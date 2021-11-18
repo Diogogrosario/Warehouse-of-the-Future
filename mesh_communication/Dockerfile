@@ -8,7 +8,7 @@ RUN apk --no-cache add maven
 
 COPY src .
 COPY pom.xml .
-RUN mvn -f pom.xml clean package
+RUN mvn -B -f pom.xml clean package
 
 ################
 # DEPLOY STAGE #
