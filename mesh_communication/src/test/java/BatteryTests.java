@@ -7,10 +7,11 @@ import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class BatteryTests {
 
     @Test
-    void createBattery(){
+    void createBattery() {
         File file = new File("src/test/resources/mesh.yaml");
 
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
@@ -27,9 +28,9 @@ public class BatteryTests {
                 "\nRemaining Battery: 1000" +
                 "\nSending Message Consumption: 30" +
                 "\nReceiving Message Consumption: 20" +
-                "\nIdle Consumption while On: 5" +
-                "\nIdle Consumption while Off: 2" +
-                "\nIs On: false" +
+                "\nIdle Consumption: 2" +
+                "\nLight Consumption: 3" +
+
                 "\n}", battery.toString());
 
     }

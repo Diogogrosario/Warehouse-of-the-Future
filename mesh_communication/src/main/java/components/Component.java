@@ -4,11 +4,13 @@ public abstract class Component {
     public Component() {
     }
 
-    public void update(){
+    public void update() {
     }
-    public void sentMessage(){
+
+    public void sentMessage() {
     }
-    public void receivedMessage(){
+
+    public void receivedMessage() {
     }
 
 
