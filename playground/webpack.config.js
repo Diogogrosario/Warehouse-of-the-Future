@@ -18,4 +18,7 @@ module.exports = {
         port: 9000,
         hot: true,
     },
+    watchOptions: {
+        poll: true
+    },
 }
