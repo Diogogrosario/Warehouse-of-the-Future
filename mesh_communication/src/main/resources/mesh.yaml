@@ -1,0 +1,6 @@
+
+totalBattery: 1000
+receivingConsumption: 20
+sendingConsumption: 30
+idleConsumptionOn: 5
+idleConsumptionOff: 2
