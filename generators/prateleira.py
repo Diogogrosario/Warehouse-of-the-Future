@@ -1,0 +1,2 @@
+class Prateleira:
+    comprimento=None
