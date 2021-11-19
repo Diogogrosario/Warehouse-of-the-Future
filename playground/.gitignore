@@ -1,0 +1,9 @@
+# IDE Folder
+.idea/
+
+# Node JS
+node_modules/
+package-lock.json
+
+# Generated files
+bundle.js
