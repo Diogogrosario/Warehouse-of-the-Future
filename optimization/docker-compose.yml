@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+  
+  optimization:
+    image: python:3.8-alpine
+    depends_on:
+      - db
+    volumes:
+      - ./src/logic:/home/logic
+    networks:
+      - internal
+  
+  server:
+    image: nginx:alpine
+    volumes:
+      - ./src/web:/var/www
+      - ./conf/nginx:/etc/nginx/conf.d
+    ports:
+      - 8000:80            
+    networks:
+      - internal
+      - external
+  laravel:
+    build:
+      args:
+        user: ruben
+        uid: 1000
+      context:
+        ./docker/web
+    ports:
+      - 9000:9000
+    volumes:
+      - ./src/web:/var/www
+    depends_on:
+      - db
+      - server
+    networks:
+      - internal
+  parser:
+    image: python:3.8-alpine
+    volumes:
+      - ./src/model/parser:/home/parser
+    networks:
+      - internal
+
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=
+      - MYSQL_USER=
+      - MYSQL_PASSWORD=
+    ports:
+      - 3306:3306
+    volumes:
+      - ./src/model/db:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      MYSQL_USER: 
+      MYSQL_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: 
+    depends_on:
+      - db
+    networks:
+      - external
+networks:
+  internal:
+    driver: bridge
+  
+  external:
+    driver: bridge
