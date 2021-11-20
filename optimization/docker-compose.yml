@@ -3,7 +3,7 @@ version: '3'
 services:
   
   optimization:
-    image: python:3.8-alpine
+    build: ./docker/logic
     depends_on:
       - db
     volumes:
@@ -38,7 +38,7 @@ services:
     networks:
       - internal
   parser:
-    image: python:3.8-alpine
+    build: ./docker/parser
     volumes:
       - ./src/model/parser:/home/parser
     networks:
