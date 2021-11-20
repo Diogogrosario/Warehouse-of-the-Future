@@ -9,10 +9,10 @@ public class ManifestGenerator {
     private final String fileName;
 
     // Random generation params
-    static final Integer minId = 0;
-    static final Integer maxId = 10000;
-    static final Integer minQuantity = 0;
-    static final Integer maxQuantity = 100;
+    private static final Integer minId = 0;
+    private static final Integer maxId = 10000;
+    private static final Integer minQuantity = 0;
+    private static final Integer maxQuantity = 100;
     private final Integer nManifests;
     private Position min;
     private Position max;
