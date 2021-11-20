@@ -32,12 +32,7 @@ public class ConfigTests {
                 Battery{
                 Total Battery: 1000
                 Remaining Battery: 1000
-                Sending Message Consumption: 30
-                Receiving Message Consumption: 20
                 Idle Consumption: 2
-                }""", new Battery(c.totalBattery,
-                c.receivingConsumption,
-                c.sendingConsumption,
-                c.idleConsumption).toString());
+                }""", new Battery(c.totalBattery, c.batIdleConsumption).toString());
     }
 }

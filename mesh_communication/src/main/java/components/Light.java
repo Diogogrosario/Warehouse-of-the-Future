@@ -41,16 +41,6 @@ public class Light extends Component {
     }
 
     @Override
-    void sentMessage() {
-
-    }
-
-    @Override
-    void receivedMessage() {
-
-    }
-
-    @Override
     public String toString() {
         return "Light{" +
                 "\nColor: " + color +

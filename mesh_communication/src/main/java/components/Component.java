@@ -7,17 +7,9 @@ public abstract class Component {
         this.idleConsumption = idleConsumption;
     }
 
-    public Component() {
-        this(0);
-    }
-
-    abstract void update();
-
-    abstract void sentMessage();
-
-    abstract void receivedMessage();
-
     public int getTickComsumption() {
         return this.idleConsumption;
     }
+
+    abstract void update();
 }
