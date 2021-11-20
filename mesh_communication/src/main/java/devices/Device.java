@@ -10,19 +10,22 @@ import java.util.List;
 public class Device {
     private final int receivingConsumption;
     private final int sendingConsumption;
+    private final int range = 1;
+    private final Position pos;
 
     private final Battery battery;
     private final List<Light> lights;
 
-    public Device() {
-        Config c = Config.getInstance();
+    public Device(Position p) {
+        this.pos = p;
 
+        Config c = Config.getInstance();
         this.receivingConsumption = c.receivingConsumption;
         this.sendingConsumption = c.sendingConsumption;
 
         this.battery = new Battery(c.totalBattery, c.batIdleConsumption);
         this.lights = new ArrayList<>();
-        //this.lights.add(new Light(0, c.))
+        this.lights.add(new Light(c.lightIdleConsumption, c.lightOnConsumption));
     }
 
     public void addLight(Light l) {
