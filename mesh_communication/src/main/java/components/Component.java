@@ -1,15 +1,23 @@
 package components;
 
 public abstract class Component {
+    protected final int idleConsumption;
+
+    public Component(int idleConsumption) {
+        this.idleConsumption = idleConsumption;
+    }
+
     public Component() {
+        this(0);
     }
 
-    public void update() {
-    }
+    abstract void update();
 
-    public void sentMessage() {
-    }
+    abstract void sentMessage();
 
-    public void receivedMessage() {
+    abstract void receivedMessage();
+
+    public int getTickComsumption() {
+        return this.idleConsumption;
     }
 }

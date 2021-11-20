@@ -1,26 +1,25 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import components.Battery;
+import config.Config;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BatteryTests {
-
     @Test
-    void createBattery() {
-        File file = new File("src/test/resources/mesh.yaml");
-
+    void createBatteryFromConfig() {
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
 
-        Battery battery = null;
+        Config config = null;
         try {
-            battery = om.readValue(file, Battery.class);
+            config = om.readValue(getClass().getClassLoader().getResourceAsStream("mesh.yaml"),
+                    Config.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            Assertions.fail();
         }
 
         assertEquals("Battery{" +
@@ -29,7 +28,9 @@ public class BatteryTests {
                 "\nSending Message Consumption: 30" +
                 "\nReceiving Message Consumption: 20" +
                 "\nIdle Consumption: 2" +
-                "\nLight Consumption: 3" +
-                "\n}", battery.toString());
+                "\n}", new Battery(config.totalBattery,
+                config.receivingConsumption,
+                config.sendingConsumption,
+                config.idleConsumption).toString());
     }
 }

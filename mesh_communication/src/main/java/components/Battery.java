@@ -1,69 +1,48 @@
 package components;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Battery extends Component {
-    private int totalBattery;
+    private final int totalBattery;
+    private final int receivingConsumption;
+    private final int sendingConsumption;
+    private final List<Light> lights;
+
     private int remainingBattery;
-    private int sendingConsumption;
-    private int receivingConsumption;
-    private int idleConsumption;
-    private int lightConsumption;
-    private List<Light> lights;
 
-    public Battery() {
-    }
+    public Battery(int totalBattery,
+                   int receivingConsumption,
+                   int sendingConsumption,
+                   int idleConsumption) {
+        super(idleConsumption);
+        this.lights = new ArrayList<>();
 
-    public Battery(int totalBattery, int sendingConsumption, int receivingConsumption, int idleConsumption, int lightConsumption) {
-        this.totalBattery = totalBattery;
-        this.remainingBattery = totalBattery;
         this.sendingConsumption = sendingConsumption;
         this.receivingConsumption = receivingConsumption;
-        this.idleConsumption = idleConsumption;
-        this.lightConsumption = lightConsumption;
 
-    }
-
-    public void setTotalBattery(int totalBattery) {
         this.totalBattery = totalBattery;
         this.remainingBattery = totalBattery;
     }
 
-    public void setSendingConsumption(int sendingConsumption) {
-        this.sendingConsumption = sendingConsumption;
+    public void addLight(Light l) {
+        this.lights.add(l);
     }
 
-    public void setReceivingConsumption(int receivingConsumption) {
-        this.receivingConsumption = receivingConsumption;
+    public void addLights(List<Light> ls) {
+        this.lights.addAll(ls);
     }
 
-    public void setIdleConsumption(int idleConsumption) {
-        this.idleConsumption = idleConsumption;
-    }
-
-    public void setLightConsumption(int lightConsumption) {
-        this.lightConsumption = lightConsumption;
-    }
-
-    public void setLights(List<Light> lights) {
-        this.lights = lights;
-    }
-
-    public void batteryRenewal() {
-        this.remainingBattery = totalBattery;
+    public void batteryRecharge() {
+        this.remainingBattery = this.totalBattery;
     }
 
     public int getRemainingBattery() {
         return this.remainingBattery;
     }
 
-    public void setRemainingBattery(int remainingBattery) {
-        this.remainingBattery = remainingBattery;
-    }
-
     @Override
     public void update() {
-
     }
 
     @Override
@@ -84,7 +63,6 @@ public class Battery extends Component {
                 "\nSending Message Consumption: " + sendingConsumption +
                 "\nReceiving Message Consumption: " + receivingConsumption +
                 "\nIdle Consumption: " + idleConsumption +
-                "\nLight Consumption: " + lightConsumption +
                 "\n}";
     }
 }

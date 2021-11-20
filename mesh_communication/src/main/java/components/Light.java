@@ -1,27 +1,53 @@
 package components;
 
-public class Light {
+public class Light extends Component {
     private String color;
     private boolean isOn;
+    private int onConsumption;
 
-    public Light() {
+    public Light(int idleComsumption, int onConsumption, String color) {
+        super(idleComsumption);
+        this.onConsumption = onConsumption;
+        this.color = color;
         this.isOn = false;
     }
 
-    public String getColor() {
-        return color;
+    public Light(int idleComsumption, int onConsumption) {
+        this(idleComsumption, onConsumption, "nocolor");
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public String getColor() {
+        return this.color;
     }
 
     public boolean isOn() {
-        return isOn;
+        return this.isOn;
     }
 
     public void setOn(boolean on) {
-        isOn = on;
+        this.isOn = on;
+    }
+
+    @Override
+    public int getTickComsumption() {
+        int ret = super.getTickComsumption();
+        if (this.isOn) ret += this.onConsumption;
+        return ret;
+    }
+
+    @Override
+    void update() {
+
+    }
+
+    @Override
+    void sentMessage() {
+
+    }
+
+    @Override
+    void receivedMessage() {
+
     }
 
     @Override
