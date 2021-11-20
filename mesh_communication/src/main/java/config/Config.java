@@ -1,24 +1,20 @@
 package config;
 
 public class Config {
+    private static Config instance;
+
     public int totalBattery;
     public int receivingConsumption;
     public int sendingConsumption;
     public int idleConsumption;
 
-    public Config() {
+    private Config() {
+        Config.instance = this;
     }
 
-    public Config(
-            int totalBattery,
-            int receivingConsumption,
-            int sendingConsumption,
-            int idleConsumption
-    ) {
-        this.totalBattery = totalBattery;
-        this.receivingConsumption = receivingConsumption;
-        this.sendingConsumption = sendingConsumption;
-        this.idleConsumption = idleConsumption;
+    public static Config getInstance() {
+        if (Config.instance == null) new Config();
+        return Config.instance;
     }
 
     @Override
