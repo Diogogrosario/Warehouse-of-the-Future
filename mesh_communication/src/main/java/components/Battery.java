@@ -29,10 +29,6 @@ public class Battery extends Component {
         this.remainingBattery = totalBattery;
     }
 
-    public void setRemainingBattery(int remainingBattery) {
-        this.remainingBattery = remainingBattery;
-    }
-
     public void setSendingConsumption(int sendingConsumption) {
         this.sendingConsumption = sendingConsumption;
     }
@@ -59,6 +55,10 @@ public class Battery extends Component {
 
     public int getRemainingBattery() {
         return this.remainingBattery;
+    }
+
+    public void setRemainingBattery(int remainingBattery) {
+        this.remainingBattery = remainingBattery;
     }
 
     @Override

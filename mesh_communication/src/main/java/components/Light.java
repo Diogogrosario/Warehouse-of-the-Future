@@ -4,24 +4,24 @@ public class Light {
     private String color;
     private boolean isOn;
 
-
     public Light() {
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public void setOn(boolean on) {
-        isOn = on;
+        this.isOn = false;
     }
 
     public String getColor() {
         return color;
     }
 
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public boolean isOn() {
         return isOn;
+    }
+
+    public void setOn(boolean on) {
+        isOn = on;
     }
 
     @Override

@@ -30,8 +30,6 @@ public class BatteryTests {
                 "\nReceiving Message Consumption: 20" +
                 "\nIdle Consumption: 2" +
                 "\nLight Consumption: 3" +
-
                 "\n}", battery.toString());
-
     }
 }
