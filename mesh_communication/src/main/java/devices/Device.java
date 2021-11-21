@@ -33,10 +33,22 @@ public class Device extends MeshDevice {
         super.sendMessage(msg);
     }
 
+    private boolean seenMessage(Message msg) {
+        // we relayed this before => drop it
+        if (msg.isInPath(this.id)) return true;
+
+        // if we haven't relayed this one but a copy => drop it
+        int s = msg.getSource();
+        return this.seqMap.containsKey(s) && this.seqMap.get(s) >= msg.getSeq();
+    }
+
     @Override
     public boolean receiveMessage(Message msg) {
-        // have we seen this before => drop it
-        if (msg.isInPath(this.id)) return true;
+        // already seen => drop
+        if (this.seenMessage(msg))
+            return true;
+        this.seqMap.put(msg.getSource(), msg.getSeq());
+
         // are we the destination
         if (msg.getDestination() == this.id) {
             System.out.printf("Message reached destination: [id=%d], [msg=%s]\n", this.id, msg);

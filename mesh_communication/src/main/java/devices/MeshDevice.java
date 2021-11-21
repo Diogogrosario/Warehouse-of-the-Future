@@ -4,7 +4,9 @@ import devices.command.Command;
 import devices.command.ReceiveMsgCmd;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class MeshDevice {
     protected final int id;
@@ -17,6 +19,8 @@ public abstract class MeshDevice {
     protected final List<Command> commands;
     // the set of commands for the next tick
     protected final List<Command> commandsNext;
+    // the last sequence number seen for each source
+    protected final Map<Integer, Integer> seqMap;
 
     public MeshDevice(int id, Position pos, float range, MeshGrid meshGrid) {
         this.id = id;
@@ -27,6 +31,7 @@ public abstract class MeshDevice {
         this.seqNum = 0;
         this.commands = new ArrayList<>();
         this.commandsNext = new ArrayList<>();
+        this.seqMap = new HashMap<>();
     }
 
     public int getId() {

@@ -25,6 +25,14 @@ public class Message {
         return this.path.contains(id);
     }
 
+    public int getSource() {
+        return this.source;
+    }
+
+    public int getSeq() {
+        return this.seq;
+    }
+
     public int getDestination() {
         return destination;
     }
