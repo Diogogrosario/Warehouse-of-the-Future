@@ -40,8 +40,11 @@ public class Main {
 
         orchestrator.sendMessage(orchestrator.createMessage(9, "Ola"));
 
+        int tick = 0;
         while (true) {
-            meshGrid.update();
+            System.out.println("Tick " + tick++);
+            if (!meshGrid.update())
+                System.out.println("No updates...");;
             try {
                 System.in.read();
             } catch (IOException e) {

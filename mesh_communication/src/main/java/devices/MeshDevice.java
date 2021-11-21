@@ -46,13 +46,17 @@ public abstract class MeshDevice {
         return this.range;
     }
 
-    public void update() {
+    public boolean update() {
+        boolean hadUpdates = (this.commands.size() != 0);
+
         for (Command c : this.commands) {
             c.execute();
         }
         this.commands.clear();
         this.commands.addAll(this.commandsNext);
         this.commandsNext.clear();
+
+        return hadUpdates;
     }
 
     protected void addCommand(Command c) {

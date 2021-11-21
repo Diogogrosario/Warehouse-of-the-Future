@@ -27,9 +27,14 @@ public class MeshGrid {
         return this.devicesInRange(md.getId(), md.getPos(), md.getRange());
     }
 
-    public void update() {
+    public boolean update() {
+        boolean hadUpdates = false;
+
         for (MeshDevice md : this.devices) {
-            md.update();
+            if (md.update())
+                hadUpdates = true;
         }
+
+        return hadUpdates;
     }
 }
