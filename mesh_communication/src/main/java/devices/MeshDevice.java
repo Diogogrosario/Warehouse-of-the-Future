@@ -1,6 +1,7 @@
 package devices;
 
 import devices.command.Command;
+import devices.command.ReceiveMsgCmd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,8 @@ public abstract class MeshDevice {
     protected final Position pos;
     protected final float range;
     protected final MeshGrid meshGrid;
+
+    protected int seqNum;
     // the set of commands that will be run in the current tick
     protected final List<Command> commands;
     // the set of commands for the next tick
@@ -20,6 +23,8 @@ public abstract class MeshDevice {
         this.pos = pos;
         this.range = range;
         this.meshGrid = meshGrid;
+
+        this.seqNum = 0;
         this.commands = new ArrayList<>();
         this.commandsNext = new ArrayList<>();
     }
@@ -49,10 +54,15 @@ public abstract class MeshDevice {
         this.commandsNext.add(c);
     }
 
+    public Message createMessage(int dest, String content) {
+        ++this.seqNum;
+        return new Message(this.id, this.seqNum, dest, content);
+    }
+
     public void sendMessage(Message msg) {
         msg.addPath(this.id);
         for (MeshDevice d : this.meshGrid.devicesInRange(this)) {
-            d.receiveMessage(msg);
+            this.addCommand(new ReceiveMsgCmd(d, msg));
         }
     }
 

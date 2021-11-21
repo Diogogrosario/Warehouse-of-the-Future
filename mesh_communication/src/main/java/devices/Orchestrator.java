@@ -1,18 +1,12 @@
 package devices;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * The class responsible for managing the mesh network.
  */
 public class Orchestrator extends MeshDevice {
-    private final List<Device> devices;
-
     public Orchestrator(Position pos, MeshGrid meshGrid) {
         // TODO don't hard code range
         super(0, pos, 1, meshGrid);
-        this.devices = new ArrayList<>();
     }
 
     @Override
