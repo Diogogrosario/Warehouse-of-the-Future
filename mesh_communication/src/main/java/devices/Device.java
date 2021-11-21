@@ -3,6 +3,7 @@ package devices;
 import components.Battery;
 import components.Light;
 import config.Config;
+import devices.command.SendMsgCmd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,22 @@ public class Device extends MeshDevice {
 
     @Override
     public void sendMessage(Message msg) {
-
+        System.out.printf("Device sent message: [id=%d], [msg=%s]\n", this.id, msg.getContent());
+        super.sendMessage(msg);
     }
 
     @Override
     public boolean receiveMessage(Message msg) {
-        System.out.printf("Device received message: [id=%d], [msg=%s]\n", this.id, msg);
+        // are we the destination
+        if (msg.getDestination() == this.id) {
+            System.out.printf("Message reached destination: [id=%d], [msg=%s]\n", this.id, msg);
+            return true;
+        }
+        // have we seen this before => drop it
+        if (msg.isInPath(this.id)) return true;
+
+        System.out.printf("Device is relaying message: [id=%d], [msg=%s]\n", this.id, msg);
+        this.addCommand(new SendMsgCmd(this, msg));
 
         return true;
     }

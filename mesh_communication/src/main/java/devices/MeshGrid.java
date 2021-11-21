@@ -26,4 +26,10 @@ public class MeshGrid {
     public List<MeshDevice> devicesInRange(MeshDevice md) {
         return this.devicesInRange(md.getId(), md.getPos(), md.getRange());
     }
+
+    public void update() {
+        for (MeshDevice md : this.devices) {
+            md.update();
+        }
+    }
 }

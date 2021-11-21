@@ -17,10 +17,8 @@ public class Orchestrator extends MeshDevice {
 
     @Override
     public void sendMessage(Message msg) {
-        for (MeshDevice d : this.meshGrid.devicesInRange(this)) {
-            System.out.printf("Orchestrator sent message: [destination=%d], [msg=%s]\n", msg.getDestination(), msg.getContent());
-            d.receiveMessage(msg);
-        }
+        System.out.printf("Orchestrator sent message: [destination=%d], [msg=%s]\n", msg.getDestination(), msg.getContent());
+        super.sendMessage(msg);
     }
 
     @Override

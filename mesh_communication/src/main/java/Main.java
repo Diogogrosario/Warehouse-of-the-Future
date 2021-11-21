@@ -36,5 +36,14 @@ public class Main {
         }
 
         orchestrator.sendMessage(new Message(9, "Ola"));
+
+        while (true) {
+            meshGrid.update();
+            try {
+                System.in.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
