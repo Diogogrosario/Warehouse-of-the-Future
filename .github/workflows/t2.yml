@@ -28,6 +28,7 @@ jobs:
       run: mvn -B package -f pom.xml
 
   gen-javadocs:
+    continue-on-error: true
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -50,6 +51,9 @@ jobs:
         git add docs/javadoc
         git commit -m "Doc: regenerate javadocs"
         git push origin t2_development
+    - name: The commit/push failed which is ok
+      if: ${{ failure() }}
+      run: echo "The commit/push failed which is ok"
 
   publish-job:
     runs-on: ubuntu-latest
