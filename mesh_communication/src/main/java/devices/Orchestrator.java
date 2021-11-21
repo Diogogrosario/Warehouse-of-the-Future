@@ -6,20 +6,25 @@ import java.util.List;
 /**
  * The class responsible for managing the mesh network.
  */
-public class Orchestrator {
-    private final Position pos;
+public class Orchestrator extends MeshDevice {
     private final List<Device> devices;
 
-    public Orchestrator(Position p) {
-        this.pos = p;
+    public Orchestrator(Position pos, MeshGrid meshGrid) {
+        // TODO don't hard code range
+        super(0, pos, 1, meshGrid);
         this.devices = new ArrayList<>();
     }
 
-    public Orchestrator(Position p, int deviceN) {
-        this(p);
-        // create the devices
-        for (int i = 0; i < deviceN; ++i) {
-            this.devices.add(new Device(new Position(i / 3, i % 3)));
+    @Override
+    public void sendMessage(Message msg) {
+        for (MeshDevice d : this.meshGrid.devicesInRange(this)) {
+            System.out.printf("Orchestrator sent message: [destination=%d], [msg=%s]\n", msg.getDestination(), msg.getContent());
+            d.receiveMessage(msg);
         }
+    }
+
+    @Override
+    public boolean receiveMessage(Message msg) {
+        return true;
     }
 }

@@ -7,17 +7,15 @@ import config.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Device {
+public class Device extends MeshDevice {
     private final int receivingConsumption;
     private final int sendingConsumption;
-    private final int range = 1;
-    private final Position pos;
-
     private final Battery battery;
     private final List<Light> lights;
 
-    public Device(Position p) {
-        this.pos = p;
+    public Device(int id, Position pos, MeshGrid meshGrid) {
+        // TODO don't hard code range
+        super(id, pos, 1, meshGrid);
 
         Config c = Config.getInstance();
         this.receivingConsumption = c.receivingConsumption;
@@ -28,11 +26,15 @@ public class Device {
         this.lights.add(new Light(c.lightIdleConsumption, c.lightOnConsumption));
     }
 
-    public void addLight(Light l) {
-        this.lights.add(l);
+    @Override
+    public void sendMessage(Message msg) {
+
     }
 
-    public void addLights(List<Light> ls) {
-        this.lights.addAll(ls);
+    @Override
+    public boolean receiveMessage(Message msg) {
+        System.out.printf("Device received message: [id=%d], [msg=%s]\n", this.id, msg);
+
+        return true;
     }
 }
