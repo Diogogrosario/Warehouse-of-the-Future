@@ -33,7 +33,7 @@ We are assuming the existence of the following data:
 
 ## Architecture:
 
-![Architecture](architecture1.png)
+![Architecture](architecture.png)
 
 
 ## MVP API Endpoints:
