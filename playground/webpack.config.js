@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   mode: "production",
   module: {
     rules: [
@@ -10,7 +10,12 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
-        options: { presets: ["@babel/env"] }
+        options: { presets: ["@babel/env"] },
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: "ts-loader",
       },
       {
         test: /\.css$/,
@@ -18,7 +23,7 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: ["*", ".js", ".jsx"] },
+  resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] },
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
