@@ -14,3 +14,7 @@ All notable changes to this project will be documented in this file.
 - Three.js scene
 - Docker configuration
 - Webpack bundler configuration
+=======
+# Changelog - Playground
+
+- Added project specification
