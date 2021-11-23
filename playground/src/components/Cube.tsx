@@ -1,14 +1,14 @@
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import React, { MouseEvent, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
-function Cube(props : any) : React.ReactElement {
+function Cube() : React.ReactElement {
     const mesh = useRef<THREE.Mesh>();
 
     const [hovered, hover] = useState<boolean>(false);
     const [clicked, click] = useState<boolean>(false);
 
-    useFrame((state, delta) => {
+    useFrame(() => {
         if (mesh.current) {
             mesh.current.rotation.x += 0.01;
             mesh.current.rotation.y -= 0.01;
@@ -17,7 +17,6 @@ function Cube(props : any) : React.ReactElement {
 
     return (
         <mesh
-        {...props}
         ref={mesh}
         scale={clicked ? 2 : 1}
         onClick={() : void => click(!clicked)}
