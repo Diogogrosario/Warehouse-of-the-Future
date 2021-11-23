@@ -10,7 +10,7 @@ module.exports = {
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
 		"prettier",
-		"airbnb-typescript"
+		"airbnb-typescript",
 	],
 	parserOptions: {
 		ecmaFeatures: {
@@ -18,11 +18,8 @@ module.exports = {
 		},
 		ecmaVersion: 13,
 		sourceType: "module",
-		project: ["./tsconfig.json"]
+		project: ["./tsconfig.json"],
 	},
-	plugins: [
-		"react",
-		"@typescript-eslint",
-	],
+	plugins: ["react", "@typescript-eslint"],
 	rules: {},
 };
