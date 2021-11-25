@@ -17,12 +17,12 @@ As a result, less energy is wasted, more water is conserved, traffic is reduced,
 
 ## [UPS](https://www.ups.com/us/en/Home.page)
 
-UPS has equipped all of its delevry fleet with sensors that record numerous data points. 
+UPS has equipped all of its delivery fleet with sensors that record numerous data points. 
 
-It results in the capability of altering the routes in real-time, depending on the data received from weather conditions sensors, for example.
+For example, it results in the capability of altering the routes in real-time, depending on the data received from weather condition sensors, among many other benefits.
 
 ## Conclusion
 
-Although we did find plenty of interesting information and complex projects on data collection with a network of sensors, we weren't able to find a project that used that knowledge and applies it in the optimization of the performance of a warehouse.
+Although we did find plenty of interesting information and complex projects on data collection with a network of sensors, we weren't able to find a project that used that knowledge and applied it in the optimization of the performance of a warehouse.
 
 Thus, we are able to take existing experiences and important information to then try to apply them in a different situation, our Warehouse of the Future.
