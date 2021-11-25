@@ -1,11 +1,11 @@
 # Sprint 1
 
-- Gerar manifesto;
-- Fazer uma grid 3 por 3 em que:
-  - Nodes acendem por ordem do que é preciso;
-    - Ler do manifesto tudo o que é preciso;
-    - Saber a ordem das prateleiras;
-  - Orchestrator inicia a comunicação com tudo o que é pretendido;
-  - Comunicação é feita por flood;
+- Generate manifest;
+- Grid 3x3:
+  - Nodes light up in the needed order;
+    - Read all the necessary data from the manifest;
+    - Know shelf order;
+  - Orchestrator starts communication with pretended devices;
+  - Communication by flood;
 
-- Caso seja impossível conectar com algum dispositivo, avisar o orchestrator que esse dispositivo tem um erro/sem bateria;
+- In the case it's not possible to connect with a device, communicate to the orchestrator that the device crashed or is out of battery.
