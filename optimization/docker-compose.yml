@@ -21,6 +21,8 @@ services:
     networks:
       - internal
       - external
+    depends_on:
+      - laravel
   laravel:
     build:
       args:
@@ -34,7 +36,6 @@ services:
       - ./src/web:/var/www
     depends_on:
       - db
-      - server
     networks:
       - internal
   parser:
