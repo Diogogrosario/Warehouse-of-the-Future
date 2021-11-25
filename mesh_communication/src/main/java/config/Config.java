@@ -4,9 +4,13 @@ public class Config {
     private static Config instance;
 
     public int totalBattery;
+    public int batIdleConsumption;
+
+    public int lightIdleConsumption;
+    public int lightOnConsumption;
+
     public int receivingConsumption;
     public int sendingConsumption;
-    public int idleConsumption;
 
     private Config() {
         Config.instance = this;
@@ -20,8 +24,10 @@ public class Config {
     @Override
     public String toString() {
         return "totalBattery: " + totalBattery +
+                "\nbatIdleConsumption: " + batIdleConsumption +
+                "\nlightIdleConsumption: " + lightIdleConsumption +
+                "\nlightOnConsumption: " + lightOnConsumption +
                 "\nreceivingConsumption: " + receivingConsumption +
-                "\nsendingConsumption: " + sendingConsumption +
-                "\nidleConsumption: " + idleConsumption;
+                "\nsendingConsumption: " + sendingConsumption;
     }
 }
