@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"components","l":"Battery"},{"p":"components","l":"Component"},{"p":"config","l":"Config"},{"p":"components","l":"Light"},{"p":"<Unnamed>","l":"Main"},{"p":"<Unnamed>","l":"ManifestGenerator"},{"p":"<Unnamed>","l":"Position"}];updateSearchResults();

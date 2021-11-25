@@ -20,7 +20,7 @@ buildNumber.properties
 *.log
 
 # Manifests
-files
+files/manifests.csv
 
 # BlueJ files
 *.ctxt
