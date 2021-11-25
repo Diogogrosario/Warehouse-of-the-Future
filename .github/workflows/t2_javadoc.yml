@@ -18,12 +18,12 @@ jobs:
       with:
         java-version: 17
     - name: Generate javadocs
-      run: javadoc -notimestamp -d docs/javadoc/ $(find src/main/java -type f)
+      run: mvn javadoc:javadoc
     - name: setup git config
       run: |
         git config user.name "GitHub Actions Bot [T2]"
         git config user.email "<joaocosta.work@posteo.net>"
-    - name: commit
+    - name: commit (this step prints a message if nothing is commited)
       run: |
         test "$(git diff --name-only | wc -l)" -gt 0 && \
           git add docs/javadoc && \
