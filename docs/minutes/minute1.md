@@ -6,23 +6,23 @@ No limit set on development technologies, except:
     - Node.js simulator (existing code)
 
 ## Simulator
-    - Data Simulator (Which ones)
-    - Number of Shelves
-    - Switch on and off hardware
-    - Import layouts from CAD files
-        - What type are CAD files?
-    - Each shelf has a sensor to detect things
-    - Predictive models:
-        - Predict failures, especially hardware, type of batery, etc
-    - Optimize the warehouse layout according to the manifests to keep the parts that are taken at the same time close to each other (keeping in mind the weigt of the parts aswell)
-        - If shelves are equal -> focus in vertical optimization
-    - Chaos engineering: Force failures to see how the system behaves
-    - Possible optmizations:
-        - Place solar pannels in shelves that are more frequently used (better battery life)
-    - Components to simulate:
-        - Sensor, LED, battery
-        - They have a microprocessor that controls all of this
-        - Communication protocol with hardware is 868
+- Data Simulator (Which ones)
+- Number of Shelves
+- Switch on and off hardware
+- Import layouts from CAD files
+    - What type are CAD files?
+- Each shelf has a sensor to detect things
+- Predictive models:
+    - Predict failures, especially hardware, type of batery, etc
+- Optimize the warehouse layout according to the manifests to keep the parts that are taken at the same time close to each other (keeping in mind the weigt of the parts aswell)
+    - If shelves are equal -> focus in vertical optimization
+- Chaos engineering: Force failures to see how the system behaves
+- Possible optmizations:
+    - Place solar pannels in shelves that are more frequently used (better battery life)
+- Components to simulate:
+    - Sensor, LED, battery
+    - They have a microprocessor that controls all of this
+    - Communication protocol with hardware is 868
 
 The manifests come in one month in advance
     - What's the frequency of manifest arrival? Once a day, week or month? To be defined by the client
