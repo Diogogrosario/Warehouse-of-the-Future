@@ -27,8 +27,8 @@ public class Device extends MeshDevice {
         System.out.printf("Device sent message: [id=%d], [msg=%s]\n", this.id, msg.getContent());
         super.sendMessage(msg);
 
-        // Decrease battery life
-        this.battery.usageOnMsg(this.receivingConsumption);
+        // decrease battery life
+        this.battery.spendBattery(this.sendingConsumption);
     }
 
     private boolean seenMessage(Message msg) {
@@ -43,8 +43,8 @@ public class Device extends MeshDevice {
 
     @Override
     public boolean receiveMessage(Message msg) {
-        // Decrease battery life
-        this.battery.usageOnMsg(this.receivingConsumption);
+        // decrease battery life
+        this.battery.spendBattery(this.receivingConsumption);
 
         // already seen => drop
         if (this.seenMessage(msg))
@@ -65,18 +65,19 @@ public class Device extends MeshDevice {
 
     @Override
     public boolean update() {
+        // update only if device has battery
         if (battery.getRemainingBattery() > 0) {
             boolean hadUpdates = super.update();
 
-            // Get lights battery usage
-            int lightBatUsage = 0;
+            // get components battery usage
+            int batUsage = battery.getTickConsumption();
             for (Light light : lights) {
-                lightBatUsage += light.getTickConsumption();
+                batUsage += light.getTickConsumption();
             }
-            battery.update(lightBatUsage);
+
+            battery.spendBattery(batUsage);
             return hadUpdates;
         }
-
         return false;
     }
 

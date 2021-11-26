@@ -18,12 +18,8 @@ public class Battery extends Component {
         return this.remainingBattery;
     }
 
-    public void update(int lightBatUsage) {
-        this.remainingBattery -= lightBatUsage + this.getTickConsumption();
-    }
-
-    public void usageOnMsg(int batUsage) {
-        this.remainingBattery -= batUsage;
+    public void spendBattery(int batToSpend) {
+        this.remainingBattery -= batToSpend;
     }
 
     @Override
