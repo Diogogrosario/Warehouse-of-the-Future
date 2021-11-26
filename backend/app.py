@@ -1,11 +1,8 @@
 from flask import Flask
-from flask_restx import Api
-from hello import HelloUser
+from api import api
 
 app = Flask(__name__)
-api = Api(app)
-
-api.add_resource(HelloUser, '/hello', '/hello/<string:name>', endpoint='hello')
+api.init_app(app)
 
 if __name__ == '__main__':
     app.run()
