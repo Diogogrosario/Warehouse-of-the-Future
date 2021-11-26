@@ -26,6 +26,9 @@ public class Device extends MeshDevice {
     public void sendMessage(Message msg) {
         System.out.printf("Device sent message: [id=%d], [msg=%s]\n", this.id, msg.getContent());
         super.sendMessage(msg);
+
+        // Decrease battery life
+        this.battery.usageOnMsg(this.receivingConsumption);
     }
 
     private boolean seenMessage(Message msg) {
@@ -34,11 +37,15 @@ public class Device extends MeshDevice {
 
         // if we haven't relayed this one but a copy => drop it
         int s = msg.getSource();
+
         return this.seqMap.containsKey(s) && this.seqMap.get(s) >= msg.getSeq();
     }
 
     @Override
     public boolean receiveMessage(Message msg) {
+        // Decrease battery life
+        this.battery.usageOnMsg(this.receivingConsumption);
+
         // already seen => drop
         if (this.seenMessage(msg))
             return true;
