@@ -1,8 +1,8 @@
 package devices;
 
-import components.Battery;
-import components.Light;
 import config.Config;
+import devices.components.Battery;
+import devices.components.Light;
 
 import java.util.ArrayList;
 import java.util.List;

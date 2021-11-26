@@ -1,11 +1,9 @@
 package devices;
 
-import config.Config;
 import devices.command.SendMsgCmd;
 import devices.components.Battery;
 import devices.components.Light;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Device extends MeshDevice {
