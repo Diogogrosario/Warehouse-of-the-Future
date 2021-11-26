@@ -1,14 +1,19 @@
 FROM node:lts-alpine
 
-# Create app directory
+# Set working directory
 WORKDIR /app
 
-COPY package*.json ./
+# Add node_modules/.bin to PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-# Install project dependencies
-RUN npm install
+# Install app dependencies
+COPY package.json ./
+RUN yarn install
 
-# Copy all the files from current directory into the container
-COPY . .
+# Copy all files from current directory to container
+COPY . ./
 
-EXPOSE 9000
+# Start app
+EXPOSE 3000
+
+CMD ["yarn", "start"]
