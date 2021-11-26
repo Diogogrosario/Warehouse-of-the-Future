@@ -6,6 +6,7 @@ import config.Config;
 import devices.command.SendMsgCmd;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Device extends MeshDevice {
@@ -44,6 +45,8 @@ public class Device extends MeshDevice {
 
     @Override
     public boolean receiveMessage(Message msg) {
+        this.resetTimeToLive(msg.getLastHop());
+
         // already seen => drop
         if (this.seenMessage(msg))
             return true;

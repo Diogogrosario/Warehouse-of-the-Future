@@ -8,6 +8,7 @@ public class Message {
     private final int seq;
     private final String content;
     private final Set<Integer> path;
+    private int lastHop;
 
     public Message(int source, int seq, int destination, String content) {
         this.source = source;
@@ -15,10 +16,15 @@ public class Message {
         this.destination = destination;
         this.content = content;
         this.path = new HashSet<>();
+        this.lastHop = source;
     }
 
     public boolean addPath(int id) {
-        return this.path.add(id);
+        if (this.path.add(id)) {
+            this.lastHop = id;
+            return true;
+        }
+        return false;
     }
 
     public boolean isInPath(int id) {
@@ -39,6 +45,10 @@ public class Message {
 
     public String getContent() {
         return content;
+    }
+
+    public int getLastHop() {
+        return lastHop;
     }
 
     @Override
