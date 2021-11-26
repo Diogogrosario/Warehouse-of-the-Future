@@ -26,6 +26,11 @@ docker-php-ext-install gd
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath
 
+RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
+
+RUN apt-get -y install nodejs
+
+
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -36,5 +41,6 @@ RUN mkdir -p /home/$user/.composer && \
 
 # Set working directory
 WORKDIR /var/www
+
 
 USER $user
