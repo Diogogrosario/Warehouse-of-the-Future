@@ -1,11 +1,9 @@
 package devices;
 
-import components.Battery;
-import components.Light;
-import config.Config;
 import devices.command.SendMsgCmd;
+import devices.components.Battery;
+import devices.components.Light;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Device extends MeshDevice {
@@ -28,6 +26,9 @@ public class Device extends MeshDevice {
     public void sendMessage(Message msg) {
         System.out.printf("Device sent message: [id=%d], [msg=%s]\n", this.id, msg.getContent());
         super.sendMessage(msg);
+
+        // decrease battery life
+        this.battery.spendBattery(this.sendingConsumption);
     }
 
     private boolean seenMessage(Message msg) {
@@ -36,11 +37,15 @@ public class Device extends MeshDevice {
 
         // if we haven't relayed this one but a copy => drop it
         int s = msg.getSource();
+
         return this.seqMap.containsKey(s) && this.seqMap.get(s) >= msg.getSeq();
     }
 
     @Override
     public boolean receiveMessage(Message msg) {
+        // decrease battery life
+        this.battery.spendBattery(this.receivingConsumption);
+
         // already seen => drop
         if (this.seenMessage(msg))
             return true;
@@ -56,5 +61,39 @@ public class Device extends MeshDevice {
         this.addCommand(new SendMsgCmd(this, msg));
 
         return true;
+    }
+
+    @Override
+    public boolean update() {
+        // update only if device has battery
+        if (battery.getRemainingBattery() > 0) {
+            boolean hadUpdates = super.update();
+
+            // get components battery usage
+            int batUsage = battery.getTickConsumption();
+            for (Light light : lights) {
+                batUsage += light.getTickConsumption();
+            }
+
+            battery.spendBattery(batUsage);
+            return hadUpdates;
+        }
+        return false;
+    }
+
+    public Battery getBattery() {
+        return battery;
+    }
+
+    public int getSendingConsumption() {
+        return sendingConsumption;
+    }
+
+    public int getReceivingConsumption() {
+        return receivingConsumption;
+    }
+
+    public List<Light> getLights() {
+        return lights;
     }
 }

@@ -1,4 +1,4 @@
-import components.Product;
+import devices.components.Product;
 import config.ManifestGenerator;
 import config.ManifestReader;
 import devices.Position;

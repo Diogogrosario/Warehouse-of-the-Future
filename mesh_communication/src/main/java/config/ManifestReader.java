@@ -1,7 +1,7 @@
 package config;
 
-import components.Product;
 import devices.Position;
+import devices.components.Product;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

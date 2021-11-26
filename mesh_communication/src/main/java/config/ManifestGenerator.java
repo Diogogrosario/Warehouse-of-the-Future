@@ -12,6 +12,7 @@ import java.util.List;
 
 import static config.ManifestReader.FILE_DIR;
 
+
 public class ManifestGenerator {
     private final String fileName;
 

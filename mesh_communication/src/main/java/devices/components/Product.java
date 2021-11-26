@@ -1,4 +1,4 @@
-package components;
+package devices.components;
 
 import devices.Position;
 
