@@ -74,4 +74,13 @@ From the stakeholder analysis, we produced the UML actor diagram below presented
 
 * Note: There is a reference to the work of two different groups. In the final stage, the data lake group will feed our project in real-time, and our output result will feed the tool for warehouse visualization that will be designed by another group.
 
-## UML Class Diagram
+## Data Modeling
+
+In every project access to data is essential to execute logical decisions on the control side of the project. Allow featuring extraction. The saying that data is the XXI century gold is not an exaggeration.
+
+To understand the data needs of this project we modelled the following UML Class Diagram:
+
+<Row style="display:flex flex-direction: row">
+    <img src="assets/class_diagram.png" style="margin:auto"/>
+</Row>
+
