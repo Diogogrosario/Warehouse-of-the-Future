@@ -1,10 +1,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import config.Config;
-import devices.Device;
-import devices.MeshGrid;
-import devices.Orchestrator;
-import devices.Position;
+import devices.*;
 
 import java.io.IOException;
 
@@ -34,7 +31,7 @@ public class Main {
         meshGrid.addDevice(orchestrator);
         // create the devices
         for (int i = 0; i < 9; ++i) {
-            Device d = new Device(i + 1, new Position(i % 3, i / 3), meshGrid);
+            Device d = DeviceFactory.deviceFromConfig(i + 1, new Position(i % 3, i / 3), meshGrid);
             meshGrid.addDevice(d);
         }
 
@@ -44,7 +41,8 @@ public class Main {
         while (true) {
             System.out.println("Tick " + tick++);
             if (!meshGrid.update())
-                System.out.println("No updates...");;
+                System.out.println("No updates...");
+            ;
             try {
                 System.in.read();
             } catch (IOException e) {

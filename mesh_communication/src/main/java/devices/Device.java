@@ -14,17 +14,14 @@ public class Device extends MeshDevice {
     private final Battery battery;
     private final List<Light> lights;
 
-    public Device(int id, Position pos, MeshGrid meshGrid) {
+    public Device(int id, Position pos, MeshGrid meshGrid, int receivingConsumption, int sendingConsumption, Battery battery, List<Light> lights) {
         // TODO don't hard code range
         super(id, pos, 1, meshGrid);
 
-        Config c = Config.getInstance();
-        this.receivingConsumption = c.receivingConsumption;
-        this.sendingConsumption = c.sendingConsumption;
-
-        this.battery = new Battery(c.totalBattery, c.batIdleConsumption);
-        this.lights = new ArrayList<>();
-        this.lights.add(new Light(c.lightIdleConsumption, c.lightOnConsumption));
+        this.receivingConsumption = receivingConsumption;
+        this.sendingConsumption = sendingConsumption;
+        this.battery = battery;
+        this.lights = lights;
     }
 
     @Override
