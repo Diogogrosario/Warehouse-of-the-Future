@@ -20,6 +20,9 @@ public class Battery extends Component {
 
     public void spendBattery(int batToSpend) {
         this.remainingBattery -= batToSpend;
+
+        // remaining battery can't be negative
+        if (this.remainingBattery < 0) this.remainingBattery = 0;
     }
 
     @Override
