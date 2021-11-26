@@ -65,7 +65,7 @@ public class Device extends MeshDevice {
 
     @Override
     public boolean update() {
-        if(battery.getRemainingBattery() > 0 ) {
+        if (battery.getRemainingBattery() > 0) {
             boolean hadUpdates = super.update();
 
             // Get lights battery usage

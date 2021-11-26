@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class MeshDevice implements Updatable{
+public abstract class MeshDevice implements Updatable {
     protected final int id;
     protected final Position pos;
     protected final float range;
