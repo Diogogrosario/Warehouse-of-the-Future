@@ -1,4 +1,6 @@
+# Intelijente
 .idea
+mesh_communication.iml
 
 # maven
 target/
@@ -40,4 +42,5 @@ files/manifests.csv
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-mesh_communication.iml
+# For lucas, by lucas, for intelij
+.attach_pid*

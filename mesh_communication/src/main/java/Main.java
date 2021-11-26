@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import config.Config;
+import config.ManifestGenerator;
 import devices.*;
 
 import java.io.IOException;

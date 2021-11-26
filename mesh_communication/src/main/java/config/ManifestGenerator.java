@@ -1,3 +1,5 @@
+package config;
+
 import devices.Position;
 
 import java.io.BufferedWriter;
@@ -8,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static config.ManifestReader.FILE_DIR;
+
+
 public class ManifestGenerator {
-    public static final String FILE_DIR = "files/";
     private final String fileName;
 
     // Random generation params
