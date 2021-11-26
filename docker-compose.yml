@@ -18,7 +18,7 @@ services:
       - ./backend/.env
     volumes:
       - ./backend:/app
-  
+
   mongo:
     image: mongo
     container_name: mongodb
