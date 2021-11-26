@@ -78,10 +78,9 @@ public abstract class MeshDevice {
     public void sendMessage(Message msg) {
         msg.addPath(this.id);
         for (MeshDevice d : this.meshGrid.devicesInRange(this)) {
-            if (!devicesLife.containsKey(d.getId())) {
-                devicesLife.put(d.getId(), DEFAULT_TTL);
-            } else {
-                devicesLife.put(d.getId(), devicesLife.get(d.getId()) - 1);
+            int deviceId = d.getId();
+            if (devicesLife.containsKey(deviceId)) {
+                devicesLife.put(deviceId, devicesLife.get(deviceId) - 1);
             }
 
             this.addCommand(new ReceiveMsgCmd(d, msg));
