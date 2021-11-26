@@ -1,4 +1,4 @@
-package components;
+package devices.components;
 
 public class Battery extends Component {
     private final int totalBattery;
@@ -18,8 +18,8 @@ public class Battery extends Component {
         return this.remainingBattery;
     }
 
-    @Override
-    public void update() {
+    public void update(int lightBatUsage) {
+        this.remainingBattery -= lightBatUsage + idleConsumption;
     }
 
     @Override

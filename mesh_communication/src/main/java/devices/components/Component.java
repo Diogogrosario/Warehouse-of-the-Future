@@ -1,4 +1,4 @@
-package components;
+package devices.components;
 
 public abstract class Component {
     protected final int idleConsumption;
@@ -7,9 +7,7 @@ public abstract class Component {
         this.idleConsumption = idleConsumption;
     }
 
-    public int getTickComsumption() {
+    public int getTickConsumption() {
         return this.idleConsumption;
     }
-
-    abstract void update();
 }

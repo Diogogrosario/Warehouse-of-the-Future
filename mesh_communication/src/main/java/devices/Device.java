@@ -1,9 +1,9 @@
 package devices;
 
-import components.Battery;
-import components.Light;
 import config.Config;
 import devices.command.SendMsgCmd;
+import devices.components.Battery;
+import devices.components.Light;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,5 +59,22 @@ public class Device extends MeshDevice {
         this.addCommand(new SendMsgCmd(this, msg));
 
         return true;
+    }
+
+    @Override
+    public boolean update() {
+        if(battery.getRemainingBattery() > 0 ) {
+            boolean hadUpdates = super.update();
+
+            // Get lights battery usage
+            int lightBatUsage = 0;
+            for (Light light : lights) {
+                lightBatUsage += light.getTickConsumption();
+            }
+            battery.update(lightBatUsage);
+            return hadUpdates;
+        }
+
+        return false;
     }
 }

@@ -1,5 +1,5 @@
 totalBattery: 1000
-batIdleConsumption: 2
+batIdleConsumption: 200
 
 lightIdleConsumption: 0
 lightOnConsumption: 20
