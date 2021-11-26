@@ -1,5 +1,7 @@
 package devices;
 
+import java.util.Objects;
+
 public class Position {
     protected int x;
     protected int y;
@@ -27,5 +29,18 @@ public class Position {
 
     public boolean inRange(Position p2, float range) {
         return Math.sqrt(Math.pow(this.x - p2.x, 2) + Math.pow(this.y - p2.y, 2)) <= range;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return x == position.x && y == position.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }
