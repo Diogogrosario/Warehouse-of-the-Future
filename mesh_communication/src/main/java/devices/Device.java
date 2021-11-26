@@ -79,4 +79,12 @@ public class Device extends MeshDevice {
 
         return false;
     }
+
+    public Battery getBattery() {
+        return battery;
+    }
+
+    public int getSendingConsumption() {
+        return sendingConsumption;
+    }
 }
