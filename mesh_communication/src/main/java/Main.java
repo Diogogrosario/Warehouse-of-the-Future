@@ -3,7 +3,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import config.Config;
 import config.ManifestGenerator;
 import devices.*;
-
 import java.io.IOException;
 
 public class Main {
@@ -18,9 +17,7 @@ public class Main {
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
         try {
             om.readValue(
-                    Main.class.getClassLoader()
-                            .getResourceAsStream("mesh.yaml"),
-                    Config.class);
+                    Main.class.getClassLoader().getResourceAsStream("mesh.yaml"), Config.class);
         } catch (IOException e) {
             System.err.println("Couldn't get configs.");
             return;
@@ -41,8 +38,7 @@ public class Main {
         int tick = 0;
         while (true) {
             System.out.println("Tick " + tick++);
-            if (!meshGrid.update())
-                System.out.println("No updates...");
+            if (!meshGrid.update()) System.out.println("No updates...");
             ;
             try {
                 System.in.read();

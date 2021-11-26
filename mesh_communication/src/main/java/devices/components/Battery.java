@@ -27,10 +27,13 @@ public class Battery extends Component {
 
     @Override
     public String toString() {
-        return "Battery{" +
-                "\nTotal Battery: " + totalBattery +
-                "\nRemaining Battery: " + remainingBattery +
-                "\nIdle Consumption: " + idleConsumption +
-                "\n}";
+        return "Battery{"
+                + "\nTotal Battery: "
+                + totalBattery
+                + "\nRemaining Battery: "
+                + remainingBattery
+                + "\nIdle Consumption: "
+                + idleConsumption
+                + "\n}";
     }
 }

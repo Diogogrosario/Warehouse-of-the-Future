@@ -130,6 +130,29 @@
                     <notimestamp>true</notimestamp>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.cosium.code</groupId>
+                <artifactId>git-code-format-maven-plugin</artifactId>
+                <version>3.3</version>
+                <executions>
+                    <!-- On Maven verify phase, fail if any file (including unmodified)
+                    is badly formatted -->
+                    <execution>
+                        <id>validate-code-format</id>
+                        <goals>
+                            <goal>validate-code-format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <googleJavaFormatOptions>
+                        <aosp>true</aosp>
+                        <fixImportsOnly>false</fixImportsOnly>
+                        <skipSortingImports>false</skipSortingImports>
+                        <skipRemovingUnusedImports>false</skipRemovingUnusedImports>
+                    </googleJavaFormatOptions>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

@@ -2,7 +2,6 @@ package devices;
 
 import devices.command.Command;
 import devices.command.ReceiveMsgCmd;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

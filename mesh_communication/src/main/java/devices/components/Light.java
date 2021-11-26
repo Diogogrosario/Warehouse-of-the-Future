@@ -37,9 +37,6 @@ public class Light extends Component {
 
     @Override
     public String toString() {
-        return "Light{" +
-                "\nColor: " + color +
-                "\nIs On: " + isOn +
-                "\n}";
+        return "Light{" + "\nColor: " + color + "\nIs On: " + isOn + "\n}";
     }
 }

@@ -1,8 +1,6 @@
 package devices;
 
-/**
- * The class responsible for managing the mesh network.
- */
+/** The class responsible for managing the mesh network. */
 public class Orchestrator extends MeshDevice {
     public Orchestrator(Position pos, MeshGrid meshGrid) {
         // TODO don't hard code range
@@ -11,7 +9,9 @@ public class Orchestrator extends MeshDevice {
 
     @Override
     public void sendMessage(Message msg) {
-        System.out.printf("Orchestrator sent message: [destination=%d], [msg=%s]\n", msg.getDestination(), msg.getContent());
+        System.out.printf(
+                "Orchestrator sent message: [destination=%d], [msg=%s]\n",
+                msg.getDestination(), msg.getContent());
         super.sendMessage(msg);
     }
 

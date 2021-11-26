@@ -1,8 +1,6 @@
 package config;
 
 import devices.Position;
-import devices.components.Product;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -23,8 +21,7 @@ public class ManifestReader {
         while (reader.hasNextLine()) {
             String line = reader.nextLine();
             String[] contents = line.split(";");
-            if (contents.length != 4)
-                throw new InputMismatchException();
+            if (contents.length != 4) throw new InputMismatchException();
 
             int id = Integer.parseInt(contents[0]);
             int x = Integer.parseInt(contents[1]), y = Integer.parseInt(contents[2]);

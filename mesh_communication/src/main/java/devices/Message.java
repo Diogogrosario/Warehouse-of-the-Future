@@ -43,7 +43,8 @@ public class Message {
 
     @Override
     public String toString() {
-        return String.format("Message{source=%d; seq=%d; dest=%d; content=%s}",
+        return String.format(
+                "Message{source=%d; seq=%d; dest=%d; content=%s}",
                 this.source, this.seq, this.destination, this.content);
     }
 }

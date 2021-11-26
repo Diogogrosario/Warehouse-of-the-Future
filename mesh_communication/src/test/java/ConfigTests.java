@@ -1,14 +1,13 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import config.Config;
 import devices.components.Battery;
+import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConfigTests {
     @BeforeAll
@@ -17,8 +16,7 @@ public class ConfigTests {
 
         try {
             om.readValue(
-                    ConfigTests.class.getClassLoader()
-                            .getResourceAsStream("mesh.yaml"),
+                    ConfigTests.class.getClassLoader().getResourceAsStream("mesh.yaml"),
                     Config.class);
         } catch (IOException e) {
             Assertions.fail();
@@ -28,11 +26,13 @@ public class ConfigTests {
     @Test
     void batteryFromConfig() {
         Config c = Config.getInstance();
-        assertEquals("""
+        assertEquals(
+                """
                 Battery{
                 Total Battery: 1000
                 Remaining Battery: 1000
                 Idle Consumption: 2
-                }""", new Battery(c.totalBattery, c.batIdleConsumption).toString());
+                }""",
+                new Battery(c.totalBattery, c.batIdleConsumption).toString());
     }
 }

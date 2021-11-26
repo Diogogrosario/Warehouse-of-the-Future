@@ -3,7 +3,6 @@ package devices;
 import devices.command.SendMsgCmd;
 import devices.components.Battery;
 import devices.components.Light;
-
 import java.util.List;
 
 public class Device extends MeshDevice {
@@ -12,7 +11,14 @@ public class Device extends MeshDevice {
     private final Battery battery;
     private final List<Light> lights;
 
-    public Device(int id, Position pos, MeshGrid meshGrid, int receivingConsumption, int sendingConsumption, Battery battery, List<Light> lights) {
+    public Device(
+            int id,
+            Position pos,
+            MeshGrid meshGrid,
+            int receivingConsumption,
+            int sendingConsumption,
+            Battery battery,
+            List<Light> lights) {
         // TODO don't hard code range
         super(id, pos, 1, meshGrid);
 
@@ -47,8 +53,7 @@ public class Device extends MeshDevice {
         this.battery.spendBattery(this.receivingConsumption);
 
         // already seen => drop
-        if (this.seenMessage(msg))
-            return true;
+        if (this.seenMessage(msg)) return true;
         this.seqMap.put(msg.getSource(), msg.getSeq());
 
         // are we the destination

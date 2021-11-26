@@ -1,10 +1,10 @@
-import devices.components.Product;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import config.ManifestGenerator;
 import config.ManifestReader;
+import config.Product;
 import devices.Position;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,9 +12,8 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ManifestTests {
     @Test
@@ -24,7 +23,9 @@ public class ManifestTests {
 
         Scanner scanner = null;
         try {
-            scanner = new Scanner(new File(ManifestReader.FILE_DIR + File.separator + m.getFileName()));
+            scanner =
+                    new Scanner(
+                            new File(ManifestReader.FILE_DIR + File.separator + m.getFileName()));
         } catch (FileNotFoundException e) {
             Assertions.fail();
         }
@@ -43,7 +44,8 @@ public class ManifestTests {
     public void testReadManifests() {
         String manifestFile = "1;1;1;10\n2;3;3;50\n";
 
-        InputStream inputStream = new ByteArrayInputStream(manifestFile.getBytes(StandardCharsets.UTF_8));
+        InputStream inputStream =
+                new ByteArrayInputStream(manifestFile.getBytes(StandardCharsets.UTF_8));
         ManifestReader reader = new ManifestReader(inputStream);
         List<Product> products = reader.getProducts();
         assertEquals(2, products.size());

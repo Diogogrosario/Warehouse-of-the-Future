@@ -1,7 +1,8 @@
 package config;
 
-import devices.Position;
+import static config.ManifestReader.FILE_DIR;
 
+import devices.Position;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -9,9 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static config.ManifestReader.FILE_DIR;
-
 
 public class ManifestGenerator {
     private final String fileName;
@@ -46,8 +44,7 @@ public class ManifestGenerator {
     private List<Position> possiblePositions() {
         List<Position> res = new ArrayList<>();
         for (int i = min.getX(); i <= max.getX(); ++i)
-            for (int j = min.getY(); j <= max.getY(); ++j)
-                res.add(new Position(i, j));
+            for (int j = min.getY(); j <= max.getY(); ++j) res.add(new Position(i, j));
 
         return res;
     }
@@ -56,8 +53,7 @@ public class ManifestGenerator {
         // Create file
         File f = new File(FILE_DIR + File.separator + fileName);
         File directory = new File(FILE_DIR);
-        if (!directory.exists())
-            directory.mkdir();
+        if (!directory.exists()) directory.mkdir();
         f.createNewFile();
 
         // Gen manifests and write to file
@@ -67,7 +63,8 @@ public class ManifestGenerator {
 
         for (int i = 0; i < nManifests; ++i) {
             String id = Integer.toString(((int) (Math.random() * (maxId - minId))));
-            String quantity = Integer.toString(((int) (Math.random() * (maxQuantity - minQuantity))));
+            String quantity =
+                    Integer.toString(((int) (Math.random() * (maxQuantity - minQuantity))));
 
             Position p = positions.get(i % this.nManifests);
             String manifest = id + ";" + p.getX() + ";" + p.getY() + ";" + quantity;
@@ -75,5 +72,4 @@ public class ManifestGenerator {
         }
         manifests.close();
     }
-
 }

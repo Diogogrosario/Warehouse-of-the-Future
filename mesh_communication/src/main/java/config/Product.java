@@ -1,13 +1,12 @@
-package devices.components;
+package config;
 
 import devices.Position;
-
 import java.util.Objects;
 
 public class Product {
-    private int id;
-    private Position position;
-    private int quantity;
+    private final int id;
+    private final Position position;
+    private final int quantity;
 
     public Product(int id, Position position, int quantity) {
         this.id = id;
@@ -20,7 +19,9 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && quantity == product.quantity && position.equals(product.position);
+        return id == product.id
+                && quantity == product.quantity
+                && position.equals(product.position);
     }
 
     @Override

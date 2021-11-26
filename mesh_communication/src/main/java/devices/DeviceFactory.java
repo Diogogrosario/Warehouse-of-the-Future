@@ -3,7 +3,6 @@ package devices;
 import config.Config;
 import devices.components.Battery;
 import devices.components.Light;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,8 @@ public class DeviceFactory {
         List<Light> lights = new ArrayList<>();
         lights.add(new Light(c.lightIdleConsumption, c.lightOnConsumption));
 
-        return new Device(id, pos, meshGrid, receivingConsumption, sendingConsumption, battery, lights);
+        return new Device(
+                id, pos, meshGrid, receivingConsumption, sendingConsumption, battery, lights);
     }
 
     public static Device deviceFromConfig(int id, Position pos, MeshGrid meshGrid) {
@@ -25,6 +25,5 @@ public class DeviceFactory {
         Config c = Config.getInstance();
 
         return DeviceFactory.deviceFromConfig(c, id, pos, meshGrid);
-
     }
 }

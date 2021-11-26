@@ -1,17 +1,16 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import devices.Device;
 import devices.MeshGrid;
 import devices.Message;
 import devices.Position;
 import devices.components.Battery;
 import devices.components.Light;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BatteryTests {
     private static Device device;
@@ -64,5 +63,4 @@ public class BatteryTests {
         int finalBattery = device.getBattery().getRemainingBattery();
         assertEquals(expectedBattery, finalBattery);
     }
-
 }
