@@ -36,10 +36,33 @@ public class BatteryTests {
         device.sendMessage(msg);
 
         int finalBattery = device.getBattery().getRemainingBattery();
-
         assertEquals(expectedBattery, finalBattery);
     }
 
+    @Test
+    void receiveConsumptionTest() {
+        int startBattery = device.getBattery().getRemainingBattery();
+        int expectedBattery = startBattery - device.getReceivingConsumption();
 
+        Message msg = new Message(0, 0, 0, "");
+        device.receiveMessage(msg);
+
+        int finalBattery = device.getBattery().getRemainingBattery();
+        assertEquals(expectedBattery, finalBattery);
+    }
+
+    @Test
+    void updateConsumptionTest() {
+        int startBattery = device.getBattery().getRemainingBattery();
+
+        int batConsumption = device.getBattery().getTickConsumption();
+        int lightsConsumption = device.getLights().get(0).getTickConsumption();
+        int expectedBattery = startBattery - batConsumption - lightsConsumption;
+
+        device.update();
+
+        int finalBattery = device.getBattery().getRemainingBattery();
+        assertEquals(expectedBattery, finalBattery);
+    }
 
 }

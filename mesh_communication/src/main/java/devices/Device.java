@@ -87,4 +87,12 @@ public class Device extends MeshDevice {
     public int getSendingConsumption() {
         return sendingConsumption;
     }
+
+    public int getReceivingConsumption() {
+        return receivingConsumption;
+    }
+
+    public List<Light> getLights() {
+        return lights;
+    }
 }
