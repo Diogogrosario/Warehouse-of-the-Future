@@ -1,5 +1,5 @@
 create table products (
-	id INT,
+	id SERIAL,
 	name VARCHAR(50),
 	length DECIMAL(3,1),
 	height DECIMAL(3,1),

@@ -1,5 +1,5 @@
 create table Worker_Manifesto_Products (
-	id INT,
+	id SERIAL,
 	manifesto_id INT,
 	product_id INT,
 	quantity INT

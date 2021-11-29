@@ -1,4 +1,5 @@
 create table Shelf_Row (	
+	id SERIAL,
 	y INT,
 	length DECIMAL(3,1),
 	height DECIMAL(3,1),

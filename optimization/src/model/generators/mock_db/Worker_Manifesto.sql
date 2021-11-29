@@ -1,5 +1,5 @@
 create table Worker_Manifesto (
-	id INT
+	id SERIAL
 );
 insert into Worker_Manifesto (id) values (1);
 insert into Worker_Manifesto (id) values (2);
