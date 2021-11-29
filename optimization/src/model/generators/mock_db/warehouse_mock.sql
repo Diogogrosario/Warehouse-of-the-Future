@@ -142,3 +142,38 @@ insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(4, 4.7, 15,
 insert into Product (width, height, weight) values (1.42, 0.64, 171);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(3.4, 4, 15, 34);
 
+insert into Month_Manifesto(date) values('2021-11-29');
+
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(1,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(2,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(3,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(4,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(5,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(6,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(7,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(8,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(9,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(10,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(11,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(12,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(13,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(14,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(15,1,90);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(16,1,90);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(17,1,90);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(18,1,90);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(19,1,90);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(20,1,90);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(21,1,90);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(22,1,90);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(23,1,90);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(24,1,1000);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(25,1,502);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(26,1,502);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(27,1,502);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(28,1,502);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(29,1,502);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(30,1,502);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(31,1,502);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(32,1,502);
+insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(33,1,502);

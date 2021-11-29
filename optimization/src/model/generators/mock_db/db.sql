@@ -29,12 +29,12 @@ create table Shelf (
 );
 
 create table Cars (
-	id INT,
+	id SERIAL,
 	name VARCHAR(50)
 );
 
 create table Sector (
-	id INT,
+	id SERIAL,
 	name VARCHAR(50)
 );
 
@@ -50,6 +50,7 @@ create table Rack (
 );
 
 create table Product (
+	id SERIAL,
 	name VARCHAR(50),
 	length DECIMAL(5,1),
 	height DECIMAL(5,1),
@@ -61,6 +62,7 @@ create table Product (
 
 
 create table Product_Rack (
+	id SERIAL,
     x_orig INT NOT NULL,
     x_end INT NOT NULL,
     rack_id BIGINT UNSIGNED NOT NULL,
@@ -68,14 +70,15 @@ create table Product_Rack (
 );
 
 create table Month_Manifesto (
-	id INT,
+	id SERIAL,
 	date DATE
 );
 
 create table Month_Manifesto_Product (
-	id INT,
+	id SERIAL,
 	product_id INT,
-	manifesto_id INT
+	manifesto_id INT,
+	quantity INT
 );
 
 create table Worker_Manifesto (
