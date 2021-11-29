@@ -1,9 +1,3 @@
-create table Worker_Manifesto_Products (
-	id SERIAL,
-	manifesto_id INT,
-	product_id INT,
-	quantity INT
-);
 insert into Worker_Manifesto_Products (manifesto_id,product_id,quantity) values ( 2167, 166, 60);
 insert into Worker_Manifesto_Products (manifesto_id,product_id,quantity) values ( 5552, 281, 52);
 insert into Worker_Manifesto_Products (manifesto_id,product_id,quantity) values ( 3895, 1, 44);

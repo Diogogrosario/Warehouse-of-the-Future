@@ -1,7 +1,3 @@
-create table Month_Manifesto (
-	id INT,
-	date DATE
-);
 insert into Month_Manifesto ( date) values ( '2020-12-23');
 insert into Month_Manifesto ( date) values ( '2021-05-08');
 insert into Month_Manifesto ( date) values ( '2021-10-01');

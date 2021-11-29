@@ -1,6 +1,3 @@
-create table Worker_Manifesto (
-	id SERIAL
-);
 insert into Worker_Manifesto (id) values (1);
 insert into Worker_Manifesto (id) values (2);
 insert into Worker_Manifesto (id) values (3);
