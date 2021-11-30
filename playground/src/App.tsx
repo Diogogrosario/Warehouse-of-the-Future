@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Grid, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
 import { Canvas } from "@react-three/fiber";
 
 import "./App.css";

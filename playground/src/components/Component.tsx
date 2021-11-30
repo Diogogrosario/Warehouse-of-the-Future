@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container } from "@material-ui/core";
+import { Container } from "@mui/material";
 
 function Component(): React.ReactElement {
 	return (
