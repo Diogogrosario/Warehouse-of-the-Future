@@ -15,79 +15,93 @@ DROP TABLE IF EXISTS Worker_Manifesto;
 DROP TABLE IF EXISTS Worker_Manifesto_Product;
 
 create table Warehouse (
-    id SERIAL,
-    CONSTRAINT TablePK PRIMARY KEY(id)
+    id SERIAL PRIMARY KEY
 );
 
 create table Shelf (
-	id SERIAL PRIMARY KEY,
+	id SERIAL PRIMARY KEY PRIMARY KEY,
     x DECIMAL(4,1),
 	y DECIMAL(4,1),
 	warehouse_id BIGINT UNSIGNED NOT NULL, 
     
-    FOREIGN KEY (warehouse_id) REFERENCES warehouse(id)
+    FOREIGN KEY (warehouse_id) REFERENCES Warehouse(id)
 );
 
 create table Cars (
-	id SERIAL,
+	id SERIAL PRIMARY KEY,
 	name VARCHAR(50)
 );
 
 create table Sector (
-	id SERIAL,
+	id SERIAL PRIMARY KEY,
 	name VARCHAR(50)
 );
 
 create table Rack (
-    id SERIAL, 
+    id SERIAL PRIMARY KEY, 
     shelf_id BIGINT UNSIGNED NOT NULL,
     y DECIMAL(9,2) NOT NULL,
     length INT NOT NULL,
     width DECIMAL(9,2) NOT NULL, 
     height DECIMAL(9,2) NOT NULL,
     capacity DECIMAL(9,2) NOT NULL,
-    CONSTRAINT TablePK PRIMARY KEY(id) 
+    
+	FOREIGN KEY (shelf_id) REFERENCES Shelf(id)
+
 );
 
 create table Product (
-	id SERIAL,
+	id SERIAL PRIMARY KEY,
 	name VARCHAR(50),
 	length DECIMAL(5,1),
 	height DECIMAL(5,1),
 	width DECIMAL(5,1),
 	weight DECIMAL(5,1),
-	car_model_id INT,
-	sector_id INT
+	car_model_id BIGINT UNSIGNED NOT NULL,
+	sector_id BIGINT UNSIGNED NOT NULL,
+
+	FOREIGN KEY (car_model_id) REFERENCES Cars(id),
+	FOREIGN KEY (sector_id) REFERENCES Sector(id)
+
 );
 
 
 create table Product_Rack (
-	id SERIAL,
+	id SERIAL PRIMARY KEY,
     x_orig INT NOT NULL,
     x_end INT NOT NULL,
     rack_id BIGINT UNSIGNED NOT NULL,
-    product_id BIGINT UNSIGNED NOT NULL    
+    product_id BIGINT UNSIGNED NOT NULL,    
+
+	FOREIGN KEY (rack_id) REFERENCES RACK(id),
+	FOREIGN KEY (product_id) REFERENCES Product(id)
 );
 
 create table Month_Manifesto (
-	id SERIAL,
+	id SERIAL PRIMARY KEY,
 	date DATE
 );
 
 create table Month_Manifesto_Product (
-	id SERIAL,
-	product_id INT,
-	manifesto_id INT,
-	quantity INT
+	id SERIAL PRIMARY KEY,
+	product_id BIGINT UNSIGNED NOT NULL,
+	manifesto_id BIGINT UNSIGNED NOT NULL,
+	quantity INT,
+
+	FOREIGN KEY(product_id) REFERENCES Product(id),
+	FOREIGN KEY(manifesto_id) REFERENCES Month_Manifesto(id)
 );
 
 create table Worker_Manifesto (
-	id SERIAL
+	id SERIAL PRIMARY KEY
 );
 
 create table Worker_Manifesto_Product (
-	id SERIAL,
-	manifesto_id INT,
-	product_id INT,
-	quantity INT
+	id SERIAL PRIMARY KEY,
+	manifesto_id BIGINT UNSIGNED NOT NULL,
+	product_id BIGINT UNSIGNED NOT NULL,
+	quantity INT,
+
+	FOREIGN KEY(product_id) REFERENCES Product(id),
+	FOREIGN KEY(manifesto_id) REFERENCES Worker_Manifesto(id)
 );
