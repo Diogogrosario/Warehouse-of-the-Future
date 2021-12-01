@@ -11,7 +11,39 @@ class Layout:
         shelf = self.warehouse.get_random_shelf()
         rack = shelf.get_random_rack()
         return rack
-    
+
+    def get_product_rack_id(self, product): # Assumindo que cada id do produto é único
+        for shelf in self.warehouse.shelves:
+            for rack in shelf.racks:
+                if product in rack.products:
+                    return rack.id
+
+    def add_product_rack_id(self, rack_id, product):
+        for shelf in self.warehouse.shelves:
+            for rack in shelf.racks:
+                if rack.id == rack_id:
+                    return True if rack.add_product(product) else False
+
+    def add_product_random(self, product):
+        random_shelf = r.choice(self.warehouse.shelves)
+        random_rack = r.choice(random_shelf.racks)
+        success = random_rack.add_product(product)
+        while not success:
+            random_shelf = r.choice(self.warehouse.shelves)
+            random_rack = r.choice(random_shelf.racks)
+            success = random_rack.add_product(product)
+
+    def get_score(self):
+        score = 0
+        for shelf in self.warehouse.shelves:
+            for rack in shelf.racks:
+                for product in rack.products:
+                    score += product.weight/rack.y
+        return score
+
+    def __lt__(self, other):
+        return self.get_score() < other.get_score()
+
     def __str__(self) -> str:
         state = 'LAYOUT:\n'
         state += str(self.warehouse)
@@ -64,6 +96,9 @@ class Product:
         self.car_model_id = car_model_id
         self.sector_id = sector_id
 
+    def __eq__(self, other):
+        return self.id == other.id
+
     def __str__(self) -> str: # TODO: print other attributes
         state = ""
         state += f'PRODUCT {self.id}:\n'
@@ -80,8 +115,11 @@ class Rack:
         self.capacity = capacity
         self.products = [] # list of Products
     
-    def add_product(self, products):
-        self.products.append(products)
+    def add_product(self, product):
+        if self.get_current_weight() + product.weight > self.capacity:
+            return False
+        self.products.append(product)
+        return True
         
     def remove_product(self, product):
         self.products.remove(product)
