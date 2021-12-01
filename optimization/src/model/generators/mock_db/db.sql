@@ -65,7 +65,6 @@ create table Product (
 
 );
 
-
 create table Product_Rack (
 	id SERIAL PRIMARY KEY,
     x_orig INT NOT NULL,

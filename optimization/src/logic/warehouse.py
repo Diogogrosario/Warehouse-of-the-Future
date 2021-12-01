@@ -18,7 +18,7 @@ class Shelf:
     def getRandomRack(self):
         return self.racks[r.randrange(0,len(self.racks))]
 
-class Piece:
+class Product:
     def __init__(self, id, weight, height):
         self.id = id
         self.weight = weight
