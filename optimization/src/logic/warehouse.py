@@ -3,6 +3,19 @@ import random as r
 class Layout:
     def __init__(self, warehouse):
         self.warehouse = warehouse
+        # shelf -> lista de racks
+        #   rack -> lista de products
+        #       product, x_orig, x_end
+
+    def get_random_rack(self):
+        shelf = self.warehouse.get_random_shelf()
+        rack = shelf.get_random_rack()
+        return rack
+    
+    def __str__(self) -> str:
+        state = 'LAYOUT:\n'
+        state += str(self.warehouse)
+        return state
 
 class Warehouse:
     def __init__(self, id):
@@ -12,14 +25,14 @@ class Warehouse:
     def add_shelf(self, shelf):
         self.shelves.append(shelf)
 
-    def getRandomShelf(self):
+    def get_random_shelf(self):
         return self.shelves[r.randrange(0,len(self.shelves))]
 
     def __str__(self) -> str:
         state = ""
         state += f'WAREHOUSE ID: {self.id}\n'
         for shelf in self.shelves:
-            state += f'\t{shelf}\n'
+            state += f'\t{shelf}'
         return state
 
 class Shelf:
@@ -30,21 +43,32 @@ class Shelf:
     def add_rack(self, rack):
         self.racks.append(rack)
 
-    def getRandomRack(self):
+    def get_random_rack(self):
         return self.racks[r.randrange(0,len(self.racks))]
 
     def __str__(self) -> str:
         state = ""
-        state += f'SHELF {self.id}:\n'
+        state += f'SHELF {self.id} ----------------------------------------\n'
         for rack in self.racks:
             state += f'\t\t{rack}\n'
         return state
 
 class Product:
-    def __init__(self, id, weight, height):
+    def __init__(self, id, name, length, height, width, weight, car_model_id, sector_id):
         self.id = id
-        self.weight = weight
+        self.name = name
+        self.length = length
         self.height = height
+        self.width = width
+        self.weight = weight
+        self.car_model_id = car_model_id
+        self.sector_id = sector_id
+
+    def __str__(self) -> str: # TODO: print other attributes
+        state = ""
+        state += f'PRODUCT {self.id}:\n'
+        state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
+        return state
 
 class Rack:
     def __init__(self, id, length, width, height, y, capacity):
@@ -54,20 +78,26 @@ class Rack:
         self.height = height
         self.y = y
         self.capacity = capacity
-        self.pieces = [] # list of Pieces
+        self.products = [] # list of Products
     
-    def addPiece(self, piece):
-        self.pieces.append(piece)
+    def add_product(self, products):
+        self.products.append(products)
         
-    def removePiece(self, piece):
-        self.pieces.remove(piece)
+    def remove_product(self, product):
+        self.products.remove(product)
     
-    def removePieceId(self, id):
+    def remove_product_id(self, id):
         # change this later
-        for piece in self.pieces:
-            if piece.id == id:
-                self.pieces.remove(id)
+        for product in self.products:
+            if product.id == id:
+                self.products.remove(id)
                 break
+    
+    def get_current_weight(self):
+        weight = 0
+        for product in self.products:
+            weight += product.weight
+        return weight
 
     def __str__(self) -> str:
         state = ""
@@ -77,6 +107,9 @@ class Rack:
         state += f'\t\t\tHEIGHT: {self.height}\n'
         state += f'\t\t\tY: {self.y}\n'
         state += f'\t\t\tCAPACITY: {self.capacity}\n'
+        state += f'\t\t\tPRODUCTS:\n'
+        for product in self.products:
+            state += f'\t\t\t\t{product}\n'
         return state
 
 class Manifesto:
