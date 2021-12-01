@@ -19,7 +19,7 @@ class App extends React.Component {
 				</AppBar>
 
 				<Grid container>
-					<Grid item xs={6}>
+					<Grid item xs={4}>
 						<Canvas
 							style={{ height: "90vh" }}
 							camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 5] }}
@@ -32,7 +32,7 @@ class App extends React.Component {
 						</Canvas>
 					</Grid>
 
-					<Grid item xs={6}>
+					<Grid item xs={8}>
 						<ComponentList />
 					</Grid>
 				</Grid>
