@@ -2,3 +2,4 @@ flask-restx==0.5.1
 Flask==2.0.2
 pytest
 pytest-cov
+names==0.3.0

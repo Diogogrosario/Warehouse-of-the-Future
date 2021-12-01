@@ -2,6 +2,7 @@ from flask_restx import fields, Namespace, Resource
 import random
 import datetime
 import uuid
+import names
 
 namespace = Namespace("GenerateData", path="/generate_data",
                       description="Generate random data to simulate the warehouse")
@@ -9,6 +10,8 @@ namespace = Namespace("GenerateData", path="/generate_data",
 # ------------------------------------------------------------------------------
 # Models
 # ------------------------------------------------------------------------------
+
+# Manifests
 
 item_attributes = namespace.model("ManifestItem", {
     "item": fields.String(required=True, description="Name of the item"),
@@ -55,6 +58,16 @@ available_items = [
     "soleira de porta", "painel lateral", "revestimento traseiro", "porta dianteira",
     "porta traseira", "para-brisas", "suporte da bateria", "eixo", "fecho central",
 ]
+
+# Staff
+
+staff_attributes = namespace.model("Staff", {
+    "id": fields.String(required=True, description="Id of the employee"),
+    "name": fields.String(required=True, description="Name of the employee"),
+    "gender": fields.String(required=True, description="Gender of the employee. The possible values are 'female' and 'male'"),
+    "age": fields.Integer(required=True, description="Age of the employee"),
+})
+
 
 # ------------------------------------------------------------------------------
 # Manifests
@@ -118,3 +131,46 @@ class Manifest(Resource):
         }
 
         return collection_manifest
+
+# ------------------------------------------------------------------------------
+# Staff
+# ------------------------------------------------------------------------------
+
+def generate_employee_data(id = None):
+    if (id == None):
+        id = uuid.uuid4()
+
+    gender = random.choice(["female", "male"])
+
+    employee = {
+        "id": id,
+        "name": names.get_full_name(gender=gender),
+        "gender": gender,
+        "age": random.randint(18,65),
+    }
+
+    return employee
+
+
+@namespace.route("/staff")
+class Staff(Resource):
+    @namespace.marshal_list_with(staff_attributes)
+    def get(self):
+        """
+        Returns a list with all the employees.
+        """
+
+        number_of_employees = random.randint(20,100)
+        employees = [generate_employee_data() for _ in range(number_of_employees)]
+        
+        return employees
+
+@namespace.route("/staff/<string:id>")
+class Staff(Resource):
+    @namespace.marshal_list_with(staff_attributes)
+    def get(self, id):
+        """
+        Returns information about the employee with the provided id.
+        """
+        
+        return generate_employee_data(id)
