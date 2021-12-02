@@ -1,13 +1,15 @@
+package org.t2.mesh_communication;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import config.Config;
-import devices.components.Battery;
 import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.t2.mesh_communication.config.Config;
+import org.t2.mesh_communication.devices.components.Battery;
 
 public class ConfigTests {
     @BeforeAll

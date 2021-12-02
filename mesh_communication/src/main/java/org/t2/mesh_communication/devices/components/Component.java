@@ -1,4 +1,4 @@
-package devices.components;
+package org.t2.mesh_communication.devices.components;
 
 public abstract class Component {
     protected final int idleConsumption;

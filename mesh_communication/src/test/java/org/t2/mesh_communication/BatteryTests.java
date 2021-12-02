@@ -1,16 +1,18 @@
+package org.t2.mesh_communication;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import devices.Device;
-import devices.MeshGrid;
-import devices.Message;
-import devices.Position;
-import devices.components.Battery;
-import devices.components.Light;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.t2.mesh_communication.devices.Device;
+import org.t2.mesh_communication.devices.MeshGrid;
+import org.t2.mesh_communication.devices.Message;
+import org.t2.mesh_communication.devices.Position;
+import org.t2.mesh_communication.devices.components.Battery;
+import org.t2.mesh_communication.devices.components.Light;
 
 public class BatteryTests {
     private static Device device;

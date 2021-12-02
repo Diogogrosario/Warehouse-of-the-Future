@@ -1,4 +1,4 @@
-package devices;
+package org.t2.mesh_communication.devices;
 
 import java.util.ArrayList;
 import java.util.List;

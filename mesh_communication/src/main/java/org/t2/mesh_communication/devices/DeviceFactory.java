@@ -1,10 +1,10 @@
-package devices;
+package org.t2.mesh_communication.devices;
 
-import config.Config;
-import devices.components.Battery;
-import devices.components.Light;
 import java.util.ArrayList;
 import java.util.List;
+import org.t2.mesh_communication.config.Config;
+import org.t2.mesh_communication.devices.components.Battery;
+import org.t2.mesh_communication.devices.components.Light;
 
 public class DeviceFactory {
 

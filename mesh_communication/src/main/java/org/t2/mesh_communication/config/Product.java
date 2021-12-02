@@ -1,7 +1,7 @@
-package config;
+package org.t2.mesh_communication.config;
 
-import devices.Position;
 import java.util.Objects;
+import org.t2.mesh_communication.devices.Position;
 
 public class Product {
     private final int id;

@@ -1,7 +1,7 @@
-package devices.command;
+package org.t2.mesh_communication.devices.command;
 
-import devices.MeshDevice;
-import devices.Message;
+import org.t2.mesh_communication.devices.MeshDevice;
+import org.t2.mesh_communication.devices.Message;
 
 public class ReceiveMsgCmd implements Command {
     private final MeshDevice meshDevice;

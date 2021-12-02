@@ -1,9 +1,11 @@
+package org.t2.mesh_communication;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import config.Config;
-import config.ManifestGenerator;
-import devices.*;
 import java.io.IOException;
+import org.t2.mesh_communication.config.Config;
+import org.t2.mesh_communication.config.ManifestGenerator;
+import org.t2.mesh_communication.devices.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,7 +29,7 @@ public class Main {
         MeshGrid meshGrid = new MeshGrid();
         Orchestrator orchestrator = new Orchestrator(new Position(-1, 0), meshGrid);
         meshGrid.addDevice(orchestrator);
-        // create the devices
+        // create the org.t2.mesh_communication.devices
         for (int i = 0; i < 9; ++i) {
             Device d = DeviceFactory.deviceFromConfig(i + 1, new Position(i % 3, i / 3), meshGrid);
             meshGrid.addDevice(d);
