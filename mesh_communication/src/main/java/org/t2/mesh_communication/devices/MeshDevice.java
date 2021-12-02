@@ -1,12 +1,11 @@
 package org.t2.mesh_communication.devices;
 
-import org.t2.mesh_communication.devices.command.Command;
-import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.t2.mesh_communication.devices.command.Command;
+import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 
 public abstract class MeshDevice implements Updatable {
     protected final int id;
@@ -101,7 +100,9 @@ public abstract class MeshDevice implements Updatable {
             if (entry.getValue() == 0) {
                 System.out.println("Device " + entry.getKey() + " is kill!");
                 // send message to orchestrator to warn about dead device
-                this.sendMessage(new Message(this.id, this.seqNum, 0, "Device " + entry.getKey() + " is kill!"));
+                this.sendMessage(
+                        new Message(
+                                this.id, this.seqNum, 0, "Device " + entry.getKey() + " is kill!"));
             }
         }
     }

@@ -1,10 +1,9 @@
 package org.t2.mesh_communication.devices;
 
+import java.util.List;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Light;
-
-import java.util.List;
 
 public class Device extends MeshDevice {
     private final int receivingConsumption;
