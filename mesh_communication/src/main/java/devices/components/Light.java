@@ -1,4 +1,4 @@
-package components;
+package devices.components;
 
 public class Light extends Component {
     private String color;
@@ -29,22 +29,14 @@ public class Light extends Component {
     }
 
     @Override
-    public int getTickComsumption() {
-        int ret = super.getTickComsumption();
+    public int getTickConsumption() {
+        int ret = super.getTickConsumption();
         if (this.isOn) ret += this.onConsumption;
         return ret;
     }
 
     @Override
-    void update() {
-
-    }
-
-    @Override
     public String toString() {
-        return "Light{" +
-                "\nColor: " + color +
-                "\nIs On: " + isOn +
-                "\n}";
+        return "Light{" + "\nColor: " + color + "\nIs On: " + isOn + "\n}";
     }
 }

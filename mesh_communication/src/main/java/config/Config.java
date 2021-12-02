@@ -23,11 +23,17 @@ public class Config {
 
     @Override
     public String toString() {
-        return "totalBattery: " + totalBattery +
-                "\nbatIdleConsumption: " + batIdleConsumption +
-                "\nlightIdleConsumption: " + lightIdleConsumption +
-                "\nlightOnConsumption: " + lightOnConsumption +
-                "\nreceivingConsumption: " + receivingConsumption +
-                "\nsendingConsumption: " + sendingConsumption;
+        return "totalBattery: "
+                + totalBattery
+                + "\nbatIdleConsumption: "
+                + batIdleConsumption
+                + "\nlightIdleConsumption: "
+                + lightIdleConsumption
+                + "\nlightOnConsumption: "
+                + lightOnConsumption
+                + "\nreceivingConsumption: "
+                + receivingConsumption
+                + "\nsendingConsumption: "
+                + sendingConsumption;
     }
 }

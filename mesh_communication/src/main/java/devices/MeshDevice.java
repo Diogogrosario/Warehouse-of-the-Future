@@ -2,11 +2,12 @@ package devices;
 
 import devices.command.Command;
 import devices.command.ReceiveMsgCmd;
-import devices.command.SendMsgCmd;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import java.util.*;
-
-public abstract class MeshDevice {
+public abstract class MeshDevice implements Updatable {
     protected final int id;
     protected final Position pos;
     protected final float range;
@@ -50,6 +51,7 @@ public abstract class MeshDevice {
         return this.range;
     }
 
+    @Override
     public boolean update() {
         boolean hadUpdates = (this.commands.size() != 0);
 

@@ -1,4 +1,4 @@
-package components;
+package devices.components;
 
 public class Battery extends Component {
     private final int totalBattery;
@@ -18,16 +18,22 @@ public class Battery extends Component {
         return this.remainingBattery;
     }
 
-    @Override
-    public void update() {
+    public void spendBattery(int batToSpend) {
+        this.remainingBattery -= batToSpend;
+
+        // remaining battery can't be negative
+        if (this.remainingBattery < 0) this.remainingBattery = 0;
     }
 
     @Override
     public String toString() {
-        return "Battery{" +
-                "\nTotal Battery: " + totalBattery +
-                "\nRemaining Battery: " + remainingBattery +
-                "\nIdle Consumption: " + idleConsumption +
-                "\n}";
+        return "Battery{"
+                + "\nTotal Battery: "
+                + totalBattery
+                + "\nRemaining Battery: "
+                + remainingBattery
+                + "\nIdle Consumption: "
+                + idleConsumption
+                + "\n}";
     }
 }

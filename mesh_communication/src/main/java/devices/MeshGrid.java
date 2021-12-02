@@ -17,8 +17,7 @@ public class MeshGrid {
     public List<MeshDevice> devicesInRange(int id, Position p, float range) {
         List<MeshDevice> ret = new ArrayList<>();
         for (MeshDevice md : this.devices) {
-            if (md.id != id && md.getPos().inRange(p, range))
-                ret.add(md);
+            if (md.id != id && md.getPos().inRange(p, range)) ret.add(md);
         }
         return ret;
     }
@@ -31,8 +30,7 @@ public class MeshGrid {
         boolean hadUpdates = false;
 
         for (MeshDevice md : this.devices) {
-            if (md.update())
-                hadUpdates = true;
+            if (md.update()) hadUpdates = true;
         }
 
         return hadUpdates;
