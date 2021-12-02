@@ -3,11 +3,12 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 export default function ComponentCard(): React.ReactElement {
 	return (
-		<Card sx={{ display: "flex", width: 300, height: 200 }}>
+		<Card sx={{ display: "flex", width: 350, height: 200, p: 1 }}>
 			<CardMedia
 				component="img"
 				image={require("../assets/images/device.png").default}
 				alt="Component Image"
+				sx={{ width: 1 / 3 }}
 			/>
 			<CardContent>
 				<Typography variant="h5">Mesh Device</Typography>

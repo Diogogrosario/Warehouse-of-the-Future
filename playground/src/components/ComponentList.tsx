@@ -7,7 +7,7 @@ function ComponentList(): React.ReactElement {
 
 	for (let i = 0; i < 10; i++)
 		cards.push(
-			<Grid item>
+			<Grid item key={i}>
 				<ComponentCard />
 			</Grid>,
 		);
