@@ -9,13 +9,13 @@
 		"@material-ui/icons": "^4.11.2",
 		"@material-ui/lab": "^4.0.0-alpha.60",
 		"@react-three/fiber": "^7.0.19",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"three": "^0.134.0",
-		"sequelize": "^6.11.0",
+		"dotenv": "^10.0.0",
 		"pg": "^8.7.1",
 		"pg-hstore": "^2.3.4",
-		"dotenv": "^10.0.0"
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"sequelize": "^6.11.0",
+		"three": "^0.134.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.16.0",
@@ -30,6 +30,7 @@
 		"@types/react-dom": "^17.0.11",
 		"@types/react-helmet": "^6.1.4",
 		"@types/three": "^0.134.0",
+		"@types/validator": "^13.7.0",
 		"@typescript-eslint/eslint-plugin": "^5.4.0",
 		"@typescript-eslint/parser": "^5.4.0",
 		"babel-eslint": "^10.1.0",
