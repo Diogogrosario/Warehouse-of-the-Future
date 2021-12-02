@@ -3,7 +3,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import Battery80Icon from "@mui/icons-material/Battery80";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 
-function Component(): React.ReactElement {
+function Device(): React.ReactElement {
 	return (
 		<Grid container>
 			<Grid item xs={3} >
@@ -40,4 +40,4 @@ function Component(): React.ReactElement {
 	);
 }
 
-export default Component;
+export default Device;

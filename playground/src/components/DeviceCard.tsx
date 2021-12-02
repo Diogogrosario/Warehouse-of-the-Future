@@ -1,13 +1,13 @@
 import React from "react";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
-export default function ComponentCard(): React.ReactElement {
+export default function DeviceCard(): React.ReactElement {
 	return (
 		<Card sx={{ display: "flex", width: 350, height: 200, p: 1 }}>
 			<CardMedia
 				component="img"
 				image={require("../assets/images/device.png").default}
-				alt="Component Image"
+				alt="Device Image"
 				sx={{ width: 1 / 3 }}
 			/>
 			<CardContent>

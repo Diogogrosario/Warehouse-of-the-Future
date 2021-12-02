@@ -4,7 +4,7 @@ import { Canvas } from "@react-three/fiber";
 
 import "./App.css";
 import Cube from "./components/Cube";
-import Component from "./components/Component";
+import Device from "./components/Device";
 
 class App extends React.Component {
 	render(): JSX.Element {
@@ -33,11 +33,11 @@ class App extends React.Component {
 				{/*	</Grid>*/}
 
 				{/*	<Grid item xs={8}>*/}
-				{/*		<ComponentList />*/}
+				{/*		<DeviceList />*/}
 				{/*	</Grid>*/}
 				{/*</Grid>*/}
 
-				<Component />
+				<Device />
 			</div>
 		);
 	}

@@ -1,14 +1,14 @@
 import React from "react";
-import ComponentCard from "./ComponentCard";
+import DeviceCard from "./DeviceCard";
 import { Grid } from "@mui/material";
 
-function ComponentList(): React.ReactElement {
+function DeviceList(): React.ReactElement {
 	const cards = [];
 
 	for (let i = 0; i < 10; i++)
 		cards.push(
 			<Grid item key={i}>
-				<ComponentCard />
+				<DeviceCard />
 			</Grid>,
 		);
 
@@ -24,4 +24,4 @@ function ComponentList(): React.ReactElement {
 	);
 }
 
-export default ComponentList;
+export default DeviceList;
