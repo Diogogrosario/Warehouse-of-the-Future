@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 
 
+## [0.0.4] - 2-12-2021
+
+### Added
+
+* Defined the optimization metrics
+* Gathering of the data from the database
+* Structure of the Genetic Algorithm
+* Implemented weight metric
 
 ## [0.0.3] - 1-12-2021
 
