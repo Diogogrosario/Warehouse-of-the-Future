@@ -59,12 +59,26 @@ class Storage:
 
     def fill_warehouse(self, layout):  # TODO: Verificar outros atributos das racks tb, para além da capacity
         # Place the heaviest products first
-        products = sorted(self.products, key=lambda x: x.weight, reverse=True)
+        products = sorted(self.products, key=lambda x: (x.weight,x.width), reverse=True)
 
         for product in products:
+            print("----------------------------------------------")
             rack = layout.get_random_rack()
-            while rack.get_current_weight() + product.weight > rack.capacity:
+            while not self.valid_placement(rack, product):
                 rack = layout.get_random_rack()
             rack.add_product(product)
 
         return layout
+    
+    def valid_placement(self, rack, product): # TODO: check other stuff, like height
+        valid_weight = rack.get_current_weight() + product.weight <= rack.capacity
+        valid_width = rack.last_x + product.width <= rack.width
+        print(f'RACK WEIGHT: {rack.get_current_weight()} + PRODW: {product.weight} <= CAP: {rack.capacity}')
+        print(f'LAST X: {rack.last_x} + PRODW: {product.width} <= RACKW: {rack.width}')
+        return valid_weight and valid_width
+
+
+        # rack -----------
+
+        # width = 20
+        # products = [(0,4), (7,10)]

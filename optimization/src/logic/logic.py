@@ -56,8 +56,9 @@ def genetic_algorithm(warehouse, population, num_iterations):
         parent2 = heapq.nsmallest(length - 1, population)[r.randint(0, length-2)] # random layout
         child = reproduce(parent1, parent2, warehouse)
 
-        print("---------------- CHILD ----------------")
-        print(child)
+        if r.uniform(0, 1.0) > 0.80: # mutation with a chance of 20%
+            print("MUTATING")
+            mutate(child)
 
         worst_score = heapq.heapreplace(population, child).get_score() # remove the worst layout and add the new child
 
@@ -66,6 +67,11 @@ def genetic_algorithm(warehouse, population, num_iterations):
     final_layout = heapq.nlargest(1, population)[0] # best layout
     print(f'FINAL_SCORE {str(final_layout.get_score())}')
     return final_layout
+
+def mutate(child):
+    product = child.get_random_product()
+    child.change_place(product)
+
 
 if __name__ == '__main__':
     manifestos = storage.get_manifestos(month_manifestos)
