@@ -1,0 +1,10 @@
+insert into Sector (id, name) values (1, 'Pintura');
+insert into Sector (id, name) values (2, 'Chapeiro');
+insert into Sector (id, name) values (3, 'Parafusos');
+insert into Sector (id, name) values (4, 'Chassis');
+insert into Sector (id, name) values (5, 'Motores');
+insert into Sector (id, name) values (6, 'Pneus');
+insert into Sector (id, name) values (7, 'Portas');
+insert into Sector (id, name) values (8, 'Eletrónica');
+insert into Sector (id, name) values (9, 'Travões');
+insert into Sector (id, name) values (10, 'Parabrisas');
