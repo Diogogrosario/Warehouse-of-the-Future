@@ -1,6 +1,7 @@
-package config;
+package org.t2.mesh_communication.config;
 
-import devices.Position;
+import org.t2.mesh_communication.devices.Position;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;

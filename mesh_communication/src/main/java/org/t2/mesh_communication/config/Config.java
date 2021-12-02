@@ -1,4 +1,4 @@
-package config;
+package org.t2.mesh_communication.config;
 
 public class Config {
     private static Config instance;

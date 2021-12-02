@@ -1,10 +1,9 @@
-package devices;
+package org.t2.mesh_communication.devices;
 
-import devices.command.SendMsgCmd;
-import java.util.ArrayList;
-import java.util.HashMap;
-import devices.components.Battery;
-import devices.components.Light;
+import org.t2.mesh_communication.devices.command.SendMsgCmd;
+import org.t2.mesh_communication.devices.components.Battery;
+import org.t2.mesh_communication.devices.components.Light;
+
 import java.util.List;
 
 public class Device extends MeshDevice {

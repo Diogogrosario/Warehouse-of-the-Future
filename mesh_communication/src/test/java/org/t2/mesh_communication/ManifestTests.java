@@ -1,10 +1,12 @@
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package org.t2.mesh_communication;
 
-import config.ManifestGenerator;
-import config.ManifestReader;
-import config.Product;
-import devices.Position;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.t2.mesh_communication.config.ManifestGenerator;
+import org.t2.mesh_communication.config.ManifestReader;
+import org.t2.mesh_communication.config.Product;
+import org.t2.mesh_communication.devices.Position;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,8 +14,9 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ManifestTests {
     @Test

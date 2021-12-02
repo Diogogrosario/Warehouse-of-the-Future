@@ -1,4 +1,4 @@
-package devices.components;
+package org.t2.mesh_communication.devices.components;
 
 public class Battery extends Component {
     private final int totalBattery;

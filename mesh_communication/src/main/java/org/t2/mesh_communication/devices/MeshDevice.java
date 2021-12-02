@@ -1,7 +1,8 @@
-package devices;
+package org.t2.mesh_communication.devices;
 
-import devices.command.Command;
-import devices.command.ReceiveMsgCmd;
+import org.t2.mesh_communication.devices.command.Command;
+import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
