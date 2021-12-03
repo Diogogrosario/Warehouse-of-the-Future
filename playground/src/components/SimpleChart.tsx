@@ -42,6 +42,22 @@ export default function SimpleChart({ width, height, margin = defaultMargin }: T
 	return (
 		<div>
 			<svg width={width} height={height}>
+				<linearGradient
+					id="gradient"
+					gradientUnits="userSpaceOnUse"
+					x1="0"
+					x2="0"
+					y1={batteryPowerScale(0)}
+					y2={batteryPowerScale(100)}
+				>
+					<stop offset="0%" stopColor="#FF5900" />
+					<stop offset="18%" stopColor="#FF5900" />
+					<stop offset="22%" stopColor="#FCBA03" />
+					<stop offset="48%" stopColor="#FCBA03" />
+					<stop offset="52%" stopColor="#67C202" />
+					<stop offset="100%" stopColor="#67C202" />
+				</linearGradient>
+
 				<rect x={0} y={0} width={width} height={height} fill={background} rx={14} />
 				<Group left={margin.left} top={margin.top}>
 					<GridRows
@@ -64,7 +80,7 @@ export default function SimpleChart({ width, height, margin = defaultMargin }: T
 						curve={curveBasis}
 						x={(d: any) => timeScale(timestamp(d)) ?? 0}
 						y={(d: any) => batteryPowerScale(batteryPower(d)) ?? 0}
-						stroke="#222"
+						stroke="url(#gradient)"
 						strokeWidth={1.5}
 					/>
 				</Group>
