@@ -4,7 +4,6 @@ USE test;
 
 DROP TABLE IF EXISTS Warehouse;
 DROP TABLE IF EXISTS Shelf;
-DROP TABLE IF EXISTS Cars;
 DROP TABLE IF EXISTS Sector;
 DROP TABLE IF EXISTS Rack;
 DROP TABLE IF EXISTS Product;
@@ -19,7 +18,7 @@ create table Warehouse (
 );
 
 create table Shelf (
-	id SERIAL PRIMARY KEY PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
     x DECIMAL(4,1),
 	y DECIMAL(4,1),
 	warehouse_id BIGINT UNSIGNED NOT NULL, 
@@ -27,13 +26,9 @@ create table Shelf (
     FOREIGN KEY (warehouse_id) REFERENCES Warehouse(id)
 );
 
-create table Cars (
-	id SERIAL PRIMARY KEY,
-	name VARCHAR(50)
-);
-
 create table Sector (
 	id SERIAL PRIMARY KEY,
+
 	name VARCHAR(50)
 );
 
@@ -57,10 +52,8 @@ create table Product (
 	height DECIMAL(5,1),
 	width DECIMAL(5,1),
 	weight DECIMAL(5,1),
-	car_model_id BIGINT UNSIGNED NOT NULL,
 	sector_id BIGINT UNSIGNED NOT NULL,
 
-	FOREIGN KEY (car_model_id) REFERENCES Cars(id),
 	FOREIGN KEY (sector_id) REFERENCES Sector(id)
 
 );
@@ -72,7 +65,7 @@ create table Product_Rack (
     rack_id BIGINT UNSIGNED NOT NULL,
     product_id BIGINT UNSIGNED NOT NULL,    
 
-	FOREIGN KEY (rack_id) REFERENCES RACK(id),
+	FOREIGN KEY (rack_id) REFERENCES Rack(id),
 	FOREIGN KEY (product_id) REFERENCES Product(id)
 );
 
@@ -100,7 +93,6 @@ create table Worker_Manifesto_Product (
 	manifesto_id BIGINT UNSIGNED NOT NULL,
 	product_id BIGINT UNSIGNED NOT NULL,
 	quantity INT,
-
 	FOREIGN KEY(product_id) REFERENCES Product(id),
 	FOREIGN KEY(manifesto_id) REFERENCES Worker_Manifesto(id)
 );
