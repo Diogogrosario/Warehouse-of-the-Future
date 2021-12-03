@@ -1,14 +1,10 @@
 from flask import Flask
-from flask_restx import Api
+from api import api
 
 app = Flask(__name__)
-api = Api(app)
+app.config['RESTX_MASK_SWAGGER'] = False
 
-
-@app.route('/')
-def hello_world():
-    return 'Hello from Flask!'
-
+api.init_app(app)
 
 if __name__ == '__main__':
     app.run()
