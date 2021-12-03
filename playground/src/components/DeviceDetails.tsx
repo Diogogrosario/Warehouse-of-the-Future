@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { Button, Grid, Typography } from "@mui/material";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
-import SimpleChart from "./SimpleChart";
+import BatteryChart from "./BatteryChart";
 
-export default function Device(): React.ReactElement {
+export default function DeviceDetails(): React.ReactElement {
 	const [turnedOn, setTurnedOn] = useState(false);
 
 	return (
-		<Grid container>
+		<Grid container sx={{ p: 3 }}>
 			<Grid item xs={3}>
 				<div style={{ textAlign: "center" }}>
 					<img
 						height={400}
 						src={require("../assets/images/device.png").default}
-						alt="Device Image"
+						alt="DeviceDetails Image"
 					/>
 				</div>
 
@@ -22,26 +22,30 @@ export default function Device(): React.ReactElement {
 				<Typography>ID: 123456</Typography>
 			</Grid>
 
-			<Grid item xs={9}>
-				<div>
-					<Typography variant="h5" align={"left"}>
+			<Grid item container xs={9} spacing={3}>
+				<Grid item>
+					<Typography variant="h5" sx={{ mb: 2 }}>
 						Battery
 					</Typography>
 
-					<SimpleChart width={800} height={500}/>
-				</div>
+					<BatteryChart width={800} height={500} />
+				</Grid>
 
-				<Typography variant="h5">Maitenance actions</Typography>
+				<Grid item>
+					<Typography variant="h5" sx={{ mb: 2 }}>
+						Maintenance actions
+					</Typography>
 
-				<Button
-					onClick={() => {
-						setTurnedOn(!turnedOn);
-					}}
-					variant="contained"
-					color={turnedOn ? "success" : "error"}
-				>
-					Turn {turnedOn ? "On" : "Off"} <PowerSettingsNewIcon />
-				</Button>
+					<Button
+						onClick={() => {
+							setTurnedOn(!turnedOn);
+						}}
+						variant="contained"
+						color={turnedOn ? "success" : "error"}
+					>
+						Turn {turnedOn ? "On" : "Off"} <PowerSettingsNewIcon />
+					</Button>
+				</Grid>
 
 				{/*<Typography variant="h5">Related reports</Typography>*/}
 				{/*<Typography variant="h5">Related logs</Typography>*/}

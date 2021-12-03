@@ -30,7 +30,7 @@ export type ThresholdProps = {
 	margin?: { top: number; right: number; bottom: number; left: number };
 };
 
-export default function SimpleChart({ width, height, margin = defaultMargin }: ThresholdProps) {
+export default function BatteryChart({ width, height, margin = defaultMargin }: ThresholdProps) {
 	if (width < 10) return null;
 
 	const xMax = width - margin.left - margin.right;
@@ -59,6 +59,7 @@ export default function SimpleChart({ width, height, margin = defaultMargin }: T
 				</linearGradient>
 
 				<rect x={0} y={0} width={width} height={height} fill={background} rx={14} />
+
 				<Group left={margin.left} top={margin.top}>
 					<GridRows
 						scale={batteryPowerScale}

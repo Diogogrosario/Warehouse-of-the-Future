@@ -26,7 +26,7 @@ module.exports = {
 			{
 				test: /\.(png|jpe?g|gif)$/,
 				loader: "file-loader",
-			}
+			},
 		],
 	},
 	resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] },
