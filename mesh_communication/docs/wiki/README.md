@@ -5,3 +5,4 @@
 - [Architecture](architecture.md)
 - [Sprint Log](sprint_log.md)
 - [Similar Products](similar_products.md)
+- [Risks](risks.md)
