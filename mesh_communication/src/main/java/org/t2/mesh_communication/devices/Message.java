@@ -17,6 +17,14 @@ public class Message {
         this.path = new HashSet<>();
     }
 
+    public Message(Message message) {
+        this.source = message.getSource();
+        this.seq = message.getSeq();
+        this.destination = message.getDestination();
+        this.content = message.getContent();
+        this.path = new HashSet<>(message.getPath());
+    }
+
     public boolean addPath(int id) {
         return this.path.add(id);
     }
@@ -39,6 +47,10 @@ public class Message {
 
     public String getContent() {
         return content;
+    }
+
+    public Set<Integer> getPath() {
+        return path;
     }
 
     @Override
