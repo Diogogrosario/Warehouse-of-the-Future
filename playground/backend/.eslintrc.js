@@ -1,0 +1,12 @@
+module.exports = {
+	env: {
+		browser: true,
+		es2021: true,
+	},
+	extends: ["eslint:recommended", "prettier", "eslint-config-airbnb"],
+	parserOptions: {
+		ecmaVersion: 13,
+		sourceType: "module",
+	},
+	rules: {},
+};
