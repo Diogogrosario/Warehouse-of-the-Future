@@ -1,6 +1,7 @@
 from flask_restx import Api
 
 from .manifest import namespace as manifests_namespace
+from .sensor import namespace as sensors_namespace
 
 api = Api(
     title='Data Lake',
@@ -9,3 +10,4 @@ api = Api(
 )
 
 api.add_namespace(manifests_namespace)
+api.add_namespace(sensors_namespace)
