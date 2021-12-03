@@ -19,6 +19,14 @@ public class Message {
         this.lastHop = source;
     }
 
+    public Message(Message message) {
+        this.source = message.getSource();
+        this.seq = message.getSeq();
+        this.destination = message.getDestination();
+        this.content = message.getContent();
+        this.path = new HashSet<>(message.getPath());
+    }
+
     public boolean addPath(int id) {
         if (this.path.add(id)) {
             this.lastHop = id;
@@ -49,6 +57,10 @@ public class Message {
 
     public int getLastHop() {
         return lastHop;
+    }
+
+    public Set<Integer> getPath() {
+        return path;
     }
 
     @Override

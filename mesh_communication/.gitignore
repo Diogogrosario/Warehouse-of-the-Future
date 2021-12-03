@@ -44,3 +44,11 @@ hs_err_pid*
 
 # For lucas, by lucas, for intelij
 .attach_pid*
+
+# For diogo, intellij iml random files
+.mvn/.mvn.iml
+src/main/main.iml
+src/test/test.iml
+
+# Henrique: IntelIJ created file
+mesh_communication.iml
