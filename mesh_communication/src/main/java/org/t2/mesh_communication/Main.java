@@ -2,11 +2,10 @@ package org.t2.mesh_communication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import java.io.IOException;
 import org.t2.mesh_communication.config.Config;
 import org.t2.mesh_communication.config.ManifestGenerator;
 import org.t2.mesh_communication.devices.*;
-
-import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
