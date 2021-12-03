@@ -36,5 +36,7 @@ public class MeshGrid {
         return hadUpdates;
     }
 
-    public List<MeshDevice> getDevices() { return devices; }
+    public List<MeshDevice> getDevices() {
+        return devices;
+    }
 }

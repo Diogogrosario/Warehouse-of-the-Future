@@ -10,7 +10,6 @@ import org.t2.mesh_communication.devices.*;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +21,6 @@ public class MeshGridTests {
 
         meshGrid.addDevice(orchestrator);
 
-        // create the org.t2.mesh_communication.devices
         Battery bat = Mockito.mock(Battery.class);
         Mockito.when(bat.getRemainingBattery()).thenReturn(Integer.MAX_VALUE);
 
@@ -51,7 +49,9 @@ public class MeshGridTests {
 
         orchestrator.sendMessage(orchestrator.createMessage(8, "Ola1"));
 
-        for (int i = 0; i < 50; ++i) { meshGrid.update(); }
+        for (int i = 0; i < 50; ++i) {
+            meshGrid.update();
+        }
 
         // Disabling Device 9
         Mockito.when(bat_dead.getRemainingBattery()).thenReturn(0);
@@ -74,9 +74,9 @@ public class MeshGridTests {
         assertEquals(0, devices.get(8).getDevicesLife().get(9));
 
         // Check if all other devices are alive
-        for(int i = 0; i < 9; ++i) {
+        for (int i = 0; i < 9; ++i) {
             for (Map.Entry<Integer, Integer> deviceLife : devices.get(i).getDevicesLife().entrySet()) {
-                if(deviceLife.getKey() != 9)
+                if (deviceLife.getKey() != 9)
                     assertTrue(deviceLife.getValue() > 0);
             }
         }
