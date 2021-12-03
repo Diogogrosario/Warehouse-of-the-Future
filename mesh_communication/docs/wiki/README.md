@@ -1,6 +1,6 @@
 # Mesh Communication - Wiki
 
-- [Product Vistion](product_vision.mb)
+- [Product Vistion](product_vision.md)
 - [Specification](specification.md)
 - [Architecture](architecture.md)
 - [Sprint Log](sprint_log.md)
