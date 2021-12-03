@@ -3,8 +3,7 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { Canvas } from "@react-three/fiber";
 
 import "./App.css";
-import Cube from "./components/Cube";
-import WarehouseRenderer from "./components/WarehouseRenderer";
+import WarehouseRenderer from "./components/renderer/WarehouseRenderer";
 
 class App extends React.Component {
 	render(): JSX.Element {

@@ -4,6 +4,7 @@ import React, { Component } from "react";
 
 import Cube from "./Cube";
 import WarehouseStructure from "./WarehouseStructure";
+import { CameraControls } from "./CameraControls";
 
 interface WarehouseRendererProps {
     title: string;
@@ -92,6 +93,8 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
                 <ambientLight intensity={0.5} />
                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
                 <pointLight position={[-10, -10, -10]} />
+
+                <CameraControls />
 
                 <WarehouseStructure w={20} l={20} h={10} />
 
