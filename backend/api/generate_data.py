@@ -68,18 +68,26 @@ staff_attributes = namespace.model("Staff", {
     "age": fields.Integer(required=True, description="Age of the employee"),
 })
 
+# Stock
+
+stock_attributes = namespace.model("Stock", {
+    "items": fields.List(fields.Nested(item_attributes), description="List of items in manifest"),
+    "time": fields.DateTime(required=True, description="The current time"),
+})
+
 
 # ------------------------------------------------------------------------------
 # Manifests
 # ------------------------------------------------------------------------------
 
-def generate_random_items():
+def generate_random_items(number_of_items = None):
     items = []
-    number_of_items = random.randint(3, 6)
+
+    if (number_of_items is None):
+        number_of_items = random.randint(3, 6)
 
     for _ in range(number_of_items):
-        item_index = random.randint(0, len(available_items) - 1)
-        item = available_items[item_index]
+        item = random.choice(available_items)
 
         quantity = random.randint(1,3)
 
@@ -174,3 +182,48 @@ class Staff(Resource):
         """
         
         return generate_employee_data(id)
+
+# ------------------------------------------------------------------------------
+# Stock
+# ------------------------------------------------------------------------------
+
+def generate_random_item(item):
+    item_stock = generate_random_items(number_of_items=1)[0]
+    item_stock["item"] = item
+    return item_stock
+
+@namespace.route("/stock")
+class Stock(Resource):
+    @namespace.marshal_list_with(stock_attributes)
+    def get(self):
+        """
+        Returns the warehouse current stock
+        """
+
+        number_of_items = random.randint(30, 100)
+
+        items = generate_random_items(number_of_items=number_of_items)
+        
+        stock = {
+            "items": items,
+            "time": datetime.datetime.now()
+        }
+
+        return stock
+
+@namespace.route("/stock/<string:id>")
+class Stock(Resource):
+    @namespace.marshal_list_with(stock_attributes)
+    def get(self, id):
+        """
+        Returns the warehouse current stock of the piece with the provided id.
+        """
+
+        item_stock = generate_random_item(item=id)
+        
+        stock = {
+            "items": item_stock,
+            "time": datetime.datetime.now()
+        }
+
+        return stock
