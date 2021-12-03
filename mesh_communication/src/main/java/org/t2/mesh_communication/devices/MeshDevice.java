@@ -21,6 +21,10 @@ public abstract class MeshDevice implements Updatable {
     // the last sequence number seen for each source
     protected final Map<Integer, Integer> seqMap;
 
+    // near devices time to live
+    private final HashMap<Integer, Integer> devicesLife;
+    private final int DEFAULT_TTL = 3;
+
     public MeshDevice(int id, Position pos, float range, MeshGrid meshGrid) {
         this.id = id;
         this.pos = pos;
@@ -31,6 +35,8 @@ public abstract class MeshDevice implements Updatable {
         this.commands = new ArrayList<>();
         this.commandsNext = new ArrayList<>();
         this.seqMap = new HashMap<>();
+
+        this.devicesLife = new HashMap<>();
     }
 
     public int getId() {
@@ -52,6 +58,9 @@ public abstract class MeshDevice implements Updatable {
         for (Command c : this.commands) {
             c.execute();
         }
+
+        this.checkDevicesLife();
+
         this.commands.clear();
         this.commands.addAll(this.commandsNext);
         this.commandsNext.clear();
@@ -71,9 +80,30 @@ public abstract class MeshDevice implements Updatable {
     public void sendMessage(Message msg) {
         msg.addPath(this.id);
         for (MeshDevice d : this.meshGrid.devicesInRange(this)) {
+            int deviceId = d.getId();
+            if (devicesLife.containsKey(deviceId)) {
+                devicesLife.put(deviceId, devicesLife.get(deviceId) - 1);
+            }
+
             this.addCommand(new ReceiveMsgCmd(d, msg));
         }
     }
 
     public abstract boolean receiveMessage(Message msg);
+
+    protected void resetTimeToLive(int id) {
+        this.devicesLife.put(id, DEFAULT_TTL);
+    }
+
+    protected void checkDevicesLife() {
+        for (Map.Entry<Integer, Integer> entry : devicesLife.entrySet()) {
+            if (entry.getValue() == 0) {
+                System.out.println("Device " + entry.getKey() + " is kill!");
+                // send message to orchestrator to warn about dead device
+                this.sendMessage(
+                        new Message(
+                                this.id, this.seqNum, 0, "Device " + entry.getKey() + " is kill!"));
+            }
+        }
+    }
 }

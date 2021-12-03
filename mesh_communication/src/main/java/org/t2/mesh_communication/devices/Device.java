@@ -1,7 +1,5 @@
 package org.t2.mesh_communication.devices;
 
-import java.util.List;
-
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
@@ -50,6 +48,7 @@ public class Device extends MeshDevice {
 
     @Override
     public boolean receiveMessage(Message msg) {
+        this.resetTimeToLive(msg.getLastHop());
         // decrease battery life
         this.battery.spendBattery(this.receivingConsumption);
 
