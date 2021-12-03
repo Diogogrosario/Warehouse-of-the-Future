@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,7 +13,7 @@ import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.Message;
 import org.t2.mesh_communication.devices.Position;
 import org.t2.mesh_communication.devices.components.Battery;
-import org.t2.mesh_communication.devices.components.Light;
+import org.t2.mesh_communication.devices.components.Screen;
 
 public class BatteryTests {
     private static Device device;
@@ -22,10 +23,10 @@ public class BatteryTests {
         MeshGrid mg = Mockito.mock(MeshGrid.class);
         Position pos = Mockito.mock(Position.class);
         Battery bat = new Battery(50, 5);
-        List<Light> lights = new ArrayList<>();
-        lights.add(new Light(5, 10, "yellow"));
 
-        device = new Device(1, pos, mg, 10, 10, bat, lights);
+        Screen screen = new Screen(5, 10);
+
+        device = new Device(1, pos, mg, 10, 10, bat, screen);
     }
 
     @Test
@@ -57,8 +58,8 @@ public class BatteryTests {
         int startBattery = device.getBattery().getRemainingBattery();
 
         int batConsumption = device.getBattery().getTickConsumption();
-        int lightsConsumption = device.getLights().get(0).getTickConsumption();
-        int expectedBattery = startBattery - batConsumption - lightsConsumption;
+        int screenConsumption = device.getScreen().getTickConsumption();
+        int expectedBattery = startBattery - batConsumption - screenConsumption;
 
         device.update();
 
