@@ -1,11 +1,11 @@
 import express, { json, urlencoded } from "express";
 
-const db = require("models");
-
 const app = express();
 
 // parse requests of content-type - application/json
 app.use(json());
+
+const db = require("./models");
 db.sequelize.sync(); // may want to use force=true
 
 // parse requests of content-type - application/x-www-form-urlencoded

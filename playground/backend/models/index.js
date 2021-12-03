@@ -13,9 +13,11 @@ const sequelize = new Sequelize(
 const db = {};
 
 db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
 db.device = require("./device.model.js")(sequelize, Sequelize);
 db.report = require("./report.model.js")(sequelize, Sequelize);
 db.action = require("./action.model.js")(sequelize, Sequelize);
 
+// module.exports = db;
 export default db;
