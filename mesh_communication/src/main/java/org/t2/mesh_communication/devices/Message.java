@@ -44,6 +44,7 @@ public class Message {
         this.destination = message.getDestination();
         this.content = message.getContent();
         this.path = new HashSet<>(message.getPath());
+        this.lastHop = message.getLastHop();
     }
 
     public boolean addPath(int id) {
