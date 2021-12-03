@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Button, Grid, Typography } from "@mui/material";
-import Battery80Icon from "@mui/icons-material/Battery80";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import SimpleChart from "./SimpleChart";
 
-function Device(): React.ReactElement {
+export default function Device(): React.ReactElement {
 	const [turnedOn, setTurnedOn] = useState(false);
 
 	return (
@@ -13,7 +13,7 @@ function Device(): React.ReactElement {
 					<img
 						height={400}
 						src={require("../assets/images/device.png").default}
-						alt="LED"
+						alt="Device Image"
 					/>
 				</div>
 
@@ -25,12 +25,10 @@ function Device(): React.ReactElement {
 			<Grid item xs={9}>
 				<div>
 					<Typography variant="h5" align={"left"}>
-						Information
+						Battery
 					</Typography>
 
-					<Typography>
-						80% battery <Battery80Icon />
-					</Typography>
+					<SimpleChart width={800} height={500}/>
 				</div>
 
 				<Typography variant="h5">Maitenance actions</Typography>
@@ -45,11 +43,9 @@ function Device(): React.ReactElement {
 					Turn {turnedOn ? "On" : "Off"} <PowerSettingsNewIcon />
 				</Button>
 
-				<Typography variant="h5">Related reports</Typography>
-				<Typography variant="h5">Related logs</Typography>
+				{/*<Typography variant="h5">Related reports</Typography>*/}
+				{/*<Typography variant="h5">Related logs</Typography>*/}
 			</Grid>
 		</Grid>
 	);
 }
-
-export default Device;
