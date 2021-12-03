@@ -17,3 +17,6 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/filters', function () {
+    return view('metrics_filter');
+});

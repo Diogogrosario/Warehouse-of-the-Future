@@ -56,7 +56,7 @@
         <div class="sidebar-heading">PSA</div>
         <div class="list-group list-group-flush">
             <a href="/" class="list-group-item list-group-item-action bg-light">Home</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Generate layout</a>
+            <a href="/filters" class="list-group-item list-group-item-action bg-light">Generate layout</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Visualize layouts</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Reports</a>
         </div>
