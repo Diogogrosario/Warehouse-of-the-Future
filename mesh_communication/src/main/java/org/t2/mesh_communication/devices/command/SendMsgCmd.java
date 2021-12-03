@@ -14,6 +14,7 @@ public class SendMsgCmd implements Command {
 
     @Override
     public void execute() {
-        this.meshDevice.sendMessage(this.message);
+        Message m = new Message(this.message);
+        this.meshDevice.sendMessage(m);
     }
 }
