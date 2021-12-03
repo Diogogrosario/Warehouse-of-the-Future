@@ -18,10 +18,7 @@ const timeScale = scaleTime<number>({
 });
 
 const batteryPowerScale = scaleLinear<number>({
-	domain: [
-		Math.min(...batteryData.map(batteryPower)),
-		Math.max(...batteryData.map(batteryPower)),
-	],
+	domain: [0, 100],
 	nice: true,
 });
 
