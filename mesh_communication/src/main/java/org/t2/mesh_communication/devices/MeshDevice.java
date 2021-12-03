@@ -4,42 +4,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 
-/**
- * A device on a mesh Network. Can be an orchestrator or a normal, passive device.
- */
+/** A device on a mesh Network. Can be an orchestrator or a normal, passive device. */
 public abstract class MeshDevice implements Updatable {
     protected final int id;
     protected final Position pos;
     protected final float range;
     protected final MeshGrid meshGrid;
 
-    /**
-     * The sequence number that will be sent on the next message's header (from this device).
-     */
+    /** The sequence number that will be sent on the next message's header (from this device). */
     protected int seqNum;
-    /**
-     * The set of commands that will be run in the current tick.
-     */
+    /** The set of commands that will be run in the current tick. */
     protected final List<Command> commands;
-    /**
-     * The set of commands for the next tick.
-     */
+    /** The set of commands for the next tick. */
     protected final List<Command> commandsNext;
-    /**
-     * The last sequence number seen from each source.
-     */
+    /** The last sequence number seen from each source. */
     protected final Map<Integer, Integer> seqMap;
 
     /**
-     * Neighbor table, including TTLs. Each neighbor device is registered in this table
-     * with a time-to-live counting down the missed (but expected) messages from them.
-     * If it reaches 0, the device is believed to be dead.
+     * Neighbor table, including TTLs. Each neighbor device is registered in this table with a
+     * time-to-live counting down the missed (but expected) messages from them. If it reaches 0, the
+     * device is believed to be dead.
      */
     private final HashMap<Integer, Integer> devicesLife;
+
     private final int DEFAULT_TTL = 3;
 
     public MeshDevice(int id, Position pos, float range, MeshGrid meshGrid) {
@@ -69,9 +59,8 @@ public abstract class MeshDevice implements Updatable {
     }
 
     /**
-     * Runs the scheduled commands for this tick (for this device).
-     * This includes checking for the neighboring devices' death,
-     * sending messages, and receiving messages.
+     * Runs the scheduled commands for this tick (for this device). This includes checking for the
+     * neighboring devices' death, sending messages, and receiving messages.
      *
      * @return True, if any update was run. False, otherwise.
      */
@@ -94,6 +83,7 @@ public abstract class MeshDevice implements Updatable {
 
     /**
      * Adds an action to be run on the next tick.
+     *
      * @param c Action to run
      */
     protected void addCommand(Command c) {
@@ -102,6 +92,7 @@ public abstract class MeshDevice implements Updatable {
 
     /**
      * Creates a message originating from this device.
+     *
      * @param dest Destination of the message.
      * @param content Content of the message.
      * @return The generated message object.
@@ -113,6 +104,7 @@ public abstract class MeshDevice implements Updatable {
 
     /**
      * Sends a message. This device can be the source of the message or just relaying it.
+     *
      * @param msg The message to send (or relay).
      */
     public void sendMessage(Message msg) {
@@ -133,9 +125,7 @@ public abstract class MeshDevice implements Updatable {
         this.devicesLife.put(id, DEFAULT_TTL);
     }
 
-    /**
-     * Looks for any dead neighbors, and takes the necessary actions to handle the situation.
-     */
+    /** Looks for any dead neighbors, and takes the necessary actions to handle the situation. */
     protected void checkDevicesLife() {
         for (Map.Entry<Integer, Integer> entry : devicesLife.entrySet()) {
             if (entry.getValue() == 0) {
