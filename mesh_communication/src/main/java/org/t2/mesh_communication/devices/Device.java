@@ -42,7 +42,6 @@ public class Device extends MeshDevice {
 
         // if we haven't relayed this one but a copy => drop it
         int s = msg.getSource();
-
         return this.seqMap.containsKey(s) && this.seqMap.get(s) >= msg.getSeq();
     }
 
