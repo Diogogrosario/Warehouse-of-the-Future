@@ -15,7 +15,7 @@ itemAttributes = namespace.model("ManifestItem", {
 
 manifestAttributes = namespace.model("Manifest", {
     "items": fields.List(fields.Nested(itemAttributes),
-                         description="List of items in manisfest"),
+                         description="List of items in manifest"),
     "time": fields.DateTime(required=True, description="The manifest time"),
 })
 
