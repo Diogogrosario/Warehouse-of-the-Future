@@ -1,9 +1,7 @@
 package org.t2.mesh_communication.devices;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 
@@ -23,7 +21,8 @@ public abstract class MeshDevice implements Updatable {
 
     // near devices time to live
     private final HashMap<Integer, Integer> devicesLife;
-    private final int DEFAULT_TTL = 3;
+    private final Set<Integer> currentSending;
+    private final int DEFAULT_TTL = 6;
 
     public MeshDevice(int id, Position pos, float range, MeshGrid meshGrid) {
         this.id = id;
@@ -37,6 +36,7 @@ public abstract class MeshDevice implements Updatable {
         this.seqMap = new HashMap<>();
 
         this.devicesLife = new HashMap<>();
+        this.currentSending = new HashSet<>();
     }
 
     public int getId() {
@@ -64,6 +64,7 @@ public abstract class MeshDevice implements Updatable {
         this.commands.clear();
         this.commands.addAll(this.commandsNext);
         this.commandsNext.clear();
+        this.currentSending.clear();
 
         return hadUpdates;
     }
@@ -81,8 +82,15 @@ public abstract class MeshDevice implements Updatable {
         msg.addPath(this.id);
         for (MeshDevice d : this.meshGrid.devicesInRange(this)) {
             int deviceId = d.getId();
-            if (devicesLife.containsKey(deviceId)) {
-                devicesLife.put(deviceId, devicesLife.get(deviceId) - 1);
+
+            // reduce TTL only if it hasn't done it already in this tick and if the message to be sent
+            // didnt go through the device before (the device will not relay it)
+            if (devicesLife.containsKey(deviceId) && !currentSending.contains(deviceId)) {
+                if (!msg.getPath().contains(deviceId) && msg.getDestination() != deviceId) {
+                    Integer newTTL = Integer.max(devicesLife.get(deviceId) - 1, 0);
+                    devicesLife.put(deviceId, newTTL);
+                    currentSending.add(deviceId);
+                }
             }
 
             this.addCommand(new ReceiveMsgCmd(d, msg));
@@ -97,13 +105,13 @@ public abstract class MeshDevice implements Updatable {
 
     protected void checkDevicesLife() {
         for (Map.Entry<Integer, Integer> entry : devicesLife.entrySet()) {
-            if (entry.getValue() == 0) {
-                System.out.println("Device " + entry.getKey() + " is kill!");
-                // send message to orchestrator to warn about dead device
-                this.sendMessage(
-                        new Message(
-                                this.id, this.seqNum, 0, "Device " + entry.getKey() + " is kill!"));
+            if (entry.getValue() < 0) {
+                System.out.println(this.id + ": Device " + entry.getKey() + " is kill!");
             }
         }
+    }
+
+    public Map<Integer, Integer> getDevicesLife() {
+        return this.devicesLife;
     }
 }

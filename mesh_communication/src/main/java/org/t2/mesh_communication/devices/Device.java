@@ -52,6 +52,8 @@ public class Device extends MeshDevice {
         // decrease battery life
         this.battery.spendBattery(this.receivingConsumption);
 
+        System.out.printf("Device received message: [id=%d], [msg=%s], [lastHop=%d]\n", this.id, msg, msg.getLastHop());
+
         // already seen => drop
         if (this.seenMessage(msg)) return true;
         this.seqMap.put(msg.getSource(), msg.getSeq());
