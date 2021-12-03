@@ -3,11 +3,13 @@ version: '3'
 services:
   
   optimization:
-    build: ./docker/logic
+    build: 
+        context: .
+        dockerfile: ./docker/logic/Dockerfile
     depends_on:
       - db
     volumes:
-      - ./src/logic:/home/logic
+      - ./src/logic:/tmp/genetic/logic
     networks:
       - internal
   
@@ -44,6 +46,8 @@ services:
       - ./src/model/parser:/home/parser
     networks:
       - internal
+    depends_on:
+      - db
 
   db:
     image: mariadb

@@ -6,8 +6,8 @@ class Database:
     def __init__(self, database='test'):
         try:
             self.db = mysql.connector.connect(
-                host="localhost",
-                port=9002,
+                host="db",
+                port=3306,
                 database=database,
                 user="test",
                 password="test"
