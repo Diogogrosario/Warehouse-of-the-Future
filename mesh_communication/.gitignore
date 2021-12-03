@@ -49,3 +49,6 @@ hs_err_pid*
 .mvn/.mvn.iml
 src/main/main.iml
 src/test/test.iml
+
+# Henrique: IntelIJ created file
+mesh_communication.iml

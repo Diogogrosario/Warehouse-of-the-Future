@@ -1,0 +1,53 @@
+@startuml architecture_diagram
+
+!theme amiga
+
+hide empty members
+
+component "Java 17 - Maven App" as JavaApp {
+    component "Manifest Parser" as parser
+    component "Manifest Generator" as generator
+    component "Communication Simulation" as commSim
+    component "Device Simulation" as devSim
+}
+
+component Javadoc 
+
+component Configuration
+
+component Manifest
+
+component Tests
+
+note as JavaDocNote
+    Documentation of the Java Application
+end note
+
+note as Jack
+    Jackson
+end note
+
+note as yaml
+    YAML
+end note
+
+note as tests
+    JUnit 5
+    Mockito
+    Pitest
+end note
+
+Configuration .. yaml
+generator -down-> Manifest
+Manifest .. yaml
+parser .. Jack
+Javadoc .. JavaDocNote
+Javadoc <-- JavaApp
+Configuration -up-> commSim
+Configuration -up-> devSim
+Manifest -up-> parser
+tests .. Tests
+JavaApp --> Tests
+
+
+@enduml
