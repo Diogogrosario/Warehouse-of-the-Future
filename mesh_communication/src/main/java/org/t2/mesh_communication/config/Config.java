@@ -6,8 +6,8 @@ public class Config {
     public int totalBattery;
     public int batIdleConsumption;
 
-    public int lightIdleConsumption;
-    public int lightOnConsumption;
+    public int screenIdleConsumption;
+    public int screenOnConsumption;
 
     public int receivingConsumption;
     public int sendingConsumption;
@@ -27,10 +27,10 @@ public class Config {
                 + totalBattery
                 + "\nbatIdleConsumption: "
                 + batIdleConsumption
-                + "\nlightIdleConsumption: "
-                + lightIdleConsumption
-                + "\nlightOnConsumption: "
-                + lightOnConsumption
+                + "\nscreenIdleConsumption: "
+                + screenIdleConsumption
+                + "\nscreenOnConsumption: "
+                + screenOnConsumption
                 + "\nreceivingConsumption: "
                 + receivingConsumption
                 + "\nsendingConsumption: "

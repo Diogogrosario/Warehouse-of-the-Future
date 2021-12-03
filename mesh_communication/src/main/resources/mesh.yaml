@@ -1,8 +1,8 @@
 totalBattery: 1000
 batIdleConsumption: 2
 
-lightIdleConsumption: 0
-lightOnConsumption: 20
+screenIdleConsumption: 0
+screenOnConsumption: 20
 
 receivingConsumption: 20
 sendingConsumption: 30

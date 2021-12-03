@@ -1,10 +1,8 @@
 package org.t2.mesh_communication.devices;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.t2.mesh_communication.config.Config;
 import org.t2.mesh_communication.devices.components.Battery;
-import org.t2.mesh_communication.devices.components.Light;
+import org.t2.mesh_communication.devices.components.Screen;
 
 public class DeviceFactory {
 
@@ -13,11 +11,10 @@ public class DeviceFactory {
         int sendingConsumption = c.sendingConsumption;
 
         Battery battery = new Battery(c.totalBattery, c.batIdleConsumption);
-        List<Light> lights = new ArrayList<>();
-        lights.add(new Light(c.lightIdleConsumption, c.lightOnConsumption));
+        Screen screen = new Screen(c.screenIdleConsumption, c.screenOnConsumption);
 
         return new Device(
-                id, pos, meshGrid, receivingConsumption, sendingConsumption, battery, lights);
+                id, pos, meshGrid, receivingConsumption, sendingConsumption, battery, screen);
     }
 
     public static Device deviceFromConfig(int id, Position pos, MeshGrid meshGrid) {

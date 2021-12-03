@@ -1,15 +1,16 @@
 package org.t2.mesh_communication.devices;
 
 import java.util.List;
+
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.components.Battery;
-import org.t2.mesh_communication.devices.components.Light;
+import org.t2.mesh_communication.devices.components.Screen;
 
 public class Device extends MeshDevice {
     private final int receivingConsumption;
     private final int sendingConsumption;
     private final Battery battery;
-    private final List<Light> lights;
+    private final Screen screen;
 
     public Device(
             int id,
@@ -18,14 +19,14 @@ public class Device extends MeshDevice {
             int receivingConsumption,
             int sendingConsumption,
             Battery battery,
-            List<Light> lights) {
+            Screen screen) {
         // TODO don't hard code range
         super(id, pos, 1, meshGrid);
 
         this.receivingConsumption = receivingConsumption;
         this.sendingConsumption = sendingConsumption;
         this.battery = battery;
-        this.lights = lights;
+        this.screen = screen;
     }
 
     @Override
@@ -75,10 +76,7 @@ public class Device extends MeshDevice {
             boolean hadUpdates = super.update();
 
             // get components battery usage
-            int batUsage = battery.getTickConsumption();
-            for (Light light : lights) {
-                batUsage += light.getTickConsumption();
-            }
+            int batUsage = battery.getTickConsumption() + screen.getTickConsumption();
 
             battery.spendBattery(batUsage);
             return hadUpdates;
@@ -98,7 +96,7 @@ public class Device extends MeshDevice {
         return receivingConsumption;
     }
 
-    public List<Light> getLights() {
-        return lights;
+    public Screen getScreen() {
+        return screen;
     }
 }

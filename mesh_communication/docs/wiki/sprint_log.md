@@ -2,7 +2,7 @@
 
 - Generate manifest;
 - Grid 3x3:
-  - Nodes light up in the needed order;
+  - Nodes screen up in the needed order;
     - Read all the necessary data from the manifest;
     - Know shelf order;
   - Orchestrator starts communication with pretended devices;
