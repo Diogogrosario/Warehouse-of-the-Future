@@ -75,6 +75,20 @@ stock_attributes = namespace.model("Stock", {
     "time": fields.DateTime(required=True, description="The current time"),
 })
 
+# Sensors
+
+sensor_attributes = namespace.model("Sensor", {
+    "id": fields.String(required=True, description="Id of the sensor"),
+    "position": fields.List(fields.Integer, required=True, description="Coordinates of the sensor, in the form of list ([x, y, z])"),
+    "battery": fields.Integer(required=True, description="Percentage of battery of the sensor"),
+    "movement_records": fields.List(fields.DateTime, required=True, description="Timestamps of the movement detections."),
+})
+
+sensors_attributes = namespace.model("Sensors", {
+    "sensors": fields.List(fields.Nested(sensor_attributes), description="List of all the sensors"),
+    "time": fields.DateTime(required=True, description="The current time"),
+})
+
 
 # ------------------------------------------------------------------------------
 # Manifests
@@ -106,7 +120,7 @@ def generate_random_items(number_of_items = None):
     return items
 
 @namespace.route("/manifest/reposition")
-class Manifest(Resource):
+class RepositionManifest(Resource):
     @namespace.marshal_list_with(reposition_manifest_attributes)
     def get(self):
         """
@@ -123,7 +137,7 @@ class Manifest(Resource):
         return reposition_manifest
 
 @namespace.route("/manifest/collection")
-class Manifest(Resource):
+class CollectionManifest(Resource):
     @namespace.marshal_list_with(collection_manifest_attributes)
     def get(self):
         """
@@ -212,7 +226,7 @@ class Stock(Resource):
         return stock
 
 @namespace.route("/stock/<string:id>")
-class Stock(Resource):
+class ItemStock(Resource):
     @namespace.marshal_list_with(stock_attributes)
     def get(self, id):
         """
@@ -227,3 +241,89 @@ class Stock(Resource):
         }
 
         return stock
+
+# ------------------------------------------------------------------------------
+# Sensors
+# ------------------------------------------------------------------------------
+
+def get_random_date(start, end):
+    delta = end - start
+    int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
+    random_second = random.randrange(int_delta)
+    return start + datetime.timedelta(seconds=random_second)
+
+def get_random_date_last_day():
+    now =  datetime.datetime.now()
+    yesterday = now - datetime.timedelta(days=1)
+    return get_random_date(yesterday, now)
+
+def generate_random_sensors(number_of_sensors):
+
+    sensors = []
+
+    for _ in range(number_of_sensors):
+        id = uuid.uuid4()
+
+        position = [
+            random.randint(0, 100),
+            random.randint(0, 100),
+            random.randint(0, 100),
+        ]
+
+        battery = random.randint(1,100)
+
+        number_of_movements = random.randint(1,10)
+        movement_timestamps = []
+
+        for _ in range(number_of_movements):
+            movement_timestamps.append(get_random_date_last_day())
+
+        sensor = {
+            "id": id,
+            "position": position,
+            "battery": battery,
+            "movement_records": movement_timestamps
+        }
+        sensors.append(sensor)
+    return sensors
+
+def generate_random_sensor(sensor_id):
+    sensor = generate_random_sensors(number_of_sensors=1)[0]
+    sensor["id"] = sensor_id
+    return sensor
+
+@namespace.route("/sensors")
+class Sensors(Resource):
+    @namespace.marshal_list_with(sensors_attributes)
+    def get(self):
+        """
+        Returns the data about all the sensors.
+        """
+
+        number_of_sensors = random.randint(30, 100)
+
+        sensors = generate_random_sensors(number_of_sensors=number_of_sensors)
+
+        result = {
+            "sensors": sensors,
+            "time": datetime.datetime.now()
+        }
+
+        return result
+
+@namespace.route("/sensors/<string:id>")
+class Sensor(Resource):
+    @namespace.marshal_list_with(sensors_attributes)
+    def get(self, id):
+        """
+        Returns the data about the sensor with the provided id.
+        """
+
+        sensor = generate_random_sensor(sensor_id=id)
+
+        result = {
+            "sensors": sensor,
+            "time": datetime.datetime.now()
+        }
+
+        return result
