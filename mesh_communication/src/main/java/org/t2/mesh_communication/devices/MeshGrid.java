@@ -3,6 +3,10 @@ package org.t2.mesh_communication.devices;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Holder of the network devices. Represents the network and distributes the tick update commands to
+ * all devices. Can be queried to find devices in a certain range.
+ */
 public class MeshGrid {
     List<MeshDevice> devices;
 

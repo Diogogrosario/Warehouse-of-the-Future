@@ -4,6 +4,7 @@ import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 
+/** The common device on the mesh network. */
 public class Device extends MeshDevice {
     private final int receivingConsumption;
     private final int sendingConsumption;

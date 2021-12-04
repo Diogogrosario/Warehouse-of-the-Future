@@ -3,6 +3,7 @@ package org.t2.mesh_communication.devices;
 import java.util.HashSet;
 import java.util.Set;
 
+/** Messages distribute in the mesh network. */
 public class Message {
     /** The source of the message. */
     private final int source;
