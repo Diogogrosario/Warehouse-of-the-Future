@@ -182,6 +182,34 @@ cart_attributes = namespace.model("Cart", {
     ),
 })
 
+# Layout
+
+shelf_attributes = namespace.model("Shelf", {
+    "position": fields.List(
+        fields.Integer,
+        required=True,
+        description="Coordinates of the shelf, in the form of list ([x, y, z])"
+    ),
+})
+
+rack_attributes = namespace.model("Rack", {
+    "id": fields.String(
+        required=True,
+        description="Id of the rack"
+    ),
+    "shelfs": fields.List(
+        fields.Nested(shelf_attributes),
+        description="List of shelfs of the rack"
+    )
+})
+
+layout_attributes = namespace.model("Layout", {
+    "racks": fields.List(
+        fields.Nested(rack_attributes),
+        description="List of racks of the warehouse"
+    )
+})
+
 
 # ------------------------------------------------------------------------------
 # Manifests
@@ -436,3 +464,45 @@ class Cart(Resource):
         }
 
         return cart
+
+# ------------------------------------------------------------------------------
+# Layout
+# ------------------------------------------------------------------------------
+
+
+def get_shelfs():
+    number_of_shelfs = random.randint(20, 100)
+    shelfs = []
+
+    for _ in range(number_of_shelfs):
+        position = utils.get_position()
+        shelfs.append({
+            "position": position
+        })
+
+    return shelfs
+
+
+@namespace.route("/layout")
+class Layout(Resource):
+    @namespace.marshal_list_with(layout_attributes)
+    def get(self):
+        """
+        Returns the position and operator who is controlling the cart.
+        """
+
+        rack_ids = ["side_rack_1", "side_rack_2", "back_rack"]
+        racks = []
+
+        for rack_id in rack_ids:
+            rack = {
+                "id": rack_id,
+                "shelfs": get_shelfs()
+            }
+            racks.append(rack)
+
+        layout = {
+            "racks": racks
+        }
+
+        return layout
