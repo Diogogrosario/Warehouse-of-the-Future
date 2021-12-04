@@ -7,7 +7,7 @@ on:
     branches: [ t1_development ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
