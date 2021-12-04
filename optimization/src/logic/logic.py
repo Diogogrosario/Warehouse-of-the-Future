@@ -5,14 +5,14 @@ from copy import deepcopy
 from database import Database
 from utils import *
 
-db = Database()
-storage = Storage(db)
+db = None
+storage = None
 
-query_warehouse = "SELECT * FROM warehouse"
-query_month_manifesto = "SELECT * FROM month_manifesto"
+query_warehouse = None
+query_month_manifesto = None
 
-warehouses = db.df_query(query_warehouse)
-month_manifestos = db.df_query(query_month_manifesto)
+warehouses = None
+month_manifestos = None
 
 
 # Randomly generate a population of num layouts of the warehouse
@@ -83,6 +83,16 @@ if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'docker':
         db = Database('test', True)
         storage = Storage(db)
+        print("Running Docker ENV")
+    else:
+        db = Database()
+        storage = Storage(db)
+
+    query_warehouse = "SELECT * FROM warehouse"
+    query_month_manifesto = "SELECT * FROM month_manifesto"
+
+    warehouses = db.df_query(query_warehouse)
+    month_manifestos = db.df_query(query_month_manifesto)
 
     manifestos = storage.get_manifestos(month_manifestos)
     manifesto = manifestos[1]  # Initial test with only 1 manifesto
