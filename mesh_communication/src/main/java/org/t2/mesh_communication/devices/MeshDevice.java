@@ -123,7 +123,7 @@ public abstract class MeshDevice implements Updatable {
                 }
             }
 
-            this.addCommand(new ReceiveMsgCmd(d, msg));
+            d.addCommand(new ReceiveMsgCmd(d, msg));
         }
     }
 
