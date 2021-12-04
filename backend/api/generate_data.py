@@ -3,6 +3,7 @@ import random
 import datetime
 import uuid
 import names
+from .utils import utils
 
 namespace = Namespace(
     "GenerateData",
@@ -58,7 +59,8 @@ collection_manifest_attributes = namespace.model("CollectionManifest", {
     ),
 })
 
-# TODO: put the available items in the database,
+# TODO:
+# put the available items in the database,
 # and add the weight and dimensions
 available_items = [
     # items relacionados com o sistema de travagem
@@ -166,6 +168,20 @@ sensors_attributes = namespace.model("Sensors", {
     ),
 })
 
+# Cart
+
+cart_attributes = namespace.model("Cart", {
+    "position": fields.List(
+        fields.Integer,
+        required=True,
+        description="Coordinates of the cart, in the form of list ([x, y])"
+    ),
+    "operator": fields.String(
+        required=True,
+        description="Id of the operator who is controlling the cart"
+    ),
+})
+
 
 # ------------------------------------------------------------------------------
 # Manifests
@@ -182,11 +198,7 @@ def generate_random_items(number_of_items=None):
 
         quantity = random.randint(1, 3)
 
-        position = [
-            random.randint(0, 100),
-            random.randint(0, 100),
-            random.randint(0, 100),
-        ]
+        position = utils.get_position()
 
         items.append({
             "item": item,
@@ -333,19 +345,6 @@ class ItemStock(Resource):
 # ------------------------------------------------------------------------------
 
 
-def get_random_date(start, end):
-    delta = end - start
-    int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
-    random_second = random.randrange(int_delta)
-    return start + datetime.timedelta(seconds=random_second)
-
-
-def get_random_date_last_day():
-    now = datetime.datetime.now()
-    yesterday = now - datetime.timedelta(days=1)
-    return get_random_date(yesterday, now)
-
-
 def generate_random_sensors(number_of_sensors):
 
     sensors = []
@@ -353,11 +352,7 @@ def generate_random_sensors(number_of_sensors):
     for _ in range(number_of_sensors):
         id = uuid.uuid4()
 
-        position = [
-            random.randint(0, 100),
-            random.randint(0, 100),
-            random.randint(0, 100),
-        ]
+        position = utils.get_position()
 
         battery = random.randint(1, 100)
 
@@ -365,7 +360,7 @@ def generate_random_sensors(number_of_sensors):
         movement_timestamps = []
 
         for _ in range(number_of_movements):
-            movement_timestamps.append(get_random_date_last_day())
+            movement_timestamps.append(utils.get_random_date_last_day())
 
         sensor = {
             "id": id,
@@ -419,3 +414,25 @@ class Sensor(Resource):
         }
 
         return result
+
+# ------------------------------------------------------------------------------
+# Cart
+# ------------------------------------------------------------------------------
+
+
+@namespace.route("/cart")
+class Cart(Resource):
+    @namespace.marshal_list_with(cart_attributes)
+    def get(self):
+        """
+        Returns the position and operator who is controlling the cart.
+        """
+
+        position = utils.get_position(dimensions=2)
+
+        cart = {
+            "position": position,
+            "operator": uuid.uuid4()
+        }
+
+        return cart
