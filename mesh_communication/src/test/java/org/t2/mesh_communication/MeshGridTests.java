@@ -1,17 +1,15 @@
 package org.t2.mesh_communication;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.t2.mesh_communication.devices.*;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
-
-import java.util.List;
-import java.util.Map;
 
 public class MeshGridTests {
     @Test
@@ -26,25 +24,29 @@ public class MeshGridTests {
 
         for (int i = 0; i < 8; ++i) {
 
-            Device d = new Device(i + 1,
-                    new Position(i % 3, i / 3),
-                    meshGrid,
-                    0,
-                    0,
-                    bat,
-                    Mockito.mock(Screen.class));
+            Device d =
+                    new Device(
+                            i + 1,
+                            new Position(i % 3, i / 3),
+                            meshGrid,
+                            0,
+                            0,
+                            bat,
+                            Mockito.mock(Screen.class));
             meshGrid.addDevice(d);
         }
 
         Battery bat_dead = Mockito.mock(Battery.class);
         Mockito.when(bat_dead.getRemainingBattery()).thenReturn(Integer.MAX_VALUE);
-        Device toBeDead = new Device(9,
-                new Position(2, 2),
-                meshGrid,
-                0,
-                0,
-                bat_dead,
-                Mockito.mock(Screen.class));
+        Device toBeDead =
+                new Device(
+                        9,
+                        new Position(2, 2),
+                        meshGrid,
+                        0,
+                        0,
+                        bat_dead,
+                        Mockito.mock(Screen.class));
         meshGrid.addDevice(toBeDead);
 
         orchestrator.sendMessage(orchestrator.createMessage(8, "Ola1"));
@@ -55,7 +57,6 @@ public class MeshGridTests {
 
         // Disabling Device 9
         Mockito.when(bat_dead.getRemainingBattery()).thenReturn(0);
-
 
         for (int i = 0; i < 7; ++i) {
             orchestrator.sendMessage(orchestrator.createMessage(7, "Ola" + (i + 2)));
@@ -75,9 +76,9 @@ public class MeshGridTests {
 
         // Check if all other devices are alive
         for (int i = 0; i < 9; ++i) {
-            for (Map.Entry<Integer, Integer> deviceLife : devices.get(i).getDevicesLife().entrySet()) {
-                if (deviceLife.getKey() != 9)
-                    assertTrue(deviceLife.getValue() > 0);
+            for (Map.Entry<Integer, Integer> deviceLife :
+                    devices.get(i).getDevicesLife().entrySet()) {
+                if (deviceLife.getKey() != 9) assertTrue(deviceLife.getValue() > 0);
             }
         }
     }

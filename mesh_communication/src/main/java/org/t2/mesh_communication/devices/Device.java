@@ -4,6 +4,7 @@ import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 
+/** The common device on the mesh network. */
 public class Device extends MeshDevice {
     private final int receivingConsumption;
     private final int sendingConsumption;
@@ -42,7 +43,6 @@ public class Device extends MeshDevice {
 
         // if we haven't relayed this one but a copy => drop it
         int s = msg.getSource();
-
         return this.seqMap.containsKey(s) && this.seqMap.get(s) >= msg.getSeq();
     }
 
@@ -52,7 +52,9 @@ public class Device extends MeshDevice {
         // decrease battery life
         this.battery.spendBattery(this.receivingConsumption);
 
-        System.out.printf("Device received message: [id=%d], [msg=%s], [lastHop=%d]\n", this.id, msg, msg.getLastHop());
+        System.out.printf(
+                "Device received message: [id=%d], [msg=%s], [lastHop=%d]\n",
+                this.id, msg, msg.getLastHop());
 
         // already seen => drop
         if (this.seenMessage(msg)) return true;

@@ -1,6 +1,6 @@
 package org.t2.mesh_communication.devices;
 
-/** The class responsible for managing the mesh network. */
+/** The device responsible for initiating communications on the mesh network. */
 public class Orchestrator extends MeshDevice {
     public Orchestrator(Position pos, MeshGrid meshGrid) {
         // TODO don't hard code range
