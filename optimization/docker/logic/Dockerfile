@@ -7,6 +7,4 @@ COPY ./src/logic/requirements.txt .
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python3", "logic.py", ">","output.txt"]
-
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["python3", "logic.py", "docker", ">","output.txt"]

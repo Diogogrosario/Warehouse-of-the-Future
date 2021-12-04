@@ -1,9 +1,9 @@
-from database import Database
-from warehouse import *
-from utils import *
-from copy import deepcopy
 import heapq
-import random as r
+import sys
+from copy import deepcopy
+
+from database import Database
+from utils import *
 
 db = Database()
 storage = Storage(db)
@@ -78,6 +78,12 @@ def mutate(child):
 
 
 if __name__ == '__main__':
+
+    # Overwrite Database configs if Docker tag is defined
+    if len(sys.argv) > 1 and sys.argv[1] == 'docker':
+        db = Database('test', True)
+        storage = Storage(db)
+
     manifestos = storage.get_manifestos(month_manifestos)
     manifesto = manifestos[1]  # Initial test with only 1 manifesto
     warehouse_id = warehouses.iloc[0]['id']  # Initial test with only 1 warehouse
