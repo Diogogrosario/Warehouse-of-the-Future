@@ -1,10 +1,10 @@
-package org.t2.mesh_communication.devices;
+package org.t2.mesh_communication.devices.messages;
 
 import java.util.HashSet;
 import java.util.Set;
 
 /** Messages distribute in the mesh network. */
-public class Message {
+public abstract class Message {
     /** The source of the message. */
     private final int source;
     /** The destination of the message. */
@@ -93,4 +93,6 @@ public class Message {
                 "Message{source=%d; seq=%d; dest=%d; content=%s}",
                 this.source, this.seq, this.destination, this.content);
     }
+
+    public abstract String getType();
 }

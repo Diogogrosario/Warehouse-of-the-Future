@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.t2.mesh_communication.devices.Device;
 import org.t2.mesh_communication.devices.MeshGrid;
-import org.t2.mesh_communication.devices.Message;
 import org.t2.mesh_communication.devices.Position;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
+import org.t2.mesh_communication.devices.messages.Message;
+import org.t2.mesh_communication.devices.messages.ReplyMessage;
 
 public class BatteryTests {
     private static Device device;
@@ -31,7 +32,7 @@ public class BatteryTests {
         int startBattery = device.getBattery().getRemainingBattery();
         int expectedBattery = startBattery - device.getSendingConsumption();
 
-        Message msg = new Message(0, 0, 0, "");
+        Message msg = new ReplyMessage(0, 0, 0, "");
         device.sendMessage(msg);
 
         int finalBattery = device.getBattery().getRemainingBattery();
@@ -43,7 +44,7 @@ public class BatteryTests {
         int startBattery = device.getBattery().getRemainingBattery();
         int expectedBattery = startBattery - device.getReceivingConsumption();
 
-        Message msg = new Message(0, 0, 0, "");
+        Message msg = new ReplyMessage(0, 0, 0, "");
         device.receiveMessage(msg);
 
         int finalBattery = device.getBattery().getRemainingBattery();

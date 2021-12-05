@@ -3,6 +3,8 @@ package org.t2.mesh_communication.devices;
 import java.util.*;
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
+import org.t2.mesh_communication.devices.messages.Message;
+import org.t2.mesh_communication.devices.messages.RequestMessage;
 
 /** A device on a mesh Network. Can be an orchestrator or a normal, passive device. */
 public abstract class MeshDevice implements Updatable {
@@ -99,7 +101,7 @@ public abstract class MeshDevice implements Updatable {
      */
     public Message createMessage(int dest, String content) {
         ++this.seqNum;
-        return new Message(this.id, this.seqNum, dest, content);
+        return new RequestMessage(this.id, this.seqNum, dest, content);
     }
 
     /**
@@ -145,5 +147,9 @@ public abstract class MeshDevice implements Updatable {
 
     public Map<Integer, Integer> getDevicesLife() {
         return this.devicesLife;
+    }
+
+    public List<Command> getNextCommands() {
+        return this.commandsNext;
     }
 }

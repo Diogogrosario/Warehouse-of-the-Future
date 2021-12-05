@@ -3,6 +3,9 @@ package org.t2.mesh_communication.devices;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
+import org.t2.mesh_communication.devices.messages.Message;
+import org.t2.mesh_communication.devices.messages.ReplyMessage;
+import org.t2.mesh_communication.devices.messages.RequestMessage;
 
 /** The common device on the mesh network. */
 public class Device extends MeshDevice {
@@ -63,6 +66,17 @@ public class Device extends MeshDevice {
         // are we the destination
         if (msg.getDestination() == this.id) {
             System.out.printf("Message reached destination: [id=%d], [msg=%s]\n", this.id, msg);
+
+            // check message type
+            String msgType = msg.getType();
+
+            if (RequestMessage.type.equals(msgType)) {
+                // send reply to request msg
+                ReplyMessage rep = new ReplyMessage(id, 0, msg.getSource(), "Reply.");
+                System.out.printf("Device is replying: [id=%d], [msg=%s]\n", this.id, rep);
+                this.addCommand(new SendMsgCmd(this, rep));
+            }
+
             return true;
         }
 

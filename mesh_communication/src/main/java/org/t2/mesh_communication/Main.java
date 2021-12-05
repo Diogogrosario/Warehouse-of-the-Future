@@ -41,7 +41,7 @@ public class Main {
         while (true) {
             System.out.println("Tick " + tick++);
             if (!meshGrid.update()) System.out.println("No updates...");
-            ;
+
             try {
                 System.in.read();
             } catch (IOException e) {
