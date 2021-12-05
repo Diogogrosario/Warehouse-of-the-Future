@@ -1,12 +1,13 @@
 package org.t2.mesh_communication.devices;
 
+import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.messages.Message;
 
 /** The device responsible for initiating communications on the mesh network. */
 public class Orchestrator extends MeshDevice {
-    public Orchestrator(Position pos, MeshGrid meshGrid) {
+    public Orchestrator(Position pos, CommunicationStrategy commStrat) {
         // TODO don't hard code range
-        super(0, pos, 1, meshGrid);
+        super(MeshGrid.ORCHESTRATOR_ID, pos, 1, commStrat);
     }
 
     @Override

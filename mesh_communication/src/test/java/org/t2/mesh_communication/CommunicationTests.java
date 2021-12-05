@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.t2.mesh_communication.devices.Device;
 import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.Position;
+import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.components.Battery;
@@ -28,7 +29,7 @@ public class CommunicationTests {
         Battery bat = Mockito.mock(Battery.class);
         Screen screen = Mockito.mock(Screen.class);
 
-        device = new Device(1, pos, mg, 10, 10, bat, screen);
+        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
     }
 
     @Test

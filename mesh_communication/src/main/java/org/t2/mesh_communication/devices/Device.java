@@ -1,11 +1,9 @@
 package org.t2.mesh_communication.devices;
 
-import org.t2.mesh_communication.devices.command.SendMsgCmd;
+import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 import org.t2.mesh_communication.devices.messages.Message;
-import org.t2.mesh_communication.devices.messages.ReplyMessage;
-import org.t2.mesh_communication.devices.messages.RequestMessage;
 
 /** The common device on the mesh network. */
 public class Device extends MeshDevice {
@@ -17,13 +15,13 @@ public class Device extends MeshDevice {
     public Device(
             int id,
             Position pos,
-            MeshGrid meshGrid,
+            CommunicationStrategy commStrat,
             int receivingConsumption,
             int sendingConsumption,
             Battery battery,
             Screen screen) {
         // TODO don't hard code range
-        super(id, pos, 1, meshGrid);
+        super(id, pos, 1, commStrat);
 
         this.receivingConsumption = receivingConsumption;
         this.sendingConsumption = sendingConsumption;
@@ -34,56 +32,19 @@ public class Device extends MeshDevice {
     @Override
     public void sendMessage(Message msg) {
         System.out.printf("Device sent message: [id=%d], [msg=%s]\n", this.id, msg.getContent());
-        super.sendMessage(msg);
-
         // decrease battery life
         this.battery.spendBattery(this.sendingConsumption);
-    }
-
-    private boolean seenMessage(Message msg) {
-        // we relayed this before => drop it
-        if (msg.isInPath(this.id)) return true;
-
-        // if we haven't relayed this one but a copy => drop it
-        int s = msg.getSource();
-        return this.seqMap.containsKey(s) && this.seqMap.get(s) >= msg.getSeq();
+        super.sendMessage(msg);
     }
 
     @Override
     public boolean receiveMessage(Message msg) {
-        this.resetTimeToLive(msg.getLastHop());
-        // decrease battery life
-        this.battery.spendBattery(this.receivingConsumption);
-
         System.out.printf(
                 "Device received message: [id=%d], [msg=%s], [lastHop=%d]\n",
                 this.id, msg, msg.getLastHop());
-
-        // already seen => drop
-        if (this.seenMessage(msg)) return true;
-        this.seqMap.put(msg.getSource(), msg.getSeq());
-
-        // are we the destination
-        if (msg.getDestination() == this.id) {
-            System.out.printf("Message reached destination: [id=%d], [msg=%s]\n", this.id, msg);
-
-            // check message type
-            String msgType = msg.getType();
-
-            if (RequestMessage.type.equals(msgType)) {
-                // send reply to request msg
-                ReplyMessage rep = new ReplyMessage(id, 0, msg.getSource(), "Reply.");
-                System.out.printf("Device is replying: [id=%d], [msg=%s]\n", this.id, rep);
-                this.addCommand(new SendMsgCmd(this, rep));
-            }
-
-            return true;
-        }
-
-        System.out.printf("Device is relaying message: [id=%d], [msg=%s]\n", this.id, msg);
-        this.addCommand(new SendMsgCmd(this, msg));
-
-        return true;
+        // decrease battery life
+        this.battery.spendBattery(this.receivingConsumption);
+        return super.receiveMessage(msg);
     }
 
     @Override

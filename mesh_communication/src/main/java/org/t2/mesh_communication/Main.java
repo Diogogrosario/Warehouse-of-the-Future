@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.t2.mesh_communication.config.Config;
 import org.t2.mesh_communication.config.ManifestGenerator;
 import org.t2.mesh_communication.devices.*;
+import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,11 +28,14 @@ public class Main {
 
         // orchestrator and grid
         MeshGrid meshGrid = new MeshGrid();
-        Orchestrator orchestrator = new Orchestrator(new Position(-1, 0), meshGrid);
+        Orchestrator orchestrator =
+                new Orchestrator(new Position(-1, 0), new FloodStrategy(meshGrid));
         meshGrid.addDevice(orchestrator);
         // create the org.t2.mesh_communication.devices
         for (int i = 0; i < 9; ++i) {
-            Device d = DeviceFactory.deviceFromConfig(i + 1, new Position(i % 3, i / 3), meshGrid);
+            Device d =
+                    DeviceFactory.deviceFromConfig(
+                            i + 1, new Position(i % 3, i / 3), new FloodStrategy(meshGrid));
             meshGrid.addDevice(d);
         }
 

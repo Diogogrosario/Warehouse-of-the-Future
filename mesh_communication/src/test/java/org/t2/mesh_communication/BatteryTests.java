@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.t2.mesh_communication.devices.Device;
 import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.Position;
+import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 import org.t2.mesh_communication.devices.messages.Message;
@@ -24,7 +25,7 @@ public class BatteryTests {
 
         Screen screen = new Screen(5, 10);
 
-        device = new Device(1, pos, mg, 10, 10, bat, screen);
+        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
     }
 
     @Test

@@ -8,7 +8,9 @@ import java.util.List;
  * all devices. Can be queried to find devices in a certain range.
  */
 public class MeshGrid {
-    List<MeshDevice> devices;
+    public static final int ORCHESTRATOR_ID = 0;
+
+    private List<MeshDevice> devices;
 
     public MeshGrid() {
         this.devices = new ArrayList<>();

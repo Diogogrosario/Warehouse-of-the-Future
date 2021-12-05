@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.t2.mesh_communication.devices.*;
+import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 
@@ -15,7 +16,8 @@ public class MeshGridTests {
     @Test
     void testDeviceFailure() {
         MeshGrid meshGrid = new MeshGrid();
-        Orchestrator orchestrator = new Orchestrator(new Position(-1, 0), meshGrid);
+        Orchestrator orchestrator =
+                new Orchestrator(new Position(-1, 0), new FloodStrategy(meshGrid));
 
         meshGrid.addDevice(orchestrator);
 
@@ -28,7 +30,7 @@ public class MeshGridTests {
                     new Device(
                             i + 1,
                             new Position(i % 3, i / 3),
-                            meshGrid,
+                            new FloodStrategy(meshGrid),
                             0,
                             0,
                             bat,
@@ -42,7 +44,7 @@ public class MeshGridTests {
                 new Device(
                         9,
                         new Position(2, 2),
-                        meshGrid,
+                        new FloodStrategy(meshGrid),
                         0,
                         0,
                         bat_dead,
@@ -71,13 +73,17 @@ public class MeshGridTests {
         List<MeshDevice> devices = meshGrid.getDevices();
 
         // Devices 6 and 7 are in 9 range (will detect it is dead)
-        assertEquals(0, devices.get(6).getDevicesLife().get(9));
-        assertEquals(0, devices.get(8).getDevicesLife().get(9));
+        List<Integer> dead6 = devices.get(6).getDeadNeighbors();
+        assertEquals(1, dead6.size());
+        assertEquals(9, dead6.get(0));
+        List<Integer> dead8 = devices.get(8).getDeadNeighbors();
+        assertEquals(1, dead8.size());
+        assertEquals(9, dead8.get(0));
 
         // Check if all other devices are alive
         for (int i = 0; i < 9; ++i) {
             for (Map.Entry<Integer, Integer> deviceLife :
-                    devices.get(i).getDevicesLife().entrySet()) {
+                    devices.get(i).getNeighborTTLs().entrySet()) {
                 if (deviceLife.getKey() != 9) assertTrue(deviceLife.getValue() > 0);
             }
         }
