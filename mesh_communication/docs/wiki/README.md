@@ -7,3 +7,4 @@
 - [Similar Products](similar_products.md)
 - [Risks](risks.md)
 - [Mockups](mockups.md)
+- [Git Workflow](git_workflow.md)
