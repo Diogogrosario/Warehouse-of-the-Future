@@ -1,9 +1,10 @@
 import React from "react";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { Canvas } from "@react-three/fiber";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import "./App.css";
 import Cube from "./components/Cube";
+import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 
 class App extends React.Component {
 	render(): JSX.Element {
