@@ -15,6 +15,7 @@ class WarehouseRenderer extends Component {
     private requestID: number = 0;
 
     private cube!: THREE.Mesh;
+    private ground!: THREE.Mesh;
 
   componentDidMount() {
     this.sceneSetup();
@@ -47,7 +48,7 @@ class WarehouseRenderer extends Component {
     // OrbitControls allow a camera to orbit around the object
     // https://threejs.org/docs/#examples/controls/OrbitControls
     this.controls = new OrbitControls(this.camera, this.el);
-    this.renderer = new THREE.WebGLRenderer();
+    this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setSize(width, height);
     this.el?.appendChild(this.renderer.domElement); // mount using React ref
   };
@@ -60,25 +61,30 @@ class WarehouseRenderer extends Component {
     const material = new THREE.MeshPhongMaterial({
       color: 0x156289,
       emissive: 0x072534,
-      side: THREE.DoubleSide,
-      flatShading: true
+      flatShading: true,
+      side: THREE.DoubleSide
     });
 
-    this.cube = new THREE.Mesh(geometry, material);
+    const loader = new THREE.TextureLoader();
+    const testmapMaterial = new THREE.MeshBasicMaterial({
+      map: loader.load('images/testmap.jpg')
+    });
+    const planeGeometry = new THREE.PlaneGeometry(4, 4, 2, 2);
+    this.ground = new THREE.Mesh(planeGeometry, testmapMaterial);
+    this.scene.add(this.ground);
+
+    this.cube = new THREE.Mesh(geometry, testmapMaterial);
     this.scene.add(this.cube);
 
-    const lights = [];
-    lights[0] = new THREE.PointLight(0xffffff, 1, 0);
-    lights[1] = new THREE.PointLight(0xffffff, 1, 0);
-    lights[2] = new THREE.PointLight(0xffffff, 1, 0);
+    const rectLight = new THREE.RectAreaLight(0xffffff, 1, 50, 50);
+    rectLight.position.set( 5, 5, 0 );
+    rectLight.lookAt( 0, 0, 0 );
 
-    lights[0].position.set(0, 200, 0);
-    lights[1].position.set(100, 200, 100);
-    lights[2].position.set(-100, -200, -100);
-
-    this.scene?.add(lights[0]);
-    this.scene?.add(lights[1]);
-    this.scene?.add(lights[2]);
+    const light = new THREE.DirectionalLight( 0xFFFFFF );
+    light.position.set( 0, 5, 0 );
+    this.scene.add( light );
+    const helper = new THREE.DirectionalLightHelper( light, 5 );
+    this.scene.add( helper );
   };
 
   startAnimationLoop = () => {
