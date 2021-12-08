@@ -1,6 +1,6 @@
 USE test;
 
-insert into warehouse (id)
+insert into Warehouse (id)
 values (2);
 
 insert into Shelf (warehouse_id, x, y)
