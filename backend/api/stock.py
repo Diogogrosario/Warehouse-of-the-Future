@@ -41,6 +41,7 @@ class CollectionManifests(Resource):
         """
         return {}
 
+
 @namespace.route("/<id>")
 class StockValues(Resource):
     @namespace.marshal_with(itemAttributes)
