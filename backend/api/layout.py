@@ -17,8 +17,10 @@ bucketAttributes = namespace.model("LayoutBucket", {
 })
 
 layoutAttributes = namespace.model("Layout", {
-    "buckets": fields.List(fields.Nested(bucketAttributes),
-                         description="List of bucets in layout"),
+    "buckets": fields.List(
+        fields.Nested(bucketAttributes),
+        description="List of bucets in layout"
+    ),
     "date": fields.DateTime(required=True, description="The layout time"),
 })
 
@@ -31,9 +33,9 @@ layoutsExampleList = [
                 "bucket": 10,
                 "item": 1,
                 "quantity": 10,
-                "coordinates": [  
-                    1,  
-                    1  
+                "coordinates": [
+                    1,
+                    1
                 ],
                 "shelf": 1
             }
@@ -60,6 +62,7 @@ class Layouts(Resource):
         """
         Returns information of layouts
 
-        Returns data about every warehouse layout on a determined time interval.
+        Returns data about every warehouse layout on a determined
+        time interval.
         """
         return layoutsExampleList
