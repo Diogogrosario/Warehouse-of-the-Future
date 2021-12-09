@@ -52,7 +52,7 @@ parser.add_argument("time_before", required=False, type=inputs.date,
                     help="The upper bound for the timestamp of layouts.")
 
 
-@namespace.route("/layouts")
+@namespace.route("/warehouse")
 class Layouts(Resource):
     @namespace.marshal_list_with(layoutAttributes)
     @namespace.expect(parser)
@@ -60,6 +60,6 @@ class Layouts(Resource):
         """
         Returns information of layouts
 
-        Returns data about every layout on a determined time interval.
+        Returns data about every warehouse layout on a determined time interval.
         """
         return layoutsExampleList
