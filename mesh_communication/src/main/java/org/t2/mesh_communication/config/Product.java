@@ -1,7 +1,8 @@
 package org.t2.mesh_communication.config;
 
-import java.util.Objects;
 import org.t2.mesh_communication.devices.Position;
+
+import java.util.Objects;
 
 public class Product {
     private final int id;
@@ -12,6 +13,18 @@ public class Product {
         this.id = id;
         this.position = position;
         this.quantity = quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     @Override

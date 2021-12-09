@@ -62,6 +62,18 @@ public class Device extends MeshDevice {
         return false;
     }
 
+    public void turnScreenOn() {
+        this.screen.setOn(true);
+    }
+
+    public void turnScreenOff() {
+        this.screen.setOn(false);
+    }
+
+    public void rechargeBattery() {
+        this.battery.batteryRecharge();
+    }
+
     public Battery getBattery() {
         return battery;
     }

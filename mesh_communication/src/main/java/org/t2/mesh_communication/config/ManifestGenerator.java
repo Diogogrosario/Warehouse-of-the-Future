@@ -1,6 +1,6 @@
 package org.t2.mesh_communication.config;
 
-import static org.t2.mesh_communication.config.ManifestReader.FILE_DIR;
+import org.t2.mesh_communication.devices.Position;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,15 +9,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.t2.mesh_communication.devices.Position;
+import java.util.Random;
+
+import static org.t2.mesh_communication.config.ManifestReader.FILE_DIR;
 
 public class ManifestGenerator {
     private final String fileName;
 
     // Random generation params
-    private static final Integer minId = 0;
     private static final Integer maxId = 10000;
-    private static final Integer minQuantity = 0;
     private static final Integer maxQuantity = 100;
     private final Integer nManifests;
     private Position min;
@@ -50,6 +50,10 @@ public class ManifestGenerator {
     }
 
     public void generate() throws IOException {
+        generate(new Random());
+    }
+
+    public void generate(Random r) throws IOException { // Inject random for testing purposes
         // Create file
         File f = new File(FILE_DIR + File.separator + fileName);
         File directory = new File(FILE_DIR);
@@ -59,12 +63,11 @@ public class ManifestGenerator {
         // Gen manifests and write to file
         BufferedWriter manifests = new BufferedWriter((new FileWriter(f)));
         List<Position> positions = possiblePositions();
-        Collections.shuffle(positions);
+        Collections.shuffle(positions, r);
 
         for (int i = 0; i < nManifests; ++i) {
-            String id = Integer.toString(((int) (Math.random() * (maxId - minId))));
-            String quantity =
-                    Integer.toString(((int) (Math.random() * (maxQuantity - minQuantity))));
+            String id = Integer.toString(r.nextInt(maxId));
+            String quantity = Integer.toString(r.nextInt(maxQuantity));
 
             Position p = positions.get(i % this.nManifests);
             String manifest = id + ";" + p.getX() + ";" + p.getY() + ";" + quantity;

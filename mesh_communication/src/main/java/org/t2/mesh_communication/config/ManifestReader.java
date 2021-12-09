@@ -1,5 +1,7 @@
 package org.t2.mesh_communication.config;
 
+import org.t2.mesh_communication.devices.Position;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -7,7 +9,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import org.t2.mesh_communication.devices.Position;
 
 public class ManifestReader {
     public static final String FILE_DIR = "files/";

@@ -2,7 +2,7 @@ package org.t2.mesh_communication.devices.components;
 
 public class Screen extends Component {
     private boolean isOn;
-    private int onConsumption;
+    private final int onConsumption;
 
     public Screen(int idleConsumption, int onConsumption) {
         super(idleConsumption);

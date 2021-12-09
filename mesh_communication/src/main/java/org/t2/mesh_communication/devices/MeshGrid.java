@@ -16,6 +16,14 @@ public class MeshGrid {
         this.devices = new ArrayList<>();
     }
 
+    public List<MeshDevice> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<MeshDevice> devices) {
+        this.devices = devices;
+    }
+
     public void addDevice(MeshDevice d) {
         this.devices.add(d);
     }
@@ -23,7 +31,7 @@ public class MeshGrid {
     public List<MeshDevice> devicesInRange(int id, Position p, float range) {
         List<MeshDevice> ret = new ArrayList<>();
         for (MeshDevice md : this.devices) {
-            if (md.id != id && md.getPos().inRange(p, range)) ret.add(md);
+            if (md.getId() != id && md.getPos().inRange(p, range)) ret.add(md);
         }
         return ret;
     }
@@ -40,9 +48,5 @@ public class MeshGrid {
         }
 
         return hadUpdates;
-    }
-
-    public List<MeshDevice> getDevices() {
-        return devices;
     }
 }

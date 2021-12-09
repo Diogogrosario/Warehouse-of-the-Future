@@ -1,91 +1,118 @@
 package org.t2.mesh_communication;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.t2.mesh_communication.devices.*;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
+import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
+import org.t2.mesh_communication.devices.messages.RequestMessage;
+
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MeshGridTests {
-    @Test
-    void testDeviceFailure() {
-        MeshGrid meshGrid = new MeshGrid();
-        Orchestrator orchestrator =
-                new Orchestrator(new Position(-1, 0), new FloodStrategy(meshGrid));
+  @Test
+  public void meshGridTests() {
+    MeshGrid mg = new MeshGrid();
 
-        meshGrid.addDevice(orchestrator);
+    Battery bat = new Battery(50, 7);
+    Screen screen = new Screen(5, 10);
+    Position pos = new Position(1, 1);
+    Position fakePos = new Position(1, 2);
 
-        Battery bat = Mockito.mock(Battery.class);
-        Mockito.when(bat.getRemainingBattery()).thenReturn(Integer.MAX_VALUE);
+    MeshDevice device1 = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
+    MeshDevice device2 = new Device(2, pos, new FloodStrategy(mg), 10, 10, bat, screen);
 
-        for (int i = 0; i < 8; ++i) {
+    mg.addDevice(device1);
+    assertEquals(1, mg.getDevices().size());
+    mg.addDevice(device2);
+    assertNotEquals(1, mg.getDevices().size());
 
-            Device d =
-                    new Device(
-                            i + 1,
-                            new Position(i % 3, i / 3),
-                            new FloodStrategy(meshGrid),
-                            0,
-                            0,
-                            bat,
-                            Mockito.mock(Screen.class));
-            meshGrid.addDevice(d);
-        }
+    List<MeshDevice> devicesInRange = mg.devicesInRange(device1);
+    assertEquals(1, devicesInRange.size());
 
-        Battery bat_dead = Mockito.mock(Battery.class);
-        Mockito.when(bat_dead.getRemainingBattery()).thenReturn(Integer.MAX_VALUE);
-        Device toBeDead =
-                new Device(
-                        9,
-                        new Position(2, 2),
-                        new FloodStrategy(meshGrid),
-                        0,
-                        0,
-                        bat_dead,
-                        Mockito.mock(Screen.class));
-        meshGrid.addDevice(toBeDead);
+    device1.addCommand(new ReceiveMsgCmd(device1, new RequestMessage(device1.getId(), 1, 0, "")));
+    boolean updateOnce = mg.update();
+    boolean updateTwice = mg.update();
+    assertFalse(updateOnce);
+    assertTrue(updateTwice);
+  }
 
-        orchestrator.sendMessage(orchestrator.createMessage(8, "Ola1"));
+  @Test
+  void testDeviceFailure() {
+    MeshGrid meshGrid = new MeshGrid();
+    Orchestrator orchestrator = new Orchestrator(new Position(-1, 0), new FloodStrategy(meshGrid));
 
-        for (int i = 0; i < 50; ++i) {
-            meshGrid.update();
-        }
+    meshGrid.addDevice(orchestrator);
 
-        // Disabling Device 9
-        Mockito.when(bat_dead.getRemainingBattery()).thenReturn(0);
+    Battery bat = Mockito.mock(Battery.class);
+    Mockito.when(bat.getRemainingBattery()).thenReturn(Integer.MAX_VALUE);
 
-        for (int i = 0; i < 7; ++i) {
-            orchestrator.sendMessage(orchestrator.createMessage(7, "Ola" + (i + 2)));
+    for (int i = 0; i < 8; ++i) {
 
-            meshGrid.update();
-        }
-
-        for (int i = 0; i < 9; ++i) {
-            meshGrid.update();
-        }
-
-        List<MeshDevice> devices = meshGrid.getDevices();
-
-        // Devices 6 and 7 are in 9 range (will detect it is dead)
-        List<Integer> dead6 = devices.get(6).getDeadNeighbors();
-        assertEquals(1, dead6.size());
-        assertEquals(9, dead6.get(0));
-        List<Integer> dead8 = devices.get(8).getDeadNeighbors();
-        assertEquals(1, dead8.size());
-        assertEquals(9, dead8.get(0));
-
-        // Check if all other devices are alive
-        for (int i = 0; i < 9; ++i) {
-            for (Map.Entry<Integer, Integer> deviceLife :
-                    devices.get(i).getNeighborTTLs().entrySet()) {
-                if (deviceLife.getKey() != 9) assertTrue(deviceLife.getValue() > 0);
-            }
-        }
+      Device d =
+          new Device(
+              i + 1,
+              new Position(i % 3, i / 3),
+              new FloodStrategy(meshGrid),
+              0,
+              0,
+              bat,
+              Mockito.mock(Screen.class));
+      meshGrid.addDevice(d);
     }
+
+    Battery bat_dead = Mockito.mock(Battery.class);
+    Mockito.when(bat_dead.getRemainingBattery()).thenReturn(Integer.MAX_VALUE);
+    Device toBeDead =
+        new Device(
+            9,
+            new Position(2, 2),
+            new FloodStrategy(meshGrid),
+            0,
+            0,
+            bat_dead,
+            Mockito.mock(Screen.class));
+    meshGrid.addDevice(toBeDead);
+
+    orchestrator.sendMessage(orchestrator.createMessage(8, "Ola1"));
+
+    for (int i = 0; i < 50; ++i) {
+      meshGrid.update();
+    }
+
+    // Disabling Device 9
+    Mockito.when(bat_dead.getRemainingBattery()).thenReturn(0);
+
+    for (int i = 0; i < 7; ++i) {
+      orchestrator.sendMessage(orchestrator.createMessage(7, "Ola" + (i + 2)));
+
+      meshGrid.update();
+    }
+
+    for (int i = 0; i < 9; ++i) {
+      meshGrid.update();
+    }
+
+    List<MeshDevice> devices = meshGrid.getDevices();
+
+    // Devices 6 and 7 are in 9 range (will detect it is dead)
+    List<Integer> dead6 = devices.get(6).getDeadNeighbors();
+    assertEquals(1, dead6.size());
+    assertEquals(9, dead6.get(0));
+    List<Integer> dead8 = devices.get(8).getDeadNeighbors();
+    assertEquals(1, dead8.size());
+    assertEquals(9, dead8.get(0));
+
+    // Check if all other devices are alive
+    for (int i = 0; i < 9; ++i) {
+      for (Map.Entry<Integer, Integer> deviceLife : devices.get(i).getNeighborTTLs().entrySet()) {
+        if (deviceLife.getKey() != 9) assertTrue(deviceLife.getValue() > 0);
+      }
+    }
+  }
 }

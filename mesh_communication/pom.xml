@@ -72,6 +72,8 @@
                     <targetTests>
                         <param>org.t2.mesh_communication.*</param>
                     </targetTests>
+                    <threads>4</threads>
+                    <timestampedReports>false</timestampedReports>
                 </configuration>
             </plugin>
             <plugin>
