@@ -16,7 +16,7 @@ We are a team in the Warehouse of Future project, that was done as part of the L
 - Linux: docker and docker-compose (https://docs.docker.com/engine/install/ubuntu/)
 
 ### Build and run docker images
-- create a ```.env``` file with appropriate values following the ```.env.example``` example in the same folder.
+- create a ```.env``` file with appropriate values following the ```.env.example``` example, in the same folder.
 - docker-compose up --build
 
 ### URLs:
