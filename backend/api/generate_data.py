@@ -17,10 +17,43 @@ namespace = Namespace(
 
 # Manifests
 
+"""
+
+"id":       id,
+            "designation": item_name,
+            "width": width,
+            "height": height,
+            "length": length,
+            "weight": weight,
+            "quantity": quantity,
+            "position": position
+
+"""
+
 item_attributes = namespace.model("ManifestItem", {
-    "item": fields.String(
+    "id": fields.String(
+        required=True,
+        description="Id of the item"
+    ),
+    "designation": fields.String(
         required=True,
         description="Name of the item"
+    ),
+    "width": fields.Float(
+        required=True,
+        description="Width of the item, in cm"
+    ),
+    "height": fields.Float(
+        required=True,
+        description="Height of the item, in cm"
+    ),
+    "length": fields.Float(
+        required=True,
+        description="Length of the item, in cm"
+    ),
+    "weight": fields.Float(
+        required=True,
+        description="Weight of the item, in g"
     ),
     "quantity": fields.Integer(
         required=True,
@@ -222,14 +255,24 @@ def generate_random_items(number_of_items=None):
         number_of_items = random.randint(3, 6)
 
     for _ in range(number_of_items):
-        item = random.choice(available_items)
+        id = uuid.uuid4()
+        item_name = random.choice(available_items)
+
+        width = random.randint(1, 100)
+        height = random.randint(1, 100)
+        length = random.randint(1, 100)
+        weight = random.randint(1, 1000*100)
 
         quantity = random.randint(1, 3)
-
         position = utils.get_position()
 
         items.append({
-            "item": item,
+            "id": id,
+            "designation": item_name,
+            "width": width,
+            "height": height,
+            "length": length,
+            "weight": weight,
             "quantity": quantity,
             "position": position
         })

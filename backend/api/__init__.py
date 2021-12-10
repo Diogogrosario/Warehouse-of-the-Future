@@ -18,9 +18,6 @@ api.add_namespace(cart_namespace)
 api.add_namespace(manifests_namespace)
 api.add_namespace(sensors_namespace)
 api.add_namespace(staff_namespace)
-<<<<<<< HEAD
 api.add_namespace(stock_namespace)
 api.add_namespace(layouts_namespace)
-=======
 api.add_namespace(generate_data_namespace)
->>>>>>> Add: random manifest generator
