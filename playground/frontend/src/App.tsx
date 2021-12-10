@@ -1,7 +1,8 @@
 import React from "react";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
 import "./App.css";
+import { AppBar, Toolbar, Typography } from "@mui/material";
+
 import WarehouseRenderer from "./components/renderer/WarehouseRenderer";
 
 class App extends React.Component {
@@ -15,7 +16,7 @@ class App extends React.Component {
 						</Typography>
 					</Toolbar>
 				</AppBar>
-					
+
 				<WarehouseRenderer />
 			</div>
 		);
