@@ -1,11 +1,11 @@
 import express, { json, urlencoded } from "express";
+import db from "./models/index.js";
 
 const app = express();
 
 // parse requests of content-type - application/json
 app.use(json());
 
-const db = require("./models");
 db.sequelize.sync(); // may want to use force=true
 
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -13,7 +13,7 @@ app.use(urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-	res.json({ message: "Welcome to bezkoder application." });
+	res.json({ message: "Welcome to the playgroud backend API" });
 });
 
 // set port, listen for requests

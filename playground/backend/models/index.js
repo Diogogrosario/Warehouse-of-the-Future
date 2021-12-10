@@ -1,11 +1,14 @@
 import Sequelize from "sequelize";
+import device from "./device.model.js";
+import report from "./report.model.js";
+import action from "./action.model.js";
 
 const sequelize = new Sequelize(
-	"playground_db",
+	process.env.POSTGRES_DB,
 	process.env.POSTGRES_USER,
 	process.env.POSTGRES_PASSWORD,
 	{
-		host: "localhost",
+		host: "db",
 		dialect: "postgres",
 	}
 );
@@ -15,9 +18,9 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.device = require("./device.model.js")(sequelize, Sequelize);
-db.report = require("./report.model.js")(sequelize, Sequelize);
-db.action = require("./action.model.js")(sequelize, Sequelize);
+db.device = device(sequelize, Sequelize);
+db.report = report(sequelize, Sequelize);
+db.action = action(sequelize, Sequelize);
 
 // module.exports = db;
 export default db;
