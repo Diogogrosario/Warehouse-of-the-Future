@@ -20,7 +20,7 @@
   - Read parameters from configuration files;
   - Changed the initial plan of lights to screens;
 - Communication between devices;
-- Read and generate manifestos;
+- Read and generate manifess;
 - Started wiki:
   - Pipeline for documentation;
 - Pipeline for tests:
@@ -49,7 +49,7 @@
   - With back end API;
 - Loggers;
 
-- Display manifestos entries;
+- Display manifests entries;
 
 # Sprint 2
 
