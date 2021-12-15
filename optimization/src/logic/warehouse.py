@@ -45,7 +45,7 @@ class Layout:
             iteration += 1
             if iteration == max_iterations:
                 self.products_out.append(product)
-                print(f'DELETED FROM CROSSOVER: {product.id}')
+                print(f'DELETED FROM CROSSOVER/MUTATION: {product.id}')
                 break
             random_shelf = r.choice(self.warehouse.shelves)
             random_rack = r.choice(random_shelf.racks)
@@ -57,6 +57,8 @@ class Layout:
             for rack in shelf.racks:
                 for product in rack.products:
                     score += product.weight/rack.y
+
+        score -= len(self.products_out)*100
         return score
 
     def remove_product(self, product):

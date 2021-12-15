@@ -79,8 +79,6 @@ class Storage:
 
             rack.add_product(product)
 
-        print(f'DELETED {len(layout.products_out)}')
-
         return layout
     
     def valid_placement(self, rack, product): # TODO: check other stuff, like height

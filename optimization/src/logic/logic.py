@@ -59,13 +59,14 @@ def genetic_algorithm(warehouse, population, num_iterations):
         child = reproduce(parent1, parent2, warehouse)
 
         if r.uniform(0, 1.0) > 0.80:  # mutation with a chance of 20%
-            print("MUTATING")
             mutate(child)
 
-        worst_score = heapq.heapreplace(population, child).get_score()  # remove the worst layout and add the new child
+        worst_layout = heapq.heapreplace(population, child) # remove the worst layout and add the new child
+        worst_score = worst_layout.get_score()
 
     final_layout = heapq.nlargest(1, population)[0]  # best layout
     print(f'FINAL_SCORE {str(final_layout.get_score())}')
+    print(f'PRODUCTS OUT: {len(final_layout.products_out)}')
     return final_layout
 
 
