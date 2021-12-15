@@ -3,7 +3,7 @@ import sys
 from copy import deepcopy
 
 from database import Database
-from utils import *
+from storage import *
 
 db = None
 storage = None
@@ -101,9 +101,6 @@ if __name__ == '__main__':
     warehouse = storage.create_warehouse(warehouse_id)
 
     initial_population = generate_population(warehouse, manifesto, 10)
-
-    for layout in initial_population:
-        print(layout)
 
     num_iterations = 100
 
