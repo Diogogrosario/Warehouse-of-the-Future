@@ -2,7 +2,8 @@ import React, { SetStateAction } from "react";
 import { Canvas } from "@react-three/fiber";
 import "./App.css";
 import Cube from "./components/Cube";
-import { Divider, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Button, Divider, Grid, Tab, Tabs } from "@mui/material";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
 
 export default function App() {
 	const [value, setValue] = React.useState(0);
@@ -14,7 +15,7 @@ export default function App() {
 	return (
 		<div className="App">
 			<Grid container>
-				<Grid item>
+				<Grid item sx={{ position: "relative", flex: 1 }}>
 					<Canvas
 						style={{ height: "90vh" }}
 						camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 5] }}
@@ -25,16 +26,24 @@ export default function App() {
 						<pointLight position={[-10, -10, -10]} />
 						<Cube />
 					</Canvas>
+
+					<Button sx={{ position: "absolute", bottom: 0, right: 0 }}>
+						<FullscreenIcon />
+					</Button>
 				</Grid>
 
 				<Divider orientation="vertical" flexItem />
 
-				<Grid item>
+				<Grid item sx={{ position: "relative", flex: 1 }}>
 					<Tabs value={value} onChange={handleChange}>
 						<Tab label="Reports" />
 						<Tab label="Logs" />
 						<Tab label="Devices" />
 					</Tabs>
+
+					<Button sx={{ position: "absolute", bottom: 0, right: 0 }}>
+						<FullscreenIcon />
+					</Button>
 				</Grid>
 			</Grid>
 		</div>
