@@ -1,9 +1,12 @@
 from math import prod
 import random as r
 
+max_iterations = 10000
+
 class Layout:
     def __init__(self, warehouse): # TODO: Talvez manter lista com todos os produtos e respetivas posições
         self.warehouse = warehouse
+        self.products_out = []
         # shelf -> lista de racks
         #   rack -> lista de products
         #       product, x_orig, x_end
@@ -18,6 +21,7 @@ class Layout:
             for rack in shelf.racks:
                 if product in rack.products:
                     return rack.id
+        return None
 
     def add_product_rack_id(self, rack_id, product):
         for shelf in self.warehouse.shelves:
@@ -32,11 +36,17 @@ class Layout:
 
         return random_product
 
-    def add_product_random(self, product): # TODO limit number of iterations to avoid infinite loop
+    def add_product_random(self, product):
+        iteration = 0
         random_shelf = r.choice(self.warehouse.shelves)
         random_rack = r.choice(random_shelf.racks)
         success = random_rack.add_product(product)
         while not success:
+            iteration += 1
+            if iteration == max_iterations:
+                self.products_out.append(product)
+                print(f'DELETED FROM CROSSOVER: {product.id}')
+                break
             random_shelf = r.choice(self.warehouse.shelves)
             random_rack = r.choice(random_shelf.racks)
             success = random_rack.add_product(product)

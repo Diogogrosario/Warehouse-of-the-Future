@@ -1,5 +1,4 @@
 from warehouse import *
-from utils import *
 import time
 
 class Storage:
@@ -61,11 +60,7 @@ class Storage:
 
     def fill_warehouse(self, layout):  # TODO: Verificar outros atributos das racks tb, para além da capacity
         # Place the heaviest products first
-
         products = sorted(self.products, key=lambda x: (x.weight,x.width), reverse=True)
-
-        list_products_out = []
-        max_iterations = 10000
 
         for product in products:
             out = False
@@ -75,7 +70,7 @@ class Storage:
                 rack = layout.get_random_rack()
                 iteration += 1
                 if iteration == max_iterations:
-                    list_products_out.append(product)
+                    layout.products_out.append(product)
                     out = True
                     break
                     
@@ -84,7 +79,7 @@ class Storage:
 
             rack.add_product(product)
 
-        print(f'DELETED {len(list_products_out)}')
+        print(f'DELETED {len(layout.products_out)}')
 
         return layout
     
