@@ -1,8 +1,11 @@
 import random
-from math import prod
 import random as r
 
 max_iterations = 10000
+
+# metrics_to_optimize = ['weight', 'sector']
+# metrics_to_optimize = ['weight']
+metrics_to_optimize = ['sector']
 
 
 class Layout:
@@ -73,10 +76,24 @@ class Layout:
 
     def get_score(self):
         score = 0
-        for shelf in self.warehouse.shelves:
-            for rack in shelf.racks:
-                for product in rack.products:
-                    score += product.weight / rack.y
+        different_sectors_in_a_shelf = 0
+
+        if 'weight' in metrics_to_optimize:
+            for shelf in self.warehouse.shelves:
+                for rack in shelf.racks:
+                    for product in rack.products:
+                        score += product.weight / rack.y
+
+        if 'sector' in metrics_to_optimize:
+            for shelf in self.warehouse.shelves:
+                different_sectors = []
+
+                for rack in shelf.racks:
+                    for product in rack.products:
+                        if product.sector_id not in different_sectors:
+                            different_sectors.append(product.sector_id)
+
+                score -= len(different_sectors) * 3
 
         score -= len(self.products_out) * 100
         return score
@@ -190,6 +207,7 @@ class Product:
         state += f'PRODUCT {self.id}:\n'
         state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
         state += f'\t\t\t\t\tWIDTH {self.width}'
+        state += f'\t\t\t\t\tSECTOR_ID {self.sector_id}'
         return state
 
 

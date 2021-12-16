@@ -1,3 +1,5 @@
+import pandas as pd
+
 from warehouse import *
 import time
 
@@ -7,7 +9,6 @@ class Storage:
         self.db = db
 
         query_shelf = "SELECT * FROM shelf"
-        query_product_rack = "SELECT * FROM product_rack"
         query_rack = "SELECT * FROM rack"
         query_product = "SELECT * FROM product"
         query_month_manifesto_product = "SELECT * FROM month_manifesto_product"
@@ -15,7 +16,6 @@ class Storage:
         self.df_shelves = db.df_query(query_shelf)
         self.df_racks = db.df_query(query_rack)
         self.df_products = db.df_query(query_product)
-        self.df_product_rack = db.df_query(query_product_rack)
         self.df_month_manifesto_products = db.df_query(query_month_manifesto_product)
 
         self.products = self.create_products(self.df_products)
@@ -50,7 +50,11 @@ class Storage:
             shelf_id = s['id']
             shelf = Shelf(shelf_id)
             racks_query = f"SELECT * FROM rack WHERE shelf_id = {shelf_id}"
+
             racks = self.db.df_query(racks_query)
+
+            if racks is None:
+                continue
 
             for _, r in racks.iterrows():
                 rack = Rack(r['id'], r['length'], r['width'], r['height'], r['y'], r['capacity'], shelf_id)
