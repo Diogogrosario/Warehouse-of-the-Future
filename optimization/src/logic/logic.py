@@ -3,7 +3,7 @@ import sys
 from copy import deepcopy
 
 from database import Database
-from utils import *
+from storage import *
 
 db = None
 storage = None
@@ -33,17 +33,17 @@ def reproduce(parent1, parent2, warehouse):
     # caso estiverem os 2 ocupados, escolher rack aleatória
     parents = [parent1, parent2]
 
-    products = sorted(storage.products, key=lambda x: x.weight, reverse=True)
+    products = sorted(storage.products, key=lambda x: (x.weight, x.width), reverse=True)
 
     child = Layout(deepcopy(warehouse))
 
     for product in products:
         parent = r.randint(0, 1)
         rack_id = parents[parent].get_product_rack_id(product)
-        if not child.add_product_rack_id(rack_id, product):
+        if rack_id and not child.add_product_rack_id(rack_id, product):
             parent = 1 - parent
             rack_id = parents[parent].get_product_rack_id(product)
-            if not child.add_product_rack_id(rack_id, product):
+            if rack_id and not child.add_product_rack_id(rack_id, product):
                 child.add_product_random(product)
 
     return child
@@ -54,21 +54,19 @@ def genetic_algorithm(warehouse, population, num_iterations):
     length = len(population)
 
     for i in range(num_iterations):
-        print(f'Iteration {i}:')
         parent1 = heapq.nlargest(1, population)[0]  # best layout
         parent2 = heapq.nsmallest(length - 1, population)[r.randint(0, length - 2)]  # random layout
         child = reproduce(parent1, parent2, warehouse)
 
         if r.uniform(0, 1.0) > 0.80:  # mutation with a chance of 20%
-            print("MUTATING")
             mutate(child)
 
-        worst_score = heapq.heapreplace(population, child).get_score()  # remove the worst layout and add the new child
-
-        print(f'WORST_SCORE {str(worst_score)}')
+        worst_layout = heapq.heapreplace(population, child) # remove the worst layout and add the new child
+        worst_score = worst_layout.get_score()
 
     final_layout = heapq.nlargest(1, population)[0]  # best layout
     print(f'FINAL_SCORE {str(final_layout.get_score())}')
+    print(f'PRODUCTS OUT: {len(final_layout.products_out)}')
     return final_layout
 
 
@@ -101,9 +99,6 @@ if __name__ == '__main__':
     warehouse = storage.create_warehouse(warehouse_id)
 
     initial_population = generate_population(warehouse, manifesto, 10)
-
-    for layout in initial_population:
-        print(layout)
 
     num_iterations = 100
 
