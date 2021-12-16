@@ -3,8 +3,9 @@ import random as r
 
 max_iterations = 10000
 
+
 class Layout:
-    def __init__(self, warehouse): # TODO: Talvez manter lista com todos os produtos e respetivas posições
+    def __init__(self, warehouse):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
         self.warehouse = warehouse
         self.products_out = []
         # shelf -> lista de racks
@@ -16,7 +17,7 @@ class Layout:
         rack = shelf.get_random_rack()
         return rack
 
-    def get_product_rack_id(self, product): # Assumindo que cada id do produto é único
+    def get_product_rack_id(self, product):  # Assumindo que cada id do produto é único
         for shelf in self.warehouse.shelves:
             for rack in shelf.racks:
                 if product in rack.products:
@@ -56,9 +57,9 @@ class Layout:
         for shelf in self.warehouse.shelves:
             for rack in shelf.racks:
                 for product in rack.products:
-                    score += product.weight/rack.y
+                    score += product.weight / rack.y
 
-        score -= len(self.products_out)*100
+        score -= len(self.products_out) * 100
         return score
 
     def remove_product(self, product):
@@ -73,6 +74,34 @@ class Layout:
         self.remove_product(product)
         self.add_product_random(product)
 
+    # Return NONE If current_rack is at the top and there is nothing above
+    def get_rack_above(self, current_rack):
+
+        shelf = None
+
+        for elem in self.warehouse.shelves:
+            if elem.id == current_rack.shelf_id:
+                shelf = shelf
+                break
+
+        if not shelf:
+            return None
+
+        rack_above = None
+
+        for shelf_rack in shelf.racks:
+
+            if shelf_rack.y < current_rack.y:
+                continue
+
+            if not rack_above:
+                rack_above = shelf_rack
+
+            elif rack_above.y > shelf_rack.y:
+                rack_above = shelf_rack
+
+        return rack_above
+
     def __lt__(self, other):
         return self.get_score() < other.get_score()
 
@@ -81,11 +110,12 @@ class Layout:
         state += str(self.warehouse)
         return state
 
+
 class Warehouse:
     def __init__(self, id):
         self.id = id
-        self.shelves = [] # list of Shelves
-    
+        self.shelves = []  # list of Shelves
+
     def add_shelf(self, shelf):
         self.shelves.append(shelf)
 
@@ -99,11 +129,12 @@ class Warehouse:
             state += f'\t{shelf}'
         return state
 
+
 class Shelf:
     def __init__(self, id):
         self.id = id
-        self.racks = [] # list of Racks
-    
+        self.racks = []  # list of Racks
+
     def add_rack(self, rack):
         self.racks.append(rack)
 
@@ -117,15 +148,15 @@ class Shelf:
             state += f'\t\t{rack}\n'
         return state
 
+
 class Product:
-    def __init__(self, id, name, length, height, width, weight, car_model_id, sector_id):
+    def __init__(self, id, name, length, height, width, weight, sector_id):
         self.id = id
         self.name = name
         self.length = length
         self.height = height
         self.width = width
         self.weight = weight
-        self.car_model_id = car_model_id
         self.sector_id = sector_id
 
     def __eq__(self, other):
@@ -134,24 +165,26 @@ class Product:
     def __hash__(self):
         return hash(str(self.id))
 
-    def __str__(self) -> str: # TODO: print other attributes
+    def __str__(self) -> str:  # TODO: print other attributes
         state = ""
         state += f'PRODUCT {self.id}:\n'
         state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
         state += f'\t\t\t\t\tWIDTH {self.width}'
         return state
 
+
 class Rack:
-    def __init__(self, id, length, width, height, y, capacity):
+    def __init__(self, id, length, width, height, y, capacity, shelf_id):
         self.id = id
         self.length = length
         self.width = width
         self.height = height
         self.y = y
         self.capacity = capacity
-        self.products = {} # dictionary of Products {Product : (x_orig, x_end)}
+        self.products = {}  # dictionary of Products {Product : (x_orig, x_end)}
         self.last_x = 0
-    
+        self.shelf_id = shelf_id
+
     def get_random_product(self):
         try:
             return r.choice(list(self.products.keys()))
@@ -165,19 +198,19 @@ class Rack:
         self.products[product] = (self.last_x, self.last_x + product.width)
         self.last_x = self.last_x + product.width
         return True
-        
+
     def remove_product(self, product):
         del self.products[product]
-        
+
         products = self.products.keys()
         self.products.clear()
         last_width = 0
         for prod in products:
             self.add_product(prod)
             _, last_width = self.products[prod]
-        
+
         self.last_x = last_width
-    
+
     def get_current_weight(self):
         weight = 0
         for product in self.products.keys():
@@ -199,6 +232,7 @@ class Rack:
             state += f'\t\t\t\t\tPOSITION: ({x_orig}, {x_end})\n'
         return state
 
-class MonthManifesto: # TODO: use this class instead of dictionary of dictionaries in get_manifestos()
+
+class MonthManifesto:  # TODO: use this class instead of dictionary of dictionaries in get_manifestos()
     def __init__(self, products):
-        self.products = products # {id : quantity}
+        self.products = products  # {id : quantity}

@@ -34,12 +34,6 @@ create table Sector
     name VARCHAR(50)
 );
 
-create table Cars
-(
-    id   SERIAL PRIMARY KEY,
-    name VARCHAR(50)
-);
-
 create table Rack
 (
     id       SERIAL PRIMARY KEY,
@@ -63,10 +57,8 @@ create table Product
     width     DECIMAL(5, 1),
     weight    DECIMAL(5, 1),
     sector_id BIGINT UNSIGNED NOT NULL,
-    car_model_id    BIGINT UNSIGNED NOT NULL,
 
-    FOREIGN KEY (sector_id) REFERENCES Sector (id),
-    FOREIGN KEY (car_model_id) REFERENCES Cars (id)
+    FOREIGN KEY (sector_id) REFERENCES Sector (id)
 
 );
 
