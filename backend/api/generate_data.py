@@ -15,22 +15,9 @@ namespace = Namespace(
 # Models
 # ------------------------------------------------------------------------------
 
-# Manifests
+# Items
 
-"""
-
-"id":       id,
-            "designation": item_name,
-            "width": width,
-            "height": height,
-            "length": length,
-            "weight": weight,
-            "quantity": quantity,
-            "position": position
-
-"""
-
-item_attributes = namespace.model("ManifestItem", {
+item_attributes = namespace.model("Item", {
     "id": fields.String(
         required=True,
         description="Id of the item"
@@ -59,36 +46,20 @@ item_attributes = namespace.model("ManifestItem", {
         required=True,
         description="Quantity of the item"
     ),
-    "position": fields.List(
-        fields.Integer,
+    "bucket_id": fields.String(
         required=True,
-        description="Coordinates of the item, in the form of list ([x, y, z])"
+        description="Id of the item's bucket"
     ),
 })
 
-reposition_manifest_attributes = namespace.model("RepositionManifest", {
-    "items": fields.List(
-        fields.Nested(item_attributes),
-        description="List of items in manifest"
-    ),
-    "time": fields.DateTime(
+item_in_manifest_attributes = namespace.model("ItemInManifest", {
+    "item_id": fields.String(
         required=True,
-        description="The manifest time"
+        description="Id of the item"
     ),
-})
-
-collection_manifest_attributes = namespace.model("CollectionManifest", {
-    "items": fields.List(
-        fields.Nested(item_attributes),
-        description="List of items in manifest"
-    ),
-    "staff_id": fields.String(
+    "quantity": fields.Integer(
         required=True,
-        description="Id of the operator who makes the collection of items"
-    ),
-    "time": fields.DateTime(
-        required=True,
-        description="The manifest time"
+        description="Quantity of the item"
     ),
 })
 
@@ -131,6 +102,28 @@ available_items = [
     "eixo", "fecho central",
 ]
 
+# Manifest
+
+manifest_attributes = namespace.model("Manifest", {
+    "id": fields.String(
+        required=True,
+        description="Id of the manifest"
+    ),
+    "time": fields.DateTime(
+        required=True,
+        description="The manifest time"
+    ),
+    "staff_id": fields.String(
+        required=True,
+        description="Id of the operator who makes the collection of items"
+    ),
+    "items": fields.List(
+        fields.Nested(item_in_manifest_attributes),
+        required=True,
+        description="Manifest Items"
+    ),
+})
+
 # Staff
 
 staff_attributes = namespace.model("Staff", {
@@ -147,23 +140,87 @@ staff_attributes = namespace.model("Staff", {
         description="Gender of the employee. "
                     + "The possible values are 'female' and 'male'"
     ),
-    "age": fields.Integer(
+    "birth_date": fields.DateTime(
         required=True,
-        description="Age of the employee"
+        description="Birth date of the employee"
     ),
 })
 
-# Stock
+# Layout
 
-stock_attributes = namespace.model("Stock", {
-    "items": fields.List(
-        fields.Nested(item_attributes),
-        description="List of items in manifest"
-        ),
+bucket_attributes = namespace.model("Bucket", {
+    "id": fields.String(
+        required=True,
+        description="Id of the bucket"
+    ),
+    "width": fields.Float(
+        required=True,
+        description="Width of the bucket, in cm"
+    ),
+    "height": fields.Float(
+        required=True,
+        description="Height of the bucket, in cm"
+    ),
+    "length": fields.Float(
+        required=True,
+        description="Length of the bucket, in cm"
+    ),
+    "position": fields.List(
+        fields.Integer,
+        required=True,
+        description="Coordinates of the bucket, "
+                    + "in the form of list ([x, y, z])"
+    ),
+    "item_id": fields.String(
+        required=True,
+        description="Id of the item inside the bucket"
+    ),
+    "quantity": fields.Integer(
+        required=True,
+        description="Quantity of the item that is inside the bucket"
+    ),
+    "shelf_id": fields.String(
+        required=True,
+        description="Id of the shelf where the bucket is located"
+    )
+})
+
+shelf_attributes = namespace.model("Shelf", {
+    "id": fields.String(
+        required=True,
+        description="Id of the shelf"
+    ),
+    "height": fields.Float(
+        required=True,
+        description="Height of the shelf in relation to the gound, in cm"
+    ),
+    "rack_id": fields.String(
+        required=True,
+        description="Id of the rack where the shelf is located"
+    ),
+})
+
+rack_attributes = namespace.model("Rack", {
+    "id": fields.String(
+        required=True,
+        description="Id of the rack"
+    ),
+    "width": fields.Float(
+        required=True,
+        description="Width of the rack, in cm"
+    ),
+})
+
+layout_attributes = namespace.model("Layout", {
     "time": fields.DateTime(
         required=True,
         description="The current time"
     ),
+    "buckets": fields.List(
+        fields.Nested(bucket_attributes),
+        required=True,
+        desccription="Buckets present in the warehouse"
+    )
 })
 
 # Sensors
@@ -173,31 +230,14 @@ sensor_attributes = namespace.model("Sensor", {
         required=True,
         description="Id of the sensor"
     ),
-    "position": fields.List(
-        fields.Integer,
+    "bucket": fields.String(
         required=True,
-        description="Coordinates of the sensor, "
-                    + "in the form of list ([x, y, z])"
-    ),
-    "battery": fields.Integer(
-        required=True,
-        description="Percentage of battery of the sensor"
+        description="Id of the associated bucket"
     ),
     "movement_records": fields.List(
         fields.DateTime,
         required=True,
         description="Timestamps of the movement detections."
-    ),
-})
-
-sensors_attributes = namespace.model("Sensors", {
-    "sensors": fields.List(
-        fields.Nested(sensor_attributes),
-        description="List of all the sensors"
-    ),
-    "time": fields.DateTime(
-        required=True,
-        description="The current time"
     ),
 })
 
@@ -215,37 +255,20 @@ cart_attributes = namespace.model("Cart", {
     ),
 })
 
-# Layout
+# Orchestrator
 
-shelf_attributes = namespace.model("Shelf", {
+orchestrator_attributes = namespace.model("Orchestrator", {
     "position": fields.List(
         fields.Integer,
         required=True,
-        description="Coordinates of the shelf, in the form of list ([x, y, z])"
-    ),
-})
-
-rack_attributes = namespace.model("Rack", {
-    "id": fields.String(
-        required=True,
-        description="Id of the rack"
-    ),
-    "shelfs": fields.List(
-        fields.Nested(shelf_attributes),
-        description="List of shelfs of the rack"
-    )
-})
-
-layout_attributes = namespace.model("Layout", {
-    "racks": fields.List(
-        fields.Nested(rack_attributes),
-        description="List of racks of the warehouse"
+        description="Coordinates of the orchestrator, "
+                    + "in the form of list ([x, y, z])"
     )
 })
 
 
 # ------------------------------------------------------------------------------
-# Manifests
+# Items
 # ------------------------------------------------------------------------------
 
 def generate_random_items(number_of_items=None):
@@ -255,71 +278,100 @@ def generate_random_items(number_of_items=None):
         number_of_items = random.randint(3, 6)
 
     for _ in range(number_of_items):
-        id = uuid.uuid4()
         item_name = random.choice(available_items)
-
         width = random.randint(1, 100)
         height = random.randint(1, 100)
         length = random.randint(1, 100)
         weight = random.randint(1, 1000*100)
-
         quantity = random.randint(1, 3)
-        position = utils.get_position()
 
         items.append({
-            "id": id,
+            "id": uuid.uuid4(),
             "designation": item_name,
             "width": width,
             "height": height,
             "length": length,
             "weight": weight,
             "quantity": quantity,
-            "position": position
+            "bucket_id": uuid.uuid4()
         })
 
     return items
 
 
-@namespace.route("/manifest/reposition")
-class RepositionManifest(Resource):
-    @namespace.marshal_list_with(reposition_manifest_attributes)
+@namespace.route("/items")
+class Items(Resource):
+    @namespace.marshal_list_with(item_attributes)
     def get(self):
         """
-        Returns a random reposition manifest.
+        Returns all the items of the warehouse.
         """
 
         items = generate_random_items()
 
-        reposition_manifest = {
-            "items": items,
-            "time": datetime.datetime.now()
-        }
-
-        return reposition_manifest
+        return items
 
 
-@namespace.route("/manifest/collection")
-class CollectionManifest(Resource):
-    @namespace.marshal_list_with(collection_manifest_attributes)
+@namespace.route("/items/<string:id>")
+class Item(Resource):
+    @namespace.marshal_list_with(item_attributes)
+    def get(self, id):
+        """
+        Returns the item with the specified id.
+        """
+
+        item = generate_random_items(number_of_items=1)[0]
+        item["id"] = id
+
+        return item
+
+
+# ------------------------------------------------------------------------------
+# Manifests
+# ------------------------------------------------------------------------------
+
+def generate_random_items_for_manifest(number_of_items=None):
+    items = []
+
+    if (number_of_items is None):
+        number_of_items = random.randint(1, 3)
+
+    for _ in range(number_of_items):
+        id = uuid.uuid4()
+
+        quantity = random.randint(1, 3)
+
+        items.append({
+            "item_id": id,
+            "quantity": quantity
+        })
+
+    return items
+
+
+@namespace.route("/manifest")
+class Manifest(Resource):
+    @namespace.marshal_list_with(manifest_attributes)
     def get(self):
         """
-        Returns a random collection manifest.
+        Returns a random manifest.
         """
 
-        items = generate_random_items()
+        items = generate_random_items_for_manifest()
 
-        collection_manifest = {
-            "items": items,
+        manifest = {
+            "id": uuid.uuid4(),
+            "time": datetime.datetime.now(),
             "staff_id": uuid.uuid4(),
-            "time": datetime.datetime.now()
+            "items": items
         }
 
-        return collection_manifest
+        return manifest
+
 
 # ------------------------------------------------------------------------------
 # Staff
 # ------------------------------------------------------------------------------
-
 
 def generate_employee_data(id=None):
     if (id is None):
@@ -331,7 +383,7 @@ def generate_employee_data(id=None):
         "id": id,
         "name": names.get_full_name(gender=gender),
         "gender": gender,
-        "age": random.randint(18, 65),
+        "birth_date": utils.get_random_birth_date(),
     }
 
     return employee
@@ -363,58 +415,10 @@ class StaffEmployee(Resource):
 
         return generate_employee_data(id)
 
-# ------------------------------------------------------------------------------
-# Stock
-# ------------------------------------------------------------------------------
-
-
-def generate_random_item(item):
-    item_stock = generate_random_items(number_of_items=1)[0]
-    item_stock["item"] = item
-    return item_stock
-
-
-@namespace.route("/stock")
-class Stock(Resource):
-    @namespace.marshal_list_with(stock_attributes)
-    def get(self):
-        """
-        Returns the warehouse current stock
-        """
-
-        number_of_items = random.randint(30, 100)
-
-        items = generate_random_items(number_of_items=number_of_items)
-
-        stock = {
-            "items": items,
-            "time": datetime.datetime.now()
-        }
-
-        return stock
-
-
-@namespace.route("/stock/<string:id>")
-class ItemStock(Resource):
-    @namespace.marshal_list_with(stock_attributes)
-    def get(self, id):
-        """
-        Returns the warehouse current stock of the piece with the provided id.
-        """
-
-        item_stock = generate_random_item(item=id)
-
-        stock = {
-            "items": item_stock,
-            "time": datetime.datetime.now()
-        }
-
-        return stock
 
 # ------------------------------------------------------------------------------
 # Sensors
 # ------------------------------------------------------------------------------
-
 
 def generate_random_sensors(number_of_sensors):
 
@@ -422,10 +426,6 @@ def generate_random_sensors(number_of_sensors):
 
     for _ in range(number_of_sensors):
         id = uuid.uuid4()
-
-        position = utils.get_position()
-
-        battery = random.randint(1, 100)
 
         number_of_movements = random.randint(1, 10)
         movement_timestamps = []
@@ -435,8 +435,7 @@ def generate_random_sensors(number_of_sensors):
 
         sensor = {
             "id": id,
-            "position": position,
-            "battery": battery,
+            "bucket": uuid.uuid4(),
             "movement_records": movement_timestamps
         }
         sensors.append(sensor)
@@ -451,7 +450,7 @@ def generate_random_sensor(sensor_id):
 
 @namespace.route("/sensors")
 class Sensors(Resource):
-    @namespace.marshal_list_with(sensors_attributes)
+    @namespace.marshal_list_with(sensor_attributes)
     def get(self):
         """
         Returns the data about all the sensors.
@@ -461,17 +460,12 @@ class Sensors(Resource):
 
         sensors = generate_random_sensors(number_of_sensors=number_of_sensors)
 
-        result = {
-            "sensors": sensors,
-            "time": datetime.datetime.now()
-        }
-
-        return result
+        return sensors
 
 
 @namespace.route("/sensors/<string:id>")
 class Sensor(Resource):
-    @namespace.marshal_list_with(sensors_attributes)
+    @namespace.marshal_list_with(sensor_attributes)
     def get(self, id):
         """
         Returns the data about the sensor with the provided id.
@@ -479,17 +473,12 @@ class Sensor(Resource):
 
         sensor = generate_random_sensor(sensor_id=id)
 
-        result = {
-            "sensors": sensor,
-            "time": datetime.datetime.now()
-        }
+        return sensor
 
-        return result
 
 # ------------------------------------------------------------------------------
 # Cart
 # ------------------------------------------------------------------------------
-
 
 @namespace.route("/cart")
 class Cart(Resource):
@@ -499,31 +488,65 @@ class Cart(Resource):
         Returns the position and operator who is controlling the cart.
         """
 
-        position = utils.get_position(dimensions=2)
-
         cart = {
-            "position": position,
+            "position": utils.get_position(dimensions=2),
             "operator": uuid.uuid4()
         }
 
         return cart
 
+
+# ------------------------------------------------------------------------------
+# Orchestrator
+# ------------------------------------------------------------------------------
+
+@namespace.route("/orchestrator")
+class Orchestrator(Resource):
+    @namespace.marshal_list_with(orchestrator_attributes)
+    def get(self):
+        """
+        Returns the position of the orchestrator.
+        """
+
+        orchestrator = {
+            "position": utils.get_position(),
+        }
+
+        return orchestrator
+
+
 # ------------------------------------------------------------------------------
 # Layout
 # ------------------------------------------------------------------------------
 
+def generate_bucket():
+    width = random.randint(1, 100)
+    height = random.randint(1, 100)
+    length = random.randint(1, 100)
+    quantity = random.randint(1, 3)
 
-def get_shelfs():
-    number_of_shelfs = random.randint(20, 100)
-    shelfs = []
+    bucket = {
+        "id": uuid.uuid4(),
+        "width": width,
+        "height": height,
+        "length": length,
+        "position": utils.get_position(),
+        "item_id": uuid.uuid4(),
+        "quantity": quantity,
+        "shelf_id": uuid.uuid4()
+    }
 
-    for _ in range(number_of_shelfs):
-        position = utils.get_position()
-        shelfs.append({
-            "position": position
-        })
+    return bucket
 
-    return shelfs
+
+def generate_buckets():
+    number_of_buckets = random.randint(50, 150)
+
+    buckets = [
+        generate_bucket() for _ in range(number_of_buckets)
+    ]
+
+    return buckets
 
 
 @namespace.route("/layout")
@@ -531,21 +554,120 @@ class Layout(Resource):
     @namespace.marshal_list_with(layout_attributes)
     def get(self):
         """
-        Returns the position and operator who is controlling the cart.
+        Returns the buckets present in the wareshouse,
+        as well it's details and associated items
         """
 
-        rack_ids = ["side_rack_1", "side_rack_2", "back_rack"]
-        racks = []
-
-        for rack_id in rack_ids:
-            rack = {
-                "id": rack_id,
-                "shelfs": get_shelfs()
-            }
-            racks.append(rack)
+        buckets = generate_buckets()
 
         layout = {
-            "racks": racks
+            "time": datetime.datetime.now(),
+            "buckets": buckets
         }
 
         return layout
+
+
+# ------------------------------------------------------------------------------
+# Shelves
+# ------------------------------------------------------------------------------
+
+def generate_shelf():
+    height = round(random.uniform(0, 400), 2)
+
+    shelf = {
+        "id": uuid.uuid4(),
+        "height": height,
+        "rack_id": uuid.uuid4()
+    }
+
+    return shelf
+
+
+def generate_shelves():
+    number_of_shelves = random.randint(50, 100)
+
+    shelves = [
+        generate_shelf() for _ in range(number_of_shelves)
+    ]
+
+    return shelves
+
+
+@namespace.route("/shelves")
+class Shelves(Resource):
+    @namespace.marshal_list_with(shelf_attributes)
+    def get(self):
+        """
+        Returns the information about the shelves.
+        """
+
+        shelves = generate_shelves()
+
+        return shelves
+
+
+@namespace.route("/shelves/<string:id>")
+class Shelf(Resource):
+    @namespace.marshal_list_with(shelf_attributes)
+    def get(self, id):
+        """
+        Returns the information about the shelf with the specified id.
+        """
+
+        shelf = generate_shelf()
+        shelf["id"] = id
+
+        return shelf
+
+
+# ------------------------------------------------------------------------------
+# Racks
+# ------------------------------------------------------------------------------
+
+def generate_rack():
+    width = round(random.uniform(50, 300), 2)
+
+    rack = {
+        "id": uuid.uuid4(),
+        "width": width,
+    }
+
+    return rack
+
+
+def generate_racks():
+    number_of_racks = random.randint(300, 400)
+
+    racks = [
+        generate_rack() for _ in range(number_of_racks)
+    ]
+
+    return racks
+
+
+@namespace.route("/racks")
+class Racks(Resource):
+    @namespace.marshal_list_with(rack_attributes)
+    def get(self):
+        """
+        Returns the information about the racks.
+        """
+
+        racks = generate_racks()
+
+        return racks
+
+
+@namespace.route("/racks/<string:id>")
+class Rack(Resource):
+    @namespace.marshal_list_with(rack_attributes)
+    def get(self, id):
+        """
+        Returns the information about the rack with the specified id.
+        """
+
+        rack = generate_rack()
+        rack["id"] = id
+
+        return rack

@@ -29,3 +29,10 @@ def get_random_date_last_day():
     now = datetime.datetime.now()
     yesterday = now - datetime.timedelta(days=1)
     return get_random_date(yesterday, now)
+
+
+def get_random_birth_date():
+    now = datetime.datetime.now()
+    eighteen_years_ago = now - datetime.timedelta(days=18*365)
+    sixty_five_years_ago = now - datetime.timedelta(days=65*365)
+    return get_random_date(sixty_five_years_ago, eighteen_years_ago)
