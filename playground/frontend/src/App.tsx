@@ -4,6 +4,7 @@ import "./App.css";
 import Cube from "./components/Cube";
 import { Box, Button, Divider, Grid, Tab, Tabs } from "@mui/material";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import { DragHandle } from "@mui/icons-material";
 
 export default function App() {
 	const [selectedTab, setSelectedTab] = React.useState(0);
@@ -47,7 +48,10 @@ export default function App() {
 	return (
 		<div className="App">
 			<Grid container>
-				<Grid item sx={{ position: "relative", width: `${panelWidth}%` }}>
+				<Grid
+					item
+					sx={{ position: "relative", width: `${panelWidth}%`}}
+				>
 					<Canvas
 						style={{ height: "90vh" }}
 						camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 5] }}
@@ -65,10 +69,22 @@ export default function App() {
 				</Grid>
 
 				<Box
-					sx={{ width: 10, backgroundColor: "red", cursor: "ew-resize" }}
+					sx={{
+						cursor: "ew-resize",
+						backgroundColor: "transparent",
+					}}
 					onMouseDown={handleMouseDown}
 				>
-					<Divider orientation="vertical" flexItem />
+					<Divider
+						orientation="vertical"
+						sx={{
+							"> .MuiDivider-wrapper": {
+								padding: "0",
+							},
+						}}
+					>
+						<DragHandle sx={{ transform: "rotate(90deg)", color: "rgba(0, 0, 0, 0.5)" }} />
+					</Divider>
 				</Box>
 
 				<Grid item sx={{ position: "relative", flex: 1 }}>
