@@ -48,8 +48,33 @@
 - Front end;
   - With back end API;
 - Loggers;
-
 - Display manifests entries;
+
+## Global Sprint Retrospective
+
+### Positive Topics
+
+- Github Workflow;
+- Weekly meetings with the client;
+- Pipeline (DevOps);
+- Responsibilities Segregation (Inside each team);
+- Task Self-Atribuition
+
+### Meh Topics
+
+- Task Self-Atribuition;
+- Test Coverage;
+- Multiple discords for each team;
+- Most talk happens inside the discord and not in github;
+- Standard Communication;
+
+### Topics to work on
+
+- Try not to be so optimistic on the work estimates;
+- Reserach before starting working with a tool;
+- Analyze PBI's dependencies and redefine priorities ;
+- Quality Assurance technic;
+- More communication within each team;
 
 # Sprint 2
 
