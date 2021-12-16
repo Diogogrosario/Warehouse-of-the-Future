@@ -6,4 +6,6 @@ export default (sequelize, Sequelize) => {
 			primaryKey: true,
 		},
 	});
+
+	return Device;
 };

@@ -12,4 +12,6 @@ export default (sequelize, Sequelize) => {
 		createdAt: Sequelize.DATE,
 		updatedAt: Sequelize.DATE,
 	});
+
+	return Report;
 };

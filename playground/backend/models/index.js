@@ -22,5 +22,10 @@ db.device = device(sequelize, Sequelize);
 db.report = report(sequelize, Sequelize);
 db.action = action(sequelize, Sequelize);
 
-// module.exports = db;
+db.device.hasMany(db.report);
+db.report.belongsTo(db.device);
+
+db.report.hasMany(db.action);
+db.action.belongsTo(db.report);
+
 export default db;
