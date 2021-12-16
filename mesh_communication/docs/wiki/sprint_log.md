@@ -50,7 +50,7 @@
 - Loggers;
 - Display manifests entries;
 
-## Global Sprint Retrospective
+## Global Sprint 1 Retrospective
 
 ### Positive Topics
 
