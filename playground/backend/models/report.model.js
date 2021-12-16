@@ -3,6 +3,9 @@ export default (sequelize, Sequelize) => {
 		severity: {
 			type: Sequelize.ENUM("Error", "Warning"),
 		},
+		title: {
+			type: Sequelize.TEXT,
+		},
 		description: {
 			type: Sequelize.TEXT,
 		},

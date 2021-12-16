@@ -52,7 +52,7 @@ export function findOne(req, res) {
 
 // Update a Device by the id in the request
 export function update(req, res) {
-	res.send({ message: "Not implemented for device." });
+	res.status(405).send({ message: "Not implemented for device." });
 }
 
 // Delete a Device with the specified id in the request
