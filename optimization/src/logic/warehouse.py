@@ -144,6 +144,7 @@ class Warehouse:
     def __str__(self) -> str:
         state = ""
         state += f'WAREHOUSE ID: {self.id}\n'
+
         for shelf in self.shelves:
             state += f'\t{shelf}'
         return state

@@ -66,25 +66,10 @@ class Storage:
         products = sorted(self.products, key=lambda x: (x.weight, x.width), reverse=True)
 
         for product in products:
-            out = False
-            iteration = 0
-            # TODO: Change this from random_rack to
-            # TODO: Return list of valid Racks. Iterate Over them.
             # TODO: Which is the concept of best RACK to FIT?
-            # TODO: Conjungando a ordenação safa  melhor porque estou a dar racks mais baixas para produtos mais pesadas.
 
             rack = layout.get_best_rack(product)
-            # rack = layout.get_random_rack()
-            # while not self.valid_placement(rack, product, layout):
-            #    rack = layout.get_random_rack()
-            #    iteration += 1
-            #    if iteration == max_iterations:
-            #        layout.products_out.append(product)
-            #        out = True
-            #        break
 
-            # if out:
-            #   continue
             if rack:
                 rack.add_product(product)
             else:

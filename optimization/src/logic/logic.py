@@ -105,3 +105,11 @@ if __name__ == '__main__':
 
     print('----- FINAL LAYOUT -----')
     print(final_layout)
+
+    print('----- Out Products -----')
+
+    if len(final_layout.products_out) > 0:
+        for out_product in final_layout.products_out:
+            print(out_product)
+    else:
+        print('No products were left out')
