@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import "./App.css";
 import Cube from "./components/Cube";
@@ -6,16 +6,48 @@ import { Box, Button, Divider, Grid, Tab, Tabs } from "@mui/material";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 
 export default function App() {
-	const [value, setValue] = React.useState(0);
+	const [selectedTab, setSelectedTab] = React.useState(0);
+	const [panelWidth, setPanelWidth] = React.useState(60);
+	const minPanelWidth = 20,
+		maxPanelWidth = 80;
 
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: SetStateAction<number>) => {
-		setValue(newValue);
+		setSelectedTab(newValue);
 	};
+
+	const [dragging, setDragging] = React.useState(false);
+
+	const handleMouseMove = (e: MouseEvent) => {
+		if (dragging) {
+			const newWidth =
+				((e.clientX - document.body.offsetLeft) / document.body.clientWidth) * 100;
+
+			if (newWidth > minPanelWidth && newWidth < maxPanelWidth) setPanelWidth(newWidth);
+		}
+	};
+
+	const handleMouseDown = () => {
+		setDragging(true);
+	};
+
+	const handleMouseUp = () => {
+		setDragging(false);
+	};
+
+	useEffect(() => {
+		document.addEventListener("mouseup", handleMouseUp);
+		document.addEventListener("mousemove", handleMouseMove);
+
+		return () => {
+			document.removeEventListener("mouseup", handleMouseUp);
+			document.removeEventListener("mousemove", handleMouseMove);
+		};
+	});
 
 	return (
 		<div className="App">
 			<Grid container>
-				<Grid item sx={{ position: "relative", flex: 1 }}>
+				<Grid item sx={{ position: "relative", width: `${panelWidth}%` }}>
 					<Canvas
 						style={{ height: "90vh" }}
 						camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 5] }}
@@ -32,10 +64,15 @@ export default function App() {
 					</Button>
 				</Grid>
 
-				<Divider orientation="vertical" flexItem />
+				<Box
+					sx={{ width: 10, backgroundColor: "red", cursor: "ew-resize" }}
+					onMouseDown={handleMouseDown}
+				>
+					<Divider orientation="vertical" flexItem />
+				</Box>
 
 				<Grid item sx={{ position: "relative", flex: 1 }}>
-					<Tabs value={value} onChange={handleChange}>
+					<Tabs value={selectedTab} onChange={handleChange}>
 						<Tab label="Reports" />
 						<Tab label="Logs" />
 						<Tab label="Devices" />
@@ -49,4 +86,3 @@ export default function App() {
 		</div>
 	);
 }
-
