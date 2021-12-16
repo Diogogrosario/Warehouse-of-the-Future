@@ -1,3 +1,4 @@
+import random
 from math import prod
 import random as r
 
@@ -16,6 +17,24 @@ class Layout:
         shelf = self.warehouse.get_random_shelf()
         rack = shelf.get_random_rack()
         return rack
+
+    def get_best_rack(self, product):
+        valid_racks = []
+        for shelf in self.warehouse.shelves:
+            for rack in shelf.racks:
+
+                if (rack.capacity - rack.get_current_weight()) < product.weight:
+                    continue
+
+                if rack.get_available_width() < product.width:
+                    continue
+
+                valid_racks.append(rack)
+
+        if len(valid_racks) == 0:
+            return None
+
+        return random.choice(valid_racks)
 
     def get_product_rack_id(self, product):  # Assumindo que cada id do produto é único
         for shelf in self.warehouse.shelves:
@@ -216,6 +235,15 @@ class Rack:
         for product in self.products.keys():
             weight += product.weight
         return weight
+
+    def get_available_width(self):
+
+        counter = self.width
+
+        for product in self.products:
+            counter -= product.width
+
+        return counter
 
     def __str__(self) -> str:
         state = ""

@@ -60,7 +60,7 @@ class Storage:
 
         return warehouse
 
-    def fill_warehouse(self, layout):  # TODO: Verificar outros atributos das racks tb, para além da capacity
+    def fill_warehouse(self, layout):
         # Place the heaviest products first
         # TODO: Which is the concept of best product to FIT?
         products = sorted(self.products, key=lambda x: (x.weight, x.width), reverse=True)
@@ -73,19 +73,22 @@ class Storage:
             # TODO: Which is the concept of best RACK to FIT?
             # TODO: Conjungando a ordenação safa  melhor porque estou a dar racks mais baixas para produtos mais pesadas.
 
-            rack = layout.get_random_rack()
-            while not self.valid_placement(rack, product, layout):
-                rack = layout.get_random_rack()
-                iteration += 1
-                if iteration == max_iterations:
-                    layout.products_out.append(product)
-                    out = True
-                    break
+            rack = layout.get_best_rack(product)
+            # rack = layout.get_random_rack()
+            # while not self.valid_placement(rack, product, layout):
+            #    rack = layout.get_random_rack()
+            #    iteration += 1
+            #    if iteration == max_iterations:
+            #        layout.products_out.append(product)
+            #        out = True
+            #        break
 
-            if out:
-                continue
-
-            rack.add_product(product)
+            # if out:
+            #   continue
+            if rack:
+                rack.add_product(product)
+            else:
+                layout.products_out.append(product)
 
         return layout
 
