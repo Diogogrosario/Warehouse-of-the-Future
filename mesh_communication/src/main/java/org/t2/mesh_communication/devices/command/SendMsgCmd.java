@@ -31,6 +31,10 @@ public class SendMsgCmd implements Command {
         this.meshDevice.sendMessage(m);
     }
 
+    public String toJson(){
+        return message.toJson();
+    }
+
     public Message getMessage() {
         return message;
     }

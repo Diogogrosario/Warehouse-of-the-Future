@@ -1,6 +1,8 @@
 package org.t2.mesh_communication.devices.messages;
 
-/** Message used to reply to a request message. */
+/**
+ * Message used to reply to a request message.
+ */
 public class ReplyMessage extends Message {
     public static final String type = "REP";
 

@@ -4,12 +4,16 @@ import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.messages.Message;
 
 public class ReceiveMsgCmd implements Command {
-    private final MeshDevice meshDevice;
+    private final MeshDevice meshDevice; // who will receive the message
     private final Message message;
 
     public ReceiveMsgCmd(MeshDevice md, Message msg) {
         this.meshDevice = md;
         this.message = msg;
+    }
+
+    public String toJson(){
+        return message.toJson();
     }
 
     @Override
