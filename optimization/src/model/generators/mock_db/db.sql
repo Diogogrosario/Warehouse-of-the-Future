@@ -34,12 +34,6 @@ create table Sector
     name VARCHAR(50)
 );
 
-create table Cars
-(
-    id   SERIAL PRIMARY KEY,
-    name VARCHAR(50)
-);
-
 create table Rack
 (
     id       SERIAL PRIMARY KEY,
@@ -64,7 +58,7 @@ create table Product
     weight    DECIMAL(5, 1),
     sector_id BIGINT UNSIGNED NOT NULL,
     car_model_id    BIGINT UNSIGNED NOT NULL,
-    frequency  DECIMAL(3, 2),
+
     FOREIGN KEY (sector_id) REFERENCES Sector (id),
     FOREIGN KEY (car_model_id) REFERENCES Cars (id)
 
@@ -114,4 +108,21 @@ create table Worker_Manifesto_Product
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
 );
 
-DROP TRIGGER IF EXISTS ;
+DROP TRIGGER IF EXISTS calculate_product_frequency;
+CREATE TRIGGER calculate_product_frequency 
+AFTER INSERT ON Worker_Manifesto_Product FOR EACH ROW
+BEGIN
+DECLARE total_pieces INT
+DECLARE freq INT
+DELIMITER $$
+    BEGIN
+        SET freq:= SELECT count(SELECT * from Worker_Manifesto_Product WHERE
+        product_id=NEW.product_id);
+        SET total_pieces:=SUM(SELECT quantity from Worker_Manifesto_Product as A
+        WHERE
+        A.product_id=NEW.product_id);
+              
+        UPDATE Product where id=NEW.product_id SET frequency = freq/total_pieces;
+
+END $$
+DELIMITER ;
