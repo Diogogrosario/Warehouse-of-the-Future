@@ -37,7 +37,7 @@ paths:
 
       responses:
         200:
-          description: "array containing json specified content"
+          description: "Array containing json specified content"
           content:
             application/json:
               schema:
@@ -107,6 +107,9 @@ paths:
                 position:
                   x: 2
                   y: 1
+
+        404:
+          description: "Device does not exist."
                 
               
                 
@@ -125,7 +128,7 @@ paths:
             type: integer
       responses:
         200:
-          description: "array containing json of devices' battery level"
+          description: "Array containing json of devices' battery level"
           content:
             application/json:
               schema:
@@ -138,8 +141,9 @@ paths:
                     battery_level:
                       type: integer  
                     
-        400:
-          description: device ID does not exist
+        404:
+          description: "Device does not exist."
+
   /devices/position:
     get:
       summary: gets mesh devices' position
@@ -173,8 +177,8 @@ paths:
                         y: 
                           type: integer
                    
-        400:
-          description: device ID does not exist
+        404:
+          description: "Device does not exist."
           
   /devices/messagesToRelay:
     get:
@@ -206,8 +210,9 @@ paths:
                       items:
                         $ref: '#/components/schemas/Message'
                    
-        400:
-          description: device ID does not exist
+        404:
+          description: "Device does not exist."
+
   /devices/messagesRelayed:
     get:
       summary: gets mesh devices' messages that were relayed
@@ -238,8 +243,9 @@ paths:
                       items:
                         $ref: '#/components/schemas/Message'
                    
-        400:
-          description: device ID does not exist
+        404:
+          description: "Device does not exist."
+          
   /devices/messagesReceived:
     get:
       summary: gets mesh devices' messages that were received
@@ -270,10 +276,10 @@ paths:
                       items:
                         $ref: '#/components/schemas/Message'
                    
-        400:
-          description: device ID does not exist
+        404:
+          description: "Device does not exist."
 
-  /update:
+  /tick:
     post:
       summary: update grid
       operationId: position
@@ -282,31 +288,13 @@ paths:
       parameters:
         - in: query
           name: n_ticks
-          description: optional number of ticks. Default is 1
+          description: Optional number of ticks. Default is 1
           required: false
           schema:
             type: integer
       responses:
         200:
-          description: "array containing json devices' position"
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    device_id:
-                      type: integer
-                    position:
-                      type: object
-                      properties:
-                        x:
-                          type: integer
-                        y: 
-                          type: integer
-        400:
-          description: device ID does not exist
+          description: "Mesh Grid updated"
   
   /message:
     post:
@@ -326,12 +314,15 @@ paths:
                 recipient_id:
                   description: ID of the device to receive the message
                   type: integer
+              required:
+                - message
+                - recipient_id
         required: true
       responses:
         200:
-          description: message arrived correctly.
+          description: "Message sent correctly."
         400:
-          description: device ID does not exist or the message was lost.
+          description: "Recipient does not exist."
 
 components:
   schemas:
