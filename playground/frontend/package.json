@@ -50,7 +50,7 @@
 	"scripts": {
 		"start": "webpack-dev-server --mode=development",
 		"build": "webpack --mode=production",
-		"lint": "eslint --ext .js,.jsx,.ts,.tsx",
+		"lint": "eslint --ext .js,.jsx,.ts,.tsx .",
 		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,json,yml}\""
 	},
 	"eslintConfig": {

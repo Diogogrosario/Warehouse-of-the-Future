@@ -21,7 +21,7 @@
 		"eslint-plugin-import": "^2.25.3"
 	},
 	"scripts": {
-		"lint": "eslint --ext .js",
+		"lint": "eslint --ext .js .",
 		"format": "prettier --write \"**/*.{js,json,yml}\""
 	}
 }
