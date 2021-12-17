@@ -58,7 +58,12 @@ class WarehouseRenderer extends Component {
 	};
 
 	render() {
-		return <div id="warehouse-renderer" ref={(ref) => (this.container = ref != null ? ref : undefined)} />;
+		return (
+			<div
+				id="warehouse-renderer"
+				ref={(ref) => (this.container = ref != null ? ref : undefined)}
+			/>
+		);
 	}
 }
 

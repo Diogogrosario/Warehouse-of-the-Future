@@ -1,8 +1,7 @@
-import * as THREE from 'three';
+import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 class SceneManager {
-	
 	public scene: THREE.Scene;
 	public renderer: THREE.Renderer;
 
@@ -17,7 +16,12 @@ class SceneManager {
 	private cube!: THREE.Mesh;
 	private ground!: THREE.Mesh;
 
-	constructor(container: HTMLElement | undefined, width: number, height: number, showStats: boolean=false) {
+	constructor(
+		container: HTMLElement | undefined,
+		width: number,
+		height: number,
+		showStats: boolean = false
+	) {
 		this.width = width;
 		this.height = height;
 
@@ -41,7 +45,7 @@ class SceneManager {
 
 		this.addCustomSceneObjects();
 	}
-	
+
 	public render() {
 		this.invalidFrame = this.invalidFrame || this.controls.update();
 
@@ -56,8 +60,7 @@ class SceneManager {
 	}
 
 	public resize(width: number, height: number) {
-		if (this.width == width && this.height == height)
-			return;
+		if (this.width == width && this.height == height) return;
 
 		this.width = width;
 		this.height = height;
@@ -90,10 +93,7 @@ class SceneManager {
 
 		const loader = new THREE.TextureLoader();
 		const testmapMaterial = new THREE.MeshBasicMaterial({
-			map: loader.load(
-				'textures/testmap.jpg',
-				onload=this.invalidate.bind(this)
-			),
+			map: loader.load("textures/testmap.jpg", (onload = this.invalidate.bind(this))),
 		});
 		const planeGeometry = new THREE.PlaneGeometry(4, 4, 2, 2);
 		this.ground = new THREE.Mesh(planeGeometry, testmapMaterial);
