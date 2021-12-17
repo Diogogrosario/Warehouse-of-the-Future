@@ -135,10 +135,9 @@ staff_attributes = namespace.model("Staff", {
         required=True,
         description="Name of the employee"
     ),
-    "gender": fields.String(
+    "height": fields.Float(
         required=True,
-        description="Gender of the employee. "
-                    + "The possible values are 'female' and 'male'"
+        description="Height of the employee, in cm."
     ),
     "birth_date": fields.DateTime(
         required=True,
@@ -219,11 +218,22 @@ layout_attributes = namespace.model("Layout", {
     "buckets": fields.List(
         fields.Nested(bucket_attributes),
         required=True,
-        desccription="Buckets present in the warehouse"
+        description="Buckets present in the warehouse"
     )
 })
 
 # Sensors
+
+staff_contact_in_sensor_attributes = namespace.model("StaffContactInSensor", {
+    "time": fields.DateTime(
+        required=True,
+        description="Timestamp of when the sensor registered the contact"
+    ),
+    "staff_id": fields.String(
+        required=True,
+        description="Id of the operator that was next to the sensor"
+    )
+})
 
 sensor_attributes = namespace.model("Sensor", {
     "id": fields.String(
@@ -239,19 +249,28 @@ sensor_attributes = namespace.model("Sensor", {
         required=True,
         description="Timestamps of the movement detections."
     ),
+    "staff_contacts": fields.List(
+        fields.Nested(staff_contact_in_sensor_attributes),
+        required=True,
+        description="Array of objects with timestamp and staff_id, that"
+                    + " represents when an operator was next to the sensor."
+    )
 })
 
 # Cart
 
 cart_attributes = namespace.model("Cart", {
-    "position": fields.List(
-        fields.Integer,
+    "speed": fields.Float(
         required=True,
-        description="Coordinates of the cart, in the form of list ([x, y])"
+        description="Speed of the cart, in cm/min"
     ),
-    "operator": fields.String(
+    "start_time": fields.String(
         required=True,
-        description="Id of the operator who is controlling the cart"
+        description="The time of the day when the cart starts"
+    ),
+    "end_time": fields.String(
+        required=True,
+        description="The time of the day when the cart stops"
     ),
 })
 
@@ -377,12 +396,10 @@ def generate_employee_data(id=None):
     if (id is None):
         id = uuid.uuid4()
 
-    gender = random.choice(["female", "male"])
-
     employee = {
         "id": id,
-        "name": names.get_full_name(gender=gender),
-        "gender": gender,
+        "name": names.get_full_name(),
+        "height": round(random.uniform(140, 220)),
         "birth_date": utils.get_random_birth_date(),
     }
 
@@ -433,10 +450,22 @@ def generate_random_sensors(number_of_sensors):
         for _ in range(number_of_movements):
             movement_timestamps.append(utils.get_random_date_last_day())
 
+        staff_contacts = []
+        number_of_staff_contacts = random.randint(1, 10)
+
+        for _ in range(number_of_staff_contacts):
+            staff_contact = {
+                "time": utils.get_random_date_last_day(),
+                "staff_id": uuid.uuid4()
+            }
+
+            staff_contacts.append(staff_contact)
+
         sensor = {
             "id": id,
             "bucket": uuid.uuid4(),
-            "movement_records": movement_timestamps
+            "movement_records": movement_timestamps,
+            "staff_contacts": staff_contacts
         }
         sensors.append(sensor)
     return sensors
@@ -485,12 +514,13 @@ class Cart(Resource):
     @namespace.marshal_list_with(cart_attributes)
     def get(self):
         """
-        Returns the position and operator who is controlling the cart.
+        Returns the speed, start and end times of the cart.
         """
 
         cart = {
-            "position": utils.get_position(dimensions=2),
-            "operator": uuid.uuid4()
+            "speed": round(random.uniform(500, 1000), 2),
+            "start_time": "07:00",
+            "end_time": "19:00"
         }
 
         return cart
