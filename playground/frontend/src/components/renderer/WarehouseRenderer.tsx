@@ -1,5 +1,6 @@
-import React, { Component, CSSProperties } from "react";
+import React, { Component } from "react";
 import SceneManager from "./SceneManager";
+import Stats from "./Stats";
 
 class WarehouseRenderer extends Component {
 	private container?: HTMLDivElement;
@@ -7,8 +8,12 @@ class WarehouseRenderer extends Component {
 	private requestID: number = 0;
 
 	private sceneManager!: SceneManager;
+	private stats?: Stats;
 
 	componentDidMount() {
+		this.stats = new Stats();
+		this.container?.appendChild(this.stats.dom);
+
 		this.sceneSetup();
 		this.startAnimationLoop();
 		window.addEventListener("resize", this.handleResize);
@@ -25,12 +30,14 @@ class WarehouseRenderer extends Component {
 		const width = this.container?.clientWidth ?? 100;
 		const height = this.container?.clientHeight ?? 100; // TODO: Can I remove these bastards?
 
-		this.sceneManager = new SceneManager(this.container, width, height);
+		this.sceneManager = new SceneManager(this.container, width, height, true);
 
 		this.container?.appendChild(this.sceneManager.renderer.domElement); // mount using React ref
 	};
 
 	startAnimationLoop = () => {
+		this.stats?.update();
+
 		this.sceneManager.render();
 
 		// The window.requestAnimationFrame() method tells the browser that you wish to perform

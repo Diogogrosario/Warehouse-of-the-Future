@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-
 class SceneManager {
 	
 	public scene: THREE.Scene;
@@ -13,12 +12,12 @@ class SceneManager {
 	private width: number;
 	private height: number;
 
-	private frameInvalid = false;
+	private invalidFrame: boolean = true;
 
 	private cube!: THREE.Mesh;
 	private ground!: THREE.Mesh;
-	
-	constructor(container: HTMLElement | undefined, width: number, height: number) {
+
+	constructor(container: HTMLElement | undefined, width: number, height: number, showStats: boolean=false) {
 		this.width = width;
 		this.height = height;
 
@@ -34,6 +33,8 @@ class SceneManager {
 		// OrbitControls allow a camera to orbit around the object
 		// https://threejs.org/docs/#examples/controls/OrbitControls
 		this.controls = new OrbitControls(this.camera, container);
+		this.controls.enableDamping = true;
+		this.controls.dampingFactor = 0.95;
 
 		this.renderer = new THREE.WebGLRenderer({ antialias: true });
 		this.renderer.setSize(width, height);
@@ -42,10 +43,12 @@ class SceneManager {
 	}
 	
 	public render() {
-		this.cube.rotation.x += 0.01;
-		this.cube.rotation.y += 0.01;
+		this.invalidFrame = this.invalidFrame || this.controls.update();
 
-		this.renderer?.render(this.scene, this.camera);
+		if (this.invalidFrame) {
+			this.renderer?.render(this.scene, this.camera);
+			this.invalidFrame = false;
+		}
 	}
 
 	public dispose() {
@@ -65,10 +68,12 @@ class SceneManager {
 		// Note that after making changes to most of camera properties you have to call
 		// .updateProjectionMatrix for the changes to take effect.
 		this.camera.updateProjectionMatrix();
+
+		this.invalidate();
 	}
 
 	public invalidate() {
-		this.frameInvalid = true;
+		this.invalidFrame = true;
 	}
 
 	// Here should come custom code.
@@ -85,7 +90,10 @@ class SceneManager {
 
 		const loader = new THREE.TextureLoader();
 		const testmapMaterial = new THREE.MeshBasicMaterial({
-			map: loader.load('textures/testmap.jpg'),
+			map: loader.load(
+				'textures/testmap.jpg',
+				onload=this.invalidate.bind(this)
+			),
 		});
 		const planeGeometry = new THREE.PlaneGeometry(4, 4, 2, 2);
 		this.ground = new THREE.Mesh(planeGeometry, testmapMaterial);
