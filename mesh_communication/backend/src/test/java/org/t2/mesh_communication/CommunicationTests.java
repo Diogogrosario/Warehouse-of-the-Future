@@ -1,5 +1,9 @@
 package org.t2.mesh_communication;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,11 +18,6 @@ import org.t2.mesh_communication.devices.components.Screen;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.ReplyMessage;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class CommunicationTests {
     private static Device device;

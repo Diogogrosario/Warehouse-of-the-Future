@@ -1,5 +1,7 @@
 package org.t2.mesh_communication;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,8 +13,6 @@ import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.ReplyMessage;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class BatteryTests {
     private static Device device;

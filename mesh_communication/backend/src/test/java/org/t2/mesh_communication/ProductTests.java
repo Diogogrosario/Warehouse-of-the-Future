@@ -1,13 +1,12 @@
 package org.t2.mesh_communication;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Objects;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.t2.mesh_communication.config.Product;
 import org.t2.mesh_communication.devices.Position;
-
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductTests {
     public static Product product;

@@ -1,6 +1,6 @@
 package org.t2.mesh_communication.config;
 
-import org.t2.mesh_communication.devices.Position;
+import static org.t2.mesh_communication.config.ManifestReader.FILE_DIR;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import static org.t2.mesh_communication.config.ManifestReader.FILE_DIR;
+import org.t2.mesh_communication.devices.Position;
 
 public class ManifestGenerator {
     private final String fileName;
