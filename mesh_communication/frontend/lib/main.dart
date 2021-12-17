@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:graphview/GraphView.dart';
 import 'package:myapp/decision_tree_screen.dart';
 import 'package:myapp/layer_graphview.dart';
 import 'package:myapp/tree_graphview_json.dart';
-import 'package:flutter/material.dart';
-import 'package:graphview/GraphView.dart';
 
 import 'directed_graphview.dart';
 import 'graph_cluster_animated.dart';
@@ -39,11 +39,11 @@ class Home extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TreeViewPage(),
-                  ),
-                ),
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TreeViewPage(),
+                      ),
+                    ),
                 child: Text(
                   'Tree View (BuchheimWalker)',
                   style: TextStyle(fontSize: 30),
@@ -57,11 +57,11 @@ class Home extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GraphClusterViewPage(),
-                  ),
-                ),
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GraphClusterViewPage(),
+                      ),
+                    ),
                 child: Text(
                   'Graph Cluster View (FruchtermanReingold)',
                   style: TextStyle(fontSize: 30),
@@ -75,11 +75,11 @@ class Home extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LayeredGraphViewPage(),
-                  ),
-                ),
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LayeredGraphViewPage(),
+                      ),
+                    ),
                 child: Text(
                   "Layered View (Sugiyama)",
                   style: TextStyle(fontSize: 30),
@@ -93,11 +93,11 @@ class Home extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TreeViewPageFromJson(),
-                  ),
-                ),
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TreeViewPageFromJson(),
+                      ),
+                    ),
                 child: Text(
                   'Tree View From Json(BuchheimWalker)',
                   style: TextStyle(fontSize: 30),
@@ -134,7 +134,8 @@ class Home extends StatelessWidget {
 
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => GraphScreen(graph, builder, null)),
+                  MaterialPageRoute(
+                      builder: (context) => GraphScreen(graph, builder, null)),
                 );
               },
               color: Colors.blueAccent,
@@ -187,7 +188,8 @@ class Home extends StatelessWidget {
 
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => GraphScreen(graph, builder, null)),
+                  MaterialPageRoute(
+                      builder: (context) => GraphScreen(graph, builder, null)),
                 );
               },
               color: Colors.blueAccent,
