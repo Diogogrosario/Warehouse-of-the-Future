@@ -8,6 +8,8 @@ services:
       - db
     volumes:
       - ./src/logic:/home/logic
+    ports:
+      - 50051:50051
     networks:
       - internal
   
