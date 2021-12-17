@@ -12,6 +12,7 @@ export function create(req, res) {
 
 	const report = {
 		id: req.params.id,
+		title: req.body.title,
 		severity: req.body.severity,
 		description: req.body.description,
 		resolved: req.body.resolved,
