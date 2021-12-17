@@ -39,7 +39,7 @@ jobs:
         with:
           java-version: 17
       - run: mvn -B package -f pom.xml -DskipTests
-      - run: mkdir staging && cp target/*.jar staging
+      - run: mkdir staging && cp target/*.war staging
       - uses: actions/upload-artifact@v2
         with:
           name: t2_mesh_comm
