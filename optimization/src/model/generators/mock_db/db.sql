@@ -57,11 +57,8 @@ create table Product
     width     DECIMAL(5, 1),
     weight    DECIMAL(5, 1),
     sector_id BIGINT UNSIGNED NOT NULL,
-    car_model_id    BIGINT UNSIGNED NOT NULL,
 
     FOREIGN KEY (sector_id) REFERENCES Sector (id),
-    FOREIGN KEY (car_model_id) REFERENCES Cars (id)
-
 );
 
 create table Product_Rack
@@ -126,3 +123,6 @@ DELIMITER $$
 
 END $$
 DELIMITER ;
+
+SELECT count(SELECT * from Worker_Manifesto_Product WHERE
+        product_id=1);
