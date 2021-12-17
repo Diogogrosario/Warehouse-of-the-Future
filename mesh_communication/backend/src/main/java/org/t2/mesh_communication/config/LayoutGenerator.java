@@ -1,0 +1,64 @@
+package org.t2.mesh_communication.config;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import org.t2.mesh_communication.devices.Position;
+
+/** Generates a file with sequential ids and random positions. */
+public class LayoutGenerator {
+    public static final String FILE = "layout.csv";
+    public static final String FILE_DIR = "files/";
+    public static final String FILE_SEPARATOR = ";";
+
+    private final Position min;
+    private final Position max;
+    private final Integer nDevices;
+
+    public LayoutGenerator(Integer nDevices, Position min, Position max) {
+        this.nDevices = nDevices;
+        this.min = min;
+        this.max = max;
+    }
+
+    public LayoutGenerator(Integer nDevices, Integer maxRows, Integer maxCols) {
+        this(nDevices, new Position(0, 0), new Position(maxRows, maxCols));
+    }
+
+    private List<Position> possiblePositions() {
+        List<Position> res = new ArrayList<>();
+        for (int i = min.getX(); i <= max.getX(); ++i)
+            for (int j = min.getY(); j <= max.getY(); ++j) res.add(new Position(i, j));
+
+        return res;
+    }
+
+    public void generate() throws IOException {
+        generate(new Random());
+    }
+
+    public void generate(Random r) throws IOException { // Inject random for testing purposes
+        // create file
+        File f = new File(FILE_DIR + FILE);
+        File directory = new File(FILE_DIR);
+        if (!directory.exists()) directory.mkdir();
+        f.createNewFile();
+
+        // add devices to file
+        BufferedWriter layoutFile = new BufferedWriter((new FileWriter(f)));
+        List<Position> positions = possiblePositions();
+        Collections.shuffle(positions, r);
+
+        for (int i = 1; i <= nDevices; ++i) {
+            Position p = positions.get(i % this.nDevices);
+            String device = i + FILE_SEPARATOR + p.getX() + FILE_SEPARATOR + p.getY();
+            layoutFile.write(device + "\n");
+        }
+        layoutFile.close();
+    }
+}

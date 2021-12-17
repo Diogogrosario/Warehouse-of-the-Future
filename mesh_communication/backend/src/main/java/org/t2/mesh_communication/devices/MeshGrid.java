@@ -1,7 +1,9 @@
 package org.t2.mesh_communication.devices;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 
 /**
  * Holder of the network devices. Represents the network and distributes the tick update commands to
@@ -48,5 +50,12 @@ public class MeshGrid {
         }
 
         return hadUpdates;
+    }
+
+    public void addDevices(HashMap<Integer, Position> devices) {
+        for (int id : devices.keySet()) {
+            Device d = DeviceFactory.deviceFromConfig(id, devices.get(id), new FloodStrategy(this));
+            addDevice(d);
+        }
     }
 }
