@@ -113,3 +113,20 @@ create table Worker_Manifesto_Product
     FOREIGN KEY (product_id) REFERENCES Product (id),
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
 );
+
+CREATE TRIGGER proximo_pago 
+AFTER INSERT ON Worker_Manifesto_Product FOR EACH ROW
+BEGIN
+DECLARE total_pieces INT;
+DECLARE freq INT;
+    BEGIN
+        SET freq:= count(SELECT * from Worker_Manifesto_Product 
+        WHERE
+        product_id=NEW.product_id);
+        SET total_pieces:=SUM(SELECT quantity from Worker_Manifesto_Product 
+        WHERE
+        product_id=NEW.product_id);
+              
+        UPDATE Product where id=NEW.product_id SET frequency = freq/total_pieces;
+
+END
