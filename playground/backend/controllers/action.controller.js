@@ -1,6 +1,6 @@
 import { Action } from "../models/action.model";
 
-// Create and Save a new Device
+// Create and Save a new Action
 export function create(req, res) {
 	// validate request
 	if (!req.params.id) {
@@ -26,7 +26,7 @@ export function create(req, res) {
 		});
 }
 
-// Retrieve all Devices from the database.
+// Retrieve all Action from the database.
 export function findAll(req, res) {
 	Action.findAll()
 		.then((data) => {
@@ -37,7 +37,7 @@ export function findAll(req, res) {
 		});
 }
 
-// Find a single Device with an id
+// Find a single Action with an id
 export function findOne(req, res) {
 	const id = req.params.id;
 
@@ -51,7 +51,7 @@ export function findOne(req, res) {
 		});
 }
 
-// Update a Device by the id in the request
+// Update a Action by the id in the request
 export function update(req, res) {
 	const id = req.params.id;
 
@@ -70,7 +70,7 @@ export function update(req, res) {
 		});
 }
 
-// Delete a Device with the specified id in the request
+// Delete a Action with the specified id in the request
 const _delete = (req, res) => {
 	const id = req.params.id;
 
@@ -88,7 +88,7 @@ const _delete = (req, res) => {
 };
 export { _delete as delete };
 
-// Delete all Devices from the database.
+// Delete all Actions from the database.
 export function deleteAll(req, res) {
 	Action.destroy({
 		where: {},
