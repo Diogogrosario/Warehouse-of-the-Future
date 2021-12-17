@@ -1,4 +1,5 @@
 from flask_restx import fields, inputs, reqparse, Namespace, Resource
+from .db import client
 
 namespace = Namespace("Staff", path="/staff",
                       description="Staff related operations")
@@ -29,8 +30,8 @@ parser.add_argument("age", required=False, type=inputs.date, help="The age to \
 
 @namespace.route("/")
 class StaffQuery(Resource):
-    @namespace.marshal_list_with(staffAttributes)
-    @namespace.expect(parser)
+    # @namespace.marshal_list_with(staffAttributes)
+    # @namespace.expect(parser)
     def get(self):
         """
         Returns the result of the search for staff members
@@ -38,8 +39,7 @@ class StaffQuery(Resource):
         Returns information about all the staff members that match the name \
             and age passed as query parameters.
         """
-        return {}
-
+        return client.WoF.Employees.count_documents({})
 # ------------------------------------------------------------------------------
 # Staff instance information
 # ------------------------------------------------------------------------------
