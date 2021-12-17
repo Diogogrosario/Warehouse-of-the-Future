@@ -72,7 +72,7 @@ class Storage:
         for product in products:
             # TODO: Which is the concept of best RACK to FIT?
 
-            rack = layout.get_best_rack(product)
+            rack = layout.get_valid_rack(product)
 
             if rack:
                 rack.add_product(product)

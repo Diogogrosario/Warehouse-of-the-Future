@@ -21,7 +21,7 @@ class Layout:
         rack = shelf.get_random_rack()
         return rack
 
-    def get_best_rack(self, product):
+    def get_valid_rack(self, product):
         valid_racks = []
         for shelf in self.warehouse.shelves:
             for rack in shelf.racks:
