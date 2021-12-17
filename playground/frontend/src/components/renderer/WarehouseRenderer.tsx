@@ -65,7 +65,7 @@ class WarehouseRenderer extends Component {
 
 		const loader = new THREE.TextureLoader();
 		const testmapMaterial = new THREE.MeshBasicMaterial({
-			map: loader.load('textures/testmap.jpg'),
+			map: loader.load("textures/testmap.jpg"),
 		});
 		const planeGeometry = new THREE.PlaneGeometry(4, 4, 2, 2);
 		this.ground = new THREE.Mesh(planeGeometry, testmapMaterial);
