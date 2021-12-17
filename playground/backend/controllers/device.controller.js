@@ -1,5 +1,4 @@
-import { device, Sequelize } from "../models";
-const Device = device;
+import { Device } from "../models/action.model";
 
 // Create and Save a new Device
 export function create(req, res) {
@@ -52,17 +51,19 @@ export function findOne(req, res) {
 
 // Update a Device by the id in the request
 export function update(req, res) {
-	res.status(405).send({ message: "Not implemented for device." });
+	res.status(405).send({ message: "Not implemented." });
 }
 
 // Delete a Device with the specified id in the request
 const _delete = (req, res) => {
+	const id = req.params.id;
+
 	Device.destroy({ where: { id: id } })
 		.then((num) => {
 			if (num == 1) {
 				res.send({ message: "Sucess." });
 			} else {
-				res.status(404).send({ message: err.message || "Device not found." });
+				res.status(404).send({ message: "Device not found." });
 			}
 		})
 		.catch((err) => {
