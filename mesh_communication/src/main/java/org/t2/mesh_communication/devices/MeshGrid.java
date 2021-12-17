@@ -1,5 +1,8 @@
 package org.t2.mesh_communication.devices;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +10,7 @@ import java.util.List;
  * Holder of the network devices. Represents the network and distributes the tick update commands to
  * all devices. Can be queried to find devices in a certain range.
  */
+@Component
 public class MeshGrid {
     public static final int ORCHESTRATOR_ID = 0;
 
@@ -48,5 +52,14 @@ public class MeshGrid {
         }
 
         return hadUpdates;
+    }
+
+    public void sendRequest(int dest, String content) {
+        for (MeshDevice device : devices) {
+            if (device.getId() == ORCHESTRATOR_ID) {
+                device.sendMessage(device.createMessage(dest, content));
+                return;
+            }
+        }
     }
 }
