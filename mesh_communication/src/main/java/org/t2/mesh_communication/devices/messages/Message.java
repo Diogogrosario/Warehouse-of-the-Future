@@ -110,7 +110,7 @@ public abstract class Message {
 
     public String toJson() {
         return String.format(
-                "{source=%d, seq=%d, dest=%d, content=%s}",
+                "{\"source\": %d, \"seq\": %d, \"dest\": %d, \"content\": \"%s\"}",
                 this.source, this.seq, this.destination, this.content);
     }
 }

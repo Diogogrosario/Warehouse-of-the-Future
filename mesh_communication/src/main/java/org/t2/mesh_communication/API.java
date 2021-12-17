@@ -1,6 +1,7 @@
 package org.t2.mesh_communication;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -67,7 +68,7 @@ public class API {
     }
 
     @GetMapping("/devices")
-    public String devices(@RequestParam(value = "id", defaultValue = "-1") int deviceID, HttpServletResponse response) {
+    public List<JsonNode> devices(@RequestParam(value = "id", defaultValue = "-1") int deviceID, HttpServletResponse response) {
         List<MeshDevice> devices = meshGrid.getDevices();
         if (deviceID != -1) {
             MeshDevice device = null;
@@ -78,19 +79,27 @@ public class API {
                 }
             }
 
-            if (device == null) {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                return "The specified ID does not exist";
+            if (device == null) { //if the queried device does not exist - code 204
+                response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                return new ArrayList<>();
             }
             devices = new ArrayList<>(Collections.singleton(device));
         }
-        response.setStatus(HttpServletResponse.SC_OK);
 
-        StringBuilder ret = new StringBuilder("[");
+        List<JsonNode> devicesJson = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
         for (MeshDevice dv : devices) {
-            ret.append(dv.toJson());
+            try {
+                devicesJson.add(mapper.readValue(dv.toJson(), JsonNode.class));
+            } catch (JsonProcessingException e) {
+                System.err.println("Error in JSON parsing of devices.");
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                return null;
+            }
         }
-        return ret + "]";
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return devicesJson;
     }
 
     @PostMapping("/message")
