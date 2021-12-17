@@ -64,7 +64,7 @@ create table Product
     weight    DECIMAL(5, 1),
     sector_id BIGINT UNSIGNED NOT NULL,
     car_model_id    BIGINT UNSIGNED NOT NULL,
-
+    frequency  DECIMAL(3, 2),
     FOREIGN KEY (sector_id) REFERENCES Sector (id),
     FOREIGN KEY (car_model_id) REFERENCES Cars (id)
 
@@ -113,3 +113,5 @@ create table Worker_Manifesto_Product
     FOREIGN KEY (product_id) REFERENCES Product (id),
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
 );
+
+DROP TRIGGER IF EXISTS ;
