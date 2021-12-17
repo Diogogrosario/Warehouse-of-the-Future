@@ -19,4 +19,5 @@ body,
 	width: 100%;
 	/* overflow: hidden; */
 	display: block;
+	position: relative;
 }
