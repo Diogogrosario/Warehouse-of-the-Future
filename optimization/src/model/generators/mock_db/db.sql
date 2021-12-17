@@ -104,25 +104,6 @@ create table Worker_Manifesto
     id SERIAL PRIMARY KEY
 );
 
-<<<<<<< HEAD
-create table Worker_Manifesto_Product (
-	id SERIAL PRIMARY KEY,
-	manifesto_id BIGINT UNSIGNED NOT NULL,
-	product_id BIGINT UNSIGNED NOT NULL,
-	quantity INT,
-	FOREIGN KEY(product_id) REFERENCES Product(id),
-	FOREIGN KEY(manifesto_id) REFERENCES Worker_Manifesto(id)
-);
-
-CREATE TABLE Parts_Statistics_monthlyUpdate( /*tirado a partir dos manifestos diários para esse mes*/
-	part_id SERIAL PRIMARY KEY,
-	total_parts INT, /*vindo do manifesto mensal*/
-	worker_fetcher_times BIGINT, /*numero de vezes que a peça aparece nos manifestos diários/em cada rota*/
-/*a partir de total_parts e worker_fetcher_times conseguimos obter uma métrica do número de vezes que o worker precisa de ir à prateleira*/
-	mean_time_to_reach  INT, /*mean time worker takes when collecting this parts in seconds*/
-	
-	FOREIGN KEY(part_id) REFERENCES Product(id)
-=======
 create table Worker_Manifesto_Product
 (
     id           SERIAL PRIMARY KEY,
@@ -131,5 +112,4 @@ create table Worker_Manifesto_Product
     quantity     INT,
     FOREIGN KEY (product_id) REFERENCES Product (id),
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
->>>>>>> t4_development
 );
