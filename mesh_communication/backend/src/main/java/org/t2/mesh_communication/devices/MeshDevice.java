@@ -142,9 +142,16 @@ public abstract class MeshDevice implements Updatable {
     }
 
     public String toJson() {
-        return "{\"id\":" + this.id +
-                ",\"position\":{\"x\":" + this.pos.getX() + ",\"y\":" + this.pos.getY() +
-                "},\"messagesToRelay\":" + this.getMessageListJson(this.commands) +
-                ",\"messagesReceived\":" + this.getMessageListJson(this.commandsNext) + "}";
+        return "{\"id\":"
+                + this.id
+                + ",\"position\":{\"x\":"
+                + this.pos.getX()
+                + ",\"y\":"
+                + this.pos.getY()
+                + "},\"messagesToRelay\":"
+                + this.getMessageListJson(this.commands)
+                + ",\"messagesReceived\":"
+                + this.getMessageListJson(this.commandsNext)
+                + "}";
     }
 }

@@ -32,7 +32,7 @@ public class SendMsgCmd implements Command {
     }
 
     @Override
-    public String toJson(){
+    public String toJson() {
         return message.toJson();
     }
 
