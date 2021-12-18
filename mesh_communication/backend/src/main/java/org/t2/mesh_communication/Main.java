@@ -3,7 +3,9 @@ package org.t2.mesh_communication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import org.t2.mesh_communication.config.*;
 import org.t2.mesh_communication.devices.*;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
@@ -37,6 +39,7 @@ public class Main {
         Orchestrator orchestrator =
                 new Orchestrator(new Position(-1, 0), new FloodStrategy(meshGrid));
         meshGrid.addDevice(orchestrator);
+        List<Product> products = new ArrayList<>();
 
         try {
             // read devices from layout file
@@ -55,12 +58,14 @@ public class Main {
             // read manifests
             ManifestReader manifestReader = new ManifestReader();
             manifestReader.read();
+            products = manifestReader.getProducts();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // orchestrate
         System.out.println("Tick " + Logger.getInstance().getTick());
-        orchestrator.sendMessage(orchestrator.createMessage(9, "Ola"));
+        orchestrator.orchestrate(products);
         Logger.getInstance().nextTick();
 
         while (true) {
