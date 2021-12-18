@@ -21,8 +21,8 @@ buildNumber.properties
 # Log file
 *.log
 
-# Manifests
-files/manifests.csv
+# Generated files
+files/
 
 # BlueJ files
 *.ctxt
@@ -52,3 +52,6 @@ src/test/test.iml
 
 # Henrique: IntelIJ created file
 mesh_communication.iml
+
+el_log.json
+el_log.json.lck
