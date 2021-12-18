@@ -21,8 +21,8 @@ buildNumber.properties
 # Log file
 *.log
 
-# Manifests
-files/manifests.csv
+# Generated files
+files/
 
 # BlueJ files
 *.ctxt
