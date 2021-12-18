@@ -14,26 +14,27 @@ import org.t2.mesh_communication.devices.Position;
 public class LayoutGenerator {
     public static final String FILE = "layout.csv";
     public static final String FILE_DIR = "files/";
-    public static final String FILE_SEPARATOR = ";";
+    public static final String SEPARATOR = ";";
 
     private final Position min;
     private final Position max;
-    private final Integer nDevices;
+    private final int nDevices;
 
-    public LayoutGenerator(Integer nDevices, Position min, Position max) {
+    public LayoutGenerator(int nDevices, Position min, Position max) {
         this.nDevices = nDevices;
         this.min = min;
         this.max = max;
     }
 
-    public LayoutGenerator(Integer nDevices, Integer maxRows, Integer maxCols) {
+    public LayoutGenerator(int nDevices, int maxRows, int maxCols) {
         this(nDevices, new Position(0, 0), new Position(maxRows, maxCols));
     }
 
     private List<Position> possiblePositions() {
         List<Position> res = new ArrayList<>();
-        for (int i = min.getX(); i <= max.getX(); ++i)
+        for (int i = min.getX(); i <= max.getX(); ++i) {
             for (int j = min.getY(); j <= max.getY(); ++j) res.add(new Position(i, j));
+        }
 
         return res;
     }
@@ -50,9 +51,11 @@ public class LayoutGenerator {
         List<Position> positions = possiblePositions();
         Collections.shuffle(positions, new Random());
 
-        for (int i = 1; i <= nDevices; ++i) {
+        System.out.println(positions);
+        for (int i = 0; i < this.nDevices; ++i) {
             Position p = positions.get(i % this.nDevices);
-            String device = i + FILE_SEPARATOR + p.getX() + FILE_SEPARATOR + p.getY();
+            System.out.println(p);
+            String device = i + SEPARATOR + p.getX() + SEPARATOR + p.getY();
             layoutFile.write(device + "\n");
         }
         layoutFile.close();

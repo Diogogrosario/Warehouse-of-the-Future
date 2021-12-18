@@ -3,6 +3,7 @@ package org.t2.mesh_communication.devices;
 import java.util.List;
 import org.t2.mesh_communication.config.Product;
 import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
+import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
@@ -17,7 +18,7 @@ public class Orchestrator extends MeshDevice {
     public void orchestrate(List<Product> products) {
         for (Product prod : products) {
             Message msg = createMessage(prod.getId(), "Quantity: " + prod.getQuantity());
-            sendMessage(msg);
+            this.commands.add(new SendMsgCmd(this, msg));
         }
     }
 

@@ -69,11 +69,11 @@ public class FloodStrategy implements CommunicationStrategy {
 
             // reduce TTL only if it hasn't done it already in this tick and if the message
             // to be sent didn't go through the device before (the device will not relay it)
-            if (neighborTTL.containsKey(deviceId) && !currentSending.contains(deviceId)) {
+            if (this.neighborTTL.containsKey(deviceId) && !this.currentSending.contains(deviceId)) {
                 if (!msg.getPath().contains(deviceId)) {
-                    Integer newTTL = Integer.max(neighborTTL.get(deviceId) - 1, 0);
-                    neighborTTL.put(deviceId, newTTL);
-                    currentSending.add(deviceId);
+                    Integer newTTL = Integer.max(this.neighborTTL.get(deviceId) - 1, 0);
+                    this.neighborTTL.put(deviceId, newTTL);
+                    this.currentSending.add(deviceId);
                 }
             }
 
