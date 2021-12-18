@@ -57,7 +57,7 @@ create table Product
     width     DECIMAL(5, 1),
     weight    DECIMAL(5, 1),
     sector_id BIGINT UNSIGNED NOT NULL,
-    frequency DECIMAL(3, 2),
+    frequency DECIMAL(3, 2) DEFAULT 0,
     FOREIGN KEY (sector_id) REFERENCES Sector (id)
     );
 
@@ -84,7 +84,7 @@ create table Month_Manifesto_Product
     id           SERIAL PRIMARY KEY,
     product_id   BIGINT UNSIGNED NOT NULL,
     manifesto_id BIGINT UNSIGNED NOT NULL,
-    quantity     INT,
+    quantity     INT DEFAULT 0,
 
     FOREIGN KEY (product_id) REFERENCES Product (id),
     FOREIGN KEY (manifesto_id) REFERENCES Month_Manifesto (id)
