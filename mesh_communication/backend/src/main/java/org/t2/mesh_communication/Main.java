@@ -25,7 +25,7 @@ public class Main {
 
     private void prepareGrid() throws IOException {
         // add orchestrator
-        meshGrid.addDevice(orchestrator);
+        this.meshGrid.addDevice(this.orchestrator);
 
         // read devices from layout file
         LayoutReader layoutReader = new LayoutReader();
@@ -33,7 +33,7 @@ public class Main {
         HashMap<Integer, Position> devices = layoutReader.getDevices();
 
         // add devices
-        meshGrid.addDevices(devices);
+        this.meshGrid.addDevices(devices);
 
         // generate manifests
         final int nManifests = 3;
@@ -54,13 +54,9 @@ public class Main {
             System.exit(1);
         }
 
+        this.orchestrator.orchestrate(this.products);
+
         Scanner sc = new Scanner(System.in);
-
-        // orchestrate
-        System.out.println("Tick " + Logger.getInstance().getTick());
-        orchestrator.orchestrate(products);
-        Logger.getInstance().nextTick();
-
         event_loop:
         while (true) {
             String nextLine = sc.nextLine();
@@ -90,6 +86,7 @@ public class Main {
     }
 
     private static void prepareConfigs() {
+        // read configs
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
         try {
             om.readValue(
@@ -99,8 +96,8 @@ public class Main {
             System.exit(1);
         }
 
-        final int nDevices = 9, maxRows = 3, maxCols = 3;
         // generate layout
+        final int nDevices = 9, maxRows = 3, maxCols = 3;
         LayoutGenerator layoutGenerator = new LayoutGenerator(nDevices, maxRows, maxCols);
         try {
             layoutGenerator.generate();

@@ -12,9 +12,9 @@ import org.t2.mesh_communication.devices.*;
 
 /** Reads ids and positions from genereated layout file and stores them in a hashmap. */
 public class LayoutReader {
-    private InputStream inputStream;
+    private final InputStream inputStream;
     /** Where information read from the file is stored. Key: ID Value: Position */
-    private HashMap<Integer, Position> devices;
+    private final HashMap<Integer, Position> devices;
 
     public LayoutReader() throws FileNotFoundException {
         this(new FileInputStream(FILE_DIR + FILE));
@@ -36,11 +36,11 @@ public class LayoutReader {
             int id = Integer.parseInt(contents[0]);
             int x = Integer.parseInt(contents[1]), y = Integer.parseInt(contents[2]);
             Position pos = new Position(x, y);
-            devices.put(id, pos);
+            this.devices.put(id, pos);
         }
     }
 
     public HashMap<Integer, Position> getDevices() {
-        return devices;
+        return this.devices;
     }
 }
