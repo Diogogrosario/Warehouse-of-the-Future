@@ -3,21 +3,6 @@ info:
   description: API for mesh communication backend
   version: 1.0.0
   title: MeshCommunication API
-  
-  # # put the contact info for your development or API team
-  # contact:
-  #   email: you@your-company.com
-
-  # license:
-  #   name: Apache 2.0
-  #   url: http://www.apache.org/licenses/LICENSE-2.0.html
-
-# tags are used for organizing operations
-# tags:
-# - name: admins
-#   description: Secured Admin-only calls
-# - name: developers
-#   description: Operations available to regular developers
 
 paths:
   /devices:
@@ -26,7 +11,7 @@ paths:
       operationId: meshStatus
       description: 
         Generic path that returns all the device's info if no value is present or a specific device if value is present.
-        
+
       parameters:
         - in: query
           name: device
@@ -52,12 +37,12 @@ paths:
                       type: array
                       items:
                         $ref: '#/components/schemas/Message'
-                          
+
                     messages_relayed:
                       type: array
                       items:
                         $ref: '#/components/schemas/Message'
-                        
+
                     messages_received:
                       type: array
                       items:
@@ -65,7 +50,7 @@ paths:
 
                     battery_level:
                       type: integer
-                      
+
                     position:
                       type: object
                       properties:
@@ -73,7 +58,7 @@ paths:
                           type: integer
                         y: 
                           type: integer
-                    
+
               example: 
                 device_id: 1
                 messages_to_relay: [
@@ -110,9 +95,7 @@ paths:
 
         404:
           description: "Device does not exist."
-                
-              
-                
+
   /devices/battery:
     get:
       summary: gets mesh devices' battery status
@@ -137,10 +120,10 @@ paths:
                   type: object
                   properties:
                     device_id:
-                      type: integer
+                     type: integer
                     battery_level:
                       type: integer  
-                    
+
         404:
           description: "Device does not exist."
 
@@ -179,7 +162,7 @@ paths:
                    
         404:
           description: "Device does not exist."
-          
+
   /devices/messagesToRelay:
     get:
       summary: gets mesh devices' messages that will be relayed
@@ -209,7 +192,7 @@ paths:
                       type: array
                       items:
                         $ref: '#/components/schemas/Message'
-                   
+
         404:
           description: "Device does not exist."
 
@@ -242,10 +225,10 @@ paths:
                       type: array
                       items:
                         $ref: '#/components/schemas/Message'
-                   
+
         404:
           description: "Device does not exist."
-          
+
   /devices/messagesReceived:
     get:
       summary: gets mesh devices' messages that were received
@@ -275,7 +258,7 @@ paths:
                       type: array
                       items:
                         $ref: '#/components/schemas/Message'
-                   
+
         404:
           description: "Device does not exist."
 
@@ -348,4 +331,4 @@ components:
           example: 7
         content:
           type: string
-          example: This is a message
+          example: This is a message 
