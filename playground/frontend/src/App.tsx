@@ -62,7 +62,7 @@ export default function App() {
 							width: fullscreen == Fullscreen.Left ? "100%" : `${panelWidth}%`,
 						}}
 					>
-						<WarehouseRenderer/>
+						<WarehouseRenderer />
 
 						<Button
 							sx={{ position: "absolute", bottom: 0, right: 0 }}

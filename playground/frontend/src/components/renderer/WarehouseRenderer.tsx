@@ -10,60 +10,74 @@ class WarehouseRenderer extends Component {
 	private sceneManager!: SceneManager;
 	private stats?: Stats;
 
+	private width: number = 0;
+	private height: number = 0;
+	private needsResize: boolean = false;
+
 	componentDidMount() {
 		this.stats = new Stats();
 		this.container?.appendChild(this.stats.dom);
 
 		this.sceneSetup();
 		this.startAnimationLoop();
-		window.addEventListener("resize", this.handleResize);
+
+		if (this.container) {
+			const ro = new ResizeObserver((entries) => {
+				for (let entry of entries) {
+					const cr = entry.contentRect;
+					// Mark for resize
+					this.width = cr.width;
+					this.height = cr.height;
+					this.needsResize = true;
+				}
+			});
+
+			// Observe contaienr
+			ro.observe(this.container);
+		}
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener("resize", this.handleResize);
 		this.cancelAnimationLoop();
 		this.sceneManager.dispose();
 	}
 
-	sceneSetup = () => {
+	private sceneSetup() {
 		// get container dimensions and use them for scene sizing
-		const width = this.container?.clientWidth ?? 100;
-		const height = this.container?.clientHeight ?? 100; // TODO: Can I remove these bastards?
+		this.sceneManager = new SceneManager(this.container, this.width, this.height);
+		this.container?.appendChild(this.sceneManager.renderer.domElement);
+	}
 
-		this.sceneManager = new SceneManager(this.container, width, height, true);
-
-		this.container?.appendChild(this.sceneManager.renderer.domElement); // mount using React ref
+	animationLoop = () => {
+		this.startAnimationLoop();
 	};
 
-	startAnimationLoop = () => {
+	private startAnimationLoop() {
 		this.stats?.update();
+
+		if (this.needsResize) {
+			this.resize();
+			this.needsResize = false;
+		}
 
 		this.sceneManager.render();
 
 		// The window.requestAnimationFrame() method tells the browser that you wish to perform
 		// an animation and requests that the browser call a specified function
 		// to update an animation before the next repaint
-		this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
-	};
+		this.requestID = window.requestAnimationFrame(this.animationLoop);
+	}
 
-	cancelAnimationLoop = () => {
+	private cancelAnimationLoop() {
 		window.cancelAnimationFrame(this.requestID);
-	};
+	}
 
-	handleResize = () => {
-		const width = this.container?.clientWidth ?? 100;
-		const height = this.container?.clientHeight ?? 100; // TODO: Can I remove these bastards?
+	private resize() {
+		this.sceneManager.resize(this.width, this.height);
+	}
 
-		this.sceneManager.resize(width, height);
-	};
-
-	render() {
-		return (
-			<div
-				id="warehouse-renderer"
-				ref={(ref) => (this.container = ref != null ? ref : undefined)}
-			/>
-		);
+	public render() {
+		return <div id="warehouse-renderer" ref={(ref) => (this.container = ref ?? undefined)} />;
 	}
 }
 
