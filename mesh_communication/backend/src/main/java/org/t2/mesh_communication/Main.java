@@ -6,78 +6,112 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import org.t2.mesh_communication.config.*;
 import org.t2.mesh_communication.devices.*;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.log.Logger;
 
 public class Main {
-    public static void main(String[] args) {
-        int nDevices = 9, maxRows = 3, maxCols = 3, nManifests = 3;
+    private final Orchestrator orchestrator;
+    private final MeshGrid meshGrid;
+    private List<Product> products;
 
-        // generate layout
-        LayoutGenerator layoutGenerator = new LayoutGenerator(nDevices, maxRows, maxCols);
-        try {
-            layoutGenerator.generate();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Main() {
+        this.meshGrid = new MeshGrid();
+        this.orchestrator = new Orchestrator(new Position(-1, 0), new FloodStrategy(this.meshGrid));
+        this.products = new ArrayList<>();
+    }
 
-        ObjectMapper om = new ObjectMapper(new YAMLFactory());
-        try {
-            om.readValue(
-                    Main.class.getClassLoader().getResourceAsStream("mesh.yaml"), Config.class);
-        } catch (IOException e) {
-            System.err.println("Couldn't get configs.");
-            return;
-        }
-
-        // create grid
-        MeshGrid meshGrid = new MeshGrid();
-
+    private void prepareGrid() throws IOException {
         // add orchestrator
-        Orchestrator orchestrator =
-                new Orchestrator(new Position(-1, 0), new FloodStrategy(meshGrid));
         meshGrid.addDevice(orchestrator);
-        List<Product> products = new ArrayList<>();
 
+        // read devices from layout file
+        LayoutReader layoutReader = new LayoutReader();
+        layoutReader.read();
+        HashMap<Integer, Position> devices = layoutReader.getDevices();
+
+        // add devices
+        meshGrid.addDevices(devices);
+
+        // generate manifests
+        final int nManifests = 3;
+        ManifestGenerator manifestGenerator = new ManifestGenerator(nManifests, devices.keySet());
+        manifestGenerator.generate();
+
+        // read manifests
+        ManifestReader manifestReader = new ManifestReader();
+        manifestReader.read();
+        this.products = manifestReader.getProducts();
+    }
+
+    public void run() {
         try {
-            // read devices from layout file
-            LayoutReader layoutReader = new LayoutReader();
-            layoutReader.read();
-            HashMap<Integer, Position> devices = layoutReader.getDevices();
-
-            // add devices
-            meshGrid.addDevices(devices);
-
-            // generate manifests
-            ManifestGenerator manifestGenerator =
-                    new ManifestGenerator(nManifests, devices.keySet());
-            manifestGenerator.generate();
-
-            // read manifests
-            ManifestReader manifestReader = new ManifestReader();
-            manifestReader.read();
-            products = manifestReader.getProducts();
+            this.prepareGrid();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Failed to prepare mesh grid.");
+            System.exit(1);
         }
+
+        Scanner sc = new Scanner(System.in);
 
         // orchestrate
         System.out.println("Tick " + Logger.getInstance().getTick());
         orchestrator.orchestrate(products);
         Logger.getInstance().nextTick();
 
+        event_loop:
         while (true) {
-            System.out.println("Tick " + Logger.getInstance().getTick());
-            if (!meshGrid.update()) System.out.println("No updates...");
-
-            try {
-                System.in.read();
-            } catch (IOException e) {
-                e.printStackTrace();
+            String nextLine = sc.nextLine();
+            char cmd = nextLine.length() > 0 ? nextLine.charAt(0) : 'n';
+            switch (cmd) {
+                case 'n':
+                    System.out.println("Tick " + Logger.getInstance().getTick());
+                    if (!meshGrid.update()) System.out.println("No updates...");
+                    Logger.getInstance().nextTick();
+                    break;
+                case 'N':
+                    for (int i = 0; i < 10; ++i) {
+                        System.out.println("Tick " + Logger.getInstance().getTick());
+                        if (!meshGrid.update()) System.out.println("No updates...");
+                        Logger.getInstance().nextTick();
+                    }
+                    break;
+                case 'q':
+                case 'Q':
+                    System.err.println("Quitting...");
+                    break event_loop;
+                default:
+                    System.err.println("Unknown command...");
+                    continue event_loop;
             }
-            Logger.getInstance().nextTick();
         }
+    }
+
+    private static void prepareConfigs() {
+        ObjectMapper om = new ObjectMapper(new YAMLFactory());
+        try {
+            om.readValue(
+                    Main.class.getClassLoader().getResourceAsStream("mesh.yaml"), Config.class);
+        } catch (IOException e) {
+            System.err.println("Couldn't get configs.");
+            System.exit(1);
+        }
+
+        final int nDevices = 9, maxRows = 3, maxCols = 3;
+        // generate layout
+        LayoutGenerator layoutGenerator = new LayoutGenerator(nDevices, maxRows, maxCols);
+        try {
+            layoutGenerator.generate();
+        } catch (IOException e) {
+            System.err.println("Layout generation failed.");
+            System.exit(1);
+        }
+    }
+
+    public static void main(String[] args) {
+        prepareConfigs();
+        new Main().run();
     }
 }
