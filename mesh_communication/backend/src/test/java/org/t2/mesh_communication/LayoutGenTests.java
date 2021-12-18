@@ -53,10 +53,10 @@ public class LayoutGenTests {
             minGenRow = Math.min(minGenRow, d.getX());
             minGenCol = Math.min(minGenCol, d.getY());
         }
-        assertEquals(maxRows, maxGenRow);
-        assertEquals(maxCols, maxGenCol);
-        assertEquals(0, minGenRow);
-        assertEquals(0, minGenCol);
+        assertTrue(maxRows <= maxGenRow);
+        assertTrue(maxCols <= maxGenCol);
+        assertTrue(0 <= minGenRow);
+        assertTrue(0 <= minGenCol);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class LayoutGenTests {
         HashMap<Integer, Position> devices = new HashMap<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            String[] contents = line.split(LayoutGenerator.FILE_SEPARATOR);
+            String[] contents = line.split(LayoutGenerator.SEPARATOR);
             if (contents.length != 3) throw new InputMismatchException();
 
             int id = Integer.parseInt(contents[0]);

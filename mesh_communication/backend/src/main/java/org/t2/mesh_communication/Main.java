@@ -63,12 +63,8 @@ public class Main {
             char cmd = nextLine.length() > 0 ? nextLine.charAt(0) : 'n';
             switch (cmd) {
                 case 'n':
-                    System.out.println("Tick " + Logger.getInstance().getTick());
-                    if (!meshGrid.update()) System.out.println("No updates...");
-                    Logger.getInstance().nextTick();
-                    break;
                 case 'N':
-                    for (int i = 0; i < 10; ++i) {
+                    for (int i = 0; i < (cmd == 'n' ? 1 : 10); ++i) {
                         System.out.println("Tick " + Logger.getInstance().getTick());
                         if (!meshGrid.update()) System.out.println("No updates...");
                         Logger.getInstance().nextTick();

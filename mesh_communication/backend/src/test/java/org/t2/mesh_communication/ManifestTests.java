@@ -1,7 +1,7 @@
 package org.t2.mesh_communication;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.t2.mesh_communication.config.LayoutGenerator.FILE_SEPARATOR;
+import static org.t2.mesh_communication.config.LayoutGenerator.SEPARATOR;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -87,7 +87,7 @@ public class ManifestTests {
         HashMap<Integer, Integer> products = new HashMap<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            String[] contents = line.split(FILE_SEPARATOR);
+            String[] contents = line.split(SEPARATOR);
             if (contents.length != 2) throw new InputMismatchException();
 
             int id = Integer.parseInt(contents[0]);

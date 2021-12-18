@@ -2,7 +2,7 @@ package org.t2.mesh_communication.config;
 
 import static org.t2.mesh_communication.config.LayoutGenerator.FILE;
 import static org.t2.mesh_communication.config.LayoutGenerator.FILE_DIR;
-import static org.t2.mesh_communication.config.LayoutGenerator.FILE_SEPARATOR;
+import static org.t2.mesh_communication.config.LayoutGenerator.SEPARATOR;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,7 +30,7 @@ public class LayoutReader {
 
         while (reader.hasNextLine()) {
             String line = reader.nextLine();
-            String[] contents = line.split(FILE_SEPARATOR);
+            String[] contents = line.split(SEPARATOR);
             if (contents.length != 3) throw new InputMismatchException();
 
             int id = Integer.parseInt(contents[0]);
