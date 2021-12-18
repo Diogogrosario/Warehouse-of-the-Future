@@ -1,25 +1,18 @@
 package org.t2.mesh_communication.config;
 
 import java.util.Objects;
-import org.t2.mesh_communication.devices.Position;
 
 public class Product {
     private final int id;
-    private final Position position;
     private final int quantity;
 
-    public Product(int id, Position position, int quantity) {
+    public Product(int id, int quantity) {
         this.id = id;
-        this.position = position;
         this.quantity = quantity;
     }
 
     public int getId() {
         return id;
-    }
-
-    public Position getPosition() {
-        return position;
     }
 
     public int getQuantity() {
@@ -31,13 +24,11 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id
-                && quantity == product.quantity
-                && position.equals(product.position);
+        return id == product.id && quantity == product.quantity;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, position, quantity);
+        return Objects.hash(id, quantity);
     }
 }

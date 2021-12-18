@@ -39,10 +39,6 @@ public class LayoutGenerator {
     }
 
     public void generate() throws IOException {
-        generate(new Random());
-    }
-
-    public void generate(Random r) throws IOException { // Inject random for testing purposes
         // create file
         File f = new File(FILE_DIR + FILE);
         File directory = new File(FILE_DIR);
@@ -52,7 +48,7 @@ public class LayoutGenerator {
         // add devices to file
         BufferedWriter layoutFile = new BufferedWriter((new FileWriter(f)));
         List<Position> positions = possiblePositions();
-        Collections.shuffle(positions, r);
+        Collections.shuffle(positions, new Random());
 
         for (int i = 1; i <= nDevices; ++i) {
             Position p = positions.get(i % this.nDevices);

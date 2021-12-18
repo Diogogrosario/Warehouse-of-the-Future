@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -72,5 +73,37 @@ public class MeshDeviceTests {
         assertFalse(device.update());
         assertEquals(0, device.getCommands().size());
         assertNotEquals(0, device.getCommandsNext().size());
+    }
+
+    @Test
+    void positionTest() {
+        Position pos = new Position(1, 1);
+        assertEquals(1, pos.getX());
+        assertEquals(1, pos.getY());
+
+        Position pos1 = new Position(1, 1);
+        assertEquals(pos1, pos);
+
+        pos1.setX(2);
+        assertNotEquals(pos1, pos);
+
+        pos1.setX(1);
+        pos1.setY(2);
+        assertNotEquals(pos1, pos);
+
+        pos1.setX(5);
+        assertFalse(pos.inRange(pos1, 1));
+        assertTrue(pos.inRange(pos1, 5));
+
+        pos1.setX(1);
+        assertTrue(pos.inRange(pos1, 1));
+
+        Position copy = pos;
+        assertEquals(copy, pos);
+
+        copy = null;
+        assertNotEquals(copy, pos);
+
+        assertEquals(Objects.hash(1, 1), pos.hashCode());
     }
 }

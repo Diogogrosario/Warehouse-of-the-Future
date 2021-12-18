@@ -1,7 +1,6 @@
 package org.t2.mesh_communication;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.t2.mesh_communication.config.LayoutGenerator.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -42,10 +41,6 @@ public class LayoutGenTests {
         // test uniqueness of positions
         Set<Position> uniquePositions = new HashSet<>(devices.values());
         assertEquals(uniquePositions.size(), devices.values().size());
-
-        // test uniqueness of ids
-        Set<Integer> uniqueIds = new HashSet<>(devices.keySet());
-        assertEquals(uniqueIds.size(), devices.keySet().size());
 
         // test generated rows & cols
         int maxGenRow = -1,
@@ -101,7 +96,7 @@ public class LayoutGenTests {
         HashMap<Integer, Position> devices = new HashMap<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            String[] contents = line.split(FILE_SEPARATOR);
+            String[] contents = line.split(LayoutGenerator.FILE_SEPARATOR);
             if (contents.length != 3) throw new InputMismatchException();
 
             int id = Integer.parseInt(contents[0]);
