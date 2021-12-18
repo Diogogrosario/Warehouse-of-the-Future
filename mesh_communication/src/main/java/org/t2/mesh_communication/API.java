@@ -119,4 +119,23 @@ public class API {
         response.setStatus(HttpServletResponse.SC_OK);
         return "Request Sent.";
     }
+
+    @PostMapping("/tick")
+    public String tick(@RequestBody(required = false) JsonNode body, HttpServletResponse response) {
+        int ticks = 1;
+        if(body != null && body.has("n_ticks"))
+            ticks = body.get("n_ticks").asInt();
+
+        if(ticks < 1) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "Invalid number of ticks.";
+        }
+
+        for (int i = 0; i < ticks; ++i) {
+            this.meshGrid.update();
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return "Mesh Grid Updated.";
+    }
 }
