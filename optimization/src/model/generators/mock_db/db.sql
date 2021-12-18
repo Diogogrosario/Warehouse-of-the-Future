@@ -114,11 +114,10 @@ BEGIN
     DECLARE total_pieces INT;
     DECLARE freq INT;
 
-    SET freq = (SELECT count(*) from Worker_Manifesto_Product WHERE
-    product_id=new.product_id);
-
-    SET total_pieces = (SELECT SUM(quantity) from Worker_Manifesto_Product
+    SET freq = (SELECT SUM(quantity) from Worker_Manifesto_Product
     WHERE product_id=new.product_id);
+
+    SET total_pieces = (SELECT SUM(quantity) from Worker_Manifesto_Product); /*this number is to normalize the results*/
             
     UPDATE Product SET frequency = freq/total_pieces where id=new.product_id;
 
