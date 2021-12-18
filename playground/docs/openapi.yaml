@@ -1,0 +1,59 @@
+openapi: 3.0.0
+
+info:
+  version: "1.0"
+  title: "playground"
+  description: "Backlog specification for playground"
+
+tags: [
+    {
+      name: "Device",
+      description: "Operations on Devices"
+    },
+    {
+      name: "Action",
+      description: "Operations on Actions"
+    },
+    {
+      name: "Report",
+      description: "Operations on Reports"
+    }
+  ]
+
+paths:
+  /device/create:
+    post:
+      operationId: D01
+      summary: "D01: Create new device"
+      description: "Create new device object."
+      tags: ["Device"]
+      parameters: [
+        {
+          in: "query",
+          name: "id",
+          description: "ID of device",
+          schema:
+          {
+            type: "string"
+          },
+          required: true
+        }
+        
+      ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+      responses:
+        "200":
+          description: "Device created."
+        "400":
+          description: "No parameters provided"
+
+
+
