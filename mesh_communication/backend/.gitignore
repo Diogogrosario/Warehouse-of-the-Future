@@ -52,3 +52,6 @@ src/test/test.iml
 
 # Henrique: IntelIJ created file
 mesh_communication.iml
+
+el_log.json
+el_log.json.lck

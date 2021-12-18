@@ -2,6 +2,8 @@ package org.t2.mesh_communication.devices;
 
 import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.messages.Message;
+import org.t2.mesh_communication.log.Log;
+import org.t2.mesh_communication.log.Logger;
 
 /** The device responsible for initiating communications on the mesh network. */
 public class Orchestrator extends MeshDevice {
@@ -11,11 +13,31 @@ public class Orchestrator extends MeshDevice {
     }
 
     @Override
+    protected void logSendMessage(Message msg) {
+        Logger.getInstance()
+                .publish(
+                        new Log(
+                                "Orchestrator",
+                                "Sent message: [destination=%d], [msg=%s]",
+                                msg.getDestination(),
+                                msg.getContent()));
+    }
+
+    @Override
     public void sendMessage(Message msg) {
-        System.out.printf(
-                "Orchestrator sent message: [destination=%d], [msg=%s]\n",
-                msg.getDestination(), msg.getContent());
         super.sendMessage(msg);
+    }
+
+    @Override
+    protected void logReceiveMessage(Message msg) {
+        Logger.getInstance()
+                .publish(
+                        new Log(
+                                "Orchestrator",
+                                "Received message: [source=%d], [msg=%s], [lastHop=%d]",
+                                msg.getSource(),
+                                msg.getContent(),
+                                msg.getLastHop()));
     }
 
     @Override

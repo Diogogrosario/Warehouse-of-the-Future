@@ -4,6 +4,8 @@ import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 import org.t2.mesh_communication.devices.messages.Message;
+import org.t2.mesh_communication.log.Log;
+import org.t2.mesh_communication.log.Logger;
 
 /** The common device on the mesh network. */
 public class Device extends MeshDevice {
@@ -30,18 +32,37 @@ public class Device extends MeshDevice {
     }
 
     @Override
+    protected void logSendMessage(Message msg) {
+        Logger.getInstance()
+                .publish(
+                        new Log(
+                                "Device " + this.id,
+                                "Sent message: [destination=%d], [msg=%s]",
+                                msg.getDestination(),
+                                msg.getContent()));
+    }
+
+    @Override
     public void sendMessage(Message msg) {
-        System.out.printf("Device sent message: [id=%d], [msg=%s]\n", this.id, msg.getContent());
         // decrease battery life
         this.battery.spendBattery(this.sendingConsumption);
         super.sendMessage(msg);
     }
 
     @Override
+    protected void logReceiveMessage(Message msg) {
+        Logger.getInstance()
+                .publish(
+                        new Log(
+                                "Device " + this.id,
+                                "Received message: [source=%d], [msg=%s], [lastHop=%d]",
+                                msg.getSource(),
+                                msg.getContent(),
+                                msg.getLastHop()));
+    }
+
+    @Override
     public boolean receiveMessage(Message msg) {
-        System.out.printf(
-                "Device received message: [id=%d], [msg=%s], [lastHop=%d]\n",
-                this.id, msg, msg.getLastHop());
         // decrease battery life
         this.battery.spendBattery(this.receivingConsumption);
         return super.receiveMessage(msg);

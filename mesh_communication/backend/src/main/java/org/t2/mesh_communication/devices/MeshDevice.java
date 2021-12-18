@@ -111,11 +111,17 @@ public abstract class MeshDevice implements Updatable {
         return this.commStrat.getNeighborTTLs();
     }
 
+    protected abstract void logSendMessage(Message msg);
+
     public void sendMessage(Message msg) {
+        this.logSendMessage(msg);
         this.commStrat.sendMessage(this, msg);
     }
 
+    protected abstract void logReceiveMessage(Message msg);
+
     public boolean receiveMessage(Message msg) {
+        this.logReceiveMessage(msg);
         return this.commStrat.receiveMessage(this, msg);
     }
 

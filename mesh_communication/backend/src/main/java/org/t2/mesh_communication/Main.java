@@ -10,6 +10,7 @@ import org.t2.mesh_communication.config.LayoutReader;
 import org.t2.mesh_communication.config.ManifestGenerator;
 import org.t2.mesh_communication.devices.*;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
+import org.t2.mesh_communication.log.Logger;
 
 public class Main {
     public static void main(String[] args) {
@@ -50,11 +51,12 @@ public class Main {
             e.printStackTrace();
         }
 
+        System.out.println("Tick " + Logger.getInstance().getTick());
         orchestrator.sendMessage(orchestrator.createMessage(9, "Ola"));
+        Logger.getInstance().nextTick();
 
-        int tick = 0;
         while (true) {
-            System.out.println("Tick " + tick++);
+            System.out.println("Tick " + Logger.getInstance().getTick());
             if (!meshGrid.update()) System.out.println("No updates...");
 
             try {
@@ -62,6 +64,7 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            Logger.getInstance().nextTick();
         }
     }
 }

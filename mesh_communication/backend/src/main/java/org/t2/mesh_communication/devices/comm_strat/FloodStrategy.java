@@ -8,6 +8,8 @@ import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.ReplyMessage;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
+import org.t2.mesh_communication.log.Log;
+import org.t2.mesh_communication.log.Logger;
 
 public class FloodStrategy implements CommunicationStrategy {
     public static final int DEFAULT_TTL = 6;
@@ -102,7 +104,13 @@ public class FloodStrategy implements CommunicationStrategy {
 
         // are we the destination
         if (msg.getDestination() == me.getId()) {
-            System.out.printf("Message reached destination: [id=%d], [msg=%s]\n", me.getId(), msg);
+            Logger.getInstance()
+                    .publish(
+                            new Log(
+                                    "Device " + me.getId(),
+                                    "Reached destination: [source=%d], [msg=%s]",
+                                    msg.getSource(),
+                                    msg));
 
             // check message type
             String msgType = msg.getType();
@@ -110,14 +118,26 @@ public class FloodStrategy implements CommunicationStrategy {
             if (RequestMessage.type.equals(msgType)) {
                 // send reply to request msg
                 ReplyMessage rep = new ReplyMessage(me.getId(), 0, msg.getSource(), "Reply.");
-                System.out.printf("Device is replying: [id=%d], [msg=%s]\n", me.getId(), rep);
+                Logger.getInstance()
+                        .publish(
+                                new Log(
+                                        "Device " + me.getId(),
+                                        "Replying: [destination=%d], [msg=%s]",
+                                        rep.getDestination(),
+                                        rep.getContent()));
                 me.addCommand(new SendMsgCmd(me, rep));
             }
 
             return true;
         }
 
-        System.out.printf("Device is relaying message: [id=%d], [msg=%s]\n", me.getId(), msg);
+        Logger.getInstance()
+                .publish(
+                        new Log(
+                                "Device " + me.getId(),
+                                "Relaying message: [destination=%d], [msg=%s]",
+                                msg.getDestination(),
+                                msg.getContent()));
         me.addCommand(new SendMsgCmd(me, msg));
 
         return true;
