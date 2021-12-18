@@ -137,9 +137,13 @@ public abstract class MeshDevice implements Updatable {
     public String getMessageListJson(List<Command> dvlst) {
         StringBuilder ret = new StringBuilder("[");
         for (Command cmd : dvlst) {
-            ret.append(cmd.toJson());
+            ret.append(cmd.toJson()).append(",");
         }
-        return ret + "]";
+        String retString = ret.toString();
+        if (retString.length() > 1) {
+            retString = retString.substring(0, retString.length() - 1);
+        }
+        return retString + "]";
     }
 
     public String toJson() {

@@ -29,6 +29,7 @@ public class API {
 
     public static void main(String[] args) {
         API api = new API();
+        api.start();
         SpringApplication.run(API.class);
     }
 
@@ -70,6 +71,9 @@ public class API {
     @GetMapping("/devices")
     public List<JsonNode> devices(@RequestParam(value = "id", defaultValue = "-1") int deviceID, HttpServletResponse response) {
         List<MeshDevice> devices = meshGrid.getDevices();
+        for(MeshDevice dv : devices)
+            System.out.println(dv.toJson());
+
         if (deviceID != -1) {
             MeshDevice device = null;
             for (MeshDevice dv : devices) {
@@ -99,6 +103,9 @@ public class API {
         }
 
         response.setStatus(HttpServletResponse.SC_OK);
+
+
+
         return devicesJson;
     }
 
