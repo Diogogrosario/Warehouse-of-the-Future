@@ -1,5 +1,6 @@
 package org.t2.mesh_communication.devices;
 
+import java.util.List;
 import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
@@ -43,10 +44,10 @@ public class Device extends MeshDevice {
     }
 
     @Override
-    public void sendMessage(Message msg) {
+    public List<Integer> sendMessage(Message msg) {
         // decrease battery life
         this.battery.spendBattery(this.sendingConsumption);
-        super.sendMessage(msg);
+        return super.sendMessage(msg);
     }
 
     @Override

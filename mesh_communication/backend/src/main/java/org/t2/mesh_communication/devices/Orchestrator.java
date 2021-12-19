@@ -34,8 +34,8 @@ public class Orchestrator extends MeshDevice {
     }
 
     @Override
-    public void sendMessage(Message msg) {
-        super.sendMessage(msg);
+    public List<Integer> sendMessage(Message msg) {
+        return super.sendMessage(msg);
     }
 
     @Override

@@ -241,17 +241,20 @@ public class API {
         for (MeshDevice receiver : this.meshGrid.getDevices()) {
             for (Command command : receiver.getCommands()) {
                 if (!(command instanceof SendMsgCmd)) continue;
+                SendMsgCmd curr_cmd = (SendMsgCmd) command;
 
                 int sourceDevice = 0;
                 JsonNode messageJson;
                 try {
-                    Message message = ((SendMsgCmd) command).getMessage();
+                    Message message = curr_cmd.getMessage();
 
                     System.out.println("Device: " + receiver.getId());
                     System.out.println("Last Hop: " + message.getLastHop());
                     System.out.println("Source: " + message.getSource());
                     System.out.println("Dest: " + message.getDestination());
                     System.out.println("Type: " + message.getType());
+                    System.out.println(
+                            "Message destinations: " + curr_cmd.getDestinations().size());
                     System.out.println("--------");
                     sourceDevice = message.getLastHop();
                     messageJson = this.messageJson(message.toJson(receiver.getId()));
