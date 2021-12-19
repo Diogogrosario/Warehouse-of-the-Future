@@ -24,6 +24,11 @@ public class ManifestGenerator {
         devicesIds.addAll(deviceIds);
     }
 
+    public static boolean manifestFileExists() {
+        File file = new File(FILE_DIR + FILE);
+        return file.exists();
+    }
+
     public void generate() throws IOException {
         // create file
         File f = new File(FILE_DIR + FILE);

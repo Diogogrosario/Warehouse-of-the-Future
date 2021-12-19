@@ -30,6 +30,11 @@ public class LayoutGenerator {
         this(nDevices, new Position(0, 0), new Position(maxRows, maxCols));
     }
 
+    public static boolean layoutFileExists() {
+        File file = new File(FILE_DIR + FILE);
+        return file.exists();
+    }
+
     private List<Position> possiblePositions() {
         List<Position> res = new ArrayList<>();
         for (int i = min.getX(); i <= max.getX(); ++i) {
