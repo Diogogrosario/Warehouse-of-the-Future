@@ -57,7 +57,8 @@ public class Main {
             System.exit(1);
         }
 
-        this.orchestrator.orchestrate(this.products);
+        // this.orchestrator.orchestrate(this.products);
+        orchestrator.sendMessage(orchestrator.createMessage(8, "padoru"));
 
         Scanner sc = new Scanner(System.in);
         event_loop:

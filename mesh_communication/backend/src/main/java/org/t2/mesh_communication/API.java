@@ -18,7 +18,6 @@ import org.t2.mesh_communication.config.*;
 import org.t2.mesh_communication.devices.*;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.devices.command.Command;
-import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.log.Logger;
@@ -47,13 +46,15 @@ public class API {
         }
 
         // generate layout
-        final int nDevices = 9, maxRows = 3, maxCols = 3;
-        LayoutGenerator layoutGenerator = new LayoutGenerator(nDevices, maxRows, maxCols);
-        try {
-            layoutGenerator.generate();
-        } catch (IOException e) {
-            System.err.println("Layout generation failed.");
-            System.exit(1);
+        if (!LayoutGenerator.layoutFileExists()) {
+            final int nDevices = 9, maxRows = 3, maxCols = 3;
+            LayoutGenerator layoutGenerator = new LayoutGenerator(nDevices, maxRows, maxCols);
+            try {
+                layoutGenerator.generate();
+            } catch (IOException e) {
+                System.err.println("Layout generation failed.");
+                System.exit(1);
+            }
         }
 
         this.meshGrid = new MeshGrid();
@@ -73,10 +74,12 @@ public class API {
             this.meshGrid.addDevices(devices);
 
             // generate manifests
-            final int nManifests = 3;
-            ManifestGenerator manifestGenerator =
-                    new ManifestGenerator(nManifests, devices.keySet());
-            manifestGenerator.generate();
+            if (!ManifestGenerator.manifestFileExists()) {
+                final int nManifests = 3;
+                ManifestGenerator manifestGenerator =
+                        new ManifestGenerator(nManifests, devices.keySet());
+                manifestGenerator.generate();
+            }
 
             // read manifests
             ManifestReader manifestReader = new ManifestReader();
@@ -242,7 +245,7 @@ public class API {
                 int sourceDevice = 0;
                 JsonNode messageJson;
                 try {
-                    Message message = ((ReceiveMsgCmd) command).getMessage();
+                    Message message = ((SendMsgCmd) command).getMessage();
 
                     System.out.println("Device: " + receiver.getId());
                     System.out.println("Last Hop: " + message.getLastHop());
