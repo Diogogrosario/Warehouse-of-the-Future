@@ -36,9 +36,12 @@ public class Main {
         this.meshGrid.addDevices(devices);
 
         // generate manifests
-        final int nManifests = 3;
-        ManifestGenerator manifestGenerator = new ManifestGenerator(nManifests, devices.keySet());
-        manifestGenerator.generate();
+        if (!ManifestGenerator.manifestFileExists()) {
+            final int nManifests = 3;
+            ManifestGenerator manifestGenerator =
+                    new ManifestGenerator(nManifests, devices.keySet());
+            manifestGenerator.generate();
+        }
 
         // read manifests
         ManifestReader manifestReader = new ManifestReader();
@@ -93,13 +96,15 @@ public class Main {
         }
 
         // generate layout
-        final int nDevices = 9, maxRows = 3, maxCols = 3;
-        LayoutGenerator layoutGenerator = new LayoutGenerator(nDevices, maxRows, maxCols);
-        try {
-            layoutGenerator.generate();
-        } catch (IOException e) {
-            System.err.println("Layout generation failed.");
-            System.exit(1);
+        if (!LayoutGenerator.layoutFileExists()) {
+            final int nDevices = 9, maxRows = 3, maxCols = 3;
+            LayoutGenerator layoutGenerator = new LayoutGenerator(nDevices, maxRows, maxCols);
+            try {
+                layoutGenerator.generate();
+            } catch (IOException e) {
+                System.err.println("Layout generation failed.");
+                System.exit(1);
+            }
         }
     }
 
