@@ -61,7 +61,8 @@ public class FloodStrategy implements CommunicationStrategy {
     }
 
     @Override
-    public void sendMessage(MeshDevice me, Message msg) {
+    public List<Integer> sendMessage(MeshDevice me, Message msg) {
+        List<Integer> destinations = new ArrayList<>();
         msg.addPath(me.getId());
 
         for (MeshDevice d : this.meshGrid.devicesInRange(me)) {
@@ -78,7 +79,10 @@ public class FloodStrategy implements CommunicationStrategy {
             }
 
             d.addCommand(new ReceiveMsgCmd(d, msg));
+            destinations.add(deviceId);
         }
+
+        return destinations;
     }
 
     protected void resetTimeToLive(int id) {

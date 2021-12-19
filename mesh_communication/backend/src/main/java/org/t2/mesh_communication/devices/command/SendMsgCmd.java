@@ -1,5 +1,6 @@
 package org.t2.mesh_communication.devices.command;
 
+import java.util.List;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.ReplyMessage;
@@ -8,6 +9,7 @@ import org.t2.mesh_communication.devices.messages.RequestMessage;
 public class SendMsgCmd implements Command {
     private final MeshDevice meshDevice;
     private final Message message;
+    private List<Integer> destinations;
 
     public SendMsgCmd(MeshDevice md, Message msg) {
         this.meshDevice = md;
@@ -28,10 +30,15 @@ public class SendMsgCmd implements Command {
             default:
                 return;
         }
-        this.meshDevice.sendMessage(m);
+
+        this.destinations = this.meshDevice.sendMessage(m);
     }
 
     public Message getMessage() {
         return message;
+    }
+
+    public List<Integer> getDestinations() {
+        return destinations;
     }
 }

@@ -113,9 +113,9 @@ public abstract class MeshDevice implements Updatable {
 
     protected abstract void logSendMessage(Message msg);
 
-    public void sendMessage(Message msg) {
+    public List<Integer> sendMessage(Message msg) {
         this.logSendMessage(msg);
-        this.commStrat.sendMessage(this, msg);
+        return this.commStrat.sendMessage(this, msg);
     }
 
     protected abstract void logReceiveMessage(Message msg);
