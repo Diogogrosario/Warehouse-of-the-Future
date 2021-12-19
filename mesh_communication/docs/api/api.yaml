@@ -5,330 +5,186 @@ info:
   title: MeshCommunication API
 
 paths:
-  /devices:
+  /devices/{status}:
     get:
-      summary: gets mesh status
-      operationId: meshStatus
+      summary: gets devices by status
+      operationId: getAllDevices
       description: 
-        Generic path that returns all the device's info if no value is present or a specific device if value is present.
+        Returns devices present in the mesh network with the given status.
 
       parameters:
-        - in: query
-          name: device
-          description: pass an optional integer to specify the wanted device
-          required: false
+        - in: path
+          name: status
+          description: What type of devices to retrieve
           schema:
-            type: integer
+            type: string
+            enum:
+              - all
+              - failed
+              - operational
+          required: true
 
       responses:
         200:
-          description: "Array containing json specified content"
+          description: "Success: Received all devices"
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    device_id:
-                      type: integer
-
-                    messages_to_relay:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/Message'
-
-                    messages_relayed:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/Message'
-
-                    messages_received:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/Message'
-
-                    battery_level:
-                      type: integer
-
-                    position:
-                      type: object
-                      properties:
-                        x:
-                          type: integer
-                        y: 
-                          type: integer
-
-              example: 
-                device_id: 1
-                messages_to_relay: [
-                  {
-                  type: "Request",
-                  source: 0,
-                  destination: 9,
-                  lastHop: 7,
-                  content: "This is a message"
-                  },
-                ]
-                messages_relayed: [
-                  {
-                  type: "Reply",
-                  source: 0,
-                  destination: 9,
-                  lastHop: 7,
-                  content: "This is a message"
-                  },
-                ]
-                messages_received: [
-                  {
-                  type: "Request",
-                  source: 0,
-                  destination: 9,
-                  lastHop: 7,
-                  content: "This is a message"
-                  },
-                ]
-                battery_level: 68
-                position:
-                  x: 2
-                  y: 1
-
+                  $ref: '#/components/schemas/Device'
         404:
-          description: "Device does not exist."
+          description: Couldn't retreive devices
 
-  /devices/battery:
+  /devices/{id}:
     get:
-      summary: gets mesh devices' battery status
-      operationId: batteryStatus
+      summary: gets a specific device
+      operationId: getDevice
       description: 
-        Path that returns all the device's battery level if no value is present or a specific device's if value is present.        
+        Returns devices present in the mesh network with the given id.
+
       parameters:
-        - in: query
-          name: device
-          description: pass an optional integer to specify the wanted device
-          required: false
+        - in: path
+          name: id
+          description: Id of the device to retrieve
           schema:
             type: integer
+          required: true
+
       responses:
         200:
-          description: "Array containing json of devices' battery level"
+          description: "Success: Received all devices"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        404:
+          description: Device does not exist.
+
+  /devices/inrange/{id}:
+    get:
+      summary: gets devices within range of another device
+      operationId: getDevicesInRange
+      description: 
+        Returns devices present in the mesh network that are within range of a device with the given id.
+
+      parameters:
+        - in: path
+          name: id
+          description: Id of the device to make the search on
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        200:
+          description: "Success: Received all devices within range"
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    device_id:
-                     type: integer
-                    battery_level:
-                      type: integer  
-
+                  $ref: '#/components/schemas/Device'
         404:
-          description: "Device does not exist."
+          description: Couldn't retreive devices
 
-  /devices/position:
-    get:
-      summary: gets mesh devices' position
-      operationId: position
-      description: 
-        Path that returns all the device's position if no value is present or a specific device's if value is present.        
-      parameters:
-        - in: query
-          name: device
-          description: pass an optional integer to specify the wanted device
-          required: false
-          schema:
-            type: integer
-      responses:
-        200:
-          description: "array containing json of devices' position"
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    device_id:
-                      type: integer
-                    position:
-                      type: object
-                      properties:
-                        x:
-                          type: integer
-                        y: 
-                          type: integer
-                   
-        404:
-          description: "Device does not exist."
-
-  /devices/messagesToRelay:
-    get:
-      summary: gets mesh devices' messages that will be relayed
-      operationId: position
-      description: 
-        Path that returns all the device's messages to relay if no value is present or a specific device's if value is present.        
-      parameters:
-        - in: query
-          name: device
-          description: pass an optional integer to specify the wanted device
-          required: false
-          schema:
-            type: integer
-      responses:
-        200:
-          description: "array containing json of devices' messages to be relayed"
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    device_id:
-                      type: integer
-                    messages_to_relay:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/Message'
-
-        404:
-          description: "Device does not exist."
-
-  /devices/messagesRelayed:
-    get:
-      summary: gets mesh devices' messages that were relayed
-      operationId: position
-      description: 
-        Path that returns all the device's relayed messages if no value is present or a specific device's if value is present.        
-      parameters:
-        - in: query
-          name: device
-          description: pass an optional integer to specify the wanted device
-          required: false
-          schema:
-            type: integer
-      responses:
-        200:
-          description: "array containing json of devices' relayed messages"
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    device_id:
-                      type: integer
-                    messages_relayed:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/Message'
-
-        404:
-          description: "Device does not exist."
-
-  /devices/messagesReceived:
-    get:
-      summary: gets mesh devices' messages that were received
-      operationId: position
-      description: 
-        Path that returns all the device's received messages if no value is present or a specific device's if value is present.        
-      parameters:
-        - in: query
-          name: device
-          description: pass an optional integer to specify the wanted device
-          required: false
-          schema:
-            type: integer
-      responses:
-        200:
-          description: "array containing json of devices' received messages"
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    device_id:
-                      type: integer
-                    messages_received:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/Message'
-
-        404:
-          description: "Device does not exist."
-
-  /tick:
+  /tick/{time_flow}:
     post:
       summary: update grid
       operationId: position
-      description: 
-        "Path that updates the grid by given number of ticks."
+      description: Path that updates the grid by given number of ticks.
       parameters:
+        - in: path
+          name: time_flow
+          description: In what direction time will advance
+          schema:
+            type: string
+            enum:
+              - forwards
+              - backwards
+          required: true
         - in: query
           name: n_ticks
-          description: Optional number of ticks. Default is 1
+          description: Number of ticks to skip
           required: false
           schema:
             type: integer
+            default: 1
+
       responses:
         200:
-          description: "Mesh Grid updated"
-  
+          description: Mesh Grid updated
+
   /message:
-    post:
-      summary: Request to send a new message to the mesh grid
-      operationId: sendMessage
-      description: 
-        Request to send a new message to the mesh grid. The message should be inside the request body as well as the ID of the device in the destination. 
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  description: New message to be sent
-                  type: string
-                recipient_id:
-                  description: ID of the device to receive the message
-                  type: integer
-              required:
-                - message
-                - recipient_id
-        required: true
+    get:
+      summary: Get all messages sent in the current tick
+      operationId: getAllMessages
+      description:
+        Path that returns, for all message senders of the current tick, the messages that were sent by them.      
       responses:
         200:
-          description: "Message sent correctly."
-        400:
-          description: "Recipient does not exist."
+          description: "Success: Received all messages"
+          content:
+            application/json:
+              schema:
+                description: Dictionary in which its keys are the sender's ids, and its values are arrays of messages that were sent by its respective key/sender
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Message'
+              example:
+                1:
+                  - hop: 68
+                    final: 30
+                    failed: true
+                  - hop: 21
+                    final: 45
+                    failed: false
+                30:
+                  - hop: 54
+                    final: 2
+                    failed: false
+                 - hop: 2
+                    final: 1
+                    failed: false
+        404:
+          description: "Error: couldn't get current tick messages."
 
 components:
   schemas:
     Message:
       type: object
-      required:
-      - id
-      - name
-      - manufacturer
-      - releaseDate
+
       properties:
-        type:
-          type: string
-          example: Request
-        source:
+        hop:
+          description: ID of the device to receive the message on this hop
           type: integer
-          example: 0
-        destination:
+        final:
+          description: ID of the final destination of the message
           type: integer
-          example: 9
-        lastHop:
+        failed:
+          description: Wether or not the message was lost in the current tick
+          type: boolean
+
+    Device:
+      type: object
+
+      properties:
+        device_id:
           type: integer
-          example: 7
-        content:
-          type: string
-          example: This is a message 
+        battery_level:
+          type: integer
+        position:
+          type: object
+          properties:
+            x:
+              type: integer
+            y: 
+              type: integer
+      example:
+        device_id: 1
+        battery_level: 68
+        position:
+          x: 2
+          y: 1 
