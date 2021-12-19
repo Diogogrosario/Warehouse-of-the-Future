@@ -54,15 +54,6 @@ public class MeshGrid {
         return hadUpdates;
     }
 
-    public void sendRequest(int dest, String content) {
-        for (MeshDevice device : devices) {
-            if (device.getId() == ORCHESTRATOR_ID) {
-                device.sendMessage(device.createMessage(dest, content));
-                return;
-            }
-        }
-    }
-
     public void addDevices(HashMap<Integer, Position> devices) {
         for (int id : devices.keySet()) {
             Device d = DeviceFactory.deviceFromConfig(id, devices.get(id), new FloodStrategy(this));

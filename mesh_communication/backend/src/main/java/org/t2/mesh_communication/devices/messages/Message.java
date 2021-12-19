@@ -1,24 +1,40 @@
 package org.t2.mesh_communication.devices.messages;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.HashSet;
 import java.util.Set;
 
-/** Messages distribute in the mesh network. */
+/**
+ * Messages distribute in the mesh network.
+ */
 public abstract class Message {
-    /** The source of the message. */
+    /**
+     * The source of the message.
+     */
     private final int source;
-    /** The destination of the message. */
+    /**
+     * The destination of the message.
+     */
     private final int destination;
     /**
      * The sequence number of the message (unique for each source), and incremented for each new
      * message.
      */
     private final int seq;
-    /** The content of the message. */
+    /**
+     * The content of the message.
+     */
     private final String content;
-    /** The path of the message. */
+    /**
+     * The path of the message.
+     */
     private final Set<Integer> path;
-    /** Last hop of the message (either source or last relay point). */
+    /**
+     * Last hop of the message (either source or last relay point).
+     */
     private int lastHop;
 
     public Message(int source, int seq, int destination, String content) {
@@ -96,9 +112,11 @@ public abstract class Message {
 
     public abstract String getType();
 
-    public String toJson() {
+    public String toJson(int receiver) {
+
         return String.format(
-                "{\"source\": %d, \"seq\": %d, \"dest\": %d, \"content\": \"%s\"}",
-                this.source, this.seq, this.destination, this.content);
+                "{\"hop\": %d, \"final\": %d, \"failed\": \"%s\"}",
+                receiver, this.destination, false); //TODO: message failed
+
     }
 }

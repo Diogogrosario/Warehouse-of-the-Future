@@ -3,14 +3,15 @@ package org.t2.mesh_communication;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,11 +19,16 @@ import org.springframework.web.bind.annotation.*;
 import org.t2.mesh_communication.config.*;
 import org.t2.mesh_communication.devices.*;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
+import org.t2.mesh_communication.devices.command.Command;
+import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
+import org.t2.mesh_communication.devices.command.SendMsgCmd;
+import org.t2.mesh_communication.devices.messages.Message;
 
 @SpringBootApplication
 @RestController
 public class API {
-    @Autowired private MeshGrid meshGrid;
+    @Autowired
+    private MeshGrid meshGrid;
 
     public static void main(String[] args) {
         API api = new API();
@@ -83,41 +89,55 @@ public class API {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        orchestrator.sendMessage(orchestrator.createMessage(8, "padoru"));
     }
 
-    @GetMapping("/devices")
-    public List<JsonNode> devices(
-            @RequestParam(value = "id", defaultValue = "-1") int deviceID,
+    @GetMapping("/devices/{status}")
+    public List<JsonNode> devicesStatus(
+            @PathVariable("status") String status,
             HttpServletResponse response) {
-        List<MeshDevice> devices = meshGrid.getDevices();
-        for (MeshDevice dv : devices) System.out.println(dv.toJson());
+        List<MeshDevice> devices = new ArrayList<>();
 
-        if (deviceID != -1) {
-            MeshDevice device = null;
-            for (MeshDevice dv : devices) {
-                if (dv.getId() == deviceID) {
-                    device = dv;
-                    break;
+        switch (status) {
+            case "all":
+                devices = this.meshGrid.getDevices();
+                break;
+            case "failed":
+                for (MeshDevice dv : this.meshGrid.getDevices()) {
+                    if (dv.getId() == MeshGrid.ORCHESTRATOR_ID ||
+                            ((Device) dv).getBattery().getRemainingBattery() <= 0) {
+                        devices.add(dv);
+                    }
                 }
-            }
-
-            if (device == null) { // if the queried device does not exist - code 204
-                response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                break;
+            case "operational":
+                for (MeshDevice dv : this.meshGrid.getDevices()) {
+                    if (dv.getId() == MeshGrid.ORCHESTRATOR_ID ||
+                            ((Device) dv).getBattery().getRemainingBattery() > 0) {
+                        devices.add(dv);
+                    }
+                }
+                break;
+            default:
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 return new ArrayList<>();
-            }
-            devices = new ArrayList<>(Collections.singleton(device));
         }
 
-        List<JsonNode> devicesJson = new ArrayList<>();
-        ObjectMapper mapper = new ObjectMapper();
-        for (MeshDevice dv : devices) {
-            try {
-                devicesJson.add(mapper.readValue(dv.toJson(), JsonNode.class));
-            } catch (JsonProcessingException e) {
-                System.err.println("Error in JSON parsing of devices.");
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                return null;
-            }
+        if (devices.isEmpty()) {
+            // device list is empty - request succeeds but there is no content
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            return new ArrayList<>();
+        }
+
+        List<JsonNode> devicesJson;
+
+        try {
+            devicesJson = this.devicesToJson(devices);
+        } catch (JsonProcessingException e) {
+            System.err.println("Error in JSON parsing of device.");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return null;
         }
 
         response.setStatus(HttpServletResponse.SC_OK);
@@ -125,39 +145,149 @@ public class API {
         return devicesJson;
     }
 
-    @PostMapping("/message")
-    public String message(@RequestBody JsonNode body, HttpServletResponse response) {
-        int destination;
-        String content;
-        try {
-            destination = body.get("destination").asInt();
-            content = body.get("content").asText();
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return "Invalid Request Body.";
+    @GetMapping("/devices/{id}")
+    public JsonNode devices(
+            @PathVariable("id") int deviceID,
+            HttpServletResponse response) {
+        List<MeshDevice> devices = meshGrid.getDevices();
+
+        MeshDevice device = null;
+        for (MeshDevice dv : devices) {
+            if (dv.getId() == deviceID) {
+                device = dv;
+                break;
+            }
         }
 
-        this.meshGrid.sendRequest(destination, content);
+        if (device == null) { // if the queried device does not exist - code 404
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
 
+        JsonNode deviceJson;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            deviceJson = mapper.readValue(device.toJson(), JsonNode.class);
+        } catch (JsonProcessingException e) {
+            System.err.println("Error in JSON parsing of device.");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return null;
+        }
         response.setStatus(HttpServletResponse.SC_OK);
-        return "Request Sent.";
+
+        return deviceJson;
     }
 
-    @PostMapping("/tick")
-    public String tick(@RequestBody(required = false) JsonNode body, HttpServletResponse response) {
-        int ticks = 1;
-        if (body != null && body.has("n_ticks")) ticks = body.get("n_ticks").asInt();
+    @GetMapping("/devices/inrange/{id}")
+    public List<JsonNode> devicesInRange(
+            @PathVariable("id") int deviceID,
+            HttpServletResponse response) {
 
-        if (ticks < 1) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return "Invalid number of ticks.";
+
+        MeshDevice device = null;
+        for (MeshDevice dv : this.meshGrid.getDevices()) {
+            if (dv.getId() == deviceID) {
+                device = dv;
+                break;
+            }
         }
 
-        for (int i = 0; i < ticks; ++i) {
-            this.meshGrid.update();
+        if (device == null) { // if the queried device does not exist - code 404
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+
+        List<MeshDevice> devicesInRange = this.meshGrid.devicesInRange(device);
+        List<JsonNode> devicesRangeJson;
+        try {
+            devicesRangeJson = this.devicesToJson(devicesInRange);
+        } catch (JsonProcessingException e) {
+            System.err.println("Error in JSON parsing of device.");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return null;
         }
 
         response.setStatus(HttpServletResponse.SC_OK);
-        return "Mesh Grid Updated.";
+        return devicesRangeJson;
+    }
+
+    @PostMapping("/tick/{time_flow}")
+    public String tick(
+            @PathVariable("time_flow") String timeFlow,
+            @RequestParam(value = "n_ticks", required = false, defaultValue = "1") int nTicks,
+            HttpServletResponse response) {
+
+        switch (timeFlow) {
+            case "forwards":
+                for (int i = 0; i < nTicks; ++i) {
+                    this.meshGrid.update();
+                }
+                break;
+            case "backwards":
+                // TODO: when UNDO ticks is implemented
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return "Backwards time flow not implemented yet.";
+            default:
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return "Invalid time flow.";
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return "Mesh Grid updated";
+    }
+
+    @GetMapping("/message")
+    public ObjectNode message(HttpServletResponse response) {
+
+        HashMap<Integer, ArrayNode> messages = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (MeshDevice device : this.meshGrid.getDevices()) {
+            int sourceDevice = 0;
+            for (Command command : device.getCommands()) {
+                if (!(command instanceof ReceiveMsgCmd)) continue;
+                JsonNode messageJson;
+                try {
+                    Message message = ((ReceiveMsgCmd) command).getMessage();
+                    sourceDevice = message.getLastHop();
+                    messageJson = this.messageJson(message.toJson(device.getId()));
+                } catch (JsonProcessingException e) {
+                    System.err.println("Error formatting message to JSON.");
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    return null;
+                }
+                if (!messages.containsKey(sourceDevice))
+                    messages.put(sourceDevice, mapper.convertValue(new ArrayList<>(), ArrayNode.class));
+                messages.get(sourceDevice).add(messageJson);
+            }
+        }
+
+        ObjectNode node = mapper.createObjectNode();
+
+        for (Map.Entry<Integer, ArrayNode> entry : messages.entrySet()) {
+            node.putIfAbsent(entry.getKey().toString(), entry.getValue());
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return node;
+    }
+
+
+    private List<JsonNode> devicesToJson(List<MeshDevice> devices) throws JsonProcessingException {
+        List<JsonNode> devicesJson = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
+        for (MeshDevice dv : devices) {
+            devicesJson.add(mapper.readValue(dv.toJson(), JsonNode.class));
+        }
+        return devicesJson;
+    }
+
+    private JsonNode messageJson(String messageJson) throws JsonProcessingException {
+        JsonNode messageNode;
+        ObjectMapper mapper = new ObjectMapper();
+
+        messageNode = mapper.readValue(messageJson, JsonNode.class);
+
+        return messageNode;
     }
 }
