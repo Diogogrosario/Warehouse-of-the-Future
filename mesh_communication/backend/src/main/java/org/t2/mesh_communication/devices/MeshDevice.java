@@ -3,37 +3,26 @@ package org.t2.mesh_communication.devices;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
 
-/**
- * A device on a mesh Network. Can be an orchestrator or a normal, passive device.
- */
+/** A device on a mesh Network. Can be an orchestrator or a normal, passive device. */
 public abstract class MeshDevice implements Updatable {
     protected final int id;
     protected final Position pos;
     protected final float range;
 
-    /**
-     * The set of commands that will be run in the current tick.
-     */
+    /** The set of commands that will be run in the current tick. */
     protected final List<Command> commands;
-    /**
-     * The set of commands for the next tick.
-     */
+    /** The set of commands for the next tick. */
     protected final List<Command> commandsNext;
 
-    /**
-     * The communication strategy employed by the device (receive and send messages).
-     */
+    /** The communication strategy employed by the device (receive and send messages). */
     private final CommunicationStrategy commStrat;
 
-    /**
-     * The sequence number that will be sent on the next message's header (from this device).
-     */
+    /** The sequence number that will be sent on the next message's header (from this device). */
     private int seqNum;
 
     public MeshDevice(int id, Position pos, float range, CommunicationStrategy commStrat) {
@@ -105,7 +94,7 @@ public abstract class MeshDevice implements Updatable {
     /**
      * Creates a message originating from this device.
      *
-     * @param dest    Destination of the message.
+     * @param dest Destination of the message.
      * @param content Content of the message.
      * @return The generated message object.
      */
@@ -139,7 +128,6 @@ public abstract class MeshDevice implements Updatable {
     public List<Command> getNextCommands() {
         return this.commandsNext;
     }
-
 
     public String toJson() {
         return "{\"device_id\":"
