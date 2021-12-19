@@ -60,6 +60,10 @@ public abstract class MeshDevice implements Updatable {
         return commandsNext;
     }
 
+    public CommunicationStrategy getCommStrat() {
+        return commStrat;
+    }
+
     /**
      * Runs the scheduled commands for this tick (for this device). This includes checking for the
      * neighboring devices' death, sending messages, and receiving messages.
@@ -113,9 +117,9 @@ public abstract class MeshDevice implements Updatable {
 
     protected abstract void logSendMessage(Message msg);
 
-    public List<Integer> sendMessage(Message msg) {
+    public void sendMessage(Message msg) {
         this.logSendMessage(msg);
-        return this.commStrat.sendMessage(this, msg);
+        this.commStrat.sendMessage(this, msg);
     }
 
     protected abstract void logReceiveMessage(Message msg);

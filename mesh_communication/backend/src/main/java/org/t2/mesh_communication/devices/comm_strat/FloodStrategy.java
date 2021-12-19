@@ -61,11 +61,15 @@ public class FloodStrategy implements CommunicationStrategy {
     }
 
     @Override
-    public List<Integer> sendMessage(MeshDevice me, Message msg) {
-        List<Integer> destinations = new ArrayList<>();
+    public List<MeshDevice> getDestsOfDevice(MeshDevice me) {
+        return this.meshGrid.devicesInRange(me);
+    }
+
+    @Override
+    public void sendMessage(MeshDevice me, Message msg) {
         msg.addPath(me.getId());
 
-        for (MeshDevice d : this.meshGrid.devicesInRange(me)) {
+        for (MeshDevice d : this.getDestsOfDevice(me)) {
             int deviceId = d.getId();
 
             // reduce TTL only if it hasn't done it already in this tick and if the message
@@ -79,10 +83,7 @@ public class FloodStrategy implements CommunicationStrategy {
             }
 
             d.addCommand(new ReceiveMsgCmd(d, msg));
-            destinations.add(deviceId);
         }
-
-        return destinations;
     }
 
     protected void resetTimeToLive(int id) {

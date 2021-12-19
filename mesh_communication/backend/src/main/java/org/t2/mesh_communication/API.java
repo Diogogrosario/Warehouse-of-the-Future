@@ -238,40 +238,32 @@ public class API {
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
-        for (MeshDevice receiver : this.meshGrid.getDevices()) {
-            for (Command command : receiver.getCommands()) {
-                if (!(command instanceof SendMsgCmd)) continue;
-                SendMsgCmd curr_cmd = (SendMsgCmd) command;
+        for (MeshDevice sender : this.meshGrid.getDevices()) {
+            for (Command command : sender.getCommands()) {
+                if (!(command instanceof SendMsgCmd sendMsgCmd)) continue;
 
-                int sourceDevice = 0;
-                JsonNode messageJson;
+                List<MeshDevice> destinations = sender.getCommStrat().getDestsOfDevice(sender);
+                Message message = sendMsgCmd.getMessage();
+                int sourceDevice = sender.getId();
                 try {
-                    Message message = curr_cmd.getMessage();
-
-                    System.out.println("Device: " + receiver.getId());
-                    System.out.println("Last Hop: " + message.getLastHop());
-                    System.out.println("Source: " + message.getSource());
-                    System.out.println("Dest: " + message.getDestination());
-                    System.out.println("Type: " + message.getType());
-                    System.out.println(
-                            "Message destinations: " + curr_cmd.getDestinations().size());
-                    System.out.println("--------");
-                    sourceDevice = message.getLastHop();
-                    messageJson = this.messageJson(message.toJson(receiver.getId()));
+                    for (MeshDevice dest : destinations) {
+                        JsonNode messageJson = this.messageJson(message.toJson(dest.getId()));
+                        if (!messages.containsKey(sourceDevice)) {
+                            ArrayNode emptyArray =
+                                    mapper.convertValue(new ArrayList<>(), ArrayNode.class);
+                            messages.put(sourceDevice, emptyArray);
+                        }
+                        messages.get(sourceDevice).add(messageJson);
+                    }
                 } catch (JsonProcessingException e) {
                     System.err.println("Error formatting message to JSON.");
                     response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     return null;
                 }
-                if (!messages.containsKey(sourceDevice))
-                    messages.put(
-                            sourceDevice, mapper.convertValue(new ArrayList<>(), ArrayNode.class));
-                messages.get(sourceDevice).add(messageJson);
             }
         }
 
         ObjectNode node = mapper.createObjectNode();
-
         for (Map.Entry<Integer, ArrayNode> entry : messages.entrySet()) {
             node.putIfAbsent(entry.getKey().toString(), entry.getValue());
         }
