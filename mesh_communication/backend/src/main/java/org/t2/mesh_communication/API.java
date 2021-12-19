@@ -6,12 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-
 import java.io.IOException;
 import java.util.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,12 +21,12 @@ import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
+import org.t2.mesh_communication.log.Logger;
 
 @SpringBootApplication
 @RestController
 public class API {
-    @Autowired
-    private MeshGrid meshGrid;
+    @Autowired private MeshGrid meshGrid;
 
     public static void main(String[] args) {
         API api = new API();
@@ -85,7 +83,7 @@ public class API {
             manifestReader.read();
             List<Product> products = manifestReader.getProducts();
 
-            orchestrator.orchestrate(products);
+            // orchestrator.orchestrate(products);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -95,8 +93,7 @@ public class API {
 
     @GetMapping("/devices/{status}")
     public List<JsonNode> devicesStatus(
-            @PathVariable("status") String status,
-            HttpServletResponse response) {
+            @PathVariable("status") String status, HttpServletResponse response) {
         List<MeshDevice> devices = new ArrayList<>();
 
         switch (status) {
@@ -105,16 +102,16 @@ public class API {
                 break;
             case "failed":
                 for (MeshDevice dv : this.meshGrid.getDevices()) {
-                    if (dv.getId() == MeshGrid.ORCHESTRATOR_ID ||
-                            ((Device) dv).getBattery().getRemainingBattery() <= 0) {
+                    if (dv.getId() == MeshGrid.ORCHESTRATOR_ID
+                            || ((Device) dv).getBattery().getRemainingBattery() <= 0) {
                         devices.add(dv);
                     }
                 }
                 break;
             case "operational":
                 for (MeshDevice dv : this.meshGrid.getDevices()) {
-                    if (dv.getId() == MeshGrid.ORCHESTRATOR_ID ||
-                            ((Device) dv).getBattery().getRemainingBattery() > 0) {
+                    if (dv.getId() == MeshGrid.ORCHESTRATOR_ID
+                            || ((Device) dv).getBattery().getRemainingBattery() > 0) {
                         devices.add(dv);
                     }
                 }
@@ -146,9 +143,7 @@ public class API {
     }
 
     @GetMapping("/devices/{id}")
-    public JsonNode devices(
-            @PathVariable("id") int deviceID,
-            HttpServletResponse response) {
+    public JsonNode devices(@PathVariable("id") int deviceID, HttpServletResponse response) {
         List<MeshDevice> devices = meshGrid.getDevices();
 
         MeshDevice device = null;
@@ -180,9 +175,7 @@ public class API {
 
     @GetMapping("/devices/inrange/{id}")
     public List<JsonNode> devicesInRange(
-            @PathVariable("id") int deviceID,
-            HttpServletResponse response) {
-
+            @PathVariable("id") int deviceID, HttpServletResponse response) {
 
         MeshDevice device = null;
         for (MeshDevice dv : this.meshGrid.getDevices()) {
@@ -221,6 +214,7 @@ public class API {
             case "forwards":
                 for (int i = 0; i < nTicks; ++i) {
                     this.meshGrid.update();
+                    Logger.getInstance().nextTick();
                 }
                 break;
             case "backwards":
@@ -238,26 +232,34 @@ public class API {
 
     @GetMapping("/message")
     public ObjectNode message(HttpServletResponse response) {
-
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
-        for (MeshDevice device : this.meshGrid.getDevices()) {
-            int sourceDevice = 0;
-            for (Command command : device.getCommands()) {
-                if (!(command instanceof ReceiveMsgCmd)) continue;
+        for (MeshDevice receiver : this.meshGrid.getDevices()) {
+            for (Command command : receiver.getCommands()) {
+                if (!(command instanceof SendMsgCmd)) continue;
+
+                int sourceDevice = 0;
                 JsonNode messageJson;
                 try {
                     Message message = ((ReceiveMsgCmd) command).getMessage();
+
+                    System.out.println("Device: " + receiver.getId());
+                    System.out.println("Last Hop: " + message.getLastHop());
+                    System.out.println("Source: " + message.getSource());
+                    System.out.println("Dest: " + message.getDestination());
+                    System.out.println("Type: " + message.getType());
+                    System.out.println("--------");
                     sourceDevice = message.getLastHop();
-                    messageJson = this.messageJson(message.toJson(device.getId()));
+                    messageJson = this.messageJson(message.toJson(receiver.getId()));
                 } catch (JsonProcessingException e) {
                     System.err.println("Error formatting message to JSON.");
                     response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     return null;
                 }
                 if (!messages.containsKey(sourceDevice))
-                    messages.put(sourceDevice, mapper.convertValue(new ArrayList<>(), ArrayNode.class));
+                    messages.put(
+                            sourceDevice, mapper.convertValue(new ArrayList<>(), ArrayNode.class));
                 messages.get(sourceDevice).add(messageJson);
             }
         }
@@ -271,7 +273,6 @@ public class API {
         response.setStatus(HttpServletResponse.SC_OK);
         return node;
     }
-
 
     private List<JsonNode> devicesToJson(List<MeshDevice> devices) throws JsonProcessingException {
         List<JsonNode> devicesJson = new ArrayList<>();
