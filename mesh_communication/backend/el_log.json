@@ -1,0 +1,1976 @@
+[
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=2], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=2], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=2], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=2], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=2], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=2], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=0], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=0], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Orchestrator",
+		"event": "Sent message: [destination=1], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Orchestrator",
+		"event": "Sent message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Relaying message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Sent message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Sent message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Reached destination: [source=0], [msg=Message{source=0; seq=1; dest=8; content=Ola1}]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Replying: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 9",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 9",
+		"event": "Relaying message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 9",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 9",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 9",
+		"event": "Sent message: [destination=8], [msg=Ola1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 9",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=9]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=9]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola1], [lastHop=9]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=9]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 9",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=8], [msg=Reply.], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Orchestrator",
+		"event": "Sent message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Orchestrator",
+		"event": "Sent message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Orchestrator",
+		"event": "Sent message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Orchestrator",
+		"event": "Sent message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Orchestrator",
+		"event": "Sent message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Orchestrator",
+		"event": "Sent message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Reached destination: [source=0], [msg=Message{source=0; seq=2; dest=7; content=Ola2}]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Replying: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Orchestrator",
+		"event": "Sent message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Sent message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Reached destination: [source=0], [msg=Message{source=0; seq=3; dest=7; content=Ola3}]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Replying: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Sent message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Reached destination: [source=0], [msg=Message{source=0; seq=4; dest=7; content=Ola4}]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Replying: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Relaying message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Sent message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Reached destination: [source=0], [msg=Message{source=0; seq=5; dest=7; content=Ola5}]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Replying: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Relaying message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Sent message: [destination=7], [msg=Ola2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Sent message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Relaying message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Reached destination: [source=0], [msg=Message{source=0; seq=6; dest=7; content=Ola6}]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Replying: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Relaying message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Sent message: [destination=7], [msg=Ola3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Sent message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Sent message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola2], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Reached destination: [source=0], [msg=Message{source=0; seq=7; dest=7; content=Ola7}]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Replying: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Relaying message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Sent message: [destination=7], [msg=Ola4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Sent message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Relaying message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola3], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Reached destination: [source=0], [msg=Message{source=0; seq=8; dest=7; content=Ola8}]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Replying: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Relaying message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Sent message: [destination=7], [msg=Ola5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=4]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Sent message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Sent message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola4], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Relaying message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Sent message: [destination=7], [msg=Ola6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Relaying message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola5], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Relaying message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Sent message: [destination=7], [msg=Ola7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=3]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 2",
+		"event": "Sent message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=0], [msg=Ola8], [lastHop=5]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 4",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=7]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 6",
+		"event": "Sent message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola6], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 8",
+		"event": "Sent message: [destination=7], [msg=Ola8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Relaying message: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 3",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=6]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 5",
+		"event": "Received message: [source=7], [msg=Reply.], [lastHop=2]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 7",
+		"event": "Received message: [source=0], [msg=Ola7], [lastHop=8]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=1], [msg=], [lastHop=1]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Relaying message: [destination=0], [msg=]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Received message: [source=0], [msg=Request.], [lastHop=0]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Reached destination: [source=0], [msg=Message{source=0; seq=0; dest=1; content=Request.}]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Replying: [destination=0], [msg=Reply.]",
+		"tick": "0"
+	},
+	{
+		"device": "Device 1",
+		"event": "Sent message: [destination=0], [msg=]",
+		"tick": "0"
+	},

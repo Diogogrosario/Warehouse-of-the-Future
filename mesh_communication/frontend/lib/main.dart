@@ -1,264 +1,112 @@
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
-import 'package:myapp/decision_tree_screen.dart';
-import 'package:myapp/layer_graphview.dart';
-import 'package:myapp/tree_graphview_json.dart';
-
-import 'directed_graphview.dart';
-import 'graph_cluster_animated.dart';
-import 'tree_graphview.dart';
+import 'package:http/http.dart' as http;
+import 'package:myapp/ActionButtons/FFButton.dart';
+import 'package:myapp/ActionButtons/PPButton.dart';
+import 'package:myapp/ActionButtons/SBButton.dart';
+import 'package:myapp/ActionButtons/SFButton.dart';
+import 'package:myapp/MyGraph.dart';
+import 'package:myapp/MyGraphDisplay.dart';
+import 'package:myapp/RequestHandler/Device.dart';
+import 'package:myapp/RequestHandler/RequestHandler.dart';
+import 'package:myapp/UndirectedGraph.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Home());
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: BasePage(),
+    );
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({
-    Key? key,
-  }) : super(key: key);
+class BasePage extends StatelessWidget {
+  const BasePage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(children: [
-            SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-                color: Colors.redAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TreeViewPage(),
-                      ),
-                    ),
-                child: Text(
-                  'Tree View (BuchheimWalker)',
-                  style: TextStyle(fontSize: 30),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-                color: Colors.blueAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GraphClusterViewPage(),
-                      ),
-                    ),
-                child: Text(
-                  'Graph Cluster View (FruchtermanReingold)',
-                  style: TextStyle(fontSize: 30),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-                color: Colors.greenAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LayeredGraphViewPage(),
-                      ),
-                    ),
-                child: Text(
-                  "Layered View (Sugiyama)",
-                  style: TextStyle(fontSize: 30),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-                color: Colors.redAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TreeViewPageFromJson(),
-                      ),
-                    ),
-                child: Text(
-                  'Tree View From Json(BuchheimWalker)',
-                  style: TextStyle(fontSize: 30),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-              onPressed: () {
-                var graph = new Graph();
+  Graph _genGraph(List<Device> devices) {
+    Graph graph = UndirectedGraph();
+    // gen nodes
+    for (Device d in devices) {
+      graph.addNode(Node.Id(d.id));
+    }
+    // gen edges
+    // orchestrator
+    Node node0 = graph.getNodeUsingId('0');
+    graph.addEdge(node0, graph.getNodeUsingId('1'));
+    graph.addEdge(node0, graph.getNodeUsingId('4'));
+    // other
+    for (int i = 1; i < graph.nodeCount() - 1; ++i) {
+      Node node1 = graph.getNodeUsingId(i.toString());
 
-                Node node1 = Node.Id('One');
-                Node node2 = Node.Id('Two');
-                Node node3 = Node.Id('Three');
-                Node node4 = Node.Id('Four');
-                Node node5 = Node.Id('Five');
-                Node node6 = Node.Id('Six');
-                Node node7 = Node.Id('Seven');
-                Node node8 = Node.Id('Eight');
-                Node node9 = Node.Id('Nine');
-                graph.addEdge(node1, node2);
-                graph.addEdge(node1, node4);
-                graph.addEdge(node2, node3);
-                graph.addEdge(node2, node5);
-                graph.addEdge(node3, node6);
-                graph.addEdge(node4, node5);
-                graph.addEdge(node4, node7);
-                graph.addEdge(node5, node6);
-                graph.addEdge(node5, node8);
-                graph.addEdge(node6, node9);
-                graph.addEdge(node7, node8);
-                graph.addEdge(node8, node9);
-                var builder = FruchtermanReingoldAlgorithm();
+      if (i % 3 != 0) {
+        Node node2 = graph.getNodeUsingId((i + 1).toString());
+        graph.addEdge(node1, node2);
+      }
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => GraphScreen(graph, builder, null)),
-                );
-              },
-              color: Colors.blueAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Text(
-                'Square Grid (FruchtermanReingold)',
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-              onPressed: () {
-                var graph = new Graph();
+      if (i / 3.0 <= 2.0) {
+        Node node3 = graph.getNodeUsingId((i + 3).toString());
+        graph.addEdge(node1, node3);
+      }
+    }
+    return graph;
+  }
 
-                Node node1 = Node.Id('One');
-                Node node2 = Node.Id('Two');
-                Node node3 = Node.Id('Three');
-                Node node4 = Node.Id('Four');
-                Node node5 = Node.Id('Five');
-                Node node6 = Node.Id('Six');
-                Node node7 = Node.Id('Seven');
-                Node node8 = Node.Id('Eight');
-                Node node9 = Node.Id('Nine');
-                Node node10 = Node.Id('Ten');
-
-                graph.addEdge(node1, node2);
-                graph.addEdge(node1, node3);
-                graph.addEdge(node2, node4);
-                graph.addEdge(node2, node5);
-                graph.addEdge(node2, node3);
-                graph.addEdge(node3, node5);
-                graph.addEdge(node3, node6);
-                graph.addEdge(node4, node7);
-                graph.addEdge(node4, node8);
-                graph.addEdge(node4, node5);
-                graph.addEdge(node5, node8);
-                graph.addEdge(node5, node9);
-                graph.addEdge(node5, node6);
-                graph.addEdge(node9, node6);
-                graph.addEdge(node10, node6);
-                graph.addEdge(node7, node8);
-                graph.addEdge(node8, node9);
-                graph.addEdge(node9, node10);
-
-                var builder = FruchtermanReingoldAlgorithm();
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => GraphScreen(graph, builder, null)),
-                );
-              },
-              color: Colors.blueAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Text(
-                'Triangle Grid (FruchtermanReingold)',
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DecisionTreeScreen()),
-                );
-              },
-              color: Colors.greenAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Text(
-                'Decision Tree (Sugiyama)',
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DecisionTreeScreen()),
-                );
-              },
-              color: Colors.greenAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Text(
-                'Family Tree (Sugiyama)',
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-          ]),
-        ),
+  Widget _genGraphPage(BuildContext context) {
+    final MyGraphDisplay graphDisplay = MyGraphDisplay(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Mesh Communication"),
+        actions: [
+          SBButton(MyGraph.of(context).skipBackwards),
+          PPButton(MyGraph.of(context).pausePlay),
+          SFButton(MyGraph.of(context).skipForward),
+          FFButton(MyGraph.of(context).fastForward),
+        ],
       ),
+      body: graphDisplay,
+      persistentFooterButtons: [
+        IconButton(
+          onPressed: graphDisplay.resetGraphView,
+          icon: const Icon(Icons.replay_rounded),
+        )
+      ],
     );
   }
 
-  Widget createNode(String nodeText) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.red,
-        border: Border.all(color: Colors.white, width: 1),
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Center(
-        child: Text(
-          nodeText,
-          style: TextStyle(fontSize: 10),
-        ),
-      ),
+  @override
+  Widget build(BuildContext context) {
+    RequestHandler requestHandler =
+        RequestHandler("https://randomuser.me/api/");
+    Future<List<Device>> devices = requestHandler.getDevices();
+
+    return FutureBuilder<List<Device>>(
+      future: devices,
+      builder: (context, response) {
+        if (response.connectionState == ConnectionState.done) {
+          Graph graph = _genGraph(response.data!);
+          return MyGraph(
+            graph: graph,
+            requestHandler: requestHandler,
+            child: Builder(
+              builder: (BuildContext innerContext) {
+                return _genGraphPage(innerContext);
+              },
+            ),
+          );
+        } else {
+          // still loading
+          return Container(
+            color: Colors.red,
+          );
+        }
+      },
     );
   }
 }
