@@ -1,12 +1,11 @@
 import React, { SetStateAction, useEffect } from "react";
 import "./App.css";
-import { DragHandle, FullscreenExit } from "@mui/icons-material";
-import FullscreenIcon from "@mui/icons-material/Fullscreen";
-import { Box, Button, Divider, Grid, Tab, Tabs, useMediaQuery } from "@mui/material";
+import { Grid, Tab, Tabs, useMediaQuery } from "@mui/material";
 import WarehouseRenderer from "./components/renderer/WarehouseRenderer";
 import PanelDivider from "./components/PanelDivider";
+import FullscreenButton from "./components/FullscreenButton";
 
-enum Fullscreen {
+export enum FullscreenState {
 	Left,
 	Disabled,
 	Right,
@@ -17,8 +16,8 @@ export default function App() {
 
 	const [selectedTab, setSelectedTab] = React.useState(0);
 	const [panelWidth, setPanelWidth] = React.useState(60);
-	const [fullscreen, setFullscreen] = React.useState(Fullscreen.Disabled);
 	const [dragging, setDragging] = React.useState(false);
+	const [fullscreen, setFullscreen] = React.useState(FullscreenState.Disabled);
 
 	const minPanelWidth = 20,
 		maxPanelWidth = 80;
@@ -57,33 +56,29 @@ export default function App() {
 	return (
 		<div className="App">
 			<Grid container sx={{ height: "100vh" }} direction={matches ? "row" : "column"}>
-				{fullscreen != Fullscreen.Right && (
+				{fullscreen != FullscreenState.Right && (
 					<Grid
 						item
 						sx={{
 							position: "relative",
-							width: fullscreen == Fullscreen.Left ? "100%" : `${panelWidth}%`,
+							width: fullscreen == FullscreenState.Left ? "100%" : `${panelWidth}%`,
 						}}
 					>
 						<WarehouseRenderer />
 
-						<Button
-							sx={{ position: "absolute", bottom: 0, right: 0 }}
-							onClick={() => {
-								if (fullscreen == Fullscreen.Disabled)
-									setFullscreen(Fullscreen.Left);
-								else setFullscreen(Fullscreen.Disabled);
-							}}
-						>
-							{fullscreen == Fullscreen.Left && <FullscreenExit />}
-							{fullscreen != Fullscreen.Left && <FullscreenIcon />}
-						</Button>
+						<FullscreenButton
+							fullscreenState={fullscreen}
+							setFullscreen={setFullscreen}
+							panelSide={FullscreenState.Left}
+						/>
 					</Grid>
 				)}
 
-				<PanelDivider handleMouseDown={handleMouseDown} orientation={"vertical"} />
+				{fullscreen == FullscreenState.Disabled && (
+					<PanelDivider handleMouseDown={handleMouseDown} orientation={"vertical"} />
+				)}
 
-				{fullscreen != Fullscreen.Left && (
+				{fullscreen != FullscreenState.Left && (
 					<Grid item sx={{ position: "relative", flex: 1, height: "100%" }}>
 						<Tabs value={selectedTab} onChange={handleChange}>
 							<Tab label="Reports" />
@@ -91,21 +86,11 @@ export default function App() {
 							<Tab label="Devices" />
 						</Tabs>
 
-						<Button
-							sx={{
-								position: "absolute",
-								bottom: 0,
-								right: 0,
-							}}
-							onClick={() => {
-								if (fullscreen == Fullscreen.Disabled)
-									setFullscreen(Fullscreen.Right);
-								else setFullscreen(Fullscreen.Disabled);
-							}}
-						>
-							{fullscreen == Fullscreen.Right && <FullscreenExit />}
-							{fullscreen != Fullscreen.Right && <FullscreenIcon />}
-						</Button>
+						<FullscreenButton
+							fullscreenState={fullscreen}
+							setFullscreen={setFullscreen}
+							panelSide={FullscreenState.Right}
+						/>
 					</Grid>
 				)}
 			</Grid>
