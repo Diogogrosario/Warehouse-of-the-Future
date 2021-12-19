@@ -3,7 +3,7 @@ import "./App.css";
 import { DragHandle, FullscreenExit } from "@mui/icons-material";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import { Box, Button, Divider, Grid, Tab, Tabs } from "@mui/material";
-import WarehouseRenderer from "./components/renderer/WarehouseRenderer";
+import WarehouseRenderer from "./components/WarehouseRenderer";
 
 enum Fullscreen {
 	Left,

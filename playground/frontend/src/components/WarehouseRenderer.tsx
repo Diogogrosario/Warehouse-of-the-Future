@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import SceneManager from "./SceneManager";
-import Stats from "./Stats";
+import SceneManager from "./renderer/SceneManager";
+import Stats from "./renderer/Stats";
 
 class WarehouseRenderer extends Component {
 	private container?: HTMLDivElement;
