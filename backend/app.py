@@ -1,4 +1,3 @@
-from os import getenv
 from flask import Flask
 from api.init import api
 from dotenv import load_dotenv
