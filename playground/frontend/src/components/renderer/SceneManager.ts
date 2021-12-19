@@ -16,16 +16,13 @@ class SceneManager {
 	private cube!: THREE.Mesh;
 	private ground!: THREE.Mesh;
 
-	constructor(
-		container: HTMLElement | undefined,
-		width: number,
-		height: number,
-		showStats: boolean = false
-	) {
+	constructor(container: HTMLElement | undefined, width: number, height: number) {
 		this.width = width;
 		this.height = height;
 
 		this.scene = new THREE.Scene();
+		this.scene.background = new THREE.Color(0xffffff);
+
 		this.camera = new THREE.PerspectiveCamera(
 			75, // fov = field of view
 			width / height, // aspect ratio

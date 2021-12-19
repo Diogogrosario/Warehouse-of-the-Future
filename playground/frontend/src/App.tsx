@@ -1,26 +1,99 @@
-import React from "react";
-
+import React, { SetStateAction, useEffect } from "react";
 import "./App.css";
-import { AppBar, Toolbar, Typography } from "@mui/material";
-
+import { Grid, Tab, Tabs, useMediaQuery } from "@mui/material";
 import WarehouseRenderer from "./components/renderer/WarehouseRenderer";
+import PanelDivider from "./components/PanelDivider";
+import FullscreenButton from "./components/FullscreenButton";
 
-class App extends React.Component {
-	render(): JSX.Element {
-		return (
-			<div className="App">
-				<AppBar position="static">
-					<Toolbar>
-						<Typography color="inherit">
-							Warehouse of the Future - Playground
-						</Typography>
-					</Toolbar>
-				</AppBar>
-
-				<WarehouseRenderer />
-			</div>
-		);
-	}
+export enum FullscreenState {
+	Left,
+	Disabled,
+	Right,
 }
 
-export default App;
+export default function App() {
+	const matches = useMediaQuery("(min-width: 800px)");
+
+	const [selectedTab, setSelectedTab] = React.useState(0);
+	const [panelWidth, setPanelWidth] = React.useState(60);
+	const [dragging, setDragging] = React.useState(false);
+	const [fullscreen, setFullscreen] = React.useState(FullscreenState.Disabled);
+
+	const minPanelWidth = 20,
+		maxPanelWidth = 80;
+
+	const handleChange = (event: React.ChangeEvent<{}>, newValue: SetStateAction<number>) => {
+		setSelectedTab(newValue);
+	};
+
+	const handleMouseMove = (e: MouseEvent) => {
+		if (dragging) {
+			const newWidth =
+				((e.clientX - document.body.offsetLeft) / document.body.clientWidth) * 100;
+
+			if (newWidth > minPanelWidth && newWidth < maxPanelWidth) setPanelWidth(newWidth);
+		}
+	};
+
+	const handleMouseDown = () => {
+		setDragging(true);
+	};
+
+	const handleMouseUp = () => {
+		setDragging(false);
+	};
+
+	useEffect(() => {
+		document.addEventListener("mouseup", handleMouseUp);
+		document.addEventListener("mousemove", handleMouseMove);
+
+		return () => {
+			document.removeEventListener("mouseup", handleMouseUp);
+			document.removeEventListener("mousemove", handleMouseMove);
+		};
+	});
+
+	return (
+		<div className="App">
+			<Grid container sx={{ height: "100vh" }} direction={matches ? "row" : "column"}>
+				{fullscreen != FullscreenState.Right && (
+					<Grid
+						item
+						sx={{
+							position: "relative",
+							width: fullscreen == FullscreenState.Left ? "100%" : `${panelWidth}%`,
+						}}
+					>
+						<WarehouseRenderer />
+
+						<FullscreenButton
+							fullscreenState={fullscreen}
+							setFullscreen={setFullscreen}
+							panelSide={FullscreenState.Left}
+						/>
+					</Grid>
+				)}
+
+				{fullscreen == FullscreenState.Disabled && (
+					<PanelDivider handleMouseDown={handleMouseDown} orientation={"vertical"} />
+				)}
+
+				{fullscreen != FullscreenState.Left && (
+					<Grid item sx={{ position: "relative", flex: 1, height: "100%" }}>
+						<Tabs value={selectedTab} onChange={handleChange}>
+							<Tab label="Reports" />
+							<Tab label="Logs" />
+							<Tab label="Devices" />
+						</Tabs>
+
+						<FullscreenButton
+							fullscreenState={fullscreen}
+							setFullscreen={setFullscreen}
+							panelSide={FullscreenState.Right}
+						/>
+					</Grid>
+				)}
+			</Grid>
+		</div>
+	);
+}
