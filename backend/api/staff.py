@@ -1,6 +1,5 @@
-from flask_restx import fields, reqparse, Namespace, Resource
+from flask_restx import fields, reqparse, Namespace, Resource, abort
 from bson.objectid import ObjectId
-from flask_restx import abort
 from bson import json_util
 import json
 import datetime
@@ -75,7 +74,7 @@ class StaffInformation(Resource):
     @namespace.marshal_with(staffAttributes)
     @namespace.response(200, 'Success')
     @namespace.response(404, 'Incorrect Request')
-    def get(self, id):
+    def get(self, id: str):
         """
         Returns the information of a staff member
 

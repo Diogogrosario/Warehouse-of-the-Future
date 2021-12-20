@@ -58,6 +58,7 @@ parser.add_argument("time_after",
                     type=inputs.date,
                     help="The upper bound for the timestamp of the cart.")
 
+
 @namespace.route("/")
 class SensorInformation(Resource):
     @namespace.marshal_with(globalDataAttributes)
