@@ -145,11 +145,40 @@ paths:
                   - hop: 54
                     final: 2
                     failed: false
-                 - hop: 2
+                  - hop: 2
                     final: 1
                     failed: false
         404:
           description: "Error: couldn't get current tick messages."
+
+  /log:
+    get:
+      summary: Get logs of the current tick
+      operationId: getLog
+      description:
+        Path that returns, for all devices that had a log in the current tick,
+        their respective log messages.
+      responses:
+        200:
+          description: "Success: Received all logs"
+          content:
+            application/json:
+              schema:
+                description: "Dictionary in which its keys are the devices, and
+                its values are arrays of message logs that were sent by its respective key/sender"
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    description: Message log
+                    type: string
+              example:
+                Device 6:
+                  - "Received message: [source=0], [msg=padoru], [lastHop=0]"
+                  - "Relaying message: [destination=8], [msg=padoru]"
+
+        404:
+          description: "Error: couldn't get current log messages."
 
 components:
   schemas:
@@ -187,4 +216,4 @@ components:
         battery_level: 68
         position:
           x: 2
-          y: 1 
+          y: 1
