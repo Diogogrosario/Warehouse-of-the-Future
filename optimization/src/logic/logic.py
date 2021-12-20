@@ -77,20 +77,24 @@ def mutate(child):
 
 
 def dump_results_to_database(layout):
-    list_ids_products_out = []
-
-    for out_product in final_layout.products_out:
-        list_ids_products_out.append(out_product.id)
-
     query_insert_result = f"INSERT INTO Results (date_issued) values (%s)"
 
-    db.df_query(query_insert_result, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    db.df_query(query_insert_result, [datetime.now().strftime('%Y-%m-%d %H:%M:%S')])
 
     result_id_inserted = f"SELECT MAX(id) FROM RESULTS"
 
-    print(result_id_inserted)
+    result_id = int(db.df_query(result_id_inserted).at[0, 'MAX(id)'])
 
-    pass
+    for out_product in final_layout.products_out:
+        query_insert_out_product = f"INSERT INTO Products_Left_Out (result_id,product_id) values (%s,%s)"
+        db.df_query(query_insert_out_product, [result_id, out_product.id])
+
+    for shelf in layout.warehouse.shelves:
+        for rack in shelf.racks:
+            for product, position in rack.products.items():
+                x_orig, x_end = position
+                query_insert_out_product_rack = f"INSERT INTO Product_Rack (x_orig,x_end,result_id,rack_id,product_id) values (%s,%s,%s,%s,%s)"
+                db.df_query(query_insert_out_product_rack, [x_orig, x_end, result_id, rack.id, product.id])
 
 
 if __name__ == '__main__':

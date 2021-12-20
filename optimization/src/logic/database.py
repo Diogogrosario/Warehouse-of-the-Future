@@ -40,7 +40,7 @@ class Database:
             except Exception as e:
                 print(f"Error executing query: {query} Exception: {e}")
         else:
-            cursor.execute(query, [value])
+            cursor.execute(query, value)
             self.db.commit()
             return None
 

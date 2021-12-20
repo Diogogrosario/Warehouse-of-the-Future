@@ -115,7 +115,7 @@ create table Product_Rack
     FOREIGN KEY (product_id) REFERENCES Product (id)
 );
 
-create table products_left_out
+create table Products_Left_Out
 (
     id         SERIAL PRIMARY KEY,
     result_id  BIGINT UNSIGNED NOT NULL,
