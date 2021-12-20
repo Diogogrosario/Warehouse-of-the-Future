@@ -1,6 +1,8 @@
 import heapq
+import json
 import sys
 from copy import deepcopy
+from datetime import datetime
 
 from database import Database
 from storage import *
@@ -74,6 +76,23 @@ def mutate(child):
     child.change_place(product)
 
 
+def dump_results_to_database(layout):
+    list_ids_products_out = []
+
+    for out_product in final_layout.products_out:
+        list_ids_products_out.append(out_product.id)
+
+    query_insert_result = f"INSERT INTO Results (date_issued) values (%s)"
+
+    db.df_query(query_insert_result, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+    result_id_inserted = f"SELECT MAX(id) FROM RESULTS"
+
+    print(result_id_inserted)
+
+    pass
+
+
 if __name__ == '__main__':
 
     # Overwrite Database configs if Docker tag is defined
@@ -113,3 +132,5 @@ if __name__ == '__main__':
             print(out_product)
     else:
         print('No products were left out')
+
+    dump_results_to_database(final_layout)

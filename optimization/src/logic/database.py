@@ -29,26 +29,39 @@ class Database:
             print("Error connecting to MySQL database %s: ", database, e)
 
     # Execute SQL queries
-    def execute(self, query):
+    def execute(self, query, value=None):
         cursor = self.db.cursor(buffered=True)
-        cursor.execute(query)
-        try:
-            records = cursor.fetchall()
-            header = [i[0] for i in cursor.description]
-            return {'header': header, 'records': records}
-        except:
-            print("Error executing query: " + query)
-
-    # Execute SQL queries and retrieve a pandas dataframe
-    def df_query(self, query):
-        result = self.execute(query)
-
-        if len(result['records']) == 0:
+        if not value:
+            cursor.execute(query)
+            try:
+                records = cursor.fetchall()
+                header = [i[0] for i in cursor.description]
+                return {'header': header, 'records': records}
+            except Exception as e:
+                print(f"Error executing query: {query} Exception: {e}")
+        else:
+            cursor.execute(query, [value])
+            self.db.commit()
             return None
 
-        df = pd.DataFrame(result['records'])
-        df.columns = result['header']
-        return df
+    # Execute SQL queries and retrieve a pandas dataframe
+    def df_query(self, query, value=None):
+
+        if not value:
+            result = self.execute(query)
+
+            if not result:
+                return None
+
+            if len(result['records']) == 0:
+                return None
+
+            df = pd.DataFrame(result['records'])
+            df.columns = result['header']
+            return df
+        else:
+            self.execute(query, value)
+            return None
 
     # Close the database connection
     def __del__(self):
