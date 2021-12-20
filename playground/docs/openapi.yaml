@@ -21,6 +21,7 @@ tags: [
   ]
 
 paths:
+  # ===================== DEVICES =====================
   /device:
     get:
       operationId: D1
@@ -42,11 +43,21 @@ paths:
                 - id: 85B3
         "404":
           description: "Error: No registered devices."
+    delete:
+      operationId: "D2"
+      summary: "D2: Delete all devices."
+      description: "Delete every device."
+      tags: ["Device"]
+      responses:
+        "200":
+          description: "Success."
+        "500":
+          description: "Error: No registered devices."
 
   /device/{id}:
     get:
-      operationId: D2
-      summary: "D2: Check if device exists."
+      operationId: D3
+      summary: "D3: Check if device exists."
       description: "Check if device with specified ID is registered."
       tags: ["Device"]
       parameters:
@@ -62,11 +73,10 @@ paths:
         "404":
           description: "Error: No registered device with that ID."
         "500":
-          description: "Server Error."
-      
+          description: "Server Error." 
     post:
-      operationId: D3
-      summary: "D3: Create new device"
+      operationId: D4
+      summary: "D4: Create new device"
       description: "Register a new device."
       tags: ["Device"]
       parameters:
@@ -81,11 +91,9 @@ paths:
           description: "Success: Device created."
         "400":
           description: "Error: No parameters provided."
-
-  /device/delete/{id}:
-    get:
-      operationId: "D4"
-      summary: "D4: Delete device."
+    delete:
+      operationId: "D5"
+      summary: "D5: Delete device."
       description: "Delete the device with the specified ID."
       tags: ["Device"]
       parameters:
@@ -102,21 +110,8 @@ paths:
           description: "Error: No registered device with that ID."
         "500":
           description: "Server Error."
-  
-  /device/delete:
-    get:
-      operationId: "D5"
-      summary: "D5: Delete all devices."
-      description: "Delete every device."
-      tags: ["Device"]
-      responses:
-        "200":
-          description: "Success."
-        "500":
-          description: "Error: No registered devices."
 
-
-
+# ===================== ACTIONS =====================
   /action:
     get:
       operationId: A1
@@ -143,11 +138,22 @@ paths:
                   employee_id: 53A
         "404":
           description: "Error: No registered devices."
+    delete:
+      operationId: "A2"
+      summary: "A2: Delete all actions."
+      description: "Delete every action."
+      tags: ["Action"]
+      responses:
+        "200":
+          description: "Success."
+        "500":
+          description: "Error: No registered actions."
+    
 
   /action/{id}:
     get:
-      operationId: A2
-      summary: "A2: Get specific action."
+      operationId: A3
+      summary: "A3: Get specific action."
       description: Retrieve action with the specified ID.
       tags: ["Action"]
       parameters:
@@ -170,15 +176,16 @@ paths:
                 - id: 55
                   report_id: 40
                   employee_id: 54D
-                  createdAt: "2021-12-09 18:05:28"
-                  updatedAt: "2021-12-09 18:05:28"
+                  description: "Replaced batery."
+                  createdAt: "2021-12-21 15:30"
+                  updatedAt: "2021-12-21 15:30"
         "404":
           description: "Error: Action not found."
         "500":
           description: "Server Error."
     post:
-      operationId: A3
-      summary: "A3: Add new action"
+      operationId: A4
+      summary: "A4: Add new action"
       description: "Register a new action."
       tags: ["Action"]
       parameters:
@@ -203,7 +210,48 @@ paths:
           description: "Success: Device created."
         "400":
           description: "Error: No parameters provided."
+    put:
+      operationId: A5
+      summary: "A5: Edit Action."
+      description: "Edit a certain action."
+      tags: ["Action"]
+      parameters:
+        - in: query
+          name: "id"
+          description: "ID of action."
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Action"
+      responses:
+        "200":
+          description: "Success: Action created."
+        "404":
+          description: "Error: Can't update action."
+    delete:
+      operationId: A6
+      summary: "A6: Delete action."
+      description: "Delete the action with the specified ID."
+      tags: ["Action"]
+      parameters:
+        - in: path
+          name: "id"
+          description: "ID of action."
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Success: Action deleted."
+        "404":
+          description: "Error: Action not found."
 
+        
 
 components:
   schemas:
@@ -230,10 +278,9 @@ components:
         employee_id:
           description: "ID of the employed that executed the action."
           type: string
-        createdAt:
-          description: "Timestamp of creation."
-          type: string
-        updatedAt:
-          description: "Timestamp of edits."
-          type: string
+      example:
+        - id: 45
+          report_id: 865
+          description: "Replaced batery."
+          employee_id: 24F
 
