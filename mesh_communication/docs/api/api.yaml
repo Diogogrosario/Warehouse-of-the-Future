@@ -36,7 +36,7 @@ paths:
         404:
           description: Couldn't retreive devices
 
-  /devices/{id}:
+  /device/{id}:
     get:
       summary: gets a specific device
       operationId: getDevice
