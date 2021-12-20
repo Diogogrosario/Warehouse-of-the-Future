@@ -6,10 +6,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 import java.io.IOException;
 import java.util.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +27,8 @@ import org.t2.mesh_communication.log.Logger;
 @SpringBootApplication
 @RestController
 public class API {
-    @Autowired private MeshGrid meshGrid;
+    @Autowired
+    private MeshGrid meshGrid;
 
     public static void main(String[] args) {
         API api = new API();
@@ -105,8 +108,8 @@ public class API {
                 break;
             case "failed":
                 for (MeshDevice dv : this.meshGrid.getDevices()) {
-                    if (dv.getId() == MeshGrid.ORCHESTRATOR_ID
-                            || ((Device) dv).getBattery().getRemainingBattery() <= 0) {
+                    if (dv.getId() != MeshGrid.ORCHESTRATOR_ID
+                            && ((Device) dv).getBattery().getRemainingBattery() <= 0) {
                         devices.add(dv);
                     }
                 }
