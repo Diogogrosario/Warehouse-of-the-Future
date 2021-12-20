@@ -361,8 +361,8 @@ paths:
         "404":
           description: "Error: Can't update action."
     delete:
-      operationId: A6
-      summary: "A6: Delete report."
+      operationId: R6
+      summary: "R6: Delete report."
       description: "Delete the report with the specified ID."
       tags: ["Report"]
       parameters:
