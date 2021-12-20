@@ -32,7 +32,6 @@ public class API {
 
     public static void main(String[] args) {
         API api = new API();
-        api.start();
         SpringApplication.run(API.class);
     }
 
@@ -148,7 +147,7 @@ public class API {
         return devicesJson;
     }
 
-    @GetMapping("/devices/{id}")
+    @GetMapping("/device/{id}")
     public JsonNode devices(@PathVariable("id") int deviceID, HttpServletResponse response) {
         List<MeshDevice> devices = meshGrid.getDevices();
 
@@ -216,6 +215,8 @@ public class API {
             @RequestParam(value = "n_ticks", required = false, defaultValue = "1") int nTicks,
             HttpServletResponse response) {
 
+        if(nTicks <= 0)
+            return "NTicks must be a number of value higher than 0.";
         switch (timeFlow) {
             case "forwards":
                 for (int i = 0; i < nTicks; ++i) {
@@ -291,5 +292,13 @@ public class API {
         messageNode = mapper.readValue(messageJson, JsonNode.class);
 
         return messageNode;
+    }
+
+    public void setMeshGrid(MeshGrid meshGrid) {
+        this.meshGrid = meshGrid;
+    }
+
+    public MeshGrid getMeshGrid() {
+        return this.meshGrid;
     }
 }
