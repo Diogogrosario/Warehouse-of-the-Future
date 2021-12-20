@@ -57,7 +57,7 @@ class StaffQuery(Resource):
         if age is not None:
             current_year = datetime.date.today().year
             dt = datetime.datetime(year=current_year - age, month=1, day=1)
-            searchQuery["birth_date"] = {"$lt": dt}
+            searchQuery["birth_date"] = {"$lte": dt}
         if name is not None:
             searchQuery["name"] = name
 
