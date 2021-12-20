@@ -9,6 +9,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.LogRecord;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +23,7 @@ import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
+import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
 
 @SpringBootApplication
@@ -215,7 +217,7 @@ public class API {
             @RequestParam(value = "n_ticks", required = false, defaultValue = "1") int nTicks,
             HttpServletResponse response) {
 
-        if(nTicks <= 0)
+        if (nTicks <= 0)
             return "NTicks must be a number of value higher than 0.";
         switch (timeFlow) {
             case "forwards":
@@ -270,6 +272,40 @@ public class API {
         ObjectNode node = mapper.createObjectNode();
         for (Map.Entry<Integer, ArrayNode> entry : messages.entrySet()) {
             node.putIfAbsent(entry.getKey().toString(), entry.getValue());
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return node;
+    }
+
+    @GetMapping("/log")
+    public ObjectNode log(HttpServletResponse response) {
+        HashMap<String, ArrayNode> logs = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        int currentTick = Logger.getInstance().getTick();
+
+        List<LogRecord> history = Logger.getInstance().getHistory();
+
+        // logs from history that are from the current tick
+        // (currentTick - 1) -> currentTick represents the tick in which commands still haven't been executed,
+        // so we want the logs from the "previous" tick
+        history = history.stream().filter(l -> l.getSequenceNumber() == currentTick - 1).toList();
+
+        for (LogRecord lr : history) {
+            Log log = (Log) lr;
+            String deviceName = log.getSourceClassName();
+            if (!logs.containsKey(deviceName)) {
+                ArrayNode emptyArray =
+                        mapper.convertValue(new ArrayList<>(), ArrayNode.class);
+                logs.put(deviceName, emptyArray);
+            }
+            logs.get(deviceName).add(log.getMessage());
+        }
+
+        ObjectNode node = mapper.createObjectNode();
+        for (Map.Entry<String, ArrayNode> entry : logs.entrySet()) {
+            node.putIfAbsent(entry.getKey(), entry.getValue());
         }
 
         response.setStatus(HttpServletResponse.SC_OK);
