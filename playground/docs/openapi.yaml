@@ -23,8 +23,8 @@ tags: [
 paths:
   /device:
     get:
-      operationId: D01
-      summary: "D01: Get all Devices."
+      operationId: D1
+      summary: "D1: Get all Devices."
       description: Retrieves all devices registered in the playground.
       tags: ["Device"]
       responses:
@@ -45,10 +45,17 @@ paths:
 
   /device/{id}:
     get:
-      operationId: D02
-      summary: "D02: Check if device exists."
+      operationId: D2
+      summary: "D2: Check if device exists."
       description: "Check if device with specified ID is registered."
       tags: ["Device"]
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of device"
+          schema:
+            type: string
+          required: true
       responses:
         "200":
           description: "Success: Device Exists"
@@ -58,8 +65,8 @@ paths:
           description: "Server Error."
       
     post:
-      operationId: D03
-      summary: "D03: Create new device"
+      operationId: D3
+      summary: "D3: Create new device"
       description: "Register a new device."
       tags: ["Device"]
       parameters:
@@ -77,10 +84,17 @@ paths:
 
   /device/delete/{id}:
     get:
-      operationId: "D04"
-      summary: "D04: Delete device."
+      operationId: "D4"
+      summary: "D4: Delete device."
       description: "Delete the device with the specified ID."
       tags: ["Device"]
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of device"
+          schema:
+            type: string
+          required: true
       responses:
         "200":
           description: "Success: Device Deleted."
@@ -91,8 +105,8 @@ paths:
   
   /device/delete:
     get:
-      operationId: "D04"
-      summary: "D04: Delete all devices."
+      operationId: "D5"
+      summary: "D5: Delete all devices."
       description: "Delete every device."
       tags: ["Device"]
       responses:
@@ -103,6 +117,94 @@ paths:
 
 
 
+  /action:
+    get:
+      operationId: A1
+      summary: "A1: Get all Actions."
+      description: Retrieves all actions.
+      tags: ["Action"]
+      responses:
+        "200":
+          description: "Success."
+          content:
+            application/json:
+              schema:
+                description: "Array containing every action."
+                type: array
+                items:
+                  $ref: "#/components/schemas/Action"
+              example:
+                - id: 55
+                  report_id: 40
+                  employee_id: 54D
+
+                - id: 56
+                  report_id: 40
+                  employee_id: 53A
+        "404":
+          description: "Error: No registered devices."
+
+  /action/{id}:
+    get:
+      operationId: A2
+      summary: "A2: Get specific action."
+      description: Retrieve action with the specified ID.
+      tags: ["Action"]
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of action"
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Success."
+          content:
+            application/json:
+              schema:
+                description: "Array containing every action."
+                type: string
+                $ref: "#/components/schemas/Action"
+              example:
+                - id: 55
+                  report_id: 40
+                  employee_id: 54D
+                  createdAt: "2021-12-09 18:05:28"
+                  updatedAt: "2021-12-09 18:05:28"
+        "404":
+          description: "Error: Action not found."
+        "500":
+          description: "Server Error."
+    post:
+      operationId: A3
+      summary: "A3: Add new action"
+      description: "Register a new action."
+      tags: ["Action"]
+      parameters:
+        - in: "query"
+          name: "id"
+          description: "ID of device"
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Action"
+            example:
+              - report_id: 40
+                employee_id: 54D
+                description: "Replaced Batery."
+      responses:
+        "200":
+          description: "Success: Device created."
+        "400":
+          description: "Error: No parameters provided."
+
+
 components:
   schemas:
 
@@ -110,5 +212,28 @@ components:
       type: object
       properties:
         id:
-          description: "ID of the Devices."
+          description: "ID of the Device."
           type: string
+
+    Action:
+      type: object
+      properties:
+        id: 
+          description: "ID of the Action."
+          type: string
+        report_id:
+          description: "ID of the Report to which the current action refers to."
+          type: string
+        description:
+          description: "Description of the Action."
+          type: string
+        employee_id:
+          description: "ID of the employed that executed the action."
+          type: string
+        createdAt:
+          description: "Timestamp of creation."
+          type: string
+        updatedAt:
+          description: "Timestamp of edits."
+          type: string
+
