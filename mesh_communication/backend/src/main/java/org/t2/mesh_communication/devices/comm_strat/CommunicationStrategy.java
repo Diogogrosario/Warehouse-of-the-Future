@@ -28,7 +28,6 @@ public interface CommunicationStrategy {
      *
      * @param me The device relaying/sending the message.
      * @param msg The message to send (or relay).
-     * @return the list of devices id's that the message was sent t
      */
     void sendMessage(MeshDevice me, Message msg);
 

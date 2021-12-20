@@ -49,4 +49,8 @@ public class Position {
     public String toString() {
         return String.format("{x: %d; y: %d}", this.x, this.y);
     }
+
+    public String toJson() {
+        return String.format("{\"x\":%d,\"y\":%d}", this.x, this.y);
+    }
 }

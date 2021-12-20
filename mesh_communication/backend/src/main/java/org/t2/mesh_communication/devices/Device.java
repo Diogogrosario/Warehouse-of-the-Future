@@ -116,11 +116,8 @@ public class Device extends MeshDevice {
                 + this.id
                 + ",\"battery_level\":"
                 + this.battery.getRemainingBattery()
-                + ",\"position\":{\"x\":"
-                + this.pos.getX()
-                + ",\"y\":"
-                + this.pos.getY()
-                + "}"
+                + ",\"position\":"
+                + this.pos.toJson()
                 + "}";
     }
 }

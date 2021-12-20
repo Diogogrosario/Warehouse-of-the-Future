@@ -136,11 +136,9 @@ public abstract class MeshDevice implements Updatable {
     public String toJson() {
         return "{\"device_id\":"
                 + this.id
-                + ",\"position\":{\"x\":"
-                + this.pos.getX()
-                + ",\"y\":"
-                + this.pos.getY()
-                + "},\"orchestrator\":"
+                + ",\"position\":"
+                + this.pos.toJson()
+                +",\"orchestrator\":"
                 + (this.id == MeshGrid.ORCHESTRATOR_ID)
                 + "}";
     }

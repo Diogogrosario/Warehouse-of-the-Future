@@ -101,7 +101,8 @@ public class APITests {
             JsonNode output = api.devices(1, Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, output.toString());
 
-            JsonNode outputInvalid = api.devices(23, Mockito.mock(HttpServletResponse.class));
+            int invalidID = 23;
+            JsonNode outputInvalid = api.devices(invalidID, Mockito.mock(HttpServletResponse.class));
             assertNull(outputInvalid);
         }
 
