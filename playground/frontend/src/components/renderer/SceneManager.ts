@@ -1,9 +1,11 @@
 import * as THREE from "three";
-import CameraControls from 'camera-controls';
+import CameraControls from "camera-controls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { dumpObjectToConsole } from "./utils/DebugUtils";
 
-CameraControls.install( { THREE: THREE } );
+import { WarehouseStructure } from "./WarehouseStructure";
+
+CameraControls.install({ THREE: THREE });
 
 class SceneManager {
 	public scene: THREE.Scene;
@@ -32,14 +34,13 @@ class SceneManager {
 			0.1, // near plane
 			1000 // far plane
 		);
-		this.camera.position.z = 5; // is used here to set some distance from a cube that is located at z = 0
+		this.camera.position.x = 5;
+		this.camera.position.y = 5;
+		this.camera.position.z = 5;
 
 		// OrbitControls allow a camera to orbit around the object
-		if (container) {
-			this.cameraControls = new CameraControls(this.camera, container);
-			// this.cameraControls.enableDamping = true;
-			// this.cameraControls.dampingFactor = 0.95;
-		}
+		if (container) this.cameraControls = new CameraControls(this.camera, container);
+		this.cameraControls?.setTarget(0, 2, 0);
 
 		this.renderer = new THREE.WebGLRenderer({ antialias: true });
 		this.renderer.setSize(width, height);
@@ -48,12 +49,12 @@ class SceneManager {
 
 		this.addCustomSceneObjects();
 		this.addLighting();
+		this.addAxes();
 	}
 
 	public render() {
-
 		const delta = this.clock.getDelta();
-		const controlsUpdated = this.cameraControls?.update( delta );
+		const controlsUpdated = this.cameraControls?.update(delta);
 
 		if (this.invalidFrame || controlsUpdated) {
 			this.renderer?.render(this.scene, this.camera);
@@ -85,16 +86,15 @@ class SceneManager {
 		this.invalidFrame = true;
 	}
 
-	// Here should come custom code.
-	// Code below is taken from Three.js BoxGeometry example
-	// https://threejs.org/docs/#api/en/geometries/BoxGeometry
+	// The X axis is red. The Y axis is green. The Z axis is blue.
+	private addAxes() {
+		var axesHelper = new THREE.AxesHelper(5);
+		this.scene.add(axesHelper);
+	}
+
 	private addCustomSceneObjects() {
-		this.scene.add(
-			new THREE.Mesh(
-				new THREE.PlaneGeometry(20, 20, 4, 4),
-				new THREE.MeshLambertMaterial({ color: 0x908e77 })
-			)
-		);
+		const whStructure = new WarehouseStructure();
+		this.scene.add(whStructure.getObject());
 
 		const gltfLoader = new GLTFLoader();
 		const url = "assets/models/box_efficient.glb";
@@ -104,6 +104,8 @@ class SceneManager {
 
 			const mesh = root.children[0] as THREE.Mesh;
 			mesh.material = new THREE.MeshLambertMaterial({ color: 0xc91fef });
+
+			mesh.geometry.scale(0.1, 0.1, 0.1);
 
 			mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI / 12);
 
