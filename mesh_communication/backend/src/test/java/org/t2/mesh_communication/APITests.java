@@ -1,8 +1,10 @@
 package org.t2.mesh_communication;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.*;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 import org.t2.mesh_communication.devices.Device;
@@ -16,13 +18,15 @@ import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
+import org.t2.mesh_communication.log.Log;
+import org.t2.mesh_communication.log.Logger;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogRecord;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 public class APITests {
@@ -129,8 +133,7 @@ public class APITests {
     }
 
     @Nested
-    class TestMessage
-    {
+    class TestMessage {
         private static API api;
         private static MeshGrid mg;
 
@@ -189,11 +192,64 @@ public class APITests {
         }
 
         @Test
-        public void messageTest()
-        {
+        public void messageTest() {
             String expectedOutput = "{\"0\":[{\"hop\":1,\"final\":2,\"failed\":\"false\"}]}";
             ObjectNode outputInvalidTimeflow = api.message(Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, outputInvalidTimeflow.toString());
         }
+
+    }
+
+    @Test
+    public void getLogTest() {
+        API api = new API();
+        MockedStatic<Logger> logger = Mockito.mockStatic(Logger.class);
+        Logger logger1 = Mockito.mock(Logger.class);
+
+        LogRecord record1 = new Log(
+                "Device 1",
+                "Receive message [source=%d], [msg=%s], [lastHop=%d]",
+                0, "test message 1", 0);
+        record1.setSequenceNumber(1);
+
+        LogRecord record2 = new Log(
+                "Device 2",
+                "Receive message [source=%d], [msg=%s], [lastHop=%d]",
+                1, "test message 2", 3);
+        record2.setSequenceNumber(1);
+
+        LogRecord record3 = new Log(
+                "Device 2",
+                "Sent message [destination=%d], [msg=%s]",
+                4, "test message 3");
+        record3.setSequenceNumber(1);
+
+        when(logger1.getHistory()).thenAnswer(
+                (Answer<List<LogRecord>>) invocation -> {
+                    List<LogRecord> records = new ArrayList<>();
+                    records.add(record1);
+                    records.add(record2);
+                    records.add(record3);
+                    return records;
+                });
+
+        when(logger1.getTick()).thenReturn(2);
+
+        logger.when(Logger::getInstance).thenReturn(logger1);
+
+        ObjectNode response = api.log(Mockito.mock(HttpServletResponse.class));
+
+        assertTrue(response.has("Device 1"));
+        assertTrue(response.has("Device 2"));
+
+        assertEquals(1, response.get("Device 1").size());
+        assertEquals(2, response.get("Device 2").size());
+
+        assertEquals("\"Receive message [source=0], [msg=test message 1], [lastHop=0]\"",
+                response.get("Device 1").get(0).toString());
+        assertEquals("\"Receive message [source=1], [msg=test message 2], [lastHop=3]\"",
+                response.get("Device 2").get(0).toString());
+        assertEquals("\"Sent message [destination=4], [msg=test message 3]\"",
+                response.get("Device 2").get(1).toString());
     }
 }
