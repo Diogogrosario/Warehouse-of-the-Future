@@ -21,39 +21,94 @@ tags: [
   ]
 
 paths:
-  /device/create:
-    post:
+  /device:
+    get:
       operationId: D01
-      summary: "D01: Create new device"
-      description: "Create new device object."
+      summary: "D01: Get all Devices."
+      description: Retrieves all devices registered in the playground.
       tags: ["Device"]
-      parameters: [
-        {
-          in: "query",
-          name: "id",
-          description: "ID of device",
-          schema:
-          {
-            type: "string"
-          },
-          required: true
-        }
-        
-      ]
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: string
       responses:
         "200":
-          description: "Device created."
+          description: "Success."
+          content:
+            application/json:
+              schema:
+                description: "Array containing every device."
+                type: array
+                items:
+                  $ref: "#/components/schemas/Device"
+              example:
+                - id: 445A
+                - id: 85B3
+        "404":
+          description: "Error: No registered devices."
+
+  /device/{id}:
+    get:
+      operationId: D02
+      summary: "D02: Check if device exists."
+      description: "Check if device with specified ID is registered."
+      tags: ["Device"]
+      responses:
+        "200":
+          description: "Success: Device Exists"
+        "404":
+          description: "Error: No registered device with that ID."
+        "500":
+          description: "Server Error."
+      
+    post:
+      operationId: D03
+      summary: "D03: Create new device"
+      description: "Register a new device."
+      tags: ["Device"]
+      parameters:
+        - in: "query"
+          name: "id"
+          description: "ID of device"
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Success: Device created."
         "400":
-          description: "No parameters provided"
+          description: "Error: No parameters provided."
+
+  /device/delete/{id}:
+    get:
+      operationId: "D04"
+      summary: "D04: Delete device."
+      description: "Delete the device with the specified ID."
+      tags: ["Device"]
+      responses:
+        "200":
+          description: "Success: Device Deleted."
+        "404":
+          description: "Error: No registered device with that ID."
+        "500":
+          description: "Server Error."
+  
+  /device/delete:
+    get:
+      operationId: "D04"
+      summary: "D04: Delete all devices."
+      description: "Delete every device."
+      tags: ["Device"]
+      responses:
+        "200":
+          description: "Success."
+        "500":
+          description: "Error: No registered devices."
 
 
 
+components:
+  schemas:
+
+    Device:
+      type: object
+      properties:
+        id:
+          description: "ID of the Devices."
+          type: string
