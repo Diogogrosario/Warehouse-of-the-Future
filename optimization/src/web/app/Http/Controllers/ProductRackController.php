@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product_Rack as ModelsProduct_Rack;
 use Illuminate\Http\Request;
 
-use App\Product_Rack;
+use App\Models\Product_Rack;
+use App\Models\Product;
 
 class ProductRackController extends Controller
 {
-    public function index(){
-        $product_racks = ModelsProduct_Rack::all();
-        echo $product_racks;
-        return view('layouts',[
-            'product_racks' => $product_racks,
+    public function show()
+    {
+        return view('layout', [
+            'product_racks' => Product_Rack::all(),
+            'products' => Product::all()
         ]);
     }
 }
