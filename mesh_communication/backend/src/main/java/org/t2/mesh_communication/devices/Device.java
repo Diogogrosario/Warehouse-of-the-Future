@@ -7,7 +7,9 @@ import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
 
-/** The common device on the mesh network. */
+/**
+ * The common device on the mesh network.
+ */
 public class Device extends MeshDevice {
     private final int receivingConsumption;
     private final int sendingConsumption;
@@ -111,6 +113,7 @@ public class Device extends MeshDevice {
         return screen;
     }
 
+    @Override
     public String toJson() {
         return "{\"device_id\":"
                 + this.id
@@ -119,5 +122,10 @@ public class Device extends MeshDevice {
                 + ",\"position\":"
                 + this.pos.toJson()
                 + "}";
+    }
+
+    @Override
+    public boolean isOperational() {
+        return this.battery.getRemainingBattery() > 0;
     }
 }

@@ -193,7 +193,7 @@ public class APITests {
 
         @Test
         public void messageTest() {
-            String expectedOutput = "{\"0\":[{\"hop\":1,\"final\":2,\"failed\":\"false\"}]}";
+            String expectedOutput = "{\"0\":[{\"final\":2,\"failed\":\"false\",\"hop\":1}]}";
             ObjectNode outputInvalidTimeflow = api.message(Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, outputInvalidTimeflow.toString());
         }

@@ -138,8 +138,8 @@ public abstract class MeshDevice implements Updatable {
                 + this.id
                 + ",\"position\":"
                 + this.pos.toJson()
-                +",\"orchestrator\":"
-                + (this.id == MeshGrid.ORCHESTRATOR_ID)
                 + "}";
     }
+
+    public abstract boolean isOperational();
 }

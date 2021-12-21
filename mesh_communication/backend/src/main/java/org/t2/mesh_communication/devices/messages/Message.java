@@ -96,9 +96,9 @@ public abstract class Message {
 
     public abstract String getType();
 
-    public String toJson(int receiver) {
+    public String toJson() {
         return String.format(
-                "{\"hop\": %d, \"final\": %d, \"failed\": \"%s\"}",
-                receiver, this.destination, false); // TODO: message failed
+                "{\"final\": %d, \"failed\": \"%s\"}",
+                this.destination, false); // TODO: message failed
     }
 }

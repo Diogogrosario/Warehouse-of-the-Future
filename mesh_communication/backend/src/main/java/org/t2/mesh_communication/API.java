@@ -108,20 +108,16 @@ public class API {
                 devices = this.meshGrid.getDevices();
                 break;
             case "failed":
-                for (MeshDevice dv : this.meshGrid.getDevices()) {
-                    if (dv.getId() != MeshGrid.ORCHESTRATOR_ID
-                            && ((Device) dv).getBattery().getRemainingBattery() <= 0) {
-                        devices.add(dv);
-                    }
-                }
+                devices = this.meshGrid.getDevices()
+                        .stream()
+                        .filter(dv -> !dv.isOperational())
+                        .toList();
                 break;
             case "operational":
-                for (MeshDevice dv : this.meshGrid.getDevices()) {
-                    if (dv.getId() == MeshGrid.ORCHESTRATOR_ID
-                            || ((Device) dv).getBattery().getRemainingBattery() > 0) {
-                        devices.add(dv);
-                    }
-                }
+                devices = this.meshGrid.getDevices()
+                        .stream()
+                        .filter(MeshDevice::isOperational)
+                        .toList();
                 break;
             default:
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -167,6 +163,11 @@ public class API {
         }
 
         JsonNode deviceJson;
+        /*
+        Use an ObjectMapper to convert the JSON string into a JsonNode.
+        This makes the requests with JSON responses more easily testable, provides easier construction of JSON node
+        arrays and assures a consistent formatting of the JSON strings across all requests.
+        */
         ObjectMapper mapper = new ObjectMapper();
         try {
             deviceJson = mapper.readValue(device.toJson(), JsonNode.class);
@@ -228,7 +229,7 @@ public class API {
                 break;
             case "backwards":
                 // TODO: when UNDO ticks is implemented
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                response.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
                 return "Backwards time flow not implemented yet.";
             default:
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -253,7 +254,7 @@ public class API {
                 int sourceDevice = sender.getId();
                 try {
                     for (MeshDevice dest : destinations) {
-                        JsonNode messageJson = this.messageJson(message.toJson(dest.getId()));
+                        JsonNode messageJson = this.messageJson(message.toJson(), dest.getId());
                         if (!messages.containsKey(sourceDevice)) {
                             ArrayNode emptyArray =
                                     mapper.convertValue(new ArrayList<>(), ArrayNode.class);
@@ -321,11 +322,12 @@ public class API {
         return devicesJson;
     }
 
-    private JsonNode messageJson(String messageJson) throws JsonProcessingException {
-        JsonNode messageNode;
+    private JsonNode messageJson(String messageJson, int receiver) throws JsonProcessingException {
+        ObjectNode messageNode;
         ObjectMapper mapper = new ObjectMapper();
 
-        messageNode = mapper.readValue(messageJson, JsonNode.class);
+        messageNode = (ObjectNode) mapper.readValue(messageJson, JsonNode.class);
+        messageNode.put("hop", receiver);
 
         return messageNode;
     }

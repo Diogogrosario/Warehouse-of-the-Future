@@ -20,7 +20,7 @@ public interface CommunicationStrategy {
      * @param me The device relaying/sending the message.
      * @return the list of devices that me will send messages to
      */
-    public List<MeshDevice> getDestsOfDevice(MeshDevice me);
+    List<MeshDevice> getDestsOfDevice(MeshDevice me);
 
     /**
      * Sends a message. This device can be the source of the message or just relaying it. Don't send
