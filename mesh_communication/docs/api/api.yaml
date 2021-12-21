@@ -10,12 +10,12 @@ paths:
       summary: gets devices by status
       operationId: getAllDevices
       description: 
-        Returns devices present in the mesh network with the given status.
+        "Returns devices present in the mesh network with the given status."
 
       parameters:
         - in: path
           name: status
-          description: What type of devices to retrieve
+          description: "What type of devices to retrieve"
           schema:
             type: string
             enum:
@@ -33,20 +33,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Device'
-        404:
-          description: Couldn't retreive devices
+        400:
+          description: "Bad Request"
+        204:
+          description: "No content"
+        500:
+          description: "Internal Server Error"
 
-  /devices/{id}:
+  /device/{id}:
     get:
       summary: gets a specific device
       operationId: getDevice
       description: 
-        Returns devices present in the mesh network with the given id.
+        "Returns devices present in the mesh network with the given id."
 
       parameters:
         - in: path
           name: id
-          description: Id of the device to retrieve
+          description: "Id of the device to retrieve"
           schema:
             type: integer
           required: true
@@ -59,19 +63,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/Device'
         404:
-          description: Device does not exist.
+          description: "Device does not exist."
+        500:
+          description: "Internal Server Error"
 
   /devices/inrange/{id}:
     get:
       summary: gets devices within range of another device
       operationId: getDevicesInRange
       description: 
-        Returns devices present in the mesh network that are within range of a device with the given id.
+        "Returns devices present in the mesh network that are within range of a device with the given id."
 
       parameters:
         - in: path
           name: id
-          description: Id of the device to make the search on
+          description: "Id of the device to make the search on"
           schema:
             type: integer
           required: true
@@ -86,17 +92,20 @@ paths:
                 items:
                   $ref: '#/components/schemas/Device'
         404:
-          description: Couldn't retreive devices
+          description: "Device does not exist."
+        500:
+          description: "Internal Server Error"
+
 
   /tick/{time_flow}:
     post:
-      summary: update grid
+      summary: Update grid ticks
       operationId: position
-      description: Path that updates the grid by given number of ticks.
+      description: "Path that updates the grid by given number of ticks."
       parameters:
         - in: path
           name: time_flow
-          description: In what direction time will advance
+          description: "In what direction time will advance"
           schema:
             type: string
             enum:
@@ -105,7 +114,7 @@ paths:
           required: true
         - in: query
           name: n_ticks
-          description: Number of ticks to skip
+          description: "Number of ticks to skip"
           required: false
           schema:
             type: integer
@@ -113,21 +122,23 @@ paths:
 
       responses:
         200:
-          description: Mesh Grid updated
+          description: "Mesh Grid updated"
+        404:
+          description: "Device does not exist."
 
   /message:
     get:
       summary: Get all messages sent in the current tick
       operationId: getAllMessages
       description:
-        Path that returns, for all message senders of the current tick, the messages that were sent by them.      
+        "Path that returns, for all message senders of the current tick, the messages that were sent by them."
       responses:
         200:
           description: "Success: Received all messages"
           content:
             application/json:
               schema:
-                description: Dictionary in which its keys are the sender's ids, and its values are arrays of messages that were sent by its respective key/sender
+                description: "Dictionary in which its keys are the sender's ids, and its values are arrays of messages that were sent by its respective key/sender"
                 type: object
                 additionalProperties:
                   type: array
@@ -145,11 +156,35 @@ paths:
                   - hop: 54
                     final: 2
                     failed: false
-                 - hop: 2
+                  - hop: 2
                     final: 1
                     failed: false
-        404:
-          description: "Error: couldn't get current tick messages."
+        500:
+          description: "Internal Server Error"
+
+  /log:
+    get:
+      summary: Get logs of the current tick
+      operationId: getLog
+      description:
+        "Path that returns, for all devices that had a log in the current tick, their respective log messages."
+      responses:
+        200:
+          description: "Success: Received all logs"
+          content:
+            application/json:
+              schema:
+                description: "Dictionary in which its keys are the devices, and its values are arrays of message logs that were sent by its respective key/sender"
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    description: "Message log"
+                    type: string
+              example:
+                Device 6:
+                  - "Received message: [source=0], [msg=padoru], [lastHop=0]"
+                  - "Relaying message: [destination=8], [msg=padoru]"
 
 components:
   schemas:
@@ -158,13 +193,13 @@ components:
 
       properties:
         hop:
-          description: ID of the device to receive the message on this hop
+          description: "ID of the device to receive the message on this hop"
           type: integer
         final:
-          description: ID of the final destination of the message
+          description: "ID of the final destination of the message"
           type: integer
         failed:
-          description: Wether or not the message was lost in the current tick
+          description: "Wether or not the message was lost in the current tick"
           type: boolean
 
     Device:
@@ -187,4 +222,4 @@ components:
         battery_level: 68
         position:
           x: 2
-          y: 1 
+          y: 1

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Component;
+import java.util.Map;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 
 /**
@@ -14,10 +15,16 @@ import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 public class MeshGrid {
     public static final int ORCHESTRATOR_ID = 0;
 
+    private MeshDevice orchestrator;
     private List<MeshDevice> devices;
 
     public MeshGrid() {
+        this.orchestrator = null;
         this.devices = new ArrayList<>();
+    }
+
+    public MeshDevice getOrchestrator() {
+        return this.orchestrator;
     }
 
     public List<MeshDevice> getDevices() {
@@ -30,6 +37,10 @@ public class MeshGrid {
 
     public void addDevice(MeshDevice d) {
         this.devices.add(d);
+        if (d.getId() == MeshGrid.ORCHESTRATOR_ID) {
+            assert this.orchestrator == null;
+            this.orchestrator = d;
+        }
     }
 
     public List<MeshDevice> devicesInRange(int id, Position p, float range) {
@@ -51,13 +62,19 @@ public class MeshGrid {
             if (md.update()) hadUpdates = true;
         }
 
+        for (MeshDevice md : this.devices) {
+            md.nextCommands();
+        }
+
         return hadUpdates;
     }
 
     public void addDevices(HashMap<Integer, Position> devices) {
-        for (int id : devices.keySet()) {
-            Device d = DeviceFactory.deviceFromConfig(id, devices.get(id), new FloodStrategy(this));
-            addDevice(d);
+        for (Map.Entry<Integer, Position> e : devices.entrySet()) {
+            int id = e.getKey();
+            Position pos = e.getValue();
+            MeshDevice d = DeviceFactory.deviceFromConfig(id, pos, new FloodStrategy(this));
+            this.addDevice(d);
         }
     }
 }

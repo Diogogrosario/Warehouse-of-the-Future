@@ -13,26 +13,27 @@ import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.log.Logger;
 
 public class Main {
-    private final Orchestrator orchestrator;
+    private Orchestrator orchestrator;
     private final MeshGrid meshGrid;
     private List<Product> products;
 
     public Main() {
         this.meshGrid = new MeshGrid();
-        this.orchestrator = new Orchestrator(new Position(-1, 0), new FloodStrategy(this.meshGrid));
         this.products = new ArrayList<>();
     }
 
     private void prepareGrid() throws IOException {
-        // add orchestrator
-        this.meshGrid.addDevice(this.orchestrator);
-
         // read devices from layout file
         LayoutReader layoutReader = new LayoutReader();
         layoutReader.read();
         HashMap<Integer, Position> devices = layoutReader.getDevices();
 
-        // add devices
+        // add devices (and orchestrator)
+        this.orchestrator =
+                new Orchestrator(
+                        devices.get(MeshGrid.ORCHESTRATOR_ID), new FloodStrategy(this.meshGrid));
+        devices.remove(MeshGrid.ORCHESTRATOR_ID);
+        this.meshGrid.addDevice(this.orchestrator);
         this.meshGrid.addDevices(devices);
 
         // generate manifests
@@ -57,7 +58,12 @@ public class Main {
             System.exit(1);
         }
 
+        System.out.println("Tick " + Logger.getInstance().getTick());
         this.orchestrator.orchestrate(this.products);
+        // Message initMsg = this.orchestrator.createMessage(8, "hello");
+        // this.orchestrator.addCommand(new SendMsgCmd(this.orchestrator, initMsg));
+        if (!meshGrid.update()) System.out.println("No updates...");
+        Logger.getInstance().nextTick();
 
         Scanner sc = new Scanner(System.in);
         event_loop:
