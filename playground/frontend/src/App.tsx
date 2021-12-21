@@ -34,7 +34,7 @@ export default function App() {
 	const handleMouseMove = (e: MouseEvent) => {
 		if (dragging) {
 			const newSize = mobile
-				? ((e.clientX - document.body.offsetTop) / document.body.clientHeight) * 100
+				? ((e.clientY - document.body.offsetTop) / document.body.clientHeight) * 100
 				: ((e.clientX - document.body.offsetLeft) / document.body.clientWidth) * 100;
 
 			if (newSize > minPanelSize && newSize < maxPanelSize) setPanelSize(newSize);
