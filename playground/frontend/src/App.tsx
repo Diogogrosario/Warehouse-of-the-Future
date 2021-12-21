@@ -75,7 +75,7 @@ export default function App() {
 								height:
 									!mobile || fullscreen == FullscreenState.Left
 										? "100%"
-										: `${panelSize}`,
+										: `${panelSize}%`,
 							}}
 						>
 							<WarehouseRenderer />
