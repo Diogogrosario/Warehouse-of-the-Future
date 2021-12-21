@@ -10,9 +10,10 @@ services:
       - db
     volumes:
       - ./src/logic:/tmp/genetic/logic
+    ports:
+      - 50051:50051    
     networks:
-      - internal
-
+      - internal      
   server:
     image: nginx:alpine
     volumes:
