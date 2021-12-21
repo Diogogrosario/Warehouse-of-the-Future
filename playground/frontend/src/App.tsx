@@ -8,8 +8,6 @@ import WarehouseRenderer from "./components/WarehouseRenderer";
 import Report from "./components/Report";
 import theme from "./styles/theme";
 
-import "./App.css";
-
 export enum FullscreenState {
 	Left,
 	Disabled,
@@ -60,7 +58,16 @@ export default function App() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<div className="App">
+			<div
+				className="App"
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					height: "100%",
+					width: "100%",
+					margin: 0,
+				}}
+			>
 				<Grid container sx={{ height: "100vh" }} direction={matches ? "row" : "column"}>
 					{fullscreen != FullscreenState.Right && (
 						<Grid

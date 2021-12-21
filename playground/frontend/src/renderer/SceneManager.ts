@@ -103,7 +103,7 @@ class SceneManager {
 			root.name = "Bucket";
 
 			const mesh = root.children[0] as THREE.Mesh;
-			mesh.material = new THREE.MeshLambertMaterial({ color: 0x606C2E });
+			mesh.material = new THREE.MeshLambertMaterial({ color: 0x606c2e });
 
 			mesh.geometry.scale(0.24, 0.24, 0.24);
 

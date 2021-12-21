@@ -77,7 +77,19 @@ class WarehouseRenderer extends Component {
 	}
 
 	public render() {
-		return <div id="warehouse-renderer" ref={(ref) => (this.container = ref ?? undefined)} />;
+		return (
+			<div
+				style={{
+					flexGrow: 1,
+					height: "100%",
+					width: "100%",
+					/* overflow: "hidden"; */
+					display: "block",
+					position: "relative",
+				}}
+				ref={(ref) => (this.container = ref ?? undefined)}
+			/>
+		);
 	}
 }
 
