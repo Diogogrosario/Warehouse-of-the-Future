@@ -3,8 +3,8 @@ import { DragHandle } from "@mui/icons-material";
 import React from "react";
 
 interface PanelDividerProps {
-	handleMouseDown: () => void,
-	orientation: "vertical" | "horizontal"
+	handleMouseDown: () => void;
+	orientation: "vertical" | "horizontal";
 }
 
 export default function PanelDivider(props: PanelDividerProps) {
@@ -26,7 +26,8 @@ export default function PanelDivider(props: PanelDividerProps) {
 			>
 				<DragHandle
 					sx={{
-						transform: props.orientation == "vertical" ? "rotate(90deg)" : "rotate(0deg)",
+						transform:
+							props.orientation == "vertical" ? "rotate(90deg)" : "rotate(0deg)",
 						color: "rgba(0, 0, 0, 0.5)",
 					}}
 				/>
@@ -34,4 +35,3 @@ export default function PanelDivider(props: PanelDividerProps) {
 		</Box>
 	);
 }
-

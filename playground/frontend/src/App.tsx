@@ -1,7 +1,6 @@
 import React, { SetStateAction, useEffect } from "react";
 import { Grid, Tab, Tabs, useMediaQuery } from "@mui/material";
-import { ThemeProvider } from '@mui/material/styles';
-
+import { ThemeProvider } from "@mui/material/styles";
 
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
@@ -68,9 +67,9 @@ export default function App() {
 							item
 							sx={{
 								position: "relative",
-								width: fullscreen == FullscreenState.Left ? "100%" : `${panelWidth}%`,
+								width:
+									fullscreen == FullscreenState.Left ? "100%" : `${panelWidth}%`,
 							}}
-							onMouseDown={handleMouseDown}
 						>
 							<WarehouseRenderer />
 
@@ -100,8 +99,8 @@ export default function App() {
 								shortDescription="A brief description of the problem"
 								warningLevel="warning"
 								actions={[
-									[ "04:05", "Latest action to be performed" ],
-									[ "04:00", "Previous Action" ]
+									["04:05", "Latest action to be performed"],
+									["04:00", "Previous Action"],
 								]}
 								resolved={false}
 								reportId={1}
