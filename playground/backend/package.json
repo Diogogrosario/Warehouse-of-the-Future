@@ -4,6 +4,7 @@
 	"description": "Backend to interact with the database of the Playground application",
 	"license": "MIT",
 	"main": "index.js",
+	"type": "module",
 	"dependencies": {
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
