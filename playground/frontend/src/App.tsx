@@ -1,9 +1,15 @@
 import React, { SetStateAction, useEffect } from "react";
-import "./App.css";
 import { Grid, Tab, Tabs, useMediaQuery } from "@mui/material";
-import WarehouseRenderer from "./components/renderer/WarehouseRenderer";
-import PanelDivider from "./components/PanelDivider";
+import { ThemeProvider } from '@mui/material/styles';
+
+
 import FullscreenButton from "./components/FullscreenButton";
+import PanelDivider from "./components/PanelDivider";
+import WarehouseRenderer from "./components/renderer/WarehouseRenderer";
+import Report from "./components/Report";
+import theme from "./styles/theme";
+
+import "./App.css";
 
 export enum FullscreenState {
 	Left,
@@ -22,7 +28,7 @@ export default function App() {
 	const minPanelWidth = 20,
 		maxPanelWidth = 80;
 
-	const handleChange = (event: React.ChangeEvent<{}>, newValue: SetStateAction<number>) => {
+	const handleChange = (event: React.SyntheticEvent, newValue: SetStateAction<number>) => {
 		setSelectedTab(newValue);
 	};
 
@@ -54,46 +60,62 @@ export default function App() {
 	});
 
 	return (
-		<div className="App">
-			<Grid container sx={{ height: "100vh" }} direction={matches ? "row" : "column"}>
-				{fullscreen != FullscreenState.Right && (
-					<Grid
-						item
-						sx={{
-							position: "relative",
-							width: fullscreen == FullscreenState.Left ? "100%" : `${panelWidth}%`,
-						}}
-					>
-						<WarehouseRenderer />
+		<ThemeProvider theme={theme}>
+			<div className="App">
+				<Grid container sx={{ height: "100vh" }} direction={matches ? "row" : "column"}>
+					{fullscreen != FullscreenState.Right && (
+						<Grid
+							item
+							sx={{
+								position: "relative",
+								width: fullscreen == FullscreenState.Left ? "100%" : `${panelWidth}%`,
+							}}
+							onMouseDown={handleMouseDown}
+						>
+							<WarehouseRenderer />
 
-						<FullscreenButton
-							fullscreenState={fullscreen}
-							setFullscreen={setFullscreen}
-							panelSide={FullscreenState.Left}
-						/>
-					</Grid>
-				)}
+							<FullscreenButton
+								fullscreenState={fullscreen}
+								setFullscreen={setFullscreen}
+								panelSide={FullscreenState.Left}
+							/>
+						</Grid>
+					)}
 
-				{fullscreen == FullscreenState.Disabled && (
-					<PanelDivider handleMouseDown={handleMouseDown} orientation={"vertical"} />
-				)}
+					{fullscreen == FullscreenState.Disabled && (
+						<PanelDivider handleMouseDown={handleMouseDown} orientation={"vertical"} />
+					)}
 
-				{fullscreen != FullscreenState.Left && (
-					<Grid item sx={{ position: "relative", flex: 1, height: "100%" }}>
-						<Tabs value={selectedTab} onChange={handleChange}>
-							<Tab label="Reports" />
-							<Tab label="Logs" />
-							<Tab label="Devices" />
-						</Tabs>
+					{fullscreen != FullscreenState.Left && (
+						<Grid item sx={{ position: "relative", flex: 1, height: "100%" }}>
+							<Tabs value={selectedTab} onChange={handleChange}>
+								<Tab label="Reports" />
+								<Tab label="Logs" />
+								<Tab label="Devices" />
+							</Tabs>
 
-						<FullscreenButton
-							fullscreenState={fullscreen}
-							setFullscreen={setFullscreen}
-							panelSide={FullscreenState.Right}
-						/>
-					</Grid>
-				)}
-			</Grid>
-		</div>
+							<Report
+								title="Report Testing"
+								description="This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be"
+								shortDescription="A brief description of the problem"
+								warningLevel="warning"
+								actions={[
+									[ "04:05", "Latest action to be performed" ],
+									[ "04:00", "Previous Action" ]
+								]}
+								resolved={false}
+								reportId={1}
+							/>
+
+							<FullscreenButton
+								fullscreenState={fullscreen}
+								setFullscreen={setFullscreen}
+								panelSide={FullscreenState.Right}
+							/>
+						</Grid>
+					)}
+				</Grid>
+			</div>
+		</ThemeProvider>
 	);
 }
