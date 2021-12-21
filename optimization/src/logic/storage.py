@@ -1,4 +1,5 @@
 from warehouse import *
+import time
 
 class Storage:
     def __init__(self, db):
@@ -62,10 +63,20 @@ class Storage:
         products = sorted(self.products, key=lambda x: (x.weight,x.width), reverse=True)
 
         for product in products:
-            print("----------------------------------------------")
+            out = False
+            iteration = 0
             rack = layout.get_random_rack()
             while not self.valid_placement(rack, product):
                 rack = layout.get_random_rack()
+                iteration += 1
+                if iteration == max_iterations:
+                    layout.products_out.append(product)
+                    out = True
+                    break
+                    
+            if out:
+                continue
+
             rack.add_product(product)
 
         return layout
@@ -73,8 +84,8 @@ class Storage:
     def valid_placement(self, rack, product): # TODO: check other stuff, like height
         valid_weight = rack.get_current_weight() + product.weight <= rack.capacity
         valid_width = rack.last_x + product.width <= rack.width
-        print(f'RACK WEIGHT: {rack.get_current_weight()} + PRODW: {product.weight} <= CAP: {rack.capacity}')
-        print(f'LAST X: {rack.last_x} + PRODW: {product.width} <= RACKW: {rack.width}')
+        # print(f'RACK WEIGHT: {rack.get_current_weight()} + PRODW: {product.weight} <= CAP: {rack.capacity}')
+        # print(f'LAST X: {rack.last_x} + PRODW: {product.width} <= RACKW: {rack.width}')
         return valid_weight and valid_width
 
 

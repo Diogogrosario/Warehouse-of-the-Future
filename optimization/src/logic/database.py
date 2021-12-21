@@ -1,13 +1,21 @@
 import mysql.connector
 import pandas as pd
 
+
 class Database:
     # Connect to MySQL server of a given database
-    def __init__(self, database='test'):
+    def __init__(self, database='test', docker=False):
+        host = "localhost"
+        port = 9002
+
+        if docker:
+            host = "db"
+            port = 3306
+
         try:
             self.db = mysql.connector.connect(
-                host="localhost",
-                port=9002,
+                host=host,
+                port=port,
                 database=database,
                 user="test",
                 password="test"

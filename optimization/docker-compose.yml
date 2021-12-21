@@ -1,25 +1,26 @@
 version: '3'
 
 services:
-  
+
   optimization:
-    build: ./docker/logic
+    build:
+      context: .
+      dockerfile: ./docker/logic/Dockerfile
     depends_on:
       - db
     volumes:
-      - ./src/logic:/home/logic
+      - ./src/logic:/tmp/genetic/logic
     ports:
-      - 50051:50051
+      - 50051:50051    
     networks:
-      - internal
-  
+      - internal      
   server:
     image: nginx:alpine
     volumes:
       - ./src/web:/var/www
       - ./conf/nginx:/etc/nginx/conf.d
     ports:
-      - 8000:80            
+      - "8000:80"
     networks:
       - internal
       - external
@@ -33,7 +34,7 @@ services:
       context:
         ./docker/web
     ports:
-      - 9000:9000
+      - "9000:9000"
     volumes:
       - ./src/web:/var/www
     depends_on:
@@ -46,6 +47,8 @@ services:
       - ./src/model/parser:/home/parser
     networks:
       - internal
+    depends_on:
+      - db
 
   db:
     image: mariadb
@@ -55,7 +58,7 @@ services:
       - MYSQL_USER=test
       - MYSQL_PASSWORD=test
     ports:
-      - 9002:3306
+      - "9002:3306"
     volumes:
       - ./src/model/db:/var/lib/mysql
     networks:
@@ -64,7 +67,7 @@ services:
   phpmyadmin:
     image: phpmyadmin
     ports:
-      - 8080:80
+      - "8080:80"
     environment:
       MYSQL_USER: test
       MYSQL_PASSWORD: test
@@ -76,6 +79,6 @@ services:
 networks:
   internal:
     driver: bridge
-  
+
   external:
     driver: bridge
