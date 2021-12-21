@@ -26,9 +26,9 @@ class Battery {
     remaining : Integer
 }
  
-class Light {
-    color : String
-    consumption : Integer
+class Screen {
+    isOn : Boolean
+    onConsumption : Integer
 }
 
 
@@ -38,7 +38,7 @@ Orchestrator "1" -- "1" MeshGrid : > sends commands
 MeshGrid o-- "1..*" Device
 Device "1" -- "*" Device : propagates commands
 Battery --o Device
-Light --o Device
+Screen --o Device
 
 
 @enduml

@@ -10,3 +10,5 @@ Tools:
 - [Maven](https://maven.apache.org/): To build and manage our Java project more easily, we will be using the Maven build automation tool. This tool allows for better dependency handling and is supported in the most popular IDEs.
 - [Javadoc](https://www.oracle.com/java/technologies/javase/javadoc-tool.html): API documentation generator for the Java source code.
 - Jackson: Java-based library that will be used to parse and manipulate YAML configuration files.
+- [Spring Boot](https://spring.io/projects/spring-boot): Framework built on top of the spring framework, used for building web applications and microservices. Will be used to develop the REST API for frontend communication with backend.
+- [Flutter](https://flutter.dev/): Cross-platform UI toolkit. Used for development of the graphical user interface to visualize the mesh communication.
