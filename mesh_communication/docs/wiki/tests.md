@@ -29,6 +29,12 @@
 **When** I open the system's graph interface and if I do not interact with the time flow buttons,
 **Then** the system's ticks should advance automatically.
 
+### Device out of battery
+
+**Given** a device that has ran out of battery,
+**When** I open the graph interface,
+**Then** I should see that the device turned off.
+
 ## Possible property (use on PBT if we implement it)
 
 Given any system state, if it advances N ticks followed by going back N ticks, then the system's state must remain the same.
