@@ -74,12 +74,14 @@ public abstract class MeshDevice implements Updatable {
             c.execute();
         }
 
+        return hadUpdates;
+    }
+
+    public void nextCommands() {
         this.commands.clear();
         this.commands.addAll(this.commandsNext);
         this.commandsNext.clear();
         this.commStrat.reset();
-
-        return hadUpdates;
     }
 
     /**
