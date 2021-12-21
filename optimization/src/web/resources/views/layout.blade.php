@@ -39,11 +39,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($j = 0; $j < 5; $j++)
+                                @foreach($product_racks as $product_rack)
                                 <tr>
-                                    <td>Parafusos 20</td>
+                                    <td>{{$product_rack}}</td>
                                 </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
