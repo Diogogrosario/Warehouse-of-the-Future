@@ -1,28 +1,36 @@
 import React, { SetStateAction, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Box, Button, Divider, Grid, Tab, Tabs } from "@mui/material";
-import FullscreenIcon from "@mui/icons-material/Fullscreen";
-import { DragHandle } from "@mui/icons-material";
+import { Grid, Tab, Tabs, useMediaQuery } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
 
+
+import FullscreenButton from "./components/FullscreenButton";
+import PanelDivider from "./components/PanelDivider";
+import WarehouseRenderer from "./components/renderer/WarehouseRenderer";
+import Report from "./components/Report";
 import theme from "./styles/theme";
 
 import "./App.css";
-import Cube from "./components/Cube";
-import Report from "./components/Report";
 
+export enum FullscreenState {
+	Left,
+	Disabled,
+	Right,
+}
 
 export default function App() {
+	const matches = useMediaQuery("(min-width: 800px)");
+
 	const [selectedTab, setSelectedTab] = React.useState(0);
 	const [panelWidth, setPanelWidth] = React.useState(60);
+	const [dragging, setDragging] = React.useState(false);
+	const [fullscreen, setFullscreen] = React.useState(FullscreenState.Disabled);
+
 	const minPanelWidth = 20,
 		maxPanelWidth = 80;
 
 	const handleChange = (event: React.SyntheticEvent, newValue: SetStateAction<number>) => {
 		setSelectedTab(newValue);
 	};
-
-	const [dragging, setDragging] = React.useState(false);
 
 	const handleMouseMove = (e: MouseEvent) => {
 		if (dragging) {
@@ -54,70 +62,58 @@ export default function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<div className="App">
-				<Grid container>
-					<Grid
-						item
-						sx={{ position: "relative", width: `${panelWidth}%`}}
-					>
-						<Canvas
-							style={{ height: "90vh" }}
-							camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 5] }}
-							resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }}
-						>
-							<ambientLight intensity={0.5} />
-							<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-							<pointLight position={[-10, -10, -10]} />
-							<Cube />
-						</Canvas>
-
-						<Button sx={{ position: "absolute", bottom: 0, right: 0 }}>
-							<FullscreenIcon />
-						</Button>
-					</Grid>
-
-					<Box
-						sx={{
-							cursor: "ew-resize",
-							backgroundColor: "transparent",
-						}}
-						onMouseDown={handleMouseDown}
-					>
-						<Divider
-							orientation="vertical"
+				<Grid container sx={{ height: "100vh" }} direction={matches ? "row" : "column"}>
+					{fullscreen != FullscreenState.Right && (
+						<Grid
+							item
 							sx={{
-								"> .MuiDivider-wrapper": {
-									padding: "0",
-								},
+								position: "relative",
+								width: fullscreen == FullscreenState.Left ? "100%" : `${panelWidth}%`,
 							}}
+							onMouseDown={handleMouseDown}
 						>
-							<DragHandle sx={{ transform: "rotate(90deg)", color: "rgba(0, 0, 0, 0.5)" }} />
-						</Divider>
-					</Box>
+							<WarehouseRenderer />
 
-					<Grid item sx={{ position: "relative", flex: 1 }}>
-						<Tabs value={selectedTab} onChange={handleChange}>
-							<Tab label="Reports" />
-							<Tab label="Logs" />
-							<Tab label="Devices" />
-						</Tabs>
-						
-						<Report
-							title="Report Testing"
-							description="This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be"
-							shortDescription="A brief description of the problem"
-							warningLevel="warning"
-							actions={[
-								[ "04:05", "Latest action to be performed" ],
-								[ "04:00", "Previous Action" ]
-							]}
-							resolved={false}
-							reportId={1}
-						/>
+							<FullscreenButton
+								fullscreenState={fullscreen}
+								setFullscreen={setFullscreen}
+								panelSide={FullscreenState.Left}
+							/>
+						</Grid>
+					)}
 
-						<Button sx={{ position: "absolute", bottom: 0, right: 0 }}>
-							<FullscreenIcon />
-						</Button>
-					</Grid>
+					{fullscreen == FullscreenState.Disabled && (
+						<PanelDivider handleMouseDown={handleMouseDown} orientation={"vertical"} />
+					)}
+
+					{fullscreen != FullscreenState.Left && (
+						<Grid item sx={{ position: "relative", flex: 1, height: "100%" }}>
+							<Tabs value={selectedTab} onChange={handleChange}>
+								<Tab label="Reports" />
+								<Tab label="Logs" />
+								<Tab label="Devices" />
+							</Tabs>
+
+							<Report
+								title="Report Testing"
+								description="This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be"
+								shortDescription="A brief description of the problem"
+								warningLevel="warning"
+								actions={[
+									[ "04:05", "Latest action to be performed" ],
+									[ "04:00", "Previous Action" ]
+								]}
+								resolved={false}
+								reportId={1}
+							/>
+
+							<FullscreenButton
+								fullscreenState={fullscreen}
+								setFullscreen={setFullscreen}
+								panelSide={FullscreenState.Right}
+							/>
+						</Grid>
+					)}
 				</Grid>
 			</div>
 		</ThemeProvider>
