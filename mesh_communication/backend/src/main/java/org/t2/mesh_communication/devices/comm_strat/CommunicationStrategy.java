@@ -15,6 +15,14 @@ public interface CommunicationStrategy {
     List<Integer> getDeadNeighbors();
 
     /**
+     * Given a device that wants to send a message, yields all device that will recieve that message
+     *
+     * @param me The device relaying/sending the message.
+     * @return the list of devices that me will send messages to
+     */
+    List<MeshDevice> getDestsOfDevice(MeshDevice me);
+
+    /**
      * Sends a message. This device can be the source of the message or just relaying it. Don't send
      * a message to yourself. It isn't intended.
      *

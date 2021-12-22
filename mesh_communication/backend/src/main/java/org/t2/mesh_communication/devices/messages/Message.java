@@ -95,4 +95,10 @@ public abstract class Message {
     }
 
     public abstract String getType();
+
+    public String toJson() {
+        return String.format(
+                "{\"final\": %d, \"failed\": \"%s\"}",
+                this.destination, false); // TODO: message failed
+    }
 }

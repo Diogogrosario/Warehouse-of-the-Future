@@ -18,10 +18,10 @@ public class ManifestGenerator {
     // IMP: This class only generates random manifests for a grid atm
     // Min and max are opposite corners of the grid
     // If nManifests surpasses the number of possible spots, pieces may overlap
-    public ManifestGenerator(int nManifests, Set<Integer> keySet) {
+    public ManifestGenerator(int nManifests, Set<Integer> deviceIds) {
         this.nManifests = nManifests;
         this.devicesIds = new ArrayList<>();
-        devicesIds.addAll(keySet);
+        devicesIds.addAll(deviceIds);
     }
 
     public static boolean manifestFileExists() {

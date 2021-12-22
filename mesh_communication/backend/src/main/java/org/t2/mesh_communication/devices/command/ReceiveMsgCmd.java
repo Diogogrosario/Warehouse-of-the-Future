@@ -4,7 +4,9 @@ import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.messages.Message;
 
 public class ReceiveMsgCmd implements Command {
+    /** Who will receive the message **/
     private final MeshDevice meshDevice;
+
     private final Message message;
 
     public ReceiveMsgCmd(MeshDevice md, Message msg) {
@@ -15,5 +17,9 @@ public class ReceiveMsgCmd implements Command {
     @Override
     public void execute() {
         this.meshDevice.receiveMessage(this.message);
+    }
+
+    public Message getMessage() {
+        return message;
     }
 }

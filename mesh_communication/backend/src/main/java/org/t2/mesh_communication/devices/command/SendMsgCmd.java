@@ -28,6 +28,7 @@ public class SendMsgCmd implements Command {
             default:
                 return;
         }
+
         this.meshDevice.sendMessage(m);
     }
 
