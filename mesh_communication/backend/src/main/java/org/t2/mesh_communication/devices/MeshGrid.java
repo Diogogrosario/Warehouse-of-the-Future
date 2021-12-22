@@ -3,8 +3,8 @@ package org.t2.mesh_communication.devices;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import org.springframework.stereotype.Component;
 import java.util.Map;
+import org.springframework.stereotype.Component;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 
 /**

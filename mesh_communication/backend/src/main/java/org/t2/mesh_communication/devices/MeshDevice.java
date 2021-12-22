@@ -136,11 +136,7 @@ public abstract class MeshDevice implements Updatable {
     }
 
     public String toJson() {
-        return "{\"device_id\":"
-                + this.id
-                + ",\"position\":"
-                + this.pos.toJson()
-                + "}";
+        return "{\"device_id\":" + this.id + ",\"position\":" + this.pos.toJson() + "}";
     }
 
     public abstract boolean isOperational();

@@ -4,7 +4,7 @@ import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.messages.Message;
 
 public class ReceiveMsgCmd implements Command {
-    /** Who will receive the message **/
+    /** Who will receive the message * */
     private final MeshDevice meshDevice;
 
     private final Message message;

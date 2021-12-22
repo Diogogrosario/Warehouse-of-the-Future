@@ -1,8 +1,14 @@
 package org.t2.mesh_communication;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.LogRecord;
+import javax.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -20,14 +26,6 @@ import org.t2.mesh_communication.devices.components.Screen;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.LogRecord;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 public class APITests {
 
@@ -52,20 +50,24 @@ public class APITests {
             Screen screen2 = new Screen(5, 10);
             Device device2 = new Device(2, pos2, new FloodStrategy(mg), 10, 10, bat2, screen2);
 
-            when(mg.getDevices()).thenAnswer(
-                    (Answer<List<MeshDevice>>) invocation -> {
-                        List<MeshDevice> lmd = new ArrayList<>();
-                        lmd.add(device1);
-                        lmd.add(device2);
-                        return lmd;
-                    });
+            when(mg.getDevices())
+                    .thenAnswer(
+                            (Answer<List<MeshDevice>>)
+                                    invocation -> {
+                                        List<MeshDevice> lmd = new ArrayList<>();
+                                        lmd.add(device1);
+                                        lmd.add(device2);
+                                        return lmd;
+                                    });
 
-            when(mg.devicesInRange(device1)).thenAnswer(
-                    (Answer<List<MeshDevice>>) invocation -> {
-                        List<MeshDevice> lmd = new ArrayList<>();
-                        lmd.add(device2);
-                        return lmd;
-                    });
+            when(mg.devicesInRange(device1))
+                    .thenAnswer(
+                            (Answer<List<MeshDevice>>)
+                                    invocation -> {
+                                        List<MeshDevice> lmd = new ArrayList<>();
+                                        lmd.add(device2);
+                                        return lmd;
+                                    });
 
             api.setMeshGrid(mg);
         }
@@ -83,36 +85,43 @@ public class APITests {
 
         @Test
         public void getDevicesTest() {
-            String expectedOutput = "[{\"device_id\":1,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}, {\"device_id\":2,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
-            List<JsonNode> output = api.devicesStatus("all", Mockito.mock(HttpServletResponse.class));
+            String expectedOutput =
+                    "[{\"device_id\":1,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}, {\"device_id\":2,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
+            List<JsonNode> output =
+                    api.devicesStatus("all", Mockito.mock(HttpServletResponse.class));
 
             String outputString = listToString(output);
 
             assertEquals(outputString.toString(), expectedOutput);
 
-            List<JsonNode> outputFail = api.devicesStatus("failed", Mockito.mock(HttpServletResponse.class));
+            List<JsonNode> outputFail =
+                    api.devicesStatus("failed", Mockito.mock(HttpServletResponse.class));
 
             assertEquals("[]", outputFail.toString());
 
-            List<JsonNode> outputInvalid = api.devicesStatus("invalidParameter", Mockito.mock(HttpServletResponse.class));
+            List<JsonNode> outputInvalid =
+                    api.devicesStatus("invalidParameter", Mockito.mock(HttpServletResponse.class));
 
             assertEquals("[]", outputFail.toString());
         }
 
         @Test
         public void getSpecificDeviceTest() {
-            String expectedOutput = "{\"device_id\":1,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
+            String expectedOutput =
+                    "{\"device_id\":1,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
             JsonNode output = api.devices(1, Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, output.toString());
 
             int invalidID = 23;
-            JsonNode outputInvalid = api.devices(invalidID, Mockito.mock(HttpServletResponse.class));
+            JsonNode outputInvalid =
+                    api.devices(invalidID, Mockito.mock(HttpServletResponse.class));
             assertNull(outputInvalid);
         }
 
         @Test
         public void getInRangeDevicesTest() {
-            String expectedOutput = "[{\"device_id\":2,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
+            String expectedOutput =
+                    "[{\"device_id\":2,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
             List<JsonNode> output = api.devicesInRange(1, Mockito.mock(HttpServletResponse.class));
 
             String outputString = listToString(output);
@@ -124,10 +133,12 @@ public class APITests {
             String output = api.tick("forwards", 1, Mockito.mock(HttpServletResponse.class));
             assertEquals("Mesh Grid updated", output);
 
-            String outputInvalidTimeflow = api.tick("invalid", 1, Mockito.mock(HttpServletResponse.class));
+            String outputInvalidTimeflow =
+                    api.tick("invalid", 1, Mockito.mock(HttpServletResponse.class));
             assertEquals("Invalid time flow.", outputInvalidTimeflow);
 
-            String outputNegTicks = api.tick("forwards", -1, Mockito.mock(HttpServletResponse.class));
+            String outputNegTicks =
+                    api.tick("forwards", -1, Mockito.mock(HttpServletResponse.class));
             assertEquals("NTicks must be a number of value higher than 0.", outputNegTicks);
         }
     }
@@ -156,38 +167,48 @@ public class APITests {
 
             Device dvc = Mockito.mock(Device.class);
 
-            when(dvc.getCommands()).thenAnswer(
-                    (Answer<List<Command>>) invocation -> {
-                        List<Command> lcmd = new ArrayList<>();
-                        lcmd.add(new SendMsgCmd(device2, new RequestMessage(1, 1, 2, "test")));
-                        return lcmd;
-                    });
+            when(dvc.getCommands())
+                    .thenAnswer(
+                            (Answer<List<Command>>)
+                                    invocation -> {
+                                        List<Command> lcmd = new ArrayList<>();
+                                        lcmd.add(
+                                                new SendMsgCmd(
+                                                        device2,
+                                                        new RequestMessage(1, 1, 2, "test")));
+                                        return lcmd;
+                                    });
 
-            when(fs.getDestsOfDevice(dvc)).thenAnswer(
-                    (Answer<List<MeshDevice>>) invocation -> {
-                        List<MeshDevice> lmd = new ArrayList<>();
-                        lmd.add(device1);
-                        return lmd;
-                    });
+            when(fs.getDestsOfDevice(dvc))
+                    .thenAnswer(
+                            (Answer<List<MeshDevice>>)
+                                    invocation -> {
+                                        List<MeshDevice> lmd = new ArrayList<>();
+                                        lmd.add(device1);
+                                        return lmd;
+                                    });
 
-            when(dvc.getCommStrat()).thenAnswer(
-                    (Answer<CommunicationStrategy>) invocation -> fs);
+            when(dvc.getCommStrat()).thenAnswer((Answer<CommunicationStrategy>) invocation -> fs);
 
-            when(mg.getDevices()).thenAnswer(
-                    (Answer<List<MeshDevice>>) invocation -> {
-                        List<MeshDevice> lmd = new ArrayList<>();
-                        lmd.add(device1);
-                        lmd.add(device2);
-                        lmd.add(dvc);
-                        return lmd;
-                    });
+            when(mg.getDevices())
+                    .thenAnswer(
+                            (Answer<List<MeshDevice>>)
+                                    invocation -> {
+                                        List<MeshDevice> lmd = new ArrayList<>();
+                                        lmd.add(device1);
+                                        lmd.add(device2);
+                                        lmd.add(dvc);
+                                        return lmd;
+                                    });
 
-            when(mg.devicesInRange(device1)).thenAnswer(
-                    (Answer<List<MeshDevice>>) invocation -> {
-                        List<MeshDevice> lmd = new ArrayList<>();
-                        lmd.add(device2);
-                        return lmd;
-                    });
+            when(mg.devicesInRange(device1))
+                    .thenAnswer(
+                            (Answer<List<MeshDevice>>)
+                                    invocation -> {
+                                        List<MeshDevice> lmd = new ArrayList<>();
+                                        lmd.add(device2);
+                                        return lmd;
+                                    });
             api.setMeshGrid(mg);
         }
 
@@ -197,7 +218,6 @@ public class APITests {
             ObjectNode outputInvalidTimeflow = api.message(Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, outputInvalidTimeflow.toString());
         }
-
     }
 
     @Test
@@ -206,32 +226,38 @@ public class APITests {
         MockedStatic<Logger> logger = Mockito.mockStatic(Logger.class);
         Logger logger1 = Mockito.mock(Logger.class);
 
-        LogRecord record1 = new Log(
-                "Device 1",
-                "Receive message [source=%d], [msg=%s], [lastHop=%d]",
-                0, "test message 1", 0);
+        LogRecord record1 =
+                new Log(
+                        "Device 1",
+                        "Receive message [source=%d], [msg=%s], [lastHop=%d]",
+                        0,
+                        "test message 1",
+                        0);
         record1.setSequenceNumber(1);
 
-        LogRecord record2 = new Log(
-                "Device 2",
-                "Receive message [source=%d], [msg=%s], [lastHop=%d]",
-                1, "test message 2", 3);
+        LogRecord record2 =
+                new Log(
+                        "Device 2",
+                        "Receive message [source=%d], [msg=%s], [lastHop=%d]",
+                        1,
+                        "test message 2",
+                        3);
         record2.setSequenceNumber(1);
 
-        LogRecord record3 = new Log(
-                "Device 2",
-                "Sent message [destination=%d], [msg=%s]",
-                4, "test message 3");
+        LogRecord record3 =
+                new Log("Device 2", "Sent message [destination=%d], [msg=%s]", 4, "test message 3");
         record3.setSequenceNumber(1);
 
-        when(logger1.getHistory()).thenAnswer(
-                (Answer<List<LogRecord>>) invocation -> {
-                    List<LogRecord> records = new ArrayList<>();
-                    records.add(record1);
-                    records.add(record2);
-                    records.add(record3);
-                    return records;
-                });
+        when(logger1.getHistory())
+                .thenAnswer(
+                        (Answer<List<LogRecord>>)
+                                invocation -> {
+                                    List<LogRecord> records = new ArrayList<>();
+                                    records.add(record1);
+                                    records.add(record2);
+                                    records.add(record3);
+                                    return records;
+                                });
 
         when(logger1.getTick()).thenReturn(2);
 
@@ -245,11 +271,14 @@ public class APITests {
         assertEquals(1, response.get("Device 1").size());
         assertEquals(2, response.get("Device 2").size());
 
-        assertEquals("\"Receive message [source=0], [msg=test message 1], [lastHop=0]\"",
+        assertEquals(
+                "\"Receive message [source=0], [msg=test message 1], [lastHop=0]\"",
                 response.get("Device 1").get(0).toString());
-        assertEquals("\"Receive message [source=1], [msg=test message 2], [lastHop=3]\"",
+        assertEquals(
+                "\"Receive message [source=1], [msg=test message 2], [lastHop=3]\"",
                 response.get("Device 2").get(0).toString());
-        assertEquals("\"Sent message [destination=4], [msg=test message 3]\"",
+        assertEquals(
+                "\"Sent message [destination=4], [msg=test message 3]\"",
                 response.get("Device 2").get(1).toString());
     }
 }

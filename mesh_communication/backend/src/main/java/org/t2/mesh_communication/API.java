@@ -6,13 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.LogRecord;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,8 +27,7 @@ import org.t2.mesh_communication.log.Logger;
 @SpringBootApplication
 @RestController
 public class API {
-    @Autowired
-    private MeshGrid meshGrid;
+    @Autowired private MeshGrid meshGrid;
 
     public static void main(String[] args) {
         API api = new API();
@@ -108,16 +105,16 @@ public class API {
                 devices = this.meshGrid.getDevices();
                 break;
             case "failed":
-                devices = this.meshGrid.getDevices()
-                        .stream()
-                        .filter(dv -> !dv.isOperational())
-                        .toList();
+                devices =
+                        this.meshGrid.getDevices().stream()
+                                .filter(dv -> !dv.isOperational())
+                                .toList();
                 break;
             case "operational":
-                devices = this.meshGrid.getDevices()
-                        .stream()
-                        .filter(MeshDevice::isOperational)
-                        .toList();
+                devices =
+                        this.meshGrid.getDevices().stream()
+                                .filter(MeshDevice::isOperational)
+                                .toList();
                 break;
             default:
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -218,8 +215,7 @@ public class API {
             @RequestParam(value = "n_ticks", required = false, defaultValue = "1") int nTicks,
             HttpServletResponse response) {
 
-        if (nTicks <= 0)
-            return "NTicks must be a number of value higher than 0.";
+        if (nTicks <= 0) return "NTicks must be a number of value higher than 0.";
         switch (timeFlow) {
             case "forwards":
                 for (int i = 0; i < nTicks; ++i) {
@@ -289,7 +285,8 @@ public class API {
         List<LogRecord> history = Logger.getInstance().getHistory();
 
         // logs from history that are from the current tick
-        // (currentTick - 1) -> currentTick represents the tick in which commands still haven't been executed,
+        // (currentTick - 1) -> currentTick represents the tick in which commands still haven't been
+        // executed,
         // so we want the logs from the "previous" tick
         history = history.stream().filter(l -> l.getSequenceNumber() == currentTick - 1).toList();
 
@@ -297,8 +294,7 @@ public class API {
             Log log = (Log) lr;
             String deviceName = log.getSourceClassName();
             if (!logs.containsKey(deviceName)) {
-                ArrayNode emptyArray =
-                        mapper.convertValue(new ArrayList<>(), ArrayNode.class);
+                ArrayNode emptyArray = mapper.convertValue(new ArrayList<>(), ArrayNode.class);
                 logs.put(deviceName, emptyArray);
             }
             logs.get(deviceName).add(log.getMessage());
