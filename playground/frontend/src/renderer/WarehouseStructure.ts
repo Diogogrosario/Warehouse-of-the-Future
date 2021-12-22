@@ -1,7 +1,6 @@
 import * as THREE from "three";
-import { BufferGeometry } from "three";
 
-import { Shelf, ShelfConfig, BucketType } from "./Shelf";
+import { Shelf, BucketType } from "./Shelf";
 
 export class WarehouseStructure {
 	private obj: THREE.Object3D;
@@ -10,7 +9,7 @@ export class WarehouseStructure {
 	private static groundMaterial = new THREE.MeshPhongMaterial({ color: 0x6d6c65 });
 	private static wallMaterial = new THREE.MeshPhongMaterial({ color: 0x828282 });
 
-	constructor(width: number = 16, depth: number = 20, height: number = 6) {
+	constructor(width = 16, depth = 20, height = 6) {
 		this.obj = new THREE.Group();
 		this.obj.name = "Warehouse";
 

@@ -25,9 +25,9 @@ export class Shelf {
 
 	constructor(
 		shelfConfig: ShelfConfig[],
-		width: number = 2,
-		depth: number = 1,
-		height: number = 4
+		width = 2,
+		depth = 1,
+		height = 4
 	) {
 		const group = new THREE.Group();
 		group.name = "Shelf";
@@ -66,7 +66,7 @@ export class Shelf {
 		shelf.position.set(width / 2, 0, depth / 2);
 
 		const shelfHeightOffset = 0.06;
-		for (let sh of shelfConfig) {
+		for (const sh of shelfConfig) {
 			const m = shelf.clone();
 			m.position.y = sh.height - height / 2 + shelfHeightOffset;
 			group.add(m);

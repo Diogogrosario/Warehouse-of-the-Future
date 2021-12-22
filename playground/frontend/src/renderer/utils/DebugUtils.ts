@@ -1,8 +1,7 @@
 import * as THREE from "three";
 
-export function dumpObject(obj: THREE.Object3D, lines = [], isLast = true, prefix = ""): string[] {
+export function dumpObject(obj: THREE.Object3D, lines: string[] = [], isLast = true, prefix = ""): string[] {
 	const localPrefix = isLast ? "└─" : "├─";
-	// @ts-ignore
 	lines.push(`${prefix}${prefix ? localPrefix : ""}${obj.name || "*no-name*"} [${obj.type}]`);
 	const newPrefix = prefix + (isLast ? "  " : "│ ");
 	const lastNdx = obj.children.length - 1;

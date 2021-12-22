@@ -19,7 +19,7 @@ class SceneManager {
 	private width: number;
 	private height: number;
 
-	private invalidFrame: boolean = true;
+	private invalidFrame = true;
 
 	constructor(container: HTMLElement | undefined, width: number, height: number) {
 		this.width = width;
@@ -88,7 +88,7 @@ class SceneManager {
 
 	// The X axis is red. The Y axis is green. The Z axis is blue.
 	private addAxes() {
-		var axesHelper = new THREE.AxesHelper(5);
+		const axesHelper = new THREE.AxesHelper(5);
 		this.scene.add(axesHelper);
 	}
 
