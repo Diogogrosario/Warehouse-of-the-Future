@@ -22,8 +22,8 @@ public class LayoutGenTests {
     @BeforeAll
     static void init() {
         nDevices = 9;
-        maxRows = 3;
-        maxCols = 3;
+        maxRows = 2;
+        maxCols = 2;
         generator = new LayoutGenerator(nDevices, maxRows, maxCols);
     }
 

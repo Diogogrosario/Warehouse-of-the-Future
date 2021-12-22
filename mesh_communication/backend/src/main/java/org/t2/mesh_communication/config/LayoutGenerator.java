@@ -56,7 +56,7 @@ public class LayoutGenerator {
         List<Position> positions = possiblePositions();
         Collections.shuffle(positions, new Random());
 
-        for (int i = 0; i < this.nDevices; ++i) {
+        for (int i = 1; i <= this.nDevices; ++i) {
             Position p = positions.get(i % this.nDevices);
             String device = i + SEPARATOR + p.getX() + SEPARATOR + p.getY();
             layoutFile.write(device + "\n");
