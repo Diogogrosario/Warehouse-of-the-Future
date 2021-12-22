@@ -1,0 +1,41 @@
+name: T3 Prettier check formatting
+
+# This action works with pull requests and pushes
+on:
+  pull_request:
+    branches: [t3_development]
+  push:
+    branches: [t3_development]
+
+jobs:
+  prettier-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playground/frontend
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+      - name: Install dependencies
+        run: yarn
+      - run: yarn check-format
+
+  prettier-backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playground/backend
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+      - name: Install dependencies
+        run: yarn
+      - run: yarn check-format
