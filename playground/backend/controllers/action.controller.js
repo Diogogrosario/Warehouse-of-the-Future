@@ -1,4 +1,5 @@
-import { Action } from "../models/action.model";
+import db from "../models/index.js"
+const Action = db.action;
 
 // Create and Save a new Action
 export function create(req, res) {

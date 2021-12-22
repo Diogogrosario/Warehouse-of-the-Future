@@ -1,4 +1,5 @@
-import { Device } from "../models/action.model";
+import db from "../models/index.js";
+const Device = db.device;
 
 // Create and Save a new Device
 export function create(req, res) {

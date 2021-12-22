@@ -1,4 +1,5 @@
-import { Report } from "../models/report.model";
+import db from "../models/index.js";
+const Report = db.report;
 
 // Create and Save a new Report
 export function create(req, res) {
