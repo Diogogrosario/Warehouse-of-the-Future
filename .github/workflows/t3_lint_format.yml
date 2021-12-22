@@ -1,4 +1,4 @@
-name: T3 Prettier check formatting
+name: T3 Lint and Check Formatting
 
 # This action works with pull requests and pushes
 on:
