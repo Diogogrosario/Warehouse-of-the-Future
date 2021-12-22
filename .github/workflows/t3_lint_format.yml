@@ -7,8 +7,11 @@ on:
     branches: [t3_development]
 
 jobs:
-  lint:
+  frontend:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playground/frontend
 
     steps:
       - uses: actions/checkout@v2
@@ -19,14 +22,15 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Lint Frontend
-        working-directory: playground/frontend
         run: yarn lint
-      - name: Lint Backend
-        working-directory: playground/backend
-        run: yarn lint
+      - name: Check Formatting Frontend
+        run: yarn check-format
 
-  check-format:
+  backend:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playground/backend
 
     steps:
       - uses: actions/checkout@v2
@@ -36,9 +40,7 @@ jobs:
           node-version: "16"
       - name: Install dependencies
         run: yarn
-      - name: Check Formatting Frontend
-        working-directory: playground/frontend
-        run: yarn check-format
+      - name: Lint Backend
+        run: yarn lint
       - name: Check Formatting Backend
-        working-directory: playground/backend
         run: yarn check-format
