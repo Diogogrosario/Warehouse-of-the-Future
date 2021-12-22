@@ -51,7 +51,8 @@
 		"start": "webpack-dev-server --mode=development",
 		"build": "webpack --mode=production",
 		"lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,json,yml}\""
+		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,json,yml}\"",
+		"check-format": "prettier --check \"**/*.{js,jsx,ts,tsx,css,html,json,yml}\""
 	},
 	"eslintConfig": {
 		"extends": [
