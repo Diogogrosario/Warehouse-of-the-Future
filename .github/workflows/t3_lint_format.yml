@@ -1,6 +1,5 @@
 name: T3 Lint and Check Formatting
 
-# This action works with pull requests and pushes
 on:
   pull_request:
     branches: [t3_development]
@@ -27,7 +26,6 @@ jobs:
         run: yarn lint
 
   check-format:
-      lint:
     runs-on: ubuntu-latest
 
     steps:
