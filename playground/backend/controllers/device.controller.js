@@ -43,10 +43,10 @@ export function findOne(req, res) {
 	Device.findByPk(id)
 		.then((data) => {
 			if (data) res.send(data);
-			else res.status(404).send({ message: "Didn't find device ${id}." });
+			else res.status(404).send({ message: `Didn't find device ${id}.` });
 		})
 		.catch((err) => {
-			res.status(500).send({ message: err.message || "Error on device ${id} retrieval." });
+			res.status(500).send({ message: err.message || `Error on device ${id} retrieval.` });
 		});
 }
 

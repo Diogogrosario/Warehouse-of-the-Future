@@ -4,7 +4,6 @@ import * as action from "../controllers/action.controller.js";
 import * as device from "../controllers/device.controller.js";
 import * as report from "../controllers/report.controller.js";
 
-// const app = express();
 const router = Router();
 
 // ACTIONS
@@ -32,4 +31,3 @@ router.delete("/report/:id", report.delete);
 router.delete("/report/", report.deleteAll);
 
 export default router;
-//app.use("/api", router);

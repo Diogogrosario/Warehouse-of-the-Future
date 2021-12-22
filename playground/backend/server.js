@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 	res.json({ message: "Welcome to the playgroud backend API" });
 });
 
+// use routes defined in ./routes/playground.routes.js
 app.use("/", router);
 
 // set port, listen for requests

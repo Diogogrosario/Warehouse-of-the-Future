@@ -47,10 +47,10 @@ export function findOne(req, res) {
 	Report.findByPk(id)
 		.then((data) => {
 			if (data) res.send(data);
-			else res.status(404).send({ message: "Didn't find report ${id}." });
+			else res.status(404).send({ message: `Didn't find report ${id}.` });
 		})
 		.catch((err) => {
-			res.status(500).send({ message: err.message || "Error on report ${id} retrieval." });
+			res.status(500).send({ message: err.message || `Error on report ${id} retrieval.` });
 		});
 }
 

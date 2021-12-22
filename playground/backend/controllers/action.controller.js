@@ -1,4 +1,4 @@
-import db from "../models/index.js"
+import db from "../models/index.js";
 const Action = db.action;
 
 // Create and Save a new Action
@@ -45,10 +45,10 @@ export function findOne(req, res) {
 	Action.findByPk(id)
 		.then((data) => {
 			if (data) res.send(data);
-			else res.status(404).send({ message: "Didn't find action ${id}." });
+			else res.status(404).send({ message: `Didn't find action ${id}.` });
 		})
 		.catch((err) => {
-			res.status(500).send({ message: err.message || "Error on action ${id} retrieval." });
+			res.status(500).send({ message: err.message || `Error on action ${id} retrieval.` });
 		});
 }
 
@@ -63,7 +63,7 @@ export function update(req, res) {
 			if (num == 1) {
 				res.send({ message: "Success." });
 			} else {
-				res.send({ message: "Can't update report ${id}." });
+				res.send({ message: `Can't update report ${id}.` });
 			}
 		})
 		.catch((err) => {
