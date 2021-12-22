@@ -24,6 +24,7 @@ jobs:
       - name: Lint Frontend
         run: yarn lint
       - name: Check Formatting Frontend
+        if: always()
         run: yarn check-format
 
   backend:
@@ -43,4 +44,5 @@ jobs:
       - name: Lint Backend
         run: yarn lint
       - name: Check Formatting Backend
+        if: always()
         run: yarn check-format
