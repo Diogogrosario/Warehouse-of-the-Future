@@ -1,4 +1,4 @@
-name: T3 Lint and Check Formatting
+name: T3 - Lint and Check Formatting
 
 on:
   pull_request:
