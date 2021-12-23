@@ -31,7 +31,7 @@ class Storage:
         products = []
 
         for _, p in df_products.iterrows():
-            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['sector_id'])
+            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['sector_id'], p['frequency'])
             products.append(product)
 
         return products
