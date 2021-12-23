@@ -11,7 +11,7 @@ interface FullscreenProps {
 }
 
 export default function FullscreenButton(props: FullscreenProps) {
-	let icon =
+	const icon =
 		props.fullscreenState == FullscreenState.Disabled ? <FullscreenIcon /> : <FullscreenExit />;
 
 	return (

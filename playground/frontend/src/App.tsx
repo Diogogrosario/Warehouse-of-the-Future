@@ -15,15 +15,15 @@ export enum FullscreenState {
 }
 
 export default function App() {
-	const matches = useMediaQuery("(min-width: 800px)");
+	const mobile = useMediaQuery("(max-width: 800px)");
 
 	const [selectedTab, setSelectedTab] = React.useState(0);
-	const [panelWidth, setPanelWidth] = React.useState(60);
+	const [panelSize, setPanelSize] = React.useState(60);
 	const [dragging, setDragging] = React.useState(false);
 	const [fullscreen, setFullscreen] = React.useState(FullscreenState.Disabled);
 
-	const minPanelWidth = 20,
-		maxPanelWidth = 80;
+	const minPanelSize = 20,
+		maxPanelSize = 80;
 
 	const handleChange = (event: React.SyntheticEvent, newValue: SetStateAction<number>) => {
 		setSelectedTab(newValue);
@@ -31,10 +31,11 @@ export default function App() {
 
 	const handleMouseMove = (e: MouseEvent) => {
 		if (dragging) {
-			const newWidth =
-				((e.clientX - document.body.offsetLeft) / document.body.clientWidth) * 100;
+			const newSize = mobile
+				? ((e.clientY - document.body.offsetTop) / document.body.clientHeight) * 100
+				: ((e.clientX - document.body.offsetLeft) / document.body.clientWidth) * 100;
 
-			if (newWidth > minPanelWidth && newWidth < maxPanelWidth) setPanelWidth(newWidth);
+			if (newSize > minPanelSize && newSize < maxPanelSize) setPanelSize(newSize);
 		}
 	};
 
@@ -68,14 +69,20 @@ export default function App() {
 					margin: 0,
 				}}
 			>
-				<Grid container sx={{ height: "100vh" }} direction={matches ? "row" : "column"}>
+				<Grid container sx={{ height: "100vh" }} direction={mobile ? "row" : "column"}>
 					{fullscreen != FullscreenState.Right && (
 						<Grid
 							item
 							sx={{
 								position: "relative",
 								width:
-									fullscreen == FullscreenState.Left ? "100%" : `${panelWidth}%`,
+									mobile || fullscreen == FullscreenState.Left
+										? "100%"
+										: `${panelSize}%`,
+								height:
+									!mobile || fullscreen == FullscreenState.Left
+										? "100%"
+										: `${panelSize}%`,
 							}}
 						>
 							<WarehouseRenderer />
@@ -89,7 +96,10 @@ export default function App() {
 					)}
 
 					{fullscreen == FullscreenState.Disabled && (
-						<PanelDivider handleMouseDown={handleMouseDown} orientation={"vertical"} />
+						<PanelDivider
+							handleMouseDown={handleMouseDown}
+							orientation={mobile ? "horizontal" : "vertical"}
+						/>
 					)}
 
 					{fullscreen != FullscreenState.Left && (
