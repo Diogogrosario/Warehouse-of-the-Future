@@ -1,0 +1,1903 @@
+{
+    "room_width": 17.827,
+    "room_height": 21.57,
+    "zones": [
+        {
+            "ZONE_TYPE": 1,
+            "width": 16.029,
+            "length": 2.227,
+            "shelves": [
+                {
+                    "shelf_length": 1.86,
+                    "shelf_height": 3.022,
+                    "shelf_width": 1.763,
+                    "layers": [
+                        {
+                            "buckets_per_line": 4,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.796,
+                            "layer_height": 6.613684315023163,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.3461856607811664,
+                                    "bucket_length": 0.36636903621383415,
+                                    "bucket_height": 2.032,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6953583912965936,
+                                    "bucket_length": 0.7003543855208203,
+                                    "bucket_height": 0.557,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5559093989655788,
+                                    "bucket_length": 0.838508108108108,
+                                    "bucket_height": 0.526,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.1655465489566613,
+                                    "bucket_length": 0.6788022488389148,
+                                    "bucket_height": 2.06,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.16968891968891964,
+                                    "bucket_length": 0.6871201379574633,
+                                    "bucket_height": 0.672,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6498406868406866,
+                                    "bucket_length": 0.5614605746108088,
+                                    "bucket_height": 0.856,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.35498921998921995,
+                                    "bucket_length": 0.72647722007722,
+                                    "bucket_height": 0.813,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5884811734811733,
+                                    "bucket_length": 0.5499071131752629,
+                                    "bucket_height": 0.852,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5007161803713527,
+                                    "bucket_length": 0.8065108258287029,
+                                    "bucket_height": 1.228,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5324244031830238,
+                                    "bucket_length": 0.5981850398683711,
+                                    "bucket_height": 2.034,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4386684350132625,
+                                    "bucket_length": 0.2950146718146718,
+                                    "bucket_height": 1.263,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.29119098143236066,
+                                    "bucket_length": 0.6312906379858226,
+                                    "bucket_height": 1.833,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.009,
+                            "layer_height": 5.8237227001985445,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.5359451545057434,
+                                    "bucket_length": 0.8546696528555431,
+                                    "bucket_height": 0.814,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.40017618508331987,
+                                    "bucket_length": 0.6071881918819189,
+                                    "bucket_height": 1.272,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8268786604109367,
+                                    "bucket_length": 0.8881437125748505,
+                                    "bucket_height": 1.892,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5360111914199114,
+                                    "bucket_length": 1.0053303471444568,
+                                    "bucket_height": 2.49,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.9306206574959197,
+                                    "bucket_length": 1.2528118081180815,
+                                    "bucket_height": 2.436,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.2963681510841688,
+                                    "bucket_length": 0.97185628742515,
+                                    "bucket_height": 2.12,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 4,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.006,
+                            "layer_height": 2.782819324950364,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.32723481506616897,
+                                    "bucket_length": 1.86,
+                                    "bucket_height": 0.349,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.2810211231761113,
+                                    "bucket_length": 1.86,
+                                    "bucket_height": 1.096,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.44179691211401423,
+                                    "bucket_length": 1.86,
+                                    "bucket_height": 0.347,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7129471496437054,
+                                    "bucket_length": 1.8599999999999999,
+                                    "bucket_height": 0.626,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "shelf_length": 1.532,
+                    "shelf_height": 2.664,
+                    "shelf_width": 1.176,
+                    "layers": [
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.074,
+                            "layer_height": 3.585231981981982,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.176,
+                                    "bucket_length": 0.8243633485058381,
+                                    "bucket_height": 1.209,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.176,
+                                    "bucket_length": 0.7076366514941619,
+                                    "bucket_height": 0.608,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.4,
+                            "layer_height": 4.8981989489489495,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.20904655636783379,
+                                    "bucket_length": 0.6134722984092155,
+                                    "bucket_height": 1.887,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4506717968449403,
+                                    "bucket_length": 0.5218246648793566,
+                                    "bucket_height": 0.96,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5162816467872258,
+                                    "bucket_length": 0.361333049766057,
+                                    "bucket_height": 2.026,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6176697247706422,
+                                    "bucket_length": 0.420746754434083,
+                                    "bucket_height": 1.55,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.3322110091743119,
+                                    "bucket_length": 0.5949335120643432,
+                                    "bucket_height": 0.456,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.22611926605504587,
+                                    "bucket_length": 0.3531875797532965,
+                                    "bucket_height": 1.82,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.475360281195079,
+                                    "bucket_length": 0.49778094715670135,
+                                    "bucket_height": 1.187,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.3407896895137668,
+                                    "bucket_length": 0.4152418230563003,
+                                    "bucket_height": 0.374,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.35985002929115406,
+                                    "bucket_length": 0.8174793704806466,
+                                    "bucket_height": 2.004,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.02,
+                            "layer_height": 5.7511651651651645,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.176,
+                                    "bucket_length": 0.6224404924760603,
+                                    "bucket_height": 2.273,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.176,
+                                    "bucket_length": 0.43626721386228917,
+                                    "bucket_height": 2.244,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.176,
+                                    "bucket_length": 0.4732922936616507,
+                                    "bucket_height": 1.397,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "ZONE_TYPE": 2,
+            "width": 12.447,
+            "length": 1.398,
+            "shelves": [
+                {
+                    "shelf_length": 1.08,
+                    "shelf_height": 3.052,
+                    "shelf_width": 2.058,
+                    "layers": [
+                        {
+                            "buckets_per_line": 4,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.006,
+                            "layer_height": 1.042,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.3853125940792775,
+                                    "bucket_length": 0.3610433467741936,
+                                    "bucket_height": 0.335,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5558414450577019,
+                                    "bucket_length": 0.3523074788400166,
+                                    "bucket_height": 0.7,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.45154741595584547,
+                                    "bucket_length": 0.3695151613426301,
+                                    "bucket_height": 0.617,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6652985449071751,
+                                    "bucket_length": 0.34686328417895523,
+                                    "bucket_height": 1.037,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.94472,
+                                    "bucket_length": 0.36226814516129036,
+                                    "bucket_height": 0.723,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.31808,
+                                    "bucket_length": 0.3545552934646871,
+                                    "bucket_height": 0.449,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.32647999999999994,
+                                    "bucket_length": 0.27372142046375875,
+                                    "bucket_height": 0.921,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.46871999999999997,
+                                    "bucket_length": 0.37723069232691825,
+                                    "bucket_height": 0.63,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.3341720393330483,
+                                    "bucket_length": 0.3566885080645162,
+                                    "bucket_height": 0.696,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.42954920906370236,
+                                    "bucket_length": 0.3731372276952963,
+                                    "bucket_height": 0.485,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.42514989311671647,
+                                    "bucket_length": 0.43676341819361125,
+                                    "bucket_height": 0.313,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8691288584865325,
+                                    "bucket_length": 0.3559060234941265,
+                                    "bucket_height": 0.6,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.066,
+                            "layer_height": 1.2,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.6338358149534198,
+                                    "bucket_length": 0.46683870967741936,
+                                    "bucket_height": 0.614,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.732811211083685,
+                                    "bucket_length": 0.5799897854954035,
+                                    "bucket_height": 0.875,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6913529739628951,
+                                    "bucket_length": 0.3015141955835962,
+                                    "bucket_height": 0.516,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6871285679032656,
+                                    "bucket_length": 0.6131612903225807,
+                                    "bucket_height": 0.844,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7716018754626963,
+                                    "bucket_length": 0.5000102145045965,
+                                    "bucket_height": 0.818,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5992695566340379,
+                                    "bucket_length": 0.7784858044164038,
+                                    "bucket_height": 0.525,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "shelf_length": 1.277,
+                    "shelf_height": 2.953,
+                    "shelf_width": 2.386,
+                    "layers": [
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.116,
+                            "layer_height": 7.656796478157805,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.9500329793663129,
+                                    "bucket_length": 0.6652604778691735,
+                                    "bucket_height": 0.785,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.49994146594146605,
+                                    "bucket_length": 0.886758547574874,
+                                    "bucket_height": 0.425,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.9360255546922215,
+                                    "bucket_length": 0.7639416966012711,
+                                    "bucket_height": 1.169,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8590849010305907,
+                                    "bucket_length": 0.6117395221308265,
+                                    "bucket_height": 1.835,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.712716505807296,
+                                    "bucket_length": 0.39024145242512587,
+                                    "bucket_height": 1.042,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8141985931621135,
+                                    "bucket_length": 0.5130583033987289,
+                                    "bucket_height": 1.762,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.062,
+                            "layer_height": 4.19079173721639,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.041106399019885,
+                                    "bucket_length": 1.277,
+                                    "bucket_height": 1.108,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6900983884648006,
+                                    "bucket_length": 1.277,
+                                    "bucket_height": 1.356,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6547952125153143,
+                                    "bucket_length": 1.277,
+                                    "bucket_height": 0.859,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.217,
+                            "layer_height": 7.039176430748391,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.5543651452282157,
+                                    "bucket_length": 1.277,
+                                    "bucket_height": 1.351,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8316348547717843,
+                                    "bucket_length": 1.2770000000000001,
+                                    "bucket_height": 1.402,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.108,
+                            "layer_height": 4.5997182526244496,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.8899873455860199,
+                                    "bucket_length": 0.4011672247802427,
+                                    "bucket_height": 0.854,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.4960126544139802,
+                                    "bucket_length": 0.4009589273591311,
+                                    "bucket_height": 0.427,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.242103546466477,
+                                    "bucket_length": 0.5452239430724152,
+                                    "bucket_height": 0.966,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.1438964535335232,
+                                    "bucket_length": 0.37495078071961985,
+                                    "bucket_height": 1.185,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4480904729266621,
+                                    "bucket_length": 0.33060883214734194,
+                                    "bucket_height": 0.336,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.937909527073338,
+                                    "bucket_length": 0.5010902919212492,
+                                    "bucket_height": 0.382,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "shelf_length": 1.358,
+                    "shelf_height": 3.286,
+                    "shelf_width": 1.155,
+                    "layers": [
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.269,
+                            "layer_height": 3.979796713329276,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.42717495346982187,
+                                    "bucket_length": 0.5043948142207967,
+                                    "bucket_height": 1.111,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7278250465301782,
+                                    "bucket_length": 0.24679982298274086,
+                                    "bucket_height": 0.486,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7834726466992664,
+                                    "bucket_length": 0.31708446939321044,
+                                    "bucket_height": 1.08,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.37152735330073344,
+                                    "bucket_length": 0.5370700693317599,
+                                    "bucket_height": 1.574,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.46234163174759674,
+                                    "bucket_length": 0.5365207163859931,
+                                    "bucket_height": 0.845,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6926583682524031,
+                                    "bucket_length": 0.5741301076854994,
+                                    "bucket_height": 1.456,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 4,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.073,
+                            "layer_height": 3.1442592818015824,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.14314650388457267,
+                                    "bucket_length": 1.358,
+                                    "bucket_height": 0.708,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.29156307806141324,
+                                    "bucket_length": 1.358,
+                                    "bucket_height": 0.864,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.22290972992970773,
+                                    "bucket_length": 1.358,
+                                    "bucket_height": 1.089,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4973806881243063,
+                                    "bucket_length": 1.358,
+                                    "bucket_height": 0.577,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.237,
+                            "layer_height": 4.29495556908095,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.155,
+                                    "bucket_length": 1.358,
+                                    "bucket_height": 0.67,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.183,
+                            "layer_height": 3.537597078514912,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.45567609057183067,
+                                    "bucket_length": 0.7137415803108809,
+                                    "bucket_height": 0.364,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.21971152616093131,
+                                    "bucket_length": 0.5980757033248082,
+                                    "bucket_height": 0.267,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4796123832672381,
+                                    "bucket_length": 0.7744800000000002,
+                                    "bucket_height": 1.441,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5470326105514768,
+                                    "bucket_length": 0.6442584196891192,
+                                    "bucket_height": 0.316,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.3090122929827556,
+                                    "bucket_length": 0.7599242966751919,
+                                    "bucket_height": 0.979,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.29895509646576746,
+                                    "bucket_length": 0.5835200000000001,
+                                    "bucket_height": 1.282,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.013,
+                            "layer_height": 4.656533171028606,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.4039390016570008,
+                                    "bucket_length": 0.3474743935309973,
+                                    "bucket_height": 0.25,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4680525062137531,
+                                    "bucket_length": 0.5766822335025381,
+                                    "bucket_height": 0.9,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.2830084921292461,
+                                    "bucket_length": 0.39667740543650226,
+                                    "bucket_height": 0.437,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.516482390300231,
+                                    "bucket_length": 0.619388140161725,
+                                    "bucket_height": 0.982,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.19405600461893766,
+                                    "bucket_length": 0.41045279187817263,
+                                    "bucket_height": 0.39,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4444616050808315,
+                                    "bucket_length": 0.5814419674960449,
+                                    "bucket_height": 1.004,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5614826652221018,
+                                    "bucket_length": 0.3911374663072776,
+                                    "bucket_height": 0.93,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.41106988082340196,
+                                    "bucket_length": 0.37086497461928936,
+                                    "bucket_height": 1.368,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.18244745395449619,
+                                    "bucket_length": 0.37988062706745296,
+                                    "bucket_height": 1.659,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "ZONE_TYPE": 2,
+            "width": 15.047,
+            "length": 1.502,
+            "shelves": [
+                {
+                    "shelf_length": 1.389,
+                    "shelf_height": 3.778,
+                    "shelf_width": 1.541,
+                    "layers": [
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.168,
+                            "layer_height": 10.497882477501323,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.5410000000000001,
+                                    "bucket_length": 0.8210105054509416,
+                                    "bucket_height": 1.346,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.541,
+                                    "bucket_length": 0.5679894945490586,
+                                    "bucket_height": 1.688,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 4,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.338,
+                            "layer_height": 7.271327421916357,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.6160843291225675,
+                                    "bucket_length": 0.43631715639810426,
+                                    "bucket_height": 1.748,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.1655956811198361,
+                                    "bucket_length": 0.2815202878273036,
+                                    "bucket_height": 2.247,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.2108418402185046,
+                                    "bucket_length": 0.4903682212581345,
+                                    "bucket_height": 0.679,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5484781495390919,
+                                    "bucket_length": 0.45031506849315067,
+                                    "bucket_height": 0.901,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4209909403750263,
+                                    "bucket_length": 0.5927277725118483,
+                                    "bucket_height": 1.553,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.19566879696607908,
+                                    "bucket_length": 0.6393897661403157,
+                                    "bucket_height": 0.838,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5244529812486832,
+                                    "bucket_length": 0.5739793926247289,
+                                    "bucket_height": 2.16,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.39988728141021135,
+                                    "bucket_length": 0.34336797354747284,
+                                    "bucket_height": 2.056,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.44671152172457657,
+                                    "bucket_length": 0.3599550710900474,
+                                    "bucket_height": 2.125,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4695113476601727,
+                                    "bucket_length": 0.4680899460323805,
+                                    "bucket_height": 1.553,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.1234904599317132,
+                                    "bucket_length": 0.32465238611713665,
+                                    "bucket_height": 0.417,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5012866706835375,
+                                    "bucket_length": 0.5953169579593764,
+                                    "bucket_height": 1.789,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.054,
+                            "layer_height": 9.568511116993118,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.7613309021113244,
+                                    "bucket_length": 0.7634494303650313,
+                                    "bucket_height": 0.842,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.3913134357005758,
+                                    "bucket_length": 0.6063493815413892,
+                                    "bucket_height": 1.799,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.3883556621880998,
+                                    "bucket_length": 0.6462552504038772,
+                                    "bucket_height": 2.486,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7387283275795934,
+                                    "bucket_length": 0.6255505696349686,
+                                    "bucket_height": 1.331,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.563910241657077,
+                                    "bucket_length": 0.7826506184586108,
+                                    "bucket_height": 0.92,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.2383614307633295,
+                                    "bucket_length": 0.7427447495961228,
+                                    "bucket_height": 0.569,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.344,
+                            "layer_height": 8.679278718898887,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.7852809750468772,
+                                    "bucket_length": 0.48734289903644745,
+                                    "bucket_height": 1.376,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.2258266262801096,
+                                    "bucket_length": 0.6953028901734104,
+                                    "bucket_height": 1.907,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5298923986730131,
+                                    "bucket_length": 0.31533442021601793,
+                                    "bucket_height": 1.888,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5533807811407452,
+                                    "bucket_length": 0.39074717218265603,
+                                    "bucket_height": 0.564,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.49180851063829784,
+                                    "bucket_length": 0.2890404624277457,
+                                    "bucket_height": 1.059,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.49581070822095696,
+                                    "bucket_length": 0.6111373547992662,
+                                    "bucket_height": 1.054,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6815695211195274,
+                                    "bucket_length": 0.5109099287808966,
+                                    "bucket_height": 1.389,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5466405186801899,
+                                    "bucket_length": 0.404656647398844,
+                                    "bucket_height": 2.405,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.31278996020028244,
+                                    "bucket_length": 0.4625282249847157,
+                                    "bucket_height": 1.832,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "shelf_length": 1.042,
+                    "shelf_height": 3.71,
+                    "shelf_width": 2.095,
+                    "layers": [
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.022,
+                            "layer_height": 5.65866307277628,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.39291314373558806,
+                                    "bucket_length": 0.4780100129797886,
+                                    "bucket_height": 0.261,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.035422751729439,
+                                    "bucket_length": 0.34631388121546963,
+                                    "bucket_height": 1.14,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6666641045349732,
+                                    "bucket_length": 0.46381707317073173,
+                                    "bucket_height": 1.191,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5973566717402334,
+                                    "bucket_length": 0.3305881698498053,
+                                    "bucket_height": 1.471,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.9090025367833587,
+                                    "bucket_length": 0.3688017955801105,
+                                    "bucket_height": 0.377,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.588640791476408,
+                                    "bucket_length": 0.2749245220830587,
+                                    "bucket_height": 1.586,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6868236549957302,
+                                    "bucket_length": 0.23340181717040606,
+                                    "bucket_height": 0.502,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7041776259607173,
+                                    "bucket_length": 0.3268843232044199,
+                                    "bucket_height": 0.392,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7039987190435525,
+                                    "bucket_length": 0.30325840474620963,
+                                    "bucket_height": 1.348,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.005,
+                            "layer_height": 9.115968194070081,
+                            "buckets": [
+                                {
+                                    "bucket_width": 2.095,
+                                    "bucket_length": 0.6926290613718412,
+                                    "bucket_height": 1.339,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 2.095,
+                                    "bucket_length": 0.3493709386281588,
+                                    "bucket_height": 1.257,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.005,
+                            "layer_height": 11.872841239892184,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.6987190995718825,
+                                    "bucket_length": 1.042,
+                                    "bucket_height": 0.745,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.3962809004281178,
+                                    "bucket_length": 1.042,
+                                    "bucket_height": 2.406,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.034,
+                            "layer_height": 7.383865229110513,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.2347543066930247,
+                                    "bucket_length": 0.4756689460033011,
+                                    "bucket_height": 0.277,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8602456933069754,
+                                    "bucket_length": 0.39150428538336807,
+                                    "bucket_height": 1.38,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.059987227520436,
+                                    "bucket_length": 0.566331053996699,
+                                    "bucket_height": 0.811,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.0350127724795641,
+                                    "bucket_length": 0.6504957146166318,
+                                    "bucket_height": 1.113,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.008,
+                            "layer_height": 10.137287870619947,
+                            "buckets": [
+                                {
+                                    "bucket_width": 2.095,
+                                    "bucket_length": 1.042,
+                                    "bucket_height": 2.08,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "ZONE_TYPE": 2,
+            "width": 14.794,
+            "length": 2.763,
+            "shelves": [
+                {
+                    "shelf_length": 1.84,
+                    "shelf_height": 2.36,
+                    "shelf_width": 1.974,
+                    "layers": [
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.298,
+                            "layer_height": 2.281126271186441,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.0310035666518056,
+                                    "bucket_length": 1.84,
+                                    "bucket_height": 0.416,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.9429964333481944,
+                                    "bucket_length": 1.84,
+                                    "bucket_height": 1.31,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.817,
+                            "layer_height": 1.7510720338983052,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.825325513196481,
+                                    "bucket_length": 1.136,
+                                    "bucket_height": 0.959,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.1486744868035192,
+                                    "bucket_length": 1.599,
+                                    "bucket_height": 0.634,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.064,
+                            "layer_height": 1.8409919491525426,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.9740000000000002,
+                                    "bucket_length": 0.7211302627860978,
+                                    "bucket_height": 0.626,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.974,
+                                    "bucket_length": 1.1188697372139023,
+                                    "bucket_height": 1.132,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "shelf_length": 1.139,
+                    "shelf_height": 3.86,
+                    "shelf_width": 2.502,
+                    "layers": [
+                        {
+                            "buckets_per_line": 4,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.064,
+                            "layer_height": 2.313,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.5263980561709425,
+                                    "bucket_length": 1.139,
+                                    "bucket_height": 0.777,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8659462588437075,
+                                    "bucket_length": 1.139,
+                                    "bucket_height": 0.883,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.2224317873222325,
+                                    "bucket_length": 1.139,
+                                    "bucket_height": 0.715,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.887223897663117,
+                                    "bucket_length": 1.139,
+                                    "bucket_height": 1.754,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "ZONE_TYPE": 3,
+            "width": 18.838,
+            "length": 2.904,
+            "shelves": [
+                {
+                    "shelf_length": 1.278,
+                    "shelf_height": 2.487,
+                    "shelf_width": 2.146,
+                    "layers": [
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.235,
+                            "layer_height": 2.0629030960997183,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.3230585089974292,
+                                    "bucket_length": 1.278,
+                                    "bucket_height": 1.044,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.039568740359897,
+                                    "bucket_length": 1.278,
+                                    "bucket_height": 0.834,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7833727506426733,
+                                    "bucket_length": 1.278,
+                                    "bucket_height": 1.659,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 4,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.001,
+                            "layer_height": 1.3654845195014074,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.6690878237193693,
+                                    "bucket_length": 1.278,
+                                    "bucket_height": 0.564,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5378248591147976,
+                                    "bucket_length": 1.278,
+                                    "bucket_height": 0.449,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6396012157284872,
+                                    "bucket_length": 1.278,
+                                    "bucket_height": 0.352,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.2994861014373456,
+                                    "bucket_length": 1.278,
+                                    "bucket_height": 0.636,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "shelf_length": 1.007,
+                    "shelf_height": 3.577,
+                    "shelf_width": 2.008,
+                    "layers": [
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.004,
+                            "layer_height": 2.559410958904109,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.9963276288881713,
+                                    "bucket_length": 0.3231539708265802,
+                                    "bucket_height": 0.765,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.0116723711118285,
+                                    "bucket_length": 0.3470115811864807,
+                                    "bucket_height": 0.815,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.2550400000000002,
+                                    "bucket_length": 0.6838460291734196,
+                                    "bucket_height": 0.398,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7529600000000001,
+                                    "bucket_length": 0.6599884188135192,
+                                    "bucket_height": 0.438,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 4,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.001,
+                            "layer_height": 7.053925636007827,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.6841074856046064,
+                                    "bucket_length": 1.007,
+                                    "bucket_height": 0.38,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.3554361271059927,
+                                    "bucket_length": 1.007,
+                                    "bucket_height": 1.71,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7059475367882277,
+                                    "bucket_length": 1.007,
+                                    "bucket_height": 0.757,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.26250885050117295,
+                                    "bucket_length": 1.007,
+                                    "bucket_height": 1.515,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.002,
+                            "layer_height": 4.275634050880626,
+                            "buckets": [
+                                {
+                                    "bucket_width": 2.008,
+                                    "bucket_length": 0.32430894680688915,
+                                    "bucket_height": 1.447,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 2.008,
+                                    "bucket_length": 0.2466467001981405,
+                                    "bucket_height": 0.258,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.09,
+                                    "bucket_length": 0.43604435299497024,
+                                    "bucket_height": 1.049,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.006,
+                            "layer_height": 4.591518590998043,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.40879321925475764,
+                                    "bucket_length": 0.30492336448598134,
+                                    "bucket_height": 1.074,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.5992067807452424,
+                                    "bucket_length": 0.4157298261257244,
+                                    "bucket_height": 0.565,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.1189416826003824,
+                                    "bucket_length": 0.19318657604078165,
+                                    "bucket_height": 1.787,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8890583173996176,
+                                    "bucket_length": 0.22881602021102682,
+                                    "bucket_height": 1.245,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.9453573945541911,
+                                    "bucket_length": 0.5088900594732371,
+                                    "bucket_height": 0.496,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.062642605445809,
+                                    "bucket_length": 0.36245415366324857,
+                                    "bucket_height": 0.853,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 2,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.003,
+                            "layer_height": 3.648839530332681,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.7278999999999999,
+                                    "bucket_length": 0.568999201915403,
+                                    "bucket_height": 1.141,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.2800999999999998,
+                                    "bucket_length": 0.6401695577815781,
+                                    "bucket_height": 0.828,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.2852097179558784,
+                                    "bucket_length": 0.43800079808459697,
+                                    "bucket_height": 0.935,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7227902820441218,
+                                    "bucket_length": 0.36683044221842165,
+                                    "bucket_height": 0.793,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "ZONE_TYPE": 4,
+            "width": 2.405,
+            "length": 2.742,
+            "shelves": [
+                {
+                    "shelf_length": 2.465,
+                    "shelf_height": 2.926,
+                    "shelf_width": 1.352,
+                    "layers": [
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 2,
+                            "layer_length": 2.444,
+                            "layer_height": 2.1065724538619275,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.11,
+                                    "bucket_length": 1.05,
+                                    "bucket_height": 0.275,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.273,
+                                    "bucket_length": 1.321,
+                                    "bucket_height": 1.556,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.74,
+                            "layer_height": 1.9777915242652084,
+                            "buckets": [
+                                {
+                                    "bucket_width": 1.352,
+                                    "bucket_length": 1.0231978798586572,
+                                    "bucket_height": 0.827,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.352,
+                                    "bucket_length": 1.4418021201413427,
+                                    "bucket_height": 0.461,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "shelf_length": 1.109,
+                    "shelf_height": 3.792,
+                    "shelf_width": 2.326,
+                    "layers": [
+                        {
+                            "buckets_per_line": 4,
+                            "buckets_per_column": 2,
+                            "layer_length": 1.047,
+                            "layer_height": 7.473280590717299,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.44810603674540683,
+                                    "bucket_length": 0.7739644153957879,
+                                    "bucket_height": 1.39,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.7281214348206474,
+                                    "bucket_length": 0.6081476099426385,
+                                    "bucket_height": 2.222,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.3066738407699038,
+                                    "bucket_length": 0.6462890492359932,
+                                    "bucket_height": 0.596,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8430986876640421,
+                                    "bucket_length": 0.4838067729083666,
+                                    "bucket_height": 0.575,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4463280238924839,
+                                    "bucket_length": 0.335035584604212,
+                                    "bucket_height": 1.434,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.46890492782478854,
+                                    "bucket_length": 0.5008523900573614,
+                                    "bucket_height": 2.485,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.5687643106022898,
+                                    "bucket_length": 0.46271095076400676,
+                                    "bucket_height": 0.883,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8420027376804381,
+                                    "bucket_length": 0.6251932270916336,
+                                    "bucket_height": 1.525,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 3,
+                            "buckets_per_column": 3,
+                            "layer_length": 1.019,
+                            "layer_height": 6.029388185654008,
+                            "buckets": [
+                                {
+                                    "bucket_width": 0.6593093542843114,
+                                    "bucket_length": 0.2979902016205012,
+                                    "bucket_height": 0.304,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.2555146083967592,
+                                    "bucket_length": 0.24731179011358184,
+                                    "bucket_height": 2.065,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4111760373189295,
+                                    "bucket_length": 0.3200956663941128,
+                                    "bucket_height": 1.809,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8598483412322274,
+                                    "bucket_length": 0.24135952515545506,
+                                    "bucket_height": 1.112,
+                                    "type": "Regular",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.6654831628835121,
+                                    "bucket_length": 0.46268948968165097,
+                                    "bucket_height": 1.86,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8006684958842604,
+                                    "bucket_length": 0.4406982829108749,
+                                    "bucket_height": 0.835,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.8088074679113185,
+                                    "bucket_length": 0.5696502732240437,
+                                    "bucket_height": 1.658,
+                                    "type": "Large",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 1.039895315885981,
+                                    "bucket_length": 0.3989987202047673,
+                                    "bucket_height": 1.582,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                },
+                                {
+                                    "bucket_width": 0.4772972162027005,
+                                    "bucket_length": 0.3482060506950122,
+                                    "bucket_height": 1.087,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        },
+                        {
+                            "buckets_per_line": 1,
+                            "buckets_per_column": 1,
+                            "layer_length": 1.01,
+                            "layer_height": 8.239525316455694,
+                            "buckets": [
+                                {
+                                    "bucket_width": 2.326,
+                                    "bucket_length": 1.109,
+                                    "bucket_height": 0.492,
+                                    "type": "Small",
+                                    "object": "Screw_Box"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

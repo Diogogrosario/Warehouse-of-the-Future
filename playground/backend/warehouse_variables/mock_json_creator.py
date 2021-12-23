@@ -136,9 +136,9 @@ for i in range(NUM_Z1 + NUM_Z2 + NUM_Z3 + NUM_Z4):
         for j in range(num_shelf_layers):
             shelf_layer_dict = {}
             buckets_per_line = rn.randint(BUCKETS_PER_LINE[0], BUCKETS_PER_LINE[1])
-            buckets_per_col = rn.randint(BUCKETS_PER_LINE[0], BUCKETS_PER_LINE[1])
+            buckets_per_col = rn.randint(BUCKETS_PER_COLUMN[0], BUCKETS_PER_COLUMN[1])
             num_buckets = buckets_per_line * buckets_per_col
-            layer_length = round(rn.uniform(LAYER_LENGTH[0], LAYER_LENGTH[1]), 3)
+            layer_length = round(rn.uniform(LAYER_LENGTH[0], min(LAYER_LENGTH[1], shelf_length)), 3)
             layer_height = round(rn.uniform(LAYER_HEIGHT[0], min(LAYER_HEIGHT[1], shelf_height)), 3)
             cumulative_layer_height += layer_height
             shelf_layer_dict["buckets_per_line"] = buckets_per_line
@@ -231,14 +231,15 @@ for i in range(0, NUM_Z1 + NUM_Z2 + NUM_Z3 + NUM_Z4):
             layer_length = json_dict["zones"][i]["shelves"][j]["layers"][l]["layer_length"]
             for m in range(json_dict["zones"][i]["shelves"][j]["layers"][l]["buckets_per_line"]):
                 bpc = json_dict["zones"][i]["shelves"][j]["layers"][l]["buckets_per_column"]
+                bpl = json_dict["zones"][i]["shelves"][j]["layers"][l]["buckets_per_line"]
                 cumulative_length = 0
                 for n in range(bpc):
-                    cumulative_length += json_dict["zones"][i]["shelves"][j]["layers"][l]["buckets"][n + m * bpc]["bucket_length"]
+                    cumulative_length += json_dict["zones"][i]["shelves"][j]["layers"][l]["buckets"][n * bpl + m]["bucket_length"]
                 if(cumulative_length > layer_length):
                     ratio = cumulative_length / shelf_length
                     for n in range(bpc):
-                        new_val = json_dict["zones"][i]["shelves"][j]["layers"][l]["buckets"][n + m * bpc]["bucket_length"] / ratio
-                        json_dict["zones"][i]["shelves"][j]["layers"][l]["buckets"][n + m * bpc]["bucket_length"] = new_val
+                        new_val = json_dict["zones"][i]["shelves"][j]["layers"][l]["buckets"][n * bpl + m]["bucket_length"] / ratio
+                        json_dict["zones"][i]["shelves"][j]["layers"][l]["buckets"][n * bpl + m]["bucket_length"] = new_val
 
 
 
