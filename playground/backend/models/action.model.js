@@ -1,14 +1,18 @@
 export default (sequelize, Sequelize) => {
-	const Action = sequelize.define("action", {
+	return sequelize.define("action", {
 		description: {
 			type: Sequelize.TEXT,
 		},
 		employee_id: {
 			type: Sequelize.UUID,
 		},
-		createdAt: Sequelize.DATE,
-		updatedAt: Sequelize.DATE,
+		createdAt: {
+			type: Sequelize.DATE,
+			defaultValue: Sequelize.NOW,
+		},
+		updatedAt: {
+			type: Sequelize.DATE,
+			defaultValue: Sequelize.NOW,
+		},
 	});
-
-	return Action;
 };
