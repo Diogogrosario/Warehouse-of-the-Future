@@ -1,8 +1,4 @@
-import pandas as pd
-
 from warehouse import *
-import time
-
 
 class Storage:
     def __init__(self, db):
@@ -81,14 +77,3 @@ class Storage:
 
         return layout
 
-    def valid_placement(self, rack, product, layout):
-        valid_weight = rack.get_current_weight() + product.weight <= rack.capacity
-        valid_width = rack.last_x + product.width <= rack.width
-        valid_height = True
-
-        rack_above = layout.get_rack_above(rack)
-
-        if rack_above:
-            valid_height = rack.y + product.height <= rack.y
-
-        return valid_weight and valid_width and valid_height

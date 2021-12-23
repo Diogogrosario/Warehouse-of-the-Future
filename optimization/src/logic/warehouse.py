@@ -1,3 +1,4 @@
+import math
 import random
 import random as r
 
@@ -5,7 +6,8 @@ max_iterations = 10000
 
 # metrics_to_optimize = ['weight', 'sector']
 # metrics_to_optimize = ['weight']
-metrics_to_optimize = ['sector']
+metrics_to_optimize = ['work']
+worker_average_height = 1.75
 
 
 class Layout:
@@ -25,14 +27,8 @@ class Layout:
         valid_racks = []
         for shelf in self.warehouse.shelves:
             for rack in shelf.racks:
-
-                if (rack.capacity - rack.get_current_weight()) < product.weight:
-                    continue
-
-                if rack.get_available_width() < product.width:
-                    continue
-
-                valid_racks.append(rack)
+                if valid_placement(rack, product):
+                    valid_racks.append(rack)
 
         if len(valid_racks) == 0:
             return None
@@ -76,7 +72,6 @@ class Layout:
 
     def get_score(self):
         score = 0
-        different_sectors_in_a_shelf = 0
 
         if 'weight' in metrics_to_optimize:
             for shelf in self.warehouse.shelves:
@@ -95,7 +90,22 @@ class Layout:
 
                 score -= len(different_sectors) * 3
 
+        if 'work' in metrics_to_optimize:
+            adj_side = 0.2
+            chest_y = worker_average_height * (2.0 / 3.0)
+
+            for shelf in self.warehouse.shelves:
+
+                for rack in shelf.racks:
+                    opo = abs(float(rack.y) - float(chest_y))
+                    theta = abs(math.degrees(math.atan(opo / adj_side)))
+
+                    for product in rack.products:
+                        score += math.cos(math.radians(theta)) * float(product.weight)
+                        #print(f"Rack y:{rack.y} Theta:{theta} score:{score} id:{product.id} weight:{product.weight}")
+
         score -= len(self.products_out) * 100
+
         return score
 
     def remove_product(self, product):
@@ -206,7 +216,8 @@ class Product:
         state = ""
         state += f'PRODUCT {self.id}:\n'
         state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
-        state += f'\t\t\t\t\tWIDTH {self.width}'
+        state += f'\t\t\t\t\tWIDTH {self.width}\n'
+        state += f'\t\t\t\t\tHEIGHT {self.height}\n'
         state += f'\t\t\t\t\tSECTOR_ID {self.sector_id}'
         return state
 
@@ -230,11 +241,13 @@ class Rack:
             return None
 
     def add_product(self, product):
-        if self.get_current_weight() + product.weight > self.capacity:
+
+        if not valid_placement(self, product):
             return False
 
         self.products[product] = (self.last_x, self.last_x + product.width)
         self.last_x = self.last_x + product.width
+
         return True
 
     def remove_product(self, product):
@@ -283,3 +296,16 @@ class Rack:
 class MonthManifesto:  # TODO: use this class instead of dictionary of dictionaries in get_manifestos()
     def __init__(self, products):
         self.products = products  # {id : quantity}
+
+
+def valid_placement(rack, product):
+    if (rack.get_current_weight() + product.weight) > rack.capacity:
+        return False
+
+    if (rack.last_x + product.width) > rack.width:
+        return False
+
+    if product.height > rack.height:
+        return False
+
+    return True
