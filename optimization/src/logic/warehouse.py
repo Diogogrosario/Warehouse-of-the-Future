@@ -1,10 +1,12 @@
 import math
 import random
 import random as r
+from copy import deepcopy, copy
 
 max_iterations = 1000
 
 # metrics_to_optimize = ['weight', 'sector']
+metrics_to_optimize = ['sector']
 # metrics_to_optimize = ['weight']
 # metrics_to_optimize = ['work']
 metrics_to_optimize = ['frequency']
@@ -16,9 +18,6 @@ class Layout:
     def __init__(self, warehouse):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
         self.warehouse = warehouse
         self.products_out = []
-        # shelf -> lista de racks
-        #   rack -> lista de products
-        #       product, x_orig, x_end
 
     def get_random_rack(self):
         shelf = self.warehouse.get_random_shelf()
@@ -93,7 +92,6 @@ class Layout:
 
                     for product in rack.products:
                         score += math.cos(math.radians(theta)) * float(product.weight)
-                        # print(f"Rack y:{rack.y} Theta:{theta} score:{score} id:{product.id} weight:{product.weight}")
 
         if 'frequency' in metrics_to_optimize:
             pass
@@ -233,12 +231,16 @@ class Rack:
     def remove_product(self, product):
         del self.products[product]
 
-        products = self.products.keys()
+        products = deepcopy(list(self.products.keys()))
+
         self.products.clear()
+
         last_width = 0
+        self.last_x = 0
+
         for prod in products:
-            self.add_product(prod)
-            _, last_width = self.products[prod]
+            if self.add_product(prod):
+                _, last_width = self.products[prod]
 
         self.last_x = last_width
 
