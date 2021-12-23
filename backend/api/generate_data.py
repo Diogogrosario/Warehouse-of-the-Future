@@ -215,6 +215,16 @@ layout_attributes = namespace.model("Layout", {
         required=True,
         description="The current time"
     ),
+    "racks": fields.List(
+        fields.Nested(rack_attributes),
+        required=True,
+        description="Racks present in the warehouse"
+    ),
+    "shelves": fields.List(
+        fields.Nested(shelf_attributes),
+        required=True,
+        description="Shelves present in the warehouse"
+    ),
     "buckets": fields.List(
         fields.Nested(bucket_attributes),
         required=True,
@@ -561,9 +571,9 @@ class Orchestrator(Resource):
 
 # cart starts at (width2/2, 0)
 
-SUPER_RACK1_MAX_WIDTH = 50*100
-SUPER_RACK2_MAX_WIDTH = 50*100
-SUPER_RACK3_MAX_WIDTH = 50*100
+SUPER_RACK1_MAX_WIDTH = 15*100
+SUPER_RACK2_MAX_WIDTH = 15*100
+SUPER_RACK3_MAX_WIDTH = 15*100
 
 RACK_MIN_WIDTH = 1*100
 RACK_MAX_WIDTH = 4*100
@@ -588,7 +598,7 @@ BUCKET_MAX_LENGTH = 0.9*100
 def coherent_generate_layout():
     buckets = []
     racks = []
-    shelfs = []
+    shelves = []
 
     # track the width of the racks we are creating
     current_super_rack_width = 0
@@ -634,7 +644,7 @@ def coherent_generate_layout():
                 "height": current_rack_height - shelf_height,
                 "rack_id": rack["id"]
             }
-            shelfs.append(shelf)
+            shelves.append(shelf)
 
             # track the width of the shelf with the buckets we are creating;
             # the width of th shelf is the same as the width of the rack;
@@ -670,7 +680,11 @@ def coherent_generate_layout():
                 )
                 buckets.append(bucket)
 
-    return buckets
+    return {
+        "racks": racks,
+        "shelves": shelves,
+        "buckets": buckets
+    }
 
 
 def generate_bucket(shelf, item_id, position, width, shelf_height):
@@ -716,116 +730,13 @@ class Layout(Resource):
         as well it's details and associated items
         """
 
-        buckets = coherent_generate_layout()
+        layout = coherent_generate_layout()
 
         layout = {
             "time": datetime.datetime.now(),
-            "buckets": buckets
+            "racks": layout["racks"],
+            "shelves": layout["shelves"],
+            "buckets": layout["buckets"]
         }
 
         return layout
-
-
-# ------------------------------------------------------------------------------
-# Shelves
-# ------------------------------------------------------------------------------
-
-def generate_shelf():
-    height = round(random.uniform(0, 400), 2)
-
-    shelf = {
-        "id": uuid.uuid4(),
-        "height": height,
-        "rack_id": uuid.uuid4()
-    }
-
-    return shelf
-
-
-def generate_shelves():
-    number_of_shelves = random.randint(50, 100)
-
-    shelves = [
-        generate_shelf() for _ in range(number_of_shelves)
-    ]
-
-    return shelves
-
-
-@namespace.route("/shelves")
-class Shelves(Resource):
-    @namespace.marshal_list_with(shelf_attributes)
-    def get(self):
-        """
-        Returns the information about the shelves.
-        """
-
-        shelves = generate_shelves()
-
-        return shelves
-
-
-@namespace.route("/shelves/<string:id>")
-class Shelf(Resource):
-    @namespace.marshal_list_with(shelf_attributes)
-    def get(self, id):
-        """
-        Returns the information about the shelf with the specified id.
-        """
-
-        shelf = generate_shelf()
-        shelf["id"] = id
-
-        return shelf
-
-
-# ------------------------------------------------------------------------------
-# Racks
-# ------------------------------------------------------------------------------
-
-def generate_rack():
-    width = round(random.uniform(50, 300), 2)
-
-    rack = {
-        "id": uuid.uuid4(),
-        "width": width,
-    }
-
-    return rack
-
-
-def generate_racks():
-    number_of_racks = random.randint(300, 400)
-
-    racks = [
-        generate_rack() for _ in range(number_of_racks)
-    ]
-
-    return racks
-
-
-@namespace.route("/racks")
-class Racks(Resource):
-    @namespace.marshal_list_with(rack_attributes)
-    def get(self):
-        """
-        Returns the information about the racks.
-        """
-
-        racks = generate_racks()
-
-        return racks
-
-
-@namespace.route("/racks/<string:id>")
-class Rack(Resource):
-    @namespace.marshal_list_with(rack_attributes)
-    def get(self, id):
-        """
-        Returns the information about the rack with the specified id.
-        """
-
-        rack = generate_rack()
-        rack["id"] = id
-
-        return rack
