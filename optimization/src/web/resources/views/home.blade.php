@@ -14,41 +14,6 @@
         body {
             overflow-x: hidden;
         }
-        #sidebar-wrapper {
-            min-height: 100vh;
-            margin-left: -15rem;
-            -webkit-transition: margin .25s ease-out;
-            -moz-transition: margin .25s ease-out;
-            -o-transition: margin .25s ease-out;
-            transition: margin .25s ease-out;
-        }
-        #sidebar-wrapper .sidebar-heading {
-            padding: 0.875rem 1.25rem;
-            font-size: 1.2rem;
-        }
-        #sidebar-wrapper .list-group {
-            width: 15rem;
-            background-color: #3641ac;
-        }
-        #page-content-wrapper {
-            min-width: 100vw;
-        }
-        #wrapper.toggled #sidebar-wrapper {
-            margin-left: 0;
-        }
-        @media (min-width: 768px) {
-            #sidebar-wrapper {
-                margin-left: 0;
-            }
-            #page-content-wrapper {
-                min-width: 0;
-                width: 100%;
-            }
-            #wrapper.toggled #sidebar-wrapper {
-                margin-left: -15rem;
-            }
-        }
-
 
         /*
         Notification Cards.
@@ -80,7 +45,7 @@
         }
 
         .course-preview {
-            background-color: #3641ac;
+            background-color: #405cf5;
             color: #fff;
             padding: 30px;
             max-width: 250px;
@@ -122,7 +87,7 @@
         */
 
         .generateLayoutTab {
-            background-color: #F8F8F8;
+            background-color: #FFFFFF;
             border-radius: 10px;
             box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
             max-width: 100%;
@@ -140,12 +105,55 @@
 
         .generateLayoutTab h1 {
             margin-bottom: 30px;
+            color: #0194f6;
         }
 
         .form-check {
             margin-top: 10px;
         }
 
+        .generateLayoutTab btnSubmit {
+            background-color: #0194f6;
+            border: 1px;
+            border-radius: 50px;
+            box-shadow: 0 10px 10px rgba(1, 1, 1, 0.2);
+            color: #000000;
+        }
+
+        .boxDiv{
+            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+         .button-9 {
+             backface-visibility: hidden;
+             background-color: #405cf5;
+             border-radius: 6px;
+             border-width: 0;
+             box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+             box-sizing: border-box;
+             color: #fff;
+             cursor: pointer;
+             font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+             font-size: 100%;
+             height: 55px;
+             line-height: 1.15;
+             margin: 12px 0 0;
+             outline: none;
+             overflow: hidden;
+             padding: 0 25px;
+             position: relative;
+             text-align: center;
+             width: 30%;
+         }
+        .button-9:disabled {
+            cursor: default;
+        }
+        .button-9:focus {
+            box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+        }
 
     </style>
 </head>
@@ -210,8 +218,8 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-start mt-5">
-                        <button type="submit" class="btn btn-outline-info btn-lg">Generate Layout</button>
+                    <div class="boxDiv">
+                        <button type="submit" class="button-9">Generate</button>
                     </div>
                 </div>
             </form>
