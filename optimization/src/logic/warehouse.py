@@ -1,12 +1,12 @@
 import math
 import random
 import random as r
-from copy import deepcopy, copy
+import numpy as np
+from copy import deepcopy
+
 
 max_iterations = 1000
 
-# metrics_to_optimize = ['weight', 'sector']
-metrics_to_optimize = ['sector']
 # metrics_to_optimize = ['weight']
 # metrics_to_optimize = ['work']
 metrics_to_optimize = ['frequency']
@@ -94,7 +94,19 @@ class Layout:
                         score += math.cos(math.radians(theta)) * float(product.weight)
 
         if 'frequency' in metrics_to_optimize:
-            pass
+            shelves_frequencies = []
+
+            for shelf in self.warehouse.shelves:
+                shelf_frequency = 0
+                for rack in shelf.racks:
+                    for product in rack.products:
+                        shelf_frequency += product.frequency
+
+                shelves_frequencies.append(shelf_frequency)
+            
+            shelves_frequencies = sorted(shelves_frequencies)
+
+            score += sum(np.diff(shelves_frequencies))
 
         if 'sector' in metrics_to_optimize:
             for shelf in self.warehouse.shelves:
