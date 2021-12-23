@@ -110,7 +110,7 @@ for i in range(NUM_Z1 + NUM_Z2 + NUM_Z3 + NUM_Z4):
     zone_dict = {}
 
     zone = get_zone(i)
-    zone_dict["ZONE_TYPE"] = zone[1]
+    # zone_dict["ZONE_TYPE"] = zone[1]
     zl = get_zone_length(i)
     zone_dict["width"] = round(rn.uniform(zone[0][0], zone[0][1]), 3)
     zone_length = round(rn.uniform(zl[0][0], zl[0][1]), 3)
