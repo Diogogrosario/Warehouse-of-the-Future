@@ -1,4 +1,10 @@
+from bson import json_util
 from flask_restx import fields, inputs, reqparse, Namespace, Resource
+import json
+
+from .db import client
+
+layoutsCollection = client.WoF.Layouts
 
 namespace = Namespace("Layouts", path="/layouts",
                       description="Layouts related operations")
@@ -17,31 +23,13 @@ bucketAttributes = namespace.model("LayoutBucket", {
 })
 
 layoutAttributes = namespace.model("Layout", {
+    "_id": fields.Integer(required=True, description=""),
     "buckets": fields.List(
         fields.Nested(bucketAttributes),
-        description="List of bucets in layout"
+        description="List of buckets in layout"
     ),
     "date": fields.DateTime(required=True, description="The layout time"),
 })
-
-layoutsExampleList = [
-    {
-        "date": "01-01-2021",
-        "buckets": [
-            {
-                "_id": 1,
-                "bucket": 10,
-                "item": 1,
-                "quantity": 10,
-                "coordinates": [
-                    1,
-                    1
-                ],
-                "shelf": 1
-            }
-        ]
-    },
-]
 
 # ------------------------------------------------------------------------------
 # Layouts information
@@ -54,9 +42,9 @@ parser.add_argument("time_before", required=False, type=inputs.date,
                     help="The upper bound for the timestamp of layouts.")
 
 
-@namespace.route("/warehouse")
+@namespace.route("/")
 class Layouts(Resource):
-    @namespace.marshal_list_with(layoutAttributes)
+    # @namespace.marshal_list_with(layoutAttributes)
     @namespace.expect(parser)
     def get(self):
         """
@@ -65,4 +53,20 @@ class Layouts(Resource):
         Returns data about every warehouse layout on a determined
         time interval.
         """
-        return layoutsExampleList
+        args = parser.parse_args()
+        time_before = args['time_before']  # Format: YYYY-MM-DD
+        time_after = args['time_after']    # Format: YYYY-MM-DD
+
+        searchQuery = {}
+
+        if time_after is not None or time_before is not None:
+            if time_before is None:
+                searchQuery["date"] = {"$lte": time_after}
+            elif time_after is None:
+                searchQuery["date"] = {"$gte": time_before}
+            else:
+                searchQuery["date"]["$lte"] = time_after
+
+        response = layoutsCollection.find(searchQuery)
+
+        return json.loads(json_util.dumps(response))
