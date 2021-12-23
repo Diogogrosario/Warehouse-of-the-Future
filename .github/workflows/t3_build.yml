@@ -1,0 +1,25 @@
+name: T3 - Build
+
+on:
+  push:
+    branches: [t3_development]
+  pull_request:
+    branches: [t3_development]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playground/frontend
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+          cache: "yarn"
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install dependencies
+        run: yarn
+      - run: yarn build

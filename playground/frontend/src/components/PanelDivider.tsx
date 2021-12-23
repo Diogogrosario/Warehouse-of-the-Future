@@ -11,7 +11,7 @@ export default function PanelDivider(props: PanelDividerProps) {
 	return (
 		<Box
 			sx={{
-				cursor: "ew-resize",
+				cursor: props.orientation == "vertical" ? "col-resize" : "row-resize",
 				backgroundColor: "transparent",
 			}}
 			onMouseDown={props.handleMouseDown}
