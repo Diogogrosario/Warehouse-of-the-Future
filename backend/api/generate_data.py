@@ -549,10 +549,102 @@ class Orchestrator(Resource):
 # Layout
 # ------------------------------------------------------------------------------
 
-def generate_bucket():
-    width = random.randint(1, 100)
-    height = random.randint(1, 100)
-    length = random.randint(1, 100)
+# Dimentions of the warehouse, in cm
+
+# Super rack 1 and 3 are parallel
+#         s-rack2
+# |---------------------| -> point (width2, width3)
+# |                     |
+# | s-rack1             | s-rack3
+# |                     |
+# | <- point (0, 0)     | -> point (width2, 0)
+
+# cart starts at (width2/2, 0)
+
+SUPER_RACK1_MAX_WIDTH = 50*100
+SUPER_RACK2_MAX_WIDTH = 50*100
+SUPER_RACK3_MAX_WIDTH = 50*100
+
+RACK_MIN_WIDTH = 1*100
+RACK_MAX_WIDTH = 4*100
+RACK_MIN_HEIGHT = 2*100
+RACK_MAX_HEIGHT = 4*100
+
+# Assuming all the shelfs have a length of 95cm
+RACK_LENGTH = 0.95*100
+
+# height of the rack (not in relation to the ground)
+SHELF_MIN_HEIGHT = 0.3*100
+SHELF_MAX_HEIGHT = 1*100
+
+BUCKET_MIN_WIDTH = 0.2*100
+BUCKET_MAX_WIDTH = 0.4*100
+BUCKET_MIN_HEIGHT = 0.1*100
+BUCKET_MAX_HEIGHT = 0.7*100
+BUCKET_MIN_LENGTH = 0.3*100
+BUCKET_MAX_LENGTH = 0.9*100
+
+
+def coherent_generate_layout():
+    buckets = []
+    racks = []
+    shelfs = []
+
+    # track the width of the racks we are creating
+    current_super_rack_width = 0
+
+    # Super rack 1
+    while (current_super_rack_width < SUPER_RACK1_MAX_WIDTH):
+        rack_width = random.randint(
+            RACK_MIN_WIDTH,
+            RACK_MAX_WIDTH
+        )
+        current_super_rack_width += rack_width
+
+        if (current_super_rack_width > SUPER_RACK1_MAX_WIDTH):
+            break
+
+        rack_height = random.randint(
+            RACK_MIN_HEIGHT,
+            RACK_MAX_HEIGHT
+        )
+
+        # track the height of the rack we are creating
+        current_rack_height = 0
+
+        rack = {
+            "id": uuid.uuid4(),
+            "width": rack_width
+        }
+        racks.append(rack)
+
+        while (current_rack_height < rack_height):
+            shelf_height = random.randint(
+                SHELF_MIN_HEIGHT,
+                SHELF_MAX_HEIGHT
+            )
+            current_rack_height += shelf_height
+
+            if (current_rack_height > rack_height):
+                break
+
+            shelf = {
+                "id": uuid.uuid4(),
+                # the height of the shelf is in relation to the ground
+                "height": current_rack_height - shelf_height,
+                "rack_id": rack.id
+            }
+            shelfs.append(shelf)
+        
+
+
+
+def generate_bucket(shelf, item_id, position, width):
+    height = min(
+        random.randint(BUCKET_MIN_HEIGHT, BUCKET_MAX_HEIGHT),
+        shelf.height - 1  # Make sure the bucket is not higher than the shelf
+    )
+    length = random.randint(BUCKET_MIN_LENGTH, BUCKET_MAX_LENGTH)
     quantity = random.randint(1, 3)
 
     bucket = {
@@ -560,10 +652,10 @@ def generate_bucket():
         "width": width,
         "height": height,
         "length": length,
-        "position": utils.get_position(),
-        "item_id": uuid.uuid4(),
+        "position": position,
+        "item_id": item_id,
         "quantity": quantity,
-        "shelf_id": uuid.uuid4()
+        "shelf_id": shelf.id
     }
 
     return bucket
