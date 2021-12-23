@@ -59,8 +59,6 @@ class Layouts(Resource):
 
         searchQuery = {}
 
-        print(time_after, time_before)
-
         if time_after is not None or time_before is not None:
             if time_before is None:
                 searchQuery["date"] = {"$lte": time_after}
