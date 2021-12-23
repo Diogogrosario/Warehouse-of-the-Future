@@ -42,6 +42,10 @@ class Database:
     # Execute SQL queries and retrieve a pandas dataframe
     def df_query(self, query):
         result = self.execute(query)
+
+        if len(result['records']) == 0:
+            return None
+
         df = pd.DataFrame(result['records'])
         df.columns = result['header']
         return df
