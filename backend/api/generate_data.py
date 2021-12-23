@@ -215,6 +215,16 @@ layout_attributes = namespace.model("Layout", {
         required=True,
         description="The current time"
     ),
+    "racks": fields.List(
+        fields.Nested(rack_attributes),
+        required=True,
+        description="Racks present in the warehouse"
+    ),
+    "shelves": fields.List(
+        fields.Nested(shelf_attributes),
+        required=True,
+        description="Shelves present in the warehouse"
+    ),
     "buckets": fields.List(
         fields.Nested(bucket_attributes),
         required=True,
@@ -549,10 +559,142 @@ class Orchestrator(Resource):
 # Layout
 # ------------------------------------------------------------------------------
 
-def generate_bucket():
-    width = random.randint(1, 100)
-    height = random.randint(1, 100)
-    length = random.randint(1, 100)
+# Dimentions of the warehouse, in cm
+
+# Super rack 1 and 3 are parallel
+#         s-rack2
+# |---------------------| -> point (width2, width3)
+# |                     |
+# | s-rack1             | s-rack3
+# |                     |
+# | <- point (0, 0)     | -> point (width2, 0)
+
+# cart starts at (width2/2, 0)
+
+SUPER_RACK1_MAX_WIDTH = 15*100
+SUPER_RACK2_MAX_WIDTH = 15*100
+SUPER_RACK3_MAX_WIDTH = 15*100
+
+RACK_MIN_WIDTH = 1*100
+RACK_MAX_WIDTH = 4*100
+RACK_MIN_HEIGHT = 2*100
+RACK_MAX_HEIGHT = 4*100
+
+# Assuming all the shelfs have a length of 95cm
+RACK_LENGTH = 0.95*100
+
+# height of the rack (not in relation to the ground)
+SHELF_MIN_HEIGHT = 0.3*100
+SHELF_MAX_HEIGHT = 1*100
+
+BUCKET_MIN_WIDTH = 0.2*100
+BUCKET_MAX_WIDTH = 0.4*100
+BUCKET_MIN_HEIGHT = 0.1*100
+BUCKET_MAX_HEIGHT = 0.7*100
+BUCKET_MIN_LENGTH = 0.3*100
+BUCKET_MAX_LENGTH = 0.9*100
+
+
+def coherent_generate_layout():
+    buckets = []
+    racks = []
+    shelves = []
+
+    # track the width of the racks we are creating
+    current_super_rack_width = 0
+
+    # Super rack 1
+    while (current_super_rack_width < SUPER_RACK1_MAX_WIDTH):
+        rack_width = random.randint(
+            RACK_MIN_WIDTH,
+            RACK_MAX_WIDTH
+        )
+        current_super_rack_width += rack_width
+
+        if (current_super_rack_width > SUPER_RACK1_MAX_WIDTH):
+            break
+
+        rack_height = random.randint(
+            RACK_MIN_HEIGHT,
+            RACK_MAX_HEIGHT
+        )
+
+        # track the height of the rack we are creating
+        current_rack_height = 0
+
+        rack = {
+            "id": uuid.uuid4(),
+            "width": rack_width
+        }
+        racks.append(rack)
+
+        while (current_rack_height < rack_height):
+            shelf_height = random.randint(
+                SHELF_MIN_HEIGHT,
+                SHELF_MAX_HEIGHT
+            )
+            current_rack_height += shelf_height
+
+            if (current_rack_height > rack_height):
+                break
+
+            shelf = {
+                "id": uuid.uuid4(),
+                # the height of the shelf is in relation to the ground
+                "height": current_rack_height - shelf_height,
+                "rack_id": rack["id"]
+            }
+            shelves.append(shelf)
+
+            # track the width of the shelf with the buckets we are creating;
+            # the width of th shelf is the same as the width of the rack;
+            # we are trying to fit a certain number of buckets in the shelf,
+            # considering its width
+            current_shelf_width = 0
+
+            while (current_shelf_width < rack["width"]):
+                bucket_width = random.randint(
+                    BUCKET_MIN_WIDTH,
+                    BUCKET_MAX_WIDTH
+                )
+                current_shelf_width += bucket_width
+
+                if (current_shelf_width > rack["width"]):
+                    break
+
+                shelf_start_y_pos = current_super_rack_width - rack_width
+                bucket_start_y_pos = shelf_start_y_pos + current_shelf_width \
+                    - bucket_width
+                # Considering the y pos of the bucket to be in the center of it
+                bucket_y_position = bucket_start_y_pos + bucket_width / 2
+
+                position = [0, bucket_y_position, shelf["height"]]
+
+                bucket = generate_bucket(
+                    shelf=shelf,
+                    # TODO: make sure there are no repeated items
+                    item_id=random.choice(available_items),
+                    position=position,
+                    width=bucket_width,
+                    shelf_height=shelf_height
+                )
+                buckets.append(bucket)
+
+    return {
+        "racks": racks,
+        "shelves": shelves,
+        "buckets": buckets
+    }
+
+
+def generate_bucket(shelf, item_id, position, width, shelf_height):
+    height = min(
+        random.randint(BUCKET_MIN_HEIGHT, BUCKET_MAX_HEIGHT),
+        # Make sure the bucket is not higher than the shelf
+        shelf["height"] + shelf_height - 1
+    )
+
+    length = random.randint(BUCKET_MIN_LENGTH, BUCKET_MAX_LENGTH)
     quantity = random.randint(1, 3)
 
     bucket = {
@@ -560,10 +702,10 @@ def generate_bucket():
         "width": width,
         "height": height,
         "length": length,
-        "position": utils.get_position(),
-        "item_id": uuid.uuid4(),
+        "position": position,
+        "item_id": item_id,
         "quantity": quantity,
-        "shelf_id": uuid.uuid4()
+        "shelf_id": shelf["id"]
     }
 
     return bucket
@@ -588,116 +730,13 @@ class Layout(Resource):
         as well it's details and associated items
         """
 
-        buckets = generate_buckets()
+        layout = coherent_generate_layout()
 
         layout = {
             "time": datetime.datetime.now(),
-            "buckets": buckets
+            "racks": layout["racks"],
+            "shelves": layout["shelves"],
+            "buckets": layout["buckets"]
         }
 
         return layout
-
-
-# ------------------------------------------------------------------------------
-# Shelves
-# ------------------------------------------------------------------------------
-
-def generate_shelf():
-    height = round(random.uniform(0, 400), 2)
-
-    shelf = {
-        "id": uuid.uuid4(),
-        "height": height,
-        "rack_id": uuid.uuid4()
-    }
-
-    return shelf
-
-
-def generate_shelves():
-    number_of_shelves = random.randint(50, 100)
-
-    shelves = [
-        generate_shelf() for _ in range(number_of_shelves)
-    ]
-
-    return shelves
-
-
-@namespace.route("/shelves")
-class Shelves(Resource):
-    @namespace.marshal_list_with(shelf_attributes)
-    def get(self):
-        """
-        Returns the information about the shelves.
-        """
-
-        shelves = generate_shelves()
-
-        return shelves
-
-
-@namespace.route("/shelves/<string:id>")
-class Shelf(Resource):
-    @namespace.marshal_list_with(shelf_attributes)
-    def get(self, id):
-        """
-        Returns the information about the shelf with the specified id.
-        """
-
-        shelf = generate_shelf()
-        shelf["id"] = id
-
-        return shelf
-
-
-# ------------------------------------------------------------------------------
-# Racks
-# ------------------------------------------------------------------------------
-
-def generate_rack():
-    width = round(random.uniform(50, 300), 2)
-
-    rack = {
-        "id": uuid.uuid4(),
-        "width": width,
-    }
-
-    return rack
-
-
-def generate_racks():
-    number_of_racks = random.randint(300, 400)
-
-    racks = [
-        generate_rack() for _ in range(number_of_racks)
-    ]
-
-    return racks
-
-
-@namespace.route("/racks")
-class Racks(Resource):
-    @namespace.marshal_list_with(rack_attributes)
-    def get(self):
-        """
-        Returns the information about the racks.
-        """
-
-        racks = generate_racks()
-
-        return racks
-
-
-@namespace.route("/racks/<string:id>")
-class Rack(Resource):
-    @namespace.marshal_list_with(rack_attributes)
-    def get(self, id):
-        """
-        Returns the information about the rack with the specified id.
-        """
-
-        rack = generate_rack()
-        rack["id"] = id
-
-        return rack
