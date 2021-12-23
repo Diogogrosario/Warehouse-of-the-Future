@@ -52,7 +52,7 @@
             margin-left: 0;
         }
         .content {
-            margin-top: 50px;
+            margin-top: 25px;
         }
         @media (min-width: 768px) {
             #sidebar-wrapper {
@@ -75,7 +75,6 @@
         <div class="sidebar-heading sidebarTitle">PSA</div>
         <div class="list-group list-group-flush">
             <a href="/" class="list-group-item list-group-item-action sidebarItem">Home</a>
-            <a href="{{route('filters')}}" class="list-group-item list-group-item-action sidebarItem">Generate layout</a>
             <a href="{{route('layouts')}}" class="list-group-item list-group-item-action sidebarItem">Visualize layouts</a>
             <a href="#" class="list-group-item list-group-item-action sidebarItem">Reports</a>
         </div>

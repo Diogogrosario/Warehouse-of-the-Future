@@ -112,14 +112,6 @@
             margin-top: 10px;
         }
 
-        .generateLayoutTab btnSubmit {
-            background-color: #0194f6;
-            border: 1px;
-            border-radius: 50px;
-            box-shadow: 0 10px 10px rgba(1, 1, 1, 0.2);
-            color: #000000;
-        }
-
         .boxDiv{
             margin-top: 20px;
             width: 100%;
@@ -132,7 +124,6 @@
              background-color: #405cf5;
              border-radius: 6px;
              border-width: 0;
-             box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
              box-sizing: border-box;
              color: #fff;
              cursor: pointer;
