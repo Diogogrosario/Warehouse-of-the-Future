@@ -22,7 +22,19 @@ public class Main {
         this.products = new ArrayList<>();
     }
 
-    private void prepareGrid() throws IOException {
+    public Orchestrator getOrchestrator() {
+        return orchestrator;
+    }
+
+    public MeshGrid getMeshGrid() {
+        return meshGrid;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void prepareGrid() throws IOException {
         // read devices from layout file
         LayoutReader layoutReader = new LayoutReader();
         layoutReader.read();
@@ -58,13 +70,6 @@ public class Main {
             System.exit(1);
         }
 
-        System.out.println("Tick " + Logger.getInstance().getTick());
-        this.orchestrator.orchestrate(this.products);
-        // Message initMsg = this.orchestrator.createMessage(8, "hello");
-        // this.orchestrator.addCommand(new SendMsgCmd(this.orchestrator, initMsg));
-        if (!meshGrid.update()) System.out.println("No updates...");
-        Logger.getInstance().nextTick();
-
         Scanner sc = new Scanner(System.in);
         event_loop:
         while (true) {
@@ -75,6 +80,9 @@ public class Main {
                 case 'N':
                     for (int i = 0; i < (cmd == 'n' ? 1 : 10); ++i) {
                         System.out.println("Tick " + Logger.getInstance().getTick());
+                        if (Logger.getInstance().getTick() == 0) {
+                            this.orchestrator.orchestrate(this.products);
+                        }
                         if (!meshGrid.update()) System.out.println("No updates...");
                         Logger.getInstance().nextTick();
                     }
@@ -90,7 +98,7 @@ public class Main {
         }
     }
 
-    private static void prepareConfigs() {
+    public static void prepareConfigs() {
         // read configs
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
         try {

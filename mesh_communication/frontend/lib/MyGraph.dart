@@ -15,32 +15,43 @@ class MyGraph extends InheritedWidget {
   }) : super(key: key, child: child);
 
   // for control buttons
-  void skipForward() {
+  Future<void> skipForward() async {
     print("Hello, this is the SFButton callback!");
 
-    var r = math.Random();
-
-    int nodeId1 = -1, nodeId2 = -1;
-    while (nodeId1 == nodeId2) {
-      nodeId1 = r.nextInt(graph.nodeCount());
-      nodeId2 = r.nextInt(graph.nodeCount());
+    // TODO make this pretty
+    for (Edge e in graph.edges) {
+      e.paint!.color = Colors.grey;
     }
 
-    print(nodeId1.toString() + " " + nodeId2.toString());
+    Map messages = await requestHandler.advanceTick();
+    print(messages);
 
-    final Node node1 = graph.getNodeUsingId(nodeId1.toString());
-    final Node node2 = graph.getNodeUsingId(nodeId2.toString());
+    for (String deviceIdStr in messages.keys) {
+      int deviceId = int.parse(deviceIdStr);
+      print(deviceIdStr);
+      final Node node1 = graph.getNodeUsingId(deviceId);
+      for (var target in messages[deviceIdStr]) {
+        int targetId = target["hop"];
 
-    final Edge? edge = graph.getEdgeBetween(node1, node2);
-    Paint paint = Paint()
-      ..color = (r.nextBool() ? Colors.green : Colors.red)
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-    if (edge == null) {
-      graph.addEdge(node1, node2, paint: paint);
-    } else {
-      final color = r.nextBool() ? Colors.green : Colors.red;
-      edge.paint = paint;
+        final Node node2 = graph.getNodeUsingId(targetId);
+        final Edge? edge = graph.getEdgeBetween(node1, node2);
+        if (edge == null) {
+          print("For some reason the edge " +
+              deviceId.toString() +
+              " -- " +
+              targetId.toString() +
+              " is missing");
+        }
+
+        print(targetId.toString() + " " + target["final"].toString());
+        if (target["failed"]) {
+          edge!.paint!.color = Colors.red;
+        } else if (targetId == target["final"]) {
+          edge!.paint!.color = Colors.green;
+        } else {
+          edge!.paint!.color = Colors.black;
+        }
+      }
     }
   }
 
