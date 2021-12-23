@@ -1,11 +1,15 @@
+import math
 import random
 import random as r
+
+from unicodedata import decimal
 
 max_iterations = 10000
 
 # metrics_to_optimize = ['weight', 'sector']
 # metrics_to_optimize = ['weight']
-metrics_to_optimize = ['sector']
+metrics_to_optimize = ['work']
+worker_average_height = 1.75
 
 
 class Layout:
@@ -76,7 +80,6 @@ class Layout:
 
     def get_score(self):
         score = 0
-        different_sectors_in_a_shelf = 0
 
         if 'weight' in metrics_to_optimize:
             for shelf in self.warehouse.shelves:
@@ -95,7 +98,18 @@ class Layout:
 
                 score -= len(different_sectors) * 3
 
+        if 'work' in metrics_to_optimize:
+            adj_side = 0.3
+            chest_y = worker_average_height * (2.0 / 3.0)
+
+            for shelf in self.warehouse.shelves:
+                for rack in shelf.racks:
+                    opo = abs(float(rack.y) - float(chest_y))
+                    tetha = abs(math.degrees(math.atan(opo / adj_side)))
+                    score -= tetha
+
         score -= len(self.products_out) * 100
+
         return score
 
     def remove_product(self, product):
