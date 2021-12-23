@@ -25,7 +25,7 @@ class RequestHandler {
         // orchestrator
         ret.add(
           Device(
-            id: '0',
+            id: 0,
             pos: vm.Vector3(d["position"]["x"], d["position"]["y"], 0.0),
           ),
         );
@@ -33,7 +33,7 @@ class RequestHandler {
         // normal device
         ret.add(
           Device(
-            id: d["device_id"].toString(),
+            id: d["device_id"],
             pos: vm.Vector3(d["position"]["x"], d["position"]["y"], 0.0),
           ),
         );
@@ -43,14 +43,14 @@ class RequestHandler {
     return ret;
   }
 
-  Future<List<String>> getEdges(String id) async {
+  Future<List<int>> getEdges(String id) async {
     http.Response fetchContent =
         await client.get(_resourceUri("devices/inrange/" + id));
     List neighbors = jsonDecode(fetchContent.body);
 
-    List<String> ret = <String>[];
+    List<int> ret = <int>[];
     for (Map<String, dynamic> n in neighbors) {
-      ret.add(n["device_id"].toString());
+      ret.add(n["device_id"]);
     }
     return ret;
   }

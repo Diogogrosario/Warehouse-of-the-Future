@@ -38,9 +38,9 @@ class BasePage extends StatelessWidget {
     }
     // gen edges
     for (Device d in devices) {
-      List<String> neighbors = await requestHandler.getEdges(d.id);
+      List<int> neighbors = await requestHandler.getEdges(d.id.toString());
       Node node1 = graph.getNodeUsingId(d.id);
-      for (String nid in neighbors) {
+      for (int nid in neighbors) {
         Node node2 = graph.getNodeUsingId(nid);
         graph.addEdge(node1, node2,
             paint: Paint()
