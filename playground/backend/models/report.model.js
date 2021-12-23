@@ -1,3 +1,5 @@
+import { DataTypes } from "sequelize";
+
 export default (sequelize, Sequelize) => {
 	return sequelize.define("report", {
 		severity: {
@@ -12,7 +14,13 @@ export default (sequelize, Sequelize) => {
 		resolved: {
 			type: Sequelize.BOOLEAN,
 		},
-		createdAt: Sequelize.DATE,
-		updatedAt: Sequelize.DATE,
+		createdAt: {
+			type: Sequelize.DATE,
+			defaultValue: DataTypes.NOW,
+		},
+		updatedAt: {
+			type: Sequelize.DATE,
+			defaultValue: DataTypes.NOW,
+		},
 	});
 };
