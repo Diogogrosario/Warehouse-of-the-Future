@@ -57,9 +57,9 @@ create table Product
     width     DECIMAL(5, 1),
     weight    DECIMAL(5, 1),
     sector_id BIGINT UNSIGNED NOT NULL,
-    frequency DECIMAL(3, 2) DEFAULT 0,
+    frequency DECIMAL(30, 5) DEFAULT 0,
     FOREIGN KEY (sector_id) REFERENCES Sector (id)
-    );
+);
 
 create table Product_Rack
 (
@@ -108,18 +108,21 @@ create table Worker_Manifesto_Product
 DROP TRIGGER IF EXISTS calculate_product_frequency;
 
 DELIMITER $$
-CREATE TRIGGER calculate_product_frequency 
-AFTER INSERT ON Worker_Manifesto_Product FOR EACH ROW
+CREATE TRIGGER calculate_product_frequency
+    AFTER INSERT
+    ON Worker_Manifesto_Product
+    FOR EACH ROW
 BEGIN
     DECLARE total_pieces INT;
     DECLARE freq INT;
 
-    SET freq = (SELECT SUM(quantity) from Worker_Manifesto_Product
-    WHERE product_id=new.product_id);
+    SET freq = (SELECT SUM(quantity)
+                from Worker_Manifesto_Product
+                WHERE product_id = new.product_id);
 
-    SET total_pieces = (SELECT SUM(quantity) from Worker_Manifesto_Product); /*this number is to normalize the results*/
-            
-    UPDATE Product SET frequency = freq/total_pieces where id=new.product_id;
+    SET total_pieces = (SELECT COUNT(id) from Worker_Manifesto_Product); /*this number is to normalize the results*/
+
+    UPDATE Product SET frequency = freq / total_pieces where id = new.product_id;
 
 END $$
 DELIMITER ;
