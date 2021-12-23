@@ -145,6 +145,41 @@ staff_attributes = namespace.model("Staff", {
     ),
 })
 
+# Sensors
+
+staff_contact_in_sensor_attributes = namespace.model("StaffContactInSensor", {
+    "time": fields.DateTime(
+        required=True,
+        description="Timestamp of when the sensor registered the contact"
+    ),
+    "staff_id": fields.String(
+        required=True,
+        description="Id of the operator that was next to the sensor"
+    )
+})
+
+sensor_attributes = namespace.model("Sensor", {
+    "id": fields.String(
+        required=True,
+        description="Id of the sensor"
+    ),
+    "bucket": fields.String(
+        required=True,
+        description="Id of the associated bucket"
+    ),
+    "movement_records": fields.List(
+        fields.DateTime,
+        required=True,
+        description="Timestamps of the movement detections."
+    ),
+    "staff_contacts": fields.List(
+        fields.Nested(staff_contact_in_sensor_attributes),
+        required=True,
+        description="Array of objects with timestamp and staff_id, that"
+                    + " represents when an operator was next to the sensor."
+    )
+})
+
 # Layout
 
 bucket_attributes = namespace.model("Bucket", {
@@ -229,47 +264,23 @@ layout_attributes = namespace.model("Layout", {
         fields.Nested(bucket_attributes),
         required=True,
         description="Buckets present in the warehouse"
-    )
-})
-
-# Sensors
-
-staff_contact_in_sensor_attributes = namespace.model("StaffContactInSensor", {
-    "time": fields.DateTime(
-        required=True,
-        description="Timestamp of when the sensor registered the contact"
     ),
-    "staff_id": fields.String(
+    "sensors": fields.List(
+        fields.Nested(sensor_attributes),
         required=True,
-        description="Id of the operator that was next to the sensor"
-    )
-})
-
-sensor_attributes = namespace.model("Sensor", {
-    "id": fields.String(
-        required=True,
-        description="Id of the sensor"
-    ),
-    "bucket": fields.String(
-        required=True,
-        description="Id of the associated bucket"
-    ),
-    "movement_records": fields.List(
-        fields.DateTime,
-        required=True,
-        description="Timestamps of the movement detections."
-    ),
-    "staff_contacts": fields.List(
-        fields.Nested(staff_contact_in_sensor_attributes),
-        required=True,
-        description="Array of objects with timestamp and staff_id, that"
-                    + " represents when an operator was next to the sensor."
+        description="Sensors present in the warehouse"
     )
 })
 
 # Cart
 
 cart_attributes = namespace.model("Cart", {
+    "start_position": fields.List(
+        fields.Integer,
+        required=True,
+        description="Coordinates of the cart start position, "
+                    + "in the form of list ([x, y])"
+    ),
     "speed": fields.Float(
         required=True,
         description="Speed of the cart, in cm/min"
@@ -444,99 +455,6 @@ class StaffEmployee(Resource):
 
 
 # ------------------------------------------------------------------------------
-# Sensors
-# ------------------------------------------------------------------------------
-
-def generate_random_sensors(number_of_sensors):
-
-    sensors = []
-
-    for _ in range(number_of_sensors):
-        id = uuid.uuid4()
-
-        number_of_movements = random.randint(1, 10)
-        movement_timestamps = []
-
-        for _ in range(number_of_movements):
-            movement_timestamps.append(utils.get_random_date_last_day())
-
-        staff_contacts = []
-        number_of_staff_contacts = random.randint(1, 10)
-
-        for _ in range(number_of_staff_contacts):
-            staff_contact = {
-                "time": utils.get_random_date_last_day(),
-                "staff_id": uuid.uuid4()
-            }
-
-            staff_contacts.append(staff_contact)
-
-        sensor = {
-            "id": id,
-            "bucket": uuid.uuid4(),
-            "movement_records": movement_timestamps,
-            "staff_contacts": staff_contacts
-        }
-        sensors.append(sensor)
-    return sensors
-
-
-def generate_random_sensor(sensor_id):
-    sensor = generate_random_sensors(number_of_sensors=1)[0]
-    sensor["id"] = sensor_id
-    return sensor
-
-
-@namespace.route("/sensors")
-class Sensors(Resource):
-    @namespace.marshal_list_with(sensor_attributes)
-    def get(self):
-        """
-        Returns the data about all the sensors.
-        """
-
-        number_of_sensors = random.randint(30, 100)
-
-        sensors = generate_random_sensors(number_of_sensors=number_of_sensors)
-
-        return sensors
-
-
-@namespace.route("/sensors/<string:id>")
-class Sensor(Resource):
-    @namespace.marshal_list_with(sensor_attributes)
-    def get(self, id):
-        """
-        Returns the data about the sensor with the provided id.
-        """
-
-        sensor = generate_random_sensor(sensor_id=id)
-
-        return sensor
-
-
-# ------------------------------------------------------------------------------
-# Cart
-# ------------------------------------------------------------------------------
-
-@namespace.route("/cart")
-class Cart(Resource):
-    @namespace.marshal_list_with(cart_attributes)
-    def get(self):
-        """
-        Returns the speed, start and end times of the cart.
-        """
-
-        cart = {
-            "speed": round(random.uniform(500, 1000), 2),
-            "start_time": "07:00",
-            "end_time": "19:00"
-        }
-
-        return cart
-
-
-# ------------------------------------------------------------------------------
 # Orchestrator
 # ------------------------------------------------------------------------------
 
@@ -599,6 +517,7 @@ BUCKET_MAX_LENGTH = 0.9*100
 # The final_previous_super_rack_width tells us the real width of the
 # previously created super rack, so it is not applicable to the first one
 def generate_super_rack(super_rack_number, final_previous_super_rack_width):
+    sensors = []
     buckets = []
     racks = []
     shelves = []
@@ -722,15 +641,20 @@ def generate_super_rack(super_rack_number, final_previous_super_rack_width):
                 )
                 buckets.append(bucket)
 
+                sensor = generate_sensor(bucket_id=bucket["id"])
+                sensors.append(sensor)
+
     return {
         "final_super_rack1_width": final_current_super_rack1_width,
         "racks": racks,
         "shelves": shelves,
-        "buckets": buckets
+        "buckets": buckets,
+        "sensors": sensors
     }
 
 
 def coherent_generate_layout():
+    sensors = []
     buckets = []
     racks = []
     shelves = []
@@ -755,12 +679,43 @@ def coherent_generate_layout():
                                      + super_rack3["shelves"]
     buckets = super_rack1["buckets"] + super_rack2["buckets"] \
                                      + super_rack3["buckets"]
+    sensors = super_rack1["sensors"] + super_rack2["sensors"] \
+                                     + super_rack3["sensors"]
 
     return {
         "racks": racks,
         "shelves": shelves,
-        "buckets": buckets
+        "buckets": buckets,
+        "sensors": sensors
     }
+
+
+def generate_sensor(bucket_id):
+    number_of_movements = random.randint(1, 10)
+    movement_timestamps = []
+
+    for _ in range(number_of_movements):
+        movement_timestamps.append(utils.get_random_date_last_day())
+
+    staff_contacts = []
+    number_of_staff_contacts = random.randint(1, 10)
+
+    for _ in range(number_of_staff_contacts):
+        staff_contact = {
+            "time": utils.get_random_date_last_day(),
+            "staff_id": uuid.uuid4()
+        }
+
+        staff_contacts.append(staff_contact)
+
+    sensor = {
+        "id": uuid.uuid4(),
+        "bucket": bucket_id,
+        "movement_records": movement_timestamps,
+        "staff_contacts": staff_contacts
+    }
+
+    return sensor
 
 
 def generate_bucket(shelf, item_id, position, width, shelf_height):
@@ -802,7 +757,30 @@ class Layout(Resource):
             "time": datetime.datetime.now(),
             "racks": layout["racks"],
             "shelves": layout["shelves"],
-            "buckets": layout["buckets"]
+            "buckets": layout["buckets"],
+            "sensors": layout["sensors"]
         }
 
         return layout
+
+
+# ------------------------------------------------------------------------------
+# Cart
+# ------------------------------------------------------------------------------
+
+@namespace.route("/cart")
+class Cart(Resource):
+    @namespace.marshal_list_with(cart_attributes)
+    def get(self):
+        """
+        Returns the speed, start and end times of the cart.
+        """
+
+        cart = {
+            "start_position":  [SUPER_RACK2_MAX_WIDTH//2, 0],
+            "speed": round(random.uniform(500, 1000), 2),
+            "start_time": "07:00",
+            "end_time": "19:00"
+        }
+
+        return cart
