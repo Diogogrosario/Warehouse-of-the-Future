@@ -1,5 +1,5 @@
 export default (sequelize, Sequelize) => {
-	const Action = sequelize.define("action", {
+	return sequelize.define("action", {
 		description: {
 			type: Sequelize.TEXT,
 		},
@@ -9,6 +9,4 @@ export default (sequelize, Sequelize) => {
 		createdAt: Sequelize.DATE,
 		updatedAt: Sequelize.DATE,
 	});
-
-	return Action;
 };

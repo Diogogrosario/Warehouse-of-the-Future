@@ -1,5 +1,5 @@
 export default (sequelize, Sequelize) => {
-	const Report = sequelize.define("report", {
+	return sequelize.define("report", {
 		severity: {
 			type: Sequelize.ENUM("Error", "Warning"),
 		},
@@ -15,6 +15,4 @@ export default (sequelize, Sequelize) => {
 		createdAt: Sequelize.DATE,
 		updatedAt: Sequelize.DATE,
 	});
-
-	return Report;
 };
