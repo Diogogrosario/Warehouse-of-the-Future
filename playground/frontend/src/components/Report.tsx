@@ -33,8 +33,7 @@ interface ReportProps {
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
-	const { title, description, shortDescription, warningLevel, actions, reportId } =
-		props;
+	const { title, description, shortDescription, warningLevel, actions, reportId } = props;
 
 	const reportComponentId = `PlaygroundReport-${reportId}`;
 	return (
