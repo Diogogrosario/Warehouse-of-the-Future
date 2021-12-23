@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import SceneManager from "./SceneManager";
-import Stats from "./Stats";
+import SceneManager from "../renderer/SceneManager";
+import Stats from "../renderer/Stats";
 
 class WarehouseRenderer extends Component {
 	private container?: HTMLDivElement;
 
-	private requestID: number = 0;
+	private requestID = 0;
 
 	private sceneManager!: SceneManager;
 	private stats?: Stats;
 
-	private width: number = 0;
-	private height: number = 0;
-	private needsResize: boolean = false;
+	private width = 0;
+	private height = 0;
+	private needsResize = false;
 
 	componentDidMount() {
 		this.stats = new Stats();
@@ -23,7 +23,7 @@ class WarehouseRenderer extends Component {
 
 		if (this.container) {
 			const ro = new ResizeObserver((entries) => {
-				for (let entry of entries) {
+				for (const entry of entries) {
 					const cr = entry.contentRect;
 					// Mark for resize
 					this.width = cr.width;
@@ -77,7 +77,19 @@ class WarehouseRenderer extends Component {
 	}
 
 	public render() {
-		return <div id="warehouse-renderer" ref={(ref) => (this.container = ref ?? undefined)} />;
+		return (
+			<div
+				style={{
+					flexGrow: 1,
+					height: "100%",
+					width: "100%",
+					/* overflow: "hidden"; */
+					display: "block",
+					position: "relative",
+				}}
+				ref={(ref) => (this.container = ref ?? undefined)}
+			/>
+		);
 	}
 }
 
