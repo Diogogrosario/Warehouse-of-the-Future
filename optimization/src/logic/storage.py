@@ -76,4 +76,3 @@ class Storage:
                 layout.products_out.append(product)
 
         return layout
-

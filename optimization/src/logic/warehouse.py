@@ -2,13 +2,15 @@ import math
 import random
 import random as r
 
-max_iterations = 10000
+max_iterations = 1000
 
 # metrics_to_optimize = ['weight', 'sector']
 # metrics_to_optimize = ['weight']
 metrics_to_optimize = ['work']
-worker_average_height = 1.75
+# metrics_to_optimize = ['frequency']
+# metrics_to_optimize = ['sector']
 
+worker_average_height = 1.75
 
 class Layout:
     def __init__(self, warehouse):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
@@ -119,34 +121,6 @@ class Layout:
     def change_place(self, product):
         self.remove_product(product)
         self.add_product_random(product)
-
-    # Return NONE If current_rack is at the top and there is nothing above
-    def get_rack_above(self, current_rack):
-
-        shelf = None
-
-        for elem in self.warehouse.shelves:
-            if elem.id == current_rack.shelf_id:
-                shelf = shelf
-                break
-
-        if not shelf:
-            return None
-
-        rack_above = None
-
-        for shelf_rack in shelf.racks:
-
-            if shelf_rack.y < current_rack.y:
-                continue
-
-            if not rack_above:
-                rack_above = shelf_rack
-
-            elif rack_above.y > shelf_rack.y:
-                rack_above = shelf_rack
-
-        return rack_above
 
     def __lt__(self, other):
         return self.get_score() < other.get_score()
@@ -267,15 +241,6 @@ class Rack:
         for product in self.products.keys():
             weight += product.weight
         return weight
-
-    def get_available_width(self):
-
-        counter = self.width
-
-        for product in self.products:
-            counter -= product.width
-
-        return counter
 
     def __str__(self) -> str:
         state = ""
