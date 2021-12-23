@@ -138,10 +138,6 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
     return GraphView(
       graph: MyGraph.of(context).graph,
       algorithm: widget.algo,
-      paint: Paint()
-        ..color = Colors.black
-        ..strokeWidth = 2
-        ..style = PaintingStyle.stroke,
       builder: (Node node) {
         // I can decide what widget should be shown here based on the id
         String nodeName = node.key!.value;

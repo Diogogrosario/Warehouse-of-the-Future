@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:graphview/GraphView.dart';
 
 class UndirectedGraph extends Graph {

@@ -42,4 +42,16 @@ class RequestHandler {
 
     return ret;
   }
+
+  Future<List<String>> getEdges(String id) async {
+    http.Response fetchContent =
+        await client.get(_resourceUri("devices/inrange/" + id));
+    List neighbors = jsonDecode(fetchContent.body);
+
+    List<String> ret = <String>[];
+    for (Map<String, dynamic> n in neighbors) {
+      ret.add(n["device_id"].toString());
+    }
+    return ret;
+  }
 }
