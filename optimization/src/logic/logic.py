@@ -99,7 +99,7 @@ if __name__ == '__main__':
 
     initial_population = generate_population(warehouse, 10)
 
-    num_iterations = 100
+    num_iterations = 1000
 
     final_layout = genetic_algorithm(warehouse, initial_population, num_iterations)
 
