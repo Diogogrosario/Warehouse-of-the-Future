@@ -57,6 +57,7 @@ create table Product
     width     DECIMAL(5, 1),
     weight    DECIMAL(5, 1),
     sector_id BIGINT UNSIGNED NOT NULL,
+    frequency DECIMAL(30, 5) DEFAULT 0,
 
     FOREIGN KEY (sector_id) REFERENCES Sector (id)
 

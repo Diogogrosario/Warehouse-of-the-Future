@@ -6,9 +6,9 @@ from copy import deepcopy
 max_iterations = 10000
 
 # metrics_to_optimize = ['weight', 'sector']
-metrics_to_optimize = ['sector']
-# metrics_to_optimize = ['weight']
-# metrics_to_optimize = ['work']
+# metrics_to_optimize = ['sector']
+#metrics_to_optimize = ['weight']
+metrics_to_optimize = ['work']
 worker_average_height = 1.75
 
 
@@ -76,7 +76,7 @@ class Layout:
             for shelf in self.warehouse.shelves:
                 for rack in shelf.racks:
                     for product in rack.products:
-                        score += product.weight / rack.y
+                        score += float(product.weight) / max(float(rack.y), 0.1)
 
         if 'sector' in metrics_to_optimize:
             for shelf in self.warehouse.shelves:
