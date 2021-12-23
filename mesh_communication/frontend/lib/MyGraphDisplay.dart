@@ -113,19 +113,19 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
     super.dispose();
   }
 
-  Widget getNode(String name, Color color) {
+  Widget _getNode(int id, Color color) {
     return Material(
       color: color,
       borderRadius: BorderRadius.circular(4),
       child: InkWell(
         borderRadius: BorderRadius.circular(4),
         onTap: () {
-          print("Clicked node " + name);
+          print("Clicked node " + id.toString());
         },
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            name,
+            id.toString(),
             style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold),
           ),
@@ -134,18 +134,14 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
     );
   }
 
-  Widget getGraphView(BuildContext context) {
+  Widget _getGraphView(BuildContext context) {
     return GraphView(
       graph: MyGraph.of(context).graph,
       algorithm: widget.algo,
-      paint: Paint()
-        ..color = Colors.black
-        ..strokeWidth = 2
-        ..style = PaintingStyle.stroke,
       builder: (Node node) {
         // I can decide what widget should be shown here based on the id
-        String nodeName = node.key!.value;
-        return getNode(nodeName, widget.colors[int.parse(nodeName)]);
+        int nodeId = node.key!.value;
+        return _getNode(nodeId, widget.colors[nodeId]);
       },
     );
   }
@@ -160,7 +156,7 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
       onInteractionStart: _onInteractionStart,
       minScale: 0.1,
       maxScale: 10.0,
-      child: getGraphView(context),
+      child: _getGraphView(context),
     );
   }
 }
