@@ -632,18 +632,54 @@ def coherent_generate_layout():
                 "id": uuid.uuid4(),
                 # the height of the shelf is in relation to the ground
                 "height": current_rack_height - shelf_height,
-                "rack_id": rack.id
+                "rack_id": rack["id"]
             }
             shelfs.append(shelf)
-        
+
+            # track the width of the shelf with the buckets we are creating;
+            # the width of th shelf is the same as the width of the rack;
+            # we are trying to fit a certain number of buckets in the shelf,
+            # considering its width
+            current_shelf_width = 0
+
+            while (current_shelf_width < rack["width"]):
+                bucket_width = random.randint(
+                    BUCKET_MIN_WIDTH,
+                    BUCKET_MAX_WIDTH
+                )
+                current_shelf_width += bucket_width
+
+                if (current_shelf_width > rack["width"]):
+                    break
+
+                shelf_start_y_pos = current_super_rack_width - rack_width
+                bucket_start_y_pos = shelf_start_y_pos + current_shelf_width \
+                    - bucket_width
+                # Considering the y pos of the bucket to be in the center of it
+                bucket_y_position = bucket_start_y_pos + bucket_width / 2
+
+                position = [0, bucket_y_position, shelf["height"]]
+
+                bucket = generate_bucket(
+                    shelf=shelf,
+                    # TODO: make sure there are no repeated items
+                    item_id=random.choice(available_items),
+                    position=position,
+                    width=bucket_width,
+                    shelf_height=shelf_height
+                )
+                buckets.append(bucket)
+
+    return buckets
 
 
-
-def generate_bucket(shelf, item_id, position, width):
+def generate_bucket(shelf, item_id, position, width, shelf_height):
     height = min(
         random.randint(BUCKET_MIN_HEIGHT, BUCKET_MAX_HEIGHT),
-        shelf.height - 1  # Make sure the bucket is not higher than the shelf
+        # Make sure the bucket is not higher than the shelf
+        shelf["height"] + shelf_height - 1
     )
+
     length = random.randint(BUCKET_MIN_LENGTH, BUCKET_MAX_LENGTH)
     quantity = random.randint(1, 3)
 
@@ -655,7 +691,7 @@ def generate_bucket(shelf, item_id, position, width):
         "position": position,
         "item_id": item_id,
         "quantity": quantity,
-        "shelf_id": shelf.id
+        "shelf_id": shelf["id"]
     }
 
     return bucket
@@ -680,7 +716,7 @@ class Layout(Resource):
         as well it's details and associated items
         """
 
-        buckets = generate_buckets()
+        buckets = coherent_generate_layout()
 
         layout = {
             "time": datetime.datetime.now(),
