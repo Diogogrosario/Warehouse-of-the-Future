@@ -635,7 +635,7 @@ def coherent_generate_layout():
     sensors = super_rack1["sensors"] + super_rack2["sensors"] \
                                      + super_rack3["sensors"]
     items = super_rack1["items"] + super_rack2["items"] \
-                                     + super_rack3["items"]
+                                 + super_rack3["items"]
 
     return {
         "racks": racks,
