@@ -269,6 +269,11 @@ layout_attributes = namespace.model("Layout", {
         fields.Nested(sensor_attributes),
         required=True,
         description="Sensors present in the warehouse"
+    ),
+    "items": fields.List(
+        fields.Nested(item_attributes),
+        required=True,
+        description="Items present in the warehouse"
     )
 })
 
@@ -575,7 +580,6 @@ def generate_super_rack(super_rack_number, final_previous_super_rack_width):
 
                 bucket = generate_bucket(
                     shelf=shelf,
-                    # TODO: make sure there are no repeated items
                     item_id=random.choice(available_items),
                     position=position,
                     width=bucket_width,
