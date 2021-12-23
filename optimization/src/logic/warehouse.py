@@ -1,9 +1,9 @@
 import math
 import random
 import random as r
-from copy import deepcopy, copy
+from copy import deepcopy
 
-max_iterations = 1000
+max_iterations = 10000
 
 # metrics_to_optimize = ['weight', 'sector']
 metrics_to_optimize = ['sector']
@@ -87,10 +87,12 @@ class Layout:
                         if product.sector_id not in different_sectors:
                             different_sectors.append(product.sector_id)
 
-                if len(different_sectors) > 0:
-                    score -= len(different_sectors) * 3
-                else:
-                    score += 100
+                if len(different_sectors) == 1:
+                    score += 10
+                elif len(different_sectors) > 1:
+                    score -= 20 * len(different_sectors)
+                elif len(different_sectors) == 0:
+                    score -= 50
 
         if 'work' in metrics_to_optimize:
             adj_side = 0.2

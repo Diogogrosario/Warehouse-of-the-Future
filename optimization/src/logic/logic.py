@@ -60,9 +60,7 @@ def genetic_algorithm(warehouse, population, num_iterations):
         child = reproduce(parent1, parent2, warehouse)
 
         if r.uniform(0, 1.0) > 0.80:  # mutation with a chance of 20%
-            # pass
             mutate(child)
-            # print(f"Index:{index} child: {child}")
 
         heapq.heapreplace(population, child)  # remove the worst layout and add the new child
 
@@ -73,7 +71,6 @@ def genetic_algorithm(warehouse, population, num_iterations):
 
 
 def mutate(child):
-
     product = child.get_random_product()
     child.change_place(product)
 
