@@ -54,11 +54,7 @@ export function update(req, res) {
 			if (num == 1) {
 				res.send({ message: "Success." });
 			} else {
-<<<<<<< HEAD
 				res.send({ message: `Can't update report ${id}.` });
-=======
-				res.status(404).send({ message: "Can't update report ${id}." });
->>>>>>> t3_development
 			}
 		})
 		.catch((err) => {
