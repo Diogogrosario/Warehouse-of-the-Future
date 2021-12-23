@@ -1,3 +1,5 @@
+
+
 @extends('app')
 @section('content')
 <div class="container">
@@ -15,12 +17,12 @@
                 </select>
                 <button type="submit" class="ml-2 btn btn-outline-info "> Visualize</button>
             </form>
-            
+
             <!--add an export action-->
             <div class="ml-auto">
                 <button type="button" class="btn btn-outline-info ">Export File</button>
-            </div>  
-            
+            </div>
+
         </div>
     </div>
 

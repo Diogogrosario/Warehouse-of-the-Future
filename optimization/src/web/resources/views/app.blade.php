@@ -28,6 +28,7 @@
         }
         #sidebar-wrapper .list-group {
             width: 15rem;
+
         }
         #page-content-wrapper {
             min-width: 100vw;

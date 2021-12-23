@@ -1,13 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use ..\..\
 
-Route::get('/', '../Home@index');
-
-//Route::get('/', function () {
-//    return view('home');
-//});
+Route::get('/', 'App\Http\Controllers\HomeController@index');
 
 Route::get('/filters', function () {
     return view('metrics_filter');
