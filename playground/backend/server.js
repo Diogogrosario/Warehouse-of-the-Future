@@ -1,5 +1,6 @@
 import express, { json, urlencoded } from "express";
 import db from "./models/index.js";
+import router from "./routes/playground.routes.js";
 
 const app = express();
 
@@ -15,6 +16,9 @@ app.use(urlencoded({ extended: true }));
 app.get("/", (req, res) => {
 	res.json({ message: "Welcome to the playgroud backend API" });
 });
+
+// use routes defined in ./routes/playground.routes.js
+app.use("/", router);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
