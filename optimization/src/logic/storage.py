@@ -1,8 +1,4 @@
-import pandas as pd
-
 from warehouse import *
-import time
-
 
 class Storage:
     def __init__(self, db):

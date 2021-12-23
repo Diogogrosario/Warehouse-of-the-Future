@@ -4,6 +4,7 @@ from copy import deepcopy
 
 from database import Database
 from storage import *
+from warehouse import *
 
 db = None
 storage = None
@@ -53,7 +54,7 @@ def genetic_algorithm(warehouse, population, num_iterations):
     heapq.heapify(population)
     length = len(population)
 
-    for i in range(num_iterations):
+    for _ in range(num_iterations):
         parent1 = heapq.nlargest(1, population)[0]  # best layout
         parent2 = heapq.nsmallest(length - 1, population)[r.randint(0, length - 2)]  # random layout
         child = reproduce(parent1, parent2, warehouse)
@@ -99,9 +100,7 @@ if __name__ == '__main__':
 
     initial_population = generate_population(warehouse, 10)
 
-    num_iterations = 1000
-
-    final_layout = genetic_algorithm(warehouse, initial_population, num_iterations)
+    final_layout = genetic_algorithm(warehouse, initial_population, max_iterations)
 
     print('----- FINAL LAYOUT -----')
     print(final_layout)
