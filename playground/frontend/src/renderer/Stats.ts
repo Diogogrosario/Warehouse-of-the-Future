@@ -171,7 +171,7 @@ class Stats {
 	}
 
 	private showPanel(id: number) {
-		for (var i = 0; i < this.container.children.length; i++) {
+		for (let i = 0; i < this.container.children.length; i++) {
 			const child = this.container.children[i] as HTMLElement;
 			child.style.display = i === id ? "block" : "none";
 		}
@@ -190,7 +190,7 @@ class Stats {
 	public end(): number {
 		this.frames++;
 
-		let time = (performance || Date).now();
+		const time = (performance || Date).now();
 
 		this.msPanel.update(time - this.beginTime, 200);
 

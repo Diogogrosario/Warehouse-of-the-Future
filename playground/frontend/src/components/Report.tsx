@@ -23,7 +23,6 @@ import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 
 interface ReportProps {
-	children?: React.ReactNode;
 	title?: string;
 	shortDescription: string;
 	description: string;
@@ -34,8 +33,7 @@ interface ReportProps {
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
-	const { title, description, shortDescription, warningLevel, actions, reportId, children } =
-		props;
+	const { title, description, shortDescription, warningLevel, actions, reportId } = props;
 
 	const reportComponentId = `PlaygroundReport-${reportId}`;
 	return (
@@ -134,6 +132,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 
 								return (
 									<ListItem
+										key={`${reportComponentId}-action-${index}`}
 										id={`${reportComponentId}-action-${index}`}
 										style={{ display: "flex" }}
 									>
