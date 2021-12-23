@@ -736,8 +736,8 @@ class Layout(Resource):
     @namespace.marshal_list_with(layout_attributes)
     def get(self):
         """
-        Returns the buckets present in the wareshouse,
-        as well it's details and associated items
+        Returns the racks, shelves, buckets, sensors
+        and items present in the wareshouse
         """
 
         layout = coherent_generate_layout()
