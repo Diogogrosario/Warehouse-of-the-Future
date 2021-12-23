@@ -20,6 +20,9 @@ itemAttributes = namespace.model("StockItem", {
         required=True,
         attribute='_id.$oid',
         description="Name of the item"),
+    "designation": fields.String(
+        required=True,
+        description="Name of the item"),
     "width": fields.Float(required=True, description="Width of the item"),
     "height": fields.Float(required=True, description="Height of the item"),
     "length": fields.Float(required=True, description="Length of the item"),
