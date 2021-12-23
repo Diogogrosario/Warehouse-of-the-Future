@@ -6,7 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.LogRecord;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
-import org.t2.mesh_communication.config.*;
-import org.t2.mesh_communication.devices.*;
+import org.t2.mesh_communication.devices.MeshDevice;
+import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
@@ -25,7 +28,7 @@ import org.t2.mesh_communication.log.Logger;
 @SpringBootApplication
 @RestController
 public class API {
-    @Autowired private MeshGrid meshGrid;
+    @Autowired private Main main;
 
     public static void main(String[] args) {
         API api = new API();
@@ -35,14 +38,24 @@ public class API {
     @PostConstruct
     public void start() {
         Main.prepareConfigs();
-        Main m = new Main();
         try {
-            m.prepareGrid();
+            main.prepareGrid();
         } catch (IOException e) {
             System.err.println("Failed to prepare mesh grid.");
             System.exit(1);
         }
-        this.meshGrid = m.getMeshGrid();
+    }
+
+    private MeshGrid getMeshGrid() {
+        return this.main.getMeshGrid();
+    }
+
+    public Main getMain() {
+        return this.main;
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
     }
 
     @GetMapping("/devices/{status}")
@@ -52,24 +65,19 @@ public class API {
 
         List<MeshDevice> devices;
         switch (status) {
-            case "all":
-                devices = this.meshGrid.getDevices();
-                break;
-            case "failed":
-                devices =
-                        this.meshGrid.getDevices().stream()
-                                .filter(dv -> !dv.isOperational())
-                                .toList();
-                break;
-            case "operational":
-                devices =
-                        this.meshGrid.getDevices().stream()
-                                .filter(MeshDevice::isOperational)
-                                .toList();
-                break;
-            default:
+            case "all" -> devices = this.getMeshGrid().getDevices();
+            case "failed" -> devices =
+                    this.getMeshGrid().getDevices().stream()
+                            .filter(dv -> !dv.isOperational())
+                            .toList();
+            case "operational" -> devices =
+                    this.getMeshGrid().getDevices().stream()
+                            .filter(MeshDevice::isOperational)
+                            .toList();
+            default -> {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 return new ArrayList<>();
+            }
         }
 
         if (devices.isEmpty()) {
@@ -94,7 +102,7 @@ public class API {
 
     @GetMapping("/device/{id}")
     public JsonNode devices(@PathVariable("id") int deviceID, HttpServletResponse response) {
-        List<MeshDevice> devices = meshGrid.getDevices();
+        List<MeshDevice> devices = this.getMeshGrid().getDevices();
 
         MeshDevice device = null;
         for (MeshDevice dv : devices) {
@@ -134,7 +142,7 @@ public class API {
         response.addHeader("Access-Control-Allow-Origin", "*");
 
         MeshDevice device = null;
-        for (MeshDevice dv : this.meshGrid.getDevices()) {
+        for (MeshDevice dv : this.getMeshGrid().getDevices()) {
             if (dv.getId() == deviceID) {
                 device = dv;
                 break;
@@ -146,7 +154,7 @@ public class API {
             return null;
         }
 
-        List<MeshDevice> devicesInRange = this.meshGrid.devicesInRange(device);
+        List<MeshDevice> devicesInRange = this.getMeshGrid().devicesInRange(device);
         List<JsonNode> devicesRangeJson;
         try {
             devicesRangeJson = this.devicesToJson(devicesInRange);
@@ -170,10 +178,7 @@ public class API {
         if (nTicks <= 0) return "NTicks must be a number of value higher than 0.";
         switch (timeFlow) {
             case "forwards":
-                for (int i = 0; i < nTicks; ++i) {
-                    this.meshGrid.update();
-                    Logger.getInstance().nextTick();
-                }
+                this.main.advanceTick(nTicks);
                 break;
             case "backwards":
                 // TODO: when UNDO ticks is implemented
@@ -188,6 +193,14 @@ public class API {
         return "Mesh Grid updated";
     }
 
+    @PostMapping("/orchestrate")
+    public String orchestrate(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        this.main.orchestrate();
+        response.setStatus(HttpServletResponse.SC_OK);
+        return "Orchestrator orchestrated";
+    }
+
     @GetMapping("/message")
     public ObjectNode message(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -195,7 +208,7 @@ public class API {
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
-        for (MeshDevice sender : this.meshGrid.getDevices()) {
+        for (MeshDevice sender : this.getMeshGrid().getDevices()) {
             for (Command command : sender.getCommands()) {
                 if (!(command instanceof SendMsgCmd sendMsgCmd)) continue;
 
@@ -280,13 +293,5 @@ public class API {
         messageNode.put("hop", receiver);
 
         return messageNode;
-    }
-
-    public void setMeshGrid(MeshGrid meshGrid) {
-        this.meshGrid = meshGrid;
-    }
-
-    public MeshGrid getMeshGrid() {
-        return this.meshGrid;
     }
 }

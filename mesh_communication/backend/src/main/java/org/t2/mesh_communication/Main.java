@@ -7,14 +7,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 import org.t2.mesh_communication.config.*;
 import org.t2.mesh_communication.devices.*;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.log.Logger;
 
+@Component
 public class Main {
     private Orchestrator orchestrator;
-    private final MeshGrid meshGrid;
+    private MeshGrid meshGrid;
     private List<Product> products;
 
     public Main() {
@@ -28,6 +30,10 @@ public class Main {
 
     public MeshGrid getMeshGrid() {
         return meshGrid;
+    }
+
+    public void setMeshGrid(MeshGrid meshGrid) {
+        this.meshGrid = meshGrid;
     }
 
     public List<Product> getProducts() {
@@ -62,6 +68,18 @@ public class Main {
         this.products = manifestReader.getProducts();
     }
 
+    public void orchestrate() {
+        this.orchestrator.orchestrate(this.products);
+    }
+
+    public void advanceTick(int n) {
+        for (int i = 0; i < n; ++i) {
+            System.out.println("Tick " + Logger.getInstance().getTick());
+            if (!meshGrid.update()) System.out.println("No updates...");
+            Logger.getInstance().nextTick();
+        }
+    }
+
     public void run() {
         try {
             this.prepareGrid();
@@ -78,14 +96,10 @@ public class Main {
             switch (cmd) {
                 case 'n':
                 case 'N':
-                    for (int i = 0; i < (cmd == 'n' ? 1 : 10); ++i) {
-                        System.out.println("Tick " + Logger.getInstance().getTick());
-                        if (Logger.getInstance().getTick() == 0) {
-                            this.orchestrator.orchestrate(this.products);
-                        }
-                        if (!meshGrid.update()) System.out.println("No updates...");
-                        Logger.getInstance().nextTick();
-                    }
+                    this.advanceTick(cmd == 'n' ? 1 : 10);
+                    break;
+                case 'o':
+                    this.orchestrate();
                     break;
                 case 'q':
                 case 'Q':
