@@ -77,22 +77,22 @@ export class WarehouseStructure {
 			{
 				height: 0,
 				buckets: 4,
-				bucketType: BucketType.NORMAL,
+				bucketType: BucketType.REGULAR,
 			},
 			{
 				height: 1,
 				buckets: 4,
-				bucketType: BucketType.NORMAL,
+				bucketType: BucketType.REGULAR,
 			},
 			{
 				height: 2,
 				buckets: 4,
-				bucketType: BucketType.NORMAL,
+				bucketType: BucketType.REGULAR,
 			},
 			{
 				height: 3,
 				buckets: 4,
-				bucketType: BucketType.NORMAL,
+				bucketType: BucketType.REGULAR,
 			},
 		]);
 		this.obj.add(shelf.getObject());
