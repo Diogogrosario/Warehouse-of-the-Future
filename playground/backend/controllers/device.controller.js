@@ -4,7 +4,7 @@ const Device = db.device;
 // Create and Save a new Device
 export function create(req, res) {
 	// save to database
-	Device.create( {id: req.body.id} )
+	Device.create({ id: req.body.id })
 		.then((data) => {
 			res.send(data);
 		})
