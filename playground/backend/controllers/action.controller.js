@@ -1,17 +1,9 @@
-import { Action } from "../models/action.model";
+import db from "../models/index.js";
+const Action = db.action;
 
 // Create and Save a new Action
 export function create(req, res) {
-	// validate request
-	if (!req.params.id) {
-		res.status(400).send({
-			message: "Empty content.",
-		});
-		return;
-	}
-
 	const action = {
-		id: req.params.id,
 		description: req.body.description,
 		employee_id: req.body.employee_id,
 	};
@@ -44,10 +36,10 @@ export function findOne(req, res) {
 	Action.findByPk(id)
 		.then((data) => {
 			if (data) res.send(data);
-			else res.status(404).send({ message: "Didn't find action ${id}." });
+			else res.status(404).send({ message: `Didn't find action ${id}.` });
 		})
 		.catch((err) => {
-			res.status(500).send({ message: err.message || "Error on action ${id} retrieval." });
+			res.status(500).send({ message: err.message || `Error on action ${id} retrieval.` });
 		});
 }
 
@@ -62,7 +54,7 @@ export function update(req, res) {
 			if (num == 1) {
 				res.send({ message: "Success." });
 			} else {
-				res.status(404).send({ message: "Can't update report ${id}." });
+				res.send({ message: `Can't update report ${id}.` });
 			}
 		})
 		.catch((err) => {
