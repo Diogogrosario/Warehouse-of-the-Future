@@ -13,6 +13,8 @@ import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.Orchestrator;
 import org.t2.mesh_communication.devices.Position;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
+import org.t2.mesh_communication.devices.command.SendMsgCmd;
+import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.log.Logger;
 
 @Component
@@ -71,7 +73,9 @@ public class Main {
     }
 
     public void orchestrate() {
-        this.orchestrator.orchestrate(this.products);
+        // this.orchestrator.orchestrate(this.products);
+        Message msg = this.orchestrator.createMessage(8, "pagordo");
+        this.orchestrator.addCommand(new SendMsgCmd(this.orchestrator, msg));
     }
 
     public void advanceTick(int n) {
