@@ -102,6 +102,7 @@ public class API {
 
     @GetMapping("/device/{id}")
     public JsonNode devices(@PathVariable("id") int deviceID, HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
         List<MeshDevice> devices = this.getMeshGrid().getDevices();
 
         MeshDevice device = null;
@@ -244,6 +245,7 @@ public class API {
 
     @GetMapping("/log")
     public ObjectNode log(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
         HashMap<String, ArrayNode> logs = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
