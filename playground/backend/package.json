@@ -16,7 +16,8 @@
 		"eslint": "^8.3.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-config-prettier": "^8.3.0",
-		"prettier": "^2.5.0"
+		"prettier": "^2.5.0",
+		"sequelize-fixtures": "^1.2.0"
 	},
 	"peerDependencies": {
 		"eslint-plugin-import": "^2.25.3"
@@ -24,6 +25,7 @@
 	"scripts": {
 		"lint": "eslint --ext .js .",
 		"format": "prettier --write \"**/*.{js,json,yml}\"",
-		"check-format": "prettier --check \"**/*.{js,json,yml}\""
+		"check-format": "prettier --check \"**/*.{js,json,yml}\"",
+		"seed": "node seed.js"
 	}
 }
