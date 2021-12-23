@@ -13,7 +13,7 @@ class Worker:
     def start(self):
         while not self.exit:
             self.threadpool.submit(self.populate_items)
-            self.threadpool.submit(self.populate_layouts)
+            self.threadpool.submit(self.populate_layout)
             self.threadpool.submit(self.populate_manifests)
             self.threadpool.submit(self.populate_sensor)
             self.threadpool.submit(self.populate_shelves)
