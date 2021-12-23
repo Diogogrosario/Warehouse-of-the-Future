@@ -6,8 +6,6 @@ export default (sequelize, Sequelize) => {
 		employee_id: {
 			type: Sequelize.UUID,
 		},
-		createdAt: Sequelize.DATE,
-		updatedAt: Sequelize.DATE,
 	});
 
 	return Action;

@@ -3,20 +3,11 @@ const Report = db.report;
 
 // Create and Save a new Report
 export function create(req, res) {
-	// validate request
-	if (!req.params.id) {
-		res.status(400).send({
-			message: "Empty content.",
-		});
-		return;
-	}
-
 	const report = {
-		id: req.params.id,
 		title: req.body.title,
 		severity: req.body.severity,
 		description: req.body.description,
-		resolved: req.body.resolved,
+		resolved: false,
 	};
 
 	// save to database
@@ -70,6 +61,41 @@ export function update(req, res) {
 		})
 		.catch((err) => {
 			res.status(500).send({ message: err.message || "Error on update report." });
+		});
+}
+
+export function solved(req, res) {
+	const id = req.params.id;
+	const Action = db.action;
+
+	Report.findByPk(id)
+		.then((data) => {
+			if (data) {
+				const action = {
+					employee_id: req.body.employee_id,
+					report_id: id,
+				};
+
+				// report was not resolved
+				if (!data.resolved) {
+					action.description = "Closed Report.";
+				} else {
+					action.description = "Reopened Report.";
+				}
+
+				// save to database
+				Action.create(action)
+					.then()
+					.catch((err) => {
+						res.status(500).send({ message: err.message || "Error at create action." });
+					});
+
+				// toggle solved flag
+				Report.update({ resolved: !data.resolved });
+			} else res.status(404).send({ message: `Didn't find report ${id}.` });
+		})
+		.catch((err) => {
+			res.status(500).send({ message: err.message || `Error on report ${id} retrieval.` });
 		});
 }
 

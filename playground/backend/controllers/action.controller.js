@@ -3,16 +3,7 @@ const Action = db.action;
 
 // Create and Save a new Action
 export function create(req, res) {
-	// validate request
-	if (!req.params.id) {
-		res.status(400).send({
-			message: "Empty content.",
-		});
-		return;
-	}
-
 	const action = {
-		id: req.params.id,
 		description: req.body.description,
 		employee_id: req.body.employee_id,
 	};

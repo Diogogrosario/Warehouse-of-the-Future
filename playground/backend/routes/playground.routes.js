@@ -29,5 +29,6 @@ router.get("/report/:id", report.findOne);
 router.put("/report/:id", report.update);
 router.delete("/report/:id", report.delete);
 router.delete("/report/", report.deleteAll);
+router.put("/report/solved/:id", report.solved);
 
 export default router;

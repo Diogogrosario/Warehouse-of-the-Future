@@ -3,20 +3,8 @@ const Device = db.device;
 
 // Create and Save a new Device
 export function create(req, res) {
-	// validate request
-	if (!req.params.id) {
-		res.status(400).send({
-			message: "Empty content.",
-		});
-		return;
-	}
-
-	const device = {
-		id: req.params.id,
-	};
-
 	// save to database
-	Device.create(device)
+	Device.create()
 		.then((data) => {
 			res.send(data);
 		})
