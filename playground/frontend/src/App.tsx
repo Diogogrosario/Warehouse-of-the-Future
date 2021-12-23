@@ -69,7 +69,7 @@ export default function App() {
 					margin: 0,
 				}}
 			>
-				<Grid container sx={{ height: "100vh" }} direction={mobile ? "row" : "column"}>
+				<Grid container sx={{ height: "100vh" }} direction={mobile ? "column" : "row"}>
 					{fullscreen != FullscreenState.Right && (
 						<Grid
 							item
