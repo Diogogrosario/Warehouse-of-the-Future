@@ -90,10 +90,10 @@ if __name__ == '__main__':
     query_month_manifesto = "SELECT * FROM month_manifesto"
 
     warehouses = db.df_query(query_warehouse)
-    month_manifestos = db.df_query(query_month_manifesto)
+    #month_manifestos = db.df_query(query_month_manifesto)
 
-    manifestos = storage.get_manifestos(month_manifestos)
-    manifesto = manifestos[1]  # Initial test with only 1 manifesto
+    #manifestos = storage.get_manifestos(month_manifestos)
+    #manifesto = manifestos[1]  # Initial test with only 1 manifesto
     warehouse_id = warehouses.iloc[0]['id']  # Initial test with only 1 warehouse
 
     warehouse = storage.create_warehouse(warehouse_id)

@@ -16,27 +16,28 @@ values (1, 4, 9);
 
 
 insert into Rack (shelf_id, y, length, width, height, capacity)
-values (1, 0.0, 5, 5, 1.0, 1000);
+values (1, 0.0, 5, 6, 1.0, 1000);
 insert into Rack (shelf_id, y, length, width, height, capacity)
-values (1, 1.00, 5, 5, 1.0, 1000);
+values (1, 1.00, 5, 6, 1.0, 1000);
 insert into Rack (shelf_id, y, length, width, height, capacity)
-values (1, 2.00, 5, 5, 1.75, 1000);
+values (1, 2.00, 5, 6, 1.0, 1000);
 
 
 insert into Rack (shelf_id, y, length, width, height, capacity)
-values (2, 0.0, 5, 5, 1.0, 1000);
+values (2, 0.0, 5, 6, 1.0, 1000);
 insert into Rack (shelf_id, y, length, width, height, capacity)
-values (2, 1.00, 5, 5, 1.0, 1000);
+values (2, 1.00, 5, 6, 1.0, 1000);
 insert into Rack (shelf_id, y, length, width, height, capacity)
-values (2, 2.00, 5, 5, 1.75, 1000);
+values (2, 2.00, 5, 6, 1.0, 1000);
 
 
 insert into Rack (shelf_id, y, length, width, height, capacity)
-values (3, 0.0, 5, 5, 1.0, 1000);
+values (3, 0.0, 5, 6, 1.0, 1000);
 insert into Rack (shelf_id, y, length, width, height, capacity)
-values (3, 1.00, 5, 5, 1.0, 1000);
+values (3, 1.00, 5, 6, 1.0, 1000);
 insert into Rack (shelf_id, y, length, width, height, capacity)
-values (3, 2.00, 5, 5, 1.75, 1000);
+values (3, 2.00, 5, 6, 1.0, 1000);
+
 
 
 insert into Sector(name)

@@ -2,11 +2,12 @@ import math
 import random
 import random as r
 
-max_iterations = 10000
+max_iterations = 1000
 
 # metrics_to_optimize = ['weight', 'sector']
+metrics_to_optimize = ['sector']
 # metrics_to_optimize = ['weight']
-metrics_to_optimize = ['work']
+#metrics_to_optimize = ['work']
 worker_average_height = 1.75
 
 
@@ -14,9 +15,6 @@ class Layout:
     def __init__(self, warehouse):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
         self.warehouse = warehouse
         self.products_out = []
-        # shelf -> lista de racks
-        #   rack -> lista de products
-        #       product, x_orig, x_end
 
     def get_random_rack(self):
         shelf = self.warehouse.get_random_shelf()
@@ -102,7 +100,6 @@ class Layout:
 
                     for product in rack.products:
                         score += math.cos(math.radians(theta)) * float(product.weight)
-                        #print(f"Rack y:{rack.y} Theta:{theta} score:{score} id:{product.id} weight:{product.weight}")
 
         score -= len(self.products_out) * 100
 
