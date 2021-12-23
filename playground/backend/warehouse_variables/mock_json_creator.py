@@ -26,15 +26,14 @@ NUM_SHELF_LAYERS = (1, 5) # Int
 # Shelf layer
 BUCKETS_PER_LINE = (1, 4) # Int
 BUCKETS_PER_COLUMN = (1, 3) # Int
-SHELF_HEIGHT = (1, 5) # Float
-LAYER_HEIGHT = (2, 4) # Float
+LAYER_HEIGHT = (1, 3.5) # Float
 LAYER_WIDTH = (1, 5) # Float
 LAYER_LENGTH = (1, 5) # Float
 
 # Bucket
 BUCKET_WIDTH = (1, 5) # Float
-BUCKET_LENGTH = (1, 5) # Float
-BUCKET_HEIGHT = (1, 5) # Float
+BUCKET_LENGTH = (1, 3) # Float
+BUCKET_HEIGHT = (0.25, 2.5) # Float
 BUCKET_TYPES = ["Small", "Regular", "Large"]
 BUCKET_OBJ_TYPES = ["Screw_Box"]
 
@@ -99,8 +98,6 @@ for i in range(NUM_Z1 + NUM_Z2 + NUM_Z3 + NUM_Z4):
     zone_dict["ZONE_TYPE"] = zone[1]
     zone_dict["width"] = round(rn.uniform(zone[0][0], zone[0][1]), 3)
 
-    zone_dict["shelf_height"] = round(rn.uniform(SHELF_HEIGHT[0], SHELF_HEIGHT[1]), 3)
-
     shelf_dict_list = []
 
     num_shelves = get_num_shelves(zone[1])
@@ -110,31 +107,64 @@ for i in range(NUM_Z1 + NUM_Z2 + NUM_Z3 + NUM_Z4):
         shelf_dict["shelf_height"] = round(rn.uniform(SHELF_HEIGHT[0], SHELF_HEIGHT[1]), 3)
         num_shelf_layers = rn.randint(NUM_SHELF_LAYERS[0], NUM_SHELF_LAYERS[1])
 
+        cumulative_layer_height = 0
         shelf_layer_dicts_list = []
         for j in range(num_shelf_layers):
             shelf_layer_dict = {}
             buckets_per_line = rn.randint(BUCKETS_PER_LINE[0], BUCKETS_PER_LINE[1])
             buckets_per_col = rn.randint(BUCKETS_PER_LINE[0], BUCKETS_PER_LINE[1])
             num_buckets = buckets_per_line * buckets_per_col
-
+            layer_width = round(rn.uniform(LAYER_WIDTH[0], LAYER_WIDTH[1]), 3)
+            layer_length = round(rn.uniform(LAYER_LENGTH[0], LAYER_LENGTH[1]), 3)
+            layer_height = round(rn.uniform(LAYER_HEIGHT[0], LAYER_HEIGHT[1]), 3)
+            cumulative_layer_height += layer_height
             shelf_layer_dict["buckets_per_line"] = buckets_per_line
             shelf_layer_dict["buckets_per_column"] = buckets_per_col
-            shelf_layer_dict["layer_width"] = round(rn.uniform(LAYER_WIDTH[0], LAYER_WIDTH[1]), 3)
-            shelf_layer_dict["layer_length"] = round(rn.uniform(LAYER_LENGTH[0], LAYER_LENGTH[1]), 3)
-            shelf_layer_dict["layer_height"] = round(rn.uniform(LAYER_HEIGHT[0], LAYER_HEIGHT[1]), 3)
+            shelf_layer_dict["layer_width"] = layer_width
+            shelf_layer_dict["layer_length"] = layer_length
+            shelf_layer_dict["layer_height"] = layer_height
 
+            cumulative_bucket_width = 0
+            cumulative_bucket_length = 0
             bucket_dicts_list = []
             for k in range(num_buckets):
                 bucket_dict = {}
-                bucket_dict["bucket_width"] = round(rn.uniform(BUCKET_WIDTH[0], BUCKET_WIDTH[1]), 3)
-                bucket_dict["bucket_length"] = round(rn.uniform(BUCKET_LENGTH[0], BUCKET_LENGTH[1]), 3)
-                bucket_dict["bucket_height"] = round(rn.uniform(BUCKET_HEIGHT[0], BUCKET_HEIGHT[1]), 3)
+                bucket_width = round(rn.uniform(BUCKET_WIDTH[0], BUCKET_WIDTH[1]), 3)
+                bucket_length = round(rn.uniform(BUCKET_LENGTH[0], BUCKET_LENGTH[1]), 3)
+                cumulative_bucket_width += bucket_width
+                cumulative_bucket_length += bucket_length
+                bucket_dict["bucket_width"] = bucket_width
+                bucket_dict["bucket_length"] = bucket_length
+                bucket_dict["bucket_height"] = round(rn.uniform(BUCKET_HEIGHT[0], min(BUCKET_HEIGHT[1], layer_height)), 3)
                 bucket_dict["type"] = rn.choice(BUCKET_TYPES)
                 bucket_dict["object"] = rn.choice(BUCKET_OBJ_TYPES)
                 bucket_dicts_list.append(copy.deepcopy(bucket_dict))
 
+            #If cumulative bucket width is bigger than shelf width
+            if(cumulative_bucket_width > layer_width):
+                ratio = cumulative_bucket_width / layer_width
+                for a in range(len(bucket_dicts_list)):
+                    bw = (bucket_dicts_list[a]["bucket_width"] / ratio) - 0.01 #For rounding issues
+                    bucket_dicts_list[a]["bucket_width"] = bw
+            #If cumulative bucket length is bigger than shelf length
+            if(cumulative_bucket_length > layer_length):
+                ratio = cumulative_bucket_length / layer_length
+                for a in range(len(bucket_dicts_list)):
+                    bl = (bucket_dicts_list[a]["bucket_length"] / ratio) - 0.01 #For rounding issues
+                    bucket_dicts_list[a]["bucket_length"] = bl
+
             shelf_layer_dict["buckets"] = bucket_dicts_list
             shelf_layer_dicts_list.append(copy.deepcopy(shelf_layer_dict))
+        
+        #If cumulative layer height is bigger than shelf size
+        if(cumulative_layer_height > layer_height):
+            ratio = cumulative_layer_height / layer_height
+            for b in range(len(shelf_layer_dicts_list)):
+                lh = (shelf_layer_dicts_list[b]["layer_height"] / ratio) - 0.01 #For rounding issues
+                shelf_layer_dicts_list[b]["layer_height"] = lh
+                for c in range(len(shelf_layer_dicts_list[b]["buckets"])):
+                    if(shelf_layer_dicts_list[b]["buckets"][c]["bucket_height"] > shelf_layer_dicts_list[b]["layer_height"]):
+                        shelf_layer_dicts_list[b]["buckets"][c]["bucket_height"] = round(rn.uniform(min(BUCKET_HEIGHT[0], shelf_layer_dicts_list[b]["layer_height"]), shelf_layer_dicts_list[b]["layer_height"]), 3)
         
         shelf_dict["layers"] = shelf_layer_dicts_list
         shelf_dict_list.append(copy.deepcopy(shelf_dict))
