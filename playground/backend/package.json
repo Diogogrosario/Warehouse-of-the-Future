@@ -25,6 +25,7 @@
 	"scripts": {
 		"lint": "eslint --ext .js .",
 		"format": "prettier --write \"**/*.{js,json,yml}\"",
+		"check-format": "prettier --check \"**/*.{js,json,yml}\"",
 		"seed": "node seed.js"
 	}
 }
