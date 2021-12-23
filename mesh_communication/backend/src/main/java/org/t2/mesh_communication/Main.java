@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 import org.t2.mesh_communication.config.*;
-import org.t2.mesh_communication.devices.*;
+import org.t2.mesh_communication.devices.MeshGrid;
+import org.t2.mesh_communication.devices.Orchestrator;
+import org.t2.mesh_communication.devices.Position;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.log.Logger;
 

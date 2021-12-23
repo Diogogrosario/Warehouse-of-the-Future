@@ -153,7 +153,6 @@ public class APITests {
         @BeforeAll
         static void init() {
             api = new API();
-            api.start();
             mg = Mockito.mock(MeshGrid.class);
             MeshGrid mg = Mockito.mock(MeshGrid.class);
             FloodStrategy fs = Mockito.mock(FloodStrategy.class);
