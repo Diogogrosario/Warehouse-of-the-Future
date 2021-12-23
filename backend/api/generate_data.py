@@ -308,65 +308,6 @@ orchestrator_attributes = namespace.model("Orchestrator", {
 
 
 # ------------------------------------------------------------------------------
-# Items
-# ------------------------------------------------------------------------------
-
-def generate_random_items(number_of_items=None):
-    items = []
-
-    if (number_of_items is None):
-        number_of_items = random.randint(3, 6)
-
-    for _ in range(number_of_items):
-        item_name = random.choice(available_items)
-        width = random.randint(1, 100)
-        height = random.randint(1, 100)
-        length = random.randint(1, 100)
-        weight = random.randint(1, 1000*100)
-        quantity = random.randint(1, 3)
-
-        items.append({
-            "id": uuid.uuid4(),
-            "designation": item_name,
-            "width": width,
-            "height": height,
-            "length": length,
-            "weight": weight,
-            "quantity": quantity,
-            "bucket_id": uuid.uuid4()
-        })
-
-    return items
-
-
-@namespace.route("/items")
-class Items(Resource):
-    @namespace.marshal_list_with(item_attributes)
-    def get(self):
-        """
-        Returns all the items of the warehouse.
-        """
-
-        items = generate_random_items()
-
-        return items
-
-
-@namespace.route("/items/<string:id>")
-class Item(Resource):
-    @namespace.marshal_list_with(item_attributes)
-    def get(self, id):
-        """
-        Returns the item with the specified id.
-        """
-
-        item = generate_random_items(number_of_items=1)[0]
-        item["id"] = id
-
-        return item
-
-
-# ------------------------------------------------------------------------------
 # Manifests
 # ------------------------------------------------------------------------------
 
@@ -517,6 +458,7 @@ BUCKET_MAX_LENGTH = 0.9*100
 # The final_previous_super_rack_width tells us the real width of the
 # previously created super rack, so it is not applicable to the first one
 def generate_super_rack(super_rack_number, final_previous_super_rack_width):
+    items = []
     sensors = []
     buckets = []
     racks = []
@@ -644,16 +586,27 @@ def generate_super_rack(super_rack_number, final_previous_super_rack_width):
                 sensor = generate_sensor(bucket_id=bucket["id"])
                 sensors.append(sensor)
 
+                item = generate_item(
+                    bucket_id=bucket["id"],
+                    # remove 1 cm to the max_width and max_height
+                    # to be sure the item will fit in the bucket
+                    max_width=bucket["width"] - 1,
+                    max_height=bucket["height"] - 1
+                )
+                items.append(item)
+
     return {
         "final_super_rack1_width": final_current_super_rack1_width,
         "racks": racks,
         "shelves": shelves,
         "buckets": buckets,
-        "sensors": sensors
+        "sensors": sensors,
+        "items": items
     }
 
 
 def coherent_generate_layout():
+    items = []
     sensors = []
     buckets = []
     racks = []
@@ -681,13 +634,45 @@ def coherent_generate_layout():
                                      + super_rack3["buckets"]
     sensors = super_rack1["sensors"] + super_rack2["sensors"] \
                                      + super_rack3["sensors"]
+    items = super_rack1["items"] + super_rack2["items"] \
+                                     + super_rack3["items"]
 
     return {
         "racks": racks,
         "shelves": shelves,
         "buckets": buckets,
-        "sensors": sensors
+        "sensors": sensors,
+        "items": items
     }
+
+
+def generate_item(bucket_id, max_width, max_height):
+
+    quantity = random.randint(1, 3)
+
+    # Here we are choosing a random name of the item,
+    # but there is no problem because the generated items
+    # will for sure have a different id;
+    # We still don't have sufficient names for
+    # them to be all different
+    item_name = random.choice(available_items)
+    width = random.randint(1, max_width // quantity)
+    height = random.randint(1, max_height // quantity)
+    length = random.randint(1, RACK_LENGTH // quantity)
+    weight = random.randint(1, 1000*100 // quantity)
+
+    item = {
+        "id": uuid.uuid4(),
+        "designation": item_name,
+        "width": width,
+        "height": height,
+        "length": length,
+        "weight": weight,
+        "quantity": quantity,
+        "bucket_id": bucket_id
+    }
+
+    return item
 
 
 def generate_sensor(bucket_id):
@@ -758,7 +743,8 @@ class Layout(Resource):
             "racks": layout["racks"],
             "shelves": layout["shelves"],
             "buckets": layout["buckets"],
-            "sensors": layout["sensors"]
+            "sensors": layout["sensors"],
+            "items": layout["items"]
         }
 
         return layout
