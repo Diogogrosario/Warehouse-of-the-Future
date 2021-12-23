@@ -4,27 +4,28 @@ from api.db import client
 
 def populate_items():
     items = gen.Items().get()
-    new_ids = client.WoF.Items.insert_many(items).inserted_ids
+    client.WoF.Items.insert_many(items)
 
 def populate_layout():
     layout = gen.Layout().get()
-    new_id = client.WoF.Layouts.insert_one(layout).inserted_id
+    client.WoF.Layouts.insert_one(layout)
 
 def populate_manifests():
     manifest = gen.Manifest().get()
-    new_id = client.WoF.Manifests.insert_one(manifest).inserted_id
+    client.WoF.Manifests.insert_one(manifest)
 
 def populate_sensor():
     sensors = gen.Sensors().get()
-    new_ids = client.WoF.Sensors.insert_many(sensors).inserted_ids
+    client.WoF.Sensors.insert_many(sensors)
 
 def populate_shelves():
     items = gen.Shelves().get()
-    new_ids = client.WoF.Shelves.insert_many(items).inserted_ids
+    client.WoF.Shelves.insert_many(items)
 
 def populate_staff():
     employees = gen.Staff().get()
-    new_ids = client.WoF.Employees.insert_many(employees).inserted_ids
+    client.WoF.Employees.insert_many(employees)
+
 
 populate_items()
 populate_layout()
