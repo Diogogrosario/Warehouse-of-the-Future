@@ -1,6 +1,6 @@
 from bson import json_util
 from bson.objectid import ObjectId
-from flask_restx import fields, inputs, reqparse, Namespace, Resource
+from flask_restx import fields, Namespace, Resource
 import json
 
 from .db import client
@@ -16,7 +16,10 @@ namespace = Namespace("Stock", path="/stock",
 
 
 itemAttributes = namespace.model("StockItem", {
-    "id": fields.String(required=True, attribute='_id.$oid', description="Name of the item"),
+    "id": fields.String(
+        required=True,
+        attribute='_id.$oid',
+        description="Name of the item"),
     "width": fields.Float(required=True, description="Width of the item"),
     "height": fields.Float(required=True, description="Height of the item"),
     "length": fields.Float(required=True, description="Length of the item"),
@@ -26,6 +29,7 @@ itemAttributes = namespace.model("StockItem", {
 # ------------------------------------------------------------------------------
 # Stock Information
 # ------------------------------------------------------------------------------
+
 
 @namespace.route("")
 class CollectionManifests(Resource):
