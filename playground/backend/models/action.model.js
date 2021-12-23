@@ -1,5 +1,3 @@
-import { DataTypes } from "sequelize";
-
 export default (sequelize, Sequelize) => {
 	return sequelize.define("action", {
 		description: {
@@ -10,11 +8,11 @@ export default (sequelize, Sequelize) => {
 		},
 		createdAt: {
 			type: Sequelize.DATE,
-			defaultValue: DataTypes.NOW,
+			defaultValue: Sequelize.NOW,
 		},
 		updatedAt: {
 			type: Sequelize.DATE,
-			defaultValue: DataTypes.NOW,
+			defaultValue: Sequelize.NOW,
 		},
 	});
 };
