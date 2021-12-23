@@ -595,16 +595,20 @@ BUCKET_MIN_LENGTH = 0.3*100
 BUCKET_MAX_LENGTH = 0.9*100
 
 
-def coherent_generate_layout():
+# The super_rack_number is accordingly to the above diagram;
+# The final_previous_super_rack_width tells us the real width of the
+# previously created super rack, so it is not applicable to the first one
+def generate_super_rack(super_rack_number, final_previous_super_rack_width):
     buckets = []
     racks = []
     shelves = []
 
     # track the width of the racks we are creating
     current_super_rack_width = 0
+    final_current_super_rack1_width = 0
 
     # Super rack 1
-    while (current_super_rack_width < SUPER_RACK1_MAX_WIDTH):
+    while (True):
         rack_width = random.randint(
             RACK_MIN_WIDTH,
             RACK_MAX_WIDTH
@@ -612,6 +616,8 @@ def coherent_generate_layout():
         current_super_rack_width += rack_width
 
         if (current_super_rack_width > SUPER_RACK1_MAX_WIDTH):
+            final_current_super_rack1_width = current_super_rack_width \
+                - rack_width
             break
 
         rack_height = random.randint(
@@ -662,13 +668,49 @@ def coherent_generate_layout():
                 if (current_shelf_width > rack["width"]):
                     break
 
-                shelf_start_y_pos = current_super_rack_width - rack_width
-                bucket_start_y_pos = shelf_start_y_pos + current_shelf_width \
-                    - bucket_width
-                # Considering the y pos of the bucket to be in the center of it
-                bucket_y_position = bucket_start_y_pos + bucket_width / 2
+                if (super_rack_number == 1):
+                    shelf_start_y_pos = current_super_rack_width - rack_width
+                    bucket_start_y_pos = shelf_start_y_pos + \
+                        current_shelf_width - bucket_width
+                    # Considering the y pos of the bucket to
+                    # be in the its center
+                    bucket_y_position = bucket_start_y_pos + bucket_width / 2
 
-                position = [0, bucket_y_position, shelf["height"]]
+                    position = [0, bucket_y_position, shelf["height"]]
+
+                elif (super_rack_number == 2):
+                    shelf_start_x_pos = current_super_rack_width - rack_width
+                    bucket_start_x_pos = shelf_start_x_pos + \
+                        current_shelf_width - bucket_width
+                    # Considering the x pos of the bucket to
+                    # be in the its center
+                    bucket_x_position = bucket_start_x_pos + bucket_width / 2
+
+                    position = [
+                        bucket_x_position,
+                        final_previous_super_rack_width,
+                        shelf["height"]
+                    ]
+
+                elif (super_rack_number == 3):
+                    shelf_start_y_pos = current_super_rack_width - rack_width
+                    bucket_start_y_pos = shelf_start_y_pos + \
+                        current_shelf_width - bucket_width
+                    # Considering the y pos of the bucket to
+                    # be in the its center
+                    bucket_y_position = bucket_start_y_pos + bucket_width / 2
+
+                    # We started counting the current width from the point
+                    # (width2, width3), so the real bucket position is
+                    # SUPER_RACK3_MAX_WIDTH - bucket_y_position
+                    real_bucket_y_pos = SUPER_RACK3_MAX_WIDTH \
+                        - bucket_y_position
+
+                    position = [
+                        final_previous_super_rack_width,
+                        real_bucket_y_pos,
+                        shelf["height"]
+                    ]
 
                 bucket = generate_bucket(
                     shelf=shelf,
@@ -679,6 +721,40 @@ def coherent_generate_layout():
                     shelf_height=shelf_height
                 )
                 buckets.append(bucket)
+
+    return {
+        "final_super_rack1_width": final_current_super_rack1_width,
+        "racks": racks,
+        "shelves": shelves,
+        "buckets": buckets
+    }
+
+
+def coherent_generate_layout():
+    buckets = []
+    racks = []
+    shelves = []
+
+    super_rack1 = generate_super_rack(
+        super_rack_number=1,
+        final_previous_super_rack_width=0
+    )
+
+    super_rack2 = generate_super_rack(
+        super_rack_number=2,
+        final_previous_super_rack_width=super_rack1["final_super_rack1_width"]
+    )
+
+    super_rack3 = generate_super_rack(
+        super_rack_number=3,
+        final_previous_super_rack_width=super_rack2["final_super_rack1_width"]
+    )
+
+    racks = super_rack1["racks"] + super_rack2["racks"] + super_rack3["racks"]
+    shelves = super_rack1["shelves"] + super_rack2["shelves"] \
+                                     + super_rack3["shelves"]
+    buckets = super_rack1["buckets"] + super_rack2["buckets"] \
+                                     + super_rack3["buckets"]
 
     return {
         "racks": racks,
@@ -709,16 +785,6 @@ def generate_bucket(shelf, item_id, position, width, shelf_height):
     }
 
     return bucket
-
-
-def generate_buckets():
-    number_of_buckets = random.randint(50, 150)
-
-    buckets = [
-        generate_bucket() for _ in range(number_of_buckets)
-    ]
-
-    return buckets
 
 
 @namespace.route("/layout")
