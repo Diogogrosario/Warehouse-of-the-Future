@@ -3,7 +3,10 @@ package org.t2.mesh_communication.config;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 public class ManifestReader {
     private final List<Product> products;

@@ -54,4 +54,10 @@ class RequestHandler {
     }
     return ret;
   }
+
+  Future<Map> advanceTick() async {
+    client.post(_resourceUri("tick/forwards"));
+    http.Response fetchContent = await client.get(_resourceUri("message"));
+    return jsonDecode(fetchContent.body);
+  }
 }

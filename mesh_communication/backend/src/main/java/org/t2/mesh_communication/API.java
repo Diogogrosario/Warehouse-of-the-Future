@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.LogRecord;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
-import org.t2.mesh_communication.config.*;
-import org.t2.mesh_communication.devices.*;
-import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
+import org.t2.mesh_communication.devices.MeshDevice;
+import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
@@ -27,7 +28,7 @@ import org.t2.mesh_communication.log.Logger;
 @SpringBootApplication
 @RestController
 public class API {
-    @Autowired private MeshGrid meshGrid;
+    @Autowired private Main main;
 
     public static void main(String[] args) {
         API api = new API();
@@ -36,89 +37,47 @@ public class API {
 
     @PostConstruct
     public void start() {
-        // read configs
-        ObjectMapper om = new ObjectMapper(new YAMLFactory());
+        Main.prepareConfigs();
         try {
-            om.readValue(
-                    Main.class.getClassLoader().getResourceAsStream("mesh.yaml"), Config.class);
+            main.prepareGrid();
         } catch (IOException e) {
-            System.err.println("Couldn't get configs.");
+            System.err.println("Failed to prepare mesh grid.");
             System.exit(1);
         }
+    }
 
-        // generate layout
-        if (!LayoutGenerator.layoutFileExists()) {
-            final int nDevices = 9, maxRows = 3, maxCols = 3;
-            LayoutGenerator layoutGenerator = new LayoutGenerator(nDevices, maxRows, maxCols);
-            try {
-                layoutGenerator.generate();
-            } catch (IOException e) {
-                System.err.println("Layout generation failed.");
-                System.exit(1);
-            }
-        }
+    private MeshGrid getMeshGrid() {
+        return this.main.getMeshGrid();
+    }
 
-        this.meshGrid = new MeshGrid();
-        Orchestrator orchestrator =
-                new Orchestrator(new Position(-1, 0), new FloodStrategy(this.meshGrid));
+    public Main getMain() {
+        return this.main;
+    }
 
-        // add orchestrator
-        this.meshGrid.addDevice(orchestrator);
-
-        // read devices from layout file
-        try {
-            LayoutReader layoutReader = new LayoutReader();
-            layoutReader.read();
-            HashMap<Integer, Position> devices = layoutReader.getDevices();
-
-            // add devices
-            this.meshGrid.addDevices(devices);
-
-            // generate manifests
-            if (!ManifestGenerator.manifestFileExists()) {
-                final int nManifests = 3;
-                ManifestGenerator manifestGenerator =
-                        new ManifestGenerator(nManifests, devices.keySet());
-                manifestGenerator.generate();
-            }
-
-            // read manifests
-            ManifestReader manifestReader = new ManifestReader();
-            manifestReader.read();
-            List<Product> products = manifestReader.getProducts();
-
-            // orchestrator.orchestrate(products);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        orchestrator.sendMessage(orchestrator.createMessage(8, "padoru"));
+    public void setMain(Main main) {
+        this.main = main;
     }
 
     @GetMapping("/devices/{status}")
     public List<JsonNode> devicesStatus(
             @PathVariable("status") String status, HttpServletResponse response) {
-        List<MeshDevice> devices = new ArrayList<>();
+        response.addHeader("Access-Control-Allow-Origin", "*");
 
+        List<MeshDevice> devices;
         switch (status) {
-            case "all":
-                devices = this.meshGrid.getDevices();
-                break;
-            case "failed":
-                devices =
-                        this.meshGrid.getDevices().stream()
-                                .filter(dv -> !dv.isOperational())
-                                .toList();
-                break;
-            case "operational":
-                devices =
-                        this.meshGrid.getDevices().stream()
-                                .filter(MeshDevice::isOperational)
-                                .toList();
-                break;
-            default:
+            case "all" -> devices = this.getMeshGrid().getDevices();
+            case "failed" -> devices =
+                    this.getMeshGrid().getDevices().stream()
+                            .filter(dv -> !dv.isOperational())
+                            .toList();
+            case "operational" -> devices =
+                    this.getMeshGrid().getDevices().stream()
+                            .filter(MeshDevice::isOperational)
+                            .toList();
+            default -> {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 return new ArrayList<>();
+            }
         }
 
         if (devices.isEmpty()) {
@@ -138,13 +97,13 @@ public class API {
         }
 
         response.setStatus(HttpServletResponse.SC_OK);
-        response.addHeader("Access-Control-Allow-Origin", "*");
         return devicesJson;
     }
 
     @GetMapping("/device/{id}")
     public JsonNode devices(@PathVariable("id") int deviceID, HttpServletResponse response) {
-        List<MeshDevice> devices = meshGrid.getDevices();
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        List<MeshDevice> devices = this.getMeshGrid().getDevices();
 
         MeshDevice device = null;
         for (MeshDevice dv : devices) {
@@ -181,9 +140,10 @@ public class API {
     @GetMapping("/devices/inrange/{id}")
     public List<JsonNode> devicesInRange(
             @PathVariable("id") int deviceID, HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
 
         MeshDevice device = null;
-        for (MeshDevice dv : this.meshGrid.getDevices()) {
+        for (MeshDevice dv : this.getMeshGrid().getDevices()) {
             if (dv.getId() == deviceID) {
                 device = dv;
                 break;
@@ -195,7 +155,7 @@ public class API {
             return null;
         }
 
-        List<MeshDevice> devicesInRange = this.meshGrid.devicesInRange(device);
+        List<MeshDevice> devicesInRange = this.getMeshGrid().devicesInRange(device);
         List<JsonNode> devicesRangeJson;
         try {
             devicesRangeJson = this.devicesToJson(devicesInRange);
@@ -206,7 +166,6 @@ public class API {
         }
 
         response.setStatus(HttpServletResponse.SC_OK);
-        response.addHeader("Access-Control-Allow-Origin", "*");
         return devicesRangeJson;
     }
 
@@ -215,14 +174,12 @@ public class API {
             @PathVariable("time_flow") String timeFlow,
             @RequestParam(value = "n_ticks", required = false, defaultValue = "1") int nTicks,
             HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
 
         if (nTicks <= 0) return "NTicks must be a number of value higher than 0.";
         switch (timeFlow) {
             case "forwards":
-                for (int i = 0; i < nTicks; ++i) {
-                    this.meshGrid.update();
-                    Logger.getInstance().nextTick();
-                }
+                this.main.advanceTick(nTicks);
                 break;
             case "backwards":
                 // TODO: when UNDO ticks is implemented
@@ -237,12 +194,22 @@ public class API {
         return "Mesh Grid updated";
     }
 
+    @PostMapping("/orchestrate")
+    public String orchestrate(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        this.main.orchestrate();
+        response.setStatus(HttpServletResponse.SC_OK);
+        return "Orchestrator orchestrated";
+    }
+
     @GetMapping("/message")
     public ObjectNode message(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
-        for (MeshDevice sender : this.meshGrid.getDevices()) {
+        for (MeshDevice sender : this.getMeshGrid().getDevices()) {
             for (Command command : sender.getCommands()) {
                 if (!(command instanceof SendMsgCmd sendMsgCmd)) continue;
 
@@ -278,6 +245,7 @@ public class API {
 
     @GetMapping("/log")
     public ObjectNode log(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
         HashMap<String, ArrayNode> logs = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
@@ -327,13 +295,5 @@ public class API {
         messageNode.put("hop", receiver);
 
         return messageNode;
-    }
-
-    public void setMeshGrid(MeshGrid meshGrid) {
-        this.meshGrid = meshGrid;
-    }
-
-    public MeshGrid getMeshGrid() {
-        return this.meshGrid;
     }
 }

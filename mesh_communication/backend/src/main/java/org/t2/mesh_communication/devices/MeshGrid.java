@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.stereotype.Component;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 
 /**
  * Holder of the network devices. Represents the network and distributes the tick update commands to
  * all devices. Can be queried to find devices in a certain range.
  */
-@Component
 public class MeshGrid {
     public static final int ORCHESTRATOR_ID = 0;
 

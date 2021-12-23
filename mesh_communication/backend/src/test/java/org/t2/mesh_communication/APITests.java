@@ -69,7 +69,9 @@ public class APITests {
                                         return lmd;
                                     });
 
-            api.setMeshGrid(mg);
+            Main main = new Main();
+            main.setMeshGrid(mg);
+            api.setMain(main);
         }
 
         private String listToString(List<JsonNode> in) {
@@ -209,12 +211,15 @@ public class APITests {
                                         lmd.add(device2);
                                         return lmd;
                                     });
-            api.setMeshGrid(mg);
+
+            Main main = new Main();
+            main.setMeshGrid(mg);
+            api.setMain(main);
         }
 
         @Test
         public void messageTest() {
-            String expectedOutput = "{\"0\":[{\"final\":2,\"failed\":\"false\",\"hop\":1}]}";
+            String expectedOutput = "{\"0\":[{\"final\":2,\"failed\":false,\"hop\":1}]}";
             ObjectNode outputInvalidTimeflow = api.message(Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, outputInvalidTimeflow.toString());
         }
