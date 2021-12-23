@@ -1,5 +1,6 @@
 from warehouse import *
 
+
 class Storage:
     def __init__(self, db):
         self.db = db
@@ -50,7 +51,7 @@ class Storage:
             racks = self.db.df_query(racks_query)
 
             if racks is None:
-                print("Continue")
+                print("Shelf Without Racks")
                 continue
 
             for _, r in racks.iterrows():
@@ -58,7 +59,6 @@ class Storage:
                 shelf.add_rack(rack)
 
             warehouse.add_shelf(shelf)
-            print("Add shelf")
 
         return warehouse
 
@@ -68,7 +68,6 @@ class Storage:
         products = sorted(self.products, key=lambda x: (x.weight, x.width), reverse=True)
 
         for product in products:
-
             rack = layout.get_valid_rack(product)
 
             if rack:
@@ -77,4 +76,3 @@ class Storage:
                 layout.products_out.append(product)
 
         return layout
-

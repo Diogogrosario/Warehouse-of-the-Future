@@ -39,6 +39,21 @@ insert into Rack (shelf_id, y, length, width, height, capacity)
 values (3, 2.00, 5, 6, 1.0, 1000);
 
 
+insert into Rack (shelf_id, y, length, width, height, capacity)
+values (4, 0.0, 5, 6, 1.0, 1000);
+insert into Rack (shelf_id, y, length, width, height, capacity)
+values (4, 1.00, 5, 6, 1.0, 1000);
+insert into Rack (shelf_id, y, length, width, height, capacity)
+values (4, 2.00, 5, 6, 1.0, 1000);
+
+
+insert into Rack (shelf_id, y, length, width, height, capacity)
+values (5, 0.0, 5, 6, 1.0, 1000);
+insert into Rack (shelf_id, y, length, width, height, capacity)
+values (5, 1.00, 5, 6, 1.0, 1000);
+insert into Rack (shelf_id, y, length, width, height, capacity)
+values (5, 2.00, 5, 6, 1.0, 1000);
+
 
 insert into Sector(name)
 values ('painting');

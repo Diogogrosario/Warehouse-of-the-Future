@@ -1,13 +1,14 @@
 import math
 import random
 import random as r
+from copy import deepcopy, copy
 
 max_iterations = 1000
 
 # metrics_to_optimize = ['weight', 'sector']
 metrics_to_optimize = ['sector']
 # metrics_to_optimize = ['weight']
-#metrics_to_optimize = ['work']
+# metrics_to_optimize = ['work']
 worker_average_height = 1.75
 
 
@@ -86,7 +87,10 @@ class Layout:
                         if product.sector_id not in different_sectors:
                             different_sectors.append(product.sector_id)
 
-                score -= len(different_sectors) * 3
+                if len(different_sectors) > 0:
+                    score -= len(different_sectors) * 3
+                else:
+                    score += 100
 
         if 'work' in metrics_to_optimize:
             adj_side = 0.2
@@ -250,12 +254,16 @@ class Rack:
     def remove_product(self, product):
         del self.products[product]
 
-        products = self.products.keys()
+        products = deepcopy(list(self.products.keys()))
+
         self.products.clear()
+
         last_width = 0
+        self.last_x = 0
+
         for prod in products:
-            self.add_product(prod)
-            _, last_width = self.products[prod]
+            if self.add_product(prod):
+                _, last_width = self.products[prod]
 
         self.last_x = last_width
 
