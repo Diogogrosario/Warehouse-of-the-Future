@@ -138,7 +138,7 @@ public class API {
         }
 
         response.setStatus(HttpServletResponse.SC_OK);
-
+        response.addHeader("Access-Control-Allow-Origin", "*");
         return devicesJson;
     }
 
@@ -206,6 +206,7 @@ public class API {
         }
 
         response.setStatus(HttpServletResponse.SC_OK);
+        response.addHeader("Access-Control-Allow-Origin", "*");
         return devicesRangeJson;
     }
 

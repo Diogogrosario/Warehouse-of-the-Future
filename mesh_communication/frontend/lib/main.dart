@@ -36,6 +36,7 @@ class BasePage extends StatelessWidget {
     for (Device d in devices) {
       graph.addNode(Node.Id(d.id));
     }
+    /*
     // gen edges
     // orchestrator
     Node node0 = graph.getNodeUsingId('0');
@@ -55,6 +56,7 @@ class BasePage extends StatelessWidget {
         graph.addEdge(node1, node3);
       }
     }
+     */
     return graph;
   }
 
@@ -82,8 +84,7 @@ class BasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RequestHandler requestHandler =
-        RequestHandler("https://randomuser.me/api/");
+    RequestHandler requestHandler = RequestHandler("http://localhost:8080");
     Future<List<Device>> devices = requestHandler.getDevices();
 
     return FutureBuilder<List<Device>>(
