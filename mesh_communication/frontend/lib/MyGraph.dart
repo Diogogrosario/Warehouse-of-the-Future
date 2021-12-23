@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
+import 'package:myapp/MyGraphDisplay.dart';
 import 'package:myapp/RequestHandler/RequestHandler.dart';
-import 'dart:math' as math;
 
 class MyGraph extends InheritedWidget {
   final Graph graph;
@@ -20,7 +21,9 @@ class MyGraph extends InheritedWidget {
 
     // TODO make this pretty
     for (Edge e in graph.edges) {
-      e.paint!.color = Colors.grey;
+      e.paint!
+        ..color = MyGraphDisplay.normalColor
+        ..strokeWidth = MyGraphDisplay.strokeWidth;
     }
 
     Map messages = await requestHandler.advanceTick();
@@ -28,7 +31,6 @@ class MyGraph extends InheritedWidget {
 
     for (String deviceIdStr in messages.keys) {
       int deviceId = int.parse(deviceIdStr);
-      print(deviceIdStr);
       final Node node1 = graph.getNodeUsingId(deviceId);
       for (var target in messages[deviceIdStr]) {
         int targetId = target["hop"];
@@ -36,20 +38,24 @@ class MyGraph extends InheritedWidget {
         final Node node2 = graph.getNodeUsingId(targetId);
         final Edge? edge = graph.getEdgeBetween(node1, node2);
         if (edge == null) {
-          print("For some reason the edge " +
-              deviceId.toString() +
-              " -- " +
-              targetId.toString() +
-              " is missing");
+          if (kDebugMode) {
+            print("For some reason the edge " +
+                deviceId.toString() +
+                " -- " +
+                targetId.toString() +
+                " is missing");
+          }
+          continue;
         }
 
-        print(targetId.toString() + " " + target["final"].toString());
+        edge.paint!.strokeWidth = MyGraphDisplay.highlightStrokeWidth;
+        Color toset;
         if (target["failed"]) {
-          edge!.paint!.color = Colors.red;
+          toset = MyGraphDisplay.failColor;
         } else if (targetId == target["final"]) {
-          edge!.paint!.color = Colors.green;
+          edge.paint!.color = MyGraphDisplay.destColor;
         } else {
-          edge!.paint!.color = Colors.black;
+          edge.paint!.color = MyGraphDisplay.transColor;
         }
       }
     }

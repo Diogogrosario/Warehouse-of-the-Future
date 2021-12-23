@@ -5,21 +5,28 @@ import 'package:myapp/MyGraph.dart';
 import 'package:vector_math/vector_math.dart' as vm;
 
 class MyGraphDisplay extends StatefulWidget {
-  final Algorithm algo;
-  final List<Color> colors;
+  static const double strokeWidth = 2;
+  static const double highlightStrokeWidth = 4;
+  static const Color normalColor = Colors.grey;
+  static const Color transColor = Colors.black;
+  static const Color destColor = Colors.green;
+  static const Color failColor = Colors.red;
+
+  final Algorithm _algo;
+  final List<Color> nodeColors;
 
   late final VoidCallback _resetGraphView;
 
   MyGraphDisplay(BuildContext context, {Key? key})
-      : algo = FruchtermanReingoldAlgorithm(iterations: 10),
-        colors = List.filled(0, Colors.black, growable: true),
+      : _algo = FruchtermanReingoldAlgorithm(iterations: 10),
+        nodeColors = List.filled(0, Colors.black, growable: true),
         super(key: key) {
     _initColors(context);
   }
 
   void _initColors(BuildContext context) {
     // orchestrator color
-    colors.add(const Color.fromRGBO(45, 45, 45, 1.0));
+    nodeColors.add(const Color.fromRGBO(45, 45, 45, 1.0));
 
     // rest of the colors
     final int nColors = MyGraph.of(context).graph.nodeCount() - 1;
@@ -34,7 +41,7 @@ class MyGraphDisplay extends StatefulWidget {
       var hsvVec = vm.Vector4(H, S, V, O);
       var rgbVec = vm.Vector4.zero();
       vm.Colors.hsvToRgb(hsvVec, rgbVec);
-      colors.add(
+      nodeColors.add(
         Color.fromRGBO((rgbVec.x * 255).toInt(), (rgbVec.y * 255).toInt(),
             (rgbVec.z * 255).toInt(), 1),
       );
@@ -137,11 +144,11 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
   Widget _getGraphView(BuildContext context) {
     return GraphView(
       graph: MyGraph.of(context).graph,
-      algorithm: widget.algo,
+      algorithm: widget._algo,
       builder: (Node node) {
         // I can decide what widget should be shown here based on the id
         int nodeId = node.key!.value;
-        return _getNode(nodeId, widget.colors[nodeId]);
+        return _getNode(nodeId, widget.nodeColors[nodeId]);
       },
     );
   }

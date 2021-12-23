@@ -58,7 +58,7 @@ public class Main {
 
         // generate manifests
         if (!ManifestGenerator.manifestFileExists()) {
-            final int nManifests = 3;
+            final int nManifests = 1;
             ManifestGenerator manifestGenerator =
                     new ManifestGenerator(nManifests, devices.keySet());
             manifestGenerator.generate();

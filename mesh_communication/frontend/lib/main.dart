@@ -44,11 +44,13 @@ class BasePage extends StatelessWidget {
         Node node2 = graph.getNodeUsingId(nid);
         graph.addEdge(node1, node2,
             paint: Paint()
-              ..color = Colors.grey
-              ..strokeWidth = 2
+              ..color = MyGraphDisplay.normalColor
+              ..strokeWidth = MyGraphDisplay.strokeWidth
               ..style = PaintingStyle.stroke);
       }
     }
+    // initial message
+    await requestHandler.orchestrate();
     return graph;
   }
 

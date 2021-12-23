@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:myapp/RequestHandler/Device.dart';
 import 'package:vector_math/vector_math.dart' as vm;
@@ -55,9 +56,16 @@ class RequestHandler {
     return ret;
   }
 
-  Future<Map> advanceTick() async {
-    client.post(_resourceUri("tick/forwards"));
+  Future<Map> advanceTick({int n = 1}) async {
+    client.post(_resourceUri("tick/forwards/?n_ticks=" + n.toString()));
     http.Response fetchContent = await client.get(_resourceUri("message"));
     return jsonDecode(fetchContent.body);
+  }
+
+  Future<void> orchestrate() async {
+    http.Response response = await client.post(_resourceUri("orchestrate"));
+    if (kDebugMode) {
+      print(response.body);
+    }
   }
 }
