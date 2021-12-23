@@ -24,6 +24,7 @@
 	},
 	"scripts": {
 		"lint": "eslint --ext .js .",
-		"format": "prettier --write \"**/*.{js,json,yml}\""
+		"format": "prettier --write \"**/*.{js,json,yml}\"",
+		"seed": "node seed.js"
 	}
 }
