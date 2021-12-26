@@ -62,8 +62,6 @@ class Storage:
     def calculate_frequencies(self):
         for product in self.products:
             self.db.df_query(f"CALL calculate_product_frequency({product.id})")
-        for product in self.products: 
-            print(product)
 
     def fill_warehouse(self, layout):  # TODO: Verificar outros atributos das racks tb, para além da capacity
         # Place the heaviest products first
