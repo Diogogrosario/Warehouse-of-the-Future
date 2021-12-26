@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
-    use HasFactory;
-    protected $table = 'Product';
+    protected string $table = 'Product';
+
+    public function productRack(): HasOne
+    {
+        return $this->hasOne(Product_Rack::class);
+    }
 }
