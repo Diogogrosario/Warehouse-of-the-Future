@@ -98,8 +98,3 @@ class Storage:
 
         # width = 20
         # products = [(0,4), (7,10)]
-
-
-db = Database()
-storage = Storage(db)
-storage.calculate_frequencies()
