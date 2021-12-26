@@ -4,9 +4,10 @@
         <td colspan="{{$sizes[$shelf->id]}}">{{$shelf->id}}</td>
     </tr>
     </thead>
-    @foreach($shelf->racks as $rack)
+    @foreach($shelf->racks->sortByDesc('y')->values() as $rack)
         <tr class="text-center">
             <td class="align-middle">{{$rack->id}}</td>
+            <td class="align-middle">Y:{{$rack->y}}</td>
             @foreach($results[$rack->id] as $product_racks)
                 @if(count($product_racks)===0)
                     <td colspan="{{$sizes[$shelf->id]}}">Sem Resultados</td>
