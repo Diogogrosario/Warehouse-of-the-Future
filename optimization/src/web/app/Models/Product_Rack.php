@@ -18,4 +18,10 @@ class Product_Rack extends Model
     {
         return $this->belongsTo(Rack::class);
     }
+
+    public function result(): BelongsTo
+    {
+        return $this->belongsTo(Result::class);
+    }
+
 }

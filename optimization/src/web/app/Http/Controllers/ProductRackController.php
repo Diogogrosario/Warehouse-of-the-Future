@@ -3,11 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product_Rack;
+use App\Models\Result;
 use App\Models\Shelf;
 
 class ProductRackController extends Controller
 {
     public function show()
+    {
+        $result = Result::all()->last();
+        $layoutResult = $this->getLayoutForResult($result);
+
+        return view('show_results', [
+            'geneticResults' => Result::all()->sortBy('id')->values(),
+            'shelves' => Shelf::with('racks')->get()->sortBy('id')->values(),
+            'results' => $layoutResult['results'],
+            'sizes' => $layoutResult['sizes'],
+        ]);
+    }
+
+    public function getLayoutForResult(Result $result): array
     {
         $results = collect();
         $sizes = collect();
@@ -31,10 +45,7 @@ class ProductRackController extends Controller
             $sizes[$shelf->id] = $maxCounter;
         }
 
-        return view('show_results', [
-            'shelves' => Shelf::with('racks')->get()->sortBy('id')->values(),
-            'results' => $results,
-            'sizes' => $sizes,
-        ]);
+        return ['sizes' => $sizes, 'results' => $results];
+
     }
 }
