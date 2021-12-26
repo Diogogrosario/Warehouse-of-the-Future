@@ -34,7 +34,10 @@ class ProductRackController extends Controller
                 if (!$results->has($rack->id))
                     $results->put($rack->id, collect());
 
-                $rack_with_products = Product_Rack::with(['product', 'rack'])->where('rack_id', $rack->id)->get();
+                $rack_with_products = Product_Rack::with(['product', 'rack'])
+                    ->where('rack_id', $rack->id)
+                    ->where('result_id', $result->id)
+                    ->get();
 
                 if ($rack_with_products) {
                     $results[$rack->id]->push($rack_with_products);

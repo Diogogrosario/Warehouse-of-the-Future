@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <h1 class="d-flex justify-content-center mt-5">Visualize Warehouse</h1>
-        <div class="row my-2">
+        <div class="row my-3">
             @include('partials.show_results.dropdown',['geneticResults'=>$geneticResults])
         </div>
         @include('partials.show_results.carousel',['shelves'=>$shelves])
