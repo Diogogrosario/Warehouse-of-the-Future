@@ -4,7 +4,7 @@ const Device = db.device;
 // Create and Save a new Device
 export function create(req, res) {
 	// save to database
-	Device.create()
+	Device.create({ id: req.body.id })
 		.then((data) => {
 			res.send(data);
 		})
@@ -50,7 +50,7 @@ const _delete = (req, res) => {
 	Device.destroy({ where: { id: id } })
 		.then((num) => {
 			if (num == 1) {
-				res.send({ message: "Sucess." });
+				res.send({ message: "Success." });
 			} else {
 				res.status(404).send({ message: "Device not found." });
 			}

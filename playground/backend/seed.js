@@ -12,4 +12,4 @@ await db.report.create({
 	resolved: false,
 });
 
-await db.device.create({});
+await db.device.create({ id: "470AD" });

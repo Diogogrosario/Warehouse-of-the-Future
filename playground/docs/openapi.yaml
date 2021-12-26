@@ -48,6 +48,14 @@ paths:
       summary: "D2: Create new device"
       description: "Register a new device."
       tags: ["Device"]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              id: 40H
       responses:
         "200":
           description: "Success: Device created."

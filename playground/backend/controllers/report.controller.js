@@ -106,7 +106,7 @@ const _delete = (req, res) => {
 	Report.destroy({ where: { id: id } })
 		.then((num) => {
 			if (num == 1) {
-				res.send({ message: "Sucess." });
+				res.send({ message: "Success." });
 			} else {
 				res.status(404).send({ message: "Report not found." });
 			}
