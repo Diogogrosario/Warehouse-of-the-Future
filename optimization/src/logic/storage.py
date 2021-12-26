@@ -1,7 +1,4 @@
-import pandas as pd
-
 from warehouse import *
-import time
 
 
 class Storage:

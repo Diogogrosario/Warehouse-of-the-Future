@@ -1,5 +1,4 @@
 import heapq
-import json
 import sys
 from copy import deepcopy
 from datetime import datetime
@@ -10,11 +9,7 @@ from storage import *
 db = None
 storage = None
 
-query_warehouse = None
-query_month_manifesto = None
-
-warehouses = None
-month_manifestos = None
+metrics_to_optimize = []
 
 
 # Randomly generate a population of num layouts of the warehouse
@@ -22,7 +17,7 @@ def generate_population(warehouse, num):
     population = []
 
     for _ in range(num):
-        layout = Layout(deepcopy(warehouse))
+        layout = Layout(deepcopy(warehouse), metrics_to_optimize)
         layout = storage.fill_warehouse(layout)
         population.append(layout)
 
@@ -37,7 +32,7 @@ def reproduce(parent1, parent2, warehouse):
 
     products = sorted(storage.products, key=lambda x: (x.weight, x.width), reverse=True)
 
-    child = Layout(deepcopy(warehouse))
+    child = Layout(deepcopy(warehouse), metrics_to_optimize)
 
     for product in products:
         parent = r.randint(0, 1)
@@ -85,7 +80,7 @@ def dump_results_to_database(layout):
 
     result_id = int(db.df_query(result_id_inserted).at[0, 'MAX(id)'])
 
-    for out_product in final_layout.products_out:
+    for out_product in layout.products_out:
         query_insert_out_product = f"INSERT INTO Products_Left_Out (result_id,product_id) values (%s,%s)"
         db.df_query(query_insert_out_product, [result_id, out_product.id])
 
@@ -97,10 +92,18 @@ def dump_results_to_database(layout):
                 db.df_query(query_insert_out_product_rack, [x_orig, x_end, result_id, rack.id, product.id])
 
 
-if __name__ == '__main__':
+def main(docker=False, list_parameters=None):
+    global db
+    global storage
+    global metrics_to_optimize
+
+    if list_parameters is None:
+        list_parameters = []
+
+    metrics_to_optimize = list_parameters
 
     # Overwrite Database configs if Docker tag is defined
-    if len(sys.argv) > 1 and sys.argv[1] == 'docker':
+    if docker or len(sys.argv) > 1 and sys.argv[1] == 'docker':
         db = Database('test', True)
         storage = Storage(db)
         print("Running Docker ENV")
@@ -109,13 +112,9 @@ if __name__ == '__main__':
         storage = Storage(db)
 
     query_warehouse = "SELECT * FROM warehouse"
-    query_month_manifesto = "SELECT * FROM month_manifesto"
 
     warehouses = db.df_query(query_warehouse)
-    month_manifestos = db.df_query(query_month_manifesto)
 
-    #manifestos = storage.get_manifestos(month_manifestos)
-    #manifesto = manifestos[1]  # Initial test with only 1 manifesto
     warehouse_id = warehouses.iloc[0]['id']  # Initial test with only 1 warehouse
 
     warehouse = storage.create_warehouse(warehouse_id)
@@ -138,3 +137,7 @@ if __name__ == '__main__':
         print('No products were left out')
 
     dump_results_to_database(final_layout)
+
+
+if __name__ == '__main__':
+    main()
