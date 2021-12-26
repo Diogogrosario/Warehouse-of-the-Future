@@ -99,5 +99,65 @@ This sprint's focus is creating a GUI for the client to use.
 - Make tick time system for GUI;
 - Make a way to advance 10 ticks into the communication;
 
+## Review
 
+- Frontend and backend divided into separate projects;
+- Frontend integration with API;
+- Time passage simulation (one or multiple ticks at the same time);
+- Basic backend API done with log;
+- Layout creation with devices;
+- Orchestrator sends messages to product's devices;
+- Bug fixing and race condition handeling;
+- Documentation:
+  - API endpoints;
+  - Acceptance test draft;
+
+### Changed Details
+
+- Everything went according to plan.
+
+## What to do next
+
+- Continue working with backend and frontend interation;
+- Finish issues involving the frontend;
+- Redo ticks from the logfile, to make going back in time easier;
+- Gherkin acceptance tests;
+- Simulate node crashing and communication failure;
+
+## Sprint 2 Retrospective
+
+### Positive Topics
+
+- Reopen some issues when continuing to work on that topic;
+- Better task destribuition;
+
+### Meh Topics
+
+- Add done definition to some complex issues;
+- Some people depend on the input of other people to advance;
+
+### Topics to work on
+
+- Read the documentation of the tool being used before implementing code;
+- Frontend was dependent of the backend which delayed development;
+- API's issue was not correctly handled (it was one big issue instead of many);
+- API initial draft was not correct as there was no documentation to guide, leading to an incorrect interpretation of what the frontend needed;
+- Wait for all reviewers to accept pull request before merging;
+
+# Sprint 3
+
+## Planning
+
+### Why is this sprint valuable
+
+In this sprint, the front end will continued to be worked on to provide more features to the client.
+
+### What can be done in this sprint
+
+- Finish API:
+  - Error page;
+- Display log file with button;
+- Acceptance tests;
+- Advance time automatically;
+- Devices without battery are shown in the frontend;
 
