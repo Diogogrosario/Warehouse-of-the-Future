@@ -26,27 +26,31 @@ class ProductRackController extends Controller
         */
 
         $results = collect();
+        $sizes = collect();
 
         foreach (Shelf::with('racks')->get()->sortBy('id')->values() as $shelf) {
-            foreach ($shelf->racks as $rack) {
+            $maxCounter = 0;
 
+            foreach ($shelf->racks as $rack) {
                 #Initialize collection
                 if (!$results->has($rack->id))
                     $results->put($rack->id, collect());
 
-                $rack_with_products = Product_Rack::with(['product', 'rack'])->where('rack_id', $rack->id)->first();
+                $rack_with_products = Product_Rack::with(['product', 'rack'])->where('rack_id', $rack->id)->get();
 
                 if ($rack_with_products) {
                     $results[$rack->id]->push($rack_with_products);
+                    $maxCounter += 1;
                     $results[$rack->id]->sortBy(['x_origin', 'asc'])->values()->all();
                 }
             }
+            $sizes[$shelf->id] = $maxCounter;
         }
-
 
         return view('show_results', [
             'shelves' => Shelf::with('racks')->get()->sortBy('id')->values(),
             'results' => $results,
+            'sizes' => $sizes,
         ]);
     }
 
