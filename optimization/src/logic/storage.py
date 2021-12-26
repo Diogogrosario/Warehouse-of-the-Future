@@ -1,4 +1,5 @@
 from warehouse import *
+from database import Database
 import time
 
 class Storage:
@@ -33,7 +34,7 @@ class Storage:
         products = []
 
         for _, p in df_products.iterrows():
-            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['car_model_id'], p['sector_id'])
+            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['car_model_id'], p['sector_id'], p['frequency'])
             products.append(product)
 
         return products
@@ -57,6 +58,12 @@ class Storage:
             warehouse.add_shelf(shelf)
 
         return warehouse
+    
+    def calculate_frequencies(self):
+        for product in self.products:
+            self.db.df_query(f"CALL calculate_product_frequency({product.id})")
+        for product in self.products: 
+            print(product)
 
     def fill_warehouse(self, layout):  # TODO: Verificar outros atributos das racks tb, para além da capacity
         # Place the heaviest products first
@@ -93,3 +100,8 @@ class Storage:
 
         # width = 20
         # products = [(0,4), (7,10)]
+
+
+db = Database()
+storage = Storage(db)
+storage.calculate_frequencies()

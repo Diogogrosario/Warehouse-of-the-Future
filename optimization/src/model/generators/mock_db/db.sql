@@ -105,24 +105,20 @@ create table Worker_Manifesto_Product
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
 );
 
-DROP TRIGGER IF EXISTS calculate_product_frequency;
+DROP PROCEDURE IF EXISTS calculate_product_frequency;
 
-DELIMITER $$
-CREATE TRIGGER calculate_product_frequency
-    AFTER INSERT
-    ON Worker_Manifesto_Product
-    FOR EACH ROW
-BEGIN
-    DECLARE total_pieces INT;
-    DECLARE freq INT;
+delimiter //
+CREATE PROCEDURE calculate_product_frequency (IN prod_id INT)
+    BEGIN
+        DECLARE total_pieces INT;
+        DECLARE freq INT;
 
-    SET freq = (SELECT SUM(quantity)
-                from Worker_Manifesto_Product
-                WHERE product_id = new.product_id);
+        SET freq = (SELECT COUNT(*)
+                    from Worker_Manifesto_Product
+                    WHERE product_id = prod_id);
 
-    SET total_pieces = (SELECT COUNT(id) from Worker_Manifesto_Product); /*this number is to normalize the results*/
+        SET total_pieces = (SELECT COUNT(id) from Worker_Manifesto_Product); /*this number is to normalize the results*/
 
-    UPDATE Product SET frequency = freq / total_pieces where id = new.product_id;
-
-END $$
-DELIMITER ;
+        UPDATE Product SET frequency = freq / total_pieces where id = prod_id;
+    END //
+DELIMITER ; 

@@ -118,7 +118,7 @@ class Shelf:
         return state
 
 class Product:
-    def __init__(self, id, name, length, height, width, weight, car_model_id, sector_id):
+    def __init__(self, id, name, length, height, width, weight, car_model_id, sector_id, frequency):
         self.id = id
         self.name = name
         self.length = length
@@ -127,6 +127,7 @@ class Product:
         self.weight = weight
         self.car_model_id = car_model_id
         self.sector_id = sector_id
+        self.frequency = frequency
 
     def __eq__(self, other):
         return self.id == other.id
@@ -139,8 +140,9 @@ class Product:
         state += f'PRODUCT {self.id}:\n'
         state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
         state += f'\t\t\t\t\tWIDTH {self.width}'
+        state += f'\t\t\t\t\tFREQUENCY {self.frequency}'
         return state
-
+    
 class Rack:
     def __init__(self, id, length, width, height, y, capacity):
         self.id = id
