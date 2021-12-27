@@ -6,22 +6,17 @@ from datetime import datetime
 
 from database import Database
 from storage import *
+from warehouse import *
 
 db = None
 storage = None
-
-query_warehouse = None
-query_month_manifesto = None
-
-warehouses = None
-month_manifestos = None
 
 
 # Randomly generate a population of num layouts of the warehouse
 def generate_population(warehouse, num):
     population = []
 
-    for _ in range(num):
+    for index in range(num):
         layout = Layout(deepcopy(warehouse))
         layout = storage.fill_warehouse(layout)
         population.append(layout)
@@ -55,7 +50,7 @@ def genetic_algorithm(warehouse, population, num_iterations):
     heapq.heapify(population)
     length = len(population)
 
-    for i in range(num_iterations):
+    for index in range(num_iterations):
         parent1 = heapq.nlargest(1, population)[0]  # best layout
         parent2 = heapq.nsmallest(length - 1, population)[r.randint(0, length - 2)]  # random layout
         child = reproduce(parent1, parent2, warehouse)
@@ -112,19 +107,17 @@ if __name__ == '__main__':
     query_month_manifesto = "SELECT * FROM month_manifesto"
 
     warehouses = db.df_query(query_warehouse)
-    month_manifestos = db.df_query(query_month_manifesto)
+    # month_manifestos = db.df_query(query_month_manifesto)
 
-    manifestos = storage.get_manifestos(month_manifestos)
-    manifesto = manifestos[1]  # Initial test with only 1 manifesto
+    # manifestos = storage.get_manifestos(month_manifestos)
+    # manifesto = manifestos[1]  # Initial test with only 1 manifesto
     warehouse_id = warehouses.iloc[0]['id']  # Initial test with only 1 warehouse
 
     warehouse = storage.create_warehouse(warehouse_id)
 
     initial_population = generate_population(warehouse, 10)
 
-    num_iterations = 100
-
-    final_layout = genetic_algorithm(warehouse, initial_population, num_iterations)
+    final_layout = genetic_algorithm(warehouse, initial_population, max_iterations)
 
     print('----- FINAL LAYOUT -----')
     print(final_layout)

@@ -1,8 +1,4 @@
-import pandas as pd
-
 from warehouse import *
-import time
-
 
 class Storage:
     def __init__(self, db):
@@ -35,7 +31,7 @@ class Storage:
         products = []
 
         for _, p in df_products.iterrows():
-            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['sector_id'])
+            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['sector_id'], p['frequency'])
             products.append(product)
 
         return products
@@ -46,8 +42,8 @@ class Storage:
         shelves_query = f"SELECT * FROM shelf WHERE warehouse_id = {warehouse_id}"
         shelves = self.db.df_query(shelves_query)
 
-        for _, s in shelves.iterrows():
-            shelf_id = s['id']
+        for _, row in shelves.iterrows():
+            shelf_id = row['id']
             shelf = Shelf(shelf_id)
             racks_query = f"SELECT * FROM rack WHERE shelf_id = {shelf_id}"
 
@@ -63,6 +59,10 @@ class Storage:
             warehouse.add_shelf(shelf)
 
         return warehouse
+    
+    def calculate_frequencies(self):
+        for product in self.products:
+            self.db.df_query(f"CALL calculate_product_frequency({product.id})")
 
     def fill_warehouse(self, layout):
         # Place the heaviest products first
@@ -70,8 +70,6 @@ class Storage:
         products = sorted(self.products, key=lambda x: (x.weight, x.width), reverse=True)
 
         for product in products:
-            # TODO: Which is the concept of best RACK to FIT?
-
             rack = layout.get_valid_rack(product)
 
             if rack:
@@ -80,15 +78,3 @@ class Storage:
                 layout.products_out.append(product)
 
         return layout
-
-    def valid_placement(self, rack, product, layout):
-        valid_weight = rack.get_current_weight() + product.weight <= rack.capacity
-        valid_width = rack.last_x + product.width <= rack.width
-        valid_height = True
-
-        rack_above = layout.get_rack_above(rack)
-
-        if rack_above:
-            valid_height = rack.y + product.height <= rack.y
-
-        return valid_weight and valid_width and valid_height
