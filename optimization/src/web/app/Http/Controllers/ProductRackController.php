@@ -2,60 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\Product_Rack;
-use App\Models\Product;
-use App\Models\Rack;
+use App\Models\Result;
 use App\Models\Shelf;
 
 class ProductRackController extends Controller
 {
     public function show()
     {
-        $products_rack=Product_Rack::orderby('rack_id')->get();
+        $result = Result::all()->last();
+        $layoutResult = $this->getLayoutForResult($result);
 
-        $shelf_list=array();
-        $shelf_ids=array();
-        foreach(Shelf::all() as $shelf){
-            $racks_list=array();
-            foreach(Rack::all() as $rack){
-                if($shelf->id == $rack->shelf_id){
-                    $racks_list[]=$rack;
-                }
-            }
-            $shelf_list[]=$racks_list;
-            $shelf_ids[]=$shelf->id;
-        }
-        
-
-        return view('layout', [
-           'products_rack'=> $products_rack,
-           'shelf_list'=> $shelf_list,
-           'shelf_ids'=> $shelf_ids,
+        return view('show_results', [
+            'geneticResults' => Result::all()->sortBy('id')->values(),
+            'shelves' => Shelf::with('racks')->get()->sortBy('id')->values(),
+            'results' => $layoutResult['results'],
+            'sizes' => $layoutResult['sizes'],
         ]);
     }
 
-    public function orderRacks($shelf_id,$shelf_list){
-        $rackToOrder=array();
-        foreach($shelf_list as $shelf){
-            foreach($shelf as $rack){
-                if($rack->shelf_id == $shelf_id)
-                    $rackToOrder[]=$rack;
-            }
-        }
-        return collect($rackToOrder)->sortBy('y')->reverse();
-    }
+    public function getLayoutForResult(Result $result): array
+    {
+        $results = collect();
+        $sizes = collect();
 
-    public function orderProducts($rack_id,$products_rack){
+        foreach (Shelf::with('racks')->get()->sortBy('id')->values() as $shelf) {
+            $maxCounter = 0;
 
-        $productsToOrder=array();
-        foreach($products_rack as $product){
-            if($product->rack_id == $rack_id){
-                $productsToOrder[]=$product;
+            foreach ($shelf->racks as $rack) {
+                #Initialize collection
+                if (!$results->has($rack->id))
+                    $results->put($rack->id, collect());
+
+                $rack_with_products = Product_Rack::with(['product', 'rack'])
+                    ->where('rack_id', $rack->id)
+                    ->where('result_id', $result->id)
+                    ->get();
+
+                if ($rack_with_products) {
+                    $results[$rack->id]->push($rack_with_products);
+                    $maxCounter += 1;
+                    $results[$rack->id]->sortBy('x_origin')->values();
+                }
             }
+            $sizes[$shelf->id] = $maxCounter;
         }
-        //echo collect($productsToOrder)->sortBy('x_orig'), ' next: ';
-        return collect($productsToOrder)->sortBy('x_orig') ;
+
+        return ['sizes' => $sizes, 'results' => $results];
+
     }
 }

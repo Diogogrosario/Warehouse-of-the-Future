@@ -1,17 +1,17 @@
+import decimal
+import math
 import random
 import random as r
 
 max_iterations = 10000
 
-# metrics_to_optimize = ['weight', 'sector']
-# metrics_to_optimize = ['weight']
-metrics_to_optimize = ['sector']
-
 
 class Layout:
-    def __init__(self, warehouse):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
+    def __init__(self, warehouse,
+                 metrics_to_optimize):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
         self.warehouse = warehouse
         self.products_out = []
+        self.metrics_to_optimize = metrics_to_optimize
         # shelf -> lista de racks
         #   rack -> lista de products
         #       product, x_orig, x_end
@@ -76,15 +76,14 @@ class Layout:
 
     def get_score(self):
         score = 0
-        different_sectors_in_a_shelf = 0
 
-        if 'weight' in metrics_to_optimize:
+        if 'weight' in self.metrics_to_optimize:
             for shelf in self.warehouse.shelves:
                 for rack in shelf.racks:
                     for product in rack.products:
-                        score += product.weight / rack.y
+                        score += product.weight / decimal.Decimal(max(rack.y, 0.01))
 
-        if 'sector' in metrics_to_optimize:
+        if 'sector' in self.metrics_to_optimize:
             for shelf in self.warehouse.shelves:
                 different_sectors = []
 
