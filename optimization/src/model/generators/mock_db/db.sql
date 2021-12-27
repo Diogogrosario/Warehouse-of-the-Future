@@ -62,18 +62,6 @@ create table Product
     FOREIGN KEY (sector_id) REFERENCES Sector (id)
 );
 
-create table Product_Rack
-(
-    id         SERIAL PRIMARY KEY,
-    x_orig     INT             NOT NULL,
-    x_end      INT             NOT NULL,
-    rack_id    BIGINT UNSIGNED NOT NULL,
-    product_id BIGINT UNSIGNED NOT NULL,
-
-    FOREIGN KEY (rack_id) REFERENCES Rack (id),
-    FOREIGN KEY (product_id) REFERENCES Product (id)
-);
-
 create table Month_Manifesto
 (
     id   SERIAL PRIMARY KEY,
@@ -106,6 +94,35 @@ create table Worker_Manifesto_Product
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
 );
 
+-- OUTPUT --
+create table Results
+(
+    id                         SERIAL PRIMARY KEY,
+    date_issued                DATETIME,
+    is_read                    BOOLEAN DEFAULT FALSE
+);
+create table Product_Rack
+(
+    id         SERIAL PRIMARY KEY,
+    x_orig     INT             NOT NULL,
+    x_end      INT             NOT NULL,
+    result_id  BIGINT UNSIGNED NOT NULL,
+    rack_id    BIGINT UNSIGNED NOT NULL,
+    product_id BIGINT UNSIGNED NOT NULL,
+
+    FOREIGN KEY (result_id) REFERENCES Results (id),
+    FOREIGN KEY (rack_id) REFERENCES Rack (id),
+    FOREIGN KEY (product_id) REFERENCES Product (id)
+);
+
+create table Products_Left_Out
+(
+    id         SERIAL PRIMARY KEY,
+    result_id  BIGINT UNSIGNED NOT NULL,
+    product_id BIGINT UNSIGNED NOT NULL,
+    FOREIGN KEY (result_id) REFERENCES Results (id),
+    FOREIGN KEY (product_id) REFERENCES Product (id)
+);
 DROP PROCEDURE IF EXISTS calculate_product_frequency;
 
 DELIMITER //

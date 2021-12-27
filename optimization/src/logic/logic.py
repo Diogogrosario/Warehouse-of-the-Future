@@ -1,6 +1,8 @@
 import heapq
+import json
 import sys
 from copy import deepcopy
+from datetime import datetime
 
 from database import Database
 from storage import *
@@ -69,6 +71,27 @@ def mutate(child):
     child.change_place(product)
 
 
+def dump_results_to_database(layout):
+    query_insert_result = f"INSERT INTO Results (date_issued) values (%s)"
+
+    db.df_query(query_insert_result, [datetime.now().strftime('%Y-%m-%d %H:%M:%S')])
+
+    result_id_inserted = f"SELECT MAX(id) FROM RESULTS"
+
+    result_id = int(db.df_query(result_id_inserted).at[0, 'MAX(id)'])
+
+    for out_product in final_layout.products_out:
+        query_insert_out_product = f"INSERT INTO Products_Left_Out (result_id,product_id) values (%s,%s)"
+        db.df_query(query_insert_out_product, [result_id, out_product.id])
+
+    for shelf in layout.warehouse.shelves:
+        for rack in shelf.racks:
+            for product, position in rack.products.items():
+                x_orig, x_end = position
+                query_insert_out_product_rack = f"INSERT INTO Product_Rack (x_orig,x_end,result_id,rack_id,product_id) values (%s,%s,%s,%s,%s)"
+                db.df_query(query_insert_out_product_rack, [x_orig, x_end, result_id, rack.id, product.id])
+
+
 if __name__ == '__main__':
 
     # Overwrite Database configs if Docker tag is defined
@@ -106,3 +129,5 @@ if __name__ == '__main__':
             print(out_product)
     else:
         print('No products were left out')
+
+    dump_results_to_database(final_layout)
