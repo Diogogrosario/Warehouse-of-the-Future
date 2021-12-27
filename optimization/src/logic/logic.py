@@ -9,12 +9,6 @@ from warehouse import *
 db = None
 storage = None
 
-query_warehouse = None
-query_month_manifesto = None
-
-warehouses = None
-month_manifestos = None
-
 
 # Randomly generate a population of num layouts of the warehouse
 def generate_population(warehouse, num):

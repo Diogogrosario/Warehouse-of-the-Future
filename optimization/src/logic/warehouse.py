@@ -1,16 +1,18 @@
 import math
 import random
 import random as r
+import numpy as np
 from copy import deepcopy
+
 
 max_iterations = 10000
 
-# metrics_to_optimize = ['weight', 'sector']
+# metrics_to_optimize = ['weight']
+# metrics_to_optimize = ['work']
+metrics_to_optimize = ['frequency']
 # metrics_to_optimize = ['sector']
-#metrics_to_optimize = ['weight']
-metrics_to_optimize = ['work']
-worker_average_height = 1.75
 
+worker_average_height = 1.75
 
 class Layout:
     def __init__(self, warehouse):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
@@ -107,6 +109,33 @@ class Layout:
                     for product in rack.products:
                         score += math.cos(math.radians(theta)) * float(product.weight)
 
+        if 'frequency' in metrics_to_optimize:
+            shelves_frequencies = []
+
+            for shelf in self.warehouse.shelves:
+                shelf_frequency = 0
+                for rack in shelf.racks:
+                    for product in rack.products:
+                        shelf_frequency += product.frequency
+
+                shelves_frequencies.append(shelf_frequency)
+            
+            shelves_frequencies = sorted(shelves_frequencies)
+
+            score += sum(np.diff(shelves_frequencies))
+
+        if 'sector' in metrics_to_optimize:
+            for shelf in self.warehouse.shelves:
+                different_sectors = []
+
+                for rack in shelf.racks:
+                    for product in rack.products:
+                        if product.sector_id not in different_sectors:
+                            different_sectors.append(product.sector_id)
+
+                score -= len(different_sectors) * 3
+
+
         score -= len(self.products_out) * 100
 
         return score
@@ -122,34 +151,6 @@ class Layout:
     def change_place(self, product):
         self.remove_product(product)
         self.add_product_random(product)
-
-    # Return NONE If current_rack is at the top and there is nothing above
-    def get_rack_above(self, current_rack):
-
-        shelf = None
-
-        for elem in self.warehouse.shelves:
-            if elem.id == current_rack.shelf_id:
-                shelf = shelf
-                break
-
-        if not shelf:
-            return None
-
-        rack_above = None
-
-        for shelf_rack in shelf.racks:
-
-            if shelf_rack.y < current_rack.y:
-                continue
-
-            if not rack_above:
-                rack_above = shelf_rack
-
-            elif rack_above.y > shelf_rack.y:
-                rack_above = shelf_rack
-
-        return rack_above
 
     def __lt__(self, other):
         return self.get_score() < other.get_score()
@@ -200,7 +201,7 @@ class Shelf:
 
 
 class Product:
-    def __init__(self, id, name, length, height, width, weight, sector_id):
+    def __init__(self, id, name, length, height, width, weight, sector_id, frequency):
         self.id = id
         self.name = name
         self.length = length
@@ -208,6 +209,7 @@ class Product:
         self.width = width
         self.weight = weight
         self.sector_id = sector_id
+        self.frequency = frequency
 
     def __eq__(self, other):
         return self.id == other.id
@@ -221,7 +223,8 @@ class Product:
         state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
         state += f'\t\t\t\t\tWIDTH {self.width}\n'
         state += f'\t\t\t\t\tHEIGHT {self.height}\n'
-        state += f'\t\t\t\t\tSECTOR_ID {self.sector_id}'
+        state += f'\t\t\t\t\tSECTOR_ID {self.sector_id}\n'
+        state += f'\t\t\t\t\tFREQUENCY {self.frequency}'
         return state
 
 
@@ -274,15 +277,6 @@ class Rack:
         for product in self.products.keys():
             weight += product.weight
         return weight
-
-    def get_available_width(self):
-
-        counter = self.width
-
-        for product in self.products:
-            counter -= product.width
-
-        return counter
 
     def __str__(self) -> str:
         state = ""
