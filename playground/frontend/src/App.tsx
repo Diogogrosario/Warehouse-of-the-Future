@@ -1,5 +1,16 @@
 import React, { SetStateAction, useEffect } from "react";
-import { Grid, Tab, Tabs, useMediaQuery } from "@mui/material";
+import {
+	Button,
+	FormControl,
+	Grid,
+	InputLabel,
+	MenuItem,
+	Select,
+	SelectChangeEvent,
+	Tab,
+	Tabs,
+	useMediaQuery,
+} from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
 import FullscreenButton from "./components/FullscreenButton";
@@ -7,6 +18,8 @@ import PanelDivider from "./components/PanelDivider";
 import WarehouseRenderer from "./components/WarehouseRenderer";
 import Report from "./components/Report";
 import theme from "./styles/theme";
+import SortIcon from "@mui/icons-material/Sort";
+import { North } from "@mui/icons-material";
 
 export enum FullscreenState {
 	Left,
@@ -15,6 +28,8 @@ export enum FullscreenState {
 }
 
 export default function App() {
+	const [sortBy, setSortBy] = React.useState("");
+
 	const mobile = useMediaQuery("(max-width: 800px)");
 
 	const [selectedTab, setSelectedTab] = React.useState(0);
@@ -109,6 +124,29 @@ export default function App() {
 								<Tab label="Logs" />
 								<Tab label="Devices" />
 							</Tabs>
+
+							<FormControl fullWidth sx={{ marginTop: "10px" }}>
+								<InputLabel id="sort-by-select">Sort by</InputLabel>
+								<Select
+									label="Sort by"
+									id="sort-by-select"
+									onChange={(event: SelectChangeEvent) => {
+										setSortBy(event.target.value);
+									}}
+								>
+									<MenuItem value={10}>Time of creation</MenuItem>
+									<MenuItem value={20}>Time of last update</MenuItem>
+									<MenuItem value={30}>Time of last update</MenuItem>
+									<MenuItem value={40}>Name (A-Z)</MenuItem>
+									<MenuItem value={50}>Description (A-Z)</MenuItem>
+									<MenuItem value={60}>Severity</MenuItem>
+								</Select>
+							</FormControl>
+
+							<Button>
+								<SortIcon />
+								<North />
+							</Button>
 
 							<Report
 								title="Report Testing"
