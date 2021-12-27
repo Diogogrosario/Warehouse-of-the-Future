@@ -42,8 +42,8 @@ class Storage:
         shelves_query = f"SELECT * FROM shelf WHERE warehouse_id = {warehouse_id}"
         shelves = self.db.df_query(shelves_query)
 
-        for _, s in shelves.iterrows():
-            shelf_id = s['id']
+        for _, row in shelves.iterrows():
+            shelf_id = row['id']
             shelf = Shelf(shelf_id)
             racks_query = f"SELECT * FROM rack WHERE shelf_id = {shelf_id}"
 
@@ -70,8 +70,6 @@ class Storage:
         products = sorted(self.products, key=lambda x: (x.weight, x.width), reverse=True)
 
         for product in products:
-            # TODO: Which is the concept of best RACK to FIT?
-
             rack = layout.get_valid_rack(product)
 
             if rack:
@@ -80,4 +78,3 @@ class Storage:
                 layout.products_out.append(product)
 
         return layout
-
