@@ -5,7 +5,7 @@ import numpy as np
 from copy import deepcopy
 
 
-max_iterations = 1000
+max_iterations = 10000
 
 # metrics_to_optimize = ['weight']
 # metrics_to_optimize = ['work']
@@ -78,7 +78,23 @@ class Layout:
             for shelf in self.warehouse.shelves:
                 for rack in shelf.racks:
                     for product in rack.products:
-                        score += product.weight / rack.y
+                        score += float(product.weight) / max(float(rack.y), 0.1)
+
+        if 'sector' in metrics_to_optimize:
+            for shelf in self.warehouse.shelves:
+                different_sectors = []
+
+                for rack in shelf.racks:
+                    for product in rack.products:
+                        if product.sector_id not in different_sectors:
+                            different_sectors.append(product.sector_id)
+
+                if len(different_sectors) == 1:
+                    score += 10
+                elif len(different_sectors) > 1:
+                    score -= 20 * len(different_sectors)
+                elif len(different_sectors) == 0:
+                    score -= 50
 
         if 'work' in metrics_to_optimize:
             adj_side = 0.2
