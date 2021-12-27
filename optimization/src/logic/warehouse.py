@@ -197,7 +197,7 @@ class Shelf:
 
 
 class Product:
-    def __init__(self, id, name, length, height, width, weight, sector_id):
+    def __init__(self, id, name, length, height, width, weight, sector_id, frequency):
         self.id = id
         self.name = name
         self.length = length
@@ -205,6 +205,7 @@ class Product:
         self.width = width
         self.weight = weight
         self.sector_id = sector_id
+        self.frequency = frequency
 
     def __eq__(self, other):
         return self.id == other.id
@@ -219,6 +220,7 @@ class Product:
         state += f'\t\t\t\t\tWIDTH {self.width}\n'
         state += f'\t\t\t\t\tHEIGHT {self.height}\n'
         state += f'\t\t\t\t\tSECTOR_ID {self.sector_id}'
+        state += f'\t\t\t\t\tFREQUENCY {self.frequency}'
         return state
 
 

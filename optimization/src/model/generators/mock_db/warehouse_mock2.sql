@@ -215,3 +215,35 @@ insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(30,
 insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(31,1,502);
 insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(32,1,502);
 insert into Month_Manifesto_Product(product_id,manifesto_id,quantity) values(33,1,502);
+
+
+insert into Worker_Manifesto (id) values (1);
+insert into Worker_Manifesto (id) values (2);
+insert into Worker_Manifesto (id) values (3);
+insert into Worker_Manifesto (id) values (4);
+insert into Worker_Manifesto (id) values (5);
+insert into Worker_Manifesto (id) values (6);
+insert into Worker_Manifesto (id) values (7);
+insert into Worker_Manifesto (id) values (8);
+insert into Worker_Manifesto (id) values (9);
+insert into Worker_Manifesto (id) values (10);
+
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (1, 32, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (1, 32, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (1, 32, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (2, 2, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (2, 5, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (3, 32, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (3, 4, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (4, 7, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (5, 10, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (5, 16, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (5, 2, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (6, 5, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (7, 7, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (7, 32, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (8, 16, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (9, 32, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (9, 8, 1);
+insert into Worker_Manifesto_Product (manifesto_id, product_id, quantity) values (10, 16, 1);
+

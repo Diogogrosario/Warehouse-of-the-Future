@@ -1,1 +1,0 @@
-insert into warehouse (id) values (1);
