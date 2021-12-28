@@ -69,6 +69,15 @@ public class APITests {
                                         return lmd;
                                     });
 
+            when(mg.devicesInRange(device2))
+                    .thenAnswer(
+                            (Answer<List<MeshDevice>>)
+                                    invocation -> {
+                                        List<MeshDevice> lmd = new ArrayList<>();
+                                        lmd.add(device1);
+                                        return lmd;
+                                    });
+
             Main main = new Main();
             main.setMeshGrid(mg);
             api.setMain(main);
@@ -128,6 +137,29 @@ public class APITests {
 
             String outputString = listToString(output);
             assertEquals(expectedOutput, outputString);
+        }
+
+        @Test
+        public void getAllInRangeDevicesTest() {
+            ObjectNode output = api.allInRange(Mockito.mock(HttpServletResponse.class));
+            assertFalse(output.isEmpty());
+
+            assertTrue(output.has("1"));
+            assertTrue(output.has("2"));
+
+            assertTrue(output.get("1").isArray());
+            assertTrue(output.get("2").isArray());
+
+            assertEquals(1, output.get("1").size());
+            assertEquals(1, output.get("2").size());
+
+            String expectedDevice2 =
+                    "{\"id\":2,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
+            assertEquals(expectedDevice2, output.get("1").get(0).toString());
+
+            String expectedDevice1 =
+                    "{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
+            assertEquals(expectedDevice1, output.get("2").get(0).toString());
         }
 
         @Test
@@ -220,11 +252,12 @@ public class APITests {
         @Test
         public void messageTest() {
             String expectedOutput = "{\"0\":[{\"final\":2,\"hop\":1}]}";
-            ObjectNode outputMessage = api.message("send", Mockito.mock(HttpServletResponse.class));
+
+            ObjectNode outputMessage = api.messageSend(Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, outputMessage.toString());
 
             expectedOutput = "{}";
-            outputMessage = api.message("receive", Mockito.mock(HttpServletResponse.class));
+            outputMessage = api.messageReceive(Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, outputMessage.toString());
         }
     }

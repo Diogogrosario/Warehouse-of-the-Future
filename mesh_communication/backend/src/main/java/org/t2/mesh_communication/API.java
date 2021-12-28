@@ -159,6 +159,12 @@ public class API {
         }
 
         List<MeshDevice> devicesInRange = this.getMeshGrid().devicesInRange(device);
+
+        if (devicesInRange.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            return new ArrayList<>();
+        }
+
         List<JsonNode> devicesRangeJson;
         try {
             devicesRangeJson = this.devicesToJson(devicesInRange);
@@ -170,6 +176,44 @@ public class API {
 
         response.setStatus(HttpServletResponse.SC_OK);
         return devicesRangeJson;
+    }
+
+    @GetMapping("/devices/inrange/all")
+    public ObjectNode allInRange(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+
+        HashMap<Integer, ArrayNode> inrangeAll = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (MeshDevice dv : this.getMeshGrid().getDevices()) {
+            List<JsonNode> inrange;
+            try {
+                inrange = this.devicesToJson(this.getMeshGrid().devicesInRange(dv));
+            } catch (JsonProcessingException e) {
+                System.err.println("Error in JSON parsing of devices.");
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                return null;
+            }
+
+            if (inrange.isEmpty()) continue;
+
+            ArrayNode inrangeArray = mapper.convertValue(inrange, ArrayNode.class);
+            inrangeAll.put(dv.getId(), inrangeArray);
+        }
+
+        ObjectNode node = mapper.createObjectNode();
+
+        if (inrangeAll.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            return node;
+        }
+
+        for (Map.Entry<Integer, ArrayNode> entry : inrangeAll.entrySet()) {
+            node.putIfAbsent(entry.getKey().toString(), entry.getValue());
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return node;
     }
 
     @PostMapping("/tick/{time_flow}")
@@ -205,8 +249,8 @@ public class API {
         return "Orchestrator orchestrated";
     }
 
-    @GetMapping("/messages/{type}")
-    public ObjectNode message(@PathVariable("type") String type, HttpServletResponse response) {
+    @GetMapping("/messages/receive")
+    public ObjectNode messageReceive(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
 
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
@@ -214,16 +258,7 @@ public class API {
 
         for (MeshDevice md : this.getMeshGrid().getDevices()) {
             for (Command command : md.getCommands()) {
-                if (type.equals("send") && command instanceof SendMsgCmd sendMsgCmd) {
-                    ArrayNode ret = handleSendMsg(md, sendMsgCmd);
-                    if (ret == null) {
-                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                        return null;
-                    }
-                    int sourceDevice = md.getId();
-                    if (!messages.containsKey(sourceDevice)) messages.put(sourceDevice, ret);
-                    else messages.get(sourceDevice).addAll(ret);
-                } else if (type.equals("receive") && command instanceof ReceiveMsgCmd rcvMsgCmd) {
+                if (command instanceof ReceiveMsgCmd rcvMsgCmd) {
                     JsonNode ret = handleRcvMsg(md, rcvMsgCmd);
 
                     if (ret == null) {
@@ -238,6 +273,37 @@ public class API {
                                 mapper.convertValue(new ArrayList<>(), ArrayNode.class));
                     }
                     messages.get(sourceDevice).add(ret);
+                }
+            }
+        }
+
+        ObjectNode node = mapper.createObjectNode();
+        for (Map.Entry<Integer, ArrayNode> entry : messages.entrySet()) {
+            node.putIfAbsent(entry.getKey().toString(), entry.getValue());
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return node;
+    }
+
+    @GetMapping("/messages/send")
+    public ObjectNode messageSend(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+
+        HashMap<Integer, ArrayNode> messages = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (MeshDevice md : this.getMeshGrid().getDevices()) {
+            for (Command command : md.getCommands()) {
+                if (command instanceof SendMsgCmd sendMsgCmd) {
+                    ArrayNode ret = handleSendMsg(md, sendMsgCmd);
+                    if (ret == null) {
+                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                        return null;
+                    }
+                    int sourceDevice = md.getId();
+                    if (!messages.containsKey(sourceDevice)) messages.put(sourceDevice, ret);
+                    else messages.get(sourceDevice).addAll(ret);
                 }
             }
         }
