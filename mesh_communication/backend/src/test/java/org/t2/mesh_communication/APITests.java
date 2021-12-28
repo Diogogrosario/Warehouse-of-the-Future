@@ -217,12 +217,16 @@ public class APITests {
             api.setMain(main);
         }
 
-//        @Test
-//        public void messageTest() {
-//            String expectedOutput = "{\"0\":[{\"final\":2,\"failed\":false,\"hop\":1}]}";
-//            ObjectNode outputInvalidTimeflow = api.message(Mockito.mock(HttpServletResponse.class));
-//            assertEquals(expectedOutput, outputInvalidTimeflow.toString());
-//        }
+        @Test
+        public void messageTest() {
+            String expectedOutput = "{\"0\":[{\"final\":2,\"hop\":1}]}";
+            ObjectNode outputMessage = api.message("send",Mockito.mock(HttpServletResponse.class));
+            assertEquals(expectedOutput, outputMessage.toString());
+
+            expectedOutput = "{}";
+            outputMessage = api.message("receive",Mockito.mock(HttpServletResponse.class));
+            assertEquals(expectedOutput, outputMessage.toString());
+        }
     }
 
     @Test

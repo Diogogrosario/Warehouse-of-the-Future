@@ -251,13 +251,15 @@ public class API {
     private JsonNode handleRcvMsg(MeshDevice receiver, ReceiveMsgCmd rcvMsgCmd) {
         Message message = rcvMsgCmd.getMessage();
         try {
-            return this.messageJson(message.toJson(), receiver.getId());
+            return this.receiveMessageJson(message.toJson(), receiver.getId(), rcvMsgCmd.isFailed());
         } catch (JsonProcessingException e) {
             System.err.println("Error formatting message to JSON.");
             return null;
         }
 
     }
+
+
 
     private ArrayNode handleSendMsg(MeshDevice sender, SendMsgCmd sendMsgCmd) {
         ObjectMapper mapper = new ObjectMapper();
@@ -330,5 +332,11 @@ public class API {
         messageNode.put("hop", receiver);
 
         return messageNode;
+    }
+
+    private JsonNode receiveMessageJson(String message, int receiver, boolean isFailed) throws JsonProcessingException {
+        JsonNode node = messageJson(message, receiver);
+        ((ObjectNode) node).put("failed", isFailed);
+        return node;
     }
 }
