@@ -9,13 +9,13 @@ import {
 	SelectChangeEvent,
 } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
-import { North } from "@mui/icons-material";
+import { North, South } from "@mui/icons-material";
 import Report, { ReportProps } from "./Report";
 import React, { useEffect, useState } from "react";
 
 export default function ReportList() {
-	const [ascending, setAscending] = React.useState(false);
-	const [sortProperty, setSortProperty] = React.useState("");
+	const [ascending, setAscending] = React.useState(true);
+	const [sortProperty, setSortProperty] = React.useState("title");
 
 	const [reports, setReports]: [ReportProps[], any] = useState([
 		{
@@ -47,14 +47,16 @@ export default function ReportList() {
 	]);
 
 	useEffect(() => {
+		const value = ascending ? 1 : -1;
+
 		const sorted = [...reports].sort((a: ReportProps, b: ReportProps) =>
-			b[sortProperty as keyof ReportProps] < a[sortProperty as keyof ReportProps] ? -1 : 1
+			a[sortProperty as keyof ReportProps] > b[sortProperty as keyof ReportProps]
+				? value
+				: -value
 		);
 
-		console.log(sorted);
-
 		setReports(sorted);
-	}, [sortProperty]);
+	}, [sortProperty, ascending]);
 
 	return (
 		<div>
@@ -66,6 +68,7 @@ export default function ReportList() {
 					onChange={(event: SelectChangeEvent) => {
 						setSortProperty(event.target.value);
 					}}
+					value={sortProperty}
 				>
 					<MenuItem value={"createdAt"}>Time of creation</MenuItem>
 					<MenuItem value={"updatedAt"}>Time of last update</MenuItem>
@@ -75,9 +78,14 @@ export default function ReportList() {
 				</Select>
 			</FormControl>
 
-			<Button>
+			<Button
+				onClick={() => {
+					setAscending(!ascending);
+				}}
+			>
 				<SortIcon />
-				<North />
+
+				{ascending ? <North /> : <South />}
 			</Button>
 
 			<List>
