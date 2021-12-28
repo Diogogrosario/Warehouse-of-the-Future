@@ -1,26 +1,26 @@
 import db from "./models/index.js";
 
 // Deleting previous records and reseting base ID
-await db.action.destroy({ 
+await db.action.destroy({
 	where: {},
 	truncate: true,
 	cascade: true,
 	restartIdentity: true,
-})
+});
 
-await db.report.destroy({ 
+await db.report.destroy({
 	where: {},
 	truncate: true,
 	cascade: true,
-	restartIdentity: true
-})
+	restartIdentity: true,
+});
 
-await db.device.destroy({ 
+await db.device.destroy({
 	where: {},
 	truncate: true,
 	cascade: true,
-	restartIdentity: true
-})
+	restartIdentity: true,
+});
 
 // Seeding DB
 await db.action.create({
