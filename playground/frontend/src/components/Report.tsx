@@ -22,7 +22,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 
-interface ReportProps {
+export interface ReportProps {
 	title?: string;
 	shortDescription: string;
 	description: string;
