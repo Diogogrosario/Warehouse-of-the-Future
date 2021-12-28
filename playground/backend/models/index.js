@@ -26,6 +26,6 @@ db.device.hasMany(db.report);
 db.report.belongsTo(db.device);
 
 db.report.hasMany(db.action);
-db.action.belongsTo(db.report, { foreignKey: "report_id" });
+db.action.belongsTo(db.report);
 
 export default db;
