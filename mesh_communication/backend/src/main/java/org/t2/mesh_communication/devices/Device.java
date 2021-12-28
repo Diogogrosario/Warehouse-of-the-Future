@@ -113,8 +113,10 @@ public class Device extends MeshDevice {
 
     @Override
     public String toJson() {
-        return "{\"device_id\":"
+        return "{\"id\":"
                 + this.id
+                + ",\"battery_max\":"
+                + this.battery.getTotalBattery()
                 + ",\"battery_level\":"
                 + this.battery.getRemainingBattery()
                 + ",\"position\":"

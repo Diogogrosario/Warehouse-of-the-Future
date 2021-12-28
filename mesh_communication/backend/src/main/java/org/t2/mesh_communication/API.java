@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,13 +14,16 @@ import java.util.Map;
 import java.util.logging.LogRecord;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.command.Command;
+import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.log.Log;
@@ -28,7 +32,8 @@ import org.t2.mesh_communication.log.Logger;
 @SpringBootApplication
 @RestController
 public class API {
-    @Autowired private Main main;
+    @Autowired
+    private Main main;
 
     public static void main(String[] args) {
         API api = new API();
@@ -58,12 +63,13 @@ public class API {
         this.main = main;
     }
 
-    @GetMapping("/devices/{status}")
+    @GetMapping({"/devices/{status}", "/devices"})
     public List<JsonNode> devicesStatus(
-            @PathVariable("status") String status, HttpServletResponse response) {
+            @PathVariable(name = "status", required = false) String status, HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
 
         List<MeshDevice> devices;
+        if (status == null) status = "all";
         switch (status) {
             case "all" -> devices = this.getMeshGrid().getDevices();
             case "failed" -> devices =
@@ -202,34 +208,37 @@ public class API {
         return "Orchestrator orchestrated";
     }
 
-    @GetMapping("/message")
-    public ObjectNode message(HttpServletResponse response) {
+    @GetMapping("/messages/{type}")
+    public ObjectNode message(@PathVariable("type") String type, HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
 
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
-        for (MeshDevice sender : this.getMeshGrid().getDevices()) {
-            for (Command command : sender.getCommands()) {
-                if (!(command instanceof SendMsgCmd sendMsgCmd)) continue;
-
-                List<MeshDevice> destinations = sender.getCommStrat().getDestsOfDevice(sender);
-                Message message = sendMsgCmd.getMessage();
-                int sourceDevice = sender.getId();
-                try {
-                    for (MeshDevice dest : destinations) {
-                        JsonNode messageJson = this.messageJson(message.toJson(), dest.getId());
-                        if (!messages.containsKey(sourceDevice)) {
-                            ArrayNode emptyArray =
-                                    mapper.convertValue(new ArrayList<>(), ArrayNode.class);
-                            messages.put(sourceDevice, emptyArray);
-                        }
-                        messages.get(sourceDevice).add(messageJson);
+        for (MeshDevice md : this.getMeshGrid().getDevices()) {
+            for (Command command : md.getCommands()) {
+                if (type.equals("send") && command instanceof SendMsgCmd sendMsgCmd) {
+                    ArrayNode ret = handleSendMsg(md, sendMsgCmd);
+                    if (ret == null) {
+                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                        return null;
                     }
-                } catch (JsonProcessingException e) {
-                    System.err.println("Error formatting message to JSON.");
-                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                    return null;
+                    int sourceDevice = md.getId();
+                    if (!messages.containsKey(sourceDevice)) messages.put(sourceDevice, ret);
+                    else messages.get(sourceDevice).addAll(ret);
+                } else if (type.equals("receive") && command instanceof ReceiveMsgCmd rcvMsgCmd) {
+                    JsonNode ret = handleRcvMsg(md, rcvMsgCmd);
+
+                    if (ret == null) {
+                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                        return null;
+                    }
+
+                    int sourceDevice = rcvMsgCmd.getMessage().getLastHop();
+                    if (!messages.containsKey(sourceDevice)) {
+                        messages.put(sourceDevice, mapper.convertValue(new ArrayList<>(), ArrayNode.class));
+                    }
+                    messages.get(sourceDevice).add(ret);
                 }
             }
         }
@@ -241,6 +250,37 @@ public class API {
 
         response.setStatus(HttpServletResponse.SC_OK);
         return node;
+    }
+
+    private JsonNode handleRcvMsg(MeshDevice receiver, ReceiveMsgCmd rcvMsgCmd) {
+        Message message = rcvMsgCmd.getMessage();
+        try {
+            return this.receiveMessageJson(message.toJson(), receiver.getId(), rcvMsgCmd.isFailed());
+        } catch (JsonProcessingException e) {
+            System.err.println("Error formatting message to JSON.");
+            return null;
+        }
+
+    }
+
+
+    private ArrayNode handleSendMsg(MeshDevice sender, SendMsgCmd sendMsgCmd) {
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayNode ret = mapper.convertValue(new ArrayList<>(), ArrayNode.class);
+
+        List<MeshDevice> destinations = sender.getCommStrat().getDestsOfDevice(sender);
+        Message message = sendMsgCmd.getMessage();
+        try {
+            for (MeshDevice dest : destinations) {
+                JsonNode messageJson = this.messageJson(message.toJson(), dest.getId());
+                ret.add(messageJson);
+            }
+        } catch (JsonProcessingException e) {
+            System.err.println("Error formatting message to JSON.");
+            return null;
+        }
+
+        return ret;
     }
 
     @GetMapping("/log")
@@ -295,5 +335,11 @@ public class API {
         messageNode.put("hop", receiver);
 
         return messageNode;
+    }
+
+    private JsonNode receiveMessageJson(String message, int receiver, boolean isFailed) throws JsonProcessingException {
+        JsonNode node = messageJson(message, receiver);
+        ((ObjectNode) node).put("failed", isFailed);
+        return node;
     }
 }
