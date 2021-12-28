@@ -253,8 +253,8 @@ public class API {
         return "Orchestrator orchestrated";
     }
 
-    @GetMapping("/messages/{type}")
-    public ObjectNode message(@PathVariable("type") String type, HttpServletResponse response) {
+    @GetMapping("/messages/receive")
+    public ObjectNode messageReceive(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
 
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
@@ -262,16 +262,7 @@ public class API {
 
         for (MeshDevice md : this.getMeshGrid().getDevices()) {
             for (Command command : md.getCommands()) {
-                if (type.equals("send") && command instanceof SendMsgCmd sendMsgCmd) {
-                    ArrayNode ret = handleSendMsg(md, sendMsgCmd);
-                    if (ret == null) {
-                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                        return null;
-                    }
-                    int sourceDevice = md.getId();
-                    if (!messages.containsKey(sourceDevice)) messages.put(sourceDevice, ret);
-                    else messages.get(sourceDevice).addAll(ret);
-                } else if (type.equals("receive") && command instanceof ReceiveMsgCmd rcvMsgCmd) {
+                if (command instanceof ReceiveMsgCmd rcvMsgCmd) {
                     JsonNode ret = handleRcvMsg(md, rcvMsgCmd);
 
                     if (ret == null) {
@@ -284,6 +275,37 @@ public class API {
                         messages.put(sourceDevice, mapper.convertValue(new ArrayList<>(), ArrayNode.class));
                     }
                     messages.get(sourceDevice).add(ret);
+                }
+            }
+        }
+
+        ObjectNode node = mapper.createObjectNode();
+        for (Map.Entry<Integer, ArrayNode> entry : messages.entrySet()) {
+            node.putIfAbsent(entry.getKey().toString(), entry.getValue());
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return node;
+    }
+
+    @GetMapping("/messages/send")
+    public ObjectNode messageSend(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+
+        HashMap<Integer, ArrayNode> messages = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (MeshDevice md : this.getMeshGrid().getDevices()) {
+            for (Command command : md.getCommands()) {
+                if (command instanceof SendMsgCmd sendMsgCmd) {
+                    ArrayNode ret = handleSendMsg(md, sendMsgCmd);
+                    if (ret == null) {
+                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                        return null;
+                    }
+                    int sourceDevice = md.getId();
+                    if (!messages.containsKey(sourceDevice)) messages.put(sourceDevice, ret);
+                    else messages.get(sourceDevice).addAll(ret);
                 }
             }
         }

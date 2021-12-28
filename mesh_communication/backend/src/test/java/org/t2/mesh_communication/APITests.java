@@ -253,11 +253,11 @@ public class APITests {
         @Test
         public void messageTest() {
             String expectedOutput = "{\"0\":[{\"final\":2,\"hop\":1}]}";
-            ObjectNode outputMessage = api.message("send",Mockito.mock(HttpServletResponse.class));
+            ObjectNode outputMessage = api.messageSend(Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, outputMessage.toString());
 
             expectedOutput = "{}";
-            outputMessage = api.message("receive",Mockito.mock(HttpServletResponse.class));
+            outputMessage = api.messageReceive(Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, outputMessage.toString());
         }
     }
