@@ -200,24 +200,56 @@ paths:
         404:
           description: "Device does not exist."
 
-  /message:
+  /message/send:
     get:
-      summary: Get all messages sent in the current tick
-      operationId: getAllMessages
+      summary: Get all messages of type send in the current tick
+      operationId: getAllMessagesSend
       description:
-        "Path that returns, for all message senders of the current tick, the messages that were sent by them."
+        "Path that returns, for all message senders of the current tick, the messages of type `send` that were sent by them."
       responses:
         200:
           description: "Success: Received all messages"
           content:
             application/json:
               schema:
-                description: "Dictionary with ids of devices that sent message as keys, and arrays of messages as values. Each key maps to an array of messages that were sent by the device which id is the same as the array's key."
+                description: "Dictionary with ids of devices that sent message as keys, and arrays of messages as values. Each key maps to an array of messages that correspond to send commands that were sent by the device which id is the same as the array's key."
                 type: object
                 additionalProperties:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Message'
+                    $ref: '#/components/schemas/SendMessage'
+              example:
+                54:
+                  - hop: 68
+                    final: 30
+                  - hop: 21
+                    final: 45
+                4:
+                  - hop: 54
+                    final: 2
+                  - hop: 2
+                    final: 1
+        500:
+          description: "Internal Server Error"
+
+  /message/receive:
+    get:
+      summary: Get all messages of type receive in the current tick
+      operationId: getAllMessagesReceive
+      description:
+        "Path that returns, for all message senders of the current tick, the messages of type `receive` that were sent by them."
+      responses:
+        200:
+          description: "Success: Received all messages"
+          content:
+            application/json:
+              schema:
+                description: "Dictionary with ids of devices that sent message as keys, and arrays of messages as values. Each key maps to an array of messages that correspond to receive commands that were sent by the device which id is the same as the array's key."
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ReceiveMessage'
               example:
                 1:
                   - hop: 68
@@ -262,15 +294,24 @@ paths:
 
 components:
   schemas:
-    Message:
+    SendMessage:
       type: object
-
       properties:
+        final:
+          description: "ID of the final destination of the message"
+          type: integer
         hop:
           description: "ID of the device to receive the message on this hop"
           type: integer
+
+    ReceiveMessage:
+      type: object
+      properties:
         final:
           description: "ID of the final destination of the message"
+          type: integer
+        hop:
+          description: "ID of the device to receive the message on this hop"
           type: integer
         failed:
           description: "Wether or not the message was lost in the current tick"
@@ -294,7 +335,7 @@ components:
             y: 
               type: integer
       example:
-        id: 1
+        device_id: 1
         battery_level: 68
         battery_max: 100
         position:

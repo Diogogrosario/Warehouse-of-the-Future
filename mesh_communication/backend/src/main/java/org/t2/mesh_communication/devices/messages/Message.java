@@ -97,7 +97,6 @@ public abstract class Message {
     public abstract String getType();
 
     public String toJson() {
-        return String.format(
-                "{\"final\": %d}", this.destination);
+        return String.format("{\"final\": %d}", this.destination);
     }
 }
