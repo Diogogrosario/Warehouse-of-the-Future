@@ -42,6 +42,7 @@ paths:
           schema:
             type: string
             enum:
+              - all
               - failed
               - operational
           required: true
