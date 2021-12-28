@@ -162,6 +162,12 @@ public class API {
         }
 
         List<MeshDevice> devicesInRange = this.getMeshGrid().devicesInRange(device);
+
+        if (devicesInRange.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            return new ArrayList<>();
+        }
+
         List<JsonNode> devicesRangeJson;
         try {
             devicesRangeJson = this.devicesToJson(devicesInRange);
@@ -173,6 +179,45 @@ public class API {
 
         response.setStatus(HttpServletResponse.SC_OK);
         return devicesRangeJson;
+    }
+
+    @GetMapping("/devices/inrange/all")
+    public ObjectNode allInRange(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+
+        HashMap<Integer, ArrayNode> inrangeAll = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (MeshDevice dv : this.getMeshGrid().getDevices()) {
+            List<JsonNode> inrange;
+            try {
+                inrange = this.devicesToJson(this.getMeshGrid().devicesInRange(dv));
+            } catch (JsonProcessingException e) {
+                System.err.println("Error in JSON parsing of devices.");
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                return null;
+            }
+
+            if (inrange.isEmpty()) continue;
+
+            ArrayNode inrangeArray =
+                    mapper.convertValue(inrange, ArrayNode.class);
+            inrangeAll.put(dv.getId(), inrangeArray);
+        }
+
+        ObjectNode node = mapper.createObjectNode();
+
+        if (inrangeAll.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            return node;
+        }
+
+        for (Map.Entry<Integer, ArrayNode> entry : inrangeAll.entrySet()) {
+            node.putIfAbsent(entry.getKey().toString(), entry.getValue());
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return node;
     }
 
     @PostMapping("/tick/{time_flow}")
