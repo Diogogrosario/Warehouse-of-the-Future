@@ -160,7 +160,6 @@ public class APITests {
             String expectedDevice1 =
                     "{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
             assertEquals(expectedDevice1, output.get("2").get(0).toString());
-
         }
 
         @Test

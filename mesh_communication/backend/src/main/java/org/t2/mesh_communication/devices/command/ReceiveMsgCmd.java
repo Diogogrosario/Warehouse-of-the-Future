@@ -4,8 +4,9 @@ import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.messages.Message;
 
 public class ReceiveMsgCmd implements Command {
-    /** Who will receive the message **/
+    /** Who will receive the message * */
     private final MeshDevice meshDevice;
+
     private boolean failed;
 
     private final Message message;
@@ -16,8 +17,7 @@ public class ReceiveMsgCmd implements Command {
         this.failed = false;
     }
 
-    /**
-     * It's important to try to send the message before the next tick **/
+    /** It's important to try to send the message before the next tick * */
     @Override
     public void execute() {
         this.failed = this.meshDevice.receiveMessage(this.message);
