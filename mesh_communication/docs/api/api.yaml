@@ -5,10 +5,33 @@ info:
   title: MeshCommunication API
 
 paths:
+  /devices:
+    get:
+      summary: gets all devices
+      operationId: getAllDevices
+      description: 
+        "Returns all devices present in the mesh network."
+
+      responses:
+        200:
+          description: "Success: Received all devices"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+        400:
+          description: "Bad Request"
+        204:
+          description: "No devices found"
+        500:
+          description: "Internal Server Error"
+
   /devices/{status}:
     get:
       summary: gets devices by status
-      operationId: getAllDevices
+      operationId: getDevicesByStatus
       description: 
         "Returns devices present in the mesh network with the given status."
 
@@ -19,7 +42,6 @@ paths:
           schema:
             type: string
             enum:
-              - all
               - failed
               - operational
           required: true
@@ -36,7 +58,7 @@ paths:
         400:
           description: "Bad Request"
         204:
-          description: "No content"
+          description: "No devices found"
         500:
           description: "Internal Server Error"
 
@@ -67,10 +89,57 @@ paths:
         500:
           description: "Internal Server Error"
 
-  /devices/inrange/{id}:
+  /devices/inrange/all:
     get:
       summary: gets devices within range of another device
       operationId: getDevicesInRange
+      description: 
+        "For each device in the mesh network, returns devices that are in range to it."
+
+      responses:
+        200:
+          description: "Success: Received all devices within range"
+          content:
+            application/json:
+              schema:
+                description: "Dictionary with device ids as keys, and arrays of devices as values. Each key maps to an array of all devices that are in range of the device with the same id as the key."
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Device'
+              example:
+                1:
+                  - device_id: 1
+                    battery_level: 68
+                    battery_max: 100
+                    position:
+                      x: 2
+                      y: 1
+                  - device_id: 4
+                    battery_level: 23
+                    battery_max: 100
+                    position:
+                      x: 5
+                      y: 2
+                23:
+                  - device_id: 13
+                    battery_level: 45
+                    battery_max: 120
+                    position:
+                      x: 5
+                      y: 6
+
+        204:
+          description: "No devices found"
+
+        500:
+          description: "Internal Server Error"
+
+  /devices/inrange/{id}:
+    get:
+      summary: gets devices within range of another device
+      operationId: getDevicesInRangeWithId
       description: 
         "Returns devices present in the mesh network that are within range of a device with the given id."
 
@@ -91,8 +160,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Device'
+
+        204:
+          description: "No devices in range found"
+
         404:
           description: "Device does not exist."
+          
         500:
           description: "Internal Server Error"
 
@@ -138,7 +212,7 @@ paths:
           content:
             application/json:
               schema:
-                description: "Dictionary in which its keys are the sender's ids, and its values are arrays of messages that were sent by its respective key/sender"
+                description: "Dictionary with ids of devices that sent message as keys, and arrays of messages as values. Each key maps to an array of messages that were sent by the device which id is the same as the array's key."
                 type: object
                 additionalProperties:
                   type: array
@@ -206,9 +280,11 @@ components:
       type: object
 
       properties:
-        device_id:
+        id:
           type: integer
         battery_level:
+          type: integer
+        battery_max:
           type: integer
         position:
           type: object
@@ -218,8 +294,9 @@ components:
             y: 
               type: integer
       example:
-        device_id: 1
+        id: 1
         battery_level: 68
+        battery_max: 100
         position:
           x: 2
           y: 1
