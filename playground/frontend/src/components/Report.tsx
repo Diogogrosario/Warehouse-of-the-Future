@@ -23,7 +23,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 
 export interface ReportProps {
-	title?: string;
+	title: string;
 	shortDescription: string;
 	description: string;
 	warningLevel: "warning" | "error";

@@ -2,7 +2,8 @@ import {
 	Button,
 	FormControl,
 	InputLabel,
-	List, ListItem,
+	List,
+	ListItem,
 	MenuItem,
 	Select,
 	SelectChangeEvent,
@@ -10,14 +11,15 @@ import {
 import SortIcon from "@mui/icons-material/Sort";
 import { North } from "@mui/icons-material";
 import Report, { ReportProps } from "./Report";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ReportList() {
-	const [sortBy, setSortBy] = React.useState("");
+	const [ascending, setAscending] = React.useState(false);
+	const [sortProperty, setSortProperty] = React.useState("");
 
-	const reports: ReportProps[] = [
+	const [reports, setReports]: [ReportProps[], any] = useState([
 		{
-			title: "Report Testing",
+			title: "Report Testing A",
 			description:
 				"This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be",
 			shortDescription: "A brief description of the problem",
@@ -30,7 +32,7 @@ export default function ReportList() {
 			reportId: 1,
 		},
 		{
-			title: "Report Testing",
+			title: "Report Testing B",
 			description:
 				"This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be",
 			shortDescription: "A brief description of the problem",
@@ -40,9 +42,19 @@ export default function ReportList() {
 				["04:00", "Previous Action"],
 			],
 			resolved: false,
-			reportId: 1,
+			reportId: 2,
 		},
-	];
+	]);
+
+	useEffect(() => {
+		const sorted = [...reports].sort((a: ReportProps, b: ReportProps) =>
+			b[sortProperty as keyof ReportProps] < a[sortProperty as keyof ReportProps] ? -1 : 1
+		);
+
+		console.log(sorted);
+
+		setReports(sorted);
+	}, [sortProperty]);
 
 	return (
 		<div>
@@ -52,15 +64,14 @@ export default function ReportList() {
 					label="Sort by"
 					id="sort-by-select"
 					onChange={(event: SelectChangeEvent) => {
-						setSortBy(event.target.value);
+						setSortProperty(event.target.value);
 					}}
 				>
-					<MenuItem value={10}>Time of creation</MenuItem>
-					<MenuItem value={20}>Time of last update</MenuItem>
-					<MenuItem value={30}>Time of last update</MenuItem>
-					<MenuItem value={40}>Name (A-Z)</MenuItem>
-					<MenuItem value={50}>Description (A-Z)</MenuItem>
-					<MenuItem value={60}>Severity</MenuItem>
+					<MenuItem value={"createdAt"}>Time of creation</MenuItem>
+					<MenuItem value={"updatedAt"}>Time of last update</MenuItem>
+					<MenuItem value={"title"}>Title (A-Z)</MenuItem>
+					<MenuItem value={"description"}>Description (A-Z)</MenuItem>
+					<MenuItem value={"warningLevel"}>Severity</MenuItem>
 				</Select>
 			</FormControl>
 
