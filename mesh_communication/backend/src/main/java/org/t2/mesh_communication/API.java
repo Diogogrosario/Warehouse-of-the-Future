@@ -197,7 +197,8 @@ public class API {
 
             if (inrange.isEmpty()) continue;
 
-            ArrayNode inrangeArray = mapper.convertValue(inrange, ArrayNode.class);
+            ArrayNode inrangeArray =
+                    mapper.convertValue(inrange, ArrayNode.class);
             inrangeAll.put(dv.getId(), inrangeArray);
         }
 
