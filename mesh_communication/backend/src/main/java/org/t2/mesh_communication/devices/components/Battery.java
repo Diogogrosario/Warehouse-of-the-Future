@@ -36,4 +36,8 @@ public class Battery extends Component {
                 + idleConsumption
                 + "\n}";
     }
+
+    public int getTotalBattery() {
+        return totalBattery;
+    }
 }

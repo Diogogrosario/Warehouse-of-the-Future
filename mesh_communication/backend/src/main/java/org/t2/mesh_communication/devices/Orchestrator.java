@@ -57,7 +57,7 @@ public class Orchestrator extends MeshDevice {
 
     @Override
     public String toJson() {
-        return "{\"device_id\":"
+        return "{\"id\":"
                 + this.id
                 + ",\"position\":"
                 + this.pos.toJson()

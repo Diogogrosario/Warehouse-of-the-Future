@@ -88,13 +88,13 @@ public class APITests {
         @Test
         public void getDevicesTest() {
             String expectedOutput =
-                    "[{\"device_id\":1,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}, {\"device_id\":2,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
+                    "[{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}, {\"id\":2,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
             List<JsonNode> output =
                     api.devicesStatus("all", Mockito.mock(HttpServletResponse.class));
 
             String outputString = listToString(output);
 
-            assertEquals(outputString.toString(), expectedOutput);
+            assertEquals(expectedOutput, outputString.toString());
 
             List<JsonNode> outputFail =
                     api.devicesStatus("failed", Mockito.mock(HttpServletResponse.class));
@@ -110,7 +110,7 @@ public class APITests {
         @Test
         public void getSpecificDeviceTest() {
             String expectedOutput =
-                    "{\"device_id\":1,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
+                    "{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
             JsonNode output = api.devices(1, Mockito.mock(HttpServletResponse.class));
             assertEquals(expectedOutput, output.toString());
 
@@ -123,7 +123,7 @@ public class APITests {
         @Test
         public void getInRangeDevicesTest() {
             String expectedOutput =
-                    "[{\"device_id\":2,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
+                    "[{\"id\":2,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
             List<JsonNode> output = api.devicesInRange(1, Mockito.mock(HttpServletResponse.class));
 
             String outputString = listToString(output);

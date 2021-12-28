@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,9 +14,11 @@ import java.util.Map;
 import java.util.logging.LogRecord;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.MeshGrid;
@@ -29,7 +32,8 @@ import org.t2.mesh_communication.log.Logger;
 @SpringBootApplication
 @RestController
 public class API {
-    @Autowired private Main main;
+    @Autowired
+    private Main main;
 
     public static void main(String[] args) {
         API api = new API();
@@ -59,12 +63,13 @@ public class API {
         this.main = main;
     }
 
-    @GetMapping("/devices/{status}")
+    @GetMapping({"/devices/{status}", "/devices"})
     public List<JsonNode> devicesStatus(
-            @PathVariable("status") String status, HttpServletResponse response) {
+            @PathVariable(name = "status", required = false) String status, HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
 
         List<MeshDevice> devices;
+        if (status == null) status = "all";
         switch (status) {
             case "all" -> devices = this.getMeshGrid().getDevices();
             case "failed" -> devices =
@@ -214,18 +219,17 @@ public class API {
             for (Command command : md.getCommands()) {
                 if (type.equals("send") && command instanceof SendMsgCmd sendMsgCmd) {
                     ArrayNode ret = handleSendMsg(md, sendMsgCmd);
-                    if(ret == null) {
+                    if (ret == null) {
                         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                         return null;
                     }
                     int sourceDevice = md.getId();
                     if (!messages.containsKey(sourceDevice)) messages.put(sourceDevice, ret);
                     else messages.get(sourceDevice).addAll(ret);
-                }
-                else if (type.equals("receive") && command instanceof ReceiveMsgCmd rcvMsgCmd) {
+                } else if (type.equals("receive") && command instanceof ReceiveMsgCmd rcvMsgCmd) {
                     JsonNode ret = handleRcvMsg(md, rcvMsgCmd);
 
-                    if(ret == null) {
+                    if (ret == null) {
                         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                         return null;
                     }
@@ -258,7 +262,6 @@ public class API {
         }
 
     }
-
 
 
     private ArrayNode handleSendMsg(MeshDevice sender, SendMsgCmd sendMsgCmd) {
