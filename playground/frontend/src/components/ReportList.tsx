@@ -85,7 +85,7 @@ export default function ReportList() {
 			>
 				<SortIcon />
 
-				{ascending ? <North /> : <South />}
+				{ascending ? <South /> : <North />}
 			</Button>
 
 			<List>
