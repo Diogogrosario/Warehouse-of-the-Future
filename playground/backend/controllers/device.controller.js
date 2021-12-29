@@ -1,21 +1,10 @@
-import { Device } from "../models/action.model";
+import db from "../models/index.js";
+const Device = db.device;
 
 // Create and Save a new Device
 export function create(req, res) {
-	// validate request
-	if (!req.params.id) {
-		res.status(400).send({
-			message: "Empty content.",
-		});
-		return;
-	}
-
-	const device = {
-		id: req.params.id,
-	};
-
 	// save to database
-	Device.create(device)
+	Device.create()
 		.then((data) => {
 			res.send(data);
 		})
@@ -42,10 +31,10 @@ export function findOne(req, res) {
 	Device.findByPk(id)
 		.then((data) => {
 			if (data) res.send(data);
-			else res.status(404).send({ message: "Didn't find device ${id}." });
+			else res.status(404).send({ message: `Didn't find device ${id}.` });
 		})
 		.catch((err) => {
-			res.status(500).send({ message: err.message || "Error on device ${id} retrieval." });
+			res.status(500).send({ message: err.message || `Error on device ${id} retrieval.` });
 		});
 }
 

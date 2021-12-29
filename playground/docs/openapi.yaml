@@ -43,9 +43,20 @@ paths:
                 - id: 85B3
         "404":
           description: "Error: No registered devices."
+    post:
+      operationId: D2
+      summary: "D2: Create new device"
+      description: "Register a new device."
+      tags: ["Device"]
+      responses:
+        "200":
+          description: "Success: Device created."
+        "400":
+          description: "Error: No parameters provided."
+    
     delete:
-      operationId: "D2"
-      summary: "D2: Delete all devices."
+      operationId: "D3"
+      summary: "D3: Delete all devices."
       description: "Delete every device."
       tags: ["Device"]
       responses:
@@ -56,8 +67,8 @@ paths:
 
   /device/{id}:
     get:
-      operationId: D3
-      summary: "D3: Check if device exists."
+      operationId: D4
+      summary: "D4: Check if device exists."
       description: "Check if device with specified ID is registered."
       tags: ["Device"]
       parameters:
@@ -74,23 +85,6 @@ paths:
           description: "Error: No registered device with that ID."
         "500":
           description: "Server Error." 
-    post:
-      operationId: D4
-      summary: "D4: Create new device"
-      description: "Register a new device."
-      tags: ["Device"]
-      parameters:
-        - in: "query"
-          name: "id"
-          description: "ID of device"
-          schema:
-            type: string
-          required: true
-      responses:
-        "200":
-          description: "Success: Device created."
-        "400":
-          description: "Error: No parameters provided."
     delete:
       operationId: "D5"
       summary: "D5: Delete device."
@@ -138,9 +132,29 @@ paths:
                   employee_id: 53A
         "404":
           description: "Error: No registered devices."
+    post:
+      operationId: A2
+      summary: "A2: Add new action"
+      description: "Register a new action."
+      tags: ["Action"]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Action"
+            example:
+              - report_id: 40
+                employee_id: 54D
+                description: "Replaced Batery."
+      responses:
+        "200":
+          description: "Success: Device created."
+        "400":
+          description: "Error: No parameters provided."
     delete:
-      operationId: "A2"
-      summary: "A2: Delete all actions."
+      operationId: "A3"
+      summary: "A3: Delete all actions."
       description: "Delete every action."
       tags: ["Action"]
       responses:
@@ -152,8 +166,8 @@ paths:
 
   /action/{id}:
     get:
-      operationId: A3
-      summary: "A3: Get specific action."
+      operationId: A4
+      summary: "A4: Get specific action."
       description: Retrieve action with the specified ID.
       tags: ["Action"]
       parameters:
@@ -183,33 +197,6 @@ paths:
           description: "Error: Action not found."
         "500":
           description: "Server Error."
-    post:
-      operationId: A4
-      summary: "A4: Add new action"
-      description: "Register a new action."
-      tags: ["Action"]
-      parameters:
-        - in: "query"
-          name: "id"
-          description: "ID of device"
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Action"
-            example:
-              - report_id: 40
-                employee_id: 54D
-                description: "Replaced Batery."
-      responses:
-        "200":
-          description: "Success: Device created."
-        "400":
-          description: "Error: No parameters provided."
     put:
       operationId: A5
       summary: "A5: Edit Action."
@@ -271,9 +258,25 @@ paths:
                     $ref: "#/components/schemas/Action"
           "404":
             description: "Error: No registered devices."
+      post:
+        operationId: R2
+        summary: "R2: Add new report"
+        description: "Register a new report."
+        tags: ["Report"]
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Report"
+        responses:
+          "200":
+            description: "Success: Report created."
+          "400":
+            description: "Error: No parameters provided."
       delete:
-        operationId: "R2"
-        summary: "R2: Delete all reports."
+        operationId: "R3"
+        summary: "R3: Delete all reports."
         description: "Delete every report."
         tags: ["Report"]
         responses:
@@ -285,8 +288,8 @@ paths:
 
   /report/{id}:
     get:
-      operationId: R3
-      summary: "R3: Get specific report."
+      operationId: R4
+      summary: "R4: Get specific report."
       description: Retrieve report with the specified ID.
       tags: ["Report"]
       parameters:
@@ -310,33 +313,11 @@ paths:
                   severity: Error
                   title: Unresponsive
                   description: "Device A35 isn't responding."
+                  resolved: false
                   createdAt: "2021-12-21 15:30"
                   updatedAt: "2021-12-21 15:30"
         "404":
           description: "Error: Report not found."
-    post:
-      operationId: R4
-      summary: "R4: Add new report"
-      description: "Register a new report."
-      tags: ["Report"]
-      parameters:
-        - in: "query"
-          name: "id"
-          description: "ID of report"
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Report"
-      responses:
-        "200":
-          description: "Success: Report created."
-        "400":
-          description: "Error: No parameters provided."
     put:
       operationId: R5
       summary: "R5: Edit report."
@@ -357,9 +338,9 @@ paths:
               $ref: "#/components/schemas/Report"
       responses:
         "200":
-          description: "Success: Action created."
+          description: "Success: Updated report."
         "404":
-          description: "Error: Can't update action."
+          description: "Error: Can't find report."
     delete:
       operationId: R6
       summary: "R6: Delete report."
@@ -378,7 +359,36 @@ paths:
         "404":
           description: "Error: Report not found."
 
-
+  /report/solved/{id}:
+    put:
+      operationId: R7
+      summary: "R7: Mark report as solved."
+      description: "Marks a report as solved and adds a 'solved' action."
+      tags: ["Report"]
+      parameters:
+        - in: query
+          name: "id"
+          description: "ID of report."
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employee_id:
+                  description: "ID of the employed that executed the action."
+                  type: string
+              example:
+                - employee_id: 24F
+      responses:
+        "200":
+          description: "Success."
+        "404":
+          description: "Error: Can't find report."
 
 components:
   schemas:
@@ -438,8 +448,7 @@ components:
           description:  "Timestamp on edit."
           type: string
       example:
-        - id: 45
-          severity: Error
+        - severity: Error
           title: Unresponsive
           description: "Device 356A isn't responding."
           resolved: false

@@ -18,25 +18,33 @@ const Layout : React.FC<LayoutProps> = (props : LayoutProps) => {
         <React.Fragment>
             <Helmet>
                 <html lang="en" />
-                <title>Warehouse of the Future - Playground</title>
+                <title>Playground | Warehouse of the Future</title>
                 <meta name="description" content="A web-app with objective of providing the employees a way of simulating and visualising the warehouse" />
-                <meta property="og:title" content="Warehouse of the Future - Playground" />
+                <meta property="og:title" content="Playground | Warehouse of the Future" />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content="favicon.ico" />
                 <link rel="apple-touch-icon" type="image/x-icon" href="favicon.ico" />
                 <link rel="icon" type="image/x-icon" href="favicon.ico" />
             </Helmet>
             <ThemeProvider theme={theme}>
-                <div className="appWrapper" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-                    <div className="appContainer" style={{ display: "flex", flexGrow: 1, flexDirection: "column", minHeight: "inherit" }}>
-                        <AppBar>
+                <div className="appWrapper"
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        height: "100vh",
+                        width: "100%",
+                        margin: 0,
+                    }}    
+                >
+                    <div className="appContainer" style={{ display: "flex", flexDirection: "column", height: " inherit" }}>
+                        <AppBar position="relative">
                             <Toolbar>
                                 <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                                    Warehouse of the Future - Playground
+                                    Playground | Warehouse of the Future
                                 </Typography>
                             </Toolbar>
                         </AppBar>
-                        <Container component="main" sx={{flexGrow: 1}} maxWidth={false}>
+                        <Container component="main" maxWidth={false} sx={{ display: "flex", flexGrow: 1 }} >
                             {children}
                         </Container>
                     </div>
