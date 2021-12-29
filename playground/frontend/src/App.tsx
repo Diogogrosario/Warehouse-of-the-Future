@@ -4,7 +4,6 @@ import { Box, Grid, Tab, Tabs, useMediaQuery } from "@mui/material";
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
 import WarehouseRenderer from "./components/WarehouseRenderer";
-import Report from "./components/Report";
 import Layout from "./components/Layout";
 import LabelPicker from "./components/LabelPicker";
 

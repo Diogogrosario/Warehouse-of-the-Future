@@ -3,7 +3,6 @@ import React from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
-import CircleIcon from '@mui/icons-material/Circle';
 
 import theme from "../styles/theme";
 import Coloring from "../utils/coloring";
@@ -15,7 +14,7 @@ interface Label {
 }
 
 interface PopperComponentProps {
-    anchorEl?: any;
+    anchorEl?: HTMLElement | object | (() => object | HTMLElement) | null;
     disablePortal?: boolean;
     open: boolean;
 }
@@ -61,6 +60,7 @@ const StyledPopperComponent = styled("div")( ({theme}) => ({
 }));
 
 const PopperComponent : React.FC<PopperComponentProps> = (props : PopperComponentProps) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { anchorEl, disablePortal, open, ...rest } = props;
 
     return (<StyledPopperComponent {...rest} />);
@@ -106,9 +106,8 @@ const LabelPicker : React.FC<LabelPickerProps> = (props : LabelPickerProps) => {
                 </Button>
                 <Container component="div">
                     {selected?.map( (label) => (
-                        <Tooltip arrow describeChild title={label.description ?? ""}>
+                        <Tooltip arrow describeChild title={label.description ?? ""} key={label.name}> 
                             <Chip
-                                key={label.name}
                                 label={label.name}
                                 sx={[
                                     {
@@ -117,8 +116,8 @@ const LabelPicker : React.FC<LabelPickerProps> = (props : LabelPickerProps) => {
                                         border: "1px solid transparent",
                                     },
                                     () => {
-                                        const [h, s, l, a] = Coloring.hexToHSLA(label.color);
-                                        const [r, g, b, _] = Coloring.hextoRGBA(label.color);
+                                        const [h, s, l, _1] = Coloring.hexToHSLA(label.color);
+                                        const [r, g, b, _2] = Coloring.hextoRGBA(label.color);
                                         const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
                                         const lightness = (0.5 - luminance) * 100;
                                         return ({
@@ -169,10 +168,10 @@ const LabelPicker : React.FC<LabelPickerProps> = (props : LabelPickerProps) => {
                             noOptionsText="No tags"
                             options={
                                 [...labels].sort( ( labelA, labelB ) => {
-                                    let labelAIdx = selected!.indexOf(labelA);
-                                    let labelBIdx = selected!.indexOf(labelB);
-                                    labelAIdx = labelAIdx === -1 ? selected!.length + labels.indexOf(labelA) : labelAIdx;
-                                    labelBIdx = labelBIdx === -1 ? selected!.length + labels.indexOf(labelB) : labelBIdx;
+                                    let labelAIdx = selected.indexOf(labelA);
+                                    let labelBIdx = selected.indexOf(labelB);
+                                    labelAIdx = labelAIdx === -1 ? selected.length + labels.indexOf(labelA) : labelAIdx;
+                                    labelBIdx = labelBIdx === -1 ? selected.length + labels.indexOf(labelB) : labelBIdx;
                                     return labelAIdx - labelBIdx;
                                 })
                             }
