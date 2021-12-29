@@ -354,16 +354,16 @@ public class API implements ErrorController {
         response.addHeader("Access-Control-Allow-Origin", "*");
         HashMap<String, ArrayNode> logs = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
+        ObjectNode node = mapper.createObjectNode();
 
         int currentTick = Logger.getInstance().getTick();
-
-        List<LogRecord> history = Logger.getInstance().getHistory();
 
         // logs from history that are from the current tick
         // (currentTick - 1) -> currentTick represents the tick in which commands still haven't been
         // executed,
         // so we want the logs from the "previous" tick
-        history = history.stream().filter(l -> l.getSequenceNumber() == currentTick - 1).toList();
+        if (currentTick == 0) return node;
+        List<LogRecord> history = Logger.getInstance().getHistory(currentTick - 1);
 
         for (LogRecord lr : history) {
             Log log = (Log) lr;
@@ -375,7 +375,6 @@ public class API implements ErrorController {
             logs.get(deviceName).add(log.getMessage());
         }
 
-        ObjectNode node = mapper.createObjectNode();
         for (Map.Entry<String, ArrayNode> entry : logs.entrySet()) {
             node.putIfAbsent(entry.getKey(), entry.getValue());
         }

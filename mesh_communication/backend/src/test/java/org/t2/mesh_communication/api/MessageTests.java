@@ -139,7 +139,7 @@ public class MessageTests {
                 new Log("Device 2", "Sent message [destination=%d], [msg=%s]", 4, "test message 3");
         record3.setSequenceNumber(1);
 
-        when(logger1.getHistory())
+        when(logger1.getHistory(1))
                 .thenAnswer(
                         (Answer<List<LogRecord>>)
                                 invocation -> {
@@ -155,7 +155,6 @@ public class MessageTests {
         logger.when(Logger::getInstance).thenReturn(logger1);
 
         ObjectNode response = api.log(Mockito.mock(HttpServletResponse.class));
-
         assertTrue(response.has("Device 1"));
         assertTrue(response.has("Device 2"));
 

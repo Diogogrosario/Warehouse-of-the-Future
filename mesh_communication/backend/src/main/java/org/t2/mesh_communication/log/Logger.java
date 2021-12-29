@@ -2,6 +2,7 @@ package org.t2.mesh_communication.log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -12,13 +13,14 @@ public class Logger {
     private static final String LOGFILE = "el_log.json";
 
     private static volatile Logger instance;
-    private final List<LogRecord> history;
+    private final HashMap<Integer, List<LogRecord>> history;
     private final List<StreamHandler> loggers;
     private int tick;
 
     private Logger() {
         this.tick = 0;
-        this.history = new ArrayList<>();
+        this.history = new HashMap<>();
+        this.history.put(this.tick, new ArrayList<>());
         this.loggers = new ArrayList<>();
 
         StreamHandler handler = new StreamHandler(System.out, new ConsoleFormatter());
@@ -56,19 +58,28 @@ public class Logger {
 
     public synchronized void nextTick() {
         ++this.tick;
+        this.history.put(this.tick, new ArrayList<>());
     }
 
     public synchronized void publish(LogRecord record) {
         record.setSequenceNumber(this.tick);
-        this.history.add(record);
+        this.history.get(this.tick).add(record);
         for (StreamHandler handler : this.loggers) {
             handler.publish(record);
             handler.flush();
         }
     }
 
-    public synchronized List<LogRecord> getHistory() {
+    public synchronized HashMap<Integer, List<LogRecord>> getHistory() {
         return this.history;
+    }
+
+    public synchronized List<LogRecord> getCurrentHistory() {
+        return this.history.get(this.tick);
+    }
+
+    public synchronized List<LogRecord> getHistory(int tick) {
+        return this.history.get(tick);
     }
 
     public synchronized void cleanHistory() {
