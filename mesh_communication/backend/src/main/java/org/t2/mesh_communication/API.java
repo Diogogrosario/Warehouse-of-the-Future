@@ -12,10 +12,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogRecord;
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.*;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.MeshGrid;
@@ -28,7 +30,7 @@ import org.t2.mesh_communication.log.Logger;
 
 @SpringBootApplication
 @RestController
-public class API {
+public class API implements ErrorController {
     @Autowired private Main main;
 
     public static void main(String[] args) {
@@ -197,8 +199,7 @@ public class API {
 
             if (inrange.isEmpty()) continue;
 
-            ArrayNode inrangeArray =
-                    mapper.convertValue(inrange, ArrayNode.class);
+            ArrayNode inrangeArray = mapper.convertValue(inrange, ArrayNode.class);
             inrangeAll.put(dv.getId(), inrangeArray);
         }
 
@@ -381,6 +382,17 @@ public class API {
 
         response.setStatus(HttpServletResponse.SC_OK);
         return node;
+    }
+
+    @RequestMapping("/error")
+    @ResponseBody
+    public String elPejo(HttpServletRequest request) {
+        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
+        return String.format(
+                "<html><body><h2>Mesh Communication Error Page</h2><div>Status code: <b>%s</b></div>"
+                        + "<div>Exception Message: <b>%s</b></div><body></html>",
+                statusCode, exception == null ? "N/A" : exception.getMessage());
     }
 
     private List<JsonNode> devicesToJson(List<MeshDevice> devices) throws JsonProcessingException {
