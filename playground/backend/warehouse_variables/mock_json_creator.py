@@ -1,7 +1,6 @@
 '''
 This script creates a mock json file in this directory with mock values for variables needed to build the warehouse
 '''
-from abc import abstractproperty
 import json
 import random as rn
 import os
@@ -17,8 +16,6 @@ NUM_Z1 = 1 # There is only 1 Z1
 NUM_Z2 = 3 
 NUM_Z3 = 1 # There is only 1 Z3
 NUM_Z4 = 1 # There is only 1 Z4
-
-CORRIDOR_MIN_WIDTH = 1
 
 # Shelf
 SHELF_HEIGHT = (2, 4) # Float
@@ -67,31 +64,36 @@ NUM_SHELVES_Z4 = (1, 2)
 
 def get_zone(i):
     if(i >= NUM_Z1 + NUM_Z2 + NUM_Z3):
-        return (Z4_WIDTH, 4)
+        return 4
     if(i >= NUM_Z1 + NUM_Z2):
-        return (Z3_WIDTH, 3)
+        return 3
     if(i >= NUM_Z1):
-        return (Z2_WIDTH, 2)
-    return (Z1_WIDTH, 1)
+        return 2
+    return 1
 
-def get_zone_length(i):
-    if(i >= NUM_Z1 + NUM_Z2 + NUM_Z3):
-        return (Z4_LENGTH, 4)
-    if(i >= NUM_Z1 + NUM_Z2):
-        return (Z3_LENGTH, 3)
-    if(i >= NUM_Z1):
-        return (Z2_LENGTH, 2)
-    return (Z1_LENGTH, 1)
+def get_zone_length(zone_num):
+    return [
+        Z1_LENGTH,
+        Z2_LENGTH,
+        Z3_LENGTH,
+        Z4_LENGTH,
+    ][zone_num - 1]
+
+def get_zone_width(zone_num):
+    return [
+        Z1_WIDTH,
+        Z2_WIDTH,
+        Z3_WIDTH,
+        Z4_WIDTH,
+    ][zone_num - 1]
 
 def get_num_shelves(zone_num):
-    if(zone_num == 1):
-        return NUM_SHELVES_Z1
-    if(zone_num == 2):
-        return NUM_SHELVES_Z2
-    if(zone_num == 3):
-        return NUM_SHELVES_Z3
-    if(zone_num == 4):
-        return NUM_SHELVES_Z4
+    return [
+        NUM_SHELVES_Z1,
+        NUM_SHELVES_Z2,
+        NUM_SHELVES_Z3,
+        NUM_SHELVES_Z4,
+    ][zone_num - 1]
 
 json_dict = {}
 
@@ -110,15 +112,15 @@ for i in range(NUM_Z1 + NUM_Z2 + NUM_Z3 + NUM_Z4):
     zone_dict = {}
 
     zone = get_zone(i)
-    # zone_dict["ZONE_TYPE"] = zone[1]
-    zl = get_zone_length(i)
-    zone_dict["width"] = round(rn.uniform(zone[0][0], zone[0][1]), 3)
-    zone_length = round(rn.uniform(zl[0][0], zl[0][1]), 3)
+    zone_width = get_zone_width(zone)
+    zone_length = get_zone_length(zone)
+    zone_dict["width"] = round(rn.uniform(zone_width[0], zone_width[1]), 3)
+    zone_length = round(rn.uniform(zone_length[0], zone_length[1]), 3)
     zone_dict["length"] = zone_length
 
     shelf_dict_list = []
 
-    num_shelves = get_num_shelves(zone[1])
+    num_shelves = get_num_shelves(zone)
     # Fill the shelves with values
     for shelf in range(rn.randint(num_shelves[0], num_shelves[1])):
         shelf_dict = {}
@@ -167,13 +169,11 @@ for i in range(NUM_Z1 + NUM_Z2 + NUM_Z3 + NUM_Z4):
         shelf_dict["layers"] = shelf_layer_dicts_list
         shelf_dict_list.append(copy.deepcopy(shelf_dict))
 
-
     zone_dict["shelves"] = shelf_dict_list
     zone_dict_list.append(copy.deepcopy(zone_dict))
 
-
-
 json_dict["zones"] = zone_dict_list
+
 
 # Some valid room verifications
 
