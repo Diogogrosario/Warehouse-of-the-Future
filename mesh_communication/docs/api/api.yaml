@@ -201,6 +201,17 @@ paths:
         404:
           description: "Device does not exist."
 
+  /orchestrate:
+    post:
+      summary: Make orchestrator send messages to the network
+      operationId: orchestrate
+      description: "Path that signals orchestrator to send messages for each product in the layout file."
+
+      responses:
+        200:
+          description: "Orchestrator orchestrated"
+
+
   /message/send:
     get:
       summary: Get all messages of type send in the current tick
