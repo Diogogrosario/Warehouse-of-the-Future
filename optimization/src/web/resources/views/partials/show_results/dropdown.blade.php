@@ -6,7 +6,7 @@
     <div class="dropdown-menu" aria-labelledby="dropdownResults">
         @foreach($geneticResults as $result)
             <a class="dropdown-item" href={{route('results.show',$result->id)}}>View
-                Result {{$result->id}}</a>
+                Result {{$result->id}} ({{$result->date_issued}})</a>
         @endforeach
     </div>
 </div>
