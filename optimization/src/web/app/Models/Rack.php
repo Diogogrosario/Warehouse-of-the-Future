@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Rack extends Model
 {
-    protected string $table = 'Rack';
+    protected $table = 'Rack';
 
     public function shelf(): BelongsTo
     {

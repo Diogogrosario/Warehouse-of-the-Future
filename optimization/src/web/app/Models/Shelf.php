@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Shelf extends Model
 {
-    protected string $table = 'Shelf';
+    protected $table = 'Shelf';
 
     public function racks(): HasMany
     {

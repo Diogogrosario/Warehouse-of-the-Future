@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product_Rack extends Model
 {
-    protected string $table = 'Product_Rack';
+    protected $table = 'Product_Rack';
 
     public function product(): BelongsTo
     {

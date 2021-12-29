@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
-    protected string $table = 'Product';
+    protected $table = 'Product';
 
     public function productRack(): HasOne
     {

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Result extends Model
 {
-    protected string $table = 'Results';
+    protected $table = 'Results';
 
     public function results(): HasMany
     {
