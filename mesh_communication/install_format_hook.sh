@@ -8,7 +8,7 @@ gdir="$(git rev-parse --git-dir)"
 prehook="${gdir}/hooks/pre-commit"
 hookf="${gdir}/hooks/mesh_communication.git-code-format.pre-commit.sh"
 
-printf "%s\n%s" "#!/bin/sh" "$hookf" >"$prehook"
+printf "%s\n\"%s\"" "#!/bin/sh" "$hookf" >"$prehook"
 chmod +x "$prehook"
 
 format_code_cmd="mvn -f \"${pomxml}\" git-code-format:format-code git-code-format:format-code | grep -F '[ERROR]' && exit 1"
