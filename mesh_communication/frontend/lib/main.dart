@@ -1,14 +1,16 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
-import 'package:myapp/ActionButtons/FFButton.dart';
-import 'package:myapp/ActionButtons/PPButton.dart';
-import 'package:myapp/ActionButtons/SBButton.dart';
-import 'package:myapp/ActionButtons/SFButton.dart';
-import 'package:myapp/MyGraph.dart';
-import 'package:myapp/MyGraphDisplay.dart';
-import 'package:myapp/RequestHandler/Device.dart';
-import 'package:myapp/RequestHandler/RequestHandler.dart';
-import 'package:myapp/UndirectedGraph.dart';
+import 'package:meshcommunication/ActionButtons/FFButton.dart';
+import 'package:meshcommunication/ActionButtons/PPButton.dart';
+import 'package:meshcommunication/ActionButtons/SBButton.dart';
+import 'package:meshcommunication/ActionButtons/SFButton.dart';
+import 'package:meshcommunication/MyGraph.dart';
+import 'package:meshcommunication/MyGraphDisplay.dart';
+import 'package:meshcommunication/RequestHandler/Device.dart';
+import 'package:meshcommunication/RequestHandler/RequestHandler.dart';
+import 'package:meshcommunication/UndirectedGraph.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,6 +70,10 @@ class BasePage extends StatelessWidget {
           PPButton(MyGraph.of(context).pausePlay),
           SFButton(MyGraph.of(context).skipForward),
           FFButton(MyGraph.of(context).fastForward),
+          Text(
+            "0",
+            key: Key("counter"),
+          ),
         ],
       ),
       body: graphDisplay,
@@ -112,6 +118,10 @@ class BasePage extends StatelessWidget {
                 PPButton(null),
                 SFButton(null),
                 FFButton(null),
+                Text(
+                  "0",
+                  key: Key("counter"),
+                ),
               ],
             ),
             persistentFooterButtons: const [
