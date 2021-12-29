@@ -19,40 +19,40 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
 
   void testFeature0() {
     runFeature(
-      'Counter:',
+      'Title:',
       <String>[],
       () {
         runScenario(
-          'Counter increases when the button is pressed',
+          'The application title is Mesh Communication after loading',
           <String>[],
           (TestDependencies dependencies) async {
             await runStep(
-              'Given I expect the "counter" to be "0"',
+              'Given I expect the "appTitle" to be "Mesh Communication"',
               <String>[],
               null,
               dependencies,
             );
 
             await runStep(
-              'When I tap the "increment" button 10 times',
+              'When I tap the "appTitle" 10 times',
               <String>[],
               null,
               dependencies,
             );
 
             await runStep(
-              'Then I expect the "counter" to be "0"',
+              'Then I expect the "appTitle" to be "Mesh Communication"',
               <String>[],
               null,
               dependencies,
             );
           },
           onBefore: () async => onBeforeRunFeature(
-            'Counter',
+            'Title',
             <String>[],
           ),
           onAfter: () async => onAfterRunFeature(
-            'Counter',
+            'Title',
           ),
         );
       },

@@ -64,16 +64,15 @@ class BasePage extends StatelessWidget {
     final MyGraphDisplay graphDisplay = MyGraphDisplay(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Mesh Communication"),
+        title: const Text(
+          "Mesh Communication",
+          key: Key("appTitle"),
+        ),
         actions: [
           SBButton(MyGraph.of(context).skipBackwards),
           PPButton(MyGraph.of(context).pausePlay),
           SFButton(MyGraph.of(context).skipForward),
           FFButton(MyGraph.of(context).fastForward),
-          Text(
-            "0",
-            key: Key("counter"),
-          ),
         ],
       ),
       body: graphDisplay,
@@ -112,16 +111,15 @@ class BasePage extends StatelessWidget {
           // still loading
           return Scaffold(
             appBar: AppBar(
-              title: const Text("Mesh Communication"),
+              title: const Text(
+                "Mesh Communication",
+                key: Key("appTitle"),
+              ),
               actions: const [
                 SBButton(null),
                 PPButton(null),
                 SFButton(null),
                 FFButton(null),
-                Text(
-                  "0",
-                  key: Key("counter"),
-                ),
               ],
             ),
             persistentFooterButtons: const [

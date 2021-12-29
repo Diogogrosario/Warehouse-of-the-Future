@@ -3,12 +3,12 @@ import 'package:gherkin/gherkin.dart';
 
 import 'package:meshcommunication/main.dart' as app;
 import 'hooks/myhook.dart';
-import 'steps/tap_button_n_times_step.dart';
+import 'steps/tap_n_times_step.dart';
 
 FlutterTestConfiguration gherkinTestConfiguration =
     FlutterTestConfiguration.DEFAULT(
   [
-    whenTapButtonNTimesStep,
+    whenTapNTimesStep,
   ],
 )
       ..hooks = [
