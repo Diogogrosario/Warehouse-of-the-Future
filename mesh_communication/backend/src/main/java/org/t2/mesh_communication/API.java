@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogRecord;
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.util.StringUtils;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.*;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.MeshGrid;
@@ -31,9 +30,8 @@ import org.t2.mesh_communication.log.Logger;
 
 @SpringBootApplication
 @RestController
-public class API {
-    @Autowired
-    private Main main;
+public class API implements ErrorController {
+    @Autowired private Main main;
 
     public static void main(String[] args) {
         API api = new API();
@@ -65,7 +63,8 @@ public class API {
 
     @GetMapping({"/devices/{status}", "/devices"})
     public List<JsonNode> devicesStatus(
-            @PathVariable(name = "status", required = false) String status, HttpServletResponse response) {
+            @PathVariable(name = "status", required = false) String status,
+            HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
 
         List<MeshDevice> devices;
@@ -200,8 +199,7 @@ public class API {
 
             if (inrange.isEmpty()) continue;
 
-            ArrayNode inrangeArray =
-                    mapper.convertValue(inrange, ArrayNode.class);
+            ArrayNode inrangeArray = mapper.convertValue(inrange, ArrayNode.class);
             inrangeAll.put(dv.getId(), inrangeArray);
         }
 
@@ -272,7 +270,9 @@ public class API {
 
                     int sourceDevice = rcvMsgCmd.getMessage().getLastHop();
                     if (!messages.containsKey(sourceDevice)) {
-                        messages.put(sourceDevice, mapper.convertValue(new ArrayList<>(), ArrayNode.class));
+                        messages.put(
+                                sourceDevice,
+                                mapper.convertValue(new ArrayList<>(), ArrayNode.class));
                     }
                     messages.get(sourceDevice).add(ret);
                 }
@@ -322,14 +322,13 @@ public class API {
     private JsonNode handleRcvMsg(MeshDevice receiver, ReceiveMsgCmd rcvMsgCmd) {
         Message message = rcvMsgCmd.getMessage();
         try {
-            return this.receiveMessageJson(message.toJson(), receiver.getId(), rcvMsgCmd.isFailed());
+            return this.receiveMessageJson(
+                    message.toJson(), receiver.getId(), rcvMsgCmd.isFailed());
         } catch (JsonProcessingException e) {
             System.err.println("Error formatting message to JSON.");
             return null;
         }
-
     }
-
 
     private ArrayNode handleSendMsg(MeshDevice sender, SendMsgCmd sendMsgCmd) {
         ObjectMapper mapper = new ObjectMapper();
@@ -385,6 +384,17 @@ public class API {
         return node;
     }
 
+    @RequestMapping("/error")
+    @ResponseBody
+    public String elPejo(HttpServletRequest request) {
+        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
+        return String.format(
+                "<html><body><h2>Mesh Communication Error Page</h2><div>Status code: <b>%s</b></div>"
+                        + "<div>Exception Message: <b>%s</b></div><body></html>",
+                statusCode, exception == null ? "N/A" : exception.getMessage());
+    }
+
     private List<JsonNode> devicesToJson(List<MeshDevice> devices) throws JsonProcessingException {
         List<JsonNode> devicesJson = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
@@ -404,7 +414,8 @@ public class API {
         return messageNode;
     }
 
-    private JsonNode receiveMessageJson(String message, int receiver, boolean isFailed) throws JsonProcessingException {
+    private JsonNode receiveMessageJson(String message, int receiver, boolean isFailed)
+            throws JsonProcessingException {
         JsonNode node = messageJson(message, receiver);
         ((ObjectNode) node).put("failed", isFailed);
         return node;
