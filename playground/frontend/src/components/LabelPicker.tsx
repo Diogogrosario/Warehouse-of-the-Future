@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteChangeReason, autocompleteClasses, AutocompleteCloseReason, Box, Button, ClickAwayListener, Container, InputBase, Popper, styled, Typography } from "@mui/material";
+import { Autocomplete, AutocompleteChangeReason, autocompleteClasses, AutocompleteCloseReason, Box, Button, Chip, ClickAwayListener, Container, InputBase, Popper, styled, Tooltip, Typography } from "@mui/material";
 import React from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DoneIcon from '@mui/icons-material/Done';
@@ -6,6 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import CircleIcon from '@mui/icons-material/Circle';
 
 import theme from "../styles/theme";
+import Coloring from "../utils/coloring";
 
 interface Label {
     name: string;
@@ -40,6 +41,7 @@ const StyledPopperComponent = styled("div")( ({theme}) => ({
     [`& .${autocompleteClasses.listbox}`]: {
         backgroundColor: theme.palette.mode === "light" ? "#fff" : "#1c2128",
         padding: 0,
+        width: "inherit",
         [`& .${autocompleteClasses.option}`]: {
             minHeight: "auto",
             alignItems: "flex-start",
@@ -72,7 +74,7 @@ const LabelPicker : React.FC<LabelPickerProps> = (props : LabelPickerProps) => {
     const { labels } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
-    const [selected, setSelected] = React.useState<Label[]>([]);
+    const [selected, setSelected] = React.useState<Label[]>(labels);
     const [searchValue, setSearchValue] = React.useState<Label[]>([]);
     const open = Boolean(anchorEl);
 
@@ -86,161 +88,180 @@ const LabelPicker : React.FC<LabelPickerProps> = (props : LabelPickerProps) => {
     const labelPickerId = open ? "label-picker" : undefined;
     
     return (
-        <>
-        <Box>
-            <Button
-                disableRipple
-                aria-describedby={labelPickerId}
-                onClick={( event: React.MouseEvent<HTMLElement, MouseEvent> ) => {
-                    setSearchValue(selected);
-                    setAnchorEl(event.currentTarget);
-                }}
-            >
-                <Typography variant="button" component="span">Labels</Typography>
-                <SettingsIcon />
-            </Button>
-            {selected?.map( (label) => (
-                <Box
-                    key={label.name}
+        <details>
+            <Container component="summary" >
+                <Button
+                    disableRipple
+                    aria-describedby={labelPickerId}
+                    onClick={( event: React.MouseEvent<HTMLElement, MouseEvent> ) => {
+                        setSearchValue(selected);
+                        setAnchorEl(event.currentTarget);
+                    }}
                     sx={{
-                        backgroundColor: label.color,
-                        color: theme.palette.getContrastText(label.color),
+                        width: "100%"
                     }}
                 >
-                    {label.name}
-                </Box>
-            ))}
-        </Box>
-        <StyledPopper open={open} anchorEl={anchorEl} placement="bottom-start">
-            <ClickAwayListener onClickAway={closeLabelPicker}>
-                <Container component="div" sx={{ padding: 0 }} >
-                    <Box
-                        sx={{
-                            padding: "8px 10px",
-                            fontWeight: 600,
-                            borderBottom: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
-                        }}
-                    >
-                        <Typography variant="subtitle2" component="span">
-                            Filter reports by type
-                        </Typography>
-                    </Box>
-                    <Autocomplete
-                        open
-                        multiple
-                        value={searchValue}
-                        onClose={ (event : React.SyntheticEvent, reason: AutocompleteCloseReason) => {
-                            if (reason === "escape")
-                                closeLabelPicker();
-                        }}
-                        onChange={ (event : React.SyntheticEvent, value : Label[], reason: AutocompleteChangeReason) => {
-                            if (event.type === "keydown" &&
-                                (event as React.KeyboardEvent).key === "Backspace" &&
-                                reason === "removeOption")
-                                return;
-                            
-                            setSearchValue(value);
-                        }}
-                        disableCloseOnSelect
-                        PopperComponent={PopperComponent}
-                        renderTags={() => null}
-                        noOptionsText="No tags"
-                        options={
-                            [...labels].sort( ( labelA, labelB ) => {
-                                let labelAIdx = selected!.indexOf(labelA);
-                                let labelBIdx = selected!.indexOf(labelB);
-                                labelAIdx = labelAIdx === -1 ? selected!.length + labels.indexOf(labelA) : labelAIdx;
-                                labelBIdx = labelBIdx === -1 ? selected!.length + labels.indexOf(labelB) : labelBIdx;
-                                return labelAIdx - labelBIdx;
-                            })
-                        }
-                        renderOption={(props : React.HTMLAttributes<HTMLLIElement>, option, {selected}) => (
-                            <li {...props}>
-                                <Box
-                                    component={DoneIcon}
-                                    sx={{
-                                        width: 17,
-                                        height: 17,
-                                        mr: "5px",
-                                        ml: "-2px",
-                                        visibility: selected ? "visible" : "hidden",
-                                    }}
-                                />
-                                <Box
-                                    component="span"
-                                    sx={{
-                                        width: 14,
-                                        height: 14,
-                                        flexShrink: 0,
-                                        borderRadius: "3px",
+                    <Typography variant="button" component="span" sx={{ mr: "auto" }} >Labels</Typography>
+                    <SettingsIcon />
+                </Button>
+                <Container component="div">
+                    {selected?.map( (label) => (
+                        <Tooltip arrow describeChild title={label.description ?? ""}>
+                            <Chip
+                                key={label.name}
+                                label={label.name}
+                                sx={[
+                                    {
                                         mr: 1,
-                                        mt: "2px",
-                                        backgroundColor: option.color,
-                                    }}
-                                />
-                                <Box
-                                    sx={{
-                                        flexGrow: 1,
-                                        "& span": {
-                                            color: theme.palette.mode === "light" ? '#586069' : '#8b949e',
-                                        }
-                                    }}
-                                >
-                                    <CircleIcon sx={{ color: option.color }} />
-                                    <Typography variant="body1" component="h6">
-                                        {option.name}
-                                    </Typography>
-                                    <br />
-                                    <Typography variant="body2" component="span">
-                                        {option.description}
-                                    </Typography>
-                                </Box>
-                                <Box
-                                    component={CloseIcon}
-                                    sx={{
-                                        opacity: 0.6,
-                                        width: 18,
-                                        height: 18,
-                                        visibility: selected ? "visible" : "hidden",
-                                    }}
-                                />
-                            </li>
-                        )}
-                        getOptionLabel={(option) => option.name}
-                        renderInput={(params) => (
-                            <InputBase
-                                sx={{
-                                    padding: 1,
-                                    width: "100%",
-                                    borderBottom: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
-                                    "& input": {
-                                        borderRadius: 4,
-                                        backgroundColor: theme.palette.mode === "light" ? "#fff" : "#0d1117",
-                                        padding: 1,
-                                        transition: theme.transitions.create(["border-color", "box-shadow"]),
-                                        border: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
-                                        fontSize: 14,
-                                        "&:focus": {
-                                          boxShadow: `0px 0px 0px 3px ${
-                                            theme.palette.mode === "light"
-                                              ? "rgba(3, 102, 214, 0.3)"
-                                              : "rgb(12, 45, 107)"
-                                          }`,
-                                          borderColor: theme.palette.mode === "light" ? "#0366d6" : "#388bfd",
-                                        },
+                                        mt: 1,
+                                        border: "1px solid transparent",
                                     },
-                                }}
-                                ref={params.InputProps.ref}
-                                inputProps={params.inputProps}
-                                autoFocus
-                                placeholder="Filter labels"
+                                    () => {
+                                        const [h, s, l, a] = Coloring.hexToHSLA(label.color);
+                                        const [r, g, b, _] = Coloring.hextoRGBA(label.color);
+                                        const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+                                        const lightness = (0.5 - luminance) * 100;
+                                        return ({
+                                            backgroundColor: `rgba(${r}, ${g}, ${b}, 0.18)`,
+                                            color: `hsl(${h}, calc(${s} * 1%), calc((${l} + ${lightness}) * 1%))`,
+                                            borderColor: `hsla(${h}, calc(${s} * 1%), calc((${l} + ${lightness}) * 1%), 0.3)`,
+                                        });
+                                    }
+                                ]}
                             />
-                        )}
-                    />
+                        </Tooltip>
+                    ))}
                 </Container>
-            </ClickAwayListener>
-        </StyledPopper>
-        </>
+            </Container>
+            <StyledPopper open={open} anchorEl={anchorEl} placement="bottom-start">
+                <ClickAwayListener onClickAway={closeLabelPicker}>
+                    <Container disableGutters component="div" sx={{ width: "300px" }}>
+                        <Box
+                            sx={{
+                                padding: "8px 10px",
+                                fontWeight: 600,
+                                borderBottom: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
+                            }}
+                        >
+                            <Typography variant="subtitle2" component="span">
+                                Filter by labels
+                            </Typography>
+                        </Box>
+                        <Autocomplete
+                            open
+                            multiple
+                            value={searchValue}
+                            onClose={ (event : React.SyntheticEvent, reason: AutocompleteCloseReason) => {
+                                if (reason === "escape")
+                                    closeLabelPicker();
+                            }}
+                            onChange={ (event : React.SyntheticEvent, value : Label[], reason: AutocompleteChangeReason) => {
+                                if (event.type === "keydown" &&
+                                    (event as React.KeyboardEvent).key === "Backspace" &&
+                                    reason === "removeOption")
+                                    return;
+                                
+                                setSearchValue(value);
+                            }}
+                            disableCloseOnSelect
+                            PopperComponent={PopperComponent}
+                            renderTags={() => null}
+                            noOptionsText="No tags"
+                            options={
+                                [...labels].sort( ( labelA, labelB ) => {
+                                    let labelAIdx = selected!.indexOf(labelA);
+                                    let labelBIdx = selected!.indexOf(labelB);
+                                    labelAIdx = labelAIdx === -1 ? selected!.length + labels.indexOf(labelA) : labelAIdx;
+                                    labelBIdx = labelBIdx === -1 ? selected!.length + labels.indexOf(labelB) : labelBIdx;
+                                    return labelAIdx - labelBIdx;
+                                })
+                            }
+                            renderOption={(props : React.HTMLAttributes<HTMLLIElement>, option, {selected}) => (
+                                <li {...props}>
+                                    <Box
+                                        component={DoneIcon}
+                                        sx={{
+                                            width: 17,
+                                            height: 17,
+                                            mr: "5px",
+                                            ml: "-2px",
+                                            visibility: selected ? "visible" : "hidden",
+                                        }}
+                                    />
+                                    <Box
+                                        component="span"
+                                        sx={{
+                                            width: 14,
+                                            height: 14,
+                                            flexShrink: 0,
+                                            borderRadius: "7px",
+                                            mr: 1,
+                                            mt: "2px",
+                                            backgroundColor: option.color,
+                                        }}
+                                    />
+                                    <Box
+                                        sx={{
+                                            flexGrow: 1,
+                                            "& span": {
+                                                color: theme.palette.mode === "light" ? '#586069' : '#8b949e',
+                                            }
+                                        }}
+                                    >
+                                        <Typography variant="body1" component="h6">
+                                            {option.name}
+                                        </Typography>
+                                        <br />
+                                        <Typography variant="body2" component="span">
+                                            {option.description}
+                                        </Typography>
+                                    </Box>
+                                    <Box
+                                        component={CloseIcon}
+                                        sx={{
+                                            opacity: 0.6,
+                                            width: 18,
+                                            height: 18,
+                                            visibility: selected ? "visible" : "hidden",
+                                        }}
+                                    />
+                                </li>
+                            )}
+                            getOptionLabel={(option) => option.name}
+                            renderInput={(params) => (
+                                <InputBase
+                                    sx={{
+                                        padding: 1,
+                                        width: "100%",
+                                        borderBottom: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
+                                        "& input": {
+                                            borderRadius: 4,
+                                            backgroundColor: theme.palette.mode === "light" ? "#fff" : "#0d1117",
+                                            padding: 1,
+                                            transition: theme.transitions.create(["border-color", "box-shadow"]),
+                                            border: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
+                                            fontSize: 14,
+                                            "&:focus": {
+                                            boxShadow: `0px 0px 0px 3px ${
+                                                theme.palette.mode === "light"
+                                                ? "rgba(3, 102, 214, 0.3)"
+                                                : "rgb(12, 45, 107)"
+                                            }`,
+                                            borderColor: theme.palette.mode === "light" ? "#0366d6" : "#388bfd",
+                                            },
+                                        },
+                                    }}
+                                    ref={params.InputProps.ref}
+                                    inputProps={params.inputProps}
+                                    autoFocus
+                                    placeholder="Filter labels"
+                                />
+                            )}
+                        />
+                    </Container>
+                </ClickAwayListener>
+            </StyledPopper>
+        </details>
     );
 }
 
