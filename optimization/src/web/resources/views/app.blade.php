@@ -11,6 +11,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
+        .sidebarAll {
+            background-color: #3641ac;
+        }
+        .sidebarTitle {
+            background-color: #3641ac;
+            color: #FFFFFF;
+            font-size: 20px;
+        }
+        .sidebarItem {
+            background-color: #3641ac;
+            color: #FFFFFF;
+        }
+
         body {
             overflow-x: hidden;
         }
@@ -21,6 +34,7 @@
             -moz-transition: margin .25s ease-out;
             -o-transition: margin .25s ease-out;
             transition: margin .25s ease-out;
+            background-color: #3641ac;
         }
         #sidebar-wrapper .sidebar-heading {
             padding: 0.875rem 1.25rem;
@@ -28,12 +42,17 @@
         }
         #sidebar-wrapper .list-group {
             width: 15rem;
+            background-color: #3641ac;
         }
         #page-content-wrapper {
             min-width: 100vw;
+            background-color: #f7f7f9;
         }
         #wrapper.toggled #sidebar-wrapper {
             margin-left: 0;
+        }
+        .content {
+            margin-top: 25px;
         }
         @media (min-width: 768px) {
             #sidebar-wrapper {
@@ -52,43 +71,21 @@
 <body>
 <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">PSA</div>
+    <div class="border-right sidebarAll" id="sidebar-wrapper">
+        <div class="sidebar-heading sidebarTitle">PSA</div>
         <div class="list-group list-group-flush">
-            <a href="/" class="list-group-item list-group-item-action bg-light">Home</a>
-            <a href="{{route('filters')}}" class="list-group-item list-group-item-action bg-light">Generate layout</a>
-            <a href="{{route('layouts')}}" class="list-group-item list-group-item-action bg-light">Visualize layouts</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Reports</a>
+            <a href="/" class="list-group-item list-group-item-action sidebarItem">Home</a>
+            <a href="{{route('layouts')}}" class="list-group-item list-group-item-action sidebarItem">Visualize layouts</a>
+            <a href="#" class="list-group-item list-group-item-action sidebarItem">Reports</a>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
     <!-- Page Content -->
     <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
         <div class="container-fluid">
-            @yield('content')
+            <div class="content">
+                @yield('content')
+            </div>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
