@@ -6,17 +6,17 @@ import 'package:myapp/RequestHandler/Device.dart';
 import 'package:vector_math/vector_math.dart' as vm;
 
 class RequestHandler {
-  final String url;
-  final http.Client client;
+  final String _url;
+  final http.Client _client;
 
-  RequestHandler(this.url) : client = http.Client();
+  RequestHandler(this._url) : _client = http.Client();
 
   Uri _resourceUri([String resource = ""]) {
-    return Uri.parse(url + "/" + resource);
+    return Uri.parse(_url + "/" + resource);
   }
 
   Future<List<Device>> getDevices() async {
-    http.Response fetchContent = await client.get(_resourceUri("devices/all"));
+    http.Response fetchContent = await _client.get(_resourceUri("devices/all"));
     List devices = jsonDecode(fetchContent.body);
 
     List<Device> ret = <Device>[];
@@ -34,7 +34,7 @@ class RequestHandler {
         // normal device
         ret.add(
           Device(
-            id: d["device_id"],
+            id: d["id"],
             pos: vm.Vector3(d["position"]["x"], d["position"]["y"], 0.0),
           ),
         );
@@ -46,24 +46,34 @@ class RequestHandler {
 
   Future<List<int>> getEdges(String id) async {
     http.Response fetchContent =
-        await client.get(_resourceUri("devices/inrange/" + id));
+        await _client.get(_resourceUri("devices/inrange/" + id));
     List neighbors = jsonDecode(fetchContent.body);
 
     List<int> ret = <int>[];
     for (Map<String, dynamic> n in neighbors) {
-      ret.add(n["device_id"]);
+      ret.add(n["id"]);
     }
     return ret;
   }
 
-  Future<Map> advanceTick({int n = 1}) async {
-    client.post(_resourceUri("tick/forwards/?n_ticks=" + n.toString()));
-    http.Response fetchContent = await client.get(_resourceUri("message"));
+  Future<void> advanceTick({int n = 1}) async {
+    _client.post(_resourceUri("tick/forwards/?n_ticks=" + n.toString()));
+  }
+
+  Future<Map> getRecvMsgs() async {
+    http.Response fetchContent =
+        await _client.get(_resourceUri("messages/receive"));
+    return jsonDecode(fetchContent.body);
+  }
+
+  Future<Map> getSendMsgs() async {
+    http.Response fetchContent =
+        await _client.get(_resourceUri("messages/send"));
     return jsonDecode(fetchContent.body);
   }
 
   Future<void> orchestrate() async {
-    http.Response response = await client.post(_resourceUri("orchestrate"));
+    http.Response response = await _client.post(_resourceUri("orchestrate"));
     if (kDebugMode) {
       print(response.body);
     }

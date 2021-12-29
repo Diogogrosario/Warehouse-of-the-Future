@@ -17,6 +17,10 @@ class UndirectedGraph extends Graph {
 
     final edge = Edge(source, destination, paint: paint);
     addEdgeS(edge);
+    /*
+    final edgeTwin = Edge(source, destination, paint: paint);
+    addEdgeS(edgeTwin);
+     */
     return edge;
   }
 }

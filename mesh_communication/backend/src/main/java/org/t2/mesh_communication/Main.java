@@ -71,7 +71,7 @@ public class Main {
     }
 
     public void orchestrate() {
-        this.orchestrator.orchestrate(this.products);
+        this.orchestrator.orchestrate(this.products.subList(0, 1));
     }
 
     public void advanceTick(int n) {

@@ -1,3 +1,6 @@
+import 'dart:collection';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:graphview/GraphView.dart';
@@ -8,31 +11,32 @@ class MyGraphDisplay extends StatefulWidget {
   static const double strokeWidth = 2;
   static const double highlightStrokeWidth = 4;
   static const Color normalColor = Colors.grey;
-  static const Color transColor = Colors.black;
+  static const Color sendColor = Colors.black;
+  static const Color recvColor = Colors.blue;
   static const Color destColor = Colors.green;
   static const Color failColor = Colors.red;
 
   final Algorithm _algo;
-  final List<Color> nodeColors;
+  final HashMap<int, Color> nodeColors;
 
   late final VoidCallback _resetGraphView;
 
   MyGraphDisplay(BuildContext context, {Key? key})
       : _algo = FruchtermanReingoldAlgorithm(iterations: 10),
-        nodeColors = List.filled(0, Colors.black, growable: true),
+        nodeColors = HashMap(),
         super(key: key) {
     _initColors(context);
   }
 
   void _initColors(BuildContext context) {
     // orchestrator color
-    nodeColors.add(const Color.fromRGBO(45, 45, 45, 1.0));
+    nodeColors[0] = const Color.fromRGBO(45, 45, 45, 1.0);
 
     // rest of the colors
     final int nColors = MyGraph.of(context).graph.nodeCount() - 1;
     var angle = 0;
     var increase = 360 / nColors;
-    for (int i = 0; i < nColors; i++) {
+    for (int i = 1; i <= nColors; i++) {
       var H = (angle + increase) * math.pi / 180;
       angle += increase as int;
       var S = 0.8;
@@ -41,10 +45,16 @@ class MyGraphDisplay extends StatefulWidget {
       var hsvVec = vm.Vector4(H, S, V, O);
       var rgbVec = vm.Vector4.zero();
       vm.Colors.hsvToRgb(hsvVec, rgbVec);
-      nodeColors.add(
-        Color.fromRGBO((rgbVec.x * 255).toInt(), (rgbVec.y * 255).toInt(),
-            (rgbVec.z * 255).toInt(), 1),
-      );
+      int nodeId = MyGraph.of(context).graph.getNodeAtPosition(i).key!.value;
+      if (nodeColors.containsKey(nodeId)) {
+        if (kDebugMode) {
+          print(
+              "Duplicated id (" + nodeId.toString() + ") for color generation");
+        }
+        continue;
+      }
+      nodeColors[nodeId] = Color.fromRGBO((rgbVec.x * 255).toInt(),
+          (rgbVec.y * 255).toInt(), (rgbVec.z * 255).toInt(), 1.0);
     }
   }
 
@@ -127,7 +137,9 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
       child: InkWell(
         borderRadius: BorderRadius.circular(4),
         onTap: () {
-          print("Clicked node " + id.toString());
+          if (kDebugMode) {
+            print("Clicked node " + id.toString());
+          }
         },
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -148,7 +160,14 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
       builder: (Node node) {
         // I can decide what widget should be shown here based on the id
         int nodeId = node.key!.value;
-        return _getNode(nodeId, widget.nodeColors[nodeId]);
+        Color? nodeColor = widget.nodeColors[nodeId];
+        if (nodeColor == null) {
+          if (kDebugMode) {
+            print("Missing color for node " + nodeId.toString());
+          }
+          nodeColor = Colors.red;
+        }
+        return _getNode(nodeId, nodeColor);
       },
     );
   }

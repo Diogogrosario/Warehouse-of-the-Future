@@ -15,19 +15,8 @@ class MyGraph extends InheritedWidget {
     required Widget child,
   }) : super(key: key, child: child);
 
-  // for control buttons
-  Future<void> skipForward() async {
-    print("Hello, this is the SFButton callback!");
-
-    // TODO make this pretty
-    for (Edge e in graph.edges) {
-      e.paint!
-        ..color = MyGraphDisplay.normalColor
-        ..strokeWidth = MyGraphDisplay.strokeWidth;
-    }
-
-    Map messages = await requestHandler.advanceTick();
-    print(messages);
+  Future<void> _recvMsgs() async {
+    Map messages = await requestHandler.getRecvMsgs();
 
     for (String deviceIdStr in messages.keys) {
       int deviceId = int.parse(deviceIdStr);
@@ -53,12 +42,66 @@ class MyGraph extends InheritedWidget {
         if (target["failed"]) {
           toset = MyGraphDisplay.failColor;
         } else if (targetId == target["final"]) {
-          edge.paint!.color = MyGraphDisplay.destColor;
+          toset = MyGraphDisplay.destColor;
         } else {
-          edge.paint!.color = MyGraphDisplay.transColor;
+          toset = MyGraphDisplay.recvColor;
         }
+        edge.paint!.color = toset;
       }
     }
+  }
+
+  Future<void> _sendMsgs() async {
+    Map messages = await requestHandler.getSendMsgs();
+
+    for (String deviceIdStr in messages.keys) {
+      int deviceId = int.parse(deviceIdStr);
+      final Node node1 = graph.getNodeUsingId(deviceId);
+      for (var target in messages[deviceIdStr]) {
+        int targetId = target["hop"];
+
+        final Node node2 = graph.getNodeUsingId(targetId);
+        final Edge? edge = graph.getEdgeBetween(node1, node2);
+        if (edge == null) {
+          if (kDebugMode) {
+            print("For some reason the edge " +
+                deviceId.toString() +
+                " -- " +
+                targetId.toString() +
+                " is missing");
+          }
+          continue;
+        }
+
+        edge.paint!.strokeWidth = MyGraphDisplay.highlightStrokeWidth;
+        edge.paint!.color = MyGraphDisplay.sendColor;
+      }
+    }
+  }
+
+  void _resetEdges() {
+    for (Edge e in graph.edges) {
+      e.paint!
+        ..color = MyGraphDisplay.normalColor
+        ..strokeWidth = MyGraphDisplay.strokeWidth;
+    }
+  }
+
+  Future<void> _updateEdges() async {
+    _resetEdges();
+    await _sendMsgs();
+    await _recvMsgs();
+  }
+
+  Future<void> orchestrate() async {
+    await requestHandler.orchestrate();
+    await _updateEdges();
+  }
+
+  // for control buttons
+  Future<void> skipForward() async {
+    await requestHandler.advanceTick();
+    await _updateEdges();
   }
 
   void skipBackwards() {

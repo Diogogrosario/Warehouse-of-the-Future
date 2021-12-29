@@ -31,13 +31,18 @@ class BasePage extends StatelessWidget {
 
   Future<Graph> _genGraph(RequestHandler requestHandler) async {
     Graph graph = UndirectedGraph();
+
     // gen nodes
     List<Device> devices = await requestHandler.getDevices();
     for (Device d in devices) {
-      graph.addNode(Node.Id(d.id));
+      Node newNode = Node.Id(d.id);
+      //newNode.size = const Size(20.0, 30.0);
+      //newNode.position = const Offset(0.0, -30.0);
+      graph.addNode(newNode);
     }
     // gen edges
     for (Device d in devices) {
+      // TODO could be optimized by using a single request
       List<int> neighbors = await requestHandler.getEdges(d.id.toString());
       Node node1 = graph.getNodeUsingId(d.id);
       for (int nid in neighbors) {
@@ -49,8 +54,7 @@ class BasePage extends StatelessWidget {
               ..style = PaintingStyle.stroke);
       }
     }
-    // initial message
-    await requestHandler.orchestrate();
+
     return graph;
   }
 
@@ -71,7 +75,11 @@ class BasePage extends StatelessWidget {
         IconButton(
           onPressed: graphDisplay.resetGraphView,
           icon: const Icon(Icons.replay_rounded),
-        )
+        ),
+        IconButton(
+          onPressed: MyGraph.of(context).orchestrate,
+          icon: const Icon(Icons.rss_feed),
+        ),
       ],
     );
   }
@@ -96,8 +104,26 @@ class BasePage extends StatelessWidget {
           );
         } else {
           // still loading
-          return Container(
-            color: Colors.red,
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text("Mesh Communication"),
+              actions: const [
+                SBButton(null),
+                PPButton(null),
+                SFButton(null),
+                FFButton(null),
+              ],
+            ),
+            persistentFooterButtons: const [
+              IconButton(
+                onPressed: null,
+                icon: Icon(Icons.replay_rounded),
+              ),
+              IconButton(
+                onPressed: null,
+                icon: Icon(Icons.rss_feed),
+              ),
+            ],
           );
         }
       },
