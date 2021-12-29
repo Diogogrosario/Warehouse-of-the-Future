@@ -1,4 +1,4 @@
-from warehouse import *
+from warehouse import Warehouse, Shelf, Rack, Product
 
 class Storage:
     def __init__(self, db):
@@ -31,13 +31,16 @@ class Storage:
         products = []
 
         for _, p in df_products.iterrows():
-            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['sector_id'], p['frequency'])
+            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['type_id'], p['frequency'])
             products.append(product)
 
         return products
 
     def create_warehouse(self, warehouse_id):
-        warehouse = Warehouse(warehouse_id)
+        query_total_types = 'SELECT count(DISTINCT id) AS total_types FROM Product_Type'
+        total_types = int(self.db.df_query(query_total_types)['total_types'])
+
+        warehouse = Warehouse(warehouse_id, total_types)
 
         shelves_query = f"SELECT * FROM shelf WHERE warehouse_id = {warehouse_id}"
         shelves = self.db.df_query(shelves_query)

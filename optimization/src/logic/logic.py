@@ -1,16 +1,16 @@
 import heapq
-import json
 import sys
+import random as r
 from copy import deepcopy
 from datetime import datetime
 
 from database import Database
 from storage import *
-from warehouse import *
+from warehouse import Layout
+from constants import MAX_ITERATIONS
 
 db = None
 storage = None
-
 
 # Randomly generate a population of num layouts of the warehouse
 def generate_population(warehouse, num):
@@ -58,6 +58,9 @@ def genetic_algorithm(warehouse, population, num_iterations):
         if r.uniform(0, 1.0) > 0.80:  # mutation with a chance of 20%
             mutate(child)
 
+        # if index == 9900: # apagar
+        #     child = otimo(warehouse)
+
         heapq.heapreplace(population, child)  # remove the worst layout and add the new child
 
     final_layout = heapq.nlargest(1, population)[0]  # best layout
@@ -66,10 +69,29 @@ def genetic_algorithm(warehouse, population, num_iterations):
     return final_layout
 
 
-def mutate(child):
-    product = child.get_random_product()
-    child.change_place(product)
+def otimo(warehouse): # TODO: apagar depois de resolver métrica da organization
+    layout = Layout(warehouse)
+    for product in storage.products:
+        if product.type_id == 1:
+            layout.add_product_rack_id(1, product)
+        if product.type_id == 2:
+            layout.add_product_rack_id(7, product)
+        if product.type_id == 3:
+            layout.add_product_rack_id(13, product)
+        if product.type_id == 4:
+            layout.add_product_rack_id(19, product)
+        if product.type_id == 5:
+            layout.add_product_rack_id(25, product)
 
+    return layout
+
+def mutate(child):
+    total_products = len(storage.products)
+    products_to_mutate = r.sample(storage.products, total_products//2) # change the place of 50% of the products
+
+    for product in products_to_mutate:
+        child.change_place(product)
+    
 
 def dump_results_to_database(layout):
     query_insert_result = f"INSERT INTO Results (date_issued) values (%s)"
@@ -117,7 +139,7 @@ if __name__ == '__main__':
 
     initial_population = generate_population(warehouse, 10)
 
-    final_layout = genetic_algorithm(warehouse, initial_population, max_iterations)
+    final_layout = genetic_algorithm(warehouse, initial_population, MAX_ITERATIONS)
 
     print('----- FINAL LAYOUT -----')
     print(final_layout)
