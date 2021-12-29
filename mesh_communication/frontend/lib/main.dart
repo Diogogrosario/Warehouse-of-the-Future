@@ -1,14 +1,16 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
-import 'package:myapp/ActionButtons/FFButton.dart';
-import 'package:myapp/ActionButtons/PPButton.dart';
-import 'package:myapp/ActionButtons/SBButton.dart';
-import 'package:myapp/ActionButtons/SFButton.dart';
-import 'package:myapp/MyGraph.dart';
-import 'package:myapp/MyGraphDisplay.dart';
-import 'package:myapp/RequestHandler/Device.dart';
-import 'package:myapp/RequestHandler/RequestHandler.dart';
-import 'package:myapp/UndirectedGraph.dart';
+import 'package:meshcommunication/ActionButtons/FFButton.dart';
+import 'package:meshcommunication/ActionButtons/PPButton.dart';
+import 'package:meshcommunication/ActionButtons/SBButton.dart';
+import 'package:meshcommunication/ActionButtons/SFButton.dart';
+import 'package:meshcommunication/MyGraph.dart';
+import 'package:meshcommunication/MyGraphDisplay.dart';
+import 'package:meshcommunication/RequestHandler/Device.dart';
+import 'package:meshcommunication/RequestHandler/RequestHandler.dart';
+import 'package:meshcommunication/UndirectedGraph.dart';
 
 void main() {
   runApp(const MyApp());
@@ -62,7 +64,10 @@ class BasePage extends StatelessWidget {
     final MyGraphDisplay graphDisplay = MyGraphDisplay(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Mesh Communication"),
+        title: const Text(
+          "Mesh Communication",
+          key: Key("appTitle"),
+        ),
         actions: [
           SBButton(MyGraph.of(context).skipBackwards),
           PPButton(MyGraph.of(context).pausePlay),
@@ -106,7 +111,10 @@ class BasePage extends StatelessWidget {
           // still loading
           return Scaffold(
             appBar: AppBar(
-              title: const Text("Mesh Communication"),
+              title: const Text(
+                "Mesh Communication",
+                key: Key("appTitle"),
+              ),
               actions: const [
                 SBButton(null),
                 PPButton(null),
