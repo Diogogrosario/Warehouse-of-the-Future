@@ -22,14 +22,21 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 
-interface ReportProps {
-	title?: string;
+export enum Severity {
+	Warning,
+	Error,
+}
+
+export interface ReportProps {
+	title: string;
 	shortDescription: string;
 	description: string;
-	warningLevel: "warning" | "error";
+	warningLevel: Severity;
 	actions: [string, string][];
 	resolved: boolean;
 	reportId: number;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
@@ -59,10 +66,10 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							component="div"
 							sx={{
 								display: "flex",
-								...(warningLevel === "warning" && {
+								...(warningLevel === Severity.Warning && {
 									backgroundColor: "warning.main",
 								}),
-								...(warningLevel === "error" && {
+								...(warningLevel === Severity.Error && {
 									backgroundColor: "error.main",
 								}),
 								width: "20px",

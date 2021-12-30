@@ -5,8 +5,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
 import WarehouseRenderer from "./components/WarehouseRenderer";
-import Report from "./components/Report";
 import theme from "./styles/theme";
+import ReportList from "./components/ReportList";
 
 export enum FullscreenState {
 	Left,
@@ -110,18 +110,7 @@ export default function App() {
 								<Tab label="Devices" />
 							</Tabs>
 
-							<Report
-								title="Report Testing"
-								description="This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be"
-								shortDescription="A brief description of the problem"
-								warningLevel="warning"
-								actions={[
-									["04:05", "Latest action to be performed"],
-									["04:00", "Previous Action"],
-								]}
-								resolved={false}
-								reportId={1}
-							/>
+							<ReportList />
 
 							<FullscreenButton
 								fullscreenState={fullscreen}
