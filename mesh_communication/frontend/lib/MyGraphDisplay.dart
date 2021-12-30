@@ -132,6 +132,7 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
 
   Widget _getNode(int id, Color color) {
     return Material(
+      key: Key(id.toString()),
       color: color,
       borderRadius: BorderRadius.circular(4),
       child: InkWell(
@@ -155,6 +156,7 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
 
   Widget _getGraphView(BuildContext context) {
     return GraphView(
+      key: const Key("Graph"),
       graph: MyGraph.of(context).graph,
       algorithm: widget._algo,
       builder: (Node node) {

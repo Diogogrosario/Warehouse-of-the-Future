@@ -3,12 +3,16 @@ import 'package:gherkin/gherkin.dart';
 
 import 'package:meshcommunication/main.dart' as app;
 import 'hooks/myhook.dart';
+import 'steps/see_displays.dart';
 import 'steps/tap_n_times_step.dart';
 
 FlutterTestConfiguration gherkinTestConfiguration =
     FlutterTestConfiguration.DEFAULT(
   [
     whenTapNTimesStep,
+    ThenExpectTitleContent(),
+    whenOpenInterface,
+    thenIExpectDevices
   ],
 )
       ..hooks = [

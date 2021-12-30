@@ -15,6 +15,7 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
   @override
   void onRun() {
     testFeature0();
+    testFeature1();
   }
 
   void testFeature0() {
@@ -53,6 +54,41 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
           ),
           onAfter: () async => onAfterRunFeature(
             'Title',
+          ),
+        );
+      },
+    );
+  }
+
+  void testFeature1() {
+    runFeature(
+      'Graph:',
+      <String>[],
+      () {
+        runScenario(
+          'Display devices',
+          <String>[],
+          (TestDependencies dependencies) async {
+            await runStep(
+              'When I open the graph interface',
+              <String>[],
+              null,
+              dependencies,
+            );
+
+            await runStep(
+              'Then I should be able to see the device 1',
+              <String>[],
+              null,
+              dependencies,
+            );
+          },
+          onBefore: () async => onBeforeRunFeature(
+            'Graph',
+            <String>[],
+          ),
+          onAfter: () async => onAfterRunFeature(
+            'Graph',
           ),
         );
       },
