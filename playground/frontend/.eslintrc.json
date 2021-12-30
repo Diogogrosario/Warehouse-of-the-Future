@@ -16,10 +16,20 @@
 		"ecmaFeatures": {
 			"jsx": true
 		},
-		"ecmaVersion": 13,
+		"ecmaVersion": "latest",
 		"sourceType": "module",
-		"project": ["./tsconfig.json"]
+		"project": [
+			"./tsconfig.json"
+		]
 	},
-	"plugins": ["react", "@typescript-eslint"],
-	"rules": {}
+	"plugins": [
+		"react",
+		"@typescript-eslint"
+	],
+	"rules": {},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
 }
