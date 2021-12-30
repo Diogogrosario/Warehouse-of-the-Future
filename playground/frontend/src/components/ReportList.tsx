@@ -18,7 +18,7 @@ export default function ReportList() {
 	const [ascending, setAscending] = React.useState(false);
 	const [sortProperty, setSortProperty] = React.useState("updatedAt");
 
-	const [reports, setReports]: [ReportProps[], any] = useState([
+	const [reports, setReports] = useState<ReportProps[]>([
 		{
 			title: "Report Testing A",
 			description:
