@@ -124,11 +124,16 @@ class Layout:
 
             for dic in shelves_count_types:
               # Penalize empty shelves
-              # if not dic:
-              #   print("penalize")
-              #   score -= 1000
-              for val in dic.values():
-                score += np.power(2,val**2)
+              if dic:
+                max_key = max(dic, key=dic.get)
+                max_val = dic[max_key]
+                del dic[max_key]
+
+                score += 2**max_val
+
+                # If more than 1 product start penalizing
+                for val in dic.values():
+                  score -= 2**(val**2)
 
               
 
