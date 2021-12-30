@@ -16,3 +16,9 @@ await db.action.create({
 	employee_id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
 	reportId: 1,
 });
+
+await db.action.create({
+	description: "Replaced part",
+	employee_id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+	reportId: 1,
+});

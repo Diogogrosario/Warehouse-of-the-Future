@@ -22,7 +22,8 @@ export function create(req, res) {
 
 // Retrieve all Reports from the database.
 export function findAll(req, res) {
-	Report.findAll()
+	const Action = db.action;
+	Report.findAll( { include: Action} )
 		.then((data) => {
 			res.send(data);
 		})
@@ -34,8 +35,11 @@ export function findAll(req, res) {
 // Find a single Report with an id
 export function findOne(req, res) {
 	const id = req.params.id;
+	const Action = db.action;
 
-	Report.findByPk(id)
+	Report.findByPk(id, {
+		include: Action
+	})
 		.then((data) => {
 			if (data) res.send(data);
 			else res.status(404).send({ message: `Didn't find report ${id}.` });
