@@ -46,11 +46,15 @@
 		"typescript": "^4.5.2",
 		"webpack": "^5.64.2",
 		"webpack-cli": "^4.9.1",
-		"webpack-dev-server": "^4.5.0"
+		"webpack-dev-server": "^4.5.0",
+		"serve": "^13.0.2",
+		"react-scripts": "^5.0.0"
 	},
 	"scripts": {
-		"start": "webpack-dev-server --mode=development",
-		"build": "webpack --mode=production",
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"serve": "serve -s build",
 		"lint": "eslint --ext .js,.jsx,.ts,.tsx .",
 		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,json,yml}\"",
 		"check-format": "prettier --check \"**/*.{js,jsx,ts,tsx,css,html,json,yml}\""
