@@ -113,7 +113,8 @@ class MyGraph extends InheritedWidget {
   }
 
   void pausePlay() {
-    print("Bazinga!");
+    print("Called timed function");
+    skipForward();
   }
 
   static MyGraph of(BuildContext context) {

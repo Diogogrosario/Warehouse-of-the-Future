@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,7 +67,7 @@ public class API implements ErrorController {
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder ret = new StringBuilder();
         String add;
-        while((add = br.readLine()) != null) ret.append(add).append("\n");
+        while ((add = br.readLine()) != null) ret.append(add).append("\n");
         return ret.toString();
     }
 
