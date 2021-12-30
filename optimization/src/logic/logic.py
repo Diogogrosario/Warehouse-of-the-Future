@@ -87,8 +87,8 @@ def otimo(warehouse): # TODO: apagar depois de resolver métrica da organization
 
 def mutate(child):
     total_products = len(storage.products)
-    products_to_mutate = r.sample(storage.products, total_products//2) # change the place of 50% of the products
-    # products_to_mutate = [child.get_random_product()]
+    # products_to_mutate = r.sample(storage.products, total_products//2) # change the place of 50% of the products
+    products_to_mutate = [child.get_random_product()]
 
     for product in products_to_mutate:
         child.change_place(product)

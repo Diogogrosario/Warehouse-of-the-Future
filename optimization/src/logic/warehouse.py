@@ -107,20 +107,31 @@ class Layout:
             score += sum(np.diff(shelves_frequencies))
 
         if 'organization' in metrics_to_optimize:
-            shelves_different_types = []
+            shelves_count_types = []
 
             for shelf in self.warehouse.shelves:
-                different_types = []
+              # type_x : n_products_type_x
+              count_types = {}
 
-                for rack in shelf.racks:
-                    for product in rack.products:
-                        if product.type_id not in different_types:
-                            different_types.append(product.type_id)
+              for rack in shelf.racks:
+                for product in rack.products:
+                  if product.type_id not in count_types:
+                    count_types[product.type_id] = 1
+                  else:
+                    count_types[product.type_id] += 1
 
-                shelves_different_types.append(len(different_types))
-            
-            shelves_different_types = np.square(shelves_different_types)
-            score += 1/(sum(shelves_different_types))
+              shelves_count_types.append(count_types)
+
+            for dic in shelves_count_types:
+              # Penalize empty shelves
+              # if not dic:
+              #   print("penalize")
+              #   score -= 1000
+              for val in dic.values():
+                score += np.power(2,val**2)
+
+              
+
 
         # Penalize layouts with products out
         score -= len(self.products_out) * 100
