@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../MyGraph.dart';
+import '../my_graph.dart';
 
 class PPButton extends StatefulWidget {
   final VoidCallback? _callback;
@@ -25,8 +25,8 @@ class _PPButtonState extends State<PPButton> {
     setState(() {
       _playing = !_playing;
       if (_playing) {
-        _timer =
-            Timer.periodic(const Duration(seconds: secondsBetweenRequests), (timer) {
+        _timer = Timer.periodic(const Duration(seconds: secondsBetweenRequests),
+            (timer) {
           widget._callback!();
         });
       } else {
