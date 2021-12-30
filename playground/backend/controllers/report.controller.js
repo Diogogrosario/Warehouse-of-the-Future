@@ -23,7 +23,13 @@ export function create(req, res) {
 // Retrieve all Reports from the database.
 export function findAll(req, res) {
 	const Action = db.action;
-	Report.findAll( { include: Action} )
+	Report.findAll( { include: {
+		model: Action,
+		separate: true,
+		order: [
+			['createdAt', 'DESC']
+		]
+	} } )
 		.then((data) => {
 			res.send(data);
 		})

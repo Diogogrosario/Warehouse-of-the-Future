@@ -20,7 +20,7 @@ export function create(req, res) {
 
 // Retrieve all Action from the database.
 export function findAll(req, res) {
-	Action.findAll()
+	Action.findAll({ order: [['createdAt', 'DESC']] } )
 		.then((data) => {
 			res.send(data);
 		})

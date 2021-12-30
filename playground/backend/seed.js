@@ -4,7 +4,7 @@ import db from "./models/index.js";
 await db.device.create({ id: "470AD" });
 
 await db.report.create({
-	severity: "Error",
+	severity: "error",
 	title: "Something went wrong",
 	description: "We are going to fix it... Hopefully",
 	resolved: false,

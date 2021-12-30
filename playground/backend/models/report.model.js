@@ -1,7 +1,7 @@
 export default (sequelize, Sequelize) => {
 	return sequelize.define("report", {
 		severity: {
-			type: Sequelize.ENUM("Error", "Warning"),
+			type: Sequelize.ENUM("error", "warning"),
 		},
 		title: {
 			type: Sequelize.TEXT,

@@ -22,16 +22,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 
-export enum Severity {
-	Warning,
-	Error,
-}
-
 export interface ReportProps {
 	title: string;
 	shortDescription: string;
 	description: string;
-	warningLevel: Severity;
+	warningLevel: "warning" | "error";
 	actions: [string, string][];
 	resolved: boolean;
 	reportId: number;
@@ -66,10 +61,10 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							component="div"
 							sx={{
 								display: "flex",
-								...(warningLevel === Severity.Warning && {
+								...(warningLevel === "warning" && {
 									backgroundColor: "warning.main",
 								}),
-								...(warningLevel === Severity.Error && {
+								...(warningLevel === "error" && {
 									backgroundColor: "error.main",
 								}),
 								width: "20px",
