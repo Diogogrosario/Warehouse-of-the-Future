@@ -134,7 +134,9 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 									<ListItem
 										key={`${reportComponentId}-action-${index}`}
 										id={`${reportComponentId}-action-${index}`}
-										style={{ display: "flex" }}
+										style={{
+											display: "flex",
+										}}
 									>
 										<ListItemIcon>
 											<ReceiptLongIcon />
