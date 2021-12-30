@@ -47,6 +47,13 @@ class Layout:
                 if rack.id == rack_id:
                     return True if rack.add_product(product) else False
 
+    def get_random_product(self):
+      random_product = None
+      while random_product is None:
+          random_product = self.warehouse.get_random_shelf().get_random_rack().get_random_product()
+
+      return random_product
+
     def add_product_random(self, product):
         iteration = 0
         random_shelf = r.choice(self.warehouse.shelves)

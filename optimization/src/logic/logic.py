@@ -88,6 +88,7 @@ def otimo(warehouse): # TODO: apagar depois de resolver métrica da organization
 def mutate(child):
     total_products = len(storage.products)
     products_to_mutate = r.sample(storage.products, total_products//2) # change the place of 50% of the products
+    # products_to_mutate = [child.get_random_product()]
 
     for product in products_to_mutate:
         child.change_place(product)
@@ -98,7 +99,7 @@ def dump_results_to_database(layout):
 
     db.df_query(query_insert_result, [datetime.now().strftime('%Y-%m-%d %H:%M:%S')])
 
-    result_id_inserted = f"SELECT MAX(id) FROM RESULTS"
+    result_id_inserted = f"SELECT MAX(id) FROM Results"
 
     result_id = int(db.df_query(result_id_inserted).at[0, 'MAX(id)'])
 
@@ -125,8 +126,8 @@ if __name__ == '__main__':
         db = Database()
         storage = Storage(db)
 
-    query_warehouse = "SELECT * FROM warehouse"
-    query_month_manifesto = "SELECT * FROM month_manifesto"
+    query_warehouse = "SELECT * FROM Warehouse"
+    query_month_manifesto = "SELECT * FROM Month_Manifesto"
 
     warehouses = db.df_query(query_warehouse)
     # month_manifestos = db.df_query(query_month_manifesto)
