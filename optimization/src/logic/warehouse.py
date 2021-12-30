@@ -110,20 +110,18 @@ class Layout:
             shelves_count_types = []
 
             for shelf in self.warehouse.shelves:
-              # type_x : n_products_type_x
-              count_types = {}
+                count_types = {} # { type_x : n_products_type_x }
 
-              for rack in shelf.racks:
-                for product in rack.products:
-                  if product.type_id not in count_types:
-                    count_types[product.type_id] = 1
-                  else:
-                    count_types[product.type_id] += 1
+                for rack in shelf.racks:
+                    for product in rack.products:
+                        if product.type_id not in count_types:
+                            count_types[product.type_id] = 1
+                        else:
+                            count_types[product.type_id] += 1
 
-              shelves_count_types.append(count_types)
+                shelves_count_types.append(count_types)
 
             for dic in shelves_count_types:
-              # Penalize empty shelves
               if dic:
                 max_key = max(dic, key=dic.get)
                 max_val = dic[max_key]
@@ -131,11 +129,9 @@ class Layout:
 
                 score += 2**max_val
 
-                # If more than 1 product start penalizing
+                # If more than 1 type start penalizing
                 for val in dic.values():
                   score -= 2**(val**2)
-
-              
 
 
         # Penalize layouts with products out
@@ -165,9 +161,8 @@ class Layout:
 
 
 class Warehouse:
-    def __init__(self, id, total_types):
+    def __init__(self, id):
         self.id = id
-        self.total_types = total_types
         self.shelves = []  # list of Shelves
 
     def add_shelf(self, shelf):

@@ -23,6 +23,10 @@ def generate_population(warehouse, num):
 
     return population
 
+def mutate(child):
+    product = child.get_random_product()
+    child.change_place(product)
+
 
 def reproduce(parent1, parent2, warehouse):
     # percorrer todos os produtos
@@ -58,40 +62,12 @@ def genetic_algorithm(warehouse, population, num_iterations):
         if r.uniform(0, 1.0) > 0.80:  # mutation with a chance of 20%
             mutate(child)
 
-        # if index == 9900: # apagar
-        #     child = otimo(warehouse)
-
         heapq.heapreplace(population, child)  # remove the worst layout and add the new child
 
     final_layout = heapq.nlargest(1, population)[0]  # best layout
     print(f'FINAL_SCORE {str(final_layout.get_score())}')
     print(f'PRODUCTS OUT: {len(final_layout.products_out)}')
     return final_layout
-
-
-def otimo(warehouse): # TODO: apagar depois de resolver métrica da organization
-    layout = Layout(warehouse)
-    for product in storage.products:
-        if product.type_id == 1:
-            layout.add_product_rack_id(1, product)
-        if product.type_id == 2:
-            layout.add_product_rack_id(7, product)
-        if product.type_id == 3:
-            layout.add_product_rack_id(13, product)
-        if product.type_id == 4:
-            layout.add_product_rack_id(19, product)
-        if product.type_id == 5:
-            layout.add_product_rack_id(25, product)
-
-    return layout
-
-def mutate(child):
-    total_products = len(storage.products)
-    # products_to_mutate = r.sample(storage.products, total_products//3) # change the place of 50% of the products
-    products_to_mutate = [child.get_random_product()]
-
-    for product in products_to_mutate:
-        child.change_place(product)
     
 
 def dump_results_to_database(layout):

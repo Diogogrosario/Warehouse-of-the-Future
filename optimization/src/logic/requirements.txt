@@ -1,5 +1,5 @@
 futures==3.3.0
-msql_connector_python==8.0.27
+mysql_connector_python==8.0.27
 numpy==1.21.4
 pandas==1.3.4
 protobuf==3.19.1

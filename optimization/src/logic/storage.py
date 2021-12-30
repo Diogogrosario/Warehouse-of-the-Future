@@ -37,10 +37,7 @@ class Storage:
         return products
 
     def create_warehouse(self, warehouse_id):
-        query_total_types = 'SELECT count(DISTINCT id) AS total_types FROM Product_Type'
-        total_types = int(self.db.df_query(query_total_types)['total_types'])
-
-        warehouse = Warehouse(warehouse_id, total_types)
+        warehouse = Warehouse(warehouse_id)
 
         shelves_query = f"SELECT * FROM Shelf WHERE warehouse_id = {warehouse_id}"
         shelves = self.db.df_query(shelves_query)
