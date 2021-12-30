@@ -1,6 +1,6 @@
 import { AppBar, Container, Toolbar, Typography } from "@mui/material";
 import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "@mui/material";
 
 import theme from "../styles/theme";
@@ -15,7 +15,7 @@ const Layout : React.FC<LayoutProps> = (props : LayoutProps) => {
     const { children } = props;
 
     return (
-        <React.Fragment>
+        <HelmetProvider>
             <Helmet>
                 <html lang="en" />
                 <title>Playground | Warehouse of the Future</title>
@@ -50,7 +50,7 @@ const Layout : React.FC<LayoutProps> = (props : LayoutProps) => {
                     </div>
                 </div>
             </ThemeProvider>
-        </React.Fragment>
+        </HelmetProvider>
     );
 }
 

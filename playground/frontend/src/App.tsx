@@ -196,19 +196,6 @@ export default function App() {
 						<Box sx={{ marginBottom: "4em" }}></Box>
 						<LabelPicker labels={labels} />
 
-						{/* <Report
-							title="Report Testing"
-							description="This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be"
-							shortDescription="A brief description of the problem"
-							warningLevel="warning"
-							actions={[
-								["04:05", "Latest action to be performed"],
-								["04:00", "Previous Action"],
-							]}
-							resolved={false}
-							reportId={1}
-						/> */}
-
 						<FullscreenButton
 							fullscreenState={fullscreen}
 							setFullscreen={setFullscreen}
