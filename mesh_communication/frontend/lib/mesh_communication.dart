@@ -23,21 +23,6 @@ class MeshCommunication extends StatelessWidget {
     }
   }
 
-  static Widget pageSkeleton(
-      {List<Widget>? actions, Widget? body, List<Widget>? footers}) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Mesh Communication",
-          key: Key("appTitle"),
-        ),
-        actions: actions,
-      ),
-      body: body,
-      persistentFooterButtons: footers,
-    );
-  }
-
   void _startSimulation(BuildContext context) {
     Navigator.push(
       context,
@@ -89,7 +74,6 @@ class MeshCommunication extends StatelessWidget {
         ),
       ),
     );
-    //BasePage(requestHandler: requestHandler,),
   }
 }
 
@@ -97,6 +81,44 @@ class BasePage extends StatelessWidget {
   final RequestHandler requestHandler;
 
   const BasePage({required this.requestHandler, Key? key}) : super(key: key);
+
+  Widget _pageSkeleton(
+      {List<Widget>? actions, Widget? body, List<Widget>? footers}) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Mesh Communication",
+          key: Key("appTitle"),
+        ),
+        actions: actions,
+      ),
+      body: body,
+      persistentFooterButtons: footers,
+    );
+  }
+
+  Widget _genGraphPage(BuildContext context) {
+    final MyGraphDisplay graphDisplay = MyGraphDisplay(context);
+    return _pageSkeleton(
+      actions: [
+        SBButton(MyGraph.of(context).skipBackwards),
+        PPButton(MyGraph.of(context).pausePlay),
+        SFButton(MyGraph.of(context).skipForward),
+        FFButton(MyGraph.of(context).fastForward),
+      ],
+      body: graphDisplay,
+      footers: [
+        IconButton(
+          onPressed: graphDisplay.resetGraphView,
+          icon: const Icon(Icons.replay_rounded),
+        ),
+        IconButton(
+          onPressed: MyGraph.of(context).orchestrate,
+          icon: const Icon(Icons.rss_feed),
+        ),
+      ],
+    );
+  }
 
   Future<Graph> _genGraph(RequestHandler requestHandler) async {
     Graph graph = UndirectedGraph();
@@ -127,35 +149,6 @@ class BasePage extends StatelessWidget {
     return graph;
   }
 
-  Widget _genGraphPage(BuildContext context) {
-    final MyGraphDisplay graphDisplay = MyGraphDisplay(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Mesh Communication",
-          key: Key("appTitle"),
-        ),
-        actions: [
-          SBButton(MyGraph.of(context).skipBackwards),
-          PPButton(MyGraph.of(context).pausePlay),
-          SFButton(MyGraph.of(context).skipForward),
-          FFButton(MyGraph.of(context).fastForward),
-        ],
-      ),
-      body: graphDisplay,
-      persistentFooterButtons: [
-        IconButton(
-          onPressed: graphDisplay.resetGraphView,
-          icon: const Icon(Icons.replay_rounded),
-        ),
-        IconButton(
-          onPressed: MyGraph.of(context).orchestrate,
-          icon: const Icon(Icons.rss_feed),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Graph>(
@@ -174,20 +167,14 @@ class BasePage extends StatelessWidget {
           );
         } else {
           // still loading
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                "Mesh Communication",
-                key: Key("appTitle"),
-              ),
-              actions: const [
-                SBButton(null),
-                PPButton(null),
-                SFButton(null),
-                FFButton(null),
-              ],
-            ),
-            persistentFooterButtons: const [
+          return _pageSkeleton(
+            actions: const [
+              SBButton(null),
+              PPButton(null),
+              SFButton(null),
+              FFButton(null),
+            ],
+            footers: const [
               IconButton(
                 onPressed: null,
                 icon: Icon(Icons.replay_rounded),
