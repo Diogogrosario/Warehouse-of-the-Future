@@ -12,7 +12,7 @@ import 'package:meshcommunication/undirected_graph.dart';
 
 class MeshCommunication extends StatelessWidget {
   static const String url = "http://localhost:8080";
-  RequestHandler requestHandler;
+  late final RequestHandler requestHandler;
 
   MeshCommunication({RequestHandler? requestHandler, Key? key})
       : requestHandler = RequestHandler(MeshCommunication.url),
