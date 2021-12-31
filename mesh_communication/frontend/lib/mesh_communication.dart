@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
+import 'package:meshcommunication/ActionButtons/action_button.dart';
 import 'package:meshcommunication/ActionButtons/ff_button.dart';
 import 'package:meshcommunication/ActionButtons/pp_button.dart';
 import 'package:meshcommunication/ActionButtons/sb_button.dart';
@@ -22,14 +23,73 @@ class MeshCommunication extends StatelessWidget {
     }
   }
 
+  static Widget pageSkeleton(
+      {List<Widget>? actions, Widget? body, List<Widget>? footers}) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Mesh Communication",
+          key: Key("appTitle"),
+        ),
+        actions: actions,
+      ),
+      body: body,
+      persistentFooterButtons: footers,
+    );
+  }
+
+  void _startSimulation(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BasePage(requestHandler: requestHandler),
+      ),
+    );
+  }
+
+  Widget _titleScreen(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            "Mesh Communication",
+            style: TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.1,
+          ),
+          ActionButton(
+            () {
+              _startSimulation(context);
+            },
+            "Start simulation",
+            const Icon(Icons.play_circle_fill_rounded),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BasePage(
-        requestHandler: requestHandler,
+      home: Scaffold(
+        body: Builder(
+          builder: (BuildContext innerContext) {
+            return _titleScreen(innerContext);
+          },
+        ),
       ),
     );
+    //BasePage(requestHandler: requestHandler,),
   }
 }
 
