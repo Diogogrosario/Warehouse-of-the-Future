@@ -44,7 +44,7 @@ class RequestHandler {
     return ret;
   }
 
-  Future<List<int>> getEdges(String id) async {
+  Future<List<int>> getNeighbors(String id) async {
     http.Response fetchContent =
         await _client.get(_resourceUri("devices/inrange/" + id));
     List neighbors = jsonDecode(fetchContent.body);

@@ -1,6 +1,7 @@
 import 'package:flutter_gherkin/flutter_gherkin.dart';
 import 'package:gherkin/gherkin.dart';
 import 'package:meshcommunication/RequestHandler/request_handler.dart';
+import 'package:meshcommunication/RequestHandler/request_handler_mock.dart';
 
 import 'package:meshcommunication/main.dart' as app;
 import 'package:meshcommunication/mesh_communication.dart';
@@ -35,7 +36,7 @@ FlutterTestConfiguration gherkinTestConfiguration =
 
 // ignore: prefer_function_declarations_over_variables
 Future<void> Function(World) appInitializationFn = (World world) async {
-  RequestHandler requestHandler = RequestHandler(MeshCommunication.url);
+  RequestHandler requestHandler = RequestHandlerMock();
   (world as CustomWorld).setRequestHandler(requestHandler);
   app.main(requestHandler: requestHandler);
 };
