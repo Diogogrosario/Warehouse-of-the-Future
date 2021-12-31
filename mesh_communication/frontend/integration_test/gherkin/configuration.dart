@@ -1,9 +1,12 @@
 import 'package:flutter_gherkin/flutter_gherkin.dart';
 import 'package:gherkin/gherkin.dart';
+import 'package:meshcommunication/RequestHandler/request_handler.dart';
 
 import 'package:meshcommunication/main.dart' as app;
+import 'package:meshcommunication/mesh_communication.dart';
 import 'hooks/myhook.dart';
 import 'steps/tap_n_times_step.dart';
+import 'world/custom_world.dart';
 
 FlutterTestConfiguration gherkinTestConfiguration =
     FlutterTestConfiguration.DEFAULT(
@@ -27,10 +30,12 @@ FlutterTestConfiguration gherkinTestConfiguration =
         JsonReporter(
           writeReport: (_, __) => Future<void>.value(),
         ),
-      ];
+      ]
+      ..createWorld = (config) => Future.value(CustomWorld());
 
 // ignore: prefer_function_declarations_over_variables
 Future<void> Function(World) appInitializationFn = (World world) async {
-  // ensure a new injector instance is created each time
-  app.main();
+  RequestHandler requestHandler = RequestHandler(MeshCommunication.url);
+  (world as CustomWorld).setRequestHandler(requestHandler);
+  app.main(requestHandler: requestHandler);
 };
