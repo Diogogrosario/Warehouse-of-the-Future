@@ -20,48 +20,6 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
 
   void testFeature0() {
     runFeature(
-      'Title:',
-      <String>[],
-      () {
-        runScenario(
-          'The application title is Mesh Communication after loading',
-          <String>[],
-          (TestDependencies dependencies) async {
-            await runStep(
-              'Given I expect the "appTitle1" to be "Mesh Communication"',
-              <String>[],
-              null,
-              dependencies,
-            );
-
-            await runStep(
-              'When I tap the "appTitle2" 10 times',
-              <String>[],
-              null,
-              dependencies,
-            );
-
-            await runStep(
-              'Then I expect the "appTitle3" to be "Mesh Communication"',
-              <String>[],
-              null,
-              dependencies,
-            );
-          },
-          onBefore: () async => onBeforeRunFeature(
-            'Title',
-            <String>[],
-          ),
-          onAfter: () async => onAfterRunFeature(
-            'Title',
-          ),
-        );
-      },
-    );
-  }
-
-  void testFeature1() {
-    runFeature(
       'Graph:',
       <String>[],
       () {
@@ -69,6 +27,20 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
           'Display devices',
           <String>[],
           (TestDependencies dependencies) async {
+            await runStep(
+              'Given that the device 1 is in the graph in the position 1, 1',
+              <String>[],
+              null,
+              dependencies,
+            );
+
+            await runStep(
+              'And that the device 2 is in the graph in the position 1, 2',
+              <String>[],
+              null,
+              dependencies,
+            );
+
             await runStep(
               'When I open the graph interface',
               <String>[],
@@ -82,6 +54,13 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
               null,
               dependencies,
             );
+
+            await runStep(
+              'And I should be able to see the device 2',
+              <String>[],
+              null,
+              dependencies,
+            );
           },
           onBefore: () async => onBeforeRunFeature(
             'Graph',
@@ -89,6 +68,48 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
           ),
           onAfter: () async => onAfterRunFeature(
             'Graph',
+          ),
+        );
+      },
+    );
+  }
+
+  void testFeature1() {
+    runFeature(
+      'Title:',
+      <String>[],
+      () {
+        runScenario(
+          'The application title is Mesh Communication after loading',
+          <String>[],
+          (TestDependencies dependencies) async {
+            await runStep(
+              'Given I expect the "appTitle" to be "Mesh Communication"',
+              <String>[],
+              null,
+              dependencies,
+            );
+
+            await runStep(
+              'When I tap the "appTitle" 10 times',
+              <String>[],
+              null,
+              dependencies,
+            );
+
+            await runStep(
+              'Then I expect the "appTitle" to be "Mesh Communication"',
+              <String>[],
+              null,
+              dependencies,
+            );
+          },
+          onBefore: () async => onBeforeRunFeature(
+            'Title',
+            <String>[],
+          ),
+          onAfter: () async => onAfterRunFeature(
+            'Title',
           ),
         );
       },

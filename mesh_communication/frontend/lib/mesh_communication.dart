@@ -41,6 +41,7 @@ class MeshCommunication extends StatelessWidget {
         children: [
           const Text(
             "Mesh Communication",
+            key: Key("startAppTitle"),
             style: TextStyle(
               color: Colors.blue,
               fontWeight: FontWeight.bold,
@@ -56,6 +57,7 @@ class MeshCommunication extends StatelessWidget {
             },
             "Start simulation",
             const Icon(Icons.play_circle_fill_rounded),
+            key: const Key("startButton")
           ),
         ],
       ),

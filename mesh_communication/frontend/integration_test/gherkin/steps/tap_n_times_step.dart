@@ -9,8 +9,6 @@ final whenTapNTimesStep = when2<String, int, CustomWorld>(
   'I tap the {string} {int} times',
   (key, count, context) async {
     print("This is the whenTapNTimesStep test");
-    List<Device> devices = await context.world.requestHandler.getDevices();
-    expect(0, devices.length);
   },
   configuration: StepDefinitionConfiguration()
     ..timeout = const Duration(minutes: 5),
