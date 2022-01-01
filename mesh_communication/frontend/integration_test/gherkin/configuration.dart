@@ -13,6 +13,7 @@ FlutterTestConfiguration gherkinTestConfiguration =
     FlutterTestConfiguration.DEFAULT(
   [
     whenTapNTimesStep,
+    givenTitle
   ],
 )
       ..hooks = [
