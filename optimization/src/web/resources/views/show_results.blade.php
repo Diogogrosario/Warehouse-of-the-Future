@@ -9,7 +9,7 @@
             @include('partials.show_results.carousel',['shelves'=>$shelves])
         @else
             <div class="center alert alert-danger" role="alert">
-                No layout generated. To generate click <a class="text-danger" href="{{route('filters')}}">here</a>.
+                No layout generated. To generate click <a class="text-danger" href="{{route('home')}}">here</a>.
             </div>
         @endif
     </div>

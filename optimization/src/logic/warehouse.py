@@ -4,20 +4,17 @@ import random as r
 import numpy as np
 from copy import deepcopy
 
-
 max_iterations = 10000
-
-# metrics_to_optimize = ['weight']
-# metrics_to_optimize = ['work']
-metrics_to_optimize = ['frequency']
-# metrics_to_optimize = ['sector']
 
 worker_average_height = 1.75
 
+
 class Layout:
-    def __init__(self, warehouse):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
+    # TODO: Talvez manter lista com todos os produtos e respetivas posições
+    def __init__(self, warehouse, metrics_to_optimize):
         self.warehouse = warehouse
         self.products_out = []
+        self.metrics_to_optimize = metrics_to_optimize
 
     def get_random_rack(self):
         shelf = self.warehouse.get_random_shelf()
@@ -74,13 +71,13 @@ class Layout:
     def get_score(self):
         score = 0
 
-        if 'weight' in metrics_to_optimize:
+        if 'weight' in self.metrics_to_optimize:
             for shelf in self.warehouse.shelves:
                 for rack in shelf.racks:
                     for product in rack.products:
                         score += float(product.weight) / max(float(rack.y), 0.1)
 
-        if 'sector' in metrics_to_optimize:
+        if 'sector' in self.metrics_to_optimize:
             for shelf in self.warehouse.shelves:
                 different_sectors = []
 
@@ -96,7 +93,7 @@ class Layout:
                 elif len(different_sectors) == 0:
                     score -= 50
 
-        if 'work' in metrics_to_optimize:
+        if 'work' in self.metrics_to_optimize:
             adj_side = 0.2
             chest_y = worker_average_height * (2.0 / 3.0)
 
@@ -109,7 +106,7 @@ class Layout:
                     for product in rack.products:
                         score += math.cos(math.radians(theta)) * float(product.weight)
 
-        if 'frequency' in metrics_to_optimize:
+        if 'frequency' in self.metrics_to_optimize:
             shelves_frequencies = []
 
             for shelf in self.warehouse.shelves:
@@ -119,12 +116,12 @@ class Layout:
                         shelf_frequency += product.frequency
 
                 shelves_frequencies.append(shelf_frequency)
-            
+
             shelves_frequencies = sorted(shelves_frequencies)
 
             score += sum(np.diff(shelves_frequencies))
 
-        if 'sector' in metrics_to_optimize:
+        if 'sector' in self.metrics_to_optimize:
             for shelf in self.warehouse.shelves:
                 different_sectors = []
 
@@ -134,7 +131,6 @@ class Layout:
                             different_sectors.append(product.sector_id)
 
                 score -= len(different_sectors) * 3
-
 
         score -= len(self.products_out) * 100
 

@@ -15,49 +15,8 @@
                         </div>
                     </div>
                 </div>
-                <form>
-                    <div class="generateLayoutTab">
-                        <div class="form">
-                            <div class="col">
-                                <h1>Generate Layout</h1>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        <h6>Weight optimization</h6>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        <h6>Time and space optimization</h6>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        <h6>Hardware optimization</h6>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        <h6>Minimize errors</h6>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="boxDiv">
-                            <button type="submit" class="button-9">Generate</button>
-                        </div>
-                    </div>
-                </form>
-
-
+                @include('partials.generate_layouts.form_generate')
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
     </div>
 @endsection
-<!-- /#wrapper -->
-</body>
-</html>
