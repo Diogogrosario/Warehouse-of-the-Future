@@ -15,7 +15,7 @@
                                 <h6>While You Were Gone...</h6>
                                 <h5>{{$numberNotReads}} New Layouts were Generated</h5>
                             @endif
-                            <button class="btnSeeAll">See all</button>
+                            <a href="{{route('layouts')}}" class="btnSeeAll">See all</a>
                         </div>
                     </div>
                 </div>

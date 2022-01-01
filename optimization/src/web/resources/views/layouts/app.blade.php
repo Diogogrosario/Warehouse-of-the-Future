@@ -28,7 +28,9 @@
             <a href="/" class="list-group-item list-group-item-action sidebarItem">Home</a>
             <a href="{{route('layouts')}}" class="list-group-item list-group-item-action sidebarItem">Visualize
                 layouts</a>
-            <a href="#" class="list-group-item list-group-item-action sidebarItem">Reports</a>
+            @if(false)
+                <a href="#" class="list-group-item list-group-item-action sidebarItem">Reports</a>
+            @endif
         </div>
     </div>
     <!-- /#sidebar-wrapper -->

@@ -4,16 +4,14 @@
         <div class="form-row justify-content-around">
             <div class="col-auto">
                 <h1>Human</h1>
-                @if(false)
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
-                               value="travel-distance"
-                               id="travel-distance">
-                        <label class="form-check-label" for="travel-distance">
-                            Optimize travel distance
-                        </label>
-                    </div>
-                @endif
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
+                           value="frequency"
+                           id="frequency">
+                    <label class="form-check-label" for="frequency">
+                        Optimize Travel Distance - Frequents Together
+                    </label>
+                </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
                            value="weight"

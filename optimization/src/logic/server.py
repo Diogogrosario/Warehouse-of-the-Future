@@ -34,6 +34,9 @@ def run_server():
                     if 'work' in data['optimization-parameters']:
                         metrics.append('work')
 
+                    if 'frequency' in data['optimization-parameters']:
+                        metrics.append('frequency')
+
                     if len(sys.argv) > 1 and sys.argv[1] == 'docker':
                         logic.main(True, metrics)
                     else:
