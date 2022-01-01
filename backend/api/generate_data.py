@@ -612,7 +612,7 @@ def generate_super_rack(
 
                 sensor = generate_sensor(
                     bucket_id=bucket["id"],
-                    staff_id=random.choice(staff_ids)
+                    staff_ids=staff_ids
                 )
                 sensors.append(sensor)
 
@@ -717,7 +717,7 @@ def generate_item(id, bucket_id, max_width, max_height):
     return item
 
 
-def generate_sensor(bucket_id, staff_id):
+def generate_sensor(bucket_id, staff_ids):
     number_of_movements = random.randint(1, 10)
     movement_timestamps = []
 
@@ -730,7 +730,7 @@ def generate_sensor(bucket_id, staff_id):
     for _ in range(number_of_staff_contacts):
         staff_contact = {
             "time": utils.get_random_date_last_day(),
-            "staff_id": staff_id
+            "staff_id": random.choice(staff_ids)
         }
 
         staff_contacts.append(staff_contact)
