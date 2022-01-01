@@ -11,6 +11,8 @@ class Rack extends Model
 {
     protected $table = 'Rack';
 
+    public $timestamps = false;
+
     public function shelf(): BelongsTo
     {
         return $this->belongsTo(Shelf::class);

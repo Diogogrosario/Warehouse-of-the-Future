@@ -48,7 +48,10 @@ class ResultController extends Controller
      * @return View
      */
     public function show(Result $result): View
+
     {
+        $result->is_read = true;
+        $result->update();
 
         $layoutResult = app(ProductRackController::class)->getLayoutForResult($result);
 

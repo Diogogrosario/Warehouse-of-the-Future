@@ -9,8 +9,12 @@
                         <div class="course-preview">
                         </div>
                         <div class="course-info">
-                            <h6>while you were gone...</h6>
-                            <h5>New layouts were generated</h5>
+                            @if($numberNotReads===0)
+                                <h5>No New Layouts Ready</h5>
+                            @else
+                                <h6>While You Were Gone...</h6>
+                                <h5>{{$numberNotReads}} New Layouts were Generated</h5>
+                            @endif
                             <button class="btnSeeAll">See all</button>
                         </div>
                     </div>

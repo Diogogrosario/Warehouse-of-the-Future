@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Result;
 use Illuminate\Contracts\Support\Renderable;
 
 class HomeController extends Controller
@@ -23,11 +24,9 @@ class HomeController extends Controller
      */
     public function index(): Renderable
     {
-        $name = "David";
-
         return view('home', [
-            "name" => $name,
-
+            "name" => "David",
+            "numberNotReads" => count(Result::where('is_read', false)->get()),
         ]);
     }
 }

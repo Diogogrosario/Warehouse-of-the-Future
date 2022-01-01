@@ -9,6 +9,8 @@ class Result extends Model
 {
     protected $table = 'Results';
 
+    public $timestamps = false;
+
     public function results(): HasMany
     {
         return $this->hasMany(Product_Rack::class);

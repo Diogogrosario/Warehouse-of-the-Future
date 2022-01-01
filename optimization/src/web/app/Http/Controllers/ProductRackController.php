@@ -11,10 +11,13 @@ class ProductRackController extends Controller
     public function show()
     {
         $result = Result::all()->last();
-
+        
         if (is_null($result))
             return view('show_results', ['hasResults' => False]);
-        
+
+        $result->is_read = true;
+        $result->update();
+
         $layoutResult = $this->getLayoutForResult($result);
 
         return view('show_results', [
