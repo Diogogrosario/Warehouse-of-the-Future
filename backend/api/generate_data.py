@@ -64,10 +64,7 @@ item_in_manifest_attributes = namespace.model("ItemInManifest", {
     ),
 })
 
-# TODO:
-# put the available items in the database,
-# and add the weight and dimensions
-available_items = [
+available_item_names = [
     # items relacionados com o sistema de travagem
     "pastilhas de travão", "kit de travões", "maxilas do travão",
     "pinças de travão", "cilindro de travão de roda", "tubo flexível de vácuo",
@@ -317,23 +314,39 @@ orchestrator_attributes = namespace.model("Orchestrator", {
 # Manifests
 # ------------------------------------------------------------------------------
 
-def generate_random_items_for_manifest(number_of_items=None):
-    items = []
+def generate_items_for_manifest(number_of_items=None):
+    manifest_items = []
+    items = get_static_items_data()
 
     if (number_of_items is None):
-        number_of_items = random.randint(1, 3)
+        number_of_items = random.randint(1, 4)
 
-    for _ in range(number_of_items):
-        id = uuid.uuid4()
+    selected_item_indexes = random.sample(
+        range(0, len(items)-1),
+        number_of_items
+    )
 
-        quantity = random.randint(1, 3)
+    for item_index in selected_item_indexes:
+        id = items[item_index]["id"]
 
-        items.append({
+        quantity = random.randint(1, items[item_index]["quantity"])
+
+        manifest_items.append({
             "item_id": id,
             "quantity": quantity
         })
 
-    return items
+    return manifest_items
+
+
+def get_static_items_data():
+    with open("./api/static_files/items.json", "r") as file:
+        return json.load(file)
+
+
+def get_items_ids():
+    items = get_static_items_data()
+    return [item["id"] for item in items]
 
 
 @namespace.route("/manifest")
@@ -344,7 +357,7 @@ class Manifest(Resource):
         Returns a random manifest.
         """
 
-        items = generate_random_items_for_manifest()
+        items = generate_items_for_manifest()
         employees = get_static_employee_data()
 
         manifest = {
@@ -437,9 +450,9 @@ class Orchestrator(Resource):
 
 # cart starts at (width2/2, 0)
 
-SUPER_RACK1_MAX_WIDTH = 30*100
+SUPER_RACK1_MAX_WIDTH = 10*100
 SUPER_RACK2_MAX_WIDTH = 10*100
-SUPER_RACK3_MAX_WIDTH = 30*100
+SUPER_RACK3_MAX_WIDTH = 10*100
 
 RACK_MIN_WIDTH = 1*100
 RACK_MAX_WIDTH = 4*100
@@ -467,7 +480,8 @@ BUCKET_MAX_LENGTH = 0.9*100
 def generate_super_rack(
     super_rack_number,
     final_previous_super_rack_width,
-    staff_ids
+    staff_ids,
+    items_ids,
 ):
     items = []
     sensors = []
@@ -584,9 +598,12 @@ def generate_super_rack(
                         shelf["height"]
                     ]
 
+                item_id = random.choice(items_ids)
+                items_ids.remove(item_id)
+
                 bucket = generate_bucket(
                     shelf=shelf,
-                    item_id=random.choice(available_items),
+                    item_id=item_id,
                     position=position,
                     width=bucket_width,
                     shelf_height=shelf_height
@@ -600,6 +617,7 @@ def generate_super_rack(
                 sensors.append(sensor)
 
                 item = generate_item(
+                    id=item_id,
                     bucket_id=bucket["id"],
                     # remove 1 cm to the max_width and max_height
                     # to be sure the item will fit in the bucket
@@ -628,22 +646,27 @@ def coherent_generate_layout():
     employees = get_static_employee_data()
     staff_ids = [employee["id"] for employee in employees]
 
+    items_ids = get_items_ids()
+
     super_rack1 = generate_super_rack(
         super_rack_number=1,
         final_previous_super_rack_width=0,
-        staff_ids=staff_ids
+        staff_ids=staff_ids,
+        items_ids=items_ids
     )
 
     super_rack2 = generate_super_rack(
         super_rack_number=2,
         final_previous_super_rack_width=super_rack1["final_super_rack1_width"],
-        staff_ids=staff_ids
+        staff_ids=staff_ids,
+        items_ids=items_ids
     )
 
     super_rack3 = generate_super_rack(
         super_rack_number=3,
         final_previous_super_rack_width=super_rack2["final_super_rack1_width"],
-        staff_ids=staff_ids
+        staff_ids=staff_ids,
+        items_ids=items_ids
     )
 
     racks = super_rack1["racks"] + super_rack2["racks"] + super_rack3["racks"]
@@ -665,7 +688,7 @@ def coherent_generate_layout():
     }
 
 
-def generate_item(bucket_id, max_width, max_height):
+def generate_item(id, bucket_id, max_width, max_height):
 
     quantity = random.randint(1, 3)
 
@@ -674,14 +697,14 @@ def generate_item(bucket_id, max_width, max_height):
     # will for sure have a different id;
     # We still don't have sufficient names for
     # them to be all different
-    item_name = random.choice(available_items)
+    item_name = random.choice(available_item_names)
     width = random.randint(1, max_width // quantity)
     height = random.randint(1, max_height // quantity)
     length = random.randint(1, RACK_LENGTH // quantity)
     weight = random.randint(1, 1000*100 // quantity)
 
     item = {
-        "id": uuid.uuid4(),
+        "id": id,
         "designation": item_name,
         "width": width,
         "height": height,
