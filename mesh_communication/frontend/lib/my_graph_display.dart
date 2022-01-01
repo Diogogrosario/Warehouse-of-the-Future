@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:graphview/GraphView.dart';
-import 'package:meshcommunication/MyGraph.dart';
+import 'package:meshcommunication/my_graph.dart';
 import 'package:vector_math/vector_math.dart' as vm;
 
 class MyGraphDisplay extends StatefulWidget {

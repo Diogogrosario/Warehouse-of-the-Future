@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
-import 'package:meshcommunication/MyGraphDisplay.dart';
-import 'package:meshcommunication/RequestHandler/RequestHandler.dart';
+import 'package:meshcommunication/my_graph_display.dart';
+import 'package:meshcommunication/RequestHandler/request_handler.dart';
 
 class MyGraph extends InheritedWidget {
   final Graph graph;
@@ -113,7 +113,8 @@ class MyGraph extends InheritedWidget {
   }
 
   void pausePlay() {
-    print("Bazinga!");
+    print("Called timed function");
+    skipForward();
   }
 
   static MyGraph of(BuildContext context) {
