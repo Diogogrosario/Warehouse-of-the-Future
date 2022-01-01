@@ -8,12 +8,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:meshcommunication/main.dart';
+import 'package:meshcommunication/mesh_communication.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MeshCommunication());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
