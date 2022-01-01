@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:meshcommunication/RequestHandler/Device.dart';
+import 'package:meshcommunication/RequestHandler/device.dart';
 import 'package:vector_math/vector_math.dart' as vm;
 
 class RequestHandler {

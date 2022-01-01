@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meshcommunication/ActionButtons/ActionButton.dart';
+import 'package:meshcommunication/ActionButtons/action_button.dart';
 
 class SBButton extends ActionButton {
   const SBButton(VoidCallback? callback)
