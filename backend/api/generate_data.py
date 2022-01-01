@@ -316,20 +316,20 @@ orchestrator_attributes = namespace.model("Orchestrator", {
 
 def generate_items_for_manifest(number_of_items=None):
     manifest_items = []
-    items = get_static_items_data()
+    items_ids = get_static_items_ids()
 
     if (number_of_items is None):
         number_of_items = random.randint(1, 4)
 
-    selected_item_indexes = random.sample(
-        range(0, len(items)-1),
+    selected_items_indexes = random.sample(
+        range(0, len(items_ids)-1),
         number_of_items
     )
 
-    for item_index in selected_item_indexes:
-        id = items[item_index]["id"]
+    for index in selected_items_indexes:
+        id = items_ids[index]
 
-        quantity = random.randint(1, items[item_index]["quantity"])
+        quantity = random.randint(1, 3)
 
         manifest_items.append({
             "item_id": id,
@@ -339,14 +339,9 @@ def generate_items_for_manifest(number_of_items=None):
     return manifest_items
 
 
-def get_static_items_data():
-    with open("./api/static_files/items.json", "r") as file:
+def get_static_items_ids():
+    with open("./api/static_files/items_ids.json", "r") as file:
         return json.load(file)
-
-
-def get_items_ids():
-    items = get_static_items_data()
-    return [item["id"] for item in items]
 
 
 @namespace.route("/manifest")
@@ -646,7 +641,7 @@ def coherent_generate_layout():
     employees = get_static_employee_data()
     staff_ids = [employee["id"] for employee in employees]
 
-    items_ids = get_items_ids()
+    items_ids = get_static_items_ids()
 
     super_rack1 = generate_super_rack(
         super_rack_number=1,
