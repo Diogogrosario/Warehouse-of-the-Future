@@ -13,7 +13,7 @@ import 'package:meshcommunication/undirected_graph.dart';
 
 class MeshCommunication extends StatelessWidget {
   static const String url = "http://localhost:8080";
-  late final RequestHandler requestHandler;
+  late RequestHandler requestHandler;
 
   MeshCommunication({RequestHandler? requestHandler, Key? key})
       : requestHandler = RequestHandler(MeshCommunication.url),
@@ -134,7 +134,7 @@ class BasePage extends StatelessWidget {
     // gen edges
     for (Device d in devices) {
       // TODO could be optimized by using a single request
-      List<int> neighbors = await requestHandler.getEdges(d.id.toString());
+      List<int> neighbors = await requestHandler.getNeighbors(d.id.toString());
       Node node1 = graph.getNodeUsingId(d.id);
       for (int nid in neighbors) {
         Node node2 = graph.getNodeUsingId(nid);
