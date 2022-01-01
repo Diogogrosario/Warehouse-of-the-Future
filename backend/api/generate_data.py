@@ -3,6 +3,7 @@ import random
 import datetime
 import uuid
 import names
+import json
 from .utils import utils
 
 namespace = Namespace(
@@ -344,11 +345,12 @@ class Manifest(Resource):
         """
 
         items = generate_random_items_for_manifest()
+        employees = get_static_employee_data()
 
         manifest = {
             "id": uuid.uuid4(),
             "time": datetime.datetime.now(),
-            "staff_id": uuid.uuid4(),
+            "staff_id": random.choice(employees)["id"],
             "items": items
         }
 
@@ -373,6 +375,14 @@ def generate_employee_data(id=None):
     return employee
 
 
+def get_static_employee_data():
+    with open("./api/static_files/staff.json", "r") as file:
+        return json.load(file)
+
+
+GENERATE_RANDOM_STAFF = False
+
+
 @namespace.route("/staff")
 class Staff(Resource):
     @namespace.marshal_list_with(staff_attributes)
@@ -381,23 +391,15 @@ class Staff(Resource):
         Returns a list with all the employees.
         """
 
-        number_of_employees = random.randint(20, 100)
-        employees = [
-            generate_employee_data() for _ in range(number_of_employees)
-        ]
+        if GENERATE_RANDOM_STAFF:
+            number_of_employees = random.randint(100, 150)
+            employees = [
+                generate_employee_data() for _ in range(number_of_employees)
+            ]
+        else:
+            employees = get_static_employee_data()
 
         return employees
-
-
-@namespace.route("/staff/<string:id>")
-class StaffEmployee(Resource):
-    @namespace.marshal_list_with(staff_attributes)
-    def get(self, id):
-        """
-        Returns information about the employee with the provided id.
-        """
-
-        return generate_employee_data(id)
 
 
 # ------------------------------------------------------------------------------
@@ -435,9 +437,9 @@ class Orchestrator(Resource):
 
 # cart starts at (width2/2, 0)
 
-SUPER_RACK1_MAX_WIDTH = 15*100
-SUPER_RACK2_MAX_WIDTH = 15*100
-SUPER_RACK3_MAX_WIDTH = 15*100
+SUPER_RACK1_MAX_WIDTH = 30*100
+SUPER_RACK2_MAX_WIDTH = 10*100
+SUPER_RACK3_MAX_WIDTH = 30*100
 
 RACK_MIN_WIDTH = 1*100
 RACK_MAX_WIDTH = 4*100
@@ -462,7 +464,11 @@ BUCKET_MAX_LENGTH = 0.9*100
 # The super_rack_number is accordingly to the above diagram;
 # The final_previous_super_rack_width tells us the real width of the
 # previously created super rack, so it is not applicable to the first one
-def generate_super_rack(super_rack_number, final_previous_super_rack_width):
+def generate_super_rack(
+    super_rack_number,
+    final_previous_super_rack_width,
+    staff_ids
+):
     items = []
     sensors = []
     buckets = []
@@ -587,7 +593,10 @@ def generate_super_rack(super_rack_number, final_previous_super_rack_width):
                 )
                 buckets.append(bucket)
 
-                sensor = generate_sensor(bucket_id=bucket["id"])
+                sensor = generate_sensor(
+                    bucket_id=bucket["id"],
+                    staff_id=random.choice(staff_ids)
+                )
                 sensors.append(sensor)
 
                 item = generate_item(
@@ -616,19 +625,25 @@ def coherent_generate_layout():
     racks = []
     shelves = []
 
+    employees = get_static_employee_data()
+    staff_ids = [employee["id"] for employee in employees]
+
     super_rack1 = generate_super_rack(
         super_rack_number=1,
-        final_previous_super_rack_width=0
+        final_previous_super_rack_width=0,
+        staff_ids=staff_ids
     )
 
     super_rack2 = generate_super_rack(
         super_rack_number=2,
-        final_previous_super_rack_width=super_rack1["final_super_rack1_width"]
+        final_previous_super_rack_width=super_rack1["final_super_rack1_width"],
+        staff_ids=staff_ids
     )
 
     super_rack3 = generate_super_rack(
         super_rack_number=3,
-        final_previous_super_rack_width=super_rack2["final_super_rack1_width"]
+        final_previous_super_rack_width=super_rack2["final_super_rack1_width"],
+        staff_ids=staff_ids
     )
 
     racks = super_rack1["racks"] + super_rack2["racks"] + super_rack3["racks"]
@@ -679,7 +694,7 @@ def generate_item(bucket_id, max_width, max_height):
     return item
 
 
-def generate_sensor(bucket_id):
+def generate_sensor(bucket_id, staff_id):
     number_of_movements = random.randint(1, 10)
     movement_timestamps = []
 
@@ -692,7 +707,7 @@ def generate_sensor(bucket_id):
     for _ in range(number_of_staff_contacts):
         staff_contact = {
             "time": utils.get_random_date_last_day(),
-            "staff_id": uuid.uuid4()
+            "staff_id": staff_id
         }
 
         staff_contacts.append(staff_contact)
