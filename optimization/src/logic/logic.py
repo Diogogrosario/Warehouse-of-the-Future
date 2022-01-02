@@ -36,7 +36,7 @@ def reproduce(parent1, parent2, warehouse):
 
     products = sorted(storage.products, key=lambda x: (x.weight, x.width), reverse=True)
 
-    child = Layout(deepcopy(warehouse), metrics_to_optimize)
+    child = Layout(deepcopy(warehouse))
 
     for product in products:
         parent = r.randint(0, 1)
