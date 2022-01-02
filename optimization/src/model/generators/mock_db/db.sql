@@ -61,7 +61,7 @@ create table Product
     weight    DECIMAL(5, 1),
     sector_id BIGINT UNSIGNED NOT NULL,
     frequency DECIMAL(30, 5) DEFAULT 0,
-    
+
     FOREIGN KEY (sector_id) REFERENCES Sector (id)
 );
 
@@ -97,6 +97,18 @@ create table Worker_Manifesto_Product
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
 );
 
+CREATE TABLE Users
+(
+    `id`                bigint(20) UNSIGNED NOT NULL,
+    `name`              varchar(255) NOT NULL,
+    `email`             varchar(255) NOT NULL,
+    `email_verified_at` timestamp NULL DEFAULT NULL,
+    `password`          varchar(255) NOT NULL,
+    `remember_token`    varchar(100) DEFAULT NULL,
+    `created_at`        timestamp NULL DEFAULT NULL,
+    `updated_at`        timestamp NULL DEFAULT NULL
+);
+
 -- OUTPUT --
 create table Results
 (
@@ -128,13 +140,17 @@ create table Products_Left_Out
 );
 DROP PROCEDURE IF EXISTS calculate_product_frequency;
 
-DELIMITER //
-CREATE PROCEDURE calculate_product_frequency (IN prod_id INT)
-    BEGIN
-        DECLARE total_pieces INT;
-        DECLARE freq INT;
+DELIMITER
+//
+CREATE PROCEDURE calculate_product_frequency(IN prod_id INT)
+BEGIN
+        DECLARE
+total_pieces INT;
+        DECLARE
+freq INT;
 
-        SET freq = (SELECT COUNT(A.id) 
+        SET
+freq = (SELECT COUNT(A.id)
                     FROM (
                         SELECT id 
                         FROM Worker_Manifesto_Product 
@@ -142,13 +158,17 @@ CREATE PROCEDURE calculate_product_frequency (IN prod_id INT)
                         GROUP BY manifesto_id
                     ) as A);
 
-        SET total_pieces = (SELECT COUNT(A.id) /*this number is to normalize the results*/
+        SET
+total_pieces = (SELECT COUNT(A.id) /*this number is to normalize the results*/
                             FROM (
                                 SELECT id
                                 FROM Worker_Manifesto_Product 
                                 GROUP BY manifesto_id
-                            ) as A); 
+                            ) as A);
 
-        UPDATE Product SET frequency = freq / total_pieces where id = prod_id;
-    END //
+UPDATE Product
+SET frequency = freq / total_pieces
+where id = prod_id;
+END
+//
 DELIMITER ; 
