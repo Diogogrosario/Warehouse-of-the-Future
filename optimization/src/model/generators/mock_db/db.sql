@@ -1,6 +1,8 @@
-CREATE DATABASE IF NOT EXISTS test;
+CREATE
+DATABASE IF NOT EXISTS test;
 
-USE test;
+USE
+test;
 
 DROP TABLE IF EXISTS Warehouse;
 DROP TABLE IF EXISTS Shelf;
@@ -40,11 +42,11 @@ create table Rack
 (
     id       SERIAL PRIMARY KEY,
     shelf_id BIGINT UNSIGNED NOT NULL,
-    y        DECIMAL(9, 2)   NOT NULL,
-    length   INT             NOT NULL,
-    width    DECIMAL(9, 2)   NOT NULL,
-    height   DECIMAL(9, 2)   NOT NULL,
-    capacity DECIMAL(9, 2)   NOT NULL,
+    y        DECIMAL(9, 2) NOT NULL,
+    length   INT           NOT NULL,
+    width    DECIMAL(9, 2) NOT NULL,
+    height   DECIMAL(9, 2) NOT NULL,
+    capacity DECIMAL(9, 2) NOT NULL,
 
     FOREIGN KEY (shelf_id) REFERENCES Shelf (id)
 
@@ -99,15 +101,15 @@ create table Worker_Manifesto_Product
 -- OUTPUT --
 create table Results
 (
-    id                         SERIAL PRIMARY KEY,
-    date_issued                DATETIME,
-    is_read                    BOOLEAN DEFAULT FALSE
+    id          SERIAL PRIMARY KEY,
+    date_issued DATETIME,
+    is_read     BOOLEAN DEFAULT FALSE
 );
 create table Product_Rack
 (
     id         SERIAL PRIMARY KEY,
-    x_orig     INT             NOT NULL,
-    x_end      INT             NOT NULL,
+    x_orig     INT NOT NULL,
+    x_end      INT NOT NULL,
     result_id  BIGINT UNSIGNED NOT NULL,
     rack_id    BIGINT UNSIGNED NOT NULL,
     product_id BIGINT UNSIGNED NOT NULL,

@@ -36,7 +36,7 @@ def reproduce(parent1, parent2, warehouse):
 
     products = sorted(storage.products, key=lambda x: (x.weight, x.width), reverse=True)
 
-    child = Layout(deepcopy(warehouse))
+    child = Layout(deepcopy(warehouse), metrics_to_optimize)
 
     for product in products:
         parent = r.randint(0, 1)
@@ -79,7 +79,7 @@ def dump_results_to_database(layout):
 
     result_id = int(db.df_query(result_id_inserted).at[0, 'MAX(id)'])
 
-    for out_product in final_layout.products_out:
+    for out_product in layout.products_out:
         query_insert_out_product = f"INSERT INTO Products_Left_Out (result_id,product_id) values (%s,%s)"
         db.df_query(query_insert_out_product, [result_id, out_product.id])
 
@@ -91,10 +91,18 @@ def dump_results_to_database(layout):
                 db.df_query(query_insert_out_product_rack, [x_orig, x_end, result_id, rack.id, product.id])
 
 
-if __name__ == '__main__':
+def main(docker=False, list_parameters=None):
+    global db
+    global storage
+    global metrics_to_optimize
+
+    if list_parameters is None:
+        list_parameters = []
+
+    metrics_to_optimize = list_parameters
 
     # Overwrite Database configs if Docker tag is defined
-    if len(sys.argv) > 1 and sys.argv[1] == 'docker':
+    if docker or len(sys.argv) > 1 and sys.argv[1] == 'docker':
         db = Database('test', True)
         storage = Storage(db)
         print("Running Docker ENV")
@@ -103,7 +111,7 @@ if __name__ == '__main__':
         storage = Storage(db)
 
     query_warehouse = "SELECT * FROM Warehouse"
-    query_month_manifesto = "SELECT * FROM Month_Manifesto"
+    # query_month_manifesto = "SELECT * FROM Month_Manifesto"
 
     warehouses = db.df_query(query_warehouse)
     # month_manifestos = db.df_query(query_month_manifesto)
@@ -130,3 +138,7 @@ if __name__ == '__main__':
         print('No products were left out')
 
     dump_results_to_database(final_layout)
+
+
+if __name__ == '__main__':
+    main()
