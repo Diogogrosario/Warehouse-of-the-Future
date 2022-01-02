@@ -56,7 +56,7 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
             );
 
             await runStep(
-              'And I should be able to see the device 2',
+              'And I should be able to see the device 3',
               <String>[],
               null,
               dependencies,
