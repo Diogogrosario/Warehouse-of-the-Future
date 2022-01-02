@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="form-group row justify-content-center">
                                     <div class="boxDiv">
-                                        <button type="submit" class="button-9">Login</button>
+                                        <button type="submit" class="button-9">Register</button>
                                     </div>
                                 </div>
                             </form>
