@@ -13,6 +13,29 @@ from dotenv import load_dotenv
 class APITesting(TestCase):
     def populateTestDatabase(self):
         self.populateTestEmployees()
+        self.populateGlobalData()
+    
+    def populateGlobalData(self):
+        globalData_data = [
+            {
+                "orchestrator_position": [1, 2, 3],
+                "cart": {
+                    "speed": 3,
+                    "start_time": datetime.datetime(2022, 1, 2, 8, 30, 0),
+                    "end_time": datetime.datetime(2022, 1, 2, 20, 0, 0)
+                }
+            },
+            {
+                "orchestrator_position": [2, 3, 4],
+                "cart": {
+                    "speed": 10,
+                    "start_time": datetime.datetime(2022, 1, 1, 8, 00, 0),
+                    "end_time": datetime.datetime(2022, 1, 1, 19, 30, 0)
+                }
+            }
+
+        ]
+        self.db.WoFTests.GlobalData.insert_many(globalData_data)
 
     def populateTestEmployees(self):
         employees_data = [
@@ -57,6 +80,7 @@ class APITesting(TestCase):
 
     def tearDown(self):
         self.db.WoFTests.Employees.drop()
+        self.db.WoFTests.GlobalData.drop()
         pass
 
     def create_app(self):        
