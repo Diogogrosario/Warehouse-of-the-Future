@@ -3,6 +3,8 @@ parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.append(parentdir)
 
 import datetime
+import json
+import urllib.parse
 from api.init import api
 from flask import Flask
 from flask_testing import TestCase
@@ -13,7 +15,7 @@ from bson.objectid import ObjectId
 
 class APITesting(TestCase):
     def populateTestDatabase(self):
-        self.populateTestEmployees()
+        self.populateEmployees()
         self.populateGlobalData()
         self.populateSensorData()
 
@@ -78,29 +80,34 @@ class APITesting(TestCase):
         ]
         self.db.WoF.GlobalData.insert_many(globalData_data)
 
-    def populateTestEmployees(self):
+    def populateEmployees(self):
         employees_data = [
             {
+                "_id": ObjectId("a07f1f77bcf86cd799439011"),
                 "name": "Alcides Cabides",
                 "birth_date": datetime.datetime(2000, 10, 30),
                 "height": 175
             },
             {
+                "_id": ObjectId("a07f1f77bcf86cd799439012"),
                 "name": "Rosa Mota",
                 "birth_date": datetime.datetime(1970, 5, 24),
                 "height": 163
             },
             {
+                "_id": ObjectId("a07f1f77bcf86cd799439013"),
                 "name": "Deolinda Gomes",
                 "birth_date": datetime.datetime(1975, 3, 2),
                 "height": 187
             },
             {
+                "_id": ObjectId("a07f1f77bcf86cd799439014"),
                 "name": "Joao de Deus",
                 "birth_date": datetime.datetime(1980, 1, 1),
                 "height": 172
             },
             {
+                "_id": ObjectId("a07f1f77bcf86cd799439015"),
                 "name": "Jorge Jesus",
                 "birth_date": datetime.datetime(1990, 8, 11),
                 "height": 186
@@ -129,8 +136,46 @@ class APITesting(TestCase):
         api.init_app(app)
         return app
     
-    def test_server_is_up_and_running(self):
+    def test_staff_endpoint(self):
+        # staff/
         response = self.client.get('staff/')
-        print(response.get_data())
-        self.assertEqual(response.status_code, 200)  
-    
+        staff_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(staff_data), 5)
+        self.assertEqual(response.status_code, 200)
+
+        # staff?name=Deolinda Gomes
+        queryName = urllib.parse.quote("Deolinda Gomes")
+        response = self.client.get(f'staff/?name={queryName}')
+        staff_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(staff_data), 1)
+        self.assertEqual(response.status_code, 200)
+
+        # staff/?age=45
+        queryMinimumAge = 45
+        response = self.client.get(f'staff/?age={queryMinimumAge}')
+        staff_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(staff_data), 2)
+        self.assertEqual(response.status_code, 200)
+
+        # staff/?age=45&name=Deolinda Gomes
+        response = self.client.get(f'staff/?age={queryMinimumAge}&name={queryName}')
+        staff_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(staff_data), 1)
+        self.assertEqual(response.status_code, 200)
+
+        # staff/?age=abc (Incorrect Request)
+        response = self.client.get(f'staff/?age=abc')
+        staff_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(response.status_code, 400)
+
+        # staff/:id
+        staff_id = "a07f1f77bcf86cd799439013"
+        response = self.client.get(f'staff/{staff_id}')
+        staff_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(staff_data['id'], staff_id)
+        self.assertEqual(response.status_code, 200)
+
+        # staff/:id (Incorrect Request)
+        response = self.client.get(f'staff/abc')
+        staff_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(response.status_code, 404)

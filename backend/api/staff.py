@@ -54,8 +54,12 @@ class StaffQuery(Resource):
         searchQuery = {}
 
         if age is not None:
-            current_year = datetime.date.today().year
-            dt = datetime.datetime(year=current_year - age, month=1, day=1)
+            today = datetime.date.today()
+            dt = datetime.datetime(
+                year=today.year - age,
+                month=today.month,
+                day=today.day
+            )
             searchQuery["birth_date"] = {"$lte": dt}
         if name is not None:
             searchQuery["name"] = name
@@ -84,6 +88,6 @@ class StaffInformation(Resource):
         try:
             document = employeesCollection.find_one({"_id": ObjectId(id)})
         except Exception:
-            abort(400, 'Incorrect Staff member ID passed.')
+            abort(404, 'Incorrect Staff member ID passed.')
 
         return json.loads(json_util.dumps(document))
