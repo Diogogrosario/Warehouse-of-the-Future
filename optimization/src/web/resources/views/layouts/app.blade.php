@@ -12,6 +12,10 @@
             <a href="/" class="list-group-item list-group-item-action sidebarItem">Home</a>
             <a href="{{route('layouts')}}" class="list-group-item list-group-item-action sidebarItem">Visualize
                 layouts</a>
+            <form method="post" action="{{route('logout')}}">
+                @csrf
+                <button type="submit" class="list-group-item list-group-item-action sidebarItem">Logout</button>
+            </form>
             @if(false)
                 <a href="#" class="list-group-item list-group-item-action sidebarItem">Reports</a>
             @endif
