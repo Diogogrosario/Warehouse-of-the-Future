@@ -5,6 +5,10 @@ class RequestHandlerMock implements RequestHandler {
   List<Device> devices = <Device>[];
   Map<int, List<int>> neighbors = {};
 
+  void addDevice(Device device) {
+    devices.add(device);
+  }
+
   @override
   Future<List<Device>> getDevices() {
     return Future.value(devices);
@@ -13,7 +17,7 @@ class RequestHandlerMock implements RequestHandler {
   @override
   Future<List<int>> getNeighbors(String id) {
     // device has no neighbors or isn't in the device list of something
-    if (neighbors.containsKey(id)) {
+    if (!neighbors.containsKey(id)) {
       return Future.value([]);
     }
 

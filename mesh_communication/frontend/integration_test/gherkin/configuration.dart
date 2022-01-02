@@ -5,14 +5,20 @@ import 'package:meshcommunication/RequestHandler/request_handler_mock.dart';
 
 import 'package:meshcommunication/main.dart' as app;
 import 'hooks/myhook.dart';
+import 'steps/graph_steps.dart';
 import 'steps/tap_n_times_step.dart';
 import 'world/custom_world.dart';
 
 FlutterTestConfiguration gherkinTestConfiguration =
     FlutterTestConfiguration.DEFAULT(
   [
+    // Example test
     whenTapNTimesStep,
-    givenTitle,
+    ThenExpectTitleContent(),
+    // View graph related steps
+    givenDevice,
+    whenOpenInterface,
+    thenIExpectDevices,
   ],
 )
       ..hooks = [
@@ -36,7 +42,7 @@ FlutterTestConfiguration gherkinTestConfiguration =
 
 // ignore: prefer_function_declarations_over_variables
 Future<void> Function(World) appInitializationFn = (World world) async {
-  RequestHandler requestHandler = RequestHandlerMock();
+  RequestHandlerMock requestHandler = RequestHandlerMock();
   (world as CustomWorld).setRequestHandler(requestHandler);
   app.main(requestHandler: requestHandler);
 };
