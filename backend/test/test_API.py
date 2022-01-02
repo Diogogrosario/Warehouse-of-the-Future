@@ -1,19 +1,60 @@
-import datetime
 import os
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.append(parentdir)
 
+import datetime
 from api.init import api
 from flask import Flask
 from flask_testing import TestCase
 from pymongo import MongoClient
 from os import getenv
 from dotenv import load_dotenv
+from bson.objectid import ObjectId
 
 class APITesting(TestCase):
     def populateTestDatabase(self):
         self.populateTestEmployees()
         self.populateGlobalData()
+        self.populateSensorData()
+
+    def populateSensorData(self):
+        sensors_data = [
+            {
+                "bucket": ObjectId("107f1f77bcf86cd799439011"),
+                "movement_records": [
+                    datetime.datetime(2022, 1, 2, 8, 35, 3),
+                    datetime.datetime(2022, 1, 2, 8, 40, 5),
+                    datetime.datetime(2022, 1, 2, 8, 50, 45),
+                ],
+                "staff_contacts": [
+                    {
+                        "time": datetime.datetime(2022, 1, 2, 8, 35, 3),
+                        "staff_id": ObjectId("107f1f77bcf86cd799439012")
+                    },
+                    {
+                        "time": datetime.datetime(2022, 1, 2, 8, 40, 5),
+                        "staff_id": ObjectId("107f1f77bcf86cd799439013")
+                    }
+                ]
+            },
+            {
+                "bucket": ObjectId("907f1f77bcf86cd799439011"),
+                "movement_records": [
+                    datetime.datetime(2022, 1, 3, 8, 35, 3),
+                    datetime.datetime(2022, 1, 3, 8, 40, 5),
+                    datetime.datetime(2022, 1, 3, 8, 50, 45),
+                    datetime.datetime(2022, 1, 3, 9, 50, 1),
+                    datetime.datetime(2022, 1, 3, 12, 50, 10),
+                ],
+                "staff_contacts": [
+                    {
+                        "time": datetime.datetime(2022, 1, 3, 8, 35, 3),
+                        "staff_id": ObjectId("907f1f77bcf86cd799439012")
+                    },
+                ]
+            }
+        ]
+        self.db.WoFTests.Sensors.insert_many(sensors_data)
     
     def populateGlobalData(self):
         globalData_data = [
@@ -81,6 +122,7 @@ class APITesting(TestCase):
     def tearDown(self):
         self.db.WoFTests.Employees.drop()
         self.db.WoFTests.GlobalData.drop()
+        self.db.WoFTests.Sensors.drop()
         pass
 
     def create_app(self):        
