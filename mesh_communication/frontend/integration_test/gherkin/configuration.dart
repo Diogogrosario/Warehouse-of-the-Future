@@ -42,7 +42,7 @@ FlutterTestConfiguration gherkinTestConfiguration =
 
 // ignore: prefer_function_declarations_over_variables
 Future<void> Function(World) appInitializationFn = (World world) async {
-  RequestHandler requestHandler = RequestHandlerMock();
-  (world as CustomWorld).setRequestHandler(requestHandler as RequestHandlerMock);
+  RequestHandlerMock requestHandler = RequestHandlerMock();
+  (world as CustomWorld).setRequestHandler(requestHandler);
   app.main(requestHandler: requestHandler);
 };
