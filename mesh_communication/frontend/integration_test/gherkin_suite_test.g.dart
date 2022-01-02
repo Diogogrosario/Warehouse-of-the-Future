@@ -27,21 +27,21 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
           <String>[],
           (TestDependencies dependencies) async {
             await runStep(
-              'Given I expect the "appTitle1" to be "Mesh Communication"',
+              'Given I expect the "appTitle" to be "Mesh Communication"',
               <String>[],
               null,
               dependencies,
             );
 
             await runStep(
-              'When I tap the "appTitle2" 10 times',
+              'When I tap the "appTitle" 10 times',
               <String>[],
               null,
               dependencies,
             );
 
             await runStep(
-              'Then I expect the "appTitle3" to be "Mesh Communication"',
+              'Then I expect the "appTitle" to be "Mesh Communication"',
               <String>[],
               null,
               dependencies,

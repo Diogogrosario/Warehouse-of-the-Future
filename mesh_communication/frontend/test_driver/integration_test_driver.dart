@@ -4,14 +4,14 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:integration_test/integration_test_driver.dart'
     as integration_test_driver;
 
-DriverLogCallback logDriverMessages = (String source, String message) {
+void logDriverMessages(String source, String message) {
   final msg = '$source: $message';
   if (message.toLowerCase().contains('error')) {
     stderr.writeln(msg);
   } else {
     stdout.writeln(msg);
   }
-};
+}
 
 Future<void> main() {
   // Flutter Driver logs all messages to stderr by default so if this is run on a build server
@@ -23,7 +23,6 @@ Future<void> main() {
       'integration_test/gherkin/reports';
 
   return integration_test_driver.integrationDriver(
-    timeout: const Duration(minutes: 90),
+    timeout: const Duration(minutes: 5),
   );
 }
-
