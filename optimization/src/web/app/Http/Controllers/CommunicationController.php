@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Redirect;
 
 class CommunicationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function communicate(Request $request)
     {
         /* Get the IP address for the target host. */

@@ -99,14 +99,14 @@ create table Worker_Manifesto_Product
 
 CREATE TABLE Users
 (
-    `id`                bigint(20) UNSIGNED NOT NULL,
-    `name`              varchar(255) NOT NULL,
-    `email`             varchar(255) NOT NULL,
-    `email_verified_at` timestamp NULL DEFAULT NULL,
-    `password`          varchar(255) NOT NULL,
-    `remember_token`    varchar(100) DEFAULT NULL,
-    `created_at`        timestamp NULL DEFAULT NULL,
-    `updated_at`        timestamp NULL DEFAULT NULL
+    id                SERIAL PRIMARY KEY,
+    name              varchar(255) NOT NULL,
+    email             varchar(255) NOT NULL,
+    email_verified_at timestamp NULL DEFAULT NULL,
+    password          varchar(255) NOT NULL,
+    remember_token    varchar(100) DEFAULT NULL,
+    created_at        timestamp NULL DEFAULT NULL,
+    updated_at        timestamp NULL DEFAULT NULL
 );
 
 -- OUTPUT --

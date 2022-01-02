@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Result;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -25,7 +26,7 @@ class HomeController extends Controller
     public function index(): Renderable
     {
         return view('home', [
-            "name" => "David",
+            "user" => Auth::user(),
             "numberNotReads" => count(Result::where('is_read', false)->get()),
         ]);
     }
