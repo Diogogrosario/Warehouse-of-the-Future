@@ -1,20 +1,47 @@
 version: "3.8"
 services:
-  frontend:
-    build: ./frontend
-    ports:
-      - 8000:3000
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    stdin_open: true
-    tty: true
+    frontend:
+        build: ./frontend
+        environment:
+            CHOKIDAR_USEPOLLING: "true"
+        ports:
+            - 3000:3000
+        volumes:
+            - ./frontend/src:/app/frontend/src
+            - ./frontend/public:/app/frontend/public
+        stdin_open: true
+        tty: true
 
-  backend:
-    build: ./backend
-    ports:
-      - 8001:5000
-    env_file:
-      - ./backend/.env
-    volumes:
-      - ./backend:/app
+    backend:
+        build: ./backend
+        ports:
+            - 8001:5000
+        env_file:
+            - ./backend/.env
+        volumes:
+            - ./backend:/app
+
+    mongo:
+        image: mongo
+        container_name: mongodb
+        volumes:
+            - ./database:/data/database
+        ports:
+            - 27017:27017
+        networks:
+            - mongo-compose-network
+
+    mongo-express:
+        image: mongo-express
+        ports:
+            - 5000:8081
+        env_file:
+            - ./database/.env
+        links:
+            - mongo
+        networks:
+            - mongo-compose-network
+
+networks:
+    mongo-compose-network:
+        driver: bridge
