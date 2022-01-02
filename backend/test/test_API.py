@@ -18,7 +18,7 @@ class APITesting(TestCase):
         self.populateSensorData()
 
     def populateSensorData(self):
-        sensors_data = [
+        devices_data = [
             {
                 "bucket": ObjectId("107f1f77bcf86cd799439011"),
                 "movement_records": [
@@ -54,7 +54,7 @@ class APITesting(TestCase):
                 ]
             }
         ]
-        self.db.WoFTests.Sensors.insert_many(sensors_data)
+        self.db.WoF.Devices.insert_many(devices_data)
     
     def populateGlobalData(self):
         globalData_data = [
@@ -76,7 +76,7 @@ class APITesting(TestCase):
             }
 
         ]
-        self.db.WoFTests.GlobalData.insert_many(globalData_data)
+        self.db.WoF.GlobalData.insert_many(globalData_data)
 
     def populateTestEmployees(self):
         employees_data = [
@@ -96,7 +96,7 @@ class APITesting(TestCase):
                 "height": 187
             },
             {
-                "name": "João Deus",
+                "name": "Joao de Deus",
                 "birth_date": datetime.datetime(1980, 1, 1),
                 "height": 172
             },
@@ -106,24 +106,22 @@ class APITesting(TestCase):
                 "height": 186
             },
         ]
-        self.db.WoFTests.Employees.insert_many(employees_data)
+        self.db.WoF.Employees.insert_many(employees_data)
 
     def setUp(self):
-        self.client = self.app.test_client()
-
         load_dotenv('.env.test')
         self.db = MongoClient("mongodb+srv://" +
         f"{getenv('MONGO_ATLAS_USERNAME')}:" +
-        f"{getenv('MONGO_ATLAS_PASSWORD')}@ds.420ei.mongodb.net/" +
+        f"{getenv('MONGO_ATLAS_PASSWORD')}@{getenv('MONGO_ATLAS_SERVER')}/" +
         f"{getenv('MONGO_ATLAS_CLUSTER')}?retryWrites=true&w=majority")
         
         self.populateTestDatabase()
+        self.client = self.app.test_client()
 
     def tearDown(self):
-        self.db.WoFTests.Employees.drop()
-        self.db.WoFTests.GlobalData.drop()
-        self.db.WoFTests.Sensors.drop()
-        pass
+        self.db.WoF.Employees.drop()
+        self.db.WoF.GlobalData.drop()
+        self.db.WoF.Devices.drop()
 
     def create_app(self):        
         app = Flask(__name__)        
@@ -134,5 +132,5 @@ class APITesting(TestCase):
     def test_server_is_up_and_running(self):
         response = self.client.get('staff/')
         print(response.get_data())
-        self.assertEqual(response.status_code, 200)        
+        self.assertEqual(response.status_code, 200)  
     
