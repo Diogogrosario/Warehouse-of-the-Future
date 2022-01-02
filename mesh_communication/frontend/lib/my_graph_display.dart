@@ -177,14 +177,21 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
   @override
   Widget build(BuildContext context) {
     return InteractiveViewer(
-      constrained: false,
-      //boundaryMargin: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 16.0),
+      // prevent the default OverflowBox (we'll create our own)
+      constrained: true,
       boundaryMargin: const EdgeInsets.all(double.infinity),
       transformationController: _transformationController,
       onInteractionStart: _onInteractionStart,
       minScale: 0.1,
       maxScale: 10.0,
-      child: _getGraphView(context),
+      child: OverflowBox(
+        alignment: Alignment.center,
+        minWidth: 0.0,
+        minHeight: 0.0,
+        maxWidth: double.infinity,
+        maxHeight: double.infinity,
+        child: _getGraphView(context),
+      ),
     );
   }
 }

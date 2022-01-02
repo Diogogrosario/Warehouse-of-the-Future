@@ -4,7 +4,6 @@ import 'package:meshcommunication/RequestHandler/request_handler.dart';
 import 'package:meshcommunication/RequestHandler/request_handler_mock.dart';
 
 import 'package:meshcommunication/main.dart' as app;
-import 'package:meshcommunication/mesh_communication.dart';
 import 'hooks/myhook.dart';
 import 'steps/graph_steps.dart';
 import 'steps/tap_n_times_step.dart';
@@ -13,11 +12,13 @@ import 'world/custom_world.dart';
 FlutterTestConfiguration gherkinTestConfiguration =
     FlutterTestConfiguration.DEFAULT(
   [
+    // Example test
     whenTapNTimesStep,
-    givenDevice,
     ThenExpectTitleContent(),
+    // View graph related steps
+    givenDevice,
     whenOpenInterface,
-    thenIExpectDevices
+    thenIExpectDevices,
   ],
 )
       ..hooks = [
