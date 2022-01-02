@@ -8,11 +8,12 @@ import theme from "../styles/theme";
 
 interface LayoutProps {
     children: React.ReactNode;
+    noScroll?: boolean;
 }
 
 const Layout : React.FC<LayoutProps> = (props : LayoutProps) => {
 
-    const { children } = props;
+    const { children, noScroll } = props;
 
     return (
         <HelmetProvider>
@@ -36,7 +37,7 @@ const Layout : React.FC<LayoutProps> = (props : LayoutProps) => {
                         margin: 0,
                     }}    
                 >
-                    <div className="appContainer" style={{ display: "flex", flexDirection: "column", height: " inherit" }}>
+                    <div className="appContainer" style={{ display: "flex", flexDirection: "column", height: " inherit"}}>
                         <AppBar position="relative">
                             <Toolbar>
                                 <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
@@ -44,7 +45,7 @@ const Layout : React.FC<LayoutProps> = (props : LayoutProps) => {
                                 </Typography>
                             </Toolbar>
                         </AppBar>
-                        <Container component="main" maxWidth={false} sx={{ display: "flex", flexGrow: 1 }} >
+                        <Container component="main" maxWidth={false} sx={{ display: "flex", flexGrow: 1, ...(noScroll && { overflow: "hidden" }) }} >
                             {children}
                         </Container>
                     </div>

@@ -8,7 +8,7 @@ const sequelize = new Sequelize(
 	process.env.POSTGRES_USER,
 	process.env.POSTGRES_PASSWORD,
 	{
-		host: "db",
+		host: process.env.POSTGRES_HOST || "db",
 		dialect: "postgres",
 	}
 );
@@ -26,6 +26,6 @@ db.device.hasMany(db.report);
 db.report.belongsTo(db.device);
 
 db.report.hasMany(db.action);
-db.action.belongsTo(db.report, { foreignKey: "report_id" });
+db.action.belongsTo(db.report);
 
 export default db;

@@ -22,14 +22,16 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 
-interface ReportProps {
-	title?: string;
+export interface ReportProps {
+	title: string;
 	shortDescription: string;
 	description: string;
-	warningLevel: "warning" | "error";
+	warningLevel: "warning" | "error" | string;
 	actions: [string, string][];
 	resolved: boolean;
 	reportId: number;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {

@@ -24,7 +24,7 @@ services:
     backend:
         build: backend
         ports:
-            - "3001:3000"
+            - "3001:3001"
         container_name: playground_backend
         volumes:
             - "./backend:/app"
@@ -33,4 +33,3 @@ services:
             - .env
         depends_on:
             - db
-    

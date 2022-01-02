@@ -14,6 +14,6 @@ RUN yarn install
 COPY . ./
 
 # Start app
-EXPOSE 3000
+EXPOSE 3001
 
-CMD ["node", "server.js"]
+CMD ["yarn", "serve"]

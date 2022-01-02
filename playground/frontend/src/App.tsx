@@ -1,12 +1,12 @@
 import React, { SetStateAction, useEffect } from "react";
-import { Box, Container, Grid, Paper, Tab, Tabs, useMediaQuery } from "@mui/material";
+import { Grid, Paper, Tab, Tabs, useMediaQuery } from "@mui/material";
 
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
 import WarehouseRenderer from "./components/WarehouseRenderer";
 import Layout from "./components/Layout";
 import LabelPicker from "./components/LabelPicker";
-import Report from "./components/Report";
+import ReportList from "./components/ReportList";
 
 export enum FullscreenState {
 	Left,
@@ -107,8 +107,6 @@ const labels = [
 	},
   ];
 
-const reports = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-  
 
 export default function App() {
 	const mobile = useMediaQuery("(max-width: 800px)");
@@ -154,7 +152,7 @@ export default function App() {
 	});
 
 	return (
-		<Layout>
+		<Layout noScroll>
 			<Grid container sx={{ maxHeight: "100%" }} direction={mobile ? "column" : "row"}>
 				{fullscreen != FullscreenState.Right && (
 					<Grid
@@ -193,43 +191,29 @@ export default function App() {
 				)}
 
 				{fullscreen != FullscreenState.Left && (
-					<Grid item container sx={{ position: "relative", flex: 1, maxHeight: "100%" }} >
-						<Grid item xs={12}>
-							<Tabs value={selectedTab} onChange={handleChange}>
-								<Tab label="Reports" />
-								<Tab label="Logs" />
-								<Tab label="Devices" />
-							</Tabs>
+					<Grid item container sx={{ position: "relative", flex: 1, maxHeight: "100%", overflow: "auto" }} >
+							<Grid item xs={12}>
+								<Tabs value={selectedTab} onChange={handleChange}>
+									<Tab label="Reports" />
+									<Tab label="Logs" />
+									<Tab label="Devices" />
+								</Tabs>
 
-							<Paper sx={{ overflowY: "scroll" }}>
-								<LabelPicker labels={labels} />
-								{reports.map( (value) => (
-									<Report
-										title="Report Testing"
-										description="This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be"
-										shortDescription="A brief description of the problem"
-										warningLevel="warning"
-										actions={[
-											["04:05", "Latest action to be performed"],
-											["04:00", "Previous Action"],
-										]}
-										resolved={false}
-										reportId={value}
-										key={value}
+								<Paper>
+										<LabelPicker labels={labels} />
+										<ReportList />
+								</Paper>
+
+							</Grid>
+
+							<Grid item sx={{ marginLeft: "auto", mt: "auto" }}>
+								<FullscreenButton
+									fullscreenState={fullscreen}
+									setFullscreen={setFullscreen}
+									panelSide={FullscreenState.Right}
 									/>
-								))}
-							</Paper>
-
+							</Grid>
 						</Grid>
-
-						<Grid item sx={{ marginLeft: "auto", mt: "auto" }}>
-							<FullscreenButton
-								fullscreenState={fullscreen}
-								setFullscreen={setFullscreen}
-								panelSide={FullscreenState.Right}
-							/>
-						</Grid>
-					</Grid>
 				)}
 			</Grid>
 		</Layout>
