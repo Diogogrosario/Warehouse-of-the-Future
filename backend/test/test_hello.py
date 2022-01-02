@@ -1,11 +1,32 @@
-# Sample structure of pytest
+import os
+parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.sys.path.append(parentdir)
 
-def test_equal():
-    num = 25
-    assert num == 25
+from api.init import api
+from flask import Flask
+from flask_testing import TestCase
 
+# pytest -s
 
-def test_diff():
-    num1 = 25
-    num2 = 5
-    assert num1 - num2 == 20
+class MyTest(TestCase):
+    def setUp(self):
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        self.client = self.app.test_client()
+    
+    def tearDown(self):
+        self.app_context.pop()
+        pass
+
+    def create_app(self):
+        app = Flask(__name__)
+        app.config['TESTING'] = True
+        app.config['RESTX_MASK_SWAGGER'] = False
+        api.init_app(app)
+        return app
+    
+    def test_server_is_up_and_running(self):
+        response = self.client.get('staff/')
+        print(response.get_data())
+        self.assertEqual(response.status_code, 200)
+    
