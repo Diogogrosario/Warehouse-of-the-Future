@@ -16,11 +16,6 @@ export default function FullscreenButton(props: FullscreenProps) {
 
 	return (
 		<Button
-			sx={{
-				position: "absolute",
-				bottom: 0,
-				right: 0,
-			}}
 			onClick={() => {
 				if (props.fullscreenState == FullscreenState.Disabled)
 					props.setFullscreen(props.panelSide);
