@@ -47,9 +47,9 @@ jobs:
           echo FLASK_APP=app.py > backend/.env  
           echo FLASK_DEBUG=1 >> backend/.env  
           echo FLASK_ENV=development >> backend/.env  
-          MONGO_ATLAS_USERNAME=${{secrets.T1_MONGO_ATLAS_USERNAME}} >> backend/.env  
-          MONGO_ATLAS_PASSWORD=${{secrets.T1_MONGO_ATLAS_PASSWORD}} >> backend/.env  
-          MONGO_ATLAS_DATABASE=${{secrets.T1_MONGO_ATLAS_PASSWORD}} >> backend/.env  
+          echo MONGO_ATLAS_USERNAME=${{secrets.T1_MONGO_ATLAS_USERNAME}} >> backend/.env  
+          echo MONGO_ATLAS_PASSWORD=${{secrets.T1_MONGO_ATLAS_PASSWORD}} >> backend/.env  
+          echo MONGO_ATLAS_DATABASE=${{secrets.T1_MONGO_ATLAS_PASSWORD}} >> backend/.env  
       - name: Docker Hub login
         run: |
           docker login -u ${{secrets.T1_DOCKERHUB_USERNAME}} -p ${{secrets.T1_DOCKERHUB_PASSWORD}}
