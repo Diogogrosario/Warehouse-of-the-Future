@@ -22,8 +22,9 @@ class APITesting(TestCase):
     def populateSensorData(self):
         devices_data = [
             {
+                "_id": ObjectId("b07f1f77bcf86cd799439011"),
                 "bucket": ObjectId("107f1f77bcf86cd799439011"),
-                "movement_records": [
+                "movement_sensor": [
                     datetime.datetime(2022, 1, 2, 8, 35, 3),
                     datetime.datetime(2022, 1, 2, 8, 40, 5),
                     datetime.datetime(2022, 1, 2, 8, 50, 45),
@@ -40,17 +41,29 @@ class APITesting(TestCase):
                 ]
             },
             {
+                "_id": ObjectId("b07f1f77bcf86cd799439012"),
                 "bucket": ObjectId("907f1f77bcf86cd799439011"),
-                "movement_records": [
+                "movement_sensor": [
                     datetime.datetime(2022, 1, 3, 8, 35, 3),
                     datetime.datetime(2022, 1, 3, 8, 40, 5),
                     datetime.datetime(2022, 1, 3, 8, 50, 45),
                     datetime.datetime(2022, 1, 3, 9, 50, 1),
                     datetime.datetime(2022, 1, 3, 12, 50, 10),
+                    datetime.datetime(2022, 1, 5, 8, 50, 45),
+                    datetime.datetime(2022, 1, 5, 9, 50, 1),
+                    datetime.datetime(2022, 1, 5, 12, 50, 10),
                 ],
                 "staff_contacts": [
                     {
                         "time": datetime.datetime(2022, 1, 3, 8, 35, 3),
+                        "staff_id": ObjectId("907f1f77bcf86cd799439012")
+                    },
+                    {
+                        "time": datetime.datetime(2022, 1, 4, 9, 55, 0),
+                        "staff_id": ObjectId("907f1f77bcf86cd799439012")
+                    },
+                    {
+                        "time": datetime.datetime(2022, 1, 5, 10, 35, 25),
                         "staff_id": ObjectId("907f1f77bcf86cd799439012")
                     },
                 ]
@@ -207,3 +220,50 @@ class APITesting(TestCase):
         global_data = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response.status_code, 400)
 
+    def test_sensors_endpoint(self):
+        # sensors/
+        response = self.client.get('sensors/')
+        sensor_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(sensor_data), 2)
+        self.assertEqual(response.status_code, 200)
+
+        # sensors/:id
+        sensor_id = "b07f1f77bcf86cd799439012"
+        response = self.client.get(f'sensors/{sensor_id}')
+        sensor_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(sensor_data['id'], sensor_id)
+        self.assertEqual(response.status_code, 200)
+
+        # sensors/:id/movements
+        response = self.client.get(f'sensors/{sensor_id}/movements')
+        sensor_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(sensor_data), 8)
+        self.assertEqual(response.status_code, 200)
+
+        # sensors/:id/movements/
+        # ?time_before=2022-01-03&time_after=2022-01-04
+        query_time_before = "2022-01-03"
+        query_time_after = "2022-01-04"
+        response = self.client.get(f'sensors/{sensor_id}/movements?' +
+                                   f'time_before={query_time_before}&' +
+                                   f'time_after={query_time_after}')
+        sensor_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(sensor_data), 5)
+        self.assertEqual(response.status_code, 200)
+
+        # sensors/:id/timestamps
+        response = self.client.get(f'sensors/{sensor_id}/timestamps')
+        sensor_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(sensor_data), 3)
+        self.assertEqual(response.status_code, 200)
+
+        # sensors/:id/timestamps/
+        # ?time_before=2022-01-03&time_after=2022-01-04
+        query_time_before = "2022-01-03"
+        query_time_after = "2022-01-04"
+        response = self.client.get(f'sensors/{sensor_id}/timestamps?' +
+                                   f'time_before={query_time_before}&' +
+                                   f'time_after={query_time_after}')
+        sensor_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(sensor_data), 1)
+        self.assertEqual(response.status_code, 200)

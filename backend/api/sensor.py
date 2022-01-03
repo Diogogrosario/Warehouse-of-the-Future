@@ -128,7 +128,20 @@ class SensorInformation(Resource):
 
         Returns data about the sensor that has the passed "id".
         """
-        document = devicesCollection.find({"_id": ObjectId(id)})
+        document = devicesCollection.find_one({"_id": ObjectId(id)})
+
+        return json.loads(json_util.dumps(document))
+
+@namespace.route("/")
+class AllSensorInformation(Resource):
+    @namespace.marshal_with(sensor_attributes)
+    @namespace.response(200, 'Success')
+    @namespace.response(404, 'Incorrect Request')
+    def get(self):
+        """
+        Returns information of all sensors.
+        """
+        document = devicesCollection.find({})
 
         return json.loads(json_util.dumps(document))
 
