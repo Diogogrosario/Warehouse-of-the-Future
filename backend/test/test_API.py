@@ -1,17 +1,17 @@
-import os
-parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.sys.path.append(parentdir)
-
 import datetime
 import json
 import urllib.parse
-from api.init import api
+import os
 from flask import Flask
 from flask_testing import TestCase
 from pymongo import MongoClient
 from os import getenv
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
+parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.sys.path.append(parentdir)
+from api.init import api
+
 
 class APITesting(TestCase):
     def populateTestDatabase(self):
@@ -57,9 +57,9 @@ class APITesting(TestCase):
             }
         ]
         self.db.WoF.Devices.insert_many(devices_data)
-    
+
     def populateGlobalData(self):
-        globalData_data = [
+        global_data = [
             {
                 "orchestrator_position": [1, 2, 3],
                 "cart": {
@@ -78,7 +78,7 @@ class APITesting(TestCase):
             }
 
         ]
-        self.db.WoF.GlobalData.insert_many(globalData_data)
+        self.db.WoF.GlobalData.insert_many(global_data)
 
     def populateEmployees(self):
         employees_data = [
@@ -118,10 +118,12 @@ class APITesting(TestCase):
     def setUp(self):
         load_dotenv('.env.test')
         self.db = MongoClient("mongodb+srv://" +
-        f"{getenv('MONGO_ATLAS_USERNAME')}:" +
-        f"{getenv('MONGO_ATLAS_PASSWORD')}@{getenv('MONGO_ATLAS_SERVER')}/" +
-        f"{getenv('MONGO_ATLAS_CLUSTER')}?retryWrites=true&w=majority")
-        
+                              f"{getenv('MONGO_ATLAS_USERNAME')}:" +
+                              f"{getenv('MONGO_ATLAS_PASSWORD')}@" +
+                              f"{getenv('MONGO_ATLAS_SERVER')}/" +
+                              f"{getenv('MONGO_ATLAS_CLUSTER')}?" +
+                              "retryWrites=true&w=majority")
+
         self.populateTestDatabase()
         self.client = self.app.test_client()
 
@@ -130,12 +132,12 @@ class APITesting(TestCase):
         self.db.WoF.GlobalData.drop()
         self.db.WoF.Devices.drop()
 
-    def create_app(self):        
-        app = Flask(__name__)        
+    def create_app(self):
+        app = Flask(__name__)
         app.config['RESTX_MASK_SWAGGER'] = False
         api.init_app(app)
         return app
-    
+
     def test_staff_endpoint(self):
         # staff/
         response = self.client.get('staff/')
@@ -158,13 +160,14 @@ class APITesting(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # staff/?age=45&name=Deolinda Gomes
-        response = self.client.get(f'staff/?age={queryMinimumAge}&name={queryName}')
+        response = self.client.get(f'staff/?age={queryMinimumAge}' +
+                                   f'&name={queryName}')
         staff_data = json.loads(response.data.decode('utf-8'))
         self.assertEqual(len(staff_data), 1)
         self.assertEqual(response.status_code, 200)
 
         # staff/?age=abc (Incorrect Request)
-        response = self.client.get(f'staff/?age=abc')
+        response = self.client.get('staff/?age=abc')
         staff_data = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response.status_code, 400)
 
@@ -176,6 +179,31 @@ class APITesting(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # staff/:id (Incorrect Request)
-        response = self.client.get(f'staff/abc')
+        response = self.client.get('staff/abc')
         staff_data = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response.status_code, 404)
+
+    def test_globalData_enpoint(self):
+        # globalData/?time_before=2021-01-01
+        query_time_before = "2021-01-01"
+        response = self.client.get("globalData/?" +
+                                   f"time_before={query_time_before}")
+        global_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(global_data), 2)
+        self.assertEqual(response.status_code, 200)
+
+        # globalData/?time_before=2022-01-01&time_after=2022-01-03
+        query_time_before = "2022-01-02"
+        query_time_after = "2022-01-03"
+        response = self.client.get("globalData/?" +
+                                   f"time_before={query_time_before}&"
+                                   f"time_after={query_time_after}")
+        global_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(len(global_data), 1)
+        self.assertEqual(response.status_code, 200)
+
+        # globalData/?time_before=abc (Incorrect Request)
+        response = self.client.get("globalData/?time_before=abc")
+        global_data = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(response.status_code, 400)
+
