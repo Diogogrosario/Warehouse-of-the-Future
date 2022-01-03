@@ -1,12 +1,13 @@
 import React, { SetStateAction, useEffect } from "react";
-import { Grid, Paper, Tab, Tabs, useMediaQuery } from "@mui/material";
+import { Grid, styled, Tab, Tabs, useMediaQuery } from "@mui/material";
 
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
 import WarehouseRenderer from "./components/WarehouseRenderer";
 import Layout from "./components/Layout";
-import LabelPicker from "./components/LabelPicker";
 import ReportList from "./components/ReportList";
+import TabPanel from "./components/TabPanel";
+import NoResultsOverlay from "./components/NoResultsOverlay";
 
 export enum FullscreenState {
 	Left,
@@ -14,104 +15,14 @@ export enum FullscreenState {
 	Right,
 }
 
-const labels = [
-	{
-	  name: 'good first issue',
-	  color: '#7057ff',
-	  description: 'Good for newcomers',
-	},
-	{
-	  name: 'help wanted',
-	  color: '#008672',
-	  description: 'Extra attention is needed',
-	},
-	{
-	  name: 'priority: critical',
-	  color: '#b60205',
-	  description: '',
-	},
-	{
-	  name: 'priority: high',
-	  color: '#d93f0b',
-	  description: '',
-	},
-	{
-	  name: 'priority: low',
-	  color: '#0e8a16',
-	  description: '',
-	},
-	{
-	  name: 'priority: medium',
-	  color: '#fbca04',
-	  description: '',
-	},
-	{
-	  name: "status: can't reproduce",
-	  color: '#fec1c1',
-	  description: '',
-	},
-	{
-	  name: 'status: confirmed',
-	  color: '#215cea',
-	  description: '',
-	},
-	{
-	  name: 'status: duplicate',
-	  color: '#cfd3d7',
-	  description: 'This issue or pull request already exists',
-	},
-	{
-	  name: 'status: needs information',
-	  color: '#fef2c0',
-	  description: '',
-	},
-	{
-	  name: 'status: wont do/fix',
-	  color: '#eeeeee',
-	  description: 'This will not be worked on',
-	},
-	{
-	  name: 'type: bug',
-	  color: '#d73a4a',
-	  description: "Something isn't working",
-	},
-	{
-	  name: 'type: discussion',
-	  color: '#d4c5f9',
-	  description: '',
-	},
-	{
-	  name: 'type: documentation',
-	  color: '#006b75',
-	  description: '',
-	},
-	{
-	  name: 'type: enhancement',
-	  color: '#84b6eb',
-	  description: '',
-	},
-	{
-	  name: 'type: epic',
-	  color: '#3e4b9e',
-	  description: 'A theme of work that contain sub-tasks',
-	},
-	{
-	  name: 'type: feature request',
-	  color: '#fbca04',
-	  description: 'New feature or request',
-	},
-	{
-	  name: 'type: question',
-	  color: '#d876e3',
-	  description: 'Further information is requested',
-	},
-  ];
-
+const StyledTabPanel = styled(TabPanel)( () => ({
+    height: "100%",
+}));
 
 export default function App() {
 	const mobile = useMediaQuery("(max-width: 800px)");
 
-	const [selectedTab, setSelectedTab] = React.useState(0);
+	const [selectedTab, setSelectedTab] = React.useState(1);
 	const [panelSize, setPanelSize] = React.useState(60);
 	const [dragging, setDragging] = React.useState(false);
 	const [fullscreen, setFullscreen] = React.useState(FullscreenState.Disabled);
@@ -153,11 +64,10 @@ export default function App() {
 
 	return (
 		<Layout noScroll>
-			<Grid container sx={{ maxHeight: "100%" }} direction={mobile ? "column" : "row"}>
+			<Grid container sx={{ maxHeight: "100%", mb: "16px" }} direction={mobile ? "column" : "row"}>
 				{fullscreen != FullscreenState.Right && (
 					<Grid
 						item
-						container
 						sx={{
 							position: "relative",
 							width:
@@ -170,16 +80,12 @@ export default function App() {
 									: `${panelSize}%`
 						}}
 					>
-						<Grid item xs={12}>
-								<WarehouseRenderer />
-						</Grid>
-						<Grid item sx={{ marginLeft: "auto", mt: "auto" }}>
-							<FullscreenButton
-								fullscreenState={fullscreen}
-								setFullscreen={setFullscreen}
-								panelSide={FullscreenState.Left}
-							/>
-						</Grid>
+						<WarehouseRenderer />
+						<FullscreenButton
+							fullscreenState={fullscreen}
+							setFullscreen={setFullscreen}
+							panelSide={FullscreenState.Left}
+						/>
 					</Grid>
 				)}
 
@@ -191,29 +97,33 @@ export default function App() {
 				)}
 
 				{fullscreen != FullscreenState.Left && (
-					<Grid item container sx={{ position: "relative", flex: 1, maxHeight: "100%", overflow: "auto" }} >
-							<Grid item xs={12}>
-								<Tabs value={selectedTab} onChange={handleChange}>
-									<Tab label="Reports" />
-									<Tab label="Logs" />
-									<Tab label="Devices" />
-								</Tabs>
+					<Grid item sx={{ position: "relative", flex: 1, height: "100%" }} >
+						<Tabs
+							value={selectedTab}
+							onChange={handleChange}
+							indicatorColor="secondary"
+							aria-label="tabs navigation"
+							variant="fullWidth"
+						>
+							<Tab label="Reports" id="app-tab-0" aria-controls="app-tabpanel-0" />
+							<Tab label="Logs" id="app-tab-1" aria-controls="app-tabpanel-1" />
+							<Tab label="Devices" id="app-tab-2" aria-controls="app-tabpanel-2" />
+						</Tabs>
 
-								<Paper>
-										<LabelPicker labels={labels} />
-										<ReportList />
-								</Paper>
+						<StyledTabPanel emptyComponent={<NoResultsOverlay text="No reports found" />} value={selectedTab} index={0} id="app-tabpanel-0" aria-labelledby="app-tab-0">
+							<ReportList />
+						</StyledTabPanel>
+						<StyledTabPanel value={selectedTab} emptyComponent={<NoResultsOverlay text="No logs found" />} index={1} id="app-tabpanel-1" aria-labelledby="app-tab-1">
+						</StyledTabPanel>
+						<StyledTabPanel value={selectedTab} emptyComponent={<NoResultsOverlay text="No devices found" />} index={2} id="app-tabpanel-2" aria-labelledby="app-tab-2">
+						</StyledTabPanel>
 
-							</Grid>
-
-							<Grid item sx={{ marginLeft: "auto", mt: "auto" }}>
-								<FullscreenButton
-									fullscreenState={fullscreen}
-									setFullscreen={setFullscreen}
-									panelSide={FullscreenState.Right}
-									/>
-							</Grid>
-						</Grid>
+						<FullscreenButton
+							fullscreenState={fullscreen}
+							setFullscreen={setFullscreen}
+							panelSide={FullscreenState.Right}
+						/>
+					</Grid>
 				)}
 			</Grid>
 		</Layout>

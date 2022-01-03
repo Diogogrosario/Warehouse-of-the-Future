@@ -126,7 +126,7 @@ export default function ReportList() {
 	}, [sortProperty, ascending]);
 
 	return (
-		<div>
+		<div style={{ height: "100%" }} >
 			<Stack direction="row">
 				<FormControl fullWidth sx={{ marginTop: "10px" }}>
 					<InputLabel id="sort-by-select">Sort by</InputLabel>
@@ -157,7 +157,7 @@ export default function ReportList() {
 				</Button>
 			</Stack>
 
-			<List>
+			<List style={{ overflow: "auto", height: "100%" }} >
 				{reports.map((report, i) => {
 					return (
 						<ListItem key={i}>
