@@ -44,14 +44,12 @@ jobs:
         uses: actions/checkout@v2
       - name: Create backend .env file
         run: |
-          echo FLASK_DEBUG=1 > backend/.env    
-      - name: Create database .env file
-        run: |
-          echo ME_CONFIG_BASICAUTH_USERNAME=${{secrets.T1_MONGO_USERNAME}} > database/.env
-          echo ME_CONFIG_BASICAUTH_PASSWORD=${{secrets.T1_MONGO_PASSWORD}} >> database/.env
-          echo ME_CONFIG_MONGODB_PORT=27017 >> database/.env
-          echo ME_CONFIG_MONGODB_ADMINUSERNAME=${{secrets.T1_MONGO_ADMINUSERNAME}} >> database/.env
-          echo ME_CONFIG_MONGODB_ADMINPASSWORD=${{secrets.T1_MONGO_ADMINPASSWORD}} >> database/.env
+          echo FLASK_APP=app.py > backend/.env  
+          echo FLASK_DEBUG=1 >> backend/.env  
+          echo FLASK_ENV=development >> backend/.env  
+          MONGO_ATLAS_USERNAME=${{secrets.T1_MONGO_ATLAS_USERNAME}} >> backend/.env  
+          MONGO_ATLAS_PASSWORD=${{secrets.T1_MONGO_ATLAS_PASSWORD}} >> backend/.env  
+          MONGO_ATLAS_DATABASE=${{secrets.T1_MONGO_ATLAS_PASSWORD}} >> backend/.env  
       - name: Docker Hub login
         run: |
           docker login -u ${{secrets.T1_DOCKERHUB_USERNAME}} -p ${{secrets.T1_DOCKERHUB_PASSWORD}}
@@ -63,10 +61,7 @@ jobs:
           DOCKERHUB_REPO: "dsmeic/ds-meic2"
           FRONTEND_TAG: "frontend"
           BACKEND_TAG: "backend"
-          MONGO_TAG: "mongo"
         run: |
-          docker tag ${MONGO_TAG} ${DOCKERHUB_REPO}:${MONGO_TAG}
-          docker push ${DOCKERHUB_REPO}:${MONGO_TAG}
           docker tag ds-meic2_${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
           docker push ${DOCKERHUB_REPO}:${BACKEND_TAG}
           docker tag ds-meic2_${FRONTEND_TAG} ${DOCKERHUB_REPO}:${FRONTEND_TAG}
@@ -84,26 +79,21 @@ jobs:
             DOCKERHUB_REPO: "dsmeic/ds-meic2"
             FRONTEND_TAG: "frontend"
             BACKEND_TAG: "backend"
-            MONGO_TAG: "mongo"
         with:
           host: ${{secrets.T1_SSH_IP}}
           username: ${{secrets.T1_SSH_USERNAME}}
           password: ${{secrets.T1_SSH_PASSWORD}}
-          envs: DOCKERHUB_REPO,FRONTEND_TAG,BACKEND_TAG,MONGO_TAG          
+          envs: DOCKERHUB_REPO,FRONTEND_TAG,BACKEND_TAG          
           script: |
             echo ${FRONTEND_TAG}
             docker stop ${FRONTEND_TAG}
             docker stop ${BACKEND_TAG}
-            docker stop ${MONGO_TAG}
 
             docker rm ${FRONTEND_TAG}
             docker rm ${BACKEND_TAG}
-            docker rm ${MONGO_TAG}
 
             docker pull ${DOCKERHUB_REPO}:${FRONTEND_TAG}
             docker pull ${DOCKERHUB_REPO}:${BACKEND_TAG}
-            docker pull ${DOCKERHUB_REPO}:${MONGO_TAG}
 
             docker run -d -p 8000:3000 --restart always --name ${FRONTEND_TAG} ${DOCKERHUB_REPO}:${FRONTEND_TAG}
             docker run -d -p 8001:5000 --restart always --name ${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
-            docker run -d -p 27017:27017 --restart always --network mongo-compose-network --name ${MONGO_TAG} ${DOCKERHUB_REPO}:${MONGO_TAG}
