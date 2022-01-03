@@ -12,6 +12,17 @@ services:
         stdin_open: true
         tty: true
 
+    grafana:
+        image: grafana/grafana
+        build: ./grafana
+        container_name: grafana
+        ports:
+            - 9000:3000
+        volumes:
+            - grafana-data:/app/grafana
+        networks:
+            - grafnet
+
     backend:
         build: ./backend
         ports:
@@ -45,3 +56,9 @@ services:
 networks:
     mongo-compose-network:
         driver: bridge
+    grafnet:
+        external: false
+
+volumes:
+    grafana-data:
+        external: false
