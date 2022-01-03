@@ -7,4 +7,3 @@ Flask-PyMongo
 pymongo[srv]
 names==0.3.0
 flask_testing
-urllib
