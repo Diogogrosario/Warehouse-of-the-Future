@@ -54,13 +54,17 @@ class StaffQuery(Resource):
         searchQuery = {}
 
         if age is not None:
-            today = datetime.date.today()
-            dt = datetime.datetime(
-                year=today.year - age,
-                month=today.month,
-                day=today.day
-            )
-            searchQuery["birth_date"] = {"$lte": dt}
+            try:
+                today = datetime.date.today()
+                    
+                dt = datetime.datetime(
+                    year=today.year - age,
+                    month=today.month,
+                    day=today.day
+                )
+                searchQuery["birth_date"] = {"$lte": dt}
+            except Exception:
+                return json.loads(json_util.dumps([]))
         if name is not None:
             searchQuery["name"] = name
 

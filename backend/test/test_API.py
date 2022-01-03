@@ -1,14 +1,17 @@
-import datetime
 import os
+import datetime
+from datetime import timezone
 from sensors_unit_tests import SensorsTests
 from globalData_unit_tests import GlobalDataTests
 from staff_unit_tests import StaffTests
+from staff_PBT import StaffPBT
 from flask import Flask
 from flask_testing import TestCase
 from pymongo import MongoClient
 from os import getenv
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
+from hypothesis import given, settings, strategies as st
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.append(parentdir)
 from api.init import api
@@ -151,7 +154,11 @@ class APITesting(TestCase):
         app.config['RESTX_MASK_SWAGGER'] = False
         api.init_app(app)
         return app
-
+    
+    # ----------------------------------------------------------
+    # Unit Tests
+    # ----------------------------------------------------------
+    
     def test_staff_endpoint(self):
         staff_tests = StaffTests(self, self.client)
         staff_tests.testRoot()
@@ -178,3 +185,13 @@ class APITesting(TestCase):
         sensor_tests.testSensorTimestamps("b07f1f77bcf86cd799439012")
         sensor_tests.testSensorTimestampsWithTime("b07f1f77bcf86cd799439012",
                                                   "2022-01-03", "2022-01-04")
+
+    # ----------------------------------------------------------
+    # Property Based Tests
+    # ----------------------------------------------------------
+
+    @settings(max_examples=15, deadline=None)
+    @given(minimumAge=st.integers())
+    def test_staff_endpoint_PBT(self, minimumAge):
+        staff_tests = StaffPBT(self, self.client)
+        staff_tests.testStaffWithMinimumAge(minimumAge)
