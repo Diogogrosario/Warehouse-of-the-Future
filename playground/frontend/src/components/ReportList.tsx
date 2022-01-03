@@ -12,7 +12,7 @@ import {
 import SortIcon from "@mui/icons-material/Sort";
 import { North, South } from "@mui/icons-material";
 import Report from "./Report";
-import React, { Props, Suspense, useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import { ReportResource } from "../resources/ReportResource";
 import { NetworkErrorBoundary, useResource } from "rest-hooks";
 
@@ -32,51 +32,6 @@ function AsyncBoundary({ children, fallback = <span>loading</span> }: AsyncBound
 export default function ReportList() {
 	const [ascending, setAscending] = React.useState(false);
 	const [sortProperty, setSortProperty] = React.useState("updatedAt");
-
-	// const [reports, setReports] = useState<ReportProps[]>([
-	// {
-	// 	title: "Report Testing A",
-	// 	description:
-	// 		"This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be",
-	// 	shortDescription: "This is a short description",
-	// 	warningLevel: Severity.Warning,
-	// 	actions: [
-	// 		["04:05", "Latest action to be performed"],
-	// 		["04:00", "Previous Action"],
-	// 	],
-	// 	resolved: false,
-	// 	reportId: 1,
-	// 	createdAt: new Date("2020-12-25"),
-	// 	updatedAt: new Date("2020-12-26"),
-	// },
-	// {
-	// 	title: "Report Testing B",
-	// 	description:
-	// 		"This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be",
-	// 	shortDescription: "A brief description of the problem",
-	// 	warningLevel: Severity.Error,
-	// 	actions: [
-	// 		["04:05", "Latest action to be performed"],
-	// 		["04:00", "Previous Action"],
-	// 	],
-	// 	resolved: false,
-	// 	reportId: 2,
-	// 	createdAt: new Date("2020-12-23"),
-	// 	updatedAt: new Date("2020-12-24"),
-	// },
-	// ]);
-
-	// useEffect(() => {
-	// 	const value = ascending ? 1 : -1;
-
-	// 	const sorted = [...reports].sort((a: ReportProps, b: ReportProps) =>
-	// 		a[sortProperty as keyof ReportProps] > b[sortProperty as keyof ReportProps]
-	// 			? value
-	// 			: -value
-	// 	);
-
-	// 	setReports(sorted);
-	// }, [sortProperty, ascending]);
 
 	const reports = useResource(ReportResource.list(), {});
 
