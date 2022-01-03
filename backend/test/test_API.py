@@ -1,7 +1,8 @@
 import datetime
-import json
-import urllib.parse
 import os
+from sensors_unit_tests import SensorsTests
+from globalData_unit_tests import GlobalDataTests
+from staff_unit_tests import StaffTests
 from flask import Flask
 from flask_testing import TestCase
 from pymongo import MongoClient
@@ -152,118 +153,28 @@ class APITesting(TestCase):
         return app
 
     def test_staff_endpoint(self):
-        # staff/
-        response = self.client.get('staff/')
-        staff_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(staff_data), 5)
-        self.assertEqual(response.status_code, 200)
-
-        # staff?name=Deolinda Gomes
-        queryName = urllib.parse.quote("Deolinda Gomes")
-        response = self.client.get(f'staff/?name={queryName}')
-        staff_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(staff_data), 1)
-        self.assertEqual(response.status_code, 200)
-
-        # staff/?age=45
-        queryMinimumAge = 45
-        response = self.client.get(f'staff/?age={queryMinimumAge}')
-        staff_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(staff_data), 2)
-        self.assertEqual(response.status_code, 200)
-
-        # staff/?age=45&name=Deolinda Gomes
-        response = self.client.get(f'staff/?age={queryMinimumAge}' +
-                                   f'&name={queryName}')
-        staff_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(staff_data), 1)
-        self.assertEqual(response.status_code, 200)
-
-        # staff/?age=abc (Incorrect Request)
-        response = self.client.get('staff/?age=abc')
-        staff_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(response.status_code, 400)
-
-        # staff/:id
-        staff_id = "a07f1f77bcf86cd799439013"
-        response = self.client.get(f'staff/{staff_id}')
-        staff_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(staff_data['id'], staff_id)
-        self.assertEqual(response.status_code, 200)
-
-        # staff/:id (Incorrect Request)
-        response = self.client.get('staff/abc')
-        staff_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(response.status_code, 404)
+        staff_tests = StaffTests(self, self.client)
+        staff_tests.testRoot()
+        staff_tests.testStaffWithName("Deolinda Gomes")
+        staff_tests.testStaffWithMinimumAge(45)
+        staff_tests.testSpecificStaffWithNameAndAge("Deolinda Gomes", 45)
+        staff_tests.testSpecificStaff("a07f1f77bcf86cd799439013")
+        staff_tests.testWrongRequest()
+        staff_tests.testWrongURLParam("abc")
 
     def test_globalData_enpoint(self):
-        # globalData/?time_before=2021-01-01
-        query_time_before = "2021-01-01"
-        response = self.client.get("globalData/?" +
-                                   f"time_before={query_time_before}")
-        global_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(global_data), 2)
-        self.assertEqual(response.status_code, 200)
-
-        # globalData/?time_before=2022-01-01&time_after=2022-01-03
-        query_time_before = "2022-01-02"
-        query_time_after = "2022-01-03"
-        response = self.client.get("globalData/?" +
-                                   f"time_before={query_time_before}&"
-                                   f"time_after={query_time_after}")
-        global_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(global_data), 1)
-        self.assertEqual(response.status_code, 200)
-
-        # globalData/?time_before=abc (Incorrect Request)
-        response = self.client.get("globalData/?time_before=abc")
-        global_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(response.status_code, 400)
+        global_tests = GlobalDataTests(self, self.client)
+        global_tests.testWithTimeBefore("2021-01-01")
+        global_tests.testWithTimeBeforeAndAfter("2022-01-02", "2022-01-03")
+        global_tests.testWrongRequest()
 
     def test_sensors_endpoint(self):
-        # sensors/
-        response = self.client.get('sensors/')
-        sensor_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(sensor_data), 2)
-        self.assertEqual(response.status_code, 200)
-
-        # sensors/:id
-        sensor_id = "b07f1f77bcf86cd799439012"
-        response = self.client.get(f'sensors/{sensor_id}')
-        sensor_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(sensor_data['id'], sensor_id)
-        self.assertEqual(response.status_code, 200)
-
-        # sensors/:id/movements
-        response = self.client.get(f'sensors/{sensor_id}/movements')
-        sensor_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(sensor_data), 8)
-        self.assertEqual(response.status_code, 200)
-
-        # sensors/:id/movements/
-        # ?time_before=2022-01-03&time_after=2022-01-04
-        query_time_before = "2022-01-03"
-        query_time_after = "2022-01-04"
-        response = self.client.get(f'sensors/{sensor_id}/movements?' +
-                                   f'time_before={query_time_before}&' +
-                                   f'time_after={query_time_after}')
-        sensor_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(sensor_data), 5)
-        self.assertEqual(response.status_code, 200)
-
-        # sensors/:id/timestamps
-        response = self.client.get(f'sensors/{sensor_id}/timestamps')
-        sensor_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(sensor_data), 3)
-        self.assertEqual(response.status_code, 200)
-
-        # sensors/:id/timestamps/
-        # ?time_before=2022-01-03&time_after=2022-01-04
-        query_time_before = "2022-01-03"
-        query_time_after = "2022-01-04"
-        response = self.client.get(f'sensors/{sensor_id}/timestamps?' +
-                                   f'time_before={query_time_before}&' +
-                                   f'time_after={query_time_after}')
-        sensor_data = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(len(sensor_data), 1)
-        self.assertEqual(response.status_code, 200)
+        sensor_tests = SensorsTests(self, self.client)
+        sensor_tests.testRoot()
+        sensor_tests.testSpecificSensor("b07f1f77bcf86cd799439012")
+        sensor_tests.testSensorMovements("b07f1f77bcf86cd799439012")
+        sensor_tests.testSensorMovementsWithTime("b07f1f77bcf86cd799439012",
+                                                 "2022-01-03", "2022-01-04")
+        sensor_tests.testSensorTimestamps("b07f1f77bcf86cd799439012")
+        sensor_tests.testSensorTimestampsWithTime("b07f1f77bcf86cd799439012",
+                                                  "2022-01-03", "2022-01-04")
