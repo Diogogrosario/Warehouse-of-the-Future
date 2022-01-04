@@ -5,6 +5,7 @@ from globalData_unit_tests import GlobalDataTests
 from staff_unit_tests import StaffTests
 from staff_PBT import StaffPBT
 from globalData_PBT import GlobalPBT
+from sensors_PBT import SensorsPBT
 from flask import Flask
 from flask_testing import TestCase
 from pymongo import MongoClient
@@ -217,6 +218,40 @@ class APITesting(TestCase):
         global_tests = GlobalPBT(self, self.client)
         (time_before, time_after) = times
         global_tests.testGlobalDataWithTimeBeforeAndAfter(
+            time_before,
+            time_after
+        )
+
+    # Sensors
+
+    @settings(max_examples=15, deadline=None)
+    @given(sensor_id=st.sampled_from([
+        "b07f1f77bcf86cd799439011",
+        "b07f1f77bcf86cd799439012"]),
+        times=st.tuples(st.datetimes(), st.datetimes()).filter(
+            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999
+        ))
+    def test_sensors_endpoint_movements_PBT(self, sensor_id, times):
+        global_tests = SensorsPBT(self, self.client)
+        (time_before, time_after) = times
+        global_tests.testSensorsMovementWithTime(
+            sensor_id,
+            time_before,
+            time_after
+        )
+
+    @settings(max_examples=15, deadline=None)
+    @given(sensor_id=st.sampled_from([
+        "b07f1f77bcf86cd799439011",
+        "b07f1f77bcf86cd799439012"]),
+        times=st.tuples(st.datetimes(), st.datetimes()).filter(
+            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999
+        ))
+    def test_sensors_endpoint_timestamps_PBT(self, sensor_id, times):
+        global_tests = SensorsPBT(self, self.client)
+        (time_before, time_after) = times
+        global_tests.testSensorsTimestampWithTime(
+            sensor_id,
             time_before,
             time_after
         )

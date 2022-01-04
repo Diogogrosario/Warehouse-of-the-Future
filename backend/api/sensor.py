@@ -132,6 +132,7 @@ class SensorInformation(Resource):
 
         return json.loads(json_util.dumps(document))
 
+
 @namespace.route("/")
 class AllSensorInformation(Resource):
     @namespace.marshal_with(sensor_attributes)
