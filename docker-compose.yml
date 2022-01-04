@@ -18,6 +18,13 @@ services:
       - ./backend/.env
     volumes:
       - ./backend:/app
+      
+  worker:
+    build: ./worker
+    ports:
+      - 8080:8080
+    volumes:
+      - ./worker:/app
 
   mongo:
     image: mongo

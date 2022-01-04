@@ -1,9 +1,14 @@
-from api import generate_data as gen
+import os
 
-from api.db import client
+parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.sys.path.append(parentdir)
 
+from backend.api import db, generate_data as gen
 
-def populate_items():
+client = db.client
+print(client)
+
+"""def populate_items():
     items = gen.Items().get()
     client.WoF.Items.insert_many(items)
 
@@ -39,3 +44,10 @@ populate_manifests()
 populate_sensor()
 populate_shelves()
 populate_staff()
+"""
+
+def populate_manifests():
+    manifest = gen.Manifest().get()
+    client.WoF.Manifests.insert_one(manifest)
+
+populate_manifests()

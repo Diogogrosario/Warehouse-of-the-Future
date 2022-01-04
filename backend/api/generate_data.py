@@ -340,7 +340,7 @@ def generate_items_for_manifest(number_of_items=None):
 
 
 def get_static_items_ids():
-    with open("./api/static_files/items_ids.json", "r") as file:
+    with open("../backend/api/static_files/items_ids.json", "r") as file:
         return json.load(file)
 
 
@@ -384,7 +384,7 @@ def generate_employee_data(id=None):
 
 
 def get_static_employee_data():
-    with open("./api/static_files/staff.json", "r") as file:
+    with open("../backend/api/static_files/staff.json", "r") as file:
         return json.load(file)
 
 
