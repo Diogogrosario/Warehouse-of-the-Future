@@ -5,9 +5,7 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
-ADD ../backend/api /app/
-
 COPY . .
 
-CMD [ "python3", "-m", "worker" ]
+CMD [ "python3", "worker.py" ]
 EXPOSE 8080
