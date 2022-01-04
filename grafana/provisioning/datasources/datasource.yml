@@ -8,7 +8,7 @@ datasources:
       type: yesoreyeram-infinity-datasource
       typeName: Infinity
       typeLogoUrl: public/plugins/yesoreyeram-infinity-datasource/img/icon.svg
-      access: proxy
+      access: direct
       url:
       user:
       password:
