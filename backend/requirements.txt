@@ -8,3 +8,4 @@ pymongo[srv]
 names==0.3.0
 flask_testing
 hypothesis
+flask-cors

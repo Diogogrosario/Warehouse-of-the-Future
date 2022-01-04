@@ -229,8 +229,7 @@ class APITesting(TestCase):
         "b07f1f77bcf86cd799439011",
         "b07f1f77bcf86cd799439012"]),
         times=st.tuples(st.datetimes(), st.datetimes()).filter(
-            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999
-        ))
+            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
     def test_sensors_endpoint_movements_PBT(self, sensor_id, times):
         global_tests = SensorsPBT(self, self.client)
         (time_before, time_after) = times
@@ -245,8 +244,7 @@ class APITesting(TestCase):
         "b07f1f77bcf86cd799439011",
         "b07f1f77bcf86cd799439012"]),
         times=st.tuples(st.datetimes(), st.datetimes()).filter(
-            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999
-        ))
+            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
     def test_sensors_endpoint_timestamps_PBT(self, sensor_id, times):
         global_tests = SensorsPBT(self, self.client)
         (time_before, time_after) = times
