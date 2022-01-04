@@ -1,6 +1,5 @@
 import os
 import datetime
-from datetime import timezone
 from sensors_unit_tests import SensorsTests
 from globalData_unit_tests import GlobalDataTests
 from staff_unit_tests import StaffTests
@@ -154,11 +153,11 @@ class APITesting(TestCase):
         app.config['RESTX_MASK_SWAGGER'] = False
         api.init_app(app)
         return app
-    
+
     # ----------------------------------------------------------
     # Unit Tests
     # ----------------------------------------------------------
-    
+
     def test_staff_endpoint(self):
         staff_tests = StaffTests(self, self.client)
         staff_tests.testRoot()
@@ -192,6 +191,16 @@ class APITesting(TestCase):
 
     @settings(max_examples=15, deadline=None)
     @given(minimumAge=st.integers())
-    def test_staff_endpoint_PBT(self, minimumAge):
+    def test_staff_endpoint_age_PBT(self, minimumAge):
         staff_tests = StaffPBT(self, self.client)
         staff_tests.testStaffWithMinimumAge(minimumAge)
+
+    @settings(max_examples=15, deadline=None)
+    @given(name=st.sampled_from([
+        "Deolinda Gomes", "Alcides Cabides",
+        "Rosa Mota", "Joao de Deus",
+        "Jorge Jesus"
+    ]))
+    def test_staff_endpoint_name_PBT(self, name):
+        staff_tests = StaffPBT(self, self.client)
+        staff_tests.testStaffWithName(name)

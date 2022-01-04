@@ -1,6 +1,7 @@
 import json
 import urllib
 
+
 class StaffTests():
     def __init__(self, TestClass, client):
         self.TestClass = TestClass
@@ -12,7 +13,7 @@ class StaffTests():
         staff_data = json.loads(response.data.decode('utf-8'))
         self.TestClass.assertEqual(len(staff_data), 5)
         self.TestClass.assertEqual(response.status_code, 200)
-    
+
     def testStaffWithName(self, name):
         # staff?name=Deolinda Gomes
         queryName = urllib.parse.quote(name)
@@ -20,14 +21,14 @@ class StaffTests():
         staff_data = json.loads(response.data.decode('utf-8'))
         self.TestClass.assertEqual(len(staff_data), 1)
         self.TestClass.assertEqual(response.status_code, 200)
-    
+
     def testStaffWithMinimumAge(self, queryMinimumAge):
         # staff/?age=45
         response = self.client.get(f'staff/?age={queryMinimumAge}')
         staff_data = json.loads(response.data.decode('utf-8'))
         self.TestClass.assertEqual(len(staff_data), 2)
         self.TestClass.assertEqual(response.status_code, 200)
-    
+
     def testSpecificStaffWithNameAndAge(self, name, queryMinimumAge):
         # staff/?age=45&name=Deolinda Gomes
         queryName = urllib.parse.quote(name)
@@ -36,7 +37,7 @@ class StaffTests():
         staff_data = json.loads(response.data.decode('utf-8'))
         self.TestClass.assertEqual(len(staff_data), 1)
         self.TestClass.assertEqual(response.status_code, 200)
-    
+
     def testSpecificStaff(self, staff_id):
         # staff/:id
         response = self.client.get(f'staff/{staff_id}')
@@ -48,7 +49,7 @@ class StaffTests():
         # staff/?age=abc (Incorrect Request)
         response = self.client.get('staff/?age=abc')
         self.TestClass.assertEqual(response.status_code, 400)
-    
+
     def testWrongURLParam(self, wrong_param):
         # staff/:id (Incorrect Request)
         response = self.client.get(f'staff/{wrong_param}')

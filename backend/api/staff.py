@@ -56,7 +56,7 @@ class StaffQuery(Resource):
         if age is not None:
             try:
                 today = datetime.date.today()
-                    
+
                 dt = datetime.datetime(
                     year=today.year - age,
                     month=today.month,
