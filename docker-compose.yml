@@ -23,7 +23,14 @@ services:
             - ./grafana/dashboards:/etc/grafana/dashboards
             - ./grafana/provisioning:/etc/grafana/provisioning
         networks:
-            - grafnet
+          - grafnet
+
+    worker:
+      build: ./worker
+      ports:
+        - 8080:8080
+      volumes:
+        - ./worker:/app
 
     backend:
         build: ./backend
