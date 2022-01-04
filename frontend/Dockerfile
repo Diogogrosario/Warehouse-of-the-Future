@@ -1,13 +1,13 @@
-FROM node:14.18.1
+FROM node:16.13.1
 
-WORKDIR /app
+RUN mkdir -p /app/frontend
+WORKDIR /app/frontend
 
-COPY package.json .
+COPY package*.json ./
 
 RUN npm install
 
-RUN mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache
-
-COPY . .
+COPY public/ public/
+COPY src/ src/
 
 CMD ["npm", "start"]
