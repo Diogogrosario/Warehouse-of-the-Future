@@ -5,7 +5,7 @@ os.sys.path.append(parentdir)
 
 from backend.api import db, generate_data as gen
 
-exit = False
+exit = True
 
 def populate_items():
     items = gen.Items().get()
