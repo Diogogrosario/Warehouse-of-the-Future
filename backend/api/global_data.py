@@ -83,6 +83,8 @@ class SensorInformation(Resource):
         if time_after is not None:
             searchQuery["cart.end_time"] = {"$lte": time_after}
 
-        document = globalDataCollection.find(searchQuery)
-
-        return json.loads(json_util.dumps(document))
+        try:
+            document = globalDataCollection.find(searchQuery)
+            return json.loads(json_util.dumps(document))
+        except Exception:
+            return json.loads(json_util.dumps([]))
