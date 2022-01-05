@@ -80,8 +80,7 @@ class RequestHandler {
   }
 
   Future<Map> log() async {
-    http.Response fetchContent =
-      await _client.get(_resourceUri("log"));
+    http.Response fetchContent = await _client.get(_resourceUri("log"));
     return jsonDecode(fetchContent.body);
   }
 }

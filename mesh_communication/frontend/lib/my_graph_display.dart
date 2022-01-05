@@ -1,13 +1,11 @@
 import 'dart:collection';
+import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 import 'package:graphview/GraphView.dart';
 import 'package:meshcommunication/my_graph.dart';
 import 'package:vector_math/vector_math.dart' as vm;
-
-import 'my_log.dart';
 
 class MyGraphDisplay extends StatefulWidget {
   static const double strokeWidth = 2;
@@ -35,10 +33,7 @@ class MyGraphDisplay extends StatefulWidget {
     nodeColors[0] = const Color.fromRGBO(45, 45, 45, 1.0);
 
     // rest of the colors
-    final int nColors = MyGraph
-        .of(context)
-        .graph
-        .nodeCount() - 1;
+    final int nColors = MyGraph.of(context).graph.nodeCount() - 1;
     var angle = 0;
     var increase = 360 / nColors;
     for (int i = 1; i <= nColors; i++) {
@@ -50,12 +45,7 @@ class MyGraphDisplay extends StatefulWidget {
       var hsvVec = vm.Vector4(H, S, V, O);
       var rgbVec = vm.Vector4.zero();
       vm.Colors.hsvToRgb(hsvVec, rgbVec);
-      int nodeId = MyGraph
-          .of(context)
-          .graph
-          .getNodeAtPosition(i)
-          .key!
-          .value;
+      int nodeId = MyGraph.of(context).graph.getNodeAtPosition(i).key!.value;
       if (nodeColors.containsKey(nodeId)) {
         if (kDebugMode) {
           print(
@@ -79,7 +69,7 @@ class MyGraphDisplay extends StatefulWidget {
 class _MyGraphDisplay extends State<MyGraphDisplay>
     with TickerProviderStateMixin {
   final TransformationController _transformationController =
-  TransformationController();
+      TransformationController();
   Animation<Matrix4>? _animationReset;
   late final AnimationController _controllerReset;
 
@@ -167,9 +157,7 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
   Widget _getGraphView(BuildContext context) {
     return GraphView(
       key: const Key("Graph"),
-      graph: MyGraph
-          .of(context)
-          .graph,
+      graph: MyGraph.of(context).graph,
       algorithm: widget._algo,
       builder: (Node node) {
         // I can decide what widget should be shown here based on the id
@@ -188,28 +176,33 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
 
   @override
   Widget build(BuildContext context) {
-    return
-    Row(
+    return Row(
       children: [
-        Expanded(child: InteractiveViewer(
-        // prevent the default OverflowBox (we'll create our own)
-          constrained: true,
-          boundaryMargin: const EdgeInsets.all(double.infinity),
-          transformationController: _transformationController,
-          onInteractionStart: _onInteractionStart,
-          minScale: 0.1,
-          maxScale: 10.0,
-          child: OverflowBox(
-            alignment: Alignment.center,
-            minWidth: 0.0,
-            minHeight: 0.0,
-            maxWidth: double.infinity,
-            maxHeight: double.infinity,
-            child: _getGraphView(context),
+        Expanded(
+          child: InteractiveViewer(
+            // prevent the default OverflowBox (we'll create our own)
+            constrained: true,
+            boundaryMargin: const EdgeInsets.all(double.infinity),
+            transformationController: _transformationController,
+            onInteractionStart: _onInteractionStart,
+            minScale: 0.1,
+            maxScale: 10.0,
+            child: OverflowBox(
+              alignment: Alignment.center,
+              minWidth: 0.0,
+              minHeight: 0.0,
+              maxWidth: double.infinity,
+              maxHeight: double.infinity,
+              child: _getGraphView(context),
+            ),
           ),
-        ), flex: 7,),
-        Expanded(child: MyGraph.of(context).logDisplay, flex: 3,)
+          flex: 7,
+        ),
+        Expanded(
+          child: MyGraph.of(context).logDisplay,
+          flex: 3,
+        )
       ],
-    );}
+    );
+  }
 }
-
