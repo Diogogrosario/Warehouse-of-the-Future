@@ -21,7 +21,8 @@ class MyLog extends StatefulWidget {
   Future<Widget> genLog(RequestHandler handler) async {
     Map log = await handler.log();
     String preetyLog = preetifyLog(log);
-    logs.add(Text(preetyLog));
+    if(preetyLog != "")
+      logs.add(Text(preetyLog));
     return ListView(children: logs);
   }
 
@@ -31,21 +32,46 @@ class MyLog extends StatefulWidget {
       for (String value in entry.value) {
         ret += entry.key.toString();
         ret += " - ";
+
         List<String> splitValue = value.split(":");
         ret += splitValue[0];
+        splitValue[1] = splitValue.sublist(1).join(":");
+        String stopWord = "";
+        String secondStopWord = "msg=";
+
+        List<String> splitParameters = splitValue[1].replaceAll(" ", "").split(",");
+
         if (splitValue[0] == "Received message" ||
             splitValue[0] == "Reached destination") {
           ret += " from ";
+
+          stopWord = "source=";
+
         } else if (splitValue[0] == "Relaying message" ||
             splitValue[0] == "Sent message" ||
             splitValue[0] == "Replying") {
           ret += " to ";
+          stopWord = "destination=";
         }
-        List<String> splitParameters = splitValue[1].split(",");
-        ret += splitParameters[0];
-        ret += " with content ";
-        ret += splitParameters[1];
+
+        int startIndex = splitParameters[0].indexOf(stopWord);
+        int endIndex = splitParameters[0].indexOf("]");
+        String deviceID = splitParameters[0].substring(startIndex + stopWord.length, endIndex);
+
+        if(deviceID == "0"){
+          ret += "Orchestrator ";
+        }
+        else{
+          ret += "device ";
+          ret += deviceID;
+          ret += " ";
+        }
+        ret += "with content ";
+        startIndex = splitParameters[1].indexOf(secondStopWord);
+        endIndex = splitParameters[1].indexOf("]");
+        ret += splitParameters[1].substring(startIndex + secondStopWord.length, endIndex);
         ret += "\n";
+
       }
     }
     return ret;
