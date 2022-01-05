@@ -14,7 +14,7 @@ import { North, South } from "@mui/icons-material";
 import Report from "./Report";
 import React, { Suspense } from "react";
 import { ReportResource } from "../resources/ReportResource";
-import { NetworkErrorBoundary, useResource } from "rest-hooks";
+import { NetworkErrorBoundary, useResource, useSubscription } from "rest-hooks";
 
 interface AsyncBoundaryProps {
 	fallback?: React.ReactElement;
@@ -34,6 +34,7 @@ export default function ReportList() {
 	const [sortProperty, setSortProperty] = React.useState("updatedAt");
 
 	const reports = useResource(ReportResource.list(), {});
+	useSubscription(ReportResource.list(), {});
 
 	return (
 		<AsyncBoundary>

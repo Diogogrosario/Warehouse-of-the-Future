@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
 	Typography,
 	Stack,
@@ -21,6 +21,8 @@ import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
+import { ReportResource } from "../resources/ReportResource";
+import { useController } from "rest-hooks";
 
 export interface ReportProps {
 	title: string;
@@ -36,6 +38,11 @@ export interface ReportProps {
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
 	const { title, description, shortDescription, warningLevel, actions, reportId } = props;
+
+	const controller = useController();
+	const markSolved = useCallback(async () => {
+		await controller.fetch(ReportResource.update(), { id: reportId }, { resolved: true });
+	}, [controller, reportId]);
 
 	const reportComponentId = `PlaygroundReport-${reportId}`;
 	return (
@@ -186,7 +193,9 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							</Button>
 							<Button
 								startIcon={<CheckIcon />}
-								onClick={() => console.info(`MARK AS RESOLVED`)}
+								onClick={() => {
+									markSolved();
+								}}
 								color="success"
 								sx={{
 									margin: "5px 10px",

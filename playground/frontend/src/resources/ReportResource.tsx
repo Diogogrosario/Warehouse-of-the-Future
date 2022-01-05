@@ -16,4 +16,18 @@ export class ReportResource extends Resource {
 	pk() {
 		return `${this.id}`;
 	}
+
+	static getEndpointExtra() {
+		return { pollFrequency: 1000 };
+	}
+
+	// static solved<T extends typeof Resource>(this: T) {
+	// 	const endpoint = this.update();
+	// 	return endpoint.extend({
+	// 	  url({ id }: { id: number }) { return `/${id}/solved` },
+	// 	  fetch({ id }: { id: number }) {
+	// 		return endpoint.fetch(this, {id});
+	// 	  }
+	// 	});
+	// }
 }

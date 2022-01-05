@@ -61,10 +61,13 @@ export function update(req, res) {
 
 	Report.update(req.body, {
 		where: { id: id },
+		returning: true
 	})
-		.then((num) => {
-			if (num == 1) {
-				res.send({ message: "Success." });
+		.then((result) => {
+			let num = result[0];
+			let obj = result[1].dataValues;
+			if (num > 0) {
+				res.send(obj);
 			} else {
 				res.send({ message: "Can't update report ${id}." });
 			}
