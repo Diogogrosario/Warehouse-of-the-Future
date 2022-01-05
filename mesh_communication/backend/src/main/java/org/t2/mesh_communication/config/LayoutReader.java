@@ -20,6 +20,10 @@ public class LayoutReader {
         this(new FileInputStream(FILE_DIR + FILE));
     }
 
+    public LayoutReader(String layoutFile) throws FileNotFoundException {
+        this(new FileInputStream(FILE_DIR + layoutFile));
+    }
+
     public LayoutReader(InputStream inputStream) {
         this.devices = new HashMap<>();
         this.inputStream = inputStream;

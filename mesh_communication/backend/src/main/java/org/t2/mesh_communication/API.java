@@ -49,6 +49,18 @@ public class API implements ErrorController {
         }
     }
 
+    public void overwriteWithFiles(String layoutFile, String manifestFile) {
+        Main.prepareConfigs();
+        try {
+            this.main.clearMeshGrid();
+            this.main.prepareGrid(layoutFile);
+            this.main.clearProducts();
+            this.main.readManifest(manifestFile);
+        } catch (Exception e) {
+            System.out.println("Error reading layout file!");
+        }
+    }
+
     private MeshGrid getMeshGrid() {
         return this.main.getMeshGrid();
     }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.ArrayList;
 import java.util.List;
@@ -170,5 +171,41 @@ public class MessageTests {
         assertEquals(
                 "\"Sent message [destination=4], [msg=test message 3]\"",
                 response.get("Device 2").get(1).toString());
+    }
+
+    @Test
+    public void testMessageType() {
+        ObjectNode outputMessage = api.messageSend(Mockito.mock(HttpServletResponse.class));
+        System.out.println(outputMessage.toString());
+        assertEquals("NUMBER", outputMessage.get("0").get(0).get("final").getNodeType().toString());
+        assertEquals("NUMBER", outputMessage.get("0").get(0).get("hop").getNodeType().toString());
+    }
+
+    @Test
+    public void testPropagation() {
+        API api = new API();
+        api.setMain(new Main());
+
+        api.overwriteWithFiles("layoutTest.csv", "manifestsTest.csv");
+
+        List<JsonNode> output = api.devicesStatus("all", Mockito.mock(HttpServletResponse.class));
+        String ochOut = api.orchestrate(Mockito.mock(HttpServletResponse.class));
+        assertEquals("Orchestrator orchestrated", ochOut);
+        JsonNode jnOut = api.messageSend(Mockito.mock(HttpServletResponse.class));
+
+        System.out.println(jnOut);
+
+        assertEquals(4, jnOut.get("0").get(0).get("final").intValue());
+        assertEquals(1, jnOut.get("0").get(0).get("hop").intValue());
+
+        api.tick("forwards", 1, Mockito.mock(HttpServletResponse.class));
+        String tickOut = api.tick("forwards", 1, Mockito.mock(HttpServletResponse.class));
+        assertEquals("Mesh Grid updated", tickOut);
+
+        jnOut = api.messageSend(Mockito.mock(HttpServletResponse.class));
+        assertEquals(4, jnOut.get("1").get(0).get("final").intValue());
+        assertEquals(0, jnOut.get("1").get(0).get("hop").intValue());
+        assertEquals(4, jnOut.get("1").get(1).get("final").intValue());
+        assertEquals(2, jnOut.get("1").get(1).get("hop").intValue());
     }
 }

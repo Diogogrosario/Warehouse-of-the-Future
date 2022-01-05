@@ -70,6 +70,52 @@ public class Main {
         this.products = manifestReader.getProducts();
     }
 
+    public void clearMeshGrid() {
+        this.meshGrid = new MeshGrid();
+    }
+
+    public void clearProducts() {
+        this.products = new ArrayList<>();
+    }
+
+    public void readManifest(String manifestFile) {
+        try {
+            ManifestReader manifestReader = new ManifestReader(manifestFile);
+            manifestReader.read();
+            this.products = manifestReader.getProducts();
+        } catch (Exception e) {
+            System.out.println("Couldn't read manifest file!");
+        }
+    }
+
+    public void prepareGrid(String layoutFile) throws IOException {
+        // read devices from layout file
+        LayoutReader layoutReader = new LayoutReader(layoutFile);
+        layoutReader.read();
+        HashMap<Integer, Position> devices = layoutReader.getDevices();
+
+        // add devices (and orchestrator)
+        this.orchestrator =
+                new Orchestrator(
+                        devices.get(MeshGrid.ORCHESTRATOR_ID), new FloodStrategy(this.meshGrid));
+        devices.remove(MeshGrid.ORCHESTRATOR_ID);
+        this.meshGrid.addDevice(this.orchestrator);
+        this.meshGrid.addDevices(devices);
+
+        // generate manifests
+        if (!ManifestGenerator.manifestFileExists()) {
+            final int nManifests = 1;
+            ManifestGenerator manifestGenerator =
+                    new ManifestGenerator(nManifests, devices.keySet());
+            manifestGenerator.generate();
+        }
+
+        // read manifests
+        ManifestReader manifestReader = new ManifestReader();
+        manifestReader.read();
+        this.products = manifestReader.getProducts();
+    }
+
     public void orchestrate() {
         this.orchestrator.orchestrate(this.products.subList(0, 1));
     }
