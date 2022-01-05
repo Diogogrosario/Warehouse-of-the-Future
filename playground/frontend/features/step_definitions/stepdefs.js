@@ -5,7 +5,6 @@
 const assert = require('assert');
 const { Builder, By, Capabilities, Key } = require("selenium-webdriver");
 const { Given, When, Then, AfterAll, pending } = require('@cucumber/cucumber');
-const { report } = require('process');
 
 const driver = new Builder().forBrowser("firefox").build();
 
