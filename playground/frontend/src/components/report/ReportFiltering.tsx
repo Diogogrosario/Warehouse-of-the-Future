@@ -24,7 +24,8 @@ export default function ReportFiltering(props: {
 
 			if (!createdAtRange.every((date) => date === null))
 				disabled ||= !(
-					report.createdAt >= createdAtRange[0]! && report.createdAt <= createdAtRange[1]!
+					report.createdAt >= (createdAtRange[0] ?? new Date()) &&
+					report.createdAt <= (createdAtRange[1] ?? new Date())
 				);
 
 			report.disabled = disabled;
