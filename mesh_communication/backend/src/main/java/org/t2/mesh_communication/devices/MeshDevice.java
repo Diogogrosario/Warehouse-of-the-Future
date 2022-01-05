@@ -6,6 +6,7 @@ import java.util.List;
 import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.messages.Message;
+import org.t2.mesh_communication.devices.messages.ReplyMessage;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
 
 /** A device on a mesh Network. Can be an orchestrator or a normal, passive device. */
@@ -107,6 +108,11 @@ public abstract class MeshDevice implements Updatable {
     public Message createMessage(int dest, String content) {
         ++this.seqNum;
         return new RequestMessage(this.id, this.seqNum, dest, content);
+    }
+
+    public Message createReply(int dest, String content) {
+        ++this.seqNum;
+        return new ReplyMessage(this.id, this.seqNum, dest, content);
     }
 
     public List<Integer> getDeadNeighbors() {

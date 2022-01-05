@@ -87,7 +87,8 @@ public class FloodStrategy implements CommunicationStrategy {
     }
 
     protected void resetTimeToLive(int id) {
-        this.neighborTTL.put(id, DEFAULT_TTL);
+        if (id != MeshGrid.ORCHESTRATOR_ID)
+            this.neighborTTL.put(id, DEFAULT_TTL);
     }
 
     private boolean seenMessage(MeshDevice me, Message msg) {
@@ -122,7 +123,7 @@ public class FloodStrategy implements CommunicationStrategy {
 
             if (RequestMessage.type.equals(msgType)) {
                 // send reply to request msg
-                ReplyMessage rep = new ReplyMessage(me.getId(), 0, msg.getSource(), "Reply.");
+                Message rep = me.createReply(msg.getSource(), "Reply.");
                 Logger.getInstance()
                         .publish(
                                 new Log(
