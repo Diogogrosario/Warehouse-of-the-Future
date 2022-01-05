@@ -17,12 +17,13 @@ export default function ReportFiltering(props: {
 		[...props.reports].map((report) => {
 			let disabled = false;
 
-			console.log(includeWarning)
-
 			disabled ||= report.warningLevel == Severity.Warning && !includeWarning;
 			disabled ||= report.warningLevel == Severity.Error && !includeError;
 
-			console.log(disabled)
+			if (createdAtRange != [null, null])
+				disabled ||= !(
+					report.createdAt >= createdAtRange[0]! && report.createdAt <= createdAtRange[1]!
+				);
 
 			report.disabled = disabled;
 		});
