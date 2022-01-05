@@ -105,7 +105,6 @@ class MyGraph extends InheritedWidget {
   Future<void> skipForward() async {
     await requestHandler.advanceTick();
     await _updateEdges();
-    await _updateLogs();
   }
 
   void skipBackwards() {
@@ -131,7 +130,4 @@ class MyGraph extends InheritedWidget {
   @override
   bool updateShouldNotify(MyGraph old) => graph != old.graph;
 
-  Future<Widget> _updateLogs(){
-    return logDisplay.genLog(requestHandler);
-  }
 }
