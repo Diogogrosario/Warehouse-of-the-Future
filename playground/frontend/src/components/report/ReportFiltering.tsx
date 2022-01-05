@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Box, Checkbox, FormControlLabel, FormGroup, TextField } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, FormGroup, Stack, TextField } from "@mui/material";
 import { ReportProps, Severity } from "./Report";
 import DateRangePicker, { DateRange } from "@mui/lab/DateRangePicker";
 import { LocalizationProvider } from "@mui/lab";
@@ -34,7 +34,7 @@ export default function ReportFiltering(props: {
 	}, [includeWarning, includeError, createdAtRange]);
 
 	return (
-		<div>
+		<Stack direction="row" justifyContent="center" alignItems="center" pr={2}>
 			<FormGroup>
 				<FormControlLabel
 					control={
@@ -78,6 +78,6 @@ export default function ReportFiltering(props: {
 					)}
 				/>
 			</LocalizationProvider>
-		</div>
+		</Stack>
 	);
 }
