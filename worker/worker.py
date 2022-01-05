@@ -5,7 +5,7 @@ os.sys.path.append(parentdir)
 
 from backend.api import db, generate_data as gen
 
-exit = True
+exit = False
 
 def populate_items():
     items = gen.Items().get()
@@ -43,3 +43,4 @@ while not exit:
     populate_sensor()
     populate_shelves()
     populate_staff()
+    exit = True
