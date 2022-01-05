@@ -20,7 +20,9 @@ export default function ReportFiltering(props: {
 			disabled ||= report.warningLevel == Severity.Warning && !includeWarning;
 			disabled ||= report.warningLevel == Severity.Error && !includeError;
 
-			if (createdAtRange != [null, null])
+			console.log(createdAtRange);
+
+			if (!createdAtRange.every((date) => date === null))
 				disabled ||= !(
 					report.createdAt >= createdAtRange[0]! && report.createdAt <= createdAtRange[1]!
 				);
