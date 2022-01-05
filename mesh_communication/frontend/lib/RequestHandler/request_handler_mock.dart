@@ -45,4 +45,10 @@ class RequestHandlerMock implements RequestHandler {
   Future<void> orchestrate() async {
     // can have some logic
   }
+
+  @override
+  Future<Map> log() {
+    // TODO: implement log
+    return Future.value({});
+  }
 }

@@ -10,49 +10,23 @@ import 'package:vector_math/vector_math.dart' as vm;
 
 class MyLog extends StatefulWidget {
 
+  final List<Text> logs = <Text>[];
+  VoidCallback? callback;
+
   MyLog({Key? key}): super(key: key);
 
   @override
   _MyLogDisplay createState() => _MyLogDisplay();
 
-}
-
-class _MyLogDisplay extends State<MyLog> {
-  final List<Text> logs = <Text>[];
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<Widget>(
-      future: genLog(),
-      builder: (context, response) {
-        if (response.connectionState == ConnectionState.done) {
-          Widget log = response.data!;
-          return log;
-        } else {
-          // still loading
-          return Container(color: Colors.white);
-        }
-      },
-    );
-  }
-
-  Future<Widget> genLog() async {
-    Map log = await MyGraph.of(context).requestHandler.log();
-    print(log.entries);
-    print(logs);
-    print("before preety");
+  Future<Widget> genLog(RequestHandler handler) async {
+    Map log = await handler.log();
     String preetyLog = preetifyLog(log);
-    print("after preety");
     logs.add(Text(preetyLog));
-    print("I added some logs and will draw");
-    print(logs);
     return ListView(children: logs);
   }
 
-
   String preetifyLog(Map log) {
     String ret = "";
-    print(log.entries);
     for (var entry in log.entries) {
       for (String value in entry.value) {
         ret += entry.key.toString();
@@ -76,4 +50,37 @@ class _MyLogDisplay extends State<MyLog> {
     }
     return ret;
   }
+}
+
+class _MyLogDisplay extends State<MyLog> {
+  @override
+  void initState() {
+    super.initState();
+
+
+    widget.callback ??= updateLog;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<Widget>(
+      future: widget.genLog(MyGraph.of(context).requestHandler),
+      builder: (context, response) {
+        if (response.connectionState == ConnectionState.done) {
+          Widget log = response.data!;
+          return log;
+        } else {
+          // still loading
+          return Container();
+        }
+      },
+    );
+  }
+
+  void updateLog()  {
+    setState(() {
+
+    });
+  }
+
 }
