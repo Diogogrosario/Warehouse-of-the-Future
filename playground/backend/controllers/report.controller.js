@@ -101,7 +101,14 @@ export function solved(req, res) {
 					});
 
 				// toggle solved flag
-				Report.update({ resolved: !data.resolved });
+				Report.update({ resolved: !data.resolved }, {where: { id: id }}).then((num) => {
+					if (num == 1) {
+						res.send({ message: "Success." });
+					} else {
+						res.send({ message: "Can't update report ${id}." });
+					}
+				})
+				
 			} else res.status(404).send({ message: `Didn't find report ${id}.` });
 		})
 		.catch((err) => {
