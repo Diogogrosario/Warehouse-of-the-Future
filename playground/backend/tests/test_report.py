@@ -41,6 +41,7 @@ def test_update_report():
         "severity" : "warning"
     }
     resp = put_req_assertion(f'{BASE_URL}/report/1', data=data)
+    assert resp["severity"] == data["severity"]
     
 def test_solve_report():
     """Test updating a report."""
@@ -56,11 +57,11 @@ def test_delete_all_reports():
     
     
 if __name__ == "__main__":
-    test_retrieve_all_reports()
-    test_get_specific_report()
-    test_report_not_found()
-    test_create_report()
-    test_delete_report()
+    # test_retrieve_all_reports()
+    # test_get_specific_report()
+    # test_report_not_found()
+    # test_create_report()
+    # test_delete_report()
     test_update_report()
-    test_solve_report()
-    test_delete_all_reports()
+    # test_solve_report()
+    # test_delete_all_reports()

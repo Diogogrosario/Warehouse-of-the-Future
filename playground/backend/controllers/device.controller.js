@@ -17,11 +17,11 @@ export function create(req, res) {
 export function findAll(req, res) {
 	const Report = db.report;
 	const Action = db.action;
-	Device.findAll({ 
-		include: { 
+	Device.findAll({
+		include: {
 			model: Report,
-			include: Action
-		}
+			include: Action,
+		},
 	})
 		.then((data) => {
 			res.send(data);

@@ -23,13 +23,13 @@ export function create(req, res) {
 // Retrieve all Reports from the database.
 export function findAll(req, res) {
 	const Action = db.action;
-	Report.findAll( { include: {
-		model: Action,
-		separate: true,
-		order: [
-			['createdAt', 'DESC']
-		]
-	} } )
+	Report.findAll({
+		include: {
+			model: Action,
+			separate: true,
+			order: [["createdAt", "DESC"]],
+		},
+	})
 		.then((data) => {
 			res.send(data);
 		})
@@ -44,7 +44,7 @@ export function findOne(req, res) {
 	const Action = db.action;
 
 	Report.findByPk(id, {
-		include: Action
+		include: Action,
 	})
 		.then((data) => {
 			if (data) res.send(data);
@@ -61,15 +61,15 @@ export function update(req, res) {
 
 	Report.update(req.body, {
 		where: { id: id },
-		returning: true
+		returning: true,
 	})
 		.then((result) => {
 			let num = result[0];
-			let obj = result[1].dataValues;
+			let obj = result[1][0].dataValues;
 			if (num > 0) {
 				res.send(obj);
 			} else {
-				res.send({ message: "Can't update report ${id}." });
+				res.status(400).send({ message: "Can't update report ${id}." });
 			}
 		})
 		.catch((err) => {
@@ -104,14 +104,13 @@ export function solved(req, res) {
 					});
 
 				// toggle solved flag
-				Report.update({ resolved: !data.resolved }, {where: { id: id }}).then((num) => {
+				Report.update({ resolved: !data.resolved }, { where: { id: id } }).then((num) => {
 					if (num == 1) {
 						res.send({ message: "Success." });
 					} else {
 						res.send({ message: "Can't update report ${id}." });
 					}
-				})
-				
+				});
 			} else res.status(404).send({ message: `Didn't find report ${id}.` });
 		})
 		.catch((err) => {
