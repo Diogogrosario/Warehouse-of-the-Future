@@ -1,23 +1,10 @@
-import {
-	Button,
-	FormControl,
-	InputLabel,
-	List,
-	ListItem,
-	MenuItem,
-	Select,
-	SelectChangeEvent,
-	Stack,
-} from "@mui/material";
-import SortIcon from "@mui/icons-material/Sort";
-import { North, South } from "@mui/icons-material";
+import { Checkbox, FormControlLabel, FormGroup, List, ListItem, Slider } from "@mui/material";
 import Report, { ReportProps, Severity } from "./Report";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import ReportSorting from "./ReportSorting";
 
 export default function ReportList() {
-	const [ascending, setAscending] = React.useState(false);
-	const [sortProperty, setSortProperty] = React.useState("updatedAt");
-
+	const [filterProperty, setFilterProperty] = React.useState("");
 	const [reports, setReports] = useState<ReportProps[]>([
 		{
 			title: "Report Testing A",
@@ -51,49 +38,23 @@ export default function ReportList() {
 		},
 	]);
 
-	useEffect(() => {
-		const value = ascending ? 1 : -1;
-
-		const sorted = [...reports].sort((a: ReportProps, b: ReportProps) =>
-			a[sortProperty as keyof ReportProps] > b[sortProperty as keyof ReportProps]
-				? value
-				: -value
-		);
-
-		setReports(sorted);
-	}, [sortProperty, ascending]);
-
 	return (
 		<div>
-			<Stack direction="row">
-				<FormControl fullWidth sx={{ marginTop: "10px" }}>
-					<InputLabel id="sort-by-select">Sort by</InputLabel>
-					<Select
-						label="Sort by"
-						id="sort-by-select"
-						onChange={(event: SelectChangeEvent) => {
-							setSortProperty(event.target.value);
-						}}
-						value={sortProperty}
-					>
-						<MenuItem value={"title"}>Title (A-Z)</MenuItem>
-						<MenuItem value={"shortDescription"}>Description (A-Z)</MenuItem>
-						<MenuItem value={"warningLevel"}>Severity</MenuItem>
-						<MenuItem value={"createdAt"}>Time of creation</MenuItem>
-						<MenuItem value={"updatedAt"}>Time of last update</MenuItem>
-					</Select>
-				</FormControl>
+			<ReportSorting reports={reports} setReports={setReports} />
 
-				<Button
-					onClick={() => {
-						setAscending(!ascending);
-					}}
-				>
-					<SortIcon />
+			{/* Filtering */}
+			<FormGroup>
+				<FormControlLabel
+					control={<Checkbox defaultChecked color="warning" />}
+					label="Warning"
+				/>
+				<FormControlLabel
+					control={<Checkbox defaultChecked color="error" />}
+					label="Error"
+				/>
 
-					{ascending ? <South /> : <North />}
-				</Button>
-			</Stack>
+				<Slider value={[10, 20]} onChange={() => {}} valueLabelDisplay="auto" />
+			</FormGroup>
 
 			<List>
 				{reports.map((report, i) => {
