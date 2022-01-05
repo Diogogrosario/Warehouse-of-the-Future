@@ -1,10 +1,10 @@
-import { Checkbox, FormControlLabel, FormGroup, List, ListItem, Slider } from "@mui/material";
+import { List, ListItem } from "@mui/material";
 import Report, { ReportProps, Severity } from "./Report";
 import React, { useState } from "react";
 import ReportSorting from "./ReportSorting";
+import ReportFiltering from "./ReportFiltering";
 
 export default function ReportList() {
-	const [filterProperty, setFilterProperty] = React.useState("");
 	const [reports, setReports] = useState<ReportProps[]>([
 		{
 			title: "Report Testing A",
@@ -20,6 +20,7 @@ export default function ReportList() {
 			reportId: 1,
 			createdAt: new Date("2020-12-25"),
 			updatedAt: new Date("2020-12-26"),
+			disabled: false,
 		},
 		{
 			title: "Report Testing B",
@@ -35,31 +36,19 @@ export default function ReportList() {
 			reportId: 2,
 			createdAt: new Date("2020-12-23"),
 			updatedAt: new Date("2020-12-24"),
+			disabled: false,
 		},
 	]);
 
 	return (
 		<div>
 			<ReportSorting reports={reports} setReports={setReports} />
-
-			{/* Filtering */}
-			<FormGroup>
-				<FormControlLabel
-					control={<Checkbox defaultChecked color="warning" />}
-					label="Warning"
-				/>
-				<FormControlLabel
-					control={<Checkbox defaultChecked color="error" />}
-					label="Error"
-				/>
-
-				<Slider value={[10, 20]} onChange={() => {}} valueLabelDisplay="auto" />
-			</FormGroup>
+			<ReportFiltering reports={reports} setReports={setReports} />
 
 			<List>
-				{reports.map((report, i) => {
-					return (
-						<ListItem key={i}>
+				{reports.map((report, i) => (
+					<ListItem key={i}>
+						{!report.disabled && (
 							<Report
 								title={report.title}
 								description={report.description}
@@ -70,10 +59,11 @@ export default function ReportList() {
 								reportId={report.reportId}
 								createdAt={report.createdAt}
 								updatedAt={report.updatedAt}
+								disabled={report.disabled}
 							/>
-						</ListItem>
-					);
-				})}
+						)}
+					</ListItem>
+				))}
 			</List>
 		</div>
 	);

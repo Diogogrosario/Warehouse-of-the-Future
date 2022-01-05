@@ -9,15 +9,15 @@ import {
 } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
 import { North, South } from "@mui/icons-material";
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ReportProps } from "./Report";
 
 export default function ReportSorting(props: {
 	reports: ReportProps[];
 	setReports: Dispatch<SetStateAction<ReportProps[]>>;
 }) {
-	const [ascending, setAscending] = React.useState(false);
-	const [sortProperty, setSortProperty] = React.useState("updatedAt");
+	const [ascending, setAscending] = useState(false);
+	const [sortProperty, setSortProperty] = useState("updatedAt");
 
 	useEffect(() => {
 		const value = ascending ? 1 : -1;
