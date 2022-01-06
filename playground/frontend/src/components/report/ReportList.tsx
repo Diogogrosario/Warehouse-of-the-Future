@@ -7,6 +7,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import { ReportResource } from "../../resources/ReportResource";
 import { NetworkErrorBoundary, useResource, useSubscription } from "rest-hooks";
 import ReportSorting from "./ReportSorting";
+import ReportFiltering from "./ReportFiltering";
 
 interface AsyncBoundaryProps {
 	fallback?: React.ReactElement;
@@ -28,6 +29,8 @@ export default function ReportList() {
 
 	const [sorted, setSorted] = useState(reports.map((report) => report.id));
 
+	const [excluded, setExcluded] = useState(reports.map(() => false));
+
 	useEffect(() => {
 		setSorted(reports.map((report) => report.id));
 	}, [reports]);
@@ -36,11 +39,12 @@ export default function ReportList() {
 		<AsyncBoundary>
 			<div>
 				<ReportSorting reports={reports} setSorted={setSorted} />
+				<ReportFiltering reports={reports} setExcluded={setExcluded} />
 				<List>
 					{reports.length > 0 && sorted.map((id, i) => {
 						const report = reports.find((report) => report.id == id) || reports[0];
 
-						return (
+						return !excluded[i] && (
 							<ListItem key={i}>
 								<Report
 									title={report.title}
