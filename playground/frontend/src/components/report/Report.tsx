@@ -37,6 +37,7 @@ export interface ReportProps {
 	reportId: number;
 	createdAt: Date;
 	updatedAt: Date;
+	disabled: boolean;
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
