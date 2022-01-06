@@ -26,34 +26,15 @@ const AddActionForm: React.FC<AddActionFormProps> = (props : AddActionFormProps)
                     </Typography>
                 </DialogContentText>
                 <Box component="form">
-                    <div
-                        style={{
-                            display: "grid",
-                            gridTemplateColumns: "auto 1fr",
-                            gridTemplateAreas: `
-                                "date ."
-                                "desc desc"
-                            `,
-                        }}
-                    >
-                        <TextField
-                            required
-                            id="report-action-date-input"
-                            label="Date"
-                            type="datetime-local"
-                            InputLabelProps={{ shrink: true }}
-                            style={{ gridArea: "date", margin: "8px 0" }}
-                        />
-                        <TextField
-                            required
-                            id="report-action-desc-input"
-                            label="Description"
-                            multiline
-                            minRows={2}
-                            maxRows={4}
-                            style={{ gridArea: "desc", margin: "8px 0" }}
-                        />
-                    </div>
+                    <TextField
+                        required
+                        id="report-action-desc-input"
+                        label="Description"
+                        multiline
+                        minRows={2}
+                        maxRows={4}
+                        style={{ gridArea: "desc", margin: "8px 0", width: "100%" }}
+                    />
                 </Box>
             </DialogContent>
             <DialogActions>
