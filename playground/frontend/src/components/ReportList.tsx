@@ -1,18 +1,28 @@
 import {
 	Button,
+	ButtonGroup,
 	FormControl,
+	InputBase,
 	InputLabel,
 	List,
 	ListItem,
+	Menu,
 	MenuItem,
+	Paper,
 	Select,
 	SelectChangeEvent,
 	Stack,
+	Switch,
+	Theme,
 } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
 import { North, South } from "@mui/icons-material";
-import Report, { ReportProps } from "./Report";
 import React, { useEffect, useState } from "react";
+import SearchIcon from '@mui/icons-material/Search';
+
+import Report, { ReportProps } from "./Report";
+import LabelPicker from "./LabelPicker";
+import Coloring from "../utils/coloring";
 
 const testReports = [
 	{
@@ -107,58 +117,219 @@ const testReports = [
 	},
 ];
 
+const testLabels = [
+	{
+	  name: 'good first issue',
+	  color: '#7057ff',
+	  description: 'Good for newcomers',
+	},
+	{
+	  name: 'help wanted',
+	  color: '#008672',
+	  description: 'Extra attention is needed',
+	},
+	{
+	  name: 'priority: critical',
+	  color: '#b60205',
+	  description: '',
+	},
+	{
+	  name: 'priority: high',
+	  color: '#d93f0b',
+	  description: '',
+	},
+	{
+	  name: 'priority: low',
+	  color: '#0e8a16',
+	  description: '',
+	},
+	{
+	  name: 'priority: medium',
+	  color: '#fbca04',
+	  description: '',
+	},
+	{
+	  name: "status: can't reproduce",
+	  color: '#fec1c1',
+	  description: '',
+	},
+	{
+	  name: 'status: confirmed',
+	  color: '#215cea',
+	  description: '',
+	},
+	{
+	  name: 'status: duplicate',
+	  color: '#cfd3d7',
+	  description: 'This issue or pull request already exists',
+	},
+	{
+	  name: 'status: needs information',
+	  color: '#fef2c0',
+	  description: '',
+	},
+	{
+	  name: 'status: wont do/fix',
+	  color: '#eeeeee',
+	  description: 'This will not be worked on',
+	},
+	{
+	  name: 'type: bug',
+	  color: '#d73a4a',
+	  description: "Something isn't working",
+	},
+	{
+	  name: 'type: discussion',
+	  color: '#d4c5f9',
+	  description: '',
+	},
+	{
+	  name: 'type: documentation',
+	  color: '#006b75',
+	  description: '',
+	},
+	{
+	  name: 'type: enhancement',
+	  color: '#84b6eb',
+	  description: '',
+	},
+	{
+	  name: 'type: epic',
+	  color: '#3e4b9e',
+	  description: 'A theme of work that contain sub-tasks',
+	},
+	{
+	  name: 'type: feature request',
+	  color: '#fbca04',
+	  description: 'New feature or request',
+	},
+	{
+	  name: 'type: question',
+	  color: '#d876e3',
+	  description: 'Further information is requested',
+	},
+];
+
 export default function ReportList() {
 	const [ascending, setAscending] = React.useState(false);
-	const [sortProperty, setSortProperty] = React.useState("updatedAt");
+	
+	const [sortMenuAnchorEl, setSortMenuAnchorEl] = React.useState<null | HTMLElement>(null);
+	const sortMenuOpen = Boolean(sortMenuAnchorEl);
+	const sortMenuOptions = ["title", "warningLevel", "createdAt", "updatedAt"];
+	const sortMenuOptionText = ["Title (A-Z)", "Severity", "Time of creation", "Time of last update"];
+	const [sortOption, setSortOption] = React.useState(3);
 
-	const [reports, setReports] = useState<ReportProps[]>(testReports as ReportProps[]);
-
-	useEffect(() => {
-		const value = ascending ? 1 : -1;
-
-		const sorted = [...reports].sort((a: ReportProps, b: ReportProps) =>
-			a[sortProperty as keyof ReportProps] > b[sortProperty as keyof ReportProps]
-				? value
-				: -value
-		);
-
-		setReports(sorted);
-	}, [sortProperty, ascending]);
+	const reports = (testReports as ReportProps[]); // PROVISIONAL
+	//const [reports, setReports] = useState<ReportProps[]>(testReports as ReportProps[]);
+	const labels = testLabels; // PROVISIONAL
 
 	return (
-		<div style={{ height: "100%" }} >
-			<Stack direction="row">
-				<FormControl fullWidth sx={{ marginTop: "10px" }}>
-					<InputLabel id="sort-by-select">Sort by</InputLabel>
-					<Select
-						label="Sort by"
-						id="sort-by-select"
-						onChange={(event: SelectChangeEvent) => {
-							setSortProperty(event.target.value);
-						}}
-						value={sortProperty}
-					>
-						<MenuItem value={"title"}>Title (A-Z)</MenuItem>
-						<MenuItem value={"shortDescription"}>Description (A-Z)</MenuItem>
-						<MenuItem value={"warningLevel"}>Severity</MenuItem>
-						<MenuItem value={"createdAt"}>Time of creation</MenuItem>
-						<MenuItem value={"updatedAt"}>Time of last update</MenuItem>
-					</Select>
-				</FormControl>
-
-				<Button
-					onClick={() => {
-						setAscending(!ascending);
+		<div style={{ height: "100%", display: "grid", gridTemplateRows: "auto 1fr" }} >
+			<div
+				style={{
+					display: "grid",
+					gridTemplateColumns: "1fr auto",
+				}}
+			>
+				<Paper component="div"
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						ml: "5px",
+						border: (theme : Theme) => {
+							const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+							return `1px solid rgba(${r}, ${g}, ${b}, 0.2)`;
+						},
+						backgroundColor: "transparent",
+						"&:focus-within": {
+							border: "1px solid white.main",
+							backgroundColor: "dark.main",
+						},
+						"&:hover": {
+							border: (theme : Theme) => {
+								const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+								return `1px solid rgba(${r}, ${g}, ${b}, 0.4)`;
+							},
+							backgroundColor: (theme : Theme) => {
+								const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.dark.main);
+								return `rgba(${r}, ${g}, ${b}, 0.6)`;
+							},
+						},
 					}}
 				>
-					<SortIcon />
+					<SearchIcon fontSize="medium" sx={{ color: "white.main", margin: "0 16px" }} />
+					<InputBase
+						placeholder="Search reports"
+						inputProps={{ "aria-label": "search reports" }}
+						sx={{
+							flex: "1 1 0",
+							margin: "4px 0",
+							fontSize: "16px",
+							"> input": {
+								color: "white.main",
+								"&::placeholder": {
+									opacity: 0.6,
+								},
+							},
+						}}
+					/>
+				</Paper>
+				<ButtonGroup variant="contained" aria-label="listing options">
+					<Button
+						id="report-sort-button"
+						aria-label="select sort property for reports"
+						aria-controls="report-sort-menu"
+						aria-haspopup="true"
+						aria-expanded={sortMenuOpen ? "true" : undefined}
+						color="lightDark"
+						onClick={(event : React.MouseEvent<HTMLButtonElement, MouseEvent>) => { setSortMenuAnchorEl(event.currentTarget); }}
+					>
+						<SortIcon />
+					</Button>
+					<Menu
+						id="report-sort-menu"
+						anchorEl={sortMenuAnchorEl}
+						open={sortMenuOpen}
+						onClose={ () => { setSortMenuAnchorEl(null); }}
+						MenuListProps={{
+							"aria-labelledby": "report-sort-button",
+							role: "listbox",
+						}}
+					>
+						{sortMenuOptions.map((option, index) => (
+							<MenuItem
+								key={option}
+								selected={sortOption === index}
+								onClick={() => {
+									setSortOption(index);
+									setSortMenuAnchorEl(null);
+								}}	
+							>
+								{sortMenuOptionText[index]}
+							</MenuItem>
+						))}
+					</Menu>
+					<Button
+						id="report-sort-order-button"
+						aria-label="toggle report sorting order"
+						color="lightDark"
+						onClick={() => setAscending(prevState => !prevState)}
+					>
+						{ascending ? <South /> : <North />}
+					</Button>
+					<LabelPicker labels={labels} buttonProps={{ color: "lightDark" }} style={{ marginLeft: "4px", height: "inherit" }} />
+				</ButtonGroup>
+			</div>
 
-					{ascending ? <South /> : <North />}
-				</Button>
-			</Stack>
-
-			<List style={{ overflow: "auto", height: "100%" }} >
-				{reports.map((report, i) => {
+			<List style={{ overflow: "auto" }} >
+				{reports.sort((reportA : ReportProps, reportB : ReportProps) => (
+					(reportA[sortMenuOptions[sortOption] as keyof ReportProps] == reportB[sortMenuOptions[sortOption] as keyof ReportProps])
+						? 0
+						: ((reportA[sortMenuOptions[sortOption] as keyof ReportProps] > reportB[sortMenuOptions[sortOption] as keyof ReportProps])
+							? (ascending ? 1 : -1)
+							: (ascending ? -1 : 1)
+						)
+				)).map((report, i) => {
 					return (
 						<ListItem key={i}>
 							<Report

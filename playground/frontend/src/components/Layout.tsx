@@ -1,7 +1,8 @@
-import { AppBar, Container, Toolbar, Typography } from "@mui/material";
+import { AppBar, Container, Theme, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material";
+import { ThemeProvider as EmotionThemeProvider, Global, css } from "@emotion/react";
 
 import theme from "../styles/theme";
 
@@ -27,32 +28,44 @@ const Layout : React.FC<LayoutProps> = (props : LayoutProps) => {
                 <link rel="apple-touch-icon" type="image/x-icon" href="favicon.ico" />
                 <link rel="icon" type="image/x-icon" href="favicon.ico" />
             </Helmet>
-            <ThemeProvider theme={theme}>
-                <div className="appWrapper"
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        height: "100vh",
-                        width: "100%",
-                        margin: 0,
-                    }}    
-                >
-                    <div className="appContainer" style={{ display: "flex", flexDirection: "column", height: " inherit"}}>
-                        <AppBar position="relative">
-                            <Toolbar>
-                                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                                    Playground | Warehouse of the Future
-                                </Typography>
-                            </Toolbar>
-                        </AppBar>
-                        <Container component="main" maxWidth={false} sx={{ display: "flex", flexGrow: 1, ...(noScroll && { overflow: "hidden" }) }} >
-                            {children}
-                        </Container>
+            <MuiThemeProvider theme={theme}>
+                <EmotionThemeProvider theme={theme}>
+                    <Global styles={styles(theme)} />
+                    <div className="appWrapper">
+                        <div className="appContainer" style={{ display: "flex", flexDirection: "column", height: " inherit"}}>
+                            <AppBar position="relative">
+                                <Toolbar>
+                                    <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                                        Playground | Warehouse of the Future
+                                    </Typography>
+                                </Toolbar>
+                            </AppBar>
+                            <Container component="div" maxWidth={false} sx={{ display: "flex", flexGrow: 1, ...(noScroll && { overflow: "hidden" }) }} >
+                                {children}
+                            </Container>
+                        </div>
                     </div>
-                </div>
-            </ThemeProvider>
+                </EmotionThemeProvider>
+            </MuiThemeProvider>
         </HelmetProvider>
     );
 }
 
 export default Layout;
+
+const styles = (theme : Theme) => css`
+    html {
+        background-color: ${theme.palette.dark.main};
+        color: ${theme.palette.white.main};
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .appWrapper {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+`

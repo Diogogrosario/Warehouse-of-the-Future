@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteChangeReason, autocompleteClasses, AutocompleteCloseReason, Box, Button, Chip, ClickAwayListener, Container, InputBase, Popper, styled, Tooltip, Typography } from "@mui/material";
+import { Autocomplete, AutocompleteChangeReason, autocompleteClasses, AutocompleteCloseReason, Box, Button, ButtonProps, Chip, ClickAwayListener, Container, InputBase, Popper, styled, Tooltip, Typography, Theme } from "@mui/material";
 import React from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DoneIcon from '@mui/icons-material/Done';
@@ -38,7 +38,7 @@ const StyledPopperComponent = styled("div")( ({theme}) => ({
         fontSize: 13,
     },
     [`& .${autocompleteClasses.listbox}`]: {
-        backgroundColor: theme.palette.mode === "light" ? "#fff" : "#1c2128",
+        backgroundColor: theme.palette.lightDark.main,
         padding: 0,
         width: "inherit",
         [`& .${autocompleteClasses.option}`]: {
@@ -46,17 +46,18 @@ const StyledPopperComponent = styled("div")( ({theme}) => ({
             alignItems: "flex-start",
             padding: 8,
             borderBottom: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
-            '&[aria-selected="true"]': {
-                backgroundColor: "transparent",
-            },
-            '&[data-focus="true"], &[data-focus="true"][aria-selected="true"]': {
-                backgroundColor: theme.palette.action.hover,
+            '&:hover': {
+                backgroundColor: theme.palette.yellow.main,
             },
         },
     },
     [`&.${autocompleteClasses.popperDisablePortal}`]: {
         position: "relative",
     },
+}));
+
+const StyledOptionComponent = styled("li")( ({theme}) => ({
+    backgroundColor: theme.palette.lightDark.main,
 }));
 
 const PopperComponent : React.FC<PopperComponentProps> = (props : PopperComponentProps) => {
@@ -68,10 +69,13 @@ const PopperComponent : React.FC<PopperComponentProps> = (props : PopperComponen
 
 interface LabelPickerProps {
     labels: Label[];
+    buttonProps?: ButtonProps;
+    showSelectedLabels?: boolean;
 }
 
-const LabelPicker : React.FC<LabelPickerProps> = (props : LabelPickerProps) => {
-    const { labels } = props;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const LabelPicker : React.FC<LabelPickerProps & Record<string, any>> = (props : LabelPickerProps & Record<string, any>) => {
+    const { labels, buttonProps, showSelectedLabels, ...rest } = props;
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
     const [selected, setSelected] = React.useState<Label[]>(labels);
@@ -88,58 +92,68 @@ const LabelPicker : React.FC<LabelPickerProps> = (props : LabelPickerProps) => {
     const labelPickerId = open ? "label-picker" : undefined;
     
     return (
-        <details>
-            <Container component="summary" >
+        <details {...rest}>
+            <Container component="summary" style={{ padding: 0, height: "100%"}}>
                 <Button
                     disableRipple
                     aria-describedby={labelPickerId}
+                    {...buttonProps}
                     onClick={( event: React.MouseEvent<HTMLElement, MouseEvent> ) => {
                         setSearchValue(selected);
                         setAnchorEl(event.currentTarget);
                     }}
+                    endIcon={<SettingsIcon />}
                     sx={{
-                        width: "100%"
+                        width: "100%",
+                        height: "inherit",
                     }}
                 >
-                    <Typography variant="button" component="span" sx={{ mr: "auto" }} >Labels</Typography>
-                    <SettingsIcon />
+                    <Typography variant="button" component="span">Labels</Typography>
                 </Button>
-                <Container component="div">
-                    {selected?.map( (label) => (
-                        <Tooltip arrow describeChild title={label.description ?? ""} key={label.name}> 
-                            <Chip
-                                label={label.name}
-                                sx={[
-                                    {
-                                        mr: 1,
-                                        mt: 1,
-                                        border: "1px solid transparent",
-                                    },
-                                    () => {
-                                        const [h, s, l, _1] = Coloring.hexToHSLA(label.color);
-                                        const [r, g, b, _2] = Coloring.hextoRGBA(label.color);
-                                        const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-                                        const lightness = (0.5 - luminance) * 100;
-                                        return ({
-                                            backgroundColor: `rgba(${r}, ${g}, ${b}, 0.18)`,
-                                            color: `hsl(${h}, calc(${s} * 1%), calc((${l} + ${lightness}) * 1%))`,
-                                            borderColor: `hsla(${h}, calc(${s} * 1%), calc((${l} + ${lightness}) * 1%), 0.3)`,
-                                        });
-                                    }
-                                ]}
-                            />
-                        </Tooltip>
-                    ))}
-                </Container>
+                {showSelectedLabels &&
+                    <Container component="div">
+                        {selected?.map( (label) => (
+                            <Tooltip arrow describeChild title={label.description ?? ""} key={label.name}> 
+                                <Chip
+                                    label={label.name}
+                                    sx={[
+                                        {
+                                            mr: 1,
+                                            mt: 1,
+                                            border: "1px solid transparent",
+                                        },
+                                        () => {
+                                            const [h, s, l, _1] = Coloring.hexToHSLA(label.color);
+                                            const [r, g, b, _2] = Coloring.hextoRGBA(label.color);
+                                            const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+                                            const lightness = (0.5 - luminance) * 100;
+                                            return ({
+                                                backgroundColor: `rgba(${r}, ${g}, ${b}, 0.18)`,
+                                                color: `hsl(${h}, calc(${s} * 1%), calc((${l} + ${lightness}) * 1%))`,
+                                                borderColor: `hsla(${h}, calc(${s} * 1%), calc((${l} + ${lightness}) * 1%), 0.3)`,
+                                            });
+                                        }
+                                    ]}
+                                />
+                            </Tooltip>
+                        ))}
+                    </Container>
+                }
             </Container>
             <StyledPopper open={open} anchorEl={anchorEl} placement="bottom-start">
                 <ClickAwayListener onClickAway={closeLabelPicker}>
-                    <Container disableGutters component="div" sx={{ width: "300px" }}>
+                    <Container disableGutters component="div"
+                        sx={{
+                            width: "300px",
+                            backgroundColor: "lightDark.main",
+                            color: "white.main",
+                        }}
+                    >
                         <Box
                             sx={{
                                 padding: "8px 10px",
                                 fontWeight: 600,
-                                borderBottom: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
+                                borderBottom: `1px solid white.main`,
                             }}
                         >
                             <Typography variant="subtitle2" component="span">
@@ -175,8 +189,11 @@ const LabelPicker : React.FC<LabelPickerProps> = (props : LabelPickerProps) => {
                                     return labelAIdx - labelBIdx;
                                 })
                             }
+                            sx={{
+                                backgroundColor: "inherit",
+                            }}
                             renderOption={(props : React.HTMLAttributes<HTMLLIElement>, option, {selected}) => (
-                                <li {...props}>
+                                <StyledOptionComponent {...props}>
                                     <Box
                                         component={DoneIcon}
                                         sx={{
@@ -224,29 +241,49 @@ const LabelPicker : React.FC<LabelPickerProps> = (props : LabelPickerProps) => {
                                             visibility: selected ? "visible" : "hidden",
                                         }}
                                     />
-                                </li>
+                                </StyledOptionComponent>
                             )}
                             getOptionLabel={(option) => option.name}
                             renderInput={(params) => (
                                 <InputBase
                                     sx={{
-                                        padding: 1,
                                         width: "100%",
-                                        borderBottom: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
-                                        "& input": {
+                                        padding: "16px",
+                                        borderBottom: (theme : Theme) => {
+                                            const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+                                            return `1px solid rgba(${r}, ${g}, ${b}, 0.2)`;
+                                        },
+                                        backgroundColor: "inherit",
+                                        "> input": {
+                                            color: "white.main",
+                                            padding: "8px",
+                                            "&::placeholder": {
+                                                opacity: 0.6,
+                                            },
                                             borderRadius: 4,
-                                            backgroundColor: theme.palette.mode === "light" ? "#fff" : "#0d1117",
-                                            padding: 1,
+                                            border: (theme : Theme) => {
+                                                const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+                                                return `1px solid rgba(${r}, ${g}, ${b}, 0.2)`;
+                                            },
                                             transition: theme.transitions.create(["border-color", "box-shadow"]),
-                                            border: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
-                                            fontSize: 14,
+                                            "&:hover": {
+                                                border: (theme : Theme) => {
+                                                    const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+                                                    return `1px solid rgba(${r}, ${g}, ${b}, 0.4)`;
+                                                },
+                                                backgroundColor: (theme : Theme) => {
+                                                    const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.dark.main);
+                                                    return `rgba(${r}, ${g}, ${b}, 0.6)`;
+                                                },
+                                            },
                                             "&:focus": {
-                                            boxShadow: `0px 0px 0px 3px ${
-                                                theme.palette.mode === "light"
-                                                ? "rgba(3, 102, 214, 0.3)"
-                                                : "rgb(12, 45, 107)"
-                                            }`,
-                                            borderColor: theme.palette.mode === "light" ? "#0366d6" : "#388bfd",
+                                                boxShadow: (theme : Theme) => (
+                                                    `0px 0px 0px 3px ${theme.palette.blue.dark}`
+                                                ),
+                                                border: (theme : Theme) => (
+                                                    `1px solid ${theme.palette.white.main}`
+                                                ),
+                                                backgroundColor: "dark.main",
                                             },
                                         },
                                     }}

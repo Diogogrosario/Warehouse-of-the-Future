@@ -1,5 +1,7 @@
 import React, { SetStateAction, useEffect } from "react";
-import { Grid, styled, Tab, Tabs, useMediaQuery } from "@mui/material";
+import { Chip, Grid, styled, Tab, Tabs, Theme as ReactTheme, useMediaQuery } from "@mui/material";
+import { css, Theme } from "@emotion/react";
+
 
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
@@ -22,7 +24,7 @@ const StyledTabPanel = styled(TabPanel)( () => ({
 export default function App() {
 	const mobile = useMediaQuery("(max-width: 800px)");
 
-	const [selectedTab, setSelectedTab] = React.useState(1);
+	const [selectedTab, setSelectedTab] = React.useState(0);
 	const [panelSize, setPanelSize] = React.useState(60);
 	const [dragging, setDragging] = React.useState(false);
 	const [fullscreen, setFullscreen] = React.useState(FullscreenState.Disabled);
@@ -64,7 +66,7 @@ export default function App() {
 
 	return (
 		<Layout noScroll>
-			<Grid container sx={{ maxHeight: "100%", mb: "16px" }} direction={mobile ? "column" : "row"}>
+			<Grid container sx={{ mb: "16px" }} direction={mobile ? "column" : "row"}>
 				{fullscreen != FullscreenState.Right && (
 					<Grid
 						item
@@ -97,17 +99,39 @@ export default function App() {
 				)}
 
 				{fullscreen != FullscreenState.Left && (
-					<Grid item sx={{ position: "relative", flex: 1, height: "100%" }} >
+					<Grid item
+						sx={{
+							position: "relative", flex: 1,
+							width:
+								mobile || fullscreen == FullscreenState.Right
+									? "100%"
+									: "auto",
+							height:
+								!mobile || fullscreen != FullscreenState.Right
+									? "100%"
+									: "auto"
+						}}
+					>
 						<Tabs
 							value={selectedTab}
 							onChange={handleChange}
 							indicatorColor="secondary"
 							aria-label="tabs navigation"
 							variant="fullWidth"
+							sx={{
+								marginBottom: "10px",
+								".MuiTabs-flexContainer > .MuiTab-root": {
+									backgroundColor: "lightDark.main",
+									color: "secondary.main",
+									"&:hover": {
+										backgroundColor: "lightDarkBright.main",
+									},
+								},
+							}}
 						>
-							<Tab label="Reports" id="app-tab-0" aria-controls="app-tabpanel-0" />
-							<Tab label="Logs" id="app-tab-1" aria-controls="app-tabpanel-1" />
-							<Tab label="Devices" id="app-tab-2" aria-controls="app-tabpanel-2" />
+							<Tab label="Reports" id="app-tab-0" className="app-tab" aria-controls="app-tabpanel-0" />
+							<Tab label="Logs" id="app-tab-1" className="app-tab" aria-controls="app-tabpanel-1" />
+							<Tab label="Devices" id="app-tab-2" className="app-tab" aria-controls="app-tabpanel-2" />
 						</Tabs>
 
 						<StyledTabPanel emptyComponent={<NoResultsOverlay text="No reports found" />} value={selectedTab} index={0} id="app-tabpanel-0" aria-labelledby="app-tab-0">

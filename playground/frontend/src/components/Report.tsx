@@ -118,6 +118,8 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							subheader={
 								<ListSubheader
 									id={`${reportComponentId}-action-list-subheader`}
+									disableGutters
+									disableSticky
 									component="h6"
 									sx={{
 										textAlign: "start",
@@ -143,26 +145,26 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 										</ListItemIcon>
 										<ListItemText>
 											<Typography
-												variant="h6"
-												component="div"
+												variant="body2"
+												component="span"
 												sx={{
 													display: "flex",
 													alignItems: "center",
 													width: "10%",
-													margin: "5px 0",
+													margin: "2px 0",
 													padding: "0 10px",
 												}}
 											>
 												{eventTimestamp}
 											</Typography>
 											<Typography
-												variant="body2"
+												variant="body1"
 												component="span"
 												align="left"
 												sx={{
 													display: "flex",
 													alignItems: "center",
-													margin: "5px 0",
+													margin: "2px 0",
 													padding: "0 10px",
 												}}
 											>
