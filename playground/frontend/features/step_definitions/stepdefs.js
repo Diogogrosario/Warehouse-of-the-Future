@@ -4,7 +4,7 @@
 
 import assert from "assert";
 import { Builder, By } from "selenium-webdriver";
-import { Given, When, Then, AfterAll, pending } from "@cucumber/cucumber";
+import { Given, When, Then, AfterAll } from "@cucumber/cucumber";
 
 const driver = new Builder().forBrowser("firefox").build();
 
@@ -28,7 +28,7 @@ When("I click a report", async function () {
 	let report = await driver.findElements(By.id("PlaygroundReport-1"));
 	if (report.length == 0) {
 		console.warn("No reports to test. Skipping...");
-		return pending();
+		return "pending";
 	}
 	report = report[0];
 	report.click();
