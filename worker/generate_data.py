@@ -4,7 +4,7 @@ import datetime
 import uuid
 import names
 import json
-from .utils import utils
+from utils import utils
 
 namespace = Namespace(
     "GenerateData",
@@ -19,7 +19,7 @@ namespace = Namespace(
 # Items
 
 item_attributes = namespace.model("Item", {
-    "id": fields.String(
+    "_id": fields.String(
         required=True,
         description="Id of the item"
     ),
@@ -103,7 +103,7 @@ available_item_names = [
 # Manifest
 
 manifest_attributes = namespace.model("Manifest", {
-    "id": fields.String(
+    "_id": fields.String(
         required=True,
         description="Id of the manifest"
     ),
@@ -125,7 +125,7 @@ manifest_attributes = namespace.model("Manifest", {
 # Staff
 
 staff_attributes = namespace.model("Staff", {
-    "id": fields.String(
+    "_id": fields.String(
         required=True,
         description="Id of the employee"
     ),
@@ -157,7 +157,7 @@ staff_contact_in_sensor_attributes = namespace.model("StaffContactInSensor", {
 })
 
 sensor_attributes = namespace.model("Sensor", {
-    "id": fields.String(
+    "_id": fields.String(
         required=True,
         description="Id of the sensor"
     ),
@@ -181,7 +181,7 @@ sensor_attributes = namespace.model("Sensor", {
 # Layout
 
 bucket_attributes = namespace.model("Bucket", {
-    "id": fields.String(
+    "_id": fields.String(
         required=True,
         description="Id of the bucket"
     ),
@@ -218,7 +218,7 @@ bucket_attributes = namespace.model("Bucket", {
 })
 
 shelf_attributes = namespace.model("Shelf", {
-    "id": fields.String(
+    "_id": fields.String(
         required=True,
         description="Id of the shelf"
     ),
@@ -233,7 +233,7 @@ shelf_attributes = namespace.model("Shelf", {
 })
 
 rack_attributes = namespace.model("Rack", {
-    "id": fields.String(
+    "_id": fields.String(
         required=True,
         description="Id of the rack"
     ),
@@ -314,16 +314,13 @@ orchestrator_attributes = namespace.model("Orchestrator", {
 # Manifests
 # ------------------------------------------------------------------------------
 
-def generate_items_for_manifest(number_of_items=None):
+def generate_items_for_manifest(number_of_items):
     manifest_items = []
     items_ids = get_static_items_ids()
 
-    if (number_of_items is None):
-        number_of_items = random.randint(1, 4)
-
     selected_items_indexes = random.sample(
-        range(0, len(items_ids)-1),
-        number_of_items
+        range(0, number_of_items-1),
+        random.randint(1, 4)
     )
 
     for index in selected_items_indexes:
@@ -340,25 +337,25 @@ def generate_items_for_manifest(number_of_items=None):
 
 
 def get_static_items_ids():
-    with open("../backend/api/static_files/items_ids.json", "r") as file:
+    with open("worker/static_files/items_ids.json", "r") as file:
         return json.load(file)
 
 
-@namespace.route("/manifest")
+@namespace.route("/manifest/<int:number_of_items>")
 class Manifest(Resource):
     @namespace.marshal_list_with(manifest_attributes)
-    def get(self):
+    def get(self, number_of_items):
         """
         Returns a random manifest.
         """
 
-        items = generate_items_for_manifest()
+        items = generate_items_for_manifest(number_of_items)
         employees = get_static_employee_data()
 
         manifest = {
-            "id": uuid.uuid4(),
+            "_id": uuid.uuid4(),
             "time": datetime.datetime.now(),
-            "staff_id": random.choice(employees)["id"],
+            "staff_id": random.choice(employees)["_id"],
             "items": items
         }
 
@@ -374,7 +371,7 @@ def generate_employee_data(id=None):
         id = uuid.uuid4()
 
     employee = {
-        "id": id,
+        "_id": id,
         "name": names.get_full_name(),
         "height": round(random.uniform(140, 220)),
         "birth_date": utils.get_random_birth_date(),
@@ -384,7 +381,7 @@ def generate_employee_data(id=None):
 
 
 def get_static_employee_data():
-    with open("../backend/api/static_files/staff.json", "r") as file:
+    with open("worker/static_files/staff.json", "r") as file:
         return json.load(file)
 
 
@@ -510,7 +507,7 @@ def generate_super_rack(
         current_rack_height = 0
 
         rack = {
-            "id": uuid.uuid4(),
+            "_id": uuid.uuid4(),
             "width": rack_width
         }
         racks.append(rack)
@@ -526,10 +523,10 @@ def generate_super_rack(
                 break
 
             shelf = {
-                "id": uuid.uuid4(),
+                "_id": uuid.uuid4(),
                 # the height of the shelf is in relation to the ground
                 "height": current_rack_height - shelf_height,
-                "rack_id": rack["id"]
+                "rack_id": rack["_id"]
             }
             shelves.append(shelf)
 
@@ -606,14 +603,14 @@ def generate_super_rack(
                 buckets.append(bucket)
 
                 sensor = generate_sensor(
-                    bucket_id=bucket["id"],
+                    bucket_id=bucket["_id"],
                     staff_ids=staff_ids
                 )
                 sensors.append(sensor)
 
                 item = generate_item(
                     id=item_id,
-                    bucket_id=bucket["id"],
+                    bucket_id=bucket["_id"],
                     # remove 1 cm to the max_width and max_height
                     # to be sure the item will fit in the bucket
                     max_width=bucket["width"] - 1,
@@ -639,7 +636,7 @@ def coherent_generate_layout():
     shelves = []
 
     employees = get_static_employee_data()
-    staff_ids = [employee["id"] for employee in employees]
+    staff_ids = [employee["_id"] for employee in employees]
 
     items_ids = get_static_items_ids()
 
@@ -699,7 +696,7 @@ def generate_item(id, bucket_id, max_width, max_height):
     weight = random.randint(1, 1000*100 // quantity)
 
     item = {
-        "id": id,
+        "_id": id,
         "designation": item_name,
         "width": width,
         "height": height,
@@ -731,7 +728,7 @@ def generate_sensor(bucket_id, staff_ids):
         staff_contacts.append(staff_contact)
 
     sensor = {
-        "id": uuid.uuid4(),
+        "_id": uuid.uuid4(),
         "bucket": bucket_id,
         "movement_records": movement_timestamps,
         "staff_contacts": staff_contacts
@@ -751,14 +748,14 @@ def generate_bucket(shelf, item_id, position, width, shelf_height):
     quantity = random.randint(1, 3)
 
     bucket = {
-        "id": uuid.uuid4(),
+        "_id": uuid.uuid4(),
         "width": width,
         "height": height,
         "length": length,
         "position": position,
         "item_id": item_id,
         "quantity": quantity,
-        "shelf_id": shelf["id"]
+        "shelf_id": shelf["_id"]
     }
 
     return bucket
