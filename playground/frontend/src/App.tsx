@@ -84,6 +84,7 @@ export default function App() {
 										? "100%"
 										: `${panelSize}%`,
 							}}
+							id="warehouse-panel"
 						>
 							<WarehouseRenderer />
 
@@ -105,6 +106,7 @@ export default function App() {
 					{fullscreen != FullscreenState.Left && (
 						<Grid
 							item
+							id="info-panel"
 							sx={{
 								position: "relative",
 								flex: 1,

@@ -43,8 +43,8 @@ export interface ReportProps {
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
 	const { title, description, shortDescription, warningLevel, actions, reportId } = props;
 
-	const reportComponentId = `PlaygroundReport-${reportId}`;
-
+	const reportComponentId = `playground-report-${reportId}`;
+	const reportContentId = `playground-report-content-${reportId}`;
 	return (
 		<Paper elevation={4} id={reportComponentId}>
 			<Accordion>
@@ -62,6 +62,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							minHeight: "inherit",
 						},
 					}}
+					id={reportContentId}
 				>
 					<Tooltip title={warningLevel}>
 						<Box
