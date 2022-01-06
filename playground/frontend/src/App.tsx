@@ -104,8 +104,11 @@ export default function App() {
 					)}
 
 					{fullscreen != FullscreenState.Left && (
-							
-							<Grid item id="info-panel" sx={{ position: "relative", flex: 1, height: "100%" }}>
+						<Grid
+							item
+							id="info-panel"
+							sx={{ position: "relative", flex: 1, height: "100%" }}
+						>
 							<Tabs value={selectedTab} onChange={handleChange}>
 								<Tab label="Reports" />
 								<Tab label="Logs" />

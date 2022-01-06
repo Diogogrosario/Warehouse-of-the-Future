@@ -2,9 +2,9 @@
 // import { Builder, By, Capabilities, Key } from "selenium-webdriver";
 // import { Given, When, Then, AfterAll } from "@cucumber/cucumber";
 
-const assert = require('assert');
+const assert = require("assert");
 const { Builder, By, Capabilities, Key } = require("selenium-webdriver");
-const { Given, When, Then, AfterAll, pending } = require('@cucumber/cucumber');
+const { Given, When, Then, AfterAll, pending } = require("@cucumber/cucumber");
 
 const driver = new Builder().forBrowser("firefox").build();
 
@@ -25,9 +25,9 @@ Then("the {string} view is collapsed", async function (panel) {
 
 // Report expand
 When("I click a report", async function () {
-	let report = await driver.findElements(By.id('PlaygroundReport-1'));
-	if (report.length == 0){
-		console.warn("No reports to test. Skipping...")
+	let report = await driver.findElements(By.id("PlaygroundReport-1"));
+	if (report.length == 0) {
+		console.warn("No reports to test. Skipping...");
 		return pending();
 	}
 	report = report[0];
@@ -35,9 +35,9 @@ When("I click a report", async function () {
 });
 
 Then("the report expands and shows actions", async function () {
-	let reportContent = await driver.findElement(By.id('PlaygroundReportContent-1'))
+	let reportContent = await driver.findElement(By.id("PlaygroundReportContent-1"));
 	const isExpanded = await reportContent.getAttribute("aria-expanded");
-	assert(isExpanded)
+	assert(isExpanded);
 });
 
 AfterAll(async function () {
