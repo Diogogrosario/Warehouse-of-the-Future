@@ -21,7 +21,7 @@ Then("the {string} view is collapsed", async function (panel) {
 
 // Report expand
 When("I click a report", async function () {
-	let report = await driver.findElements(By.id("PlaygroundReport-1"));
+	let report = await driver.findElements(By.id("playground-report-1"));
 	if (report.length == 0) {
 		console.warn("No reports to test. Skipping...");
 		return "pending";
@@ -31,7 +31,7 @@ When("I click a report", async function () {
 });
 
 Then("the report expands and shows actions", async function () {
-	let reportContent = await driver.findElement(By.id("PlaygroundReportContent-1"));
+	let reportContent = await driver.findElement(By.id("playground-report-content-1"));
 	const isExpanded = await reportContent.getAttribute("aria-expanded");
 	assert(isExpanded);
 });
