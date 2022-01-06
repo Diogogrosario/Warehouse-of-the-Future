@@ -305,14 +305,14 @@ orchestrator_attributes = namespace.model("Orchestrator", {
 # Manifests
 # ------------------------------------------------------------------------------
 
-def generate_items_for_manifest(number_of_items):
+def generate_items_for_manifest():
     manifest_items = []
 
     static_items = get_static_items_data()
-    items_ids = [item["id"] for item in static_items]
+    items_ids = [item["_id"] for item in static_items]
 
     selected_items_indexes = random.sample(
-        range(0, number_of_items-1),
+        range(0, len(items_ids)-1),
         random.randint(1, 4)
     )
 
@@ -334,15 +334,15 @@ def get_static_items_ids():
         return json.load(file)
 
 
-@namespace.route("/manifest/<int:number_of_items>")
+@namespace.route("/manifest")
 class Manifest(Resource):
     @namespace.marshal_list_with(manifest_attributes)
-    def get(self, number_of_items):
+    def get(self):
         """
         Returns a random manifest.
         """
 
-        items = generate_items_for_manifest(number_of_items)
+        items = generate_items_for_manifest()
         employees = get_static_employee_data()
 
         manifest = {

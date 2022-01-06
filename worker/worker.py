@@ -1,6 +1,4 @@
-import os, sched, time
-
-import requests
+import os, sched, time, requests
 
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.append(parentdir)
@@ -10,7 +8,7 @@ from backend.api import db
 DAILY_MANIFESTS = 30
 terminate = False
 
-API_BASE_URL = "http://localhost:8001/generate_data"
+API_BASE_URL = "http://backend:5000/generate_data"
 
 
 # Call when wanting to terminate worker
@@ -20,18 +18,14 @@ def terminate_worker():
 
 
 # Manifest
-def populate_manifests(n_items):
-    manifest = requests.get(f"{API_BASE_URL}/manifest/{n_items}").json()
+def populate_manifests():
+    manifest = requests.get(f"{API_BASE_URL}/manifest").json()
     db.client.WoF.Manifests.insert_one(manifest)
 
 
 # Layout
 def populate_buckets(buckets):
     db.client.WoF.Buckets.insert_many(buckets)
-
-
-def populate_items(items):
-    db.client.WoF.Items.insert_many(items)
 
 
 def populate_racks(racks):
@@ -51,7 +45,6 @@ def populate_layouts():
 
     # Use layout data to populate other collections
     populate_buckets(layout["buckets"])
-    #populate_items(layout["items"])
     populate_racks(layout["racks"])
     populate_sensors(layout["sensors"])
     populate_shelves(layout["shelves"])
@@ -59,8 +52,6 @@ def populate_layouts():
     # Finally, populate Layouts collection
     final_layout = {"time": layout["time"], "buckets": layout["buckets"]}
     db.client.WoF.Layouts.insert_one(final_layout)
-
-    return len(layout["items"])
 
 
 # Global Data
@@ -84,24 +75,32 @@ def populate_staff():
     db.client.WoF.Employees.insert_many(employees)
 
 
+# Items
+def populate_items():
+    db.client.WoF.Items.drop()
+    db.client.WoF.create_collection("Items")
+    items = requests.get(f"{API_BASE_URL}/items").json()
+    db.client.WoF.Items.insert_many(items)
+
 # Worker starts by populating staff and global, which are needed only once
 populate_staff()
+populate_items()
 populate_global()
 
 # Then periodically adds manifests and layouts
 s = sched.scheduler(time.time, time.sleep)
 
 def populate_periodic():
-    # Schedule another populate action
+    # Schedule another populate action the next day
     event = s.enter(172800, 1, populate_periodic)
 
     counter = 0
 
     # For each day, add 1 layout and DAILY_MANIFESTS manifests
-    n_items = populate_layouts()
+    populate_layouts()
 
     while (counter < DAILY_MANIFESTS):
-        populate_manifests(n_items)
+        populate_manifests()
         counter += 1
 
     # If terminated, cancels last scheduled populate action

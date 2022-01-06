@@ -27,8 +27,12 @@ services:
 
     worker:
         build: ./worker
+        ports:
+            - 8080:8080
         volumes:
             - .:/app
+        networks:
+            - workerapi
 
     backend:
         build: ./backend
@@ -38,12 +42,16 @@ services:
             - ./backend/.env
         volumes:
             - ./backend:/app
-        # networks:
+        networks:
+            - workerapi
         #     - grafnet
 
-# networks:
+networks:
+    workerapi:
+        driver: bridge
 #     grafnet:
 #         external: false
+
 
 volumes:
     grafana-data:
