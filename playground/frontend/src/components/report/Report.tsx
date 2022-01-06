@@ -211,7 +211,11 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 					</Stack>
 				</AccordionDetails>
 			</Accordion>
-			<AddActionForm open={formOpen} onCancel={() => setFormOpen(false)} onSuccess={ () => console.log("add action")}/>
+			<AddActionForm
+				open={formOpen}
+				onCancel={() => setFormOpen(false)}
+				onSuccess={() => console.log("add action")}
+			/>
 		</Paper>
 	);
 };
