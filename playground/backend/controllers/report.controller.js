@@ -87,7 +87,6 @@ export function update(req, res) {
 					res.status(500).send({ message: err.message || "Error at create solved action." });
 				});
 
-			console.log("MERDA " + data.resolved);
 			Report.update( {resolved: !data.resolved}, {
 				where: { id: id },
 				returning: true,
