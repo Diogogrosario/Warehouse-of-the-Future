@@ -2,9 +2,9 @@
 // import { Builder, By, Capabilities, Key } from "selenium-webdriver";
 // import { Given, When, Then, AfterAll } from "@cucumber/cucumber";
 
-const assert = require("assert");
-const { Builder, By, Capabilities, Key } = require("selenium-webdriver");
-const { Given, When, Then, AfterAll, pending } = require("@cucumber/cucumber");
+import assert from "assert";
+import { Builder, By } from "selenium-webdriver";
+import { Given, When, Then, AfterAll, pending } from "@cucumber/cucumber";
 
 const driver = new Builder().forBrowser("firefox").build();
 

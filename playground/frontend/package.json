@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"description": "A web-app with objective of providing the employees a way of simulating and visualising the warehouse",
 	"main": "index.js",
+	"type":"module",
 	"license": "MIT",
 	"dependencies": {
 		"camera-controls": "^1.33.1",
