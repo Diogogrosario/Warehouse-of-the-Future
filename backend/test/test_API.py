@@ -18,6 +18,7 @@ from .sensors_PBT import SensorsPBT
 from .sensors_unit_tests import SensorsTests
 from .staff_PBT import StaffPBT
 from .staff_unit_tests import StaffTests
+from .stock_unit_tests import StockTests
 
 
 class APITesting(TestCase):
@@ -213,6 +214,11 @@ class APITesting(TestCase):
         manifest_tests.testCollectionWithAll(
             "2022-01-02", "2022-01-03",
             "0e1544f0b3d31188f2c7de9b")
+
+    def test_stock_endpoint(self):
+        stock_tests = StockTests(self, self.client)
+        stock_tests.testRoot()
+        stock_tests.testStockWithId("9810484eb5c7829c605fc915")
 
     # ----------------------------------------------------------
     # Property Based Tests
