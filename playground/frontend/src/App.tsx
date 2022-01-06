@@ -6,7 +6,7 @@ import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
 import WarehouseRenderer from "./components/WarehouseRenderer";
 import theme from "./styles/theme";
-import ReportList from "./components/ReportList";
+import ReportList from "./components/report/ReportList";
 
 export enum FullscreenState {
 	Left,
@@ -84,6 +84,7 @@ export default function App() {
 										? "100%"
 										: `${panelSize}%`,
 							}}
+							id="warehouse-panel"
 						>
 							<WarehouseRenderer />
 
@@ -103,7 +104,15 @@ export default function App() {
 					)}
 
 					{fullscreen != FullscreenState.Left && (
-						<Grid item sx={{ position: "relative", flex: 1, height: "100%" }}>
+						<Grid
+							item
+							id="info-panel"
+							sx={{
+								position: "relative",
+								flex: 1,
+								height: "100%",
+							}}
+						>
 							<Tabs value={selectedTab} onChange={handleChange}>
 								<Tab label="Reports" />
 								<Tab label="Logs" />

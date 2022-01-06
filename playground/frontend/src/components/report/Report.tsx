@@ -13,14 +13,13 @@ import {
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
-	ButtonGroup,
 	Button,
 } from "@mui/material";
 import Box from "@mui/system/Box";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
-import CheckIcon from "@mui/icons-material/Check";
+import AddActionForm from "../AddActionForm";
 
 export enum Severity {
 	Warning,
@@ -37,12 +36,16 @@ export interface ReportProps {
 	reportId: number;
 	createdAt: Date;
 	updatedAt: Date;
+	disabled: boolean;
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
 	const { title, description, shortDescription, warningLevel, actions, reportId } = props;
 
-	const reportComponentId = `PlaygroundReport-${reportId}`;
+	const [formOpen, setFormOpen] = React.useState(false);
+
+	const reportComponentId = `playground-report-${reportId}`;
+	const reportContentId = `playground-report-content-${reportId}`;
 	return (
 		<Paper elevation={4} id={reportComponentId}>
 			<Accordion>
@@ -60,6 +63,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							minHeight: "inherit",
 						},
 					}}
+					id={reportContentId}
 				>
 					<Tooltip title={warningLevel}>
 						<Box
@@ -81,7 +85,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 					</Tooltip>
 					<Typography
 						variant="h5"
-						component="h1"
+						component="span"
 						align="center"
 						sx={{
 							display: "flex",
@@ -141,7 +145,9 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 									<ListItem
 										key={`${reportComponentId}-action-${index}`}
 										id={`${reportComponentId}-action-${index}`}
-										style={{ display: "flex" }}
+										style={{
+											display: "flex",
+										}}
 									>
 										<ListItemIcon>
 											<ReceiptLongIcon />
@@ -178,31 +184,17 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 								);
 							})}
 						</List>
-						<ButtonGroup variant="contained" aria-label="actions button">
-							<Button
-								startIcon={<AddIcon />}
-								onClick={() => console.info(`ADD ACTION`)}
-								color="primary"
-								sx={{
-									margin: "5px 10px",
-								}}
-							>
-								Add Action
-							</Button>
-							<Button
-								startIcon={<CheckIcon />}
-								onClick={() => console.info(`MARK AS RESOLVED`)}
-								color="success"
-								sx={{
-									margin: "5px 10px",
-								}}
-							>
-								Mark as resolved
-							</Button>
-						</ButtonGroup>
+						<Button startIcon={<AddIcon />} onClick={() => setFormOpen(true)}>
+							Add Action
+						</Button>
 					</Stack>
 				</AccordionDetails>
 			</Accordion>
+			<AddActionForm
+				open={formOpen}
+				onCancel={() => setFormOpen(false)}
+				onSuccess={() => console.log("add action")}
+			/>
 		</Paper>
 	);
 };
