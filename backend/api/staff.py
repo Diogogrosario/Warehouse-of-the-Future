@@ -15,7 +15,7 @@ namespace = Namespace("Staff", path="/staff",
 # ------------------------------------------------------------------------------
 
 staffAttributes = namespace.model("Staff", {
-    "id": fields.String(required=True, attribute='_id.$oid', description="The unique identificator \
+    "id": fields.String(required=True, attribute='_id', description="The unique identificator \
 of the staff member"),
     "name": fields.String(required=True, description="The name of this staff \
 member"),

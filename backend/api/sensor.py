@@ -21,7 +21,7 @@ staff_contact_in_sensor_attributes = namespace.model("StaffContactInSensor", {
     ),
     "staff_id": fields.String(
         required=True,
-        attribute='staff_id.$oid',
+        attribute='staff_id',
         description="Id of the operator that was next to the sensor"
     )
 })
@@ -37,12 +37,12 @@ movement_sensor_attributes = namespace.model("StaffContactInSensor", {
 sensor_attributes = namespace.model("Sensor", {
     "id": fields.String(
         required=True,
-        attribute='_id.$oid',
+        attribute='_id',
         description="The unique identifier of the sensor"
     ),
     "bucket": fields.String(
         required=True,
-        attribute='bucket.$oid',
+        attribute='bucket',
         description="The unique identifier of the associated bucket"
     ),
     "movement_sensor": fields.List(
