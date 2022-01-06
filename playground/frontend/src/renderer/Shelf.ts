@@ -1,4 +1,3 @@
-import { NoBackpack } from "@mui/icons-material";
 import * as THREE from "three";
 import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { BucketType, BucketManager } from "./BucketManager";
@@ -9,18 +8,17 @@ export interface ShelfConfig {
 }
 
 interface FrameIdentifier {
-	width: number,
-	depth: number,
-	height: number
+	width: number;
+	depth: number;
+	height: number;
 }
 
 interface ShelvesIdentifier {
-	width: number,
-	depth: number,
+	width: number;
+	depth: number;
 }
 
 export class Shelf {
-
 	static frameMaterial = new THREE.MeshLambertMaterial({
 		color: 0x002b82,
 	});
@@ -44,7 +42,13 @@ export class Shelf {
 
 	private object: THREE.Object3D;
 
-	constructor(shelfConfig: ShelfConfig[], bucketManager: BucketManager, width = 2, depth = 1, height = 4) {
+	constructor(
+		shelfConfig: ShelfConfig[],
+		bucketManager: BucketManager,
+		width = 2,
+		depth = 1,
+		height = 4
+	) {
 		const shelf = new THREE.Group();
 		shelf.name = "Shelf";
 
@@ -56,10 +60,7 @@ export class Shelf {
 
 		this.bucketManager = bucketManager;
 
-		const frameMesh = new THREE.Mesh(
-			this.getFrameGeometry(),
-			Shelf.frameMaterial
-		);
+		const frameMesh = new THREE.Mesh(this.getFrameGeometry(), Shelf.frameMaterial);
 		frameMesh.name = "ShelfFrame";
 		shelf.add(frameMesh);
 
@@ -86,7 +87,9 @@ export class Shelf {
 				bucket.scale.multiply(new THREE.Vector3(1, 1, this.depth));
 				bucket.rotateX(Shelf.shelfAngle);
 				// CSS equivalent of space-evenly
-				bucket.translateX(Shelf.frameThickness / 2 + spacing * (i + 1) + bWidth * (i + 0.5));
+				bucket.translateX(
+					Shelf.frameThickness / 2 + spacing * (i + 1) + bWidth * (i + 0.5)
+				);
 				bucket.translateY(-0.05);
 				bucket.translateZ(this.depth / 2);
 
@@ -95,7 +98,6 @@ export class Shelf {
 				m.add(bucket);
 			}
 		}
-
 
 		shelf.position.add(new THREE.Vector3(-width / 2, height / 2, -depth / 2));
 		this.object = shelf;
@@ -113,8 +115,7 @@ export class Shelf {
 			const generated_geo = this.generateFrameGeometry();
 			Shelf.frameGeometries.set(identifier, generated_geo);
 			return generated_geo;
-		} else
-			return geo;
+		} else return geo;
 	}
 
 	private generateFrameGeometry(): THREE.BufferGeometry {
@@ -151,7 +152,7 @@ export class Shelf {
 		positionHelper.position.set(0, 0, 0);
 
 		// Side Neg X
-		const hSideBeam = new THREE.BoxGeometry(0.1, 0.1,this. depth);
+		const hSideBeam = new THREE.BoxGeometry(0.1, 0.1, this.depth);
 		positionHelper.translateY(this.height / 2 - 0.05);
 		positionHelper.translateZ(this.depth / 2);
 
@@ -207,8 +208,7 @@ export class Shelf {
 			const generated_geo = this.generateShelveGeometry();
 			Shelf.shelveGeometries.set(identifier, generated_geo);
 			return generated_geo;
-		} else
-			return geo;
+		} else return geo;
 	}
 
 	private generateShelveGeometry() {

@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import CameraControls from "camera-controls";
-import { dumpObjectToConsole } from "./utils/DebugUtils";
 
 import { WarehouseStructure } from "./WarehouseStructure";
 
@@ -47,7 +46,7 @@ export default class SceneManager {
 		this.renderer.domElement.setAttribute("tabIndex", "0");
 
 		this.renderer.domElement.style.touchAction = "none";
-		this.renderer.domElement.addEventListener("touchmove", function(event: Event) {
+		this.renderer.domElement.addEventListener("touchmove", function (event: Event) {
 			event.stopPropagation();
 			event.preventDefault();
 		});
