@@ -21,6 +21,7 @@ import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
+import AddActionForm from "./AddActionForm";
 
 export enum Severity {
 	Warning,
@@ -41,6 +42,8 @@ export interface ReportProps {
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
 	const { title, description, shortDescription, warningLevel, actions, reportId } = props;
+
+	const [formOpen, setFormOpen] = React.useState(false);
 
 	const reportComponentId = `PlaygroundReport-${reportId}`;
 	return (
@@ -183,7 +186,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 						<ButtonGroup variant="contained" aria-label="actions button">
 							<Button
 								startIcon={<AddIcon />}
-								onClick={() => console.info(`ADD ACTION`)}
+								onClick={() => setFormOpen(true)}
 								color="primary"
 								sx={{
 									margin: "5px 10px",
@@ -205,6 +208,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 					</Stack>
 				</AccordionDetails>
 			</Accordion>
+			<AddActionForm open={formOpen} onCancel={() => setFormOpen(false)} onSuccess={ () => console.log("add action")}/>
 		</Paper>
 	);
 };
