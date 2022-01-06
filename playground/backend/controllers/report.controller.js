@@ -59,22 +59,74 @@ export function findOne(req, res) {
 export function update(req, res) {
 	const id = req.params.id;
 
-	Report.update(req.body, {
-		where: { id: id },
-		returning: true,
-	})
-		.then((result) => {
-			let num = result[0];
-			let obj = result[1][0].dataValues;
-			if (num > 0) {
-				res.send(obj);
+	// TODO: should be using the solved endpoint
+	// unnable to connect it to the frontend (using this for now)
+	// find report with the id
+	Report.findByPk(id)
+	.then((data) => {
+		// resolved was updated
+		if (data.resolved != req.resolved) {
+			const Action = db.action;
+			// prepare action
+			const action = {
+				employee_id: req.body.employee_id,
+				reportId: id,
+			};
+
+			// report was not resolved
+			if (!data.resolved) {
+				action.description = "Closed Report.";
 			} else {
-				res.status(400).send({ message: "Can't update report ${id}." });
+				action.description = "Reopened Report.";
 			}
-		})
-		.catch((err) => {
-			res.status(500).send({ message: err.message || "Error on update report." });
-		});
+
+			// save to database
+			Action.create(action)
+				.then()
+				.catch((err) => {
+					res.status(500).send({ message: err.message || "Error at create solved action." });
+				});
+
+			console.log("MERDA " + data.resolved);
+			Report.update( {resolved: !data.resolved}, {
+				where: { id: id },
+				returning: true,
+			})
+				.then((result) => {
+					let num = result[0];
+					let obj = result[1][0].dataValues;
+					if (num > 0) {
+						res.send(obj);
+					} else {
+						res.status(400).send({ message: "Can't update report ${id}." });
+					}
+				})
+				.catch((err) => {
+					res.send({ message: err });
+				});
+		}
+	})
+	.catch((err) => {
+		res.status(500).send({ message: err.message || `Error on report ${id} retrieval.` });
+	});
+
+	// // other updates
+	// Report.update(req.body, {
+	// 	where: { id: id },
+	// 	returning: true,
+	// })
+	// 	.then((result) => {
+	// 		let num = result[0];
+	// 		let obj = result[1][0].dataValues;
+	// 		if (num > 0) {
+	// 			res.send(obj);
+	// 		} else {
+	// 			res.status(400).send({ message: "Can't update report ${id}." });
+	// 		}
+	// 	})
+	// 	.catch((err) => {
+	// 		res.status(500).send({ message: err.message || "Error on update report." });
+	// 	});
 }
 
 export function solved(req, res) {
@@ -86,7 +138,7 @@ export function solved(req, res) {
 			if (data) {
 				const action = {
 					employee_id: req.body.employee_id,
-					report_id: id,
+					reportId: id,
 				};
 
 				// report was not resolved
