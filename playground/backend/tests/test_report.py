@@ -35,13 +35,14 @@ def test_create_report():
     assert resp["title"] == payload["title"]
     assert resp["description"] == payload["description"]
     
-def test_update_report():
-    """Test updating a report."""
-    data={
-        "severity" : "warning"
-    }
-    resp = put_req_assertion(f'{BASE_URL}/report/1', data=data)
-    assert resp["severity"] == data["severity"]
+# Not supported for now
+# def test_update_report():
+#     """Test updating a report."""
+#     data={
+#         "severity" : "warning"
+#     }
+#     resp = put_req_assertion(f'{BASE_URL}/report/1', data=data)
+#     assert resp["severity"] == data["severity"]
     
 def test_solve_report():
     """Test updating a report."""
