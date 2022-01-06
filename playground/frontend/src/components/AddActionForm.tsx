@@ -10,6 +10,7 @@ import {
 	Box,
 	Checkbox,
 	FormControlLabel,
+	Grid,
 } from "@mui/material";
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
@@ -40,48 +41,39 @@ const AddActionForm: React.FC<AddActionFormProps> = (props: AddActionFormProps) 
 					</Typography>
 				</DialogContentText>
 				<Box component="form">
-					<div
-						style={{
-							display: "grid",
-							gridTemplateColumns: "auto auto",
-							gridTemplateAreas: `
-                                "empId resolved"
-                                "desc desc"
-                            `,
-						}}
-					>
-						<TextField
-							required
-							id="report-action-empId-input"
-							label="Employee ID"
-							style={{ gridArea: "empId" }}
-						/>
-						<FormControlLabel
-							control={
-								<Checkbox
-									checked={closingAction}
-									onChange={() => setClosingAction((prevState) => !prevState)}
-								/>
-							}
-							label="Mark report as resolved"
-							sx={{
-								gridArea: "resolved",
-								marginLeft: "16px",
-								"&:hover": {
-									backgroundColor: "#a9a9a9",
-								},
-							}}
-						/>
-						<TextField
-							required
-							id="report-action-desc-input"
-							label="Description"
-							multiline
-							minRows={2}
-							maxRows={4}
-							style={{ gridArea: "desc", margin: "8px 0", width: "100%" }}
-						/>
-					</div>
+					<Grid container spacing={2} alignItems="center" pt={2}>
+						<Grid item xs={6}>
+							<TextField
+								required
+								id="report-action-empId-input"
+								label="Employee ID"
+								sx={{ width: 1 }}
+							/>
+						</Grid>
+						<Grid item xs={6}>
+							<FormControlLabel
+								control={
+									<Checkbox
+										checked={closingAction}
+										onChange={() => setClosingAction((prevState) => !prevState)}
+									/>
+								}
+								label="Mark report as resolved"
+								sx={{ width: 1 }}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								required
+								id="report-action-desc-input"
+								label="Description"
+								multiline
+								minRows={2}
+								maxRows={4}
+								sx={{ width: 1 }}
+							/>
+						</Grid>
+					</Grid>
 				</Box>
 			</DialogContent>
 			<DialogActions>
