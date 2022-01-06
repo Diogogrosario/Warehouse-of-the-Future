@@ -1,13 +1,12 @@
 import * as THREE from "three";
 import CameraControls from "camera-controls";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { dumpObjectToConsole } from "./utils/DebugUtils";
 
 import { WarehouseStructure } from "./WarehouseStructure";
 
 CameraControls.install({ THREE: THREE });
 
-class SceneManager {
+export default class SceneManager {
 	public scene: THREE.Scene;
 	public renderer: THREE.Renderer;
 
@@ -46,6 +45,12 @@ class SceneManager {
 		this.renderer.setSize(width, height);
 
 		this.renderer.domElement.setAttribute("tabIndex", "0");
+
+		this.renderer.domElement.style.touchAction = "none";
+		this.renderer.domElement.addEventListener("touchmove", function(event: Event) {
+			event.stopPropagation();
+			event.preventDefault();
+		});
 
 		this.addCustomSceneObjects();
 		this.addLighting();
@@ -93,29 +98,8 @@ class SceneManager {
 	}
 
 	private addCustomSceneObjects() {
-		const whStructure = new WarehouseStructure();
+		const whStructure = new WarehouseStructure(this);
 		this.scene.add(whStructure.getObject());
-
-		const gltfLoader = new GLTFLoader();
-		const url = "assets/models/box_efficient.glb";
-		gltfLoader.load(url, (gltf) => {
-			const root = gltf.scene;
-			root.name = "Bucket";
-
-			const mesh = root.children[0] as THREE.Mesh;
-			mesh.material = new THREE.MeshLambertMaterial({ color: 0x606c2e });
-
-			mesh.geometry.scale(0.24, 0.24, 0.24);
-
-			mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI / 48);
-
-			mesh.translateY(0.3);
-
-			this.scene.add(root);
-			this.invalidate();
-
-			dumpObjectToConsole(root);
-		});
 	}
 
 	private addLighting() {
@@ -130,5 +114,3 @@ class SceneManager {
 		this.scene.add(rectLight);
 	}
 }
-
-export default SceneManager;

@@ -1,6 +1,8 @@
 import * as THREE from "three";
 
-import { Shelf, BucketType } from "./Shelf";
+import { Shelf } from "./Shelf";
+import { BucketManager, BucketType } from "./BucketManager";
+import SceneManager from "./SceneManager";
 
 export class WarehouseStructure {
 	private obj: THREE.Object3D;
@@ -9,9 +11,15 @@ export class WarehouseStructure {
 	private static groundMaterial = new THREE.MeshPhongMaterial({ color: 0x6d6c65 });
 	private static wallMaterial = new THREE.MeshPhongMaterial({ color: 0x828282 });
 
-	constructor(width = 16, depth = 20, height = 6) {
+	private readonly sceneManager: SceneManager;
+	private readonly bucketManager: BucketManager;
+
+	constructor(sceneManager: SceneManager, width = 16, depth = 20, height = 6) {
 		this.obj = new THREE.Group();
 		this.obj.name = "Warehouse";
+
+		this.sceneManager = sceneManager;
+		this.bucketManager = new BucketManager(sceneManager);
 
 		this.addGround(width, depth);
 		this.addWalls(width, depth, height);
@@ -73,28 +81,25 @@ export class WarehouseStructure {
 
 	private addShelves() {
 		// SHELVES
-		const shelf = new Shelf([
+		const shelfData = [
 			{
 				height: 0,
-				buckets: 4,
 				bucketType: BucketType.REGULAR,
 			},
 			{
 				height: 1,
-				buckets: 4,
 				bucketType: BucketType.REGULAR,
 			},
 			{
 				height: 2,
-				buckets: 4,
 				bucketType: BucketType.REGULAR,
 			},
 			{
 				height: 3,
-				buckets: 4,
 				bucketType: BucketType.REGULAR,
 			},
-		]);
+		];
+		const shelf = new Shelf(shelfData, this.bucketManager);
 		this.obj.add(shelf.getObject());
 	}
 
