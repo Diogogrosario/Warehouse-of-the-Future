@@ -46,7 +46,7 @@ const AddActionForm: React.FC<AddActionFormProps> = (props: AddActionFormProps) 
 							gridTemplateColumns: "auto auto",
 							gridTemplateAreas: `
                                 "empId resolved"
-                                "desc desc desc"
+                                "desc desc"
                             `,
 						}}
 					>
