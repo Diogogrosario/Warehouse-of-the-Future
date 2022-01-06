@@ -1,21 +1,21 @@
-import os
 import datetime
-from sensors_unit_tests import SensorsTests
-from globalData_unit_tests import GlobalDataTests
-from staff_unit_tests import StaffTests
-from staff_PBT import StaffPBT
-from globalData_PBT import GlobalPBT
-from sensors_PBT import SensorsPBT
+from bson.objectid import ObjectId
+from dotenv import load_dotenv
 from flask import Flask
 from flask_testing import TestCase
-from pymongo import MongoClient
-from os import getenv
-from dotenv import load_dotenv
-from bson.objectid import ObjectId
 from hypothesis import given, settings, strategies as st
-parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.sys.path.append(parentdir)
-from api.init import api
+from os import getenv
+from pymongo import MongoClient
+
+from ..api import api
+
+from .globalData_PBT import GlobalPBT
+from .globalData_unit_tests import GlobalDataTests
+from .layout_unit_tests import LayoutTests
+from .sensors_PBT import SensorsPBT
+from .sensors_unit_tests import SensorsTests
+from .staff_PBT import StaffPBT
+from .staff_unit_tests import StaffTests
 
 
 class APITesting(TestCase):
@@ -187,6 +187,13 @@ class APITesting(TestCase):
         sensor_tests.testSensorTimestampsWithTime("b07f1f77bcf86cd799439012",
                                                   "2022-01-03", "2022-01-04")
 
+    def test_layout_endpoint(self):
+        layout_tests = LayoutTests(self, self.client)
+        layout_tests.testSimple()
+        layout_tests.testWithTimeBefore("2022-01-01")
+        layout_tests.testWithTimeAfter("2020-01-01")
+        layout_tests.testWithTimeBeforeAndAfter("2022-01-02", "2022-01-03")
+
     # ----------------------------------------------------------
     # Property Based Tests
     # ----------------------------------------------------------
@@ -253,3 +260,20 @@ class APITesting(TestCase):
             time_before,
             time_after
         )
+
+    # Layouts
+
+    """
+    @settings(max_examples=15, deadline=None)
+    @given(st.tuples(st.datetimes(), st.datetimes()).filter(
+        lambda x: x[0] < x[1]
+        and x[0].year > 999
+        and x[1].year > 999))
+    def test_layout_endpoint_PBT(self, times):
+        global_tests = LayoutPBT(self, self.client)
+        time_before, time_after = times
+        global_tests.testLayoutWithTimeBeforeAndAfter(
+            time_before,
+            time_after
+        )
+    """

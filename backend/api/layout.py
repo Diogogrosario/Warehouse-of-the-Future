@@ -14,21 +14,23 @@ namespace = Namespace("Layouts", path="/layouts",
 # ------------------------------------------------------------------------------
 
 bucketAttributes = namespace.model("LayoutBucket", {
-    "_id": fields.Integer(required=True, description=""),
-    "bucket": fields.Integer(required=True, description=""),
-    "item": fields.Integer(required=True, description=""),
+    "_id": fields.String(required=True, description=""),
+    "width": fields.Integer(required=True, description=""),
+    "height": fields.Integer(required=True, description=""),
+    "length": fields.Integer(required=True, description=""),
+    "position": fields.List(fields.Integer(required=True, description="")),
+    "item_id": fields.String(required=True, description=""),
     "quantity": fields.Integer(required=True, description=""),
-    "coordinates": fields.List(fields.Integer(required=True, description="")),
-    "shelf": fields.Integer(required=True, description=""),
+    "shelf_id": fields.String(required=True, description=""),
 })
 
 layoutAttributes = namespace.model("Layout", {
-    "_id": fields.Integer(required=True, description=""),
+    "_id": fields.String(required=True, description="", attribute='_id.$oid'),
     "buckets": fields.List(
         fields.Nested(bucketAttributes),
         description="List of buckets in layout"
     ),
-    "date": fields.DateTime(required=True, description="The layout time"),
+    "time": fields.DateTime(required=True, description="The layout time"),
 })
 
 # ------------------------------------------------------------------------------
@@ -44,7 +46,7 @@ parser.add_argument("time_before", required=False, type=inputs.date,
 
 @namespace.route("/")
 class Layouts(Resource):
-    # @namespace.marshal_list_with(layoutAttributes)
+    @namespace.marshal_list_with(layoutAttributes)
     @namespace.expect(parser)
     def get(self):
         """
@@ -59,13 +61,10 @@ class Layouts(Resource):
 
         searchQuery = {}
 
-        if time_after is not None or time_before is not None:
-            if time_before is None:
-                searchQuery["date"] = {"$lte": time_after}
-            elif time_after is None:
-                searchQuery["date"] = {"$gte": time_before}
-            else:
-                searchQuery["date"]["$lte"] = time_after
+        if time_after is not None:
+            searchQuery["time"] = {"$lte": time_after}
+        if time_before is not None:
+            searchQuery["time"] = {"$gte": time_before}
 
         response = layoutsCollection.find(searchQuery)
 
