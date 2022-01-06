@@ -14,18 +14,24 @@ namespace = Namespace("Layouts", path="/layouts",
 # ------------------------------------------------------------------------------
 
 bucketAttributes = namespace.model("LayoutBucket", {
-    "_id": fields.String(required=True, description=""),
+    "id": fields.String(required=True, attribute="_id", description=""),
     "width": fields.Integer(required=True, description=""),
     "height": fields.Integer(required=True, description=""),
     "length": fields.Integer(required=True, description=""),
     "position": fields.List(fields.Integer(required=True, description="")),
-    "item_id": fields.String(required=True, description=""),
+    "item": fields.String(
+        required=True,
+        attribute="item_id",
+        description=""),
     "quantity": fields.Integer(required=True, description=""),
-    "shelf_id": fields.String(required=True, description=""),
+    "shelf": fields.String(
+        required=True,
+        attribute="shelf_id",
+        description=""),
 })
 
 layoutAttributes = namespace.model("Layout", {
-    "_id": fields.String(required=True, description="", attribute='_id.$oid'),
+    "id": fields.String(required=True, description="", attribute='_id.$oid'),
     "buckets": fields.List(
         fields.Nested(bucketAttributes),
         description="List of buckets in layout"

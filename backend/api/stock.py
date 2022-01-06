@@ -18,15 +18,20 @@ namespace = Namespace("Stock", path="/stock",
 itemAttributes = namespace.model("StockItem", {
     "id": fields.String(
         required=True,
-        attribute='_id.$oid',
+        attribute='_id',
         description="Name of the item"),
     "designation": fields.String(
         required=True,
         description="Name of the item"),
-    "width": fields.Float(required=True, description="Width of the item"),
-    "height": fields.Float(required=True, description="Height of the item"),
-    "length": fields.Float(required=True, description="Length of the item"),
-    "weight": fields.Float(required=True, description="Weight of the item")
+    "width": fields.Integer(required=True, description="Width of the item"),
+    "height": fields.Integer(required=True, description="Height of the item"),
+    "length": fields.Integer(required=True, description="Length of the item"),
+    "weight": fields.Integer(required=True, description="Weight of the item"),
+    "quantity": fields.Integer(required=True, description=""),
+    "bucket": fields.String(
+        required=True,
+        attribute="bucket_id",
+        description=""),
 })
 
 # ------------------------------------------------------------------------------
