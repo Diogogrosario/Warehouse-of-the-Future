@@ -37,9 +37,20 @@ function hexToHSLA(hex : string): [number, number, number, number] {
     return [hue, sat, lightness, alpha];
 }
 
+function rgba(hex: string, alpha: number): string {
+    const rgba = /^#?([a-f\d]{1,2})([a-f\d]{1,2})([a-f\d]{1,2})([a-f\d]{2})?$/i.exec(hex);
+
+    const r = parseInt(rgba?.[1] ?? "00", 16),
+        g = parseInt(rgba?.[2] ?? "00", 16),
+        b = parseInt(rgba?.[3] ?? "00", 16);
+
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 const Coloring = {
     hextoRGBA,
-    hexToHSLA
+    hexToHSLA,
+    rgba
 }
 
 export default Coloring;

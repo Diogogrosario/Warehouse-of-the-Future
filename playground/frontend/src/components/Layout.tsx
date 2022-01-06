@@ -5,6 +5,7 @@ import { ThemeProvider as MuiThemeProvider } from "@mui/material";
 import { ThemeProvider as EmotionThemeProvider, Global, css } from "@emotion/react";
 
 import theme from "../styles/theme";
+import Coloring from "../utils/coloring";
 
 
 interface LayoutProps {
@@ -57,6 +58,27 @@ const styles = (theme : Theme) => css`
     html {
         background-color: ${theme.palette.dark.main};
         color: ${theme.palette.white.main};
+        scrollbar-width: 16px;
+        scrollbar-color: ${Coloring.rgba(theme.palette.white.main, 0.6)};
+    }
+
+    *::-webkit-scrollbar {
+        width: 16px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-clip: content-box;
+        background-color: ${Coloring.rgba(theme.palette.white.main, 0.2)};
+        border-radius: 8px;
+        border: 4px solid transparent;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+        background-color: ${Coloring.rgba(theme.palette.white.main, 0.5)};
+    }
+
+    *::-webkit-scrollbar-thumb:active {
+        background-color: ${Coloring.rgba(theme.palette.white.main, 0.8)};
     }
 
     body {
