@@ -6,7 +6,7 @@ import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
 import WarehouseRenderer from "./components/WarehouseRenderer";
 import theme from "./styles/theme";
-import ReportList from "./components/ReportList";
+import ReportList from "./components/report/ReportList";
 
 export enum FullscreenState {
 	Left,

@@ -38,6 +38,7 @@ export interface ReportProps {
 	reportId: number;
 	createdAt: Date;
 	updatedAt: Date;
+	disabled: boolean;
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
@@ -46,6 +47,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 	const [formOpen, setFormOpen] = React.useState(false);
 
 	const reportComponentId = `PlaygroundReport-${reportId}`;
+
 	return (
 		<Paper elevation={4} id={reportComponentId}>
 			<Accordion>
