@@ -1,7 +1,3 @@
-// import assert from "assert";
-// import { Builder, By, Capabilities, Key } from "selenium-webdriver";
-// import { Given, When, Then, AfterAll } from "@cucumber/cucumber";
-
 import assert from "assert";
 import { Builder, By } from "selenium-webdriver";
 import { Given, When, Then, AfterAll } from "@cucumber/cucumber";
