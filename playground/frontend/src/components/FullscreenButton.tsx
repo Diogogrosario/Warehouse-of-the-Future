@@ -13,6 +13,10 @@ interface FullscreenProps {
 export default function FullscreenButton(props: FullscreenProps) {
 	const icon =
 		props.fullscreenState == FullscreenState.Disabled ? <FullscreenIcon /> : <FullscreenExit />;
+	const id =
+		props.panelSide == FullscreenState.Left
+			? "warehouse-fullscreen-toggle"
+			: "info-fullscreen-toggle";
 
 	return (
 		<Button
@@ -26,6 +30,7 @@ export default function FullscreenButton(props: FullscreenProps) {
 					props.setFullscreen(props.panelSide);
 				else props.setFullscreen(FullscreenState.Disabled);
 			}}
+			id={id}
 		>
 			{icon}
 		</Button>

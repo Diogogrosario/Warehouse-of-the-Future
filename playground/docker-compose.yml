@@ -2,7 +2,6 @@ version: "3.9"
 services:
     db:
         image: postgres:14.1-alpine
-        restart: always
         container_name: playground_db
         env_file:
             - .env

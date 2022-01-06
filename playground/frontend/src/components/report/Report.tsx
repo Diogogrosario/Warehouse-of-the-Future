@@ -13,7 +13,6 @@ import {
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
-	ButtonGroup,
 	Button,
 } from "@mui/material";
 import Box from "@mui/system/Box";
@@ -22,8 +21,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { ReportResource } from "../resources/ReportResource";
+import { ReportResource } from "../../resources/ReportResource";
 import { useController } from "rest-hooks";
+import AddActionForm from "../AddActionForm";
+
+export enum Severity {
+	Warning,
+	Error,
+}
 
 export interface ReportProps {
 	title: string;
@@ -45,9 +50,12 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 		await controller.fetch(ReportResource.update(), { id: reportId }, { resolved: true });
 	}, [controller, reportId]);
 
-	const reportComponentId = `PlaygroundReport-${reportId}`;
+	const [formOpen, setFormOpen] = React.useState(false);
+
+	const reportComponentId = `playground-report-${reportId}`;
+	const reportContentId = `playground-report-content-${reportId}`;
 	return (
-		<Paper elevation={4} id={reportComponentId}>
+		<Paper elevation={4} id={reportComponentId} sx={{width: 1}}>
 			<Accordion>
 				<AccordionSummary
 					expandIcon={<ExpandMoreIcon />}
@@ -63,6 +71,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							minHeight: "inherit",
 						},
 					}}
+					id={reportContentId}
 				>
 					<Tooltip title={warningLevel}>
 						<Box
@@ -84,7 +93,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 					</Tooltip>
 					<Typography
 						variant="h5"
-						component="h1"
+						component="span"
 						align="center"
 						sx={{
 							display: "flex",
@@ -144,7 +153,9 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 									<ListItem
 										key={`${reportComponentId}-action-${index}`}
 										id={`${reportComponentId}-action-${index}`}
-										style={{ display: "flex" }}
+										style={{
+											display: "flex",
+										}}
 									>
 										<ListItemIcon>
 											<ReceiptLongIcon />
@@ -181,33 +192,17 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 								);
 							})}
 						</List>
-						<ButtonGroup variant="contained" aria-label="actions button">
-							<Button
-								startIcon={<AddIcon />}
-								onClick={() => console.info(`ADD ACTION`)}
-								color="primary"
-								sx={{
-									margin: "5px 10px",
-								}}
-							>
-								Add Action
-							</Button>
-							<Button
-								startIcon={!resolved ? <CheckIcon /> : <RemoveIcon />}
-								onClick={() => {
-									markSolved();
-								}}
-								color={ !resolved ? "success" : "error"}
-								sx={{
-									margin: "5px 10px",
-								}}
-							>
-								{!resolved ? "Mark as resolved" : "Reopen" }
-							</Button>
-						</ButtonGroup>
+						<Button startIcon={<AddIcon />} onClick={() => setFormOpen(true)}>
+							Add Action
+						</Button>
 					</Stack>
 				</AccordionDetails>
 			</Accordion>
+			<AddActionForm
+				open={formOpen}
+				onCancel={() => setFormOpen(false)}
+				onSuccess={() => console.log("add action")}
+			/>
 		</Paper>
 	);
 };

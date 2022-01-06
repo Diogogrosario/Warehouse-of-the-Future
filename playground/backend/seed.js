@@ -11,6 +11,22 @@ await db.report.create({
 	deviceId: "470AD",
 });
 
+await db.report.create({
+	severity: "error",
+	title: "HAHAHAHAHA",
+	description: "Very funny",
+	resolved: false,
+	deviceId: "470AD",
+});
+
+await db.report.create({
+	severity: "warning",
+	title: "HIHIHIHIHII",
+	description: "Very funny",
+	resolved: false,
+	deviceId: "470AD",
+});
+
 await db.action.create({
 	description: "Turned it off and on again",
 	employeeId: "Ricardo Fontão",
