@@ -22,13 +22,13 @@ services:
             - grafana-data:/app/grafana
             - ./grafana/dashboards:/etc/grafana/dashboards
             - ./grafana/provisioning:/etc/grafana/provisioning
-        networks:
-          - grafnet
+        # networks:
+        #     - grafnet
 
     worker:
         build: ./worker
         volumes:
-          - .:/app
+            - .:/app
 
     backend:
         build: ./backend
@@ -38,10 +38,12 @@ services:
             - ./backend/.env
         volumes:
             - ./backend:/app
+        # networks:
+        #     - grafnet
 
-networks:
-    grafnet:
-        external: false
+# networks:
+#     grafnet:
+#         external: false
 
 volumes:
     grafana-data:

@@ -47,10 +47,6 @@ item_attributes = namespace.model("Item", {
         required=True,
         description="Quantity of the item"
     ),
-    "bucket_id": fields.String(
-        required=True,
-        description="Id of the item's bucket"
-    ),
 })
 
 item_in_manifest_attributes = namespace.model("ItemInManifest", {
@@ -268,11 +264,6 @@ layout_attributes = namespace.model("Layout", {
         required=True,
         description="Sensors present in the warehouse"
     ),
-    "items": fields.List(
-        fields.Nested(item_attributes),
-        required=True,
-        description="Items present in the warehouse"
-    )
 })
 
 # Cart
@@ -316,7 +307,9 @@ orchestrator_attributes = namespace.model("Orchestrator", {
 
 def generate_items_for_manifest(number_of_items):
     manifest_items = []
-    items_ids = get_static_items_ids()
+
+    static_items = get_static_items_data()
+    items_ids = [item["id"] for item in static_items]
 
     selected_items_indexes = random.sample(
         range(0, number_of_items-1),
@@ -408,6 +401,29 @@ class Staff(Resource):
 
 
 # ------------------------------------------------------------------------------
+# Items
+# ------------------------------------------------------------------------------
+
+
+def get_static_items_data():
+    with open("./api/static_files/items.json", "r") as file:
+        return json.load(file)
+
+
+@namespace.route("/items")
+class Item(Resource):
+    @namespace.marshal_list_with(item_attributes)
+    def get(self):
+        """
+        Returns a list with all the items.
+        """
+
+        items = get_static_items_data()
+
+        return items
+
+
+# ------------------------------------------------------------------------------
 # Orchestrator
 # ------------------------------------------------------------------------------
 
@@ -442,9 +458,9 @@ class Orchestrator(Resource):
 
 # cart starts at (width2/2, 0)
 
-SUPER_RACK1_MAX_WIDTH = 10*100
+SUPER_RACK1_MAX_WIDTH = 20*100
 SUPER_RACK2_MAX_WIDTH = 10*100
-SUPER_RACK3_MAX_WIDTH = 10*100
+SUPER_RACK3_MAX_WIDTH = 20*100
 
 RACK_MIN_WIDTH = 1*100
 RACK_MAX_WIDTH = 4*100
@@ -475,7 +491,6 @@ def generate_super_rack(
     staff_ids,
     items_ids,
 ):
-    items = []
     sensors = []
     buckets = []
     racks = []
@@ -608,28 +623,16 @@ def generate_super_rack(
                 )
                 sensors.append(sensor)
 
-                item = generate_item(
-                    id=item_id,
-                    bucket_id=bucket["_id"],
-                    # remove 1 cm to the max_width and max_height
-                    # to be sure the item will fit in the bucket
-                    max_width=bucket["width"] - 1,
-                    max_height=bucket["height"] - 1
-                )
-                items.append(item)
-
     return {
         "final_super_rack1_width": final_current_super_rack1_width,
         "racks": racks,
         "shelves": shelves,
         "buckets": buckets,
-        "sensors": sensors,
-        "items": items
+        "sensors": sensors
     }
 
 
 def coherent_generate_layout():
-    items = []
     sensors = []
     buckets = []
     racks = []
@@ -668,15 +671,12 @@ def coherent_generate_layout():
                                      + super_rack3["buckets"]
     sensors = super_rack1["sensors"] + super_rack2["sensors"] \
                                      + super_rack3["sensors"]
-    items = super_rack1["items"] + super_rack2["items"] \
-                                 + super_rack3["items"]
 
     return {
         "racks": racks,
         "shelves": shelves,
         "buckets": buckets,
-        "sensors": sensors,
-        "items": items
+        "sensors": sensors
     }
 
 
@@ -703,7 +703,6 @@ def generate_item(id, bucket_id, max_width, max_height):
         "length": length,
         "weight": weight,
         "quantity": quantity,
-        "bucket_id": bucket_id
     }
 
     return item
@@ -777,8 +776,7 @@ class Layout(Resource):
             "racks": layout["racks"],
             "shelves": layout["shelves"],
             "buckets": layout["buckets"],
-            "sensors": layout["sensors"],
-            "items": layout["items"]
+            "sensors": layout["sensors"]
         }
 
         return layout
