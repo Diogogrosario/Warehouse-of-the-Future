@@ -20,14 +20,13 @@ interface PopperComponentProps {
 }
 
 const StyledPopper = styled(Popper)( ({theme}) => ({
-    border: `1px solid ${theme.palette.mode === "light" ? "#e1e4e8" : "#30363d"}`,
-    boxShadow: `0 8px 24px ${theme.palette.mode === "light" ? "rgba(149, 157, 165, 0.2)" : "rgb(1, 4, 9)"}`,
+    border: `1px solid ${Coloring.rgba(theme.palette.white.main, 0.6)}`,
     borderRadius: 6,
     width: 300,
     zIndex: theme.zIndex.modal,
     fontSize: 13,
-    color: theme.palette.mode === "light" ? "#24292e" : "c9d1d9",
-    backgroundColor: theme.palette.mode === "light" ? "#fff" : "#1c2128",
+    color: theme.palette.white.main,
+    backgroundColor: theme.palette.lightDark.main,
 }));
 
 const StyledPopperComponent = styled("div")( ({theme}) => ({
@@ -45,9 +44,12 @@ const StyledPopperComponent = styled("div")( ({theme}) => ({
             minHeight: "auto",
             alignItems: "flex-start",
             padding: 8,
-            borderBottom: `1px solid ${theme.palette.mode === "light" ? "#eaecef" : "#30363d"}`,
-            '&:hover': {
-                backgroundColor: theme.palette.yellow.main,
+            borderBottom: `1px solid ${Coloring.rgba(theme.palette.white.main, 0.4)}`,
+            '&[aria-selected="true"]': {
+                backgroundColor: theme.palette.lightDark.main,
+            },
+            '&.Mui-focused, &[aria-selected="true"].Mui-focused': {
+                backgroundColor: theme.palette.lightDarkBright.main,
             },
         },
     },
@@ -220,8 +222,10 @@ const LabelPicker : React.FC<LabelPickerProps & Record<string, any>> = (props : 
                                         sx={{
                                             flexGrow: 1,
                                             "& span": {
-                                                color: theme.palette.mode === "light" ? '#586069' : '#8b949e',
-                                            }
+                                                color: (theme : Theme) => (
+                                                    Coloring.rgba(theme.palette.white.main, 0.6)
+                                                ),
+                                            },
                                         }}
                                     >
                                         <Typography variant="body1" component="h6">
