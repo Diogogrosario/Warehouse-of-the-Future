@@ -69,7 +69,7 @@ export function update(req, res) {
 			const Action = db.action;
 			// prepare action
 			const action = {
-				employee_id: req.body.employee_id,
+				employeeId: "User 1",
 				reportId: id,
 			};
 
@@ -136,7 +136,7 @@ export function solved(req, res) {
 		.then((data) => {
 			if (data) {
 				const action = {
-					employee_id: req.body.employee_id,
+					employeeId: req.body.employeeId,
 					reportId: id,
 				};
 

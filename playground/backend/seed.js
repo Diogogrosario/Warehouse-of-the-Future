@@ -13,12 +13,12 @@ await db.report.create({
 
 await db.action.create({
 	description: "Turned it off and on again",
-	employee_id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+	employeeId: "Ricardo Fontão",
 	reportId: 1,
 });
 
 await db.action.create({
 	description: "Replaced part",
-	employee_id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+	employeeId: "Ivo Saavedra",
 	reportId: 1,
 });

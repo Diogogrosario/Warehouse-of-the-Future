@@ -5,7 +5,7 @@ const Action = db.action;
 export function create(req, res) {
 	const action = {
 		description: req.body.description,
-		employee_id: req.body.employee_id,
+		employeeId: req.body.employeeId,
 	};
 
 	// save to database

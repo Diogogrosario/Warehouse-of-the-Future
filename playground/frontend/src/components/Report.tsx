@@ -21,6 +21,7 @@ import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { ReportResource } from "../resources/ReportResource";
 import { useController } from "rest-hooks";
 
@@ -37,7 +38,7 @@ export interface ReportProps {
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
-	const { title, description, shortDescription, warningLevel, actions, reportId } = props;
+	const { title, description, shortDescription, resolved, warningLevel, actions, reportId } = props;
 
 	const controller = useController();
 	const markSolved = useCallback(async () => {
@@ -192,16 +193,16 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 								Add Action
 							</Button>
 							<Button
-								startIcon={<CheckIcon />}
+								startIcon={!resolved ? <CheckIcon /> : <RemoveIcon />}
 								onClick={() => {
 									markSolved();
 								}}
-								color="success"
+								color={ !resolved ? "success" : "error"}
 								sx={{
 									margin: "5px 10px",
 								}}
 							>
-								Mark as resolved
+								{!resolved ? "Mark as resolved" : "Reopen" }
 							</Button>
 						</ButtonGroup>
 					</Stack>
