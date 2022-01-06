@@ -4,7 +4,7 @@ import datetime
 import uuid
 import names
 import json
-from utils import utils
+from .utils import utils
 
 namespace = Namespace(
     "GenerateData",
@@ -337,7 +337,7 @@ def generate_items_for_manifest(number_of_items):
 
 
 def get_static_items_ids():
-    with open("worker/static_files/items_ids.json", "r") as file:
+    with open("./api/static_files/items_ids.json", "r") as file:
         return json.load(file)
 
 
@@ -381,7 +381,7 @@ def generate_employee_data(id=None):
 
 
 def get_static_employee_data():
-    with open("worker/static_files/staff.json", "r") as file:
+    with open("./api/static_files/staff.json", "r") as file:
         return json.load(file)
 
 

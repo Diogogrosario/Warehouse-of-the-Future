@@ -1,6 +1,6 @@
 import os, sched, time
 
-import generate_data as gen
+import requests
 
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.append(parentdir)
@@ -10,14 +10,18 @@ from backend.api import db
 DAILY_MANIFESTS = 30
 terminate = False
 
+API_BASE_URL = "http://localhost:8001/generate_data"
+
+
 # Call when wanting to terminate worker
 def terminate_worker():
     global terminate
     terminate = True
 
+
 # Manifest
 def populate_manifests(n_items):
-    manifest = gen.Manifest().get(n_items)
+    manifest = requests.get(f"{API_BASE_URL}/manifest/{n_items}").json()
     db.client.WoF.Manifests.insert_one(manifest)
 
 
@@ -25,20 +29,25 @@ def populate_manifests(n_items):
 def populate_buckets(buckets):
     db.client.WoF.Buckets.insert_many(buckets)
 
+
 def populate_items(items):
     db.client.WoF.Items.insert_many(items)
+
 
 def populate_racks(racks):
     db.client.WoF.Racks.insert_many(racks)
 
+
 def populate_sensors(sensors):
     db.client.WoF.Sensors.insert_many(sensors)
+
 
 def populate_shelves(shelves):
     db.client.WoF.Shelves.insert_many(shelves)
 
+
 def populate_layouts():
-    layout = gen.Layout().get()
+    layout = requests.get(f"{API_BASE_URL}/layout").json()
 
     # Use layout data to populate other collections
     populate_buckets(layout["buckets"])
@@ -58,10 +67,10 @@ def populate_layouts():
 def populate_global():
     db.client.WoF.GlobalData.drop()
     db.client.WoF.create_collection("GlobalData")
-    
+
     # Add orchestrator and cart data
-    orchestrator = gen.Orchestrator().get()
-    cart = gen.Cart().get()
+    orchestrator = requests.get(f"{API_BASE_URL}/orchestrator").json()
+    cart = requests.get(f"{API_BASE_URL}/cart").json()
     data = {"orchestrator": orchestrator, "cart": cart}
 
     db.client.WoF.GlobalData.insert_one(data)
@@ -71,7 +80,7 @@ def populate_global():
 def populate_staff():
     db.client.WoF.Employees.drop()
     db.client.WoF.create_collection("Employees")
-    employees = gen.Staff().get()
+    employees = requests.get(f"{API_BASE_URL}/staff").json()
     db.client.WoF.Employees.insert_many(employees)
 
 
