@@ -107,7 +107,11 @@ export default function App() {
 						<Grid
 							item
 							id="info-panel"
-							sx={{ position: "relative", flex: 1, height: "100%" }}
+							sx={{
+								position: "relative",
+								flex: 1,
+								height: "100%",
+							}}
 						>
 							<Tabs value={selectedTab} onChange={handleChange}>
 								<Tab label="Reports" />
