@@ -1,30 +1,13 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, MenuItem, TextareaAutosize, TextField, Typography } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography, Box } from "@mui/material";
 import React from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
-import { Box } from "@mui/system";
 
 interface AddActionFormProps {
     open: boolean;
     onCancel: React.MouseEventHandler;
     onSuccess: React.MouseEventHandler;
 }
-
-interface SeverityOption {
-    label: string;
-    value: string;
-}
-
-const severityOptions = [
-    {
-        label: "Warning",
-        value: "warning",
-    },
-    {
-        label: "Error",
-        value: "error",
-    },
-] as SeverityOption[];
 
 const AddActionForm: React.FC<AddActionFormProps> = (props : AddActionFormProps) => {
     const { open, onCancel, onSuccess } = props;

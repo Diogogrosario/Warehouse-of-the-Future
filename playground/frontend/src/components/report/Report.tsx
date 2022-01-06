@@ -21,7 +21,7 @@ import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
-import AddActionForm from "./AddActionForm";
+import AddActionForm from "../AddActionForm";
 
 export enum Severity {
 	Warning,
