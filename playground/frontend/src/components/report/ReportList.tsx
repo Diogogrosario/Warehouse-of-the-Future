@@ -179,9 +179,9 @@ const ReportList: React.FC = () => {
 						</Button>
 						<LabelPicker
 							labels={labels}
-							onSelectedLabelsChange={(newState: number[]) =>
-								setSelectedLabels(newState)
-							}
+							// onSelectedLabelsChange={(newState: number[]) =>
+							// 	setSelectedLabels(newState)
+							// }
 							buttonProps={{
 								color: "lightDark",
 							}}
