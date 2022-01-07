@@ -1,23 +1,17 @@
 import {
 	Button,
 	ButtonGroup,
-	FormControl,
 	InputBase,
-	InputLabel,
 	List,
 	ListItem,
 	Menu,
 	MenuItem,
 	Paper,
-	Select,
-	SelectChangeEvent,
-	Stack,
-	Switch,
 	Theme,
 } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
 import { North, South } from "@mui/icons-material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SearchIcon from '@mui/icons-material/Search';
 
 import Report, { ReportProps } from "./Report";

@@ -9,18 +9,19 @@ import {
 	ListItemText,
 	ListItemIcon,
 	Tooltip,
-	Paper,
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
 	ButtonGroup,
 	Button,
+	Theme,
 } from "@mui/material";
 import Box from "@mui/system/Box";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
+import Coloring from "../utils/coloring";
 
 export interface ReportProps {
 	title: string;
@@ -39,16 +40,35 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 
 	const reportComponentId = `PlaygroundReport-${reportId}`;
 	return (
-		<Paper elevation={4} id={reportComponentId}>
-			<Accordion>
+			<Accordion
+				sx={{
+					backgroundColor: "lightDark.main",
+					color: "white.main",
+					border: (theme : Theme) => `1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
+					"&:hover": {
+						".MuiAccordionSummary-root": {
+							backgroundColor: "lightDarkBright.main",
+						},
+					},
+				}}
+			>
 				<AccordionSummary
 					expandIcon={<ExpandMoreIcon />}
 					aria-controls={`${reportComponentId}-content`}
 					sx={{
 						paddingLeft: 0,
+						'&[aria-expanded="true"]': {
+							borderBottom: (theme : Theme) => `1px solid ${Coloring.rgba(theme.palette.white.main, 0.4)}`,
+						},
+						"& .MuiAccordionSummary-expandIconWrapper": {
+							color: "white.main",
+						},
 						"& .MuiAccordionSummary-content": {
 							margin: 0,
 							minHeight: "inherit",
+							"> span": {
+								opacity: 0.6,
+							},
 						},
 						"& .MuiAccordionSummary-content.Mui-expanded": {
 							margin: 0,
@@ -96,7 +116,6 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							display: "flex",
 							alignItems: "center",
 							width: "60%",
-							color: "text.secondary",
 							margin: "10px 0 10px 20px",
 						}}
 					>
@@ -109,8 +128,13 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 						direction="column"
 						divider={<Divider orientation="horizontal" flexItem />}
 						spacing={1}
+						sx={{
+							"> .MuiDivider-root": {
+								borderColor: (theme: Theme) => Coloring.rgba(theme.palette.white.main, 0.4),
+							}
+						}}
 					>
-						<Typography variant="body1" component="span" align="left">
+						<Typography variant="body1" component="span" align="left" sx={{ color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.8) }}>
 							{description}
 						</Typography>
 						<List
@@ -124,6 +148,8 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 									sx={{
 										textAlign: "start",
 										margin: "0.5em 0",
+										lineHeight: "normal",
+										color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.8),
 									}}
 								>
 									Actions
@@ -138,10 +164,15 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 									<ListItem
 										key={`${reportComponentId}-action-${index}`}
 										id={`${reportComponentId}-action-${index}`}
-										style={{ display: "flex" }}
+										sx={{
+											display: "flex",
+											"&:hover": {
+												backgroundColor: "lightDarkBright.main",	
+											},
+										}}
 									>
 										<ListItemIcon>
-											<ReceiptLongIcon />
+											<ReceiptLongIcon sx={{ color: "white.main" }} />
 										</ListItemIcon>
 										<ListItemText>
 											<Typography
@@ -153,6 +184,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 													width: "10%",
 													margin: "2px 0",
 													padding: "0 10px",
+													color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
 												}}
 											>
 												{eventTimestamp}
@@ -166,6 +198,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 													alignItems: "center",
 													margin: "2px 0",
 													padding: "0 10px",
+													color: "white.main",
 												}}
 											>
 												{eventDescription}
@@ -200,7 +233,6 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 					</Stack>
 				</AccordionDetails>
 			</Accordion>
-		</Paper>
 	);
 };
 

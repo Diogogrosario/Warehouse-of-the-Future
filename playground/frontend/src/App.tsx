@@ -1,6 +1,11 @@
 import React, { SetStateAction, useEffect } from "react";
-import { Chip, Grid, styled, Tab, Tabs, Theme as ReactTheme, useMediaQuery } from "@mui/material";
-import { css, Theme } from "@emotion/react";
+import {
+	Grid,
+	styled,
+	Tab,
+	Tabs,
+	useMediaQuery
+} from "@mui/material";
 
 
 import FullscreenButton from "./components/FullscreenButton";
