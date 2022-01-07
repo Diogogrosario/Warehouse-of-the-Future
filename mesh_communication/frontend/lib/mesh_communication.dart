@@ -126,7 +126,13 @@ class BasePage extends StatelessWidget {
     Graph graph = UndirectedGraph();
 
     // gen nodes
-    List<Device> devices = await requestHandler.getDevices();
+    List<Device> devices = <Device>[];
+    try {
+      devices = await requestHandler.getDevices();
+    } on TypeError {
+      return graph;
+    }
+
     for (Device d in devices) {
       Node newNode = Node.Id(d.id);
       //newNode.size = const Size(20.0, 30.0);
@@ -157,16 +163,46 @@ class BasePage extends StatelessWidget {
       future: _genGraph(requestHandler),
       builder: (context, response) {
         if (response.connectionState == ConnectionState.done) {
-          Graph graph = response.data!;
-          return MyGraph(
-            graph: graph,
-            requestHandler: requestHandler,
-            child: Builder(
-              builder: (BuildContext innerContext) {
-                return _genGraphPage(innerContext);
-              },
-            ),
-          );
+          if (response.data != null) {
+            Graph graph = response.data!;
+            return MyGraph(
+              graph: graph,
+              requestHandler: requestHandler,
+              child: Builder(
+                builder: (BuildContext innerContext) {
+                  return _genGraphPage(innerContext);
+                },
+              ),
+            );
+          } else {
+            return _pageSkeleton(
+              actions: const [
+                SBButton(null),
+                PPButton(null),
+                SFButton(null),
+                FFButton(null),
+              ],
+              body: const Center(
+                child: Text(
+                  'Backend not Initialized!',
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 40,
+                  ),
+                ),
+              ),
+              footers: const [
+                IconButton(
+                  onPressed: null,
+                  icon: Icon(Icons.replay_rounded),
+                ),
+                IconButton(
+                  onPressed: null,
+                  icon: Icon(Icons.rss_feed),
+                ),
+              ],
+            );
+          }
         } else {
           // still loading
           return _pageSkeleton(

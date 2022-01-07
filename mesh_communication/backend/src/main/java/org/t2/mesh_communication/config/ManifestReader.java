@@ -16,6 +16,10 @@ public class ManifestReader {
         this(new FileInputStream(ManifestGenerator.FILE_DIR + ManifestGenerator.FILE));
     }
 
+    public ManifestReader(String file) throws FileNotFoundException {
+        this(new FileInputStream(ManifestGenerator.FILE_DIR + file));
+    }
+
     public ManifestReader(InputStream inputStream) {
         this.products = new ArrayList<>();
         this.inputStream = inputStream;

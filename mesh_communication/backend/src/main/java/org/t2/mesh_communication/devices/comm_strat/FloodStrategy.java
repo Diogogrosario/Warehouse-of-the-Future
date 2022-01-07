@@ -6,7 +6,6 @@ import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
-import org.t2.mesh_communication.devices.messages.ReplyMessage;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
@@ -87,7 +86,7 @@ public class FloodStrategy implements CommunicationStrategy {
     }
 
     protected void resetTimeToLive(int id) {
-        this.neighborTTL.put(id, DEFAULT_TTL);
+        if (id != MeshGrid.ORCHESTRATOR_ID) this.neighborTTL.put(id, DEFAULT_TTL);
     }
 
     private boolean seenMessage(MeshDevice me, Message msg) {
@@ -122,7 +121,7 @@ public class FloodStrategy implements CommunicationStrategy {
 
             if (RequestMessage.type.equals(msgType)) {
                 // send reply to request msg
-                ReplyMessage rep = new ReplyMessage(me.getId(), 0, msg.getSource(), "Reply.");
+                Message rep = me.createReply(msg.getSource(), "Reply.");
                 Logger.getInstance()
                         .publish(
                                 new Log(
