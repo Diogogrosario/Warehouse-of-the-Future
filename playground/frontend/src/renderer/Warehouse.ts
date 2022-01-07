@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { Shelf, ShelfConfig } from "./Shelf";
+import { ShelfFactory, ShelfConfig } from "./ShelfFactory";
 import { BucketManager } from "./BucketManager";
 import SceneManager from "./SceneManager";
 
@@ -30,7 +30,7 @@ export class Warehouse {
 	private readonly loader: THREE.TextureLoader;
 
 	private readonly sceneManager: SceneManager;
-	private readonly bucketManager: BucketManager;
+	private readonly shelfFactory: ShelfFactory;
 
 	private readonly structure: WarehouseStructure;
 
@@ -39,7 +39,9 @@ export class Warehouse {
 		this.obj.name = "Warehouse";
 
 		this.sceneManager = sceneManager;
-		this.bucketManager = new BucketManager(sceneManager);
+		const bucketManager = new BucketManager(sceneManager);
+		this.shelfFactory = new ShelfFactory(sceneManager, bucketManager);
+
 		this.structure = structure;
 
 		// Load textures
@@ -62,8 +64,7 @@ export class Warehouse {
 		this.addGround(this.structure.dimensions.width, this.structure.dimensions.depth);
 
 		for (const shelfConfig of this.structure.shelves) {
-			const shelf = new Shelf(shelfConfig, this.structure.dimensions, this.bucketManager);
-			this.obj.add(shelf.getObject());
+			this.obj.add(this.shelfFactory.getShelf(shelfConfig, this.structure.dimensions));
 		}
 	}
 

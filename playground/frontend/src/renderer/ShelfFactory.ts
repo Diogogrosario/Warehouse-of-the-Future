@@ -2,6 +2,7 @@ import * as THREE from "three";
 import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { BucketType, BucketManager } from "./BucketManager";
 import { WarehouseDimensions } from "./Warehouse";
+import SceneManager from "./SceneManager";
 
 export interface ShelfLevelConfig {
 	height: number;
@@ -36,34 +37,44 @@ interface ShelvesIdentifier {
 	depth: number;
 }
 
-export class Shelf {
-	static frameMaterial = new THREE.MeshLambertMaterial({
-		color: 0x002b82,
-	});
+export class ShelfFactory {
+	private frameMaterial: THREE.Material;
+	private shelveMaterial: THREE.Material;
 
-	static shelveMaterial = new THREE.MeshLambertMaterial({
-		color: 0xc2c2c2,
-	});
+	private static readonly frameThickness = 0.1;
 
-	static readonly frameThickness = 0.1;
+	private static readonly shelfAngle = Math.PI / 48;
+	private static readonly levelEdgeHeight = 0.075;
 
-	static readonly shelfAngle = Math.PI / 48;
-	static readonly levelEdgeHeight = 0.075;
-
-	static readonly frameGeometries: Map<FrameIdentifier, THREE.BufferGeometry> = new Map();
-	static readonly shelveGeometries: Map<ShelvesIdentifier, THREE.BufferGeometry> = new Map();
+	private readonly frameGeometries: Map<FrameIdentifier, THREE.BufferGeometry> = new Map();
+	private readonly shelveGeometries: Map<ShelvesIdentifier, THREE.BufferGeometry> = new Map();
 
 	private readonly bucketManager: BucketManager;
 
-	private object: THREE.Object3D;
+	constructor(sceneManager: SceneManager, bucketManager: BucketManager) {
+		this.bucketManager = bucketManager;
 
-	constructor(config: ShelfConfig, dimensions: WarehouseDimensions, bucketManager: BucketManager) {
+		const loadManager = new THREE.LoadingManager();
+		const loader = new THREE.TextureLoader(loadManager);
+
+		loadManager.onLoad = () => {
+			sceneManager.invalidate();
+		};
+
+		this.frameMaterial = new THREE.MeshLambertMaterial({
+			color: 0x002b82,
+		});
+
+		this.shelveMaterial = new THREE.MeshLambertMaterial({
+			color: 0xc2c2c2,
+		});
+	}
+
+	public getShelf(config: ShelfConfig, dimensions: WarehouseDimensions): THREE.Object3D {
 		const shelf = new THREE.Group();
 		shelf.name = "Shelf";
 
-		this.bucketManager = bucketManager;
-
-		const frameMesh = new THREE.Mesh(this.getFrameGeometry(config), Shelf.frameMaterial);
+		const frameMesh = new THREE.Mesh(this.getFrameGeometry(config), this.frameMaterial);
 		frameMesh.translateX(-config.width / 2);
 		frameMesh.translateZ(-config.depth / 2);
 		frameMesh.name = "ShelfFrame";
@@ -73,7 +84,7 @@ export class Shelf {
 
 		this.positionShelf(shelf, config, dimensions);
 		
-		this.object = shelf;
+		return shelf;
 	}
 
 	private positionShelf(shelf: THREE.Object3D, config: ShelfConfig, dimensions: WarehouseDimensions) {
@@ -120,7 +131,7 @@ export class Shelf {
 			if (sh.height >= config.height)
 				console.warn("Shelf contains level higher than its height");
 
-			const m = new THREE.Mesh(shelfGeometry, Shelf.shelveMaterial);
+			const m = new THREE.Mesh(shelfGeometry, this.shelveMaterial);
 			m.name = `ShelfHeight${sh.height}`;
 
 			m.translateX(-config.width / 2);
@@ -131,7 +142,7 @@ export class Shelf {
 
 			// Buckets
 			const bWidth = this.bucketManager.getWidth(sh.bucketType);
-			const availableSpace = config.width - Shelf.frameThickness;
+			const availableSpace = config.width - ShelfFactory.frameThickness;
 			const no_buckets = Math.floor(availableSpace / bWidth);
 
 			const freeSpace = availableSpace - no_buckets * bWidth;
@@ -142,10 +153,10 @@ export class Shelf {
 				bucket.name = "PlacedBucket";
 
 				bucket.scale.multiply(new THREE.Vector3(1, 1, config.depth));
-				bucket.rotateX(Shelf.shelfAngle);
+				bucket.rotateX(ShelfFactory.shelfAngle);
 				// CSS equivalent of space-evenly
 				bucket.translateX(
-					Shelf.frameThickness / 2 + spacing * (i + 1) + bWidth * (i + 0.5)
+					ShelfFactory.frameThickness / 2 + spacing * (i + 1) + bWidth * (i + 0.5)
 				);
 				bucket.translateY(-0.05);
 				bucket.translateZ(config.depth / 2);
@@ -163,11 +174,11 @@ export class Shelf {
 			depth: config.depth,
 			height: config.height,
 		};
-		const geo = Shelf.frameGeometries.get(identifier);
+		const geo = this.frameGeometries.get(identifier);
 
 		if (!geo) {
 			const generated_geo = this.generateFrameGeometry(config);
-			Shelf.frameGeometries.set(identifier, generated_geo);
+			this.frameGeometries.set(identifier, generated_geo);
 			return generated_geo;
 		} else return geo;
 	}
@@ -256,11 +267,11 @@ export class Shelf {
 			width: config.width,
 			depth: config.depth,
 		};
-		const geo = Shelf.shelveGeometries.get(identifier);
+		const geo = this.shelveGeometries.get(identifier);
 
 		if (!geo) {
 			const generated_geo = this.generateShelveGeometry(config);
-			Shelf.shelveGeometries.set(identifier, generated_geo);
+			this.shelveGeometries.set(identifier, generated_geo);
 			return generated_geo;
 		} else return geo;
 	}
@@ -269,13 +280,13 @@ export class Shelf {
 		const positionHelper = new THREE.Object3D();
 		const geometries: THREE.BufferGeometry[] = [];
 
-		const shelfHeightOffset = Math.tan(Shelf.shelfAngle) * (config.depth / 2);
+		const shelfHeightOffset = Math.tan(ShelfFactory.shelfAngle) * (config.depth / 2);
 
 		const shelfGeometry = new THREE.BoxGeometry(config.width - 0.1, 0.025, config.depth);
-		const shelfEdge = new THREE.BoxGeometry(config.width - 0.1, Shelf.levelEdgeHeight, 0.01);
+		const shelfEdge = new THREE.BoxGeometry(config.width - 0.1, ShelfFactory.levelEdgeHeight, 0.01);
 
 		// Shelf base
-		positionHelper.rotateX(Shelf.shelfAngle);
+		positionHelper.rotateX(ShelfFactory.shelfAngle);
 		positionHelper.position.set(config.width / 2, shelfHeightOffset, config.depth / 2);
 
 		positionHelper.updateMatrixWorld();
@@ -283,7 +294,7 @@ export class Shelf {
 		geometries.push(shelfGeometry);
 
 		// Edge
-		positionHelper.translateY(Shelf.levelEdgeHeight / 2);
+		positionHelper.translateY(ShelfFactory.levelEdgeHeight / 2);
 		positionHelper.translateZ(config.depth / 2);
 
 		positionHelper.updateMatrixWorld();
@@ -292,9 +303,5 @@ export class Shelf {
 
 		const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(geometries, false);
 		return mergedGeometry;
-	}
-
-	public getObject(): THREE.Object3D {
-		return this.object;
 	}
 }
