@@ -50,4 +50,4 @@ _________________
 
 Model files are located in *app/models*.  
 
-![models](/images/models.png)
+![models](https://github.com/softeng-feup/ds-meic2/blob/t4-web-app-documentation/optimization/src/web/docs/images/models.png)
