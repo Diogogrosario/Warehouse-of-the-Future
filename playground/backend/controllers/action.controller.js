@@ -6,6 +6,7 @@ export function create(req, res) {
 	const action = {
 		description: req.body.description,
 		employeeId: req.body.employeeId,
+		reportId: req.body.reportId,
 	};
 
 	// save to database

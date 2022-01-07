@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
 	Typography,
 	Stack,
@@ -19,10 +19,6 @@ import Box from "@mui/system/Box";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
-import CheckIcon from "@mui/icons-material/Check";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { ReportResource } from "../../resources/ReportResource";
-import { useController } from "rest-hooks";
 import AddActionForm from "../AddActionForm";
 
 export enum Severity {
@@ -43,19 +39,15 @@ export interface ReportProps {
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
-	const { title, description, shortDescription, resolved, warningLevel, actions, reportId } = props;
-
-	const controller = useController();
-	const markSolved = useCallback(async () => {
-		await controller.fetch(ReportResource.update(), { id: reportId }, { resolved: true });
-	}, [controller, reportId]);
+	const { title, description, shortDescription, resolved, warningLevel, actions, reportId } =
+		props;
 
 	const [formOpen, setFormOpen] = React.useState(false);
 
 	const reportComponentId = `playground-report-${reportId}`;
 	const reportContentId = `playground-report-content-${reportId}`;
 	return (
-		<Paper elevation={4} id={reportComponentId} sx={{width: 1}}>
+		<Paper elevation={4} id={reportComponentId} sx={{ width: 1 }}>
 			<Accordion>
 				<AccordionSummary
 					expandIcon={<ExpandMoreIcon />}
@@ -201,7 +193,8 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 			<AddActionForm
 				open={formOpen}
 				onCancel={() => setFormOpen(false)}
-				onSuccess={() => console.log("add action")}
+				reportId={reportId}
+				closed={resolved}
 			/>
 		</Paper>
 	);

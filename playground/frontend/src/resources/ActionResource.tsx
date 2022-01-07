@@ -6,6 +6,7 @@ export class ActionResource extends Resource {
 	readonly employee_id: string = "";
 	readonly createdAt: Date = new Date();
 	readonly updatedAt: Date = new Date();
+	readonly reportId: number = 1;
 
 	static urlRoot = "http://localhost:3001/action";
 

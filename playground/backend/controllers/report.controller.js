@@ -59,113 +59,22 @@ export function findOne(req, res) {
 export function update(req, res) {
 	const id = req.params.id;
 
-	// TODO: should be using the solved endpoint
-	// unnable to connect it to the frontend (using this for now)
-	// find report with the id
-	Report.findByPk(id)
-	.then((data) => {
-		// resolved was updated
-		if (data.resolved != req.resolved) {
-			const Action = db.action;
-			// prepare action
-			const action = {
-				employeeId: "User 1",
-				reportId: id,
-			};
-
-			// report was not resolved
-			if (!data.resolved) {
-				action.description = "Closed Report.";
-			} else {
-				action.description = "Reopened Report.";
-			}
-
-			// save to database
-			Action.create(action)
-				.then()
-				.catch((err) => {
-					res.status(500).send({ message: err.message || "Error at create solved action." });
-				});
-
-			Report.update( {resolved: !data.resolved}, {
-				where: { id: id },
-				returning: true,
-			})
-				.then((result) => {
-					let num = result[0];
-					let obj = result[1][0].dataValues;
-					if (num > 0) {
-						res.send(obj);
-					} else {
-						res.status(400).send({ message: "Can't update report ${id}." });
-					}
-				})
-				.catch((err) => {
-					res.send({ message: err });
-				});
-		}
+	// other updates
+	Report.update(req.body, {
+		where: { id: id },
+		returning: true,
 	})
-	.catch((err) => {
-		res.status(500).send({ message: err.message || `Error on report ${id} retrieval.` });
-	});
-
-	// // other updates
-	// Report.update(req.body, {
-	// 	where: { id: id },
-	// 	returning: true,
-	// })
-	// 	.then((result) => {
-	// 		let num = result[0];
-	// 		let obj = result[1][0].dataValues;
-	// 		if (num > 0) {
-	// 			res.send(obj);
-	// 		} else {
-	// 			res.status(400).send({ message: "Can't update report ${id}." });
-	// 		}
-	// 	})
-	// 	.catch((err) => {
-	// 		res.status(500).send({ message: err.message || "Error on update report." });
-	// 	});
-}
-
-export function solved(req, res) {
-	const id = req.params.id;
-	const Action = db.action;
-
-	Report.findByPk(id)
-		.then((data) => {
-			if (data) {
-				const action = {
-					employeeId: req.body.employeeId,
-					reportId: id,
-				};
-
-				// report was not resolved
-				if (!data.resolved) {
-					action.description = "Closed Report.";
-				} else {
-					action.description = "Reopened Report.";
-				}
-
-				// save to database
-				Action.create(action)
-					.then()
-					.catch((err) => {
-						res.status(500).send({ message: err.message || "Error at create action." });
-					});
-
-				// toggle solved flag
-				Report.update({ resolved: !data.resolved }, { where: { id: id } }).then((num) => {
-					if (num == 1) {
-						res.send({ message: "Success." });
-					} else {
-						res.send({ message: "Can't update report ${id}." });
-					}
-				});
-			} else res.status(404).send({ message: `Didn't find report ${id}.` });
+		.then((result) => {
+			let num = result[0];
+			let obj = result[1][0].dataValues;
+			if (num > 0) {
+				res.send(obj);
+			} else {
+				res.status(400).send({ message: "Can't update report ${id}." });
+			}
 		})
 		.catch((err) => {
-			res.status(500).send({ message: err.message || `Error on report ${id} retrieval.` });
+			res.status(500).send({ message: err.message || "Error on update report." });
 		});
 }
 

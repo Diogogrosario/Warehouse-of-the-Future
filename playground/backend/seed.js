@@ -12,17 +12,9 @@ await db.report.create({
 });
 
 await db.report.create({
-	severity: "error",
-	title: "HAHAHAHAHA",
-	description: "Very funny",
-	resolved: false,
-	deviceId: "470AD",
-});
-
-await db.report.create({
 	severity: "warning",
-	title: "HIHIHIHIHII",
-	description: "Very funny",
+	title: "Anomaly on device.",
+	description: "Device is acting strangely",
 	resolved: false,
 	deviceId: "470AD",
 });
