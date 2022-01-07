@@ -23,9 +23,9 @@ export class BucketManager {
 		this.meshes = new Map();
 		this.toAdd = new Map();
 
-		this.materials.set(BucketType.SMALL, new THREE.MeshLambertMaterial({ color: 0xfc0595 }));
-		this.materials.set(BucketType.REGULAR, new THREE.MeshLambertMaterial({ color: 0x606c2e }));
-		this.materials.set(BucketType.LARGE, new THREE.MeshLambertMaterial({ color: 0x151226 }));
+		this.materials.set(BucketType.SMALL, new THREE.MeshPhongMaterial({ color: 0xfc0595 }));
+		this.materials.set(BucketType.REGULAR, new THREE.MeshPhongMaterial({ color: 0x606c2e }));
+		this.materials.set(BucketType.LARGE, new THREE.MeshPhongMaterial({ color: 0x151226 }));
 
 		for (const k of Object.values(BucketType)) {
 			this.toAdd.set(k, []);

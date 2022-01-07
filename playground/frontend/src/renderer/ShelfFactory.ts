@@ -54,19 +54,14 @@ export class ShelfFactory {
 	constructor(sceneManager: SceneManager, bucketManager: BucketManager) {
 		this.bucketManager = bucketManager;
 
-		const loadManager = new THREE.LoadingManager();
-		const loader = new THREE.TextureLoader(loadManager);
-
-		loadManager.onLoad = () => {
-			sceneManager.invalidate();
-		};
-
-		this.frameMaterial = new THREE.MeshLambertMaterial({
+		this.frameMaterial = new THREE.MeshPhongMaterial({
 			color: 0x002b82,
+			shininess: 40,
 		});
 
-		this.shelveMaterial = new THREE.MeshLambertMaterial({
+		this.shelveMaterial = new THREE.MeshPhongMaterial({
 			color: 0xc2c2c2,
+			shininess: 5,
 		});
 	}
 
@@ -83,12 +78,15 @@ export class ShelfFactory {
 		this.addLevels(shelf, config);
 
 		this.positionShelf(shelf, config, dimensions);
-		
+
 		return shelf;
 	}
 
-	private positionShelf(shelf: THREE.Object3D, config: ShelfConfig, dimensions: WarehouseDimensions) {
-
+	private positionShelf(
+		shelf: THREE.Object3D,
+		config: ShelfConfig,
+		dimensions: WarehouseDimensions
+	) {
 		// Update position
 		switch (config.orientation) {
 			case Orientation.NORTH:
@@ -119,7 +117,6 @@ export class ShelfFactory {
 				shelf.rotateY(-Math.PI / 2);
 				break;
 		}
-
 	}
 
 	private addLevels(shelf: THREE.Object3D, config: ShelfConfig) {
@@ -127,7 +124,6 @@ export class ShelfFactory {
 		const shelfGeometry = this.getShelveGeometry(config);
 
 		for (const sh of config.levels) {
-
 			if (sh.height >= config.height)
 				console.warn("Shelf contains level higher than its height");
 
@@ -137,7 +133,7 @@ export class ShelfFactory {
 			m.translateX(-config.width / 2);
 			m.translateZ(-config.depth / 2);
 			m.translateY(sh.height - config.height / 2);
-			
+
 			shelf.add(m);
 
 			// Buckets
@@ -283,7 +279,11 @@ export class ShelfFactory {
 		const shelfHeightOffset = Math.tan(ShelfFactory.shelfAngle) * (config.depth / 2);
 
 		const shelfGeometry = new THREE.BoxGeometry(config.width - 0.1, 0.025, config.depth);
-		const shelfEdge = new THREE.BoxGeometry(config.width - 0.1, ShelfFactory.levelEdgeHeight, 0.01);
+		const shelfEdge = new THREE.BoxGeometry(
+			config.width - 0.1,
+			ShelfFactory.levelEdgeHeight,
+			0.01
+		);
 
 		// Shelf base
 		positionHelper.rotateX(ShelfFactory.shelfAngle);

@@ -11,9 +11,9 @@ export interface WarehouseDimensions {
 }
 
 interface WarehouseLights {
-	x: number,
-	y: number,
-	z: number
+	x: number;
+	y: number;
+	z: number;
 }
 
 export interface WarehouseStructure {
@@ -66,6 +66,8 @@ export class Warehouse {
 		for (const shelfConfig of this.structure.shelves) {
 			this.obj.add(this.shelfFactory.getShelf(shelfConfig, this.structure.dimensions));
 		}
+
+		this.addLights();
 	}
 
 	private addGround(width: number, depth: number) {
@@ -94,7 +96,12 @@ export class Warehouse {
 	}
 
 	private addWalls(width: number, depth: number, height: number) {
-		const wallMaterial = new THREE.MeshPhongMaterial({ color: 0x828282 });
+		const concrete = this.loader.load("assets/textures/concrete_stripe.jpg");
+		const wallMaterial = new THREE.MeshPhongMaterial({
+			color: 0x828282,
+			shininess: 3,
+			map: concrete,
+		});
 
 		const wallNegX = new THREE.Mesh(this.planeGeometry, wallMaterial);
 		wallNegX.scale.set(depth, height, 1);
@@ -123,6 +130,27 @@ export class Warehouse {
 		this.obj.add(wallPosX);
 		this.obj.add(wallNegZ);
 		this.obj.add(wallPosZ);
+	}
+
+	private addLights() {
+		const ambient = new THREE.AmbientLight();
+		ambient.color = new THREE.Color(0xdddddd);
+		ambient.intensity = 0.2;
+		this.obj.add(ambient);
+
+		for (const c of this.structure.lights) {
+			const l = new THREE.PointLight();
+			l.intensity = 0.5;
+			l.position.set(
+				c.x - this.structure.dimensions.width / 2,
+				c.y,
+				c.z - this.structure.dimensions.depth / 2
+			);
+			this.obj.add(l);
+
+			const helper = new THREE.PointLightHelper(l);
+			this.obj.add(helper);
+		}
 	}
 
 	public getObject(): THREE.Object3D {

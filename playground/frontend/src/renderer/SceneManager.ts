@@ -56,7 +56,6 @@ export default class SceneManager {
 		const whStructure = new Warehouse(this, mockJSON as WarehouseStructure);
 		this.scene.add(whStructure.getObject());
 
-		this.addLighting();
 		this.addAxes();
 	}
 
@@ -103,17 +102,5 @@ export default class SceneManager {
 	private addAxes() {
 		const axesHelper = new THREE.AxesHelper(5);
 		this.scene.add(axesHelper);
-	}
-
-	private addLighting() {
-		const color = 0xffffff;
-		const light = new THREE.AmbientLight(color, 1);
-		this.scene.add(light);
-
-		const rectLight = new THREE.SpotLight();
-		rectLight.angle = Math.PI / 2;
-		rectLight.position.set(0, 40, 0);
-		rectLight.lookAt(0, 0, 0);
-		this.scene.add(rectLight);
 	}
 }

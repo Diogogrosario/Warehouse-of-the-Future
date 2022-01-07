@@ -3,7 +3,7 @@ import SceneManager from "../renderer/SceneManager";
 import Stats from "../renderer/Stats";
 
 interface WarehouseRendererProps {
-	background?: string
+	background?: string;
 }
 
 class WarehouseRenderer extends Component<WarehouseRendererProps> {
@@ -20,7 +20,7 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 
 	static defaultProps: Partial<WarehouseRendererProps> = {
 		background: "#ffffff",
-	}
+	};
 
 	constructor(props: WarehouseRendererProps) {
 		super(props);
@@ -31,8 +31,7 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 		this.container?.appendChild(this.stats.dom);
 
 		this.sceneSetup();
-		if (this.props.background)
-			this.sceneManager.updateBackgroundColor(this.props.background);
+		if (this.props.background) this.sceneManager.updateBackgroundColor(this.props.background);
 		this.startAnimationLoop();
 
 		if (this.container) {
