@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
@@ -10,13 +12,16 @@ class MyGraph extends InheritedWidget {
   final Graph graph;
   final RequestHandler requestHandler;
   final MyLog logDisplay;
+  HashMap<int, Color> nodeColors;
 
-  MyGraph( {
+  MyGraph({
     Key? key,
     required this.graph,
     required this.requestHandler,
     required Widget child,
-  }) : logDisplay = MyLog(), super(key: key, child: child);
+  })  : logDisplay = MyLog(),
+        nodeColors = HashMap(),
+        super(key: key, child: child);
 
   Future<void> _recvMsgs() async {
     Map messages = await requestHandler.getRecvMsgs();
@@ -131,9 +136,7 @@ class MyGraph extends InheritedWidget {
   @override
   bool updateShouldNotify(MyGraph old) => graph != old.graph;
 
-
-   Future<void> _updateLogs() async{
-     logDisplay.callback!();
-
+  Future<void> _updateLogs() async {
+    logDisplay.callback!();
   }
 }

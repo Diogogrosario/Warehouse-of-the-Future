@@ -19,18 +19,18 @@ class MyGraphDisplay extends StatefulWidget {
   static const Color failColor = Colors.red;
 
   final Algorithm _algo;
-  final HashMap<int, Color> nodeColors;
 
   late final VoidCallback _resetGraphView;
 
   MyGraphDisplay(BuildContext context, {Key? key})
       : _algo = FruchtermanReingoldAlgorithm(iterations: 10),
-        nodeColors = HashMap(),
         super(key: key) {
     _initColors(context);
   }
 
   void _initColors(BuildContext context) {
+    HashMap<int, Color> nodeColors = HashMap();
+
     // orchestrator color
     nodeColors[0] = const Color.fromRGBO(45, 45, 45, 1.0);
 
@@ -66,6 +66,8 @@ class MyGraphDisplay extends StatefulWidget {
       nodeColors[nodeId] = Color.fromRGBO((rgbVec.x * 255).toInt(),
           (rgbVec.y * 255).toInt(), (rgbVec.z * 255).toInt(), 1.0);
     }
+
+    MyGraph.of(context).nodeColors = nodeColors;
   }
 
   void resetGraphView() {
@@ -174,7 +176,7 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
       builder: (Node node) {
         // I can decide what widget should be shown here based on the id
         int nodeId = node.key!.value;
-        Color? nodeColor = widget.nodeColors[nodeId];
+        Color? nodeColor = MyGraph.of(context).nodeColors[nodeId];
         if (nodeColor == null) {
           if (kDebugMode) {
             print("Missing color for node " + nodeId.toString());
