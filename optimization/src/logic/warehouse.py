@@ -11,7 +11,7 @@ from constants import MAX_ITERATIONS
 # metrics_to_optimize = ['frequency']
 # metrics_to_optimize = ['organization']
 
-metrics_to_optimize = ['weight', 'frequency']
+metrics_to_optimize = ['frequency', 'organization', 'weight']
 
 worker_average_height = 1.75
 
@@ -158,12 +158,13 @@ class Layout:
               if dic:
                 max_key = max(dic, key=dic.get)
                 max_val = dic[max_key]
-                del dic[max_key]
 
                 organization_score += 2**max_val
 
                 # If more than 1 type start penalizing
-                for val in dic.values():
+                values = sorted(dic.values(), reverse=True)[1:]
+
+                for val in values:
                   organization_score -= 2**(val**2)
 
             # Get dictionary {p_type : total_count}
@@ -181,14 +182,17 @@ class Layout:
             max_score = 0
 
             num_shelves = len(self.warehouse.shelves)
-            for elem in total_types_arr:
-                if num_shelves == 0:
-                    break
-                max_score += 2**elem
-                num_shelves -= 1
 
             for elem in total_types_arr:
-                max_score -= 2**(elem**2)
+                if num_shelves == 0:
+                    missing_types = total_types_arr[len(self.warehouse.shelves):]
+                    for missing_elem in missing_types:
+                        max_score -= 2**(missing_elem**2)
+                    break
+
+                max_score += 2**elem
+                num_shelves = num_shelves - 1
+
 
             score += organization_score / max_score
 
