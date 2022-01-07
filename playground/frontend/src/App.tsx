@@ -1,18 +1,23 @@
 import React, { SetStateAction, useEffect } from "react";
-import { Grid, Tab, Tabs, useMediaQuery } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
+import { Grid, styled, Tab, Tabs, useMediaQuery } from "@mui/material";
 
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
 import WarehouseRenderer from "./components/WarehouseRenderer";
-import theme from "./styles/theme";
+import Layout from "./components/Layout";
 import ReportList from "./components/report/ReportList";
+import TabPanel from "./components/TabPanel";
+import NoResultsOverlay from "./components/NoResultsOverlay";
 
 export enum FullscreenState {
 	Left,
 	Disabled,
 	Right,
 }
+
+const StyledTabPanel = styled(TabPanel)(() => ({
+	height: "100%",
+}));
 
 export default function App() {
 	const mobile = useMediaQuery("(max-width: 800px)");
@@ -58,78 +63,121 @@ export default function App() {
 	});
 
 	return (
-		<ThemeProvider theme={theme}>
-			<div
-				className="App"
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					height: "100%",
-					width: "100%",
-					margin: 0,
-				}}
-			>
-				<Grid container sx={{ height: "100vh" }} direction={mobile ? "column" : "row"}>
-					{fullscreen != FullscreenState.Right && (
-						<Grid
-							item
-							sx={{
-								position: "relative",
-								width:
-									mobile || fullscreen == FullscreenState.Left
-										? "100%"
-										: `${panelSize}%`,
-								height:
-									!mobile || fullscreen == FullscreenState.Left
-										? "100%"
-										: `${panelSize}%`,
-							}}
-							id="warehouse-panel"
-						>
-							<WarehouseRenderer />
-
-							<FullscreenButton
-								fullscreenState={fullscreen}
-								setFullscreen={setFullscreen}
-								panelSide={FullscreenState.Left}
-							/>
-						</Grid>
-					)}
-
-					{fullscreen == FullscreenState.Disabled && (
-						<PanelDivider
-							handleMouseDown={handleMouseDown}
-							orientation={mobile ? "horizontal" : "vertical"}
+		<Layout noScroll>
+			<Grid container sx={{ mb: "16px" }} direction={mobile ? "column" : "row"}>
+				{fullscreen != FullscreenState.Right && (
+					<Grid
+						item
+						id="warehouse-panel"
+						sx={{
+							position: "relative",
+							width:
+								mobile || fullscreen == FullscreenState.Left
+									? "100%"
+									: `${panelSize}%`,
+							height:
+								!mobile || fullscreen == FullscreenState.Left
+									? "100%"
+									: `${panelSize}%`,
+						}}
+					>
+						<WarehouseRenderer />
+						<FullscreenButton
+							fullscreenState={fullscreen}
+							setFullscreen={setFullscreen}
+							panelSide={FullscreenState.Left}
 						/>
-					)}
+					</Grid>
+				)}
 
-					{fullscreen != FullscreenState.Left && (
-						<Grid
-							item
-							id="info-panel"
+				{fullscreen == FullscreenState.Disabled && (
+					<PanelDivider
+						handleMouseDown={handleMouseDown}
+						orientation={mobile ? "horizontal" : "vertical"}
+					/>
+				)}
+
+				{fullscreen != FullscreenState.Left && (
+					<Grid
+						item
+						id="info-panel"
+						sx={{
+							position: "relative",
+							flex: 1,
+							width: mobile || fullscreen == FullscreenState.Right ? "100%" : "auto",
+							height:
+								!mobile || fullscreen != FullscreenState.Right ? "100%" : "auto",
+						}}
+					>
+						<Tabs
+							value={selectedTab}
+							onChange={handleChange}
+							indicatorColor="secondary"
+							aria-label="tabs navigation"
+							variant="fullWidth"
 							sx={{
-								position: "relative",
-								flex: 1,
-								height: "100%",
+								marginBottom: "10px",
+								".MuiTabs-flexContainer > .MuiTab-root": {
+									backgroundColor: "lightDark.main",
+									color: "secondary.main",
+									"&:hover": {
+										backgroundColor: "lightDarkBright.main",
+									},
+								},
 							}}
 						>
-							<Tabs value={selectedTab} onChange={handleChange}>
-								<Tab label="Reports" />
-								<Tab label="Logs" />
-								<Tab label="Devices" />
-							</Tabs>
-
-							<ReportList />
-
-							<FullscreenButton
-								fullscreenState={fullscreen}
-								setFullscreen={setFullscreen}
-								panelSide={FullscreenState.Right}
+							<Tab
+								label="Reports"
+								id="app-tab-0"
+								className="app-tab"
+								aria-controls="app-tabpanel-0"
 							/>
-						</Grid>
-					)}
-				</Grid>
-			</div>
-		</ThemeProvider>
+							<Tab
+								label="Logs"
+								id="app-tab-1"
+								className="app-tab"
+								aria-controls="app-tabpanel-1"
+							/>
+							<Tab
+								label="Devices"
+								id="app-tab-2"
+								className="app-tab"
+								aria-controls="app-tabpanel-2"
+							/>
+						</Tabs>
+
+						<StyledTabPanel
+							emptyComponent={<NoResultsOverlay text="No reports found" />}
+							value={selectedTab}
+							index={0}
+							id="app-tabpanel-0"
+							aria-labelledby="app-tab-0"
+						>
+							<ReportList />
+						</StyledTabPanel>
+						<StyledTabPanel
+							value={selectedTab}
+							emptyComponent={<NoResultsOverlay text="No logs found" />}
+							index={1}
+							id="app-tabpanel-1"
+							aria-labelledby="app-tab-1"
+						></StyledTabPanel>
+						<StyledTabPanel
+							value={selectedTab}
+							emptyComponent={<NoResultsOverlay text="No devices found" />}
+							index={2}
+							id="app-tabpanel-2"
+							aria-labelledby="app-tab-2"
+						></StyledTabPanel>
+
+						<FullscreenButton
+							fullscreenState={fullscreen}
+							setFullscreen={setFullscreen}
+							panelSide={FullscreenState.Right}
+						/>
+					</Grid>
+				)}
+			</Grid>
+		</Layout>
 	);
 }

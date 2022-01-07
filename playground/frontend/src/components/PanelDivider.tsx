@@ -19,6 +19,12 @@ export default function PanelDivider(props: PanelDividerProps) {
 			<Divider
 				orientation={props.orientation}
 				sx={{
+					backgroundColor: "lightDark.main",
+					opacity: 0.5,
+					"&:hover": {
+						backgroundColor: "lightDarkBright.main",
+						opacity: 0.8,
+					},
 					"> .MuiDivider-wrapper": {
 						padding: "0",
 					},
@@ -28,7 +34,7 @@ export default function PanelDivider(props: PanelDividerProps) {
 					sx={{
 						transform:
 							props.orientation == "vertical" ? "rotate(90deg)" : "rotate(0deg)",
-						color: "rgba(0, 0, 0, 0.5)",
+						color: "white.main",
 					}}
 				/>
 			</Divider>
