@@ -1,6 +1,4 @@
-from os import error
 from flask_restx import fields, reqparse, Namespace, Resource, abort
-from flask import request
 from bson.objectid import ObjectId
 from bson import json_util
 import json
