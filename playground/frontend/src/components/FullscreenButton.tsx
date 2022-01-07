@@ -15,7 +15,7 @@ export default function FullscreenButton(props: FullscreenProps) {
 		props.fullscreenState == FullscreenState.Disabled ? <FullscreenIcon /> : <FullscreenExit />;
 
 	return (
-		<div style={{ position: "absolute", bottom: 16, right: 16 }} >
+		<div style={{ position: "absolute", bottom: 16, right: 16 }}>
 			<Fab
 				color="secondary"
 				aria-label={FullscreenState.Disabled ? "enter fullscreen" : "exit fullscreen"}
@@ -24,7 +24,11 @@ export default function FullscreenButton(props: FullscreenProps) {
 						props.setFullscreen(props.panelSide);
 					else props.setFullscreen(FullscreenState.Disabled);
 				}}
-				id={props.panelSide == FullscreenState.Left ? "warehouse-fullscreen-toggle": "info-fullscreen-toggle"}
+				id={
+					props.panelSide == FullscreenState.Left
+						? "warehouse-fullscreen-toggle"
+						: "info-fullscreen-toggle"
+				}
 			>
 				{icon}
 			</Fab>

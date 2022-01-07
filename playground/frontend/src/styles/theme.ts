@@ -219,7 +219,7 @@ const theme = createTheme({
 				arrow: {
 					color: baseTheme.palette.darkBlack.main,
 				},
-			}
+			},
 		},
 		MuiPopover: {
 			styleOverrides: {

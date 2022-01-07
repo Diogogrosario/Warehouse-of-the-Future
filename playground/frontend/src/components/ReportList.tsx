@@ -12,7 +12,7 @@ import {
 import SortIcon from "@mui/icons-material/Sort";
 import { North, South } from "@mui/icons-material";
 import React from "react";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 
 import Report, { ReportProps } from "./report/Report";
 import LabelPicker from "./LabelPicker";
@@ -113,124 +113,130 @@ const testReports = [
 
 const testLabels = [
 	{
-	  name: 'good first issue',
-	  color: '#7057ff',
-	  description: 'Good for newcomers',
+		name: "good first issue",
+		color: "#7057ff",
+		description: "Good for newcomers",
 	},
 	{
-	  name: 'help wanted',
-	  color: '#008672',
-	  description: 'Extra attention is needed',
+		name: "help wanted",
+		color: "#008672",
+		description: "Extra attention is needed",
 	},
 	{
-	  name: 'priority: critical',
-	  color: '#b60205',
-	  description: '',
+		name: "priority: critical",
+		color: "#b60205",
+		description: "",
 	},
 	{
-	  name: 'priority: high',
-	  color: '#d93f0b',
-	  description: '',
+		name: "priority: high",
+		color: "#d93f0b",
+		description: "",
 	},
 	{
-	  name: 'priority: low',
-	  color: '#0e8a16',
-	  description: '',
+		name: "priority: low",
+		color: "#0e8a16",
+		description: "",
 	},
 	{
-	  name: 'priority: medium',
-	  color: '#fbca04',
-	  description: '',
+		name: "priority: medium",
+		color: "#fbca04",
+		description: "",
 	},
 	{
-	  name: "status: can't reproduce",
-	  color: '#fec1c1',
-	  description: '',
+		name: "status: can't reproduce",
+		color: "#fec1c1",
+		description: "",
 	},
 	{
-	  name: 'status: confirmed',
-	  color: '#215cea',
-	  description: '',
+		name: "status: confirmed",
+		color: "#215cea",
+		description: "",
 	},
 	{
-	  name: 'status: duplicate',
-	  color: '#cfd3d7',
-	  description: 'This issue or pull request already exists',
+		name: "status: duplicate",
+		color: "#cfd3d7",
+		description: "This issue or pull request already exists",
 	},
 	{
-	  name: 'status: needs information',
-	  color: '#fef2c0',
-	  description: '',
+		name: "status: needs information",
+		color: "#fef2c0",
+		description: "",
 	},
 	{
-	  name: 'status: wont do/fix',
-	  color: '#eeeeee',
-	  description: 'This will not be worked on',
+		name: "status: wont do/fix",
+		color: "#eeeeee",
+		description: "This will not be worked on",
 	},
 	{
-	  name: 'type: bug',
-	  color: '#d73a4a',
-	  description: "Something isn't working",
+		name: "type: bug",
+		color: "#d73a4a",
+		description: "Something isn't working",
 	},
 	{
-	  name: 'type: discussion',
-	  color: '#d4c5f9',
-	  description: '',
+		name: "type: discussion",
+		color: "#d4c5f9",
+		description: "",
 	},
 	{
-	  name: 'type: documentation',
-	  color: '#006b75',
-	  description: '',
+		name: "type: documentation",
+		color: "#006b75",
+		description: "",
 	},
 	{
-	  name: 'type: enhancement',
-	  color: '#84b6eb',
-	  description: '',
+		name: "type: enhancement",
+		color: "#84b6eb",
+		description: "",
 	},
 	{
-	  name: 'type: epic',
-	  color: '#3e4b9e',
-	  description: 'A theme of work that contain sub-tasks',
+		name: "type: epic",
+		color: "#3e4b9e",
+		description: "A theme of work that contain sub-tasks",
 	},
 	{
-	  name: 'type: feature request',
-	  color: '#fbca04',
-	  description: 'New feature or request',
+		name: "type: feature request",
+		color: "#fbca04",
+		description: "New feature or request",
 	},
 	{
-	  name: 'type: question',
-	  color: '#d876e3',
-	  description: 'Further information is requested',
+		name: "type: question",
+		color: "#d876e3",
+		description: "Further information is requested",
 	},
 ];
 
 export default function ReportList() {
 	const [ascending, setAscending] = React.useState(false);
-	
+
 	const [sortMenuAnchorEl, setSortMenuAnchorEl] = React.useState<null | HTMLElement>(null);
 	const sortMenuOpen = Boolean(sortMenuAnchorEl);
 	const sortMenuOptions = ["title", "warningLevel", "createdAt", "updatedAt"];
-	const sortMenuOptionText = ["Title (A-Z)", "Severity", "Time of creation", "Time of last update"];
+	const sortMenuOptionText = [
+		"Title (A-Z)",
+		"Severity",
+		"Time of creation",
+		"Time of last update",
+	];
 	const [sortOption, setSortOption] = React.useState(3);
 
-	const reports = (testReports as ReportProps[]); // PROVISIONAL
+	const reports = testReports as ReportProps[]; // PROVISIONAL
 	//const [reports, setReports] = useState<ReportProps[]>(testReports as ReportProps[]);
 	const labels = testLabels; // PROVISIONAL
 
 	return (
-		<div style={{ height: "100%", display: "grid", gridTemplateRows: "auto 1fr" }} >
+		<div style={{ height: "100%", display: "grid", gridTemplateRows: "auto 1fr" }}>
 			<div
 				style={{
 					display: "grid",
 					gridTemplateColumns: "1fr auto",
 				}}
 			>
-				<Paper component="div"
+				<Paper
+					component="div"
 					sx={{
 						display: "flex",
 						alignItems: "center",
 						ml: "5px",
-						border: (theme : Theme) => {
+						border: (theme: Theme) => {
 							const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.white.main);
 							return `1px solid rgba(${r}, ${g}, ${b}, 0.2)`;
 						},
@@ -240,11 +246,11 @@ export default function ReportList() {
 							backgroundColor: "dark.main",
 						},
 						"&:hover": {
-							border: (theme : Theme) => {
+							border: (theme: Theme) => {
 								const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.white.main);
 								return `1px solid rgba(${r}, ${g}, ${b}, 0.4)`;
 							},
-							backgroundColor: (theme : Theme) => {
+							backgroundColor: (theme: Theme) => {
 								const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.dark.main);
 								return `rgba(${r}, ${g}, ${b}, 0.6)`;
 							},
@@ -276,7 +282,9 @@ export default function ReportList() {
 						aria-haspopup="true"
 						aria-expanded={sortMenuOpen ? "true" : undefined}
 						color="lightDark"
-						onClick={(event : React.MouseEvent<HTMLButtonElement, MouseEvent>) => { setSortMenuAnchorEl(event.currentTarget); }}
+						onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+							setSortMenuAnchorEl(event.currentTarget);
+						}}
 					>
 						<SortIcon />
 					</Button>
@@ -284,7 +292,9 @@ export default function ReportList() {
 						id="report-sort-menu"
 						anchorEl={sortMenuAnchorEl}
 						open={sortMenuOpen}
-						onClose={ () => { setSortMenuAnchorEl(null); }}
+						onClose={() => {
+							setSortMenuAnchorEl(null);
+						}}
 						MenuListProps={{
 							"aria-labelledby": "report-sort-button",
 							role: "listbox",
@@ -297,7 +307,7 @@ export default function ReportList() {
 								onClick={() => {
 									setSortOption(index);
 									setSortMenuAnchorEl(null);
-								}}	
+								}}
 							>
 								{sortMenuOptionText[index]}
 							</MenuItem>
@@ -307,39 +317,50 @@ export default function ReportList() {
 						id="report-sort-order-button"
 						aria-label="toggle report sorting order"
 						color="lightDark"
-						onClick={() => setAscending(prevState => !prevState)}
+						onClick={() => setAscending((prevState) => !prevState)}
 					>
 						{ascending ? <South /> : <North />}
 					</Button>
-					<LabelPicker labels={labels} buttonProps={{ color: "lightDark" }} style={{ marginLeft: "4px", height: "inherit" }} />
+					<LabelPicker
+						labels={labels}
+						buttonProps={{ color: "lightDark" }}
+						style={{ marginLeft: "4px", height: "inherit" }}
+					/>
 				</ButtonGroup>
 			</div>
 
-			<List style={{ overflow: "auto" }} >
-				{reports.sort((reportA : ReportProps, reportB : ReportProps) => (
-					(reportA[sortMenuOptions[sortOption] as keyof ReportProps] == reportB[sortMenuOptions[sortOption] as keyof ReportProps])
-						? 0
-						: ((reportA[sortMenuOptions[sortOption] as keyof ReportProps] > reportB[sortMenuOptions[sortOption] as keyof ReportProps])
-							? (ascending ? 1 : -1)
-							: (ascending ? -1 : 1)
-						)
-				)).map((report, i) => {
-					return (
-						<ListItem key={i}>
-							<Report
-								title={report.title}
-								description={report.description}
-								shortDescription={report.shortDescription}
-								warningLevel={report.warningLevel}
-								actions={report.actions}
-								resolved={report.resolved}
-								reportId={report.reportId}
-								createdAt={report.createdAt}
-								updatedAt={report.updatedAt}
-							/>
-						</ListItem>
-					);
-				})}
+			<List style={{ overflow: "auto" }}>
+				{reports
+					.sort((reportA: ReportProps, reportB: ReportProps) =>
+						reportA[sortMenuOptions[sortOption] as keyof ReportProps] ==
+						reportB[sortMenuOptions[sortOption] as keyof ReportProps]
+							? 0
+							: reportA[sortMenuOptions[sortOption] as keyof ReportProps] >
+							  reportB[sortMenuOptions[sortOption] as keyof ReportProps]
+							? ascending
+								? 1
+								: -1
+							: ascending
+							? -1
+							: 1
+					)
+					.map((report, i) => {
+						return (
+							<ListItem key={i}>
+								<Report
+									title={report.title}
+									description={report.description}
+									shortDescription={report.shortDescription}
+									warningLevel={report.warningLevel}
+									actions={report.actions}
+									resolved={report.resolved}
+									reportId={report.reportId}
+									createdAt={report.createdAt}
+									updatedAt={report.updatedAt}
+								/>
+							</ListItem>
+						);
+					})}
 			</List>
 		</div>
 	);

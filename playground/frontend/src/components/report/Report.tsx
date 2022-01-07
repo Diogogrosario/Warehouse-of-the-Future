@@ -49,7 +49,8 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 				sx={{
 					backgroundColor: "lightDark.main",
 					color: "white.main",
-					border: (theme : Theme) => `1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
+					border: (theme: Theme) =>
+						`1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
 					"&:hover": {
 						".MuiAccordionSummary-root": {
 							backgroundColor: "lightDarkBright.main",
@@ -63,7 +64,8 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 					sx={{
 						paddingLeft: 0,
 						'&[aria-expanded="true"]': {
-							borderBottom: (theme : Theme) => `1px solid ${Coloring.rgba(theme.palette.white.main, 0.4)}`,
+							borderBottom: (theme: Theme) =>
+								`1px solid ${Coloring.rgba(theme.palette.white.main, 0.4)}`,
 						},
 						"& .MuiAccordionSummary-expandIconWrapper": {
 							color: "white.main",
@@ -136,11 +138,20 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 						spacing={1}
 						sx={{
 							"> .MuiDivider-root": {
-								borderColor: (theme: Theme) => Coloring.rgba(theme.palette.white.main, 0.4),
-							}
+								borderColor: (theme: Theme) =>
+									Coloring.rgba(theme.palette.white.main, 0.4),
+							},
 						}}
 					>
-						<Typography variant="body1" component="span" align="left" sx={{ color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.8) }}>
+						<Typography
+							variant="body1"
+							component="span"
+							align="left"
+							sx={{
+								color: (theme: Theme) =>
+									Coloring.rgba(theme.palette.white.main, 0.8),
+							}}
+						>
 							{description}
 						</Typography>
 						<List
@@ -155,7 +166,8 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 										textAlign: "start",
 										margin: "0.5em 0",
 										lineHeight: "normal",
-										color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.8),
+										color: (theme: Theme) =>
+											Coloring.rgba(theme.palette.white.main, 0.8),
 									}}
 								>
 									Actions
@@ -173,7 +185,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 										sx={{
 											display: "flex",
 											"&:hover": {
-												backgroundColor: "lightDarkBright.main",	
+												backgroundColor: "lightDarkBright.main",
 											},
 										}}
 									>
@@ -190,7 +202,11 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 													width: "10%",
 													margin: "2px 0",
 													padding: "0 10px",
-													color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
+													color: (theme: Theme) =>
+														Coloring.rgba(
+															theme.palette.white.main,
+															0.6
+														),
 												}}
 											>
 												{eventTimestamp}

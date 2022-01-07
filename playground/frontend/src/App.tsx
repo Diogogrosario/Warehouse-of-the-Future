@@ -1,12 +1,5 @@
 import React, { SetStateAction, useEffect } from "react";
-import {
-	Grid,
-	styled,
-	Tab,
-	Tabs,
-	useMediaQuery
-} from "@mui/material";
-
+import { Grid, styled, Tab, Tabs, useMediaQuery } from "@mui/material";
 
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
@@ -22,8 +15,8 @@ export enum FullscreenState {
 	Right,
 }
 
-const StyledTabPanel = styled(TabPanel)( () => ({
-    height: "100%",
+const StyledTabPanel = styled(TabPanel)(() => ({
+	height: "100%",
 }));
 
 export default function App() {
@@ -85,7 +78,7 @@ export default function App() {
 							height:
 								!mobile || fullscreen == FullscreenState.Left
 									? "100%"
-									: `${panelSize}%`
+									: `${panelSize}%`,
 						}}
 					>
 						<WarehouseRenderer />
@@ -105,18 +98,15 @@ export default function App() {
 				)}
 
 				{fullscreen != FullscreenState.Left && (
-					<Grid item
+					<Grid
+						item
 						id="info-panel"
 						sx={{
-							position: "relative", flex: 1,
-							width:
-								mobile || fullscreen == FullscreenState.Right
-									? "100%"
-									: "auto",
+							position: "relative",
+							flex: 1,
+							width: mobile || fullscreen == FullscreenState.Right ? "100%" : "auto",
 							height:
-								!mobile || fullscreen != FullscreenState.Right
-									? "100%"
-									: "auto"
+								!mobile || fullscreen != FullscreenState.Right ? "100%" : "auto",
 						}}
 					>
 						<Tabs
@@ -136,18 +126,49 @@ export default function App() {
 								},
 							}}
 						>
-							<Tab label="Reports" id="app-tab-0" className="app-tab" aria-controls="app-tabpanel-0" />
-							<Tab label="Logs" id="app-tab-1" className="app-tab" aria-controls="app-tabpanel-1" />
-							<Tab label="Devices" id="app-tab-2" className="app-tab" aria-controls="app-tabpanel-2" />
+							<Tab
+								label="Reports"
+								id="app-tab-0"
+								className="app-tab"
+								aria-controls="app-tabpanel-0"
+							/>
+							<Tab
+								label="Logs"
+								id="app-tab-1"
+								className="app-tab"
+								aria-controls="app-tabpanel-1"
+							/>
+							<Tab
+								label="Devices"
+								id="app-tab-2"
+								className="app-tab"
+								aria-controls="app-tabpanel-2"
+							/>
 						</Tabs>
 
-						<StyledTabPanel emptyComponent={<NoResultsOverlay text="No reports found" />} value={selectedTab} index={0} id="app-tabpanel-0" aria-labelledby="app-tab-0">
+						<StyledTabPanel
+							emptyComponent={<NoResultsOverlay text="No reports found" />}
+							value={selectedTab}
+							index={0}
+							id="app-tabpanel-0"
+							aria-labelledby="app-tab-0"
+						>
 							<ReportList />
 						</StyledTabPanel>
-						<StyledTabPanel value={selectedTab} emptyComponent={<NoResultsOverlay text="No logs found" />} index={1} id="app-tabpanel-1" aria-labelledby="app-tab-1">
-						</StyledTabPanel>
-						<StyledTabPanel value={selectedTab} emptyComponent={<NoResultsOverlay text="No devices found" />} index={2} id="app-tabpanel-2" aria-labelledby="app-tab-2">
-						</StyledTabPanel>
+						<StyledTabPanel
+							value={selectedTab}
+							emptyComponent={<NoResultsOverlay text="No logs found" />}
+							index={1}
+							id="app-tabpanel-1"
+							aria-labelledby="app-tab-1"
+						></StyledTabPanel>
+						<StyledTabPanel
+							value={selectedTab}
+							emptyComponent={<NoResultsOverlay text="No devices found" />}
+							index={2}
+							id="app-tabpanel-2"
+							aria-labelledby="app-tab-2"
+						></StyledTabPanel>
 
 						<FullscreenButton
 							fullscreenState={fullscreen}
@@ -158,6 +179,5 @@ export default function App() {
 				)}
 			</Grid>
 		</Layout>
-		
 	);
 }
