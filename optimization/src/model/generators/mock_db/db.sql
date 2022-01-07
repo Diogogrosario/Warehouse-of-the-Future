@@ -134,7 +134,8 @@ create table Window (
     x            DECIMAL(4, 1),
     y            DECIMAL(4, 1),
     z            DECIMAL(4, 1),
-    height       DECIMAL(9, 2)
+    height       DECIMAL(9, 2), 
+    width        DECIMAL(9, 2)
 );
 
 
