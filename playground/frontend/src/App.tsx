@@ -75,6 +75,7 @@ export default function App() {
 				{fullscreen != FullscreenState.Right && (
 					<Grid
 						item
+						id="warehouse-panel"
 						sx={{
 							position: "relative",
 							width:
@@ -105,6 +106,7 @@ export default function App() {
 
 				{fullscreen != FullscreenState.Left && (
 					<Grid item
+						id="info-panel"
 						sx={{
 							position: "relative", flex: 1,
 							width:

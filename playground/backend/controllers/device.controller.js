@@ -15,7 +15,14 @@ export function create(req, res) {
 
 // Retrieve all Devices from the database.
 export function findAll(req, res) {
-	Device.findAll()
+	const Report = db.report;
+	const Action = db.action;
+	Device.findAll({
+		include: {
+			model: Report,
+			include: Action,
+		},
+	})
 		.then((data) => {
 			res.send(data);
 		})
@@ -27,8 +34,9 @@ export function findAll(req, res) {
 // Find a single Device with an id
 export function findOne(req, res) {
 	const id = req.params.id;
+	const Report = db.report;
 
-	Device.findByPk(id)
+	Device.findByPk(id, { include: Report })
 		.then((data) => {
 			if (data) res.send(data);
 			else res.status(404).send({ message: `Didn't find device ${id}.` });

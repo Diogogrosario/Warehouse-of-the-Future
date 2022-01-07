@@ -271,7 +271,7 @@ const LabelPicker : React.FC<LabelPickerProps & Record<string, any>> = (props : 
                                         width: "100%",
                                         padding: "16px",
                                         borderBottom: (theme : Theme) => {
-                                            const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+                                            const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.white.main);
                                             return `1px solid rgba(${r}, ${g}, ${b}, 0.2)`;
                                         },
                                         backgroundColor: "inherit",
@@ -283,17 +283,17 @@ const LabelPicker : React.FC<LabelPickerProps & Record<string, any>> = (props : 
                                             },
                                             borderRadius: 4,
                                             border: (theme : Theme) => {
-                                                const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+                                                const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.white.main);
                                                 return `1px solid rgba(${r}, ${g}, ${b}, 0.2)`;
                                             },
                                             transition: theme.transitions.create(["border-color", "box-shadow"]),
                                             "&:hover": {
                                                 border: (theme : Theme) => {
-                                                    const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+                                                    const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.white.main);
                                                     return `1px solid rgba(${r}, ${g}, ${b}, 0.4)`;
                                                 },
                                                 backgroundColor: (theme : Theme) => {
-                                                    const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.dark.main);
+                                                    const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.dark.main);
                                                     return `rgba(${r}, ${g}, ${b}, 0.6)`;
                                                 },
                                             },

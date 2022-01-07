@@ -1,4 +1,5 @@
 import express, { json, urlencoded } from "express";
+import cors from "cors";
 import db from "./models/index.js";
 import router from "./routes/playground.routes.js";
 
@@ -6,6 +7,7 @@ const app = express();
 
 // parse requests of content-type - application/json
 app.use(json());
+app.use(cors());
 
 db.sequelize.sync(); // may want to use force=true
 

@@ -27,11 +27,11 @@ def test_create_action():
     """Test creating an action."""
     payload={
         "description":"This is a test action.",
-        "employee_id":"a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
+        "employeeId":"Test User"
     }
     resp = post_req_assertion(f'{BASE_URL}/action', payload=payload)
     assert resp["description"] == payload["description"]
-    assert resp["employee_id"] == payload["employee_id"]
+    assert resp["employeeId"] == payload["employeeId"]
     
 def test_delete_action():
     """Test deleting a action"""   

@@ -24,6 +24,7 @@ export default function FullscreenButton(props: FullscreenProps) {
 						props.setFullscreen(props.panelSide);
 					else props.setFullscreen(FullscreenState.Disabled);
 				}}
+				id={props.panelSide == FullscreenState.Left ? "warehouse-fullscreen-toggle": "info-fullscreen-toggle"}
 			>
 				{icon}
 			</Fab>

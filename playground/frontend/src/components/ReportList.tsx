@@ -14,7 +14,7 @@ import { North, South } from "@mui/icons-material";
 import React from "react";
 import SearchIcon from '@mui/icons-material/Search';
 
-import Report, { ReportProps } from "./Report";
+import Report, { ReportProps } from "./report/Report";
 import LabelPicker from "./LabelPicker";
 import Coloring from "../utils/coloring";
 
@@ -231,7 +231,7 @@ export default function ReportList() {
 						alignItems: "center",
 						ml: "5px",
 						border: (theme : Theme) => {
-							const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+							const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.white.main);
 							return `1px solid rgba(${r}, ${g}, ${b}, 0.2)`;
 						},
 						backgroundColor: "transparent",
@@ -241,11 +241,11 @@ export default function ReportList() {
 						},
 						"&:hover": {
 							border: (theme : Theme) => {
-								const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.white.main);
+								const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.white.main);
 								return `1px solid rgba(${r}, ${g}, ${b}, 0.4)`;
 							},
 							backgroundColor: (theme : Theme) => {
-								const [r, g, b, a] = Coloring.hextoRGBA(theme.palette.dark.main);
+								const [r, g, b, _] = Coloring.hextoRGBA(theme.palette.dark.main);
 								return `rgba(${r}, ${g}, ${b}, 0.6)`;
 							},
 						},
