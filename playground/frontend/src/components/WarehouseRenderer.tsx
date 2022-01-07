@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import SceneManager from "../renderer/SceneManager";
 import Stats from "../renderer/Stats";
 
-class WarehouseRenderer extends Component {
+interface WarehouseRendererProps {
+	background?: string
+}
+
+class WarehouseRenderer extends Component<WarehouseRendererProps> {
 	private container?: HTMLDivElement;
 
 	private requestID = 0;
@@ -14,11 +18,21 @@ class WarehouseRenderer extends Component {
 	private height = 0;
 	private needsResize = false;
 
+	static defaultProps: Partial<WarehouseRendererProps> = {
+		background: "#ffffff",
+	}
+
+	constructor(props: WarehouseRendererProps) {
+		super(props);
+	}
+
 	componentDidMount() {
 		this.stats = new Stats();
 		this.container?.appendChild(this.stats.dom);
 
 		this.sceneSetup();
+		if (this.props.background)
+			this.sceneManager.updateBackgroundColor(this.props.background);
 		this.startAnimationLoop();
 
 		if (this.container) {
@@ -35,6 +49,11 @@ class WarehouseRenderer extends Component {
 			// Observe contaienr
 			ro.observe(this.container);
 		}
+	}
+
+	componentDidUpdate(prevProps: WarehouseRendererProps) {
+		if (this.props.background !== prevProps.background && this.props.background)
+			this.sceneManager.updateBackgroundColor(this.props.background);
 	}
 
 	componentWillUnmount() {

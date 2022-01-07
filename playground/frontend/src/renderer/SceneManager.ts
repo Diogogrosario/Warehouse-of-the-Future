@@ -94,6 +94,11 @@ export default class SceneManager {
 		this.invalidFrame = true;
 	}
 
+	public updateBackgroundColor(color: string) {
+		this.scene.background = new THREE.Color(color);
+		this.invalidate();
+	}
+
 	// The X axis is red. The Y axis is green. The Z axis is blue.
 	private addAxes() {
 		const axesHelper = new THREE.AxesHelper(5);
