@@ -3,9 +3,9 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import SceneManager from "./SceneManager";
 
 export enum BucketType {
-	SMALL = "S",
-	REGULAR = "R",
-	LARGE = "L",
+	SMALL = "small",
+	REGULAR = "regular",
+	LARGE = "large",
 }
 
 export class BucketManager {
@@ -36,11 +36,11 @@ export class BucketManager {
 	private getModelUrl(bucketType: BucketType): string {
 		switch (bucketType) {
 			case BucketType.SMALL:
-				return "";
+				return "assets/models/bucket_regular.glb";
 			case BucketType.REGULAR:
 				return "assets/models/bucket_regular.glb";
 			case BucketType.LARGE:
-				return "";
+				return "assets/models/bucket_regular.glb";
 		}
 	}
 
@@ -58,7 +58,8 @@ export class BucketManager {
 	private loadObj(type: BucketType) {
 		const material = this.materials.get(type);
 		if (!material) {
-			console.error(`Could not load ${type} Bucket material`);
+			console.error(`Could not load ${type} Bucket`);
+			return;
 		}
 
 		this.gltfLoader.load(this.getModelUrl(type), (gltf) => {
@@ -70,8 +71,6 @@ export class BucketManager {
 
 			if (material) mesh.material = material;
 			mesh.scale.multiplyScalar(0.475);
-
-			console.log(mesh);
 
 			const toAdd = this.toAdd.get(type);
 			if (toAdd && toAdd.length > 0) {

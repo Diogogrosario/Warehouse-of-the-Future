@@ -1,7 +1,9 @@
 import * as THREE from "three";
 import CameraControls from "camera-controls";
 
-import { WarehouseStructure } from "./WarehouseStructure";
+import { Warehouse, WarehouseStructure } from "./Warehouse";
+
+import mockJSON from "./mock_json.json";
 
 CameraControls.install({ THREE: THREE });
 
@@ -51,7 +53,9 @@ export default class SceneManager {
 			event.preventDefault();
 		});
 
-		this.addCustomSceneObjects();
+		const whStructure = new Warehouse(this, mockJSON as WarehouseStructure);
+		this.scene.add(whStructure.getObject());
+
 		this.addLighting();
 		this.addAxes();
 	}
@@ -94,11 +98,6 @@ export default class SceneManager {
 	private addAxes() {
 		const axesHelper = new THREE.AxesHelper(5);
 		this.scene.add(axesHelper);
-	}
-
-	private addCustomSceneObjects() {
-		const whStructure = new WarehouseStructure(this);
-		this.scene.add(whStructure.getObject());
 	}
 
 	private addLighting() {
