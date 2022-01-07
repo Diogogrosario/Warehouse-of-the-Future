@@ -3,8 +3,8 @@ export default (sequelize, Sequelize) => {
 		description: {
 			type: Sequelize.TEXT,
 		},
-		employee_id: {
-			type: Sequelize.UUID,
+		employeeId: {
+			type: Sequelize.TEXT,
 		},
 		createdAt: {
 			type: Sequelize.DATE,

@@ -1,70 +1,73 @@
 import { List, ListItem } from "@mui/material";
-import Report, { ReportProps, Severity } from "./Report";
-import React, { useState } from "react";
+import Report from "./Report";
+import React, { Suspense, useEffect, useState } from "react";
+import { ReportResource } from "../../resources/ReportResource";
+import { NetworkErrorBoundary, useResource, useSubscription } from "rest-hooks";
 import ReportSorting from "./ReportSorting";
 import ReportFiltering from "./ReportFiltering";
 
+interface AsyncBoundaryProps {
+	fallback?: React.ReactElement;
+	children: React.ReactNode;
+}
+
+function AsyncBoundary({ children, fallback = <span>loading</span> }: AsyncBoundaryProps) {
+	return (
+		<Suspense fallback={fallback}>
+			<NetworkErrorBoundary>{children}</NetworkErrorBoundary>
+		</Suspense>
+	);
+}
+
 export default function ReportList() {
-	const [reports, setReports] = useState<ReportProps[]>([
-		{
-			title: "Report Testing A",
-			description:
-				"This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be",
-			shortDescription: "This is a short description",
-			warningLevel: Severity.Warning,
-			actions: [
-				["04:05", "Latest action to be performed"],
-				["04:00", "Previous Action"],
-			],
-			resolved: false,
-			reportId: 1,
-			createdAt: new Date("2021-12-25"),
-			updatedAt: new Date("2021-12-26"),
-			disabled: false,
-		},
-		{
-			title: "Report Testing B",
-			description:
-				"This is a testing report with a brief description on top of it. This line is just to make this description even longer than it should be",
-			shortDescription: "A brief description of the problem",
-			warningLevel: Severity.Error,
-			actions: [
-				["04:05", "Latest action to be performed"],
-				["04:00", "Previous Action"],
-			],
-			resolved: false,
-			reportId: 2,
-			createdAt: new Date("2021-12-23"),
-			updatedAt: new Date("2021-12-24"),
-			disabled: false,
-		},
-	]);
+	const reports = useResource(ReportResource.list(), {});
+	useSubscription(ReportResource.list(), {});
+
+	const [sorted, setSorted] = useState(reports.map((report) => report.id));
+
+	const [excluded, setExcluded] = useState(reports.map(() => false));
+
+	useEffect(() => {
+		setSorted(reports.map((report) => report.id));
+	}, [reports]);
 
 	return (
-		<div>
-			<ReportSorting reports={reports} setReports={setReports} />
-			<ReportFiltering reports={reports} setReports={setReports} />
+		<AsyncBoundary>
+			<div>
+				<ReportSorting reports={reports} setSorted={setSorted} />
+				<ReportFiltering reports={reports} setExcluded={setExcluded} />
+				<List>
+					{reports.length > 0 &&
+						sorted.map((id, i) => {
+							const report = reports.find((report) => report.id == id) || reports[0];
 
-			<List>
-				{reports.map((report, i) => (
-					<ListItem key={i}>
-						{!report.disabled && (
-							<Report
-								title={report.title}
-								description={report.description}
-								shortDescription={report.shortDescription}
-								warningLevel={report.warningLevel}
-								actions={report.actions}
-								resolved={report.resolved}
-								reportId={report.reportId}
-								createdAt={report.createdAt}
-								updatedAt={report.updatedAt}
-								disabled={report.disabled}
-							/>
-						)}
-					</ListItem>
-				))}
-			</List>
-		</div>
+							return (
+								!excluded[i] && (
+									<ListItem key={i}>
+										<Report
+											title={report.title}
+											description={report.description}
+											shortDescription={"Imagina ter uma descrição :)"}
+											warningLevel={report.severity}
+											actions={report.actions.map((action) => {
+												return [
+													new Date(action["createdAt"]).toLocaleString(
+														"pt-PT"
+													),
+													action["description"],
+												];
+											})}
+											resolved={report.resolved}
+											reportId={report.id}
+											createdAt={report.createdAt}
+											updatedAt={report.updatedAt}
+										/>
+									</ListItem>
+								)
+							);
+						})}
+				</List>
+			</div>
+		</AsyncBoundary>
 	);
 }

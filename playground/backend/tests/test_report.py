@@ -26,7 +26,7 @@ def test_report_not_found():
 def test_create_report():
     """Test creating a report."""
     payload={
-        "severity":"Error",
+        "severity":"error",
         "title":"Test Error",
         "description":"This is a test report."
     }
@@ -35,13 +35,23 @@ def test_create_report():
     assert resp["title"] == payload["title"]
     assert resp["description"] == payload["description"]
     
+# Not supported for now
+def test_update_report():
+    """Test updating a report."""
+    data={
+        "severity" : "warning"
+    }
+    resp = put_req_assertion(f'{BASE_URL}/report/1', data=data)
+    assert resp["severity"] == data["severity"]
+
+    
 def test_delete_report():
     """Test deleting a report"""   
     _resp = delete_req_assertion(f'{BASE_URL}/report/2', expected={'message': 'Success.'})
     
-# def test_delete_all_reports():
-#     """Test delete all reports"""
-#     _resp = delete_req_assertion(f'{BASE_URL}/report', expected={'message': 'Success.'})
+def test_delete_all_reports():
+    """Test delete all reports"""
+    _resp = delete_req_assertion(f'{BASE_URL}/report', expected={'message': 'Success.'})
     
     
 if __name__ == "__main__":
@@ -50,4 +60,6 @@ if __name__ == "__main__":
     test_report_not_found()
     test_create_report()
     test_delete_report()
-    # test_delete_all_reports()
+    test_update_report()
+    test_solve_report()
+    test_delete_all_reports()

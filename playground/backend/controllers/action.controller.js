@@ -5,7 +5,8 @@ const Action = db.action;
 export function create(req, res) {
 	const action = {
 		description: req.body.description,
-		employee_id: req.body.employee_id,
+		employeeId: req.body.employeeId,
+		reportId: req.body.reportId,
 	};
 
 	// save to database
@@ -20,7 +21,7 @@ export function create(req, res) {
 
 // Retrieve all Action from the database.
 export function findAll(req, res) {
-	Action.findAll()
+	Action.findAll({ order: [["createdAt", "DESC"]] })
 		.then((data) => {
 			res.send(data);
 		})

@@ -30,24 +30,24 @@ export interface ReportProps {
 	title: string;
 	shortDescription: string;
 	description: string;
-	warningLevel: Severity;
+	warningLevel: "warning" | "error";
 	actions: [string, string][];
 	resolved: boolean;
 	reportId: number;
 	createdAt: Date;
 	updatedAt: Date;
-	disabled: boolean;
 }
 
 const Report: React.FC<ReportProps> = (props: ReportProps) => {
-	const { title, description, shortDescription, warningLevel, actions, reportId } = props;
+	const { title, description, shortDescription, resolved, warningLevel, actions, reportId } =
+		props;
 
 	const [formOpen, setFormOpen] = React.useState(false);
 
 	const reportComponentId = `playground-report-${reportId}`;
 	const reportContentId = `playground-report-content-${reportId}`;
 	return (
-		<Paper elevation={4} id={reportComponentId}>
+		<Paper elevation={4} id={reportComponentId} sx={{ width: 1 }}>
 			<Accordion>
 				<AccordionSummary
 					expandIcon={<ExpandMoreIcon />}
@@ -70,10 +70,10 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							component="div"
 							sx={{
 								display: "flex",
-								...(warningLevel === Severity.Warning && {
+								...(warningLevel === "warning" && {
 									backgroundColor: "warning.main",
 								}),
-								...(warningLevel === Severity.Error && {
+								...(warningLevel === "error" && {
 									backgroundColor: "error.main",
 								}),
 								width: "20px",
@@ -193,7 +193,8 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 			<AddActionForm
 				open={formOpen}
 				onCancel={() => setFormOpen(false)}
-				onSuccess={() => console.log("add action")}
+				reportId={reportId}
+				closed={resolved}
 			/>
 		</Paper>
 	);
