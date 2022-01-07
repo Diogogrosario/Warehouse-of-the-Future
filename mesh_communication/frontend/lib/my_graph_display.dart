@@ -1,8 +1,8 @@
 import 'dart:collection';
+import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 import 'package:graphview/GraphView.dart';
 import 'package:meshcommunication/my_graph.dart';
 import 'package:vector_math/vector_math.dart' as vm;
@@ -17,18 +17,18 @@ class MyGraphDisplay extends StatefulWidget {
   static const Color failColor = Colors.red;
 
   final Algorithm _algo;
-  final HashMap<int, Color> nodeColors;
 
   late final VoidCallback _resetGraphView;
 
   MyGraphDisplay(BuildContext context, {Key? key})
       : _algo = FruchtermanReingoldAlgorithm(iterations: 10),
-        nodeColors = HashMap(),
         super(key: key) {
     _initColors(context);
   }
 
   void _initColors(BuildContext context) {
+    HashMap<int, Color> nodeColors = HashMap();
+
     // orchestrator color
     nodeColors[0] = const Color.fromRGBO(45, 45, 45, 1.0);
 
@@ -56,6 +56,8 @@ class MyGraphDisplay extends StatefulWidget {
       nodeColors[nodeId] = Color.fromRGBO((rgbVec.x * 255).toInt(),
           (rgbVec.y * 255).toInt(), (rgbVec.z * 255).toInt(), 1.0);
     }
+
+    MyGraph.of(context).nodeColors = nodeColors;
   }
 
   void resetGraphView() {
@@ -162,7 +164,7 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
       builder: (Node node) {
         // I can decide what widget should be shown here based on the id
         int nodeId = node.key!.value;
-        Color? nodeColor = widget.nodeColors[nodeId];
+        Color? nodeColor = MyGraph.of(context).nodeColors[nodeId];
         if (nodeColor == null) {
           if (kDebugMode) {
             print("Missing color for node " + nodeId.toString());
@@ -176,22 +178,33 @@ class _MyGraphDisplay extends State<MyGraphDisplay>
 
   @override
   Widget build(BuildContext context) {
-    return InteractiveViewer(
-      // prevent the default OverflowBox (we'll create our own)
-      constrained: true,
-      boundaryMargin: const EdgeInsets.all(double.infinity),
-      transformationController: _transformationController,
-      onInteractionStart: _onInteractionStart,
-      minScale: 0.1,
-      maxScale: 10.0,
-      child: OverflowBox(
-        alignment: Alignment.center,
-        minWidth: 0.0,
-        minHeight: 0.0,
-        maxWidth: double.infinity,
-        maxHeight: double.infinity,
-        child: _getGraphView(context),
-      ),
+    return Row(
+      children: [
+        Expanded(
+          child: InteractiveViewer(
+            // prevent the default OverflowBox (we'll create our own)
+            constrained: true,
+            boundaryMargin: const EdgeInsets.all(double.infinity),
+            transformationController: _transformationController,
+            onInteractionStart: _onInteractionStart,
+            minScale: 0.1,
+            maxScale: 10.0,
+            child: OverflowBox(
+              alignment: Alignment.center,
+              minWidth: 0.0,
+              minHeight: 0.0,
+              maxWidth: double.infinity,
+              maxHeight: double.infinity,
+              child: _getGraphView(context),
+            ),
+          ),
+          flex: 7,
+        ),
+        Expanded(
+          child: MyGraph.of(context).logDisplay,
+          flex: 3,
+        )
+      ],
     );
   }
 }
