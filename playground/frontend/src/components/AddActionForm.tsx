@@ -29,6 +29,8 @@ interface AddActionFormProps {
 const AddActionForm: React.FC<AddActionFormProps> = (props: AddActionFormProps) => {
 	const { open, onCancel, reportId, closed } = props;
 
+    const formId = open ? `playground-report-${reportId}-action-form` : undefined;
+
 	const [closingAction, setClosingAction] = React.useState(false);
 
 	const [employeeId, setEmployeeId] = React.useState("");
@@ -45,7 +47,7 @@ const AddActionForm: React.FC<AddActionFormProps> = (props: AddActionFormProps) 
 						Description for adding an action (placeholder if needed)
 					</Typography>
 				</DialogContentText>
-				<Box id="action-form" component="form">
+				<Box id={formId} component="form">
 					<Grid container spacing={2} alignItems="center" pt={2}>
 						<Grid item xs={6}>
 							<TextField

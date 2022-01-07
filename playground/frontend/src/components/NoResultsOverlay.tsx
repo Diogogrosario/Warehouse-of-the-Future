@@ -4,10 +4,12 @@ import { Typography } from "@mui/material";
 
 interface NoResultsOverlayProps {
 	text: string;
+	iconSize?: number;
+	textSize?: string;
 }
 
 const NoResultsOverlay: React.FC<NoResultsOverlayProps> = (props: NoResultsOverlayProps) => {
-	const { text } = props;
+	const { text, iconSize, textSize } = props;
 
 	return (
 		<div
@@ -19,8 +21,8 @@ const NoResultsOverlay: React.FC<NoResultsOverlayProps> = (props: NoResultsOverl
 				height: "100%",
 			}}
 		>
-			<SearchOffIcon style={{ fontSize: 72 }} />
-			<Typography variant="body2" component="span" fontSize="large">
+			<SearchOffIcon style={{ fontSize: iconSize ?? 72 }} />
+			<Typography variant="body2" component="span" fontSize={textSize ?? "large"}>
 				{text}
 			</Typography>
 		</div>

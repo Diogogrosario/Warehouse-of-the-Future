@@ -24,7 +24,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import theme from "../styles/theme";
 import Coloring from "../utils/coloring";
 
-interface Label {
+export interface Label {
 	name: string;
 	color: string;
 	description?: string;
@@ -88,6 +88,7 @@ const PopperComponent: React.FC<PopperComponentProps> = (props: PopperComponentP
 
 interface LabelPickerProps {
 	labels: Label[];
+	onSelectedLabelsChange?: ((selectedLabels : number[]) => void);
 	buttonProps?: ButtonProps;
 	showSelectedLabels?: boolean;
 }
@@ -96,10 +97,10 @@ interface LabelPickerProps {
 const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (
 	props: LabelPickerProps & Record<string, any>
 ) => {
-	const { labels, buttonProps, showSelectedLabels, ...rest } = props;
+	const { labels, onSelectedLabelsChange, buttonProps, showSelectedLabels, ...rest } = props;
 
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
-	const [selected, setSelected] = React.useState<Label[]>(labels);
+	const [selected, setSelected] = React.useState<Label[]>([]);
 	const [searchValue, setSearchValue] = React.useState<Label[]>([]);
 	const open = Boolean(anchorEl);
 
@@ -107,6 +108,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (
 		setSelected(searchValue);
 		if (anchorEl) anchorEl.focus();
 		setAnchorEl(null);
+		onSelectedLabelsChange?.(selected.map( (label : Label) => labels.indexOf(label) ));
 	};
 
 	const labelPickerId = open ? "label-picker" : undefined;

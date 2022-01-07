@@ -22,6 +22,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 import Coloring from "../../utils/coloring";
 import AddActionForm from "../AddActionForm";
+import NoResultsOverlay from "../NoResultsOverlay";
 
 export interface ReportProps {
 	title: string;
@@ -39,16 +40,19 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 	const { title, description, shortDescription, resolved, warningLevel, actions, reportId } =
 		props;
 
-	const [formOpen, setFormOpen] = React.useState(false);
+	const [actionFormOpen, setActionFormOpen] = React.useState(false);
 
 	const reportComponentId = `playground-report-${reportId}`;
 	const reportContentId = `playground-report-content-${reportId}`;
+
+
 	return (
 		<React.Fragment>
 			<Accordion
 				sx={{
 					backgroundColor: "lightDark.main",
 					color: "white.main",
+					width: "100%",
 					border: (theme: Theme) =>
 						`1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
 					"&:hover": {
@@ -174,7 +178,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 								</ListSubheader>
 							}
 						>
-							{actions.map((event: [string, string], index: number) => {
+							{actions.length ? actions.map((event: [string, string], index: number) => {
 								const eventTimestamp = event[0];
 								const eventDescription = event[1];
 
@@ -228,17 +232,27 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 										</ListItemText>
 									</ListItem>
 								);
-							})}
+							}) : <ListItem style={{ alignItems: "center", justifyContent: "center" }} ><NoResultsOverlay text="Report has no actions" iconSize={32} textSize="medium" /></ListItem>
+							}
 						</List>
-						<Button startIcon={<AddIcon />} onClick={() => setFormOpen(true)}>
+						<Button
+							startIcon={<AddIcon />}
+							onClick={() => setActionFormOpen(true)}
+							sx={{
+								color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
+								"&:hover": {
+									color: "white.main",
+								},
+							}}
+						>
 							Add Action
 						</Button>
 					</Stack>
 				</AccordionDetails>
 			</Accordion>
 			<AddActionForm
-				open={formOpen}
-				onCancel={() => setFormOpen(false)}
+				open={actionFormOpen}
+				onCancel={() => setActionFormOpen(false)}
 				reportId={reportId}
 				closed={resolved}
 			/>
