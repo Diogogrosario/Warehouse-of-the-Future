@@ -1,13 +1,13 @@
 import * as THREE from "three";
 import CameraControls from "camera-controls";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { dumpObjectToConsole } from "./utils/DebugUtils";
 
-import { WarehouseStructure } from "./WarehouseStructure";
+import { Warehouse, WarehouseStructure } from "./Warehouse";
+
+import mockJSON from "./mock_json.json";
 
 CameraControls.install({ THREE: THREE });
 
-class SceneManager {
+export default class SceneManager {
 	public scene: THREE.Scene;
 	public renderer: THREE.Renderer;
 
@@ -47,8 +47,15 @@ class SceneManager {
 
 		this.renderer.domElement.setAttribute("tabIndex", "0");
 
-		this.addCustomSceneObjects();
-		this.addLighting();
+		this.renderer.domElement.style.touchAction = "none";
+		this.renderer.domElement.addEventListener("touchmove", function (event: Event) {
+			event.stopPropagation();
+			event.preventDefault();
+		});
+
+		const whStructure = new Warehouse(this, mockJSON as WarehouseStructure);
+		this.scene.add(whStructure.getObject());
+
 		this.addAxes();
 	}
 
@@ -86,49 +93,14 @@ class SceneManager {
 		this.invalidFrame = true;
 	}
 
+	public updateBackgroundColor(color: string) {
+		this.scene.background = new THREE.Color(color);
+		this.invalidate();
+	}
+
 	// The X axis is red. The Y axis is green. The Z axis is blue.
 	private addAxes() {
 		const axesHelper = new THREE.AxesHelper(5);
 		this.scene.add(axesHelper);
 	}
-
-	private addCustomSceneObjects() {
-		const whStructure = new WarehouseStructure();
-		this.scene.add(whStructure.getObject());
-
-		const gltfLoader = new GLTFLoader();
-		const url = "assets/models/box_efficient.glb";
-		gltfLoader.load(url, (gltf) => {
-			const root = gltf.scene;
-			root.name = "Bucket";
-
-			const mesh = root.children[0] as THREE.Mesh;
-			mesh.material = new THREE.MeshLambertMaterial({ color: 0x606c2e });
-
-			mesh.geometry.scale(0.24, 0.24, 0.24);
-
-			mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI / 48);
-
-			mesh.translateY(0.3);
-
-			this.scene.add(root);
-			this.invalidate();
-
-			dumpObjectToConsole(root);
-		});
-	}
-
-	private addLighting() {
-		const color = 0xffffff;
-		const light = new THREE.AmbientLight(color, 1);
-		this.scene.add(light);
-
-		const rectLight = new THREE.SpotLight();
-		rectLight.angle = Math.PI / 2;
-		rectLight.position.set(0, 40, 0);
-		rectLight.lookAt(0, 0, 0);
-		this.scene.add(rectLight);
-	}
 }
-
-export default SceneManager;
