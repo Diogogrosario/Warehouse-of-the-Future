@@ -5,14 +5,11 @@ import 'package:meshcommunication/ActionButtons/ff_button.dart';
 import 'package:meshcommunication/ActionButtons/pp_button.dart';
 import 'package:meshcommunication/ActionButtons/sb_button.dart';
 import 'package:meshcommunication/ActionButtons/sf_button.dart';
-import 'package:meshcommunication/my_graph.dart';
-import 'package:meshcommunication/my_graph_display.dart';
 import 'package:meshcommunication/RequestHandler/device.dart';
 import 'package:meshcommunication/RequestHandler/request_handler.dart';
-import 'package:meshcommunication/my_log.dart';
+import 'package:meshcommunication/my_graph.dart';
+import 'package:meshcommunication/my_graph_display.dart';
 import 'package:meshcommunication/undirected_graph.dart';
-
-import 'my_log.dart';
 
 class MeshCommunication extends StatelessWidget {
   static const String url = "http://localhost:8080";
@@ -54,10 +51,14 @@ class MeshCommunication extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
           ),
-          ActionButton(() {
-            _startSimulation(context);
-          }, "Start simulation", const Icon(Icons.play_circle_fill_rounded),
-              key: const Key("startButton")),
+          ActionButton(
+            () {
+              _startSimulation(context);
+            },
+            "Start simulation",
+            const Icon(Icons.play_circle_fill_rounded),
+            key: const Key("startButton"),
+          ),
         ],
       ),
     );

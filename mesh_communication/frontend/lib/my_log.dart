@@ -2,11 +2,8 @@ import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
-import 'package:graphview/GraphView.dart';
 import 'package:meshcommunication/RequestHandler/request_handler.dart';
 import 'package:meshcommunication/my_graph.dart';
-import 'package:vector_math/vector_math.dart' as vm;
 
 class MyLog extends StatefulWidget {
   final List<RichText> logs = <RichText>[];
@@ -73,6 +70,7 @@ class MyLog extends StatefulWidget {
         return logs[index];
       },
     );
+
   }
 
   String preetifyLog(Map log) {
