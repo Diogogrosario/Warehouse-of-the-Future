@@ -45,7 +45,6 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 	const reportComponentId = `playground-report-${reportId}`;
 	const reportContentId = `playground-report-content-${reportId}`;
 
-
 	return (
 		<React.Fragment>
 			<Accordion
@@ -178,68 +177,80 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 								</ListSubheader>
 							}
 						>
-							{actions.length ? actions.map((event: [string, string], index: number) => {
-								const eventTimestamp = event[0];
-								const eventDescription = event[1];
+							{actions.length ? (
+								actions.map((event: [string, string], index: number) => {
+									const eventTimestamp = event[0];
+									const eventDescription = event[1];
 
-								return (
-									<ListItem
-										key={`${reportComponentId}-action-${index}`}
-										id={`${reportComponentId}-action-${index}`}
-										sx={{
-											display: "flex",
-											"&:hover": {
-												backgroundColor: "lightDarkBright.main",
-											},
-										}}
-									>
-										<ListItemIcon>
-											<ReceiptLongIcon sx={{ color: "white.main" }} />
-										</ListItemIcon>
-										<ListItemText>
-											<Typography
-												variant="body2"
-												component="span"
-												sx={{
-													display: "flex",
-													alignItems: "center",
-													width: "10%",
-													margin: "2px 0",
-													padding: "0 10px",
-													color: (theme: Theme) =>
-														Coloring.rgba(
-															theme.palette.white.main,
-															0.6
-														),
-												}}
-											>
-												{eventTimestamp}
-											</Typography>
-											<Typography
-												variant="body1"
-												component="span"
-												align="left"
-												sx={{
-													display: "flex",
-													alignItems: "center",
-													margin: "2px 0",
-													padding: "0 10px",
-													color: "white.main",
-												}}
-											>
-												{eventDescription}
-											</Typography>
-										</ListItemText>
-									</ListItem>
-								);
-							}) : <ListItem style={{ alignItems: "center", justifyContent: "center" }} ><NoResultsOverlay text="Report has no actions" iconSize={32} textSize="medium" /></ListItem>
-							}
+									return (
+										<ListItem
+											key={`${reportComponentId}-action-${index}`}
+											id={`${reportComponentId}-action-${index}`}
+											sx={{
+												display: "flex",
+												"&:hover": {
+													backgroundColor: "lightDarkBright.main",
+												},
+											}}
+										>
+											<ListItemIcon>
+												<ReceiptLongIcon sx={{ color: "white.main" }} />
+											</ListItemIcon>
+											<ListItemText>
+												<Typography
+													variant="body2"
+													component="span"
+													sx={{
+														display: "flex",
+														alignItems: "center",
+														width: "10%",
+														margin: "2px 0",
+														padding: "0 10px",
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.6
+															),
+													}}
+												>
+													{eventTimestamp}
+												</Typography>
+												<Typography
+													variant="body1"
+													component="span"
+													align="left"
+													sx={{
+														display: "flex",
+														alignItems: "center",
+														margin: "2px 0",
+														padding: "0 10px",
+														color: "white.main",
+													}}
+												>
+													{eventDescription}
+												</Typography>
+											</ListItemText>
+										</ListItem>
+									);
+								})
+							) : (
+								<ListItem
+									style={{ alignItems: "center", justifyContent: "center" }}
+								>
+									<NoResultsOverlay
+										text="Report has no actions"
+										iconSize={32}
+										textSize="medium"
+									/>
+								</ListItem>
+							)}
 						</List>
 						<Button
 							startIcon={<AddIcon />}
 							onClick={() => setActionFormOpen(true)}
 							sx={{
-								color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
+								color: (theme: Theme) =>
+									Coloring.rgba(theme.palette.white.main, 0.6),
 								"&:hover": {
 									color: "white.main",
 								},

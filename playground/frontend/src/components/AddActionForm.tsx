@@ -29,7 +29,7 @@ interface AddActionFormProps {
 const AddActionForm: React.FC<AddActionFormProps> = (props: AddActionFormProps) => {
 	const { open, onCancel, reportId, closed } = props;
 
-    const formId = open ? `playground-report-${reportId}-action-form` : undefined;
+	const formId = open ? `playground-report-${reportId}-action-form` : undefined;
 
 	const [closingAction, setClosingAction] = React.useState(false);
 
