@@ -22,7 +22,14 @@ export function create(req, res) {
 
 // Retrieve all Reports from the database.
 export function findAll(req, res) {
-	Report.findAll()
+	const Action = db.action;
+	Report.findAll({
+		include: {
+			model: Action,
+			separate: true,
+			order: [["createdAt", "DESC"]],
+		},
+	})
 		.then((data) => {
 			res.send(data);
 		})
@@ -34,8 +41,11 @@ export function findAll(req, res) {
 // Find a single Report with an id
 export function findOne(req, res) {
 	const id = req.params.id;
+	const Action = db.action;
 
-	Report.findByPk(id)
+	Report.findByPk(id, {
+		include: Action,
+	})
 		.then((data) => {
 			if (data) res.send(data);
 			else res.status(404).send({ message: `Didn't find report ${id}.` });
@@ -49,53 +59,22 @@ export function findOne(req, res) {
 export function update(req, res) {
 	const id = req.params.id;
 
+	// other updates
 	Report.update(req.body, {
 		where: { id: id },
+		returning: true,
 	})
-		.then((num) => {
-			if (num == 1) {
-				res.send({ message: "Success." });
+		.then((result) => {
+			let num = result[0];
+			let obj = result[1][0].dataValues;
+			if (num > 0) {
+				res.send(obj);
 			} else {
-				res.send({ message: "Can't update report ${id}." });
+				res.status(400).send({ message: "Can't update report ${id}." });
 			}
 		})
 		.catch((err) => {
 			res.status(500).send({ message: err.message || "Error on update report." });
-		});
-}
-
-export function solved(req, res) {
-	const id = req.params.id;
-	const Action = db.action;
-
-	Report.findByPk(id)
-		.then((data) => {
-			if (data) {
-				const action = {
-					employee_id: req.body.employee_id,
-					report_id: id,
-				};
-
-				// report was not resolved
-				if (!data.resolved) {
-					action.description = "Closed Report.";
-				} else {
-					action.description = "Reopened Report.";
-				}
-
-				// save to database
-				Action.create(action)
-					.then()
-					.catch((err) => {
-						res.status(500).send({ message: err.message || "Error at create action." });
-					});
-
-				// toggle solved flag
-				Report.update({ resolved: !data.resolved });
-			} else res.status(404).send({ message: `Didn't find report ${id}.` });
-		})
-		.catch((err) => {
-			res.status(500).send({ message: err.message || `Error on report ${id} retrieval.` });
 		});
 }
 
