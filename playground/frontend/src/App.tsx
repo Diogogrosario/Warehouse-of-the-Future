@@ -8,6 +8,7 @@ import Layout from "./components/Layout";
 import ReportList from "./components/report/ReportList";
 import TabPanel from "./components/TabPanel";
 import NoResultsOverlay from "./components/NoResultsOverlay";
+import theme from "./styles/theme";
 
 export enum FullscreenState {
 	Left,
@@ -81,7 +82,7 @@ export default function App() {
 									: `${panelSize}%`,
 						}}
 					>
-						<WarehouseRenderer />
+						<WarehouseRenderer background={theme.palette.dark.main} />
 						<FullscreenButton
 							fullscreenState={fullscreen}
 							setFullscreen={setFullscreen}

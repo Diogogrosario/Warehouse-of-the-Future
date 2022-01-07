@@ -148,8 +148,8 @@ export class Warehouse {
 			);
 			this.obj.add(l);
 
-			const helper = new THREE.PointLightHelper(l);
-			this.obj.add(helper);
+			// const helper = new THREE.PointLightHelper(l);
+			// this.obj.add(helper);
 		}
 	}
 
