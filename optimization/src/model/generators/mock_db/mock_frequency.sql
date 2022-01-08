@@ -90,76 +90,76 @@ insert into Rack (shelf_id, y, length, width, height, capacity)
 values (5, 5.00, 5, 5, 1.0, 1000);
 
 
-insert into Sector(name)
+insert into Product_Type(name)
 values ('painting');
 
-insert into Sector(name)
+insert into Product_Type(name)
 values ('metal');
 
-insert into Sector(name)
+insert into Product_Type(name)
 values ('lights');
 
-insert into Sector(name)
+insert into Product_Type(name)
 values ('tyres');
 
-insert into Sector(name)
+insert into Product_Type(name)
 values ('plastics');
 
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 1);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 1);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 1);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 1);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 1);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 1, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 1, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 1, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 1, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 1, 0.0);
 
 
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 2);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 2);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 2);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 2);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 2);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 2, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 2, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 2, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 2, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 2, 0.0);
 
 
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 3);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 3);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 3);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 3);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 3);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 3, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 3, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 3, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 3, 0.0);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 3, 0.0);
 
 
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 4);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 4);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 4);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 4);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 4);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 4, 1);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 4, 1);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 4, 1);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 4, 1);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 4, 1);
 
 
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 5);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 5);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 5);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 5);
-insert into Product (width, height, weight, sector_id)
-values (1.00, 0.5, 50, 5);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 5, 1);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 5, 1);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 5, 1);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 5, 1);
+insert into Product (width, height, weight, type_id, frequency)
+values (1.00, 0.5, 50, 5, 1);

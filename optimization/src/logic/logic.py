@@ -1,15 +1,18 @@
 import heapq
 import sys
+
+import random as r
+from copy import deepcopy
+
 from datetime import datetime
 
 from database import Database
 from storage import *
-from warehouse import *
+from warehouse import Layout
+from constants import MAX_ITERATIONS
 
 db = None
 storage = None
-
-metrics_to_optimize = []
 
 
 # Randomly generate a population of num layouts of the warehouse
@@ -22,6 +25,10 @@ def generate_population(warehouse, num):
         population.append(layout)
 
     return population
+
+def mutate(child):
+    product = child.get_random_product()
+    child.change_place(product)
 
 
 def reproduce(parent1, parent2, warehouse):
@@ -66,19 +73,14 @@ def genetic_algorithm(warehouse, population, num_iterations):
     print(f'FINAL_SCORE {str(final_layout.get_score())}')
     print(f'PRODUCTS OUT: {len(final_layout.products_out)}')
     return final_layout
-
-
-def mutate(child):
-    product = child.get_random_product()
-    child.change_place(product)
-
+    
 
 def dump_results_to_database(layout):
     query_insert_result = f"INSERT INTO Results (date_issued) values (%s)"
 
     db.df_query(query_insert_result, [datetime.now().strftime('%Y-%m-%d %H:%M:%S')])
 
-    result_id_inserted = f"SELECT MAX(id) FROM RESULTS"
+    result_id_inserted = f"SELECT MAX(id) FROM Results"
 
     result_id = int(db.df_query(result_id_inserted).at[0, 'MAX(id)'])
 
@@ -113,7 +115,8 @@ def main(docker=False, list_parameters=None):
         db = Database()
         storage = Storage(db)
 
-    query_warehouse = "SELECT * FROM warehouse"
+    query_warehouse = "SELECT * FROM Warehouse"
+    # query_month_manifesto = "SELECT * FROM Month_Manifesto"
 
     warehouses = db.df_query(query_warehouse)
 
@@ -123,7 +126,7 @@ def main(docker=False, list_parameters=None):
 
     initial_population = generate_population(warehouse, 10)
 
-    final_layout = genetic_algorithm(warehouse, initial_population, max_iterations)
+    final_layout = genetic_algorithm(warehouse, initial_population, MAX_ITERATIONS)
 
     print('----- FINAL LAYOUT -----')
 

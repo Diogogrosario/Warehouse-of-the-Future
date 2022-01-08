@@ -57,89 +57,89 @@ insert into Rack (shelf_id, y, length, width, height, capacity) values
 insert into Rack (shelf_id, y, length, width, height, capacity) values 
                 (8, 0.5, 5, 3, 1, 800);
 
-insert into Sector(id, name) values (1, '123');
+insert into Product_Type(id, name) values (1, 'painting');
 -- Rack 1
-insert into Product (width, height, weight,sector_id) values (0.85, 0.75, 50, 1);
+insert into Product (width, height, weight,type_id) values (0.85, 0.75, 50, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0.0, 1.5, 1, 1);
-insert into Product (width, height, weight,sector_id) values (1.6, 0.95, 120, 1);
+insert into Product (width, height, weight,type_id) values (1.6, 0.95, 120, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(1.5, 4, 1, 2);
-insert into Product (width, height, weight,sector_id) values (1, 0.5, 25, 1);
+insert into Product (width, height, weight,type_id) values (1, 0.5, 25, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(4, 4.5, 1, 3);
 -- Rack 2
-insert into Product (width, height, weight,sector_id) values (1.35, 0.7, 200, 1);
+insert into Product (width, height, weight,type_id) values (1.35, 0.7, 200, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0.0, 3, 2, 4);
 -- Rack 3
-insert into Product (width, height, weight,sector_id) values (1.15, 0.81, 196, 1);
+insert into Product (width, height, weight,type_id) values (1.15, 0.81, 196, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(1.5, 3, 3, 5);
-insert into Product (width, height, weight,sector_id) values (0.78, 0.63, 259, 1);
+insert into Product (width, height, weight,type_id) values (0.78, 0.63, 259, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0.0, 1.5, 3, 6);
 -- Rack 4
-insert into Product (width, height, weight,sector_id) values (0.99, 1.35, 445, 1);
+insert into Product (width, height, weight,type_id) values (0.99, 1.35, 445, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0, 2.5, 4, 7);
-insert into Product (width, height, weight,sector_id) values (0.53, 0.5, 282, 1);
+insert into Product (width, height, weight,type_id) values (0.53, 0.5, 282, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(3, 4, 4, 8);
-insert into Product (width, height, weight,sector_id) values (0.3, 0.87, 65, 1);
+insert into Product (width, height, weight,type_id) values (0.3, 0.87, 65, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(4.0, 4.5, 4, 9);
 -- Rack 5
-insert into Product (width, height, weight,sector_id) values (0.47, 0.39, 104, 1);
+insert into Product (width, height, weight,type_id) values (0.47, 0.39, 104, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(1.5, 2.7, 5, 10);
-insert into Product (width, height, weight,sector_id) values (0.23, 0.43, 514, 1);
+insert into Product (width, height, weight,type_id) values (0.23, 0.43, 514, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0, 1.25, 5, 11);
 -- Rack 6
-insert into Product (width, height, weight,sector_id) values (0.87, 0.97, 12, 1);
+insert into Product (width, height, weight,type_id) values (0.87, 0.97, 12, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(1.5, 2.3, 6, 12);
-insert into Product (width, height, weight,sector_id) values (0.46, 0.53, 309, 1);
+insert into Product (width, height, weight,type_id) values (0.46, 0.53, 309, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0.3, 1.4, 6, 13);
-insert into Product (width, height, weight,sector_id) values (0.54, 0.51, 310, 1);
+insert into Product (width, height, weight,type_id) values (0.54, 0.51, 310, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(3.4, 4.5, 6, 14);
 -- Rack 7
-insert into Product (width, height, weight,sector_id) values (0.96, 0.53, 270, 1);
+insert into Product (width, height, weight,type_id) values (0.96, 0.53, 270, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(2.5, 3.0, 7, 15);
-insert into Product (width, height, weight,sector_id) values (0.84, 0.36, 4, 1);
+insert into Product (width, height, weight,type_id) values (0.84, 0.36, 4, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(1.4, 1.7, 7, 16);
 -- Rack 8
-insert into Product (width, height, weight,sector_id) values (1.65, 0.46, 155, 1);
+insert into Product (width, height, weight,type_id) values (1.65, 0.46, 155, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(3.6, 4.7, 8, 17);
-insert into Product (width, height, weight,sector_id) values (0.86, 0.57, 106, 1);
+insert into Product (width, height, weight,type_id) values (0.86, 0.57, 106, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(2.5, 3.0, 8, 18);
-insert into Product (width, height, weight,sector_id) values (1.72, 0.74, 166, 1);
+insert into Product (width, height, weight,type_id) values (1.72, 0.74, 166, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0.4, 1.5, 8, 19);
 -- Rack 9
-insert into Product (width, height, weight,sector_id) values (1.86, 0.28, 335, 1);
+insert into Product (width, height, weight,type_id) values (1.86, 0.28, 335, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0.4, 1.5, 9, 20);
-insert into Product (width, height, weight,sector_id) values (0.28, 0.49, 449, 1);
+insert into Product (width, height, weight,type_id) values (0.28, 0.49, 449, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(1.7, 3, 9, 21);
 -- Rack 10
-insert into Product (width, height, weight,sector_id) values (0.4, 0.73, 160, 1);
+insert into Product (width, height, weight,type_id) values (0.4, 0.73, 160, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0.4, 2.4, 10, 22);
-insert into Product (width, height, weight,sector_id) values (0.8, 0.21, 224, 1);
+insert into Product (width, height, weight,type_id) values (0.8, 0.21, 224, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(3.5, 5.7, 10, 23);
-insert into Product (width, height, weight,sector_id) values (0.51, 0.3, 95, 1);
+insert into Product (width, height, weight,type_id) values (0.51, 0.3, 95, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(6, 7, 10, 24);
 -- Rack 11
-insert into Product (width, height, weight,sector_id) values (0.61, 1.05, 609, 1);
+insert into Product (width, height, weight,type_id) values (0.61, 1.05, 609, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(0, 2.4, 11, 25);
-insert into Product (width, height, weight,sector_id) values (0.58, 0.38, 29, 1);
+insert into Product (width, height, weight,type_id) values (0.58, 0.38, 29, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(2.8, 3.3, 11, 26);
 -- Rack 12
-insert into Product (width, height, weight,sector_id) values (0.9, 0.19, 303, 1);
+insert into Product (width, height, weight,type_id) values (0.9, 0.19, 303, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(2.8, 3.9, 12, 27);
 -- Rack 13
-insert into Product (width, height, weight,sector_id) values (0.5, 1.24, 103, 1);
+insert into Product (width, height, weight,type_id) values (0.5, 1.24, 103, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(1.2, 2, 13, 28);
-insert into Product (width, height, weight,sector_id) values (0.34, 0.49, 264, 1);
+insert into Product (width, height, weight,type_id) values (0.34, 0.49, 264, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(2.6, 3.5, 13, 29);
 -- Rack 14
-insert into Product (width, height, weight,sector_id) values (1.4, 0.55, 330, 1);
+insert into Product (width, height, weight,type_id) values (1.4, 0.55, 330, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(4, 4.9, 14, 30);
-insert into Product (width, height, weight,sector_id) values (2.25, 0.63, 70, 1);
+insert into Product (width, height, weight,type_id) values (2.25, 0.63, 70, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(2.6, 3.5, 14, 31);
 -- Rack 15
-insert into Product (width, height, weight,sector_id) values (1.36, 0.63, 486, 1);
+insert into Product (width, height, weight,type_id) values (1.36, 0.63, 486, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(1, 2.9, 15, 32);
-insert into Product (width, height, weight,sector_id) values (1.73, 0.38, 139, 1);
+insert into Product (width, height, weight,type_id) values (1.73, 0.38, 139, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(4, 4.7, 15, 33);
-insert into Product (width, height, weight,sector_id) values (1.42, 0.64, 171, 1);
+insert into Product (width, height, weight,type_id) values (1.42, 0.64, 171, 1);
 insert into Product_Rack (x_orig, x_end, Rack_id, Product_id) values(3.4, 4, 15, 34);
 
 insert into Month_Manifesto(date) values('2021-11-29');

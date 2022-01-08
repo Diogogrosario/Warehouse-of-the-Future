@@ -6,7 +6,7 @@ test;
 
 DROP TABLE IF EXISTS Warehouse;
 DROP TABLE IF EXISTS Shelf;
-DROP TABLE IF EXISTS Sector;
+DROP TABLE IF EXISTS Product_Type;
 DROP TABLE IF EXISTS Rack;
 DROP TABLE IF EXISTS Product;
 DROP TABLE IF EXISTS Product_Rack;
@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS Month_Manifesto_Product;
 DROP TABLE IF EXISTS Worker_Manifesto;
 DROP TABLE IF EXISTS Worker_Manifesto_Product;
 DROP TABLE IF EXISTS Results;
+DROP TABLE IF EXISTS Products_Left_Out;
 
 create table Warehouse
 (
@@ -31,7 +32,7 @@ create table Shelf
     FOREIGN KEY (warehouse_id) REFERENCES Warehouse (id)
 );
 
-create table Sector
+create table Product_Type
 (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(50)
@@ -59,10 +60,10 @@ create table Product
     height    DECIMAL(5, 1),
     width     DECIMAL(5, 1),
     weight    DECIMAL(5, 1),
-    sector_id BIGINT UNSIGNED NOT NULL,
+    type_id BIGINT UNSIGNED NOT NULL,
     frequency DECIMAL(30, 5) DEFAULT 0,
     
-    FOREIGN KEY (sector_id) REFERENCES Sector (id)
+    FOREIGN KEY (type_id) REFERENCES Product_Type (id)
 );
 
 create table Month_Manifesto
