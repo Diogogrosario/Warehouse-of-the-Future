@@ -1,13 +1,13 @@
-from warehouse import *
+from warehouse import Warehouse, Shelf, Rack, Product
 
 class Storage:
     def __init__(self, db):
         self.db = db
 
-        query_shelf = "SELECT * FROM shelf"
-        query_rack = "SELECT * FROM rack"
-        query_product = "SELECT * FROM product"
-        query_month_manifesto_product = "SELECT * FROM month_manifesto_product"
+        query_shelf = "SELECT * FROM Shelf"
+        query_rack = "SELECT * FROM Rack"
+        query_product = "SELECT * FROM Product"
+        query_month_manifesto_product = "SELECT * FROM Month_Manifesto_Product"
 
         self.df_shelves = db.df_query(query_shelf)
         self.df_racks = db.df_query(query_rack)
@@ -31,7 +31,7 @@ class Storage:
         products = []
 
         for _, p in df_products.iterrows():
-            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['sector_id'], p['frequency'])
+            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['type_id'], p['frequency'])
             products.append(product)
 
         return products
@@ -39,13 +39,13 @@ class Storage:
     def create_warehouse(self, warehouse_id):
         warehouse = Warehouse(warehouse_id)
 
-        shelves_query = f"SELECT * FROM shelf WHERE warehouse_id = {warehouse_id}"
+        shelves_query = f"SELECT * FROM Shelf WHERE warehouse_id = {warehouse_id}"
         shelves = self.db.df_query(shelves_query)
 
         for _, row in shelves.iterrows():
             shelf_id = row['id']
             shelf = Shelf(shelf_id)
-            racks_query = f"SELECT * FROM rack WHERE shelf_id = {shelf_id}"
+            racks_query = f"SELECT * FROM Rack WHERE shelf_id = {shelf_id}"
 
             racks = self.db.df_query(racks_query)
 

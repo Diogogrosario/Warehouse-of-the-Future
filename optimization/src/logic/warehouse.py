@@ -4,7 +4,7 @@ import random as r
 import numpy as np
 from copy import deepcopy
 
-max_iterations = 10000
+from constants import MAX_ITERATIONS
 
 worker_average_height = 1.75
 
@@ -47,11 +47,11 @@ class Layout:
                     return True if rack.add_product(product) else False
 
     def get_random_product(self):
-        random_product = None
-        while random_product is None:
-            random_product = self.warehouse.get_random_shelf().get_random_rack().get_random_product()
+      random_product = None
+      while random_product is None:
+          random_product = self.warehouse.get_random_shelf().get_random_rack().get_random_product()
 
-        return random_product
+      return random_product
 
     def add_product_random(self, product):
         iteration = 0
@@ -60,7 +60,7 @@ class Layout:
         success = random_rack.add_product(product)
         while not success:
             iteration += 1
-            if iteration == max_iterations:
+            if iteration == MAX_ITERATIONS:
                 self.products_out.append(product)
                 print(f'DELETED FROM CROSSOVER/MUTATION: {product.id}')
                 break
@@ -77,23 +77,7 @@ class Layout:
                     for product in rack.products:
                         score += float(product.weight) / max(float(rack.y), 0.1)
 
-        if 'sector' in self.metrics_to_optimize:
-            for shelf in self.warehouse.shelves:
-                different_sectors = []
-
-                for rack in shelf.racks:
-                    for product in rack.products:
-                        if product.sector_id not in different_sectors:
-                            different_sectors.append(product.sector_id)
-
-                if len(different_sectors) == 1:
-                    score += 10
-                elif len(different_sectors) > 1:
-                    score -= 20 * len(different_sectors)
-                elif len(different_sectors) == 0:
-                    score -= 50
-
-        if 'work' in self.metrics_to_optimize:
+        if 'work' in metrics_to_optimize:
             adj_side = 0.2
             chest_y = worker_average_height * (2.0 / 3.0)
 
@@ -121,17 +105,35 @@ class Layout:
 
             score += sum(np.diff(shelves_frequencies))
 
-        if 'sector' in self.metrics_to_optimize:
+        if 'organization' in metrics_to_optimize:
+            shelves_count_types = []
+
             for shelf in self.warehouse.shelves:
-                different_sectors = []
+                count_types = {} # { type_x : n_products_type_x }
 
                 for rack in shelf.racks:
                     for product in rack.products:
-                        if product.sector_id not in different_sectors:
-                            different_sectors.append(product.sector_id)
+                        if product.type_id not in count_types:
+                            count_types[product.type_id] = 1
+                        else:
+                            count_types[product.type_id] += 1
 
-                score -= len(different_sectors) * 3
+                shelves_count_types.append(count_types)
 
+            for dic in shelves_count_types:
+              if dic:
+                max_key = max(dic, key=dic.get)
+                max_val = dic[max_key]
+                del dic[max_key]
+
+                score += 2**max_val
+
+                # If more than 1 type start penalizing
+                for val in dic.values():
+                  score -= 2**(val**2)
+
+        # Penalize layouts with products out
+        
         score -= len(self.products_out) * 100
 
         return score
@@ -188,23 +190,30 @@ class Shelf:
     def get_random_rack(self):
         return self.racks[r.randrange(0, len(self.racks))]
 
+    def get_num_products(self):
+        num_products = 0
+        for rack in self.racks:
+            num_products += len(rack.products)
+
+        return num_products
+
     def __str__(self) -> str:
         state = ""
-        state += f'SHELF {self.id} ----------------------------------------\n'
+        state += f'SHELF {self.id} ---------------------------------------- ({self.get_num_products()} products)\n'
         for rack in self.racks:
             state += f'\t\t{rack}\n'
         return state
 
 
 class Product:
-    def __init__(self, id, name, length, height, width, weight, sector_id, frequency):
+    def __init__(self, id, name, length, height, width, weight, type_id, frequency):
         self.id = id
         self.name = name
         self.length = length
         self.height = height
         self.width = width
         self.weight = weight
-        self.sector_id = sector_id
+        self.type_id = type_id
         self.frequency = frequency
 
     def __eq__(self, other):
@@ -219,7 +228,7 @@ class Product:
         state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
         state += f'\t\t\t\t\tWIDTH {self.width}\n'
         state += f'\t\t\t\t\tHEIGHT {self.height}\n'
-        state += f'\t\t\t\t\tSECTOR_ID {self.sector_id}\n'
+        state += f'\t\t\t\t\tTYPE_ID {self.type_id}\n'
         state += f'\t\t\t\t\tFREQUENCY {self.frequency}'
         return state
 
