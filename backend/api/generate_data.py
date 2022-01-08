@@ -157,9 +157,9 @@ sensor_attributes = namespace.model("Sensor", {
         required=True,
         description="Id of the sensor"
     ),
-    "bucket": fields.String(
+    "device": fields.String(
         required=True,
-        description="Id of the associated bucket"
+        description="Id of the associated device"
     ),
     "movement_records": fields.List(
         fields.DateTime,
@@ -171,6 +171,23 @@ sensor_attributes = namespace.model("Sensor", {
         required=True,
         description="Array of objects with timestamp and staff_id, that"
                     + " represents when an operator was next to the sensor."
+    )
+})
+
+# Devices
+
+device_attributes = namespace.model("Device", {
+    "_id": fields.String(
+        required=True,
+        description="Id of the sensor"
+    ),
+    "bucket": fields.String(
+        required=True,
+        description="Id of the associated bucket"
+    ),
+    "sensor": fields.String(
+        required=True,
+        description="Id of the associated sensor"
     )
 })
 
@@ -263,6 +280,11 @@ layout_attributes = namespace.model("Layout", {
         fields.Nested(sensor_attributes),
         required=True,
         description="Sensors present in the warehouse"
+    ),
+    "devices": fields.List(
+        fields.Nested(device_attributes),
+        required=True,
+        description="Devices present in the warehouse"
     ),
 })
 
@@ -495,6 +517,7 @@ def generate_super_rack(
     buckets = []
     racks = []
     shelves = []
+    devices = []
 
     # track the width of the racks we are creating
     current_super_rack_width = 0
@@ -617,10 +640,12 @@ def generate_super_rack(
                 )
                 buckets.append(bucket)
 
-                sensor = generate_sensor(
+                device, sensor = generate_device(
                     bucket_id=bucket["_id"],
                     staff_ids=staff_ids
                 )
+
+                devices.append(device)
                 sensors.append(sensor)
 
     return {
@@ -628,7 +653,8 @@ def generate_super_rack(
         "racks": racks,
         "shelves": shelves,
         "buckets": buckets,
-        "sensors": sensors
+        "sensors": sensors,
+        "devices": devices
     }
 
 
@@ -637,6 +663,7 @@ def coherent_generate_layout():
     buckets = []
     racks = []
     shelves = []
+    devices = []
 
     employees = get_static_employee_data()
     staff_ids = [employee["_id"] for employee in employees]
@@ -671,16 +698,19 @@ def coherent_generate_layout():
                                      + super_rack3["buckets"]
     sensors = super_rack1["sensors"] + super_rack2["sensors"] \
                                      + super_rack3["sensors"]
+    devices = super_rack1["devices"] + super_rack2["devices"] \
+                                     + super_rack3["devices"]
 
     return {
         "racks": racks,
         "shelves": shelves,
         "buckets": buckets,
-        "sensors": sensors
+        "sensors": sensors,
+        "devices": devices
     }
 
 
-def generate_item(id, bucket_id, max_width, max_height):
+def generate_item(id, max_width, max_height):
 
     quantity = random.randint(1, 3)
 
@@ -708,7 +738,7 @@ def generate_item(id, bucket_id, max_width, max_height):
     return item
 
 
-def generate_sensor(bucket_id, staff_ids):
+def generate_sensor(device_id, staff_ids):
     number_of_movements = random.randint(1, 10)
     movement_timestamps = []
 
@@ -728,12 +758,24 @@ def generate_sensor(bucket_id, staff_ids):
 
     sensor = {
         "_id": uuid.uuid4(),
-        "bucket": bucket_id,
+        "device": device_id,
         "movement_records": movement_timestamps,
         "staff_contacts": staff_contacts
     }
 
     return sensor
+
+def generate_device(bucket_id, staff_ids):
+    id = uuid.uuid4()
+    sensor = generate_sensor(id, staff_ids)
+
+    device = {
+        "_id": id,
+        "bucket": bucket_id,
+        "sensor": sensor["_id"]
+    }
+
+    return device, sensor
 
 
 def generate_bucket(shelf, item_id, position, width, shelf_height):
@@ -776,7 +818,8 @@ class Layout(Resource):
             "racks": layout["racks"],
             "shelves": layout["shelves"],
             "buckets": layout["buckets"],
-            "sensors": layout["sensors"]
+            "sensors": layout["sensors"],
+            "devices": layout["devices"]
         }
 
         return layout

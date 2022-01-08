@@ -6,8 +6,8 @@ from .db import client
 
 devicesCollection = client.WoF.Devices
 
-namespace = Namespace("Sensors", path="/sensors",
-                      description="Sensor related operations")
+namespace = Namespace("Devices", path="/devices",
+                      description="Device related operations")
 
 # ------------------------------------------------------------------------------
 # Models
@@ -40,10 +40,10 @@ sensor_attributes = namespace.model("Sensor", {
         attribute='_id',
         description="The unique identifier of the sensor"
     ),
-    "bucket": fields.String(
+    "device": fields.String(
         required=True,
-        attribute='bucket',
-        description="The unique identifier of the associated bucket"
+        attribute='device',
+        description="The unique identifier of the associated device"
     ),
     "movement_sensor": fields.List(
         fields.DateTime(
@@ -57,6 +57,17 @@ sensor_attributes = namespace.model("Sensor", {
         required=True,
         description="Represents at a specific timestamp what was"
                     + "the operator that was next to the sensor."
+    )
+})
+
+device_attributes = namespace.model("Device", {
+    "_id": fields.String(
+        required=True,
+        description="Id of the device"
+    ),
+    "bucket": fields.String(
+        required=True,
+        description="Id of the associated bucket"
     )
 })
 
@@ -118,7 +129,7 @@ class SensorInformationWithTimestamps(Resource):
 
 @namespace.route("/<string:id>")
 @namespace.param('id', 'The sensor ID')
-class SensorInformation(Resource):
+class DeviceInformation(Resource):
     @namespace.marshal_with(sensor_attributes)
     @namespace.response(200, 'Success')
     @namespace.response(404, 'Incorrect Request')

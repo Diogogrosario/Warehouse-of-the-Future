@@ -36,6 +36,10 @@ def populate_sensors(sensors):
     db.client.WoF.Sensors.insert_many(sensors)
 
 
+def populate_devices(devices):
+    db.client.WoF.Devices.insert_many(devices)
+
+
 def populate_shelves(shelves):
     db.client.WoF.Shelves.insert_many(shelves)
 
@@ -47,6 +51,7 @@ def populate_layouts():
     populate_buckets(layout["buckets"])
     populate_racks(layout["racks"])
     populate_sensors(layout["sensors"])
+    populate_devices(layout["devices"])
     populate_shelves(layout["shelves"])
 
     # Finally, populate Layouts collection
@@ -82,6 +87,20 @@ def populate_items():
     items = requests.get(f"{API_BASE_URL}/items").json()
     db.client.WoF.Items.insert_many(items)
 
+db.client.WoF.Buckets.drop()
+db.client.WoF.create_collection("Buckets")
+db.client.WoF.Shelves.drop()
+db.client.WoF.create_collection("Shelves")
+db.client.WoF.Devices.drop()
+db.client.WoF.create_collection("Devices")
+db.client.WoF.Sensors.drop()
+db.client.WoF.create_collection("Sensors")
+db.client.WoF.Layouts.drop()
+db.client.WoF.create_collection("Layouts")
+db.client.WoF.Racks.drop()
+db.client.WoF.create_collection("Racks")
+db.client.WoF.Manifests.drop()
+db.client.WoF.create_collection("Manifests")
 # Worker starts by populating staff and global, which are needed only once
 populate_staff()
 populate_items()
