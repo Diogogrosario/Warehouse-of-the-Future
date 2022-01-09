@@ -132,10 +132,7 @@ create table Products_Left_Out
 create table Window (
     id      SERIAL PRIMARY KEY, 
     x            DECIMAL(4, 1),
-    y            DECIMAL(4, 1),
-    z            DECIMAL(4, 1),
-    height       DECIMAL(9, 2), 
-    width        DECIMAL(9, 2)
+    y            DECIMAL(4, 1)
 );
 
 
