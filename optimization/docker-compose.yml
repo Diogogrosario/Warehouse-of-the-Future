@@ -12,6 +12,7 @@ services:
       - ./src/logic:/tmp/genetic/logic
     ports:
       - "5800:5800"
+    restart: "on-failure"
     networks:
       - internal
   server:
