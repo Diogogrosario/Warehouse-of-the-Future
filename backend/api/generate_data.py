@@ -4,7 +4,9 @@ import datetime
 import uuid
 import names
 import json
+import secrets
 from .utils import utils
+from bson.objectid import ObjectId
 
 namespace = Namespace(
     "GenerateData",
@@ -344,7 +346,7 @@ def generate_items_for_manifest():
         quantity = random.randint(1, 3)
 
         manifest_items.append({
-            "item_id": id,
+            "item_id": ObjectId(id),
             "quantity": quantity
         })
 
@@ -368,7 +370,7 @@ class Manifest(Resource):
         employees = get_static_employee_data()
 
         manifest = {
-            "_id": uuid.uuid4(),
+            "_id": ObjectId(secrets.token_hex(12)),
             "time": datetime.datetime.now(),
             "staff_id": random.choice(employees)["_id"],
             "items": items
@@ -383,7 +385,7 @@ class Manifest(Resource):
 
 def generate_employee_data(id=None):
     if (id is None):
-        id = uuid.uuid4()
+        id = ObjectId(secrets.token_hex(12))
 
     employee = {
         "_id": id,
@@ -545,7 +547,7 @@ def generate_super_rack(
         current_rack_height = 0
 
         rack = {
-            "_id": uuid.uuid4(),
+            "_id": ObjectId(secrets.token_hex(12)),
             "width": rack_width
         }
         racks.append(rack)
@@ -561,7 +563,7 @@ def generate_super_rack(
                 break
 
             shelf = {
-                "_id": uuid.uuid4(),
+                "_id": ObjectId(secrets.token_hex(12)),
                 # the height of the shelf is in relation to the ground
                 "height": current_rack_height - shelf_height,
                 "rack_id": rack["_id"]
@@ -633,7 +635,7 @@ def generate_super_rack(
 
                 bucket = generate_bucket(
                     shelf=shelf,
-                    item_id=item_id,
+                    item_id=ObjectId(item_id),
                     position=position,
                     width=bucket_width,
                     shelf_height=shelf_height
@@ -751,13 +753,13 @@ def generate_sensor(device_id, staff_ids):
     for _ in range(number_of_staff_contacts):
         staff_contact = {
             "time": utils.get_random_date_last_day(),
-            "staff_id": random.choice(staff_ids)
+            "staff_id": ObjectId(random.choice(staff_ids))
         }
 
         staff_contacts.append(staff_contact)
 
     sensor = {
-        "_id": uuid.uuid4(),
+        "_id": ObjectId(secrets.token_hex(12)),
         "device": device_id,
         "movement_records": movement_timestamps,
         "staff_contacts": staff_contacts
@@ -766,7 +768,7 @@ def generate_sensor(device_id, staff_ids):
     return sensor
 
 def generate_device(bucket_id, staff_ids):
-    id = uuid.uuid4()
+    id = ObjectId(secrets.token_hex(12))
     sensor = generate_sensor(id, staff_ids)
 
     device = {
@@ -789,7 +791,7 @@ def generate_bucket(shelf, item_id, position, width, shelf_height):
     quantity = random.randint(1, 3)
 
     bucket = {
-        "_id": uuid.uuid4(),
+        "_id": ObjectId(secrets.token_hex(12)),
         "width": width,
         "height": height,
         "length": length,
