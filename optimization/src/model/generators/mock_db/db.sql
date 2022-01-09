@@ -43,7 +43,6 @@ create table Rack
     id       SERIAL PRIMARY KEY,
     shelf_id BIGINT UNSIGNED NOT NULL,
     y        DECIMAL(9, 2)   NOT NULL,
-    length   INT             NOT NULL,
     width    DECIMAL(9, 2)   NOT NULL,
     height   DECIMAL(9, 2)   NOT NULL,
     capacity DECIMAL(9, 2)   NOT NULL,
@@ -56,7 +55,6 @@ create table Product
 (
     id        SERIAL PRIMARY KEY,
     name      VARCHAR(50),
-    length    DECIMAL(5, 1),
     height    DECIMAL(5, 1),
     width     DECIMAL(5, 1),
     weight    DECIMAL(5, 1),

@@ -263,10 +263,9 @@ class Shelf:
 
 
 class Product:
-    def __init__(self, id, name, length, height, width, weight, type_id, frequency):
+    def __init__(self, id, name, height, width, weight, type_id, frequency):
         self.id = id
         self.name = name
-        self.length = length
         self.height = height
         self.width = width
         self.weight = weight
@@ -291,9 +290,8 @@ class Product:
 
 
 class Rack:
-    def __init__(self, id, length, width, height, y, capacity, shelf_id):
+    def __init__(self, id, width, height, y, capacity, shelf_id):
         self.id = id
-        self.length = length
         self.width = width
         self.height = height
         self.y = y
@@ -343,7 +341,6 @@ class Rack:
     def __str__(self) -> str:
         state = ""
         state += f'RACK {self.id}:\n'
-        state += f'\t\t\tLENGTH: {self.length}\n'
         state += f'\t\t\tWIDTH: {self.width}\n'
         state += f'\t\t\tHEIGHT: {self.height}\n'
         state += f'\t\t\tY: {self.y}\n'

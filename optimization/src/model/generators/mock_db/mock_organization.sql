@@ -15,79 +15,79 @@ insert into Shelf (warehouse_id, x, y)
 values (1, 4, 9);
 
 
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (1, 0.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (1, 1.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (1, 2.00, 5, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (1, 0.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (1, 1.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (1, 2.00, 5, 1.0, 1000);
 
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (1, 3.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (1, 4.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (1, 5.00, 5, 5, 1.0, 1000);
-
-
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (2, 0.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (2, 1.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (2, 2.00, 5, 5, 1.0, 1000);
-
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (2, 3.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (2, 4.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (2, 5.00, 5, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (1, 3.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (1, 4.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (1, 5.00, 5, 1.0, 1000);
 
 
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (3, 0.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (3, 1.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (3, 2.00, 5, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (2, 0.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (2, 1.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (2, 2.00, 5, 1.0, 1000);
 
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (3, 3.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (3, 4.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (3, 5.00, 5, 5, 1.0, 1000);
-
-
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (4, 0.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (4, 1.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (4, 2.00, 5, 5, 1.0, 1000);
-
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (4, 3.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (4, 4.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (4, 5.00, 5, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (2, 3.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (2, 4.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (2, 5.00, 5, 1.0, 1000);
 
 
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (5, 0.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (5, 1.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (5, 2.00, 5, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (3, 0.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (3, 1.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (3, 2.00, 5, 1.0, 1000);
 
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (5, 3.0, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (5, 4.00, 5, 5, 1.0, 1000);
-insert into Rack (shelf_id, y, length, width, height, capacity)
-values (5, 5.00, 5, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (3, 3.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (3, 4.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (3, 5.00, 5, 1.0, 1000);
+
+
+insert into Rack (shelf_id, y, width, height, capacity)
+values (4, 0.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (4, 1.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (4, 2.00, 5, 1.0, 1000);
+
+insert into Rack (shelf_id, y, width, height, capacity)
+values (4, 3.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (4, 4.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (4, 5.00, 5, 1.0, 1000);
+
+
+insert into Rack (shelf_id, y, width, height, capacity)
+values (5, 0.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (5, 1.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (5, 2.00, 5, 1.0, 1000);
+
+insert into Rack (shelf_id, y, width, height, capacity)
+values (5, 3.0, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (5, 4.00, 5, 1.0, 1000);
+insert into Rack (shelf_id, y, width, height, capacity)
+values (5, 5.00, 5, 1.0, 1000);
 
 
 insert into Product_Type(name)
