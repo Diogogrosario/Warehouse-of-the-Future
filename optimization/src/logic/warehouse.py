@@ -4,7 +4,7 @@ import sys
 import random as r
 import numpy as np
 from copy import deepcopy
-
+from constants import MAX_ITERATIONS
 
 worker_average_height = 1.75
 
@@ -71,24 +71,24 @@ class Layout:
     def get_score(self):
         score = 0
 
-        if 'weight' in metrics_to_optimize:
+        if 'weight' in self.metrics_to_optimize:
             weight_score = 0
             max_score = 0
             max_int = sys.maxsize * 2 + 1
             min_y = max_int
-            
+
             for shelf in self.warehouse.shelves:
                 for rack in shelf.racks:
                     # find min_y (this condition should happen at least once)
-                    if(rack.y < min_y):
+                    if (rack.y < min_y):
                         min_y = max(float(rack.y), 0.01)
                     for product in rack.products:
-                        max_score += float(product.weight)/ min_y
+                        max_score += float(product.weight) / min_y
                         weight_score += float(product.weight) / max(float(rack.y), 0.01)
 
             score += weight_score / max_score
 
-        if 'work' in metrics_to_optimize:
+        if 'work' in self.metrics_to_optimize:
             work_score = 0
             max_score = 0
             adj_side = 0.2
@@ -108,8 +108,7 @@ class Layout:
 
             # print(f'Work score: {work_score}')
 
-
-        if 'frequency' in metrics_to_optimize:
+        if 'frequency' in self.metrics_to_optimize:
             frequency_score = 0
             max_score = 0
             shelves_frequencies = []
@@ -126,15 +125,15 @@ class Layout:
             shelves_frequencies = sorted(shelves_frequencies)
 
             frequency_score += float(sum(np.diff(shelves_frequencies)))
-        
+
             score += frequency_score / max_score
 
             # print(f'Frequency score: {frequency_score}')
 
-        if 'organization' in metrics_to_optimize:
+        if 'organization' in self.metrics_to_optimize:
             organization_score = 0
             total_types = {}
-            
+
             shelves_count_types = []
 
             for shelf in self.warehouse.shelves:
@@ -150,31 +149,30 @@ class Layout:
                 shelves_count_types.append(count_types)
 
             for dic in shelves_count_types:
-              
-              if dic:
-                max_key = max(dic, key=dic.get)
-                max_val = dic[max_key]
 
-                organization_score += 2**max_val
+                if dic:
+                    max_key = max(dic, key=dic.get)
+                    max_val = dic[max_key]
 
-                # If more than 1 type start penalizing
-                values = sorted(dic.values(), reverse=True)[1:]
+                    organization_score += 2 ** max_val
 
-                for val in values:
-                  organization_score -= 2**(val**2)
+                    # If more than 1 type start penalizing
+                    values = sorted(dic.values(), reverse=True)[1:]
+
+                    for val in values:
+                        organization_score -= 2 ** (val ** 2)
 
             # Get dictionary {p_type : total_count}
             for dic in shelves_count_types:
                 if dic:
                     for p_type in dic:
-                        if(p_type in total_types):
+                        if (p_type in total_types):
                             total_types[p_type] += dic[p_type]
                         else:
                             total_types[p_type] = dic[p_type]
-            
-            
+
             # Descending sorted list with number of products of each type
-            total_types_arr = sorted([val for _,val in total_types.items()], reverse=True)
+            total_types_arr = sorted([val for _, val in total_types.items()], reverse=True)
             max_score = 0
 
             num_shelves = len(self.warehouse.shelves)
@@ -183,12 +181,11 @@ class Layout:
                 if num_shelves == 0:
                     missing_types = total_types_arr[len(self.warehouse.shelves):]
                     for missing_elem in missing_types:
-                        max_score -= 2**(missing_elem**2)
+                        max_score -= 2 ** (missing_elem ** 2)
                     break
 
-                max_score += 2**elem
+                max_score += 2 ** elem
                 num_shelves = num_shelves - 1
-
 
             score += organization_score / max_score
 

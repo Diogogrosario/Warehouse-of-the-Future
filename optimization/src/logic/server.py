@@ -19,18 +19,16 @@ def run_server():
             with conn:
                 print('Connected by', address)
                 data = conn.recv(1024)
-
                 if data:
                     conn.sendall(data)
                     data = json.loads(data)
                     metrics = []
 
-                    
                     if 'optimization-parameters' not in data.keys():
                         print(f"Request not well formed")
                         conn.close()
                         continue
-          
+
                     if 'weight' in data['optimization-parameters']:
                         metrics.append('weight')
 

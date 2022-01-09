@@ -16,7 +16,7 @@ storage = None
 
 
 # Randomly generate a population of num layouts of the warehouse
-def generate_population(warehouse, num):
+def generate_population(warehouse, num, metrics_to_optimize):
     population = []
 
     for index in range(num):
@@ -26,14 +26,13 @@ def generate_population(warehouse, num):
 
     return population
 
+
 def mutate(child):
     product = child.get_random_product()
     child.change_place(product)
 
 
-def reproduce(parent1, parent2, warehouse):
-    global metrics_to_optimize
-
+def reproduce(parent1, parent2, warehouse, metrics_to_optimize):
     # percorrer todos os produtos
     # para cada produto, fazer random(1,2) e ir buscá-lo ao respetivo pai
     # caso estiverem os 2 ocupados, escolher rack aleatória
@@ -41,7 +40,7 @@ def reproduce(parent1, parent2, warehouse):
 
     products = sorted(storage.products, key=lambda x: (x.weight, x.width), reverse=True)
 
-    child = Layout(deepcopy(warehouse))
+    child = Layout(deepcopy(warehouse), metrics_to_optimize)
 
     for product in products:
         parent = r.randint(0, 1)
@@ -55,14 +54,14 @@ def reproduce(parent1, parent2, warehouse):
     return child
 
 
-def genetic_algorithm(warehouse, population, num_iterations):
+def genetic_algorithm(warehouse, population, num_iterations, metrics_to_optimize):
     heapq.heapify(population)
     length = len(population)
 
     for index in range(num_iterations):
         parent1 = heapq.nlargest(1, population)[0]  # best layout
         parent2 = heapq.nsmallest(length - 1, population)[r.randint(0, length - 2)]  # random layout
-        child = reproduce(parent1, parent2, warehouse)
+        child = reproduce(parent1, parent2, warehouse, metrics_to_optimize)
 
         if r.uniform(0, 1.0) > 0.80:  # mutation with a chance of 20%
             mutate(child)
@@ -73,7 +72,7 @@ def genetic_algorithm(warehouse, population, num_iterations):
     print(f'FINAL_SCORE {str(final_layout.get_score())}')
     print(f'PRODUCTS OUT: {len(final_layout.products_out)}')
     return final_layout
-    
+
 
 def dump_results_to_database(layout):
     query_insert_result = f"INSERT INTO Results (date_issued) values (%s)"
@@ -99,12 +98,9 @@ def dump_results_to_database(layout):
 def main(docker=False, list_parameters=None):
     global db
     global storage
-    global metrics_to_optimize
 
     if list_parameters is None:
         list_parameters = []
-
-    metrics_to_optimize = list_parameters
 
     # Overwrite Database configs if Docker tag is defined
     if docker or len(sys.argv) > 1 and sys.argv[1] == 'docker':
@@ -124,9 +120,9 @@ def main(docker=False, list_parameters=None):
 
     warehouse = storage.create_warehouse(warehouse_id)
 
-    initial_population = generate_population(warehouse, 10)
+    initial_population = generate_population(warehouse, 10, list_parameters)
 
-    final_layout = genetic_algorithm(warehouse, initial_population, MAX_ITERATIONS)
+    final_layout = genetic_algorithm(warehouse, initial_population, MAX_ITERATIONS, list_parameters)
 
     print('----- FINAL LAYOUT -----')
 
