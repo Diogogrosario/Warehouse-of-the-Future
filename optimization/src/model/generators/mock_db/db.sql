@@ -98,6 +98,18 @@ create table Worker_Manifesto_Product
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
 );
 
+CREATE TABLE Users
+(
+    id                SERIAL PRIMARY KEY,
+    name              varchar(255) NOT NULL,
+    email             varchar(255) NOT NULL,
+    email_verified_at timestamp NULL DEFAULT NULL,
+    password          varchar(255) NOT NULL,
+    remember_token    varchar(100) DEFAULT NULL,
+    created_at        timestamp NULL DEFAULT NULL,
+    updated_at        timestamp NULL DEFAULT NULL
+);
+
 -- OUTPUT --
 create table Results
 (
@@ -152,4 +164,5 @@ BEGIN
 
     UPDATE Product SET frequency = freq / total_pieces where id = prod_id;
 END //
+
 DELIMITER ; 

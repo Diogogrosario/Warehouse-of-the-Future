@@ -3,7 +3,7 @@
     <div class="d-flex" id="wrapper">
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <h1 class="mt-4">Hello, {{$name}}.</h1>
+                <h1 class="mt-4">Hello, {{$user->name}}.</h1>
                 <div class="courses-container">
                     <div class="course">
                         <div class="course-preview">
