@@ -1,7 +1,9 @@
 import heapq
 import sys
+
 import random as r
 from copy import deepcopy
+
 from datetime import datetime
 
 from database import Database
@@ -12,12 +14,13 @@ from constants import MAX_ITERATIONS
 db = None
 storage = None
 
+
 # Randomly generate a population of num layouts of the warehouse
 def generate_population(warehouse, num):
     population = []
 
     for index in range(num):
-        layout = Layout(deepcopy(warehouse))
+        layout = Layout(deepcopy(warehouse), metrics_to_optimize)
         layout = storage.fill_warehouse(layout)
         population.append(layout)
 
@@ -29,6 +32,8 @@ def mutate(child):
 
 
 def reproduce(parent1, parent2, warehouse):
+    global metrics_to_optimize
+
     # percorrer todos os produtos
     # para cada produto, fazer random(1,2) e ir buscá-lo ao respetivo pai
     # caso estiverem os 2 ocupados, escolher rack aleatória
@@ -114,10 +119,7 @@ def main(docker=False, list_parameters=None):
     # query_month_manifesto = "SELECT * FROM Month_Manifesto"
 
     warehouses = db.df_query(query_warehouse)
-    # month_manifestos = db.df_query(query_month_manifesto)
 
-    # manifestos = storage.get_manifestos(month_manifestos)
-    # manifesto = manifestos[1]  # Initial test with only 1 manifesto
     warehouse_id = warehouses.iloc[0]['id']  # Initial test with only 1 warehouse
 
     warehouse = storage.create_warehouse(warehouse_id)
@@ -127,6 +129,7 @@ def main(docker=False, list_parameters=None):
     final_layout = genetic_algorithm(warehouse, initial_population, MAX_ITERATIONS)
 
     print('----- FINAL LAYOUT -----')
+
     print(final_layout)
 
     print('----- Out Products -----')

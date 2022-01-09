@@ -8,14 +8,24 @@ use App\Models\Shelf;
 
 class ProductRackController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function show()
     {
         $result = Result::all()->last();
-        if(is_null($result)) return view('show_results', ['hasResults'=> False]);
+
+        if (is_null($result))
+            return view('show_results', ['hasResults' => False]);
+
+        $result->is_read = true;
+        $result->update();
+
         $layoutResult = $this->getLayoutForResult($result);
 
         return view('show_results', [
-            'hasResults'=>True,
+            'hasResults' => True,
             'geneticResults' => Result::all()->sortBy('id')->values(),
             'shelves' => Shelf::with('racks')->get()->sortBy('id')->values(),
             'results' => $layoutResult['results'],

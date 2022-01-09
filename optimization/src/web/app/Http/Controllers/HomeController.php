@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Result;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -13,18 +16,19 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
-        $name = "David";
-
-        return view('home', ["name"=>$name]);
+        return view('home', [
+            "user" => Auth::user(),
+            "numberNotReads" => count(Result::where('is_read', false)->get()),
+        ]);
     }
 }

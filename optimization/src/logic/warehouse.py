@@ -4,21 +4,17 @@ import sys
 import random as r
 import numpy as np
 from copy import deepcopy
-from constants import MAX_ITERATIONS
 
-# metrics_to_optimize = ['weight']
-# metrics_to_optimize = ['work']
-# metrics_to_optimize = ['frequency']
-# metrics_to_optimize = ['organization']
-
-metrics_to_optimize = ['frequency', 'organization', 'weight']
 
 worker_average_height = 1.75
 
+
 class Layout:
-    def __init__(self, warehouse):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
+    # TODO: Talvez manter lista com todos os produtos e respetivas posições
+    def __init__(self, warehouse, metrics_to_optimize):
         self.warehouse = warehouse
         self.products_out = []
+        self.metrics_to_optimize = metrics_to_optimize
 
     def get_random_rack(self):
         shelf = self.warehouse.get_random_shelf()
@@ -51,11 +47,11 @@ class Layout:
                     return True if rack.add_product(product) else False
 
     def get_random_product(self):
-      random_product = None
-      while random_product is None:
-          random_product = self.warehouse.get_random_shelf().get_random_rack().get_random_product()
+        random_product = None
+        while random_product is None:
+            random_product = self.warehouse.get_random_shelf().get_random_rack().get_random_product()
 
-      return random_product
+        return random_product
 
     def add_product_random(self, product):
         iteration = 0
@@ -80,6 +76,7 @@ class Layout:
             max_score = 0
             max_int = sys.maxsize * 2 + 1
             min_y = max_int
+            
             for shelf in self.warehouse.shelves:
                 for rack in shelf.racks:
                     # find min_y (this condition should happen at least once)
@@ -94,7 +91,6 @@ class Layout:
         if 'work' in metrics_to_optimize:
             work_score = 0
             max_score = 0
-
             adj_side = 0.2
             chest_y = worker_average_height * (2.0 / 3.0)
 
@@ -126,24 +122,23 @@ class Layout:
                         shelf_frequency += float(product.frequency)
 
                 shelves_frequencies.append(shelf_frequency)
-            
+
             shelves_frequencies = sorted(shelves_frequencies)
 
-            frequency_score += sum(np.diff(shelves_frequencies))
+            frequency_score += float(sum(np.diff(shelves_frequencies)))
         
             score += frequency_score / max_score
 
             # print(f'Frequency score: {frequency_score}')
 
-
         if 'organization' in metrics_to_optimize:
             organization_score = 0
             total_types = {}
-
+            
             shelves_count_types = []
 
             for shelf in self.warehouse.shelves:
-                count_types = {} # { type_x : n_products_type_x }
+                count_types = {}  # { type_x : n_products_type_x }
 
                 for rack in shelf.racks:
                     for product in rack.products:
@@ -155,6 +150,7 @@ class Layout:
                 shelves_count_types.append(count_types)
 
             for dic in shelves_count_types:
+              
               if dic:
                 max_key = max(dic, key=dic.get)
                 max_val = dic[max_key]
@@ -197,6 +193,7 @@ class Layout:
             score += organization_score / max_score
 
         # Penalize layouts with products out
+
         score -= len(self.products_out) * 100
 
         return score

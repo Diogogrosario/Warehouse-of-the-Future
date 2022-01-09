@@ -9,6 +9,8 @@ class Product_Rack extends Model
 {
     protected $table = 'Product_Rack';
 
+    public $timestamps = false;
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

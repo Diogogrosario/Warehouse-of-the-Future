@@ -26,6 +26,8 @@ docker-php-ext-install gd
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath
 
+RUN docker-php-ext-install sockets
+
 RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
 
 RUN apt-get -y install nodejs
