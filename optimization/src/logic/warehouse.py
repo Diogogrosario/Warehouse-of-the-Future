@@ -125,13 +125,10 @@ class Layout:
                     max_key = max(dic, key=dic.get)
                     max_val = dic[max_key]
                     del dic[max_key]
-
                     score += 2 ** max_val
-
                     # If more than 1 type start penalizing
                     for val in dic.values():
                         score -= 2 ** (val ** 2)
-
         # Penalize layouts with products out
 
         score -= len(self.products_out) * 100

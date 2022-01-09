@@ -3,6 +3,7 @@ import sys
 
 import random as r
 from copy import deepcopy
+
 from datetime import datetime
 
 from database import Database
@@ -13,8 +14,6 @@ from constants import MAX_ITERATIONS
 db = None
 storage = None
 
-
-metrics_to_optimize = []
 
 # Randomly generate a population of num layouts of the warehouse
 def generate_population(warehouse, num):

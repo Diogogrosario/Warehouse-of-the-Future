@@ -12,7 +12,6 @@ class CommunicationController extends Controller
     {
         $this->middleware('auth');
     }
-
     public function communicate(Request $request)
     {
         /* Get the IP address for the target host. */

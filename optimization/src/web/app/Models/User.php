@@ -28,4 +28,13 @@ class User extends Authenticatable
     ];
 
     protected $table = 'Users';
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];    
 }
