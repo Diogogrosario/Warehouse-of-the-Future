@@ -3,19 +3,18 @@ import random
 import random as r
 import numpy as np
 from copy import deepcopy
-from constants import MAX_ITERATIONS
 
-# metrics_to_optimize = ['weight']
-# metrics_to_optimize = ['work']
-# metrics_to_optimize = ['frequency']
-metrics_to_optimize = ['organization']
+from constants import MAX_ITERATIONS
 
 worker_average_height = 1.75
 
+
 class Layout:
-    def __init__(self, warehouse):  # TODO: Talvez manter lista com todos os produtos e respetivas posições
+    # TODO: Talvez manter lista com todos os produtos e respetivas posições
+    def __init__(self, warehouse, metrics_to_optimize):
         self.warehouse = warehouse
         self.products_out = []
+        self.metrics_to_optimize = metrics_to_optimize
 
     def get_random_rack(self):
         shelf = self.warehouse.get_random_shelf()
@@ -48,11 +47,11 @@ class Layout:
                     return True if rack.add_product(product) else False
 
     def get_random_product(self):
-      random_product = None
-      while random_product is None:
-          random_product = self.warehouse.get_random_shelf().get_random_rack().get_random_product()
+        random_product = None
+        while random_product is None:
+            random_product = self.warehouse.get_random_shelf().get_random_rack().get_random_product()
 
-      return random_product
+        return random_product
 
     def add_product_random(self, product):
         iteration = 0
@@ -72,13 +71,13 @@ class Layout:
     def get_score(self):
         score = 0
 
-        if 'weight' in metrics_to_optimize:
+        if 'weight' in self.metrics_to_optimize:
             for shelf in self.warehouse.shelves:
                 for rack in shelf.racks:
                     for product in rack.products:
                         score += float(product.weight) / max(float(rack.y), 0.1)
 
-        if 'work' in metrics_to_optimize:
+        if 'work' in self.metrics_to_optimize:
             adj_side = 0.2
             chest_y = worker_average_height * (2.0 / 3.0)
 
@@ -91,7 +90,7 @@ class Layout:
                     for product in rack.products:
                         score += math.cos(math.radians(theta)) * float(product.weight)
 
-        if 'frequency' in metrics_to_optimize:
+        if 'frequency' in self.metrics_to_optimize:
             shelves_frequencies = []
 
             for shelf in self.warehouse.shelves:
@@ -101,16 +100,16 @@ class Layout:
                         shelf_frequency += product.frequency
 
                 shelves_frequencies.append(shelf_frequency)
-            
+
             shelves_frequencies = sorted(shelves_frequencies)
 
-            score += sum(np.diff(shelves_frequencies))
+            score += float(sum(np.diff(shelves_frequencies)))
 
-        if 'organization' in metrics_to_optimize:
+        if 'organization' in self.metrics_to_optimize:
             shelves_count_types = []
 
             for shelf in self.warehouse.shelves:
-                count_types = {} # { type_x : n_products_type_x }
+                count_types = {}  # { type_x : n_products_type_x }
 
                 for rack in shelf.racks:
                     for product in rack.products:
@@ -122,18 +121,16 @@ class Layout:
                 shelves_count_types.append(count_types)
 
             for dic in shelves_count_types:
-              if dic:
-                max_key = max(dic, key=dic.get)
-                max_val = dic[max_key]
-                del dic[max_key]
+                if dic:
+                    max_key = max(dic, key=dic.get)
+                    max_val = dic[max_key]
+                    del dic[max_key]
 
-                score += 2**max_val
+                    score += 2 ** max_val
 
-                # If more than 1 type start penalizing
-                for val in dic.values():
-                  score -= 2**(val**2)
-
-
+                    # If more than 1 type start penalizing
+                    for val in dic.values():
+                        score -= 2 ** (val ** 2)
         # Penalize layouts with products out
         score -= len(self.products_out) * 100
 

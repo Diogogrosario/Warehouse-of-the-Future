@@ -48,11 +48,15 @@ class ResultController extends Controller
      * @return View
      */
     public function show(Result $result): View
+
     {
+        $result->is_read = true;
+        $result->update();
 
         $layoutResult = app(ProductRackController::class)->getLayoutForResult($result);
 
         return view('show_results', [
+            'hasResults' => True,
             'geneticResults' => Result::all()->sortBy('id')->values(),
             'shelves' => Shelf::with('racks')->get()->sortBy('id')->values(),
             'results' => $layoutResult['results'],
