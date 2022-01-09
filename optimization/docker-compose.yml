@@ -11,9 +11,9 @@ services:
     volumes:
       - ./src/logic:/tmp/genetic/logic
     ports:
-      - 50051:50051    
+      - "5800:5800"
     networks:
-      - internal      
+      - internal
   server:
     image: nginx:alpine
     volumes:
@@ -41,15 +41,6 @@ services:
       - db
     networks:
       - internal
-  parser:
-    build: ./docker/parser
-    volumes:
-      - ./src/model/parser:/home/parser
-    networks:
-      - internal
-    depends_on:
-      - db
-
   db:
     image: mariadb
     environment:
