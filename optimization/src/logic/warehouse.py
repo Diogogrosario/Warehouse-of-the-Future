@@ -47,11 +47,11 @@ class Layout:
                     return True if rack.add_product(product) else False
 
     def get_random_product(self):
-      random_product = None
-      while random_product is None:
-          random_product = self.warehouse.get_random_shelf().get_random_rack().get_random_product()
+        random_product = None
+        while random_product is None:
+            random_product = self.warehouse.get_random_shelf().get_random_rack().get_random_product()
 
-      return random_product
+        return random_product
 
     def add_product_random(self, product):
         iteration = 0
@@ -77,8 +77,7 @@ class Layout:
                     for product in rack.products:
                         score += float(product.weight) / max(float(rack.y), 0.1)
 
-
-        if 'work' in metrics_to_optimize:
+        if 'work' in self.metrics_to_optimize:
             adj_side = 0.2
             chest_y = worker_average_height * (2.0 / 3.0)
 
@@ -104,14 +103,13 @@ class Layout:
 
             shelves_frequencies = sorted(shelves_frequencies)
 
-            score += sum(np.diff(shelves_frequencies))
+            score += float(sum(np.diff(shelves_frequencies)))
 
-
-        if 'organization' in metrics_to_optimize:
+        if 'organization' in self.metrics_to_optimize:
             shelves_count_types = []
-            
+
             for shelf in self.warehouse.shelves:
-                count_types = {} # { type_x : n_products_type_x }
+                count_types = {}  # { type_x : n_products_type_x }
 
                 for rack in shelf.racks:
                     for product in rack.products:
@@ -123,16 +121,16 @@ class Layout:
                 shelves_count_types.append(count_types)
 
             for dic in shelves_count_types:
-              if dic:
-                max_key = max(dic, key=dic.get)
-                max_val = dic[max_key]
-                del dic[max_key]
+                if dic:
+                    max_key = max(dic, key=dic.get)
+                    max_val = dic[max_key]
+                    del dic[max_key]
 
-                score += 2**max_val
+                    score += 2 ** max_val
 
-                # If more than 1 type start penalizing
-                for val in dic.values():
-                  score -= 2**(val**2)
+                    # If more than 1 type start penalizing
+                    for val in dic.values():
+                        score -= 2 ** (val ** 2)
         # Penalize layouts with products out
         score -= len(self.products_out) * 100
 
