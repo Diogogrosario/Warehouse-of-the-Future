@@ -29,17 +29,23 @@ def run_server():
                         conn.close()
                         continue
 
-                    if 'weight' in data['optimization-parameters']:
+                    if 'weight' in data['optimization-parameters'] and 'work' not in data['optimization-parameters']:
                         metrics.append('weight')
 
-                    if 'sector' in data['optimization-parameters']:
+                    if 'organization' in data['optimization-parameters']:
                         metrics.append('sector')
 
-                    if 'work' in data['optimization-parameters']:
+                    if 'work' in data['optimization-parameters'] and 'weight' not in data['optimization-parameters']:
                         metrics.append('work')
 
                     if 'frequency' in data['optimization-parameters']:
                         metrics.append('frequency')
+
+                    if 'minimize-errors' in data['optimization-parameters']:
+                        metrics.append('minimize-errors')
+
+                    if 'windows' in data['optimization-parameters']:
+                        metrics.append('windows')
 
                     if len(sys.argv) > 1 and sys.argv[1] == 'docker':
                         logic.main(True, metrics)

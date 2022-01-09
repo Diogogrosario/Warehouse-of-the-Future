@@ -12,6 +12,7 @@ class CommunicationController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function communicate(Request $request)
     {
         /* Get the IP address for the target host. */
@@ -37,6 +38,6 @@ class CommunicationController extends Controller
 
         socket_close($socket);
 
-        return Redirect::route('home');
+        return Redirect::route('home')->with('status', 'ok');
     }
 }
