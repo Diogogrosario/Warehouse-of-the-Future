@@ -36,7 +36,7 @@
 					},
 					"custom": {
 						"align": "auto",
-						"displayMode": "color-text",
+						"displayMode": "auto",
 						"filterable": true
 					},
 					"mappings": [],
@@ -128,12 +128,7 @@
 			"id": 2,
 			"options": {
 				"showHeader": true,
-				"sortBy": [
-					{
-						"desc": true,
-						"displayName": "birth_date"
-					}
-				]
+				"sortBy": []
 			},
 			"pluginVersion": "8.2.6",
 			"targets": [
@@ -161,7 +156,7 @@
 					"timeColumn": "timestamp",
 					"timeColumnType": "datetime",
 					"type": "json",
-					"url": "http://backend:5000/staff/",
+					"url": "http://backend:5000/staff",
 					"url_options": {
 						"data": "",
 						"headers": [
@@ -193,7 +188,12 @@
 						"excludeByName": {
 							"id": true
 						},
-						"indexByName": {},
+						"indexByName": {
+							"birth_date": 2,
+							"height": 3,
+							"id": 0,
+							"name": 1
+						},
 						"renameByName": {}
 					}
 				}
@@ -201,7 +201,7 @@
 			"type": "table"
 		}
 	],
-	"refresh": "",
+	"refresh": false,
 	"schemaVersion": 32,
 	"style": "dark",
 	"tags": [],
@@ -209,12 +209,12 @@
 		"list": []
 	},
 	"time": {
-		"from": "2021-06-20T18:56:18.562Z",
-		"to": "2021-07-19T22:45:22.641Z"
+		"from": "now-24h",
+		"to": "now"
 	},
 	"timepicker": {},
 	"timezone": "",
 	"title": "Staff",
 	"uid": "BwcXP3cnz",
-	"version": 5
+	"version": 4
 }
