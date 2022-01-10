@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class CommunicationController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function communicate(Request $request)
     {
         /* Get the IP address for the target host. */
@@ -34,6 +29,8 @@ class CommunicationController extends Controller
         $str = json_encode($arr);
 
         socket_write($socket, $str, strlen($str));
+
+        socket_read($socket, 0);
 
         socket_close($socket);
 
