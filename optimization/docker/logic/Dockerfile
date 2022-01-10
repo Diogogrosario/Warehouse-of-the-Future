@@ -1,12 +1,11 @@
 FROM python:3.8
 
+WORKDIR /usr/src/app
 
-WORKDIR /tmp/genetic/logic
-
-COPY ./src/logic/requirements.txt .
+COPY ./src/logic/ .
 
 RUN pip install --upgrade pip
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python3", "logic.py", "docker", ">","output.txt"]
+CMD ["python","-u","server.py", "docker"]

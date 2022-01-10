@@ -44,5 +44,10 @@ RUN mkdir -p /home/$user/.composer && \
 # Set working directory
 WORKDIR /var/www
 
+COPY ./src/web/ .
+
+RUN npm install && npm run prod
+
+RUN composer install
 
 USER $user
