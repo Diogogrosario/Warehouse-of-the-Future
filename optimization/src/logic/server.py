@@ -7,6 +7,13 @@ import logic
 def run_server():
     port = 5800  # Port to listen on (non-privileged ports are > 1023)
 
+    data_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    data_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+    data_sock.bind(('', port))
+
+    data_sock.listen(1000)
+
     while True:
         conn, address = data_sock.accept()
 
