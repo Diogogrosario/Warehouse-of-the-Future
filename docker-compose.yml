@@ -33,6 +33,8 @@ services:
             - ./backend/.env
         volumes:
             - ./backend:/app
+        networks:
+            - grafnet
 
 networks:
     grafnet:
