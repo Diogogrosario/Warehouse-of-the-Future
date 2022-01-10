@@ -103,7 +103,7 @@ def main(docker=False, list_parameters=None):
         list_parameters = []
 
     # Overwrite Database configs if Docker tag is defined
-    if docker or len(sys.argv) > 1 and sys.argv[1] == 'docker':
+    if docker:
         db = Database('test', True)
         storage = Storage(db)
         print("Running Docker ENV")

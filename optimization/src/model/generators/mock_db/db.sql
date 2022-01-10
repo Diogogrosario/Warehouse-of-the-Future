@@ -1,8 +1,8 @@
 CREATE
-    DATABASE IF NOT EXISTS test;
+DATABASE IF NOT EXISTS test;
 
 USE
-    test;
+test;
 
 DROP TABLE IF EXISTS Warehouse;
 DROP TABLE IF EXISTS Shelf;
@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS Worker_Manifesto;
 DROP TABLE IF EXISTS Worker_Manifesto_Product;
 DROP TABLE IF EXISTS Results;
 DROP TABLE IF EXISTS Products_Left_Out;
+DROP TABLE IF EXISTS Window;
 
 create table Warehouse
 (
@@ -42,11 +43,11 @@ create table Rack
 (
     id       SERIAL PRIMARY KEY,
     shelf_id BIGINT UNSIGNED NOT NULL,
-    y        DECIMAL(9, 2)   NOT NULL,
-    length   INT             NOT NULL,
-    width    DECIMAL(9, 2)   NOT NULL,
-    height   DECIMAL(9, 2)   NOT NULL,
-    capacity DECIMAL(9, 2)   NOT NULL,
+    y        DECIMAL(9, 2) NOT NULL,
+    length   INT           NOT NULL,
+    width    DECIMAL(9, 2) NOT NULL,
+    height   DECIMAL(9, 2) NOT NULL,
+    capacity DECIMAL(9, 2) NOT NULL,
 
     FOREIGN KEY (shelf_id) REFERENCES Shelf (id)
 
@@ -98,7 +99,7 @@ create table Worker_Manifesto_Product
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
 );
 
-CREATE TABLE Users
+CREATE TABLE users
 (
     id                SERIAL PRIMARY KEY,
     name              varchar(255) NOT NULL,
@@ -120,8 +121,8 @@ create table Results
 create table Product_Rack
 (
     id         SERIAL PRIMARY KEY,
-    x_orig     INT             NOT NULL,
-    x_end      INT             NOT NULL,
+    x_orig     INT NOT NULL,
+    x_end      INT NOT NULL,
     result_id  BIGINT UNSIGNED NOT NULL,
     rack_id    BIGINT UNSIGNED NOT NULL,
     product_id BIGINT UNSIGNED NOT NULL,
@@ -139,15 +140,26 @@ create table Products_Left_Out
     FOREIGN KEY (result_id) REFERENCES Results (id),
     FOREIGN KEY (product_id) REFERENCES Product (id)
 );
+create table Window (
+    id      SERIAL PRIMARY KEY, 
+    x            DECIMAL(4, 1),
+    y            DECIMAL(4, 1)
+);
+
+
 DROP PROCEDURE IF EXISTS calculate_product_frequency;
 
 DELIMITER //
+
 CREATE PROCEDURE calculate_product_frequency(IN prod_id INT)
 BEGIN
-    DECLARE total_pieces INT;
-    DECLARE freq INT;
+    DECLARE
+total_pieces INT;
+    DECLARE
+freq INT;
 
-    SET freq = (SELECT COUNT(A.id)
+    SET
+freq = (SELECT COUNT(A.id)
                 FROM (
                          SELECT id
                          FROM Worker_Manifesto_Product
@@ -155,14 +167,18 @@ BEGIN
                          GROUP BY manifesto_id
                      ) as A);
 
-    SET total_pieces = (SELECT COUNT(A.id) /*this number is to normalize the results*/
+    SET
+total_pieces = (SELECT COUNT(A.id) /*this number is to normalize the results*/
                         FROM (
                                  SELECT id
                                  FROM Worker_Manifesto_Product
                                  GROUP BY manifesto_id
                              ) as A);
 
-    UPDATE Product SET frequency = freq / total_pieces where id = prod_id;
-END //
+UPDATE Product
+SET frequency = freq / total_pieces
+where id = prod_id;
+END
+//
 
 DELIMITER ; 
