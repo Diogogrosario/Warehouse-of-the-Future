@@ -26,6 +26,7 @@ class APITesting(TestCase):
         self.populateEmployees()
         self.populateGlobalData()
         self.populateSensorData()
+        self.populateLayouts()
 
     def populateSensorData(self):
         devices_data = [
@@ -135,6 +136,86 @@ class APITesting(TestCase):
             },
         ]
         self.db.WoF.Employees.insert_many(employees_data)
+
+    def populateLayouts(self):
+        layouts_data = [
+            {
+                "_id": ObjectId("a07f1f99bcf86cd799439011"),
+                "time": datetime.datetime(2019, 8, 11),
+                "buckets": {}
+            }, {
+                "_id": ObjectId("a07f1f99bcf86cd799439012"),
+                "time": datetime.datetime(2023, 8, 11),
+                "buckets": {}
+            }, {
+                "_id": ObjectId("a07f1f99bcf86cd799439013"),
+                "time": datetime.datetime(2022, 8, 11),
+                "buckets": {}
+            }, {
+                "_id": ObjectId("a07f1f99bcf86cd799439014"),
+                "time": datetime.datetime(2021, 8, 11),
+                "buckets": {}
+            }, {
+                "_id": ObjectId("a07f1f99bcf86cd799439015"),
+                "time": datetime.datetime(2020, 8, 11),
+                "buckets": {}
+            }
+        ]
+        self.db.WoF.Layouts.insert_many(layouts_data)
+
+    def populateManifests(self):
+        manifests_data = [
+            {
+                "_id": ObjectId("a07f1e00bcf86cd799439011"),
+                "time": datetime.datetime(2021, 8, 11),
+                "items": {},
+                "staff": ObjectId("a07f1f77bcf86cd799439011")
+            }, {
+                "_id": ObjectId("a07f1e00bcf86cd799439012"),
+                "time": datetime.datetime(2019, 8, 11),
+                "items": {},
+                "staff": ObjectId("a07f1f77bcf86cd799439011")
+            }, {
+                "_id": ObjectId("a07f1e00bcf86cd799439013"),
+                "time": datetime.datetime(2020, 8, 11),
+                "items": {},
+                "staff": ObjectId("a07f1f77bcf86cd799439011")
+            }
+        ]
+        self.db.WoF.Manifests.insert_many(manifests_data)
+
+    def populateStock(self):
+        items_data = [
+            {
+                "_id": ObjectId("a07f1e98bcf86cd799439011"),
+                "designation": "Parafusos",
+                "width": 10,
+                "height": 20,
+                "length": 15,
+                "weight": 20,
+                "quantity": 400,
+                "bucket": ObjectId("907f1f77bcf86cd799439011")
+            }, {
+                "_id": ObjectId("a07f1e98bcf86cd799439012"),
+                "designation": "Porcas",
+                "width": 10,
+                "height": 20,
+                "length": 15,
+                "weight": 20,
+                "quantity": 400,
+                "bucket": ObjectId("907f1f77bcf86cd799439011")
+            }, {
+                "_id": ObjectId("a07f1e98bcf86cd799439013"),
+                "designation": "Roscas",
+                "width": 10,
+                "height": 20,
+                "length": 15,
+                "weight": 20,
+                "quantity": 400,
+                "bucket": ObjectId("907f1f77bcf86cd799439011")
+            }
+        ]
+        self.db.WoF.Items.insert_many(items_data)
 
     def setUp(self):
         load_dotenv('.env.test')
