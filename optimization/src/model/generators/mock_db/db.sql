@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS Worker_Manifesto;
 DROP TABLE IF EXISTS Worker_Manifesto_Product;
 DROP TABLE IF EXISTS Results;
 DROP TABLE IF EXISTS Products_Left_Out;
+DROP TABLE IF EXISTS Window;
 
 create table Warehouse
 (
@@ -139,10 +140,17 @@ create table Products_Left_Out
     FOREIGN KEY (result_id) REFERENCES Results (id),
     FOREIGN KEY (product_id) REFERENCES Product (id)
 );
+create table Window (
+    id      SERIAL PRIMARY KEY, 
+    x            DECIMAL(4, 1),
+    y            DECIMAL(4, 1)
+);
+
+
 DROP PROCEDURE IF EXISTS calculate_product_frequency;
 
-DELIMITER
-//
+DELIMITER //
+
 CREATE PROCEDURE calculate_product_frequency(IN prod_id INT)
 BEGIN
     DECLARE
