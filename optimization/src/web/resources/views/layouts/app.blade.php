@@ -4,6 +4,12 @@
     @include('partials.head')
 </head>
 <body>
+@if(session('status'))
+    <div class="myAlert-top alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
+@endif
 <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
     <div class="border-right sidebarAll" id="sidebar-wrapper">
