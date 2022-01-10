@@ -11,8 +11,16 @@ class StockTests():
         # stock/
         response = self.client.get('/stock')
         stock_data = json.loads(response.data.decode('utf-8'))
-        for stock in stock_data:
-            self.TestClass.assertEqual(len(stock), 8)
+        for item in stock_data:
+            self.TestClass.assertEqual(len(item), 8)
+            to_assert = ['width', 'height', 'length', 'weight', 'quantity']
+            # Get the items from the item
+            to_assert = map(lambda x: item[x] for x in to_assert)
+            # Change to_assert to a boolean list
+            to_assert = map(lambda x: int(x) > 0 for x in to_assert)
+            # Assert there's only true values
+            map(self.TestClass.assertTrue, to_assert)
+
         self.TestClass.assertEqual(response.status_code, 200)
 
     def testStockWithId(self, stock_id):

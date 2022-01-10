@@ -13,6 +13,7 @@ from .globalData_PBT import GlobalPBT
 from .globalData_unit_tests import GlobalDataTests
 from .layout_PBT import LayoutPBT
 from .layout_unit_tests import LayoutTests
+from .manifest_PBT import ManifestPBT
 from .manifest_unit_tests import ManifestTests
 from .sensors_PBT import SensorsPBT
 from .sensors_unit_tests import SensorsTests
@@ -382,6 +383,24 @@ class APITesting(TestCase):
         global_tests = LayoutPBT(self, self.client)
         time_before, time_after = times
         global_tests.testLayoutWithTimeBeforeAndAfter(
+            time_before,
+            time_after
+        )
+
+    # Manifests
+
+    @settings(max_examples=15, deadline=None)
+    @given(st.tuples(st.datetimes(), st.datetimes()).filter(
+        lambda x: x[0] < x[1]
+        and x[0].year > 999
+        and x[1].year > 999
+        and x[0].year != x[1].year
+        and x[0].month != x[1].month
+        and x[0].day != x[1].day))
+    def test_manifest_endpoint_PBT(self, times):
+        global_tests = ManifestPBT(self, self.client)
+        time_before, time_after = times
+        global_tests.testManifestWithTimeBeforeAndAfter(
             time_before,
             time_after
         )
