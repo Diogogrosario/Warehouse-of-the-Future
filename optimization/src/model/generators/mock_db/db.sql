@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS Worker_Manifesto;
 DROP TABLE IF EXISTS Worker_Manifesto_Product;
 DROP TABLE IF EXISTS Results;
 DROP TABLE IF EXISTS Products_Left_Out;
+DROP TABLE IF EXISTS Window;
 
 create table Warehouse
 (
@@ -60,9 +61,9 @@ create table Product
     height    DECIMAL(5, 1),
     width     DECIMAL(5, 1),
     weight    DECIMAL(5, 1),
-    type_id BIGINT UNSIGNED NOT NULL,
+    type_id   BIGINT UNSIGNED NOT NULL,
     frequency DECIMAL(30, 5) DEFAULT 0,
-    
+
     FOREIGN KEY (type_id) REFERENCES Product_Type (id)
 );
 
@@ -98,6 +99,18 @@ create table Worker_Manifesto_Product
     FOREIGN KEY (manifesto_id) REFERENCES Worker_Manifesto (id)
 );
 
+CREATE TABLE users
+(
+    id                SERIAL PRIMARY KEY,
+    name              varchar(255) NOT NULL,
+    email             varchar(255) NOT NULL,
+    email_verified_at timestamp NULL DEFAULT NULL,
+    password          varchar(255) NOT NULL,
+    remember_token    varchar(100) DEFAULT NULL,
+    created_at        timestamp NULL DEFAULT NULL,
+    updated_at        timestamp NULL DEFAULT NULL
+);
+
 -- OUTPUT --
 create table Results
 (
@@ -127,29 +140,45 @@ create table Products_Left_Out
     FOREIGN KEY (result_id) REFERENCES Results (id),
     FOREIGN KEY (product_id) REFERENCES Product (id)
 );
+create table Window (
+    id      SERIAL PRIMARY KEY, 
+    x            DECIMAL(4, 1),
+    y            DECIMAL(4, 1)
+);
+
+
 DROP PROCEDURE IF EXISTS calculate_product_frequency;
 
 DELIMITER //
-CREATE PROCEDURE calculate_product_frequency (IN prod_id INT)
-    BEGIN
-        DECLARE total_pieces INT;
-        DECLARE freq INT;
 
-        SET freq = (SELECT COUNT(A.id) 
-                    FROM (
-                        SELECT id 
-                        FROM Worker_Manifesto_Product 
-                        WHERE product_id = prod_id 
-                        GROUP BY manifesto_id
-                    ) as A);
+CREATE PROCEDURE calculate_product_frequency(IN prod_id INT)
+BEGIN
+    DECLARE
+total_pieces INT;
+    DECLARE
+freq INT;
 
-        SET total_pieces = (SELECT COUNT(A.id) /*this number is to normalize the results*/
-                            FROM (
-                                SELECT id
-                                FROM Worker_Manifesto_Product 
-                                GROUP BY manifesto_id
-                            ) as A); 
+    SET
+freq = (SELECT COUNT(A.id)
+                FROM (
+                         SELECT id
+                         FROM Worker_Manifesto_Product
+                         WHERE product_id = prod_id
+                         GROUP BY manifesto_id
+                     ) as A);
 
-        UPDATE Product SET frequency = freq / total_pieces where id = prod_id;
-    END //
+    SET
+total_pieces = (SELECT COUNT(A.id) /*this number is to normalize the results*/
+                        FROM (
+                                 SELECT id
+                                 FROM Worker_Manifesto_Product
+                                 GROUP BY manifesto_id
+                             ) as A);
+
+UPDATE Product
+SET frequency = freq / total_pieces
+where id = prod_id;
+END
+//
+
 DELIMITER ; 

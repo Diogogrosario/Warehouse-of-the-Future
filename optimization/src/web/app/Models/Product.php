@@ -9,6 +9,8 @@ class Product extends Model
 {
     protected $table = 'Product';
 
+    public $timestamps = false;
+
     public function productRack(): HasOne
     {
         return $this->hasOne(Product_Rack::class);
