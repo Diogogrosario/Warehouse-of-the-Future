@@ -4,57 +4,119 @@
         <div class="form-row justify-content-around mx-3">
             <div class="col">
                 <h1 class="pl-3">Human</h1>
-                <div class="form-check pl-5">
-                    <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
-                           value="frequency"
-                           id="frequency">
-                    <label class="form-check-label" for="frequency">
-                        Optimize Travel Distance - Frequents Together
-                    </label>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
+                                   value="frequency"
+                                   id="frequency">
+                            <label class="form-check-label" for="frequency">
+                                Optimize Travel Distance - Frequents Together
+                            </label>
+                        </div>
+                    </div>
+                    <div id="col-frequency" class="col-4 d-none">
+                        <div class="form-group">
+                            <select class="form-control" name="optimization-weights[]">
+                                @include('partials.generate_layouts.select')
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check pl-5">
-                    <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
-                           value="weight"
-                           id="weight">
-                    <label class="form-check-label" for="weight">
-                        Optimize Weight Lifting
-                    </label>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
+                                   value="weight"
+                                   id="weight">
+                            <label class="form-check-label" for="weight">
+                                Optimize Weight Lifting
+                            </label>
+                        </div>
+                    </div>
+                    <div id="col-weight" class="col-4 d-none">
+                        <div class="form-group">
+                            <select class="form-control" name="optimization-weights[]">
+                                @include('partials.generate_layouts.select')
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check pl-5">
-                    <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
-                           value="work"
-                           id="work">
-                    <label class="form-check-label" for="work">
-                        Optimize Chest Level
-                    </label>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
+                                   value="work"
+                                   id="work">
+                            <label class="form-check-label" for="work">
+                                Optimize Chest Level
+                            </label>
+                        </div>
+                    </div>
+                    <div id="col-work" class="col-4 d-none">
+                        <div class="form-group">
+                            <select class="form-control" name="optimization-weights[]">
+                                @include('partials.generate_layouts.select')
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check pl-5">
-                    <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
-                           value="minimize-errors" id="minimize-errors">
-                    <label class="form-check-label" for="minimize-errors">
-                        Minimize Worker Error
-                    </label>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
+                                   value="minimize-errors" id="minimize-errors">
+                            <label class="form-check-label" for="minimize-errors">
+                                Minimize Worker Error
+                            </label>
+                        </div>
+                    </div>
+                    <div id="col-minimize-errors" class="col-4 d-none">
+                        <div class="form-group">
+                            <select class="form-control" name="optimization-weights[]">
+                                @include('partials.generate_layouts.select')
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col">
                 <h1 class="pl-3">Hardware</h1>
-                <div class="form-check pl-5">
-                    <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
-                           value="windows" id="windows">
-                    <label class="form-check-label" for="defaultCheck1">
-                        Optimize Hardware Solar Battery
-                    </label>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
+                                   value="windows" id="windows">
+                            <label class="form-check-label" for="windows">
+                                Optimize Hardware Solar Battery
+                            </label>
+                        </div>
+                    </div>
+                    <div id="col-windows" class="col-4 d-none">
+                        <select class="form-control" name="optimization-weights[]">
+                            @include('partials.generate_layouts.select')
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="col">
                 <h1 class="pl-3">Warehouse</h1>
-                <div class="form-check pl-5">
-                    <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
-                           value="sector"
-                           id="sector">
-                    <label class="form-check-label" for="sector">
-                        Optimize By Type of Sector
-                    </label>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
+                                   value="type"
+                                   id="organization">
+                            <label class="form-check-label" for="organization">
+                                Optimize By Type of Sector
+                            </label>
+                        </div>
+                    </div>
+                    <div id="col-organization" class="col-4 d-none">
+                        <select class="form-control" name="optimization-weights[]">
+                            @include('partials.generate_layouts.select')
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>

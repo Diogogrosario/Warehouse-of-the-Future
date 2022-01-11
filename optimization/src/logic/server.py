@@ -37,8 +37,8 @@ def run_server():
         if 'weight' in data['optimization-parameters']:
             metrics.append('weight')
 
-        if 'sector' in data['optimization-parameters']:
-            metrics.append('sector')
+        if 'organization' in data['optimization-parameters']:
+            metrics.append('organization')
 
         if 'work' in data['optimization-parameters']:
             metrics.append('work')

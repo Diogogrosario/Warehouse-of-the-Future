@@ -1,5 +1,13 @@
 @extends('layouts.app')
+@section('scripts')
+    <script type="text/javascript" src="{{asset('js/optimization_weights.js')}}" defer></script>
+    <script type="text/javascript" src="{{asset('js/optimization_mutual_exclusion.js')}}" defer></script>
+@endsection
 @section('content')
+    <div id="alert-mutual-exclusion" class="myAlert-top alert alert-dismissible alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error!</strong> You cannot choose Work and Weight metrics simultaneously
+    </div>
     <div class="d-flex" id="wrapper">
         <div id="page-content-wrapper">
             <div class="container-fluid">
