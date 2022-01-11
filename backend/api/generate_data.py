@@ -1,12 +1,12 @@
-from flask_restx import fields, Namespace, Resource
+from flask_restx import Namespace, Resource
 import random
 import datetime
-import uuid
 import names
 import json
 import secrets
 from .utils import utils
 from bson.objectid import ObjectId
+from bson import json_util
 
 namespace = Namespace(
     "GenerateData",
@@ -14,53 +14,6 @@ namespace = Namespace(
     description="Generate random data to simulate the warehouse"
 )
 
-# ------------------------------------------------------------------------------
-# Models
-# ------------------------------------------------------------------------------
-
-# Items
-
-item_attributes = namespace.model("Item", {
-    "_id": fields.String(
-        required=True,
-        description="Id of the item"
-    ),
-    "designation": fields.String(
-        required=True,
-        description="Name of the item"
-    ),
-    "width": fields.Float(
-        required=True,
-        description="Width of the item, in cm"
-    ),
-    "height": fields.Float(
-        required=True,
-        description="Height of the item, in cm"
-    ),
-    "length": fields.Float(
-        required=True,
-        description="Length of the item, in cm"
-    ),
-    "weight": fields.Float(
-        required=True,
-        description="Weight of the item, in g"
-    ),
-    "quantity": fields.Integer(
-        required=True,
-        description="Quantity of the item"
-    ),
-})
-
-item_in_manifest_attributes = namespace.model("ItemInManifest", {
-    "item_id": fields.String(
-        required=True,
-        description="Id of the item"
-    ),
-    "quantity": fields.Integer(
-        required=True,
-        description="Quantity of the item"
-    ),
-})
 
 available_item_names = [
     # items relacionados com o sistema de travagem
@@ -98,232 +51,6 @@ available_item_names = [
     "eixo", "fecho central",
 ]
 
-# Manifest
-
-manifest_attributes = namespace.model("Manifest", {
-    "_id": fields.String(
-        required=True,
-        description="Id of the manifest"
-    ),
-    "time": fields.DateTime(
-        required=True,
-        description="The manifest time"
-    ),
-    "staff_id": fields.String(
-        required=True,
-        description="Id of the operator who makes the collection of items"
-    ),
-    "items": fields.List(
-        fields.Nested(item_in_manifest_attributes),
-        required=True,
-        description="Manifest Items"
-    ),
-})
-
-# Staff
-
-staff_attributes = namespace.model("Staff", {
-    "_id": fields.String(
-        required=True,
-        description="Id of the employee"
-    ),
-    "name": fields.String(
-        required=True,
-        description="Name of the employee"
-    ),
-    "height": fields.Float(
-        required=True,
-        description="Height of the employee, in cm."
-    ),
-    "birth_date": fields.DateTime(
-        required=True,
-        description="Birth date of the employee"
-    ),
-})
-
-# Sensors
-
-staff_contact_in_sensor_attributes = namespace.model("StaffContactInSensor", {
-    "time": fields.DateTime(
-        required=True,
-        description="Timestamp of when the sensor registered the contact"
-    ),
-    "staff_id": fields.String(
-        required=True,
-        description="Id of the operator that was next to the sensor"
-    )
-})
-
-sensor_attributes = namespace.model("Sensor", {
-    "_id": fields.String(
-        required=True,
-        description="Id of the sensor"
-    ),
-    "device": fields.String(
-        required=True,
-        description="Id of the associated device"
-    ),
-    "movement_records": fields.List(
-        fields.DateTime,
-        required=True,
-        description="Timestamps of the movement detections."
-    ),
-    "staff_contacts": fields.List(
-        fields.Nested(staff_contact_in_sensor_attributes),
-        required=True,
-        description="Array of objects with timestamp and staff_id, that"
-                    + " represents when an operator was next to the sensor."
-    )
-})
-
-# Devices
-
-device_attributes = namespace.model("Device", {
-    "_id": fields.String(
-        required=True,
-        description="Id of the sensor"
-    ),
-    "bucket": fields.String(
-        required=True,
-        description="Id of the associated bucket"
-    ),
-    "sensor": fields.String(
-        required=True,
-        description="Id of the associated sensor"
-    )
-})
-
-# Layout
-
-bucket_attributes = namespace.model("Bucket", {
-    "_id": fields.String(
-        required=True,
-        description="Id of the bucket"
-    ),
-    "width": fields.Float(
-        required=True,
-        description="Width of the bucket, in cm"
-    ),
-    "height": fields.Float(
-        required=True,
-        description="Height of the bucket, in cm"
-    ),
-    "length": fields.Float(
-        required=True,
-        description="Length of the bucket, in cm"
-    ),
-    "position": fields.List(
-        fields.Integer,
-        required=True,
-        description="Coordinates of the bucket, "
-                    + "in the form of list ([x, y, z])"
-    ),
-    "item_id": fields.String(
-        required=True,
-        description="Id of the item inside the bucket"
-    ),
-    "quantity": fields.Integer(
-        required=True,
-        description="Quantity of the item that is inside the bucket"
-    ),
-    "shelf_id": fields.String(
-        required=True,
-        description="Id of the shelf where the bucket is located"
-    )
-})
-
-shelf_attributes = namespace.model("Shelf", {
-    "_id": fields.String(
-        required=True,
-        description="Id of the shelf"
-    ),
-    "height": fields.Float(
-        required=True,
-        description="Height of the shelf in relation to the gound, in cm"
-    ),
-    "rack_id": fields.String(
-        required=True,
-        description="Id of the rack where the shelf is located"
-    ),
-})
-
-rack_attributes = namespace.model("Rack", {
-    "_id": fields.String(
-        required=True,
-        description="Id of the rack"
-    ),
-    "width": fields.Float(
-        required=True,
-        description="Width of the rack, in cm"
-    ),
-})
-
-layout_attributes = namespace.model("Layout", {
-    "time": fields.DateTime(
-        required=True,
-        description="The current time"
-    ),
-    "racks": fields.List(
-        fields.Nested(rack_attributes),
-        required=True,
-        description="Racks present in the warehouse"
-    ),
-    "shelves": fields.List(
-        fields.Nested(shelf_attributes),
-        required=True,
-        description="Shelves present in the warehouse"
-    ),
-    "buckets": fields.List(
-        fields.Nested(bucket_attributes),
-        required=True,
-        description="Buckets present in the warehouse"
-    ),
-    "sensors": fields.List(
-        fields.Nested(sensor_attributes),
-        required=True,
-        description="Sensors present in the warehouse"
-    ),
-    "devices": fields.List(
-        fields.Nested(device_attributes),
-        required=True,
-        description="Devices present in the warehouse"
-    ),
-})
-
-# Cart
-
-cart_attributes = namespace.model("Cart", {
-    "start_position": fields.List(
-        fields.Integer,
-        required=True,
-        description="Coordinates of the cart start position, "
-                    + "in the form of list ([x, y])"
-    ),
-    "speed": fields.Float(
-        required=True,
-        description="Speed of the cart, in cm/min"
-    ),
-    "start_time": fields.String(
-        required=True,
-        description="The time of the day when the cart starts"
-    ),
-    "end_time": fields.String(
-        required=True,
-        description="The time of the day when the cart stops"
-    ),
-})
-
-# Orchestrator
-
-orchestrator_attributes = namespace.model("Orchestrator", {
-    "position": fields.List(
-        fields.Integer,
-        required=True,
-        description="Coordinates of the orchestrator, "
-                    + "in the form of list ([x, y, z])"
-    )
-})
-
 
 # ------------------------------------------------------------------------------
 # Manifests
@@ -350,7 +77,7 @@ def generate_items_for_manifest():
             "quantity": quantity
         })
 
-    return manifest_items
+    return json.loads(json_util.dumps(manifest_items))
 
 
 def get_static_items_ids():
@@ -360,7 +87,6 @@ def get_static_items_ids():
 
 @namespace.route("/manifest")
 class Manifest(Resource):
-    @namespace.marshal_list_with(manifest_attributes)
     def get(self):
         """
         Returns a random manifest.
@@ -376,7 +102,7 @@ class Manifest(Resource):
             "items": items
         }
 
-        return manifest
+        return json.loads(json_util.dumps(manifest))
 
 
 # ------------------------------------------------------------------------------
@@ -394,7 +120,7 @@ def generate_employee_data(id=None):
         "birth_date": utils.get_random_birth_date(),
     }
 
-    return employee
+    return json.loads(json_util.dumps(employee))
 
 
 def get_static_employee_data():
@@ -407,7 +133,6 @@ GENERATE_RANDOM_STAFF = False
 
 @namespace.route("/staff")
 class Staff(Resource):
-    @namespace.marshal_list_with(staff_attributes)
     def get(self):
         """
         Returns a list with all the employees.
@@ -421,7 +146,10 @@ class Staff(Resource):
         else:
             employees = get_static_employee_data()
 
-        return employees
+        for employee in employees:
+            employee["_id"] = ObjectId(employee["_id"])
+
+        return json.loads(json_util.dumps(employees))
 
 
 # ------------------------------------------------------------------------------
@@ -436,7 +164,6 @@ def get_static_items_data():
 
 @namespace.route("/items")
 class Item(Resource):
-    @namespace.marshal_list_with(item_attributes)
     def get(self):
         """
         Returns a list with all the items.
@@ -444,7 +171,10 @@ class Item(Resource):
 
         items = get_static_items_data()
 
-        return items
+        for item in items:
+            item["_id"] = ObjectId(item["_id"])
+
+        return json.loads(json_util.dumps(items))
 
 
 # ------------------------------------------------------------------------------
@@ -453,7 +183,6 @@ class Item(Resource):
 
 @namespace.route("/orchestrator")
 class Orchestrator(Resource):
-    @namespace.marshal_list_with(orchestrator_attributes)
     def get(self):
         """
         Returns the position of the orchestrator.
@@ -650,7 +379,7 @@ def generate_super_rack(
                 devices.append(device)
                 sensors.append(sensor)
 
-    return {
+    superrack = {
         "final_super_rack1_width": final_current_super_rack1_width,
         "racks": racks,
         "shelves": shelves,
@@ -658,6 +387,8 @@ def generate_super_rack(
         "sensors": sensors,
         "devices": devices
     }
+
+    return json.loads(json_util.dumps(superrack))
 
 
 def coherent_generate_layout():
@@ -703,7 +434,7 @@ def coherent_generate_layout():
     devices = super_rack1["devices"] + super_rack2["devices"] \
                                      + super_rack3["devices"]
 
-    return {
+    coherent_layout = {
         "racks": racks,
         "shelves": shelves,
         "buckets": buckets,
@@ -711,9 +442,10 @@ def coherent_generate_layout():
         "devices": devices
     }
 
+    return json.loads(json_util.dumps(coherent_layout))
 
-def generate_item(id, max_width, max_height):
 
+def generate_item(max_width, max_height):
     quantity = random.randint(1, 3)
 
     # Here we are choosing a random name of the item,
@@ -728,7 +460,7 @@ def generate_item(id, max_width, max_height):
     weight = random.randint(1, 1000*100 // quantity)
 
     item = {
-        "_id": id,
+        "_id": ObjectId(secrets.token_hex(12)),
         "designation": item_name,
         "width": width,
         "height": height,
@@ -737,7 +469,7 @@ def generate_item(id, max_width, max_height):
         "quantity": quantity,
     }
 
-    return item
+    return json.loads(json_util.dumps(item))
 
 
 def generate_sensor(device_id, staff_ids):
@@ -765,19 +497,20 @@ def generate_sensor(device_id, staff_ids):
         "staff_contacts": staff_contacts
     }
 
-    return sensor
+    return json.loads(json_util.dumps(sensor))
 
 def generate_device(bucket_id, staff_ids):
-    id = ObjectId(secrets.token_hex(12))
-    sensor = generate_sensor(id, staff_ids)
+    device_id = ObjectId(secrets.token_hex(12))
+
+    sensor = generate_sensor(device_id, staff_ids)
 
     device = {
-        "_id": id,
+        "_id": device_id,
         "bucket": bucket_id,
         "sensor": sensor["_id"]
     }
 
-    return device, sensor
+    return json.loads(json_util.dumps(device)), sensor
 
 
 def generate_bucket(shelf, item_id, position, width, shelf_height):
@@ -801,12 +534,11 @@ def generate_bucket(shelf, item_id, position, width, shelf_height):
         "shelf_id": shelf["_id"]
     }
 
-    return bucket
+    return json.loads(json_util.dumps(bucket))
 
 
 @namespace.route("/layout")
 class Layout(Resource):
-    @namespace.marshal_list_with(layout_attributes)
     def get(self):
         """
         Returns the racks, shelves, buckets, sensors
@@ -816,6 +548,7 @@ class Layout(Resource):
         layout = coherent_generate_layout()
 
         layout = {
+            "_id": ObjectId(secrets.token_hex(12)),
             "time": datetime.datetime.now(),
             "racks": layout["racks"],
             "shelves": layout["shelves"],
@@ -824,7 +557,7 @@ class Layout(Resource):
             "devices": layout["devices"]
         }
 
-        return layout
+        return json.loads(json_util.dumps(layout))
 
 
 # ------------------------------------------------------------------------------
@@ -833,7 +566,6 @@ class Layout(Resource):
 
 @namespace.route("/cart")
 class Cart(Resource):
-    @namespace.marshal_list_with(cart_attributes)
     def get(self):
         """
         Returns the speed, start and end times of the cart.

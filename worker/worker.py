@@ -1,4 +1,7 @@
 import os, sched, time, requests
+from bson.objectid import ObjectId
+import time
+import datetime
 
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.append(parentdir)
@@ -20,27 +23,45 @@ def terminate_worker():
 # Manifest
 def populate_manifests():
     manifest = requests.get(f"{API_BASE_URL}/manifest").json()
+    
+    manifest["_id"] = ObjectId(manifest["_id"]["$oid"])
+
     db.client.WoF.Manifests.insert_one(manifest)
 
 
 # Layout
 def populate_buckets(buckets):
+    for bucket in buckets:
+        bucket["_id"] = ObjectId(bucket["_id"]["$oid"])
+
     db.client.WoF.Buckets.insert_many(buckets)
 
 
 def populate_racks(racks):
+    for rack in racks:
+        rack["_id"] = ObjectId(rack["_id"]["$oid"])
+
     db.client.WoF.Racks.insert_many(racks)
 
 
 def populate_sensors(sensors):
+    for sensor in sensors:
+        sensor["_id"] = ObjectId(sensor["_id"]["$oid"])
+
     db.client.WoF.Sensors.insert_many(sensors)
 
 
 def populate_devices(devices):
+    for device in devices:
+        device["_id"] = ObjectId(device["_id"]["$oid"])
+
     db.client.WoF.Devices.insert_many(devices)
 
 
 def populate_shelves(shelves):
+    for shelf in shelves:
+        shelf["_id"] = ObjectId(shelf["_id"]["$oid"])
+
     db.client.WoF.Shelves.insert_many(shelves)
 
 
@@ -77,6 +98,11 @@ def populate_staff():
     db.client.WoF.Employees.drop()
     db.client.WoF.create_collection("Employees")
     employees = requests.get(f"{API_BASE_URL}/staff").json()
+
+    for employee in employees:
+        employee["_id"] = ObjectId(employee["_id"]["$oid"])
+        employee["birth_date"] = datetime.datetime.strptime(employee["birth_date"], "%Y-%m-%dT%H:%M:%S.%f")
+    
     db.client.WoF.Employees.insert_many(employees)
 
 
@@ -85,6 +111,10 @@ def populate_items():
     db.client.WoF.Items.drop()
     db.client.WoF.create_collection("Items")
     items = requests.get(f"{API_BASE_URL}/items").json()
+
+    for item in items:
+        item["_id"] = ObjectId(item["_id"]["$oid"])
+
     db.client.WoF.Items.insert_many(items)
 
 db.client.WoF.Buckets.drop()
@@ -101,6 +131,9 @@ db.client.WoF.Racks.drop()
 db.client.WoF.create_collection("Racks")
 db.client.WoF.Manifests.drop()
 db.client.WoF.create_collection("Manifests")
+
+time.sleep(5)
+
 # Worker starts by populating staff and global, which are needed only once
 populate_staff()
 populate_items()

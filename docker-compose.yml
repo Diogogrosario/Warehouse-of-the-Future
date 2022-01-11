@@ -25,15 +25,6 @@ services:
         # networks:
         #     - grafnet
 
-    worker:
-        build: ./worker
-        ports:
-            - 8080:8080
-        volumes:
-            - .:/app
-        networks:
-            - workerapi
-
     backend:
         build: ./backend
         ports:
@@ -45,6 +36,15 @@ services:
         networks:
             - workerapi
         #     - grafnet
+
+    worker:
+        build: ./worker
+        ports:
+            - 8080:8080
+        volumes:
+            - .:/app
+        networks:
+            - workerapi
 
 networks:
     workerapi:
