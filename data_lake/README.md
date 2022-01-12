@@ -27,4 +27,4 @@ We are a team in the Warehouse of Future project, that was done as part of the L
 -   frontend (localhost:3000)
 -   grafana (localhost:9000)
 -   backend (localhost:8001)
--   worker (localhost:8080)
+-   populate-worker (localhost:8080)

@@ -11,7 +11,8 @@ from bson import json_util
 namespace = Namespace(
     "GenerateData",
     path="/generate_data",
-    description="Generate random data to simulate the warehouse"
+    description="Generate random data to simulate the warehouse.\
+        This endpoint is only used by the populate worker."
 )
 
 available_item_names = []
