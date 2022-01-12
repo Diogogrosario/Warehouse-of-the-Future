@@ -22,8 +22,8 @@ services:
             - grafana-data:/app/grafana
             - ./grafana/dashboards:/etc/grafana/dashboards
             - ./grafana/provisioning:/etc/grafana/provisioning
-        # networks:
-        #     - grafnet
+        networks:
+            - grafnet
 
     backend:
         build: ./backend
@@ -35,7 +35,7 @@ services:
             - ./backend:/app
         networks:
             - workerapi
-        #     - grafnet
+            - grafnet
 
     worker:
         build: ./worker
@@ -49,9 +49,8 @@ services:
 networks:
     workerapi:
         driver: bridge
-#     grafnet:
-#         external: false
-
+    grafnet:
+        external: false
 
 volumes:
     grafana-data:
