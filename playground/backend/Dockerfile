@@ -6,6 +6,8 @@ WORKDIR /app
 # Add node_modules/.bin to PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
+RUN apk add --no-cache postgresql-client
+
 # Install app dependencies
 COPY package.json ./
 RUN yarn install
@@ -16,4 +18,4 @@ COPY . ./
 # Start app
 EXPOSE 3001
 
-CMD ["yarn", "serve"]
+CMD ["./wait-for-postgres.sh", "db", "yarn", "serve"]
