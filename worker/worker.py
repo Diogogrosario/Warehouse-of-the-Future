@@ -1,12 +1,14 @@
-import os, sched, time, requests
-from bson.objectid import ObjectId
+import os
+import sched
 import time
+import requests
+from bson.objectid import ObjectId
 import datetime
 
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.append(parentdir)
 
-from backend.api import db
+from backend.api import db # noqa (ignore linter in this line)
 
 DAILY_MANIFESTS = 30
 terminate = False
@@ -23,7 +25,7 @@ def terminate_worker():
 # Manifest
 def populate_manifests():
     manifest = requests.get(f"{API_BASE_URL}/manifest").json()
-    
+
     manifest["_id"] = ObjectId(manifest["_id"]["$oid"])
 
     db.client.WoF.Manifests.insert_one(manifest)
@@ -101,8 +103,10 @@ def populate_staff():
 
     for employee in employees:
         employee["_id"] = ObjectId(employee["_id"]["$oid"])
-        employee["birth_date"] = datetime.datetime.strptime(employee["birth_date"], "%Y-%m-%dT%H:%M:%S.%f")
-    
+        employee["birth_date"] = datetime.datetime.strptime(
+            employee["birth_date"], "%Y-%m-%dT%H:%M:%S.%f"
+        )
+
     db.client.WoF.Employees.insert_many(employees)
 
 
@@ -116,6 +120,7 @@ def populate_items():
         item["_id"] = ObjectId(item["_id"]["$oid"])
 
     db.client.WoF.Items.insert_many(items)
+
 
 db.client.WoF.Buckets.drop()
 db.client.WoF.create_collection("Buckets")
@@ -142,6 +147,7 @@ populate_global()
 # Then periodically adds manifests and layouts
 s = sched.scheduler(time.time, time.sleep)
 
+
 def populate_periodic():
     # Schedule another populate action the next day
     event = s.enter(172800, 1, populate_periodic)
@@ -158,6 +164,7 @@ def populate_periodic():
     # If terminated, cancels last scheduled populate action
     if terminate:
         s.cancel(event)
+
 
 s.enter(0, 1, populate_periodic)
 s.run()
