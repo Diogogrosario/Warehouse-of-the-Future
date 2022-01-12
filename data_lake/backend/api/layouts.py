@@ -13,33 +13,6 @@ namespace = Namespace("Layouts", path="/layouts",
 # Models
 # ------------------------------------------------------------------------------
 
-bucketAttributes = namespace.model("LayoutBucket", {
-    "id": fields.String(
-        required=True,
-        attribute="_id.$oid",
-        description="Bucket id"
-    ),
-    "width": fields.Float(required=True, description="Width of the bucket, in cm"),
-    "height": fields.Float(required=True, description="Height of the bucket, in cm"),
-    "length": fields.Float(required=True, description="Length of the bucket, in cm"),
-    "position": fields.List(
-        fields.Integer(
-            required=True,
-            description="Bucket position")
-    ),
-    "item_id": fields.String(
-        required=True,
-        attribute="item_id.$oid",
-        description="Associated item id"
-    ),
-    "quantity": fields.Integer(required=True, description="Item quantity"),
-    "shelf_id": fields.String(
-        required=True,
-        attribute="shelf_id.$oid",
-        description="Associated shelf id"
-    )
-})
-
 layoutAttributes = namespace.model("Layout", {
     "id": fields.String(
         required=True,
@@ -47,8 +20,11 @@ layoutAttributes = namespace.model("Layout", {
         description="Layout id"
     ),
     "buckets": fields.List(
-        fields.Nested(bucketAttributes),
-        description="List of buckets in layout"
+        fields.String(
+            required=True,
+            attribute="$oid"
+        ),
+        description="Bucket ids in layout"
     ),
     "time": fields.String(required=True, description="The layout time"),
 })
@@ -59,9 +35,9 @@ layoutAttributes = namespace.model("Layout", {
 
 parser = reqparse.RequestParser()
 parser.add_argument("time_after", required=False, type=inputs.date,
-                    help="The lower bound for the timestamp of layouts.")
+                    help="The lower bound for the timestamp of layouts (Format YYYY-MM-DD).")
 parser.add_argument("time_before", required=False, type=inputs.date,
-                    help="The upper bound for the timestamp of layouts.")
+                    help="The upper bound for the timestamp of layouts (Format YYYY-MM-DD) .")
 
 @namespace.route("/")
 class Layouts(Resource):

@@ -77,8 +77,10 @@ def populate_layouts():
     populate_devices(layout["devices"])
     populate_shelves(layout["shelves"])
 
+    bucket_ids = [bucket["_id"] for bucket in layout["buckets"]]
+
     # Finally, populate Layouts collection
-    final_layout = {"time": layout["time"], "buckets": layout["buckets"]}
+    final_layout = {"time": layout["time"], "buckets": bucket_ids}
     db.client.WoF.Layouts.insert_one(final_layout)
 
 

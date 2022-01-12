@@ -37,8 +37,8 @@ services:
             - workerapi
             - grafnet
 
-    worker:
-        build: ./worker
+    populate-worker:
+        build: ./populate-worker
         ports:
             - 8080:8080
         volumes:

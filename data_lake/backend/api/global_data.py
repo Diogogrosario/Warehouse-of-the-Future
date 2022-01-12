@@ -51,44 +51,19 @@ orchestrator_position_attributes = namespace.model("Orchestrator", {
 # Cart position
 # ------------------------------------------------------------------------------
 
-parser = reqparse.RequestParser()
-parser.add_argument("time_before",
-                    required=False,
-                    type=str,
-                    help="The lower bound for the start_time" +
-                    "of the cart (HH:MM).")
-parser.add_argument("time_after",
-                    required=False,
-                    type=str,
-                    help="The upper bound for the end_time" +
-                    "of the cart (HH:MM).")
-
-
 @namespace.route("/cart")
 class GlobalDataCart(Resource):
     @namespace.marshal_with(cart_attributes)
-    @namespace.expect(parser)
     @namespace.response(200, 'Success')
     @namespace.response(404, 'Incorrect Request')
     def get(self):
         """
         Returns the cart's information
 
-        Returns the global data including the position of the cart
-        on a determined time interval.
+        Returns the global data including the position of the cart.
         """
-        args = parser.parse_args()
-        time_before = args['time_before']  # Format: HH:MM
-        time_after = args['time_after']    # Format: HH:MM
 
-        searchQuery = {}
-
-        if time_before is not None:
-            searchQuery["cart.start_time"] = {"$gte": str(time_before)}
-        if time_after is not None:
-            searchQuery["cart.end_time"] = {"$lte": str(time_after)}
-
-        document = globalDataCollection.find(searchQuery)
+        document = globalDataCollection.find_one({})
 
         return json.loads(json_util.dumps(document))
 

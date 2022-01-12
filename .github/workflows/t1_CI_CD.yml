@@ -1,99 +1,112 @@
 name: T1 - Data Collection & Processing CI/CD
 
 on:
-  push:
-    branches: [ t1_development ]
-  pull_request:
-    branches: [ t1_development ]
+    push:
+        branches: [t1_development]
+    pull_request:
+        branches: [t1_development]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.8]
+    test:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                python-version: [3.8]
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8
-          if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; fi
-      - name: Lint with flake8
-        run: |
-          # stop the build if there are Python syntax errors or undefined names
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          flake8 . --count --max-complexity=10 --max-line-length=127 --statistics
-      - name: Test with pytest
-        run: |
-          pytest --cov=api
-  
-  build_and_push:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    needs: test
+        steps:
+            - uses: actions/checkout@v2
+            - name: Set up Python ${{ matrix.python-version }}
+              uses: actions/setup-python@v2
+              with:
+                  python-version: ${{ matrix.python-version }}
+            - name: Change to data_lake/
+              run: |
+                  cd data_lake/
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install flake8
+                  if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; fi
+            - name: Lint with flake8
+              run: |
+                  # stop the build if there are Python syntax errors or undefined names
+                  flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+                  # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+                  flake8 . --count --max-complexity=10 --max-line-length=127 --statistics --ignore=E402,E226,W503,W504
+            - name: Build .env.test
+              run: |
+                  echo FLASK_APP=app.py > backend/.env.test  
+                  echo FLASK_DEBUG=1 >> backend/.env.test  
+                  echo FLASK_ENV=development >> backend/.env.test  
+                  echo MONGO_ATLAS_USERNAME=${{secrets.T1_MONGO_ATLAS_USERNAME_TEST}} >> backend/.env.test  
+                  echo MONGO_ATLAS_PASSWORD=${{secrets.T1_MONGO_ATLAS_PASSWORD_TEST}} >> backend/.env.test  
+                  echo MONGO_ATLAS_CLUSTER=${{secrets.T1_MONGO_ATLAS_CLUSTER_TEST}} >> backend/.env.test  
+                  echo MONGO_ATLAS_SERVER=${{secrets.T1_MONGO_ATLAS_SERVER_TEST}} >> backend/.env.test
+            - name: Test with pytest
+              run: |
+                  sh runTests.sh
 
-    steps:
-      - name: Checkout master
-        uses: actions/checkout@v2
-      - name: Create backend .env file
-        run: |
-          echo FLASK_APP=app.py > backend/.env  
-          echo FLASK_DEBUG=1 >> backend/.env  
-          echo FLASK_ENV=development >> backend/.env  
-          echo MONGO_ATLAS_USERNAME=${{secrets.T1_MONGO_ATLAS_USERNAME}} >> backend/.env  
-          echo MONGO_ATLAS_PASSWORD=${{secrets.T1_MONGO_ATLAS_PASSWORD}} >> backend/.env  
-          echo MONGO_ATLAS_DATABASE=${{secrets.T1_MONGO_ATLAS_PASSWORD}} >> backend/.env  
-      - name: Docker Hub login
-        run: |
-          docker login -u ${{secrets.T1_DOCKERHUB_USERNAME}} -p ${{secrets.T1_DOCKERHUB_PASSWORD}}
-      - name: Run docker-compose.yml
-        run: |
-          docker-compose -f "docker-compose.yml" up -d --build
-      - name: Docker push images
-        env:
-          DOCKERHUB_REPO: "dsmeic/ds-meic2"
-          FRONTEND_TAG: "frontend"
-          BACKEND_TAG: "backend"
-        run: |
-          docker tag ds-meic2_${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
-          docker push ${DOCKERHUB_REPO}:${BACKEND_TAG}
-          docker tag ds-meic2_${FRONTEND_TAG} ${DOCKERHUB_REPO}:${FRONTEND_TAG}
-          docker push ${DOCKERHUB_REPO}:${FRONTEND_TAG}
-  
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    needs: build_and_push
+    build_and_push:
+        runs-on: ubuntu-latest
+        if: github.event_name == 'push'
+        needs: test
 
-    steps:
-      - name: Deploy to Digital Ocean via SSH action
-        uses: appleboy/ssh-action@v0.1.3
-        env:
-            DOCKERHUB_REPO: "dsmeic/ds-meic2"
-            FRONTEND_TAG: "frontend"
-            BACKEND_TAG: "backend"
-        with:
-          host: ${{secrets.T1_SSH_IP}}
-          username: ${{secrets.T1_SSH_USERNAME}}
-          password: ${{secrets.T1_SSH_PASSWORD}}
-          envs: DOCKERHUB_REPO,FRONTEND_TAG,BACKEND_TAG          
-          script: |
-            echo ${FRONTEND_TAG}
-            docker stop ${FRONTEND_TAG}
-            docker stop ${BACKEND_TAG}
+        steps:
+            - name: Checkout master
+              uses: actions/checkout@v2
+            - name: Change to data_lake/
+              run: |
+                  cd data_lake/
+            - name: Create backend .env file
+              run: |
+                  echo FLASK_APP=app.py > backend/.env  
+                  echo FLASK_DEBUG=1 >> backend/.env  
+                  echo FLASK_ENV=development >> backend/.env  
+                  echo MONGO_ATLAS_USERNAME=${{secrets.T1_MONGO_ATLAS_USERNAME}} >> backend/.env  
+                  echo MONGO_ATLAS_PASSWORD=${{secrets.T1_MONGO_ATLAS_PASSWORD}} >> backend/.env  
+                  echo MONGO_ATLAS_CLUSTER=${{secrets.T1_MONGO_ATLAS_CLUSTER}} >> backend/.env  
+                  echo MONGO_ATLAS_SERVER=${{secrets.T1_MONGO_ATLAS_SERVER}} >> backend/.env
+            - name: Docker Hub login
+              run: |
+                  docker login -u ${{secrets.T1_DOCKERHUB_USERNAME}} -p ${{secrets.T1_DOCKERHUB_PASSWORD}}
+            - name: Run docker-compose.yml
+              run: |
+                  docker-compose -f "docker-compose.yml" up -d --build
+            - name: Docker push images
+              env:
+                  DOCKERHUB_REPO: "dsmeic/ds-meic2"
+                  FRONTEND_TAG: "frontend"
+                  BACKEND_TAG: "backend"
+              run: |
+                  docker tag ds-meic2_${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
+                  docker push ${DOCKERHUB_REPO}:${BACKEND_TAG}
+                  docker tag ds-meic2_${FRONTEND_TAG} ${DOCKERHUB_REPO}:${FRONTEND_TAG}
+                  docker push ${DOCKERHUB_REPO}:${FRONTEND_TAG}
 
-            docker rm ${FRONTEND_TAG}
-            docker rm ${BACKEND_TAG}
+    deploy:
+        runs-on: ubuntu-latest
+        if: github.event_name == 'push'
+        needs: build_and_push
 
-            docker pull ${DOCKERHUB_REPO}:${FRONTEND_TAG}
-            docker pull ${DOCKERHUB_REPO}:${BACKEND_TAG}
-
-            docker run -d -p 8000:3000 --restart always --name ${FRONTEND_TAG} ${DOCKERHUB_REPO}:${FRONTEND_TAG}
-            docker run -d -p 8001:5000 --restart always --name ${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
+        steps:
+            - name: Deploy to Digital Ocean via SSH action
+              uses: appleboy/ssh-action@v0.1.3
+              env:
+                  DOCKERHUB_REPO: "dsmeic/ds-meic2"
+                  FRONTEND_TAG: "frontend"
+                  BACKEND_TAG: "backend"
+              with:
+                  host: ${{secrets.T1_SSH_IP}}
+                  username: ${{secrets.T1_SSH_USERNAME}}
+                  password: ${{secrets.T1_SSH_PASSWORD}}
+                  envs: DOCKERHUB_REPO,FRONTEND_TAG,BACKEND_TAG
+                  script: |
+                      echo ${FRONTEND_TAG}
+                      docker stop ${FRONTEND_TAG}
+                      docker stop ${BACKEND_TAG}
+                      docker rm ${FRONTEND_TAG}
+                      docker rm ${BACKEND_TAG}
+                      docker pull ${DOCKERHUB_REPO}:${FRONTEND_TAG}
+                      docker pull ${DOCKERHUB_REPO}:${BACKEND_TAG}
+                      docker run -d -p 8000:3000 --restart always --name ${FRONTEND_TAG} ${DOCKERHUB_REPO}:${FRONTEND_TAG}
+                      docker run -d -p 8001:5000 --restart always --name ${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
