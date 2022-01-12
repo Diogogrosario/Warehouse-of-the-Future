@@ -8,7 +8,7 @@ There are tests done to ensure the backend is working as intended, made using JU
 The backend development, as of 07/01/2022, is missing a restart endpoint on the API and implementing a way to go back in ticks, and some more functionalities.
 
 ## Frontend
-The frontend is made using Flutter 2 and Dart 2. 
+The frontend is made using GraphView with Flutter 2 and Dart 2. 
 The frontend communicates with the backend using the API created.
 The visual interface is composed of a 2D ambient where devices are displayed in accordance to their position. On the right side of the interface, a log is displayed, containing all the messages sent and received by every device on each tick.
 There are acceptance tests done using flutter-gherkin. We're using the experimental [backend:integration test](https://docs.flutter.dev/testing/integration-tests ), instead of the old widget driver. Since we are using flutter web, there is no need for an android emulator in our project. As such, we use chrome-driver to run the integration tests in a web server. When the definitive version of the backend:integration test is released, it is necessary to update it.
