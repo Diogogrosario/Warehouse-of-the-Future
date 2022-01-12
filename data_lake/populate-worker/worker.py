@@ -11,6 +11,7 @@ from backend.api import db # noqa (ignore linter in this line)
 
 DAILY_MANIFESTS = 30
 terminate = False
+reset = False
 
 API_BASE_URL = "http://backend:5000/generate_data"
 
@@ -120,20 +121,21 @@ def populate_items():
 
     db.client.WoF.Items.insert_many(items)
 
-db.client.WoF.Buckets.drop()
-db.client.WoF.create_collection("Buckets")
-db.client.WoF.Shelves.drop()
-db.client.WoF.create_collection("Shelves")
-db.client.WoF.Devices.drop()
-db.client.WoF.create_collection("Devices")
-db.client.WoF.Sensors.drop()
-db.client.WoF.create_collection("Sensors")
-db.client.WoF.Layouts.drop()
-db.client.WoF.create_collection("Layouts")
-db.client.WoF.Racks.drop()
-db.client.WoF.create_collection("Racks")
-db.client.WoF.Manifests.drop()
-db.client.WoF.create_collection("Manifests")
+if (reset):
+    db.client.WoF.Buckets.drop()
+    db.client.WoF.create_collection("Buckets")
+    db.client.WoF.Shelves.drop()
+    db.client.WoF.create_collection("Shelves")
+    db.client.WoF.Devices.drop()
+    db.client.WoF.create_collection("Devices")
+    db.client.WoF.Sensors.drop()
+    db.client.WoF.create_collection("Sensors")
+    db.client.WoF.Layouts.drop()
+    db.client.WoF.create_collection("Layouts")
+    db.client.WoF.Racks.drop()
+    db.client.WoF.create_collection("Racks")
+    db.client.WoF.Manifests.drop()
+    db.client.WoF.create_collection("Manifests")
 
 time.sleep(5)
 
