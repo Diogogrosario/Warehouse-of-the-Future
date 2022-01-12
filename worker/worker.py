@@ -27,7 +27,7 @@ def populate_manifests():
     manifest = requests.get(f"{API_BASE_URL}/manifest").json()
 
     manifest["_id"] = ObjectId(manifest["_id"]["$oid"])
-    manifest["staff_id"] = ObjectId(manifest["staff_id"]["$oid"])
+    manifest["staff_id"] = ObjectId(manifest["staff_id"])
 
     db.client.WoF.Manifests.insert_one(manifest)
 
@@ -104,9 +104,6 @@ def populate_staff():
 
     for employee in employees:
         employee["_id"] = ObjectId(employee["_id"]["$oid"])
-        employee["birth_date"] = datetime.datetime.strptime(
-            employee["birth_date"], "%Y-%m-%dT%H:%M:%S.%f"
-        )
 
     db.client.WoF.Employees.insert_many(employees)
 

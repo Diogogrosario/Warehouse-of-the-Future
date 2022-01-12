@@ -15,12 +15,11 @@ namespace = Namespace("Staff", path="/staff",
 # ------------------------------------------------------------------------------
 
 staffAttributes = namespace.model("Staff", {
-    "id": fields.String(required=True, attribute='_id', description="The unique identificator \
+    "id": fields.String(required=True, attribute='_id.$oid', description="The unique identificator \
 of the staff member"),
     "name": fields.String(required=True, description="The name of this staff \
 member"),
-    "birth_date": fields.DateTime(required=True, attribute='birth_date.$date', description="Birth date of this \
-staff member"),
+    "birth_date": fields.String(required=True, description="Birth date of this staff member"),
     "height": fields.Integer(require=True, description="Staff member age")
 })
 
@@ -48,15 +47,22 @@ class StaffQuery(Resource):
         Returns information about all the staff members that match the name \
             and minimum age passed as query parameters.
         """
+
         args = parser.parse_args()
         name = args['name']
         age = args['age']
         searchQuery = {}
 
         if age is not None:
-            current_year = datetime.date.today().year
-            dt = datetime.datetime(year=current_year - age, month=1, day=1)
-            searchQuery["birth_date"] = {"$lte": dt}
+            today = datetime.date.today()
+
+            dt = datetime.datetime(
+                year=today.year - age,
+                month=today.month,
+                day=today.day
+            )
+            searchQuery["birth_date"] = {"$lte": str(dt)}
+
         if name is not None:
             searchQuery["name"] = name
 

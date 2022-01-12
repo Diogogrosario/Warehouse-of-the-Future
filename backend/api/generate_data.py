@@ -117,7 +117,7 @@ def generate_employee_data(id=None):
         "_id": id,
         "name": names.get_full_name(),
         "height": round(random.uniform(140, 220)),
-        "birth_date": utils.get_random_birth_date(),
+        "birth_date": str(utils.get_random_birth_date()),
     }
 
     return json.loads(json_util.dumps(employee))
@@ -146,8 +146,8 @@ class Staff(Resource):
         else:
             employees = get_static_employee_data()
 
-        for employee in employees:
-            employee["_id"] = ObjectId(employee["_id"])
+        # for employee in employees:
+        #     employee["_id"] = ObjectId(employee["_id"])
 
         return json.loads(json_util.dumps(employees))
 

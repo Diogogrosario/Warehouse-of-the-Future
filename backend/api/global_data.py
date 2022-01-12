@@ -18,12 +18,12 @@ cart_attributes = namespace.model("Cart", {
         description="Speed of the cart, in cm/min"
     ),
     "start_time": fields.DateTime(
-        attribute='start_time.$date',
+        attribute='start_time',
         required=True,
         description="Start time of this information record"
     ),
     "end_time": fields.DateTime(
-        attribute='end_time.$date',
+        attribute='end_time',
         required=True,
         description="End time of this information record"
     )
@@ -79,9 +79,9 @@ class SensorInformation(Resource):
         searchQuery = {}
 
         if time_before is not None:
-            searchQuery["cart.start_time"] = {"$gte": time_before}
+            searchQuery["cart.start_time"] = {"$gte": str(time_before)}
         if time_after is not None:
-            searchQuery["cart.end_time"] = {"$lte": time_after}
+            searchQuery["cart.end_time"] = {"$lte": str(time_after)}
 
         document = globalDataCollection.find(searchQuery)
 
