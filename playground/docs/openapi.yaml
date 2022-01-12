@@ -331,6 +331,7 @@ paths:
                   - id: 45
                     severity: error
                     title: Unresponsive
+                    deviceId: "422D"
                     description: "Device 356A isn't responding."
                     resolved: false
                     actions:
@@ -373,6 +374,7 @@ paths:
                 example:
                   id: 45
                   severity: error
+                  deviceId: "422D"
                   title: Unresponsive
                   description: "Device 356A isn't responding."
                   resolved: false
@@ -414,6 +416,7 @@ paths:
               example:
                 id: 55
                 severity: error
+                deviceId: "422D"
                 title: Unresponsive
                 description: "Device A35 isn't responding."
                 resolved: false
@@ -425,7 +428,7 @@ paths:
                         createdAt: "2021-06-21 08:30"
                         updatedAt: "2021-06-21 08:30"
                       - id: 46
-                        report_id: 865
+                        reportId: 865
                         description: "Replaced display."
                         employeeId: "Fontão"
                         createdAt: "2021-06-21 08:35"
@@ -465,6 +468,7 @@ paths:
               example:
                 id: 55
                 severity: warning
+                deviceId: "422D"
                 title: Minor failure
                 description: "Device A35 isn't responding."
                 resolved: false
@@ -540,6 +544,9 @@ components:
           type: string
         description:
           description: "Description of the Report."
+          type: string
+        deviceId:
+          description: "Id of the device to which the report refers to."
           type: string
         resolved:
           description: "Field indicating if the issue was solved."
