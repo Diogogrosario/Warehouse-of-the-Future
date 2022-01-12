@@ -27,6 +27,7 @@ def populate_manifests():
     manifest = requests.get(f"{API_BASE_URL}/manifest").json()
 
     manifest["_id"] = ObjectId(manifest["_id"]["$oid"])
+    manifest["staff_id"] = ObjectId(manifest["staff_id"]["$oid"])
 
     db.client.WoF.Manifests.insert_one(manifest)
 
