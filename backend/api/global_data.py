@@ -14,33 +14,36 @@ namespace = Namespace("Global Data", path="/globalData",
 
 cart_attributes = namespace.model("Cart", {
     "speed": fields.Float(
+        attribute="cart.speed",
         required=True,
         description="Speed of the cart, in cm/min"
     ),
-    "start_time": fields.DateTime(
-        attribute='start_time',
+    "start_time": fields.String(
+        attribute='cart.start_time',
         required=True,
-        description="Start time of this information record"
+        description="Start time of this information record (HH:MM)"
     ),
-    "end_time": fields.DateTime(
-        attribute='end_time',
+    "end_time": fields.String(
+        attribute='cart.end_time',
         required=True,
-        description="End time of this information record"
+        description="End time of this information record (HH:MM)"
+    ),
+    "start_position": fields.List(
+        fields.Integer,
+        required=True,
+        attribute="cart.start_position",
+        description="Coordinates of the cart"
     )
 })
 
-globalDataAttributes = namespace.model("Cart", {
-    "orchestrator_position": fields.List(
+orchestrator_position_attributes = namespace.model("Orchestrator", {
+    "position": fields.List(
         fields.Integer,
         required=True,
+        attribute="orchestrator.position",
         description="Coordinates of the orchestrator,\
-in the form of list ([x, y, z])"
-    ),
-    "cart": fields.Nested(
-        cart_attributes,
-        required=True,
-        description="Information relative to the cart"
-    ),
+        in the form of list ([x, y, z])"
+    )
 })
 
 
@@ -51,30 +54,32 @@ in the form of list ([x, y, z])"
 parser = reqparse.RequestParser()
 parser.add_argument("time_before",
                     required=False,
-                    type=inputs.date,
-                    help="The lower bound for the timestamp of the cart.")
+                    type=str,
+                    help="The lower bound for the start_time" +
+                    "of the cart (HH:MM).")
 parser.add_argument("time_after",
                     required=False,
-                    type=inputs.date,
-                    help="The upper bound for the timestamp of the cart.")
+                    type=str,
+                    help="The upper bound for the end_time" +
+                    "of the cart (HH:MM).")
 
 
-@namespace.route("/")
-class SensorInformation(Resource):
-    @namespace.marshal_with(globalDataAttributes)
+@namespace.route("/cart")
+class GlobalDataCart(Resource):
+    @namespace.marshal_with(cart_attributes)
     @namespace.expect(parser)
     @namespace.response(200, 'Success')
     @namespace.response(404, 'Incorrect Request')
     def get(self):
         """
-        Returns the cart's position
+        Returns the cart's information
 
         Returns the global data including the position of the cart
         on a determined time interval.
         """
         args = parser.parse_args()
-        time_before = args['time_before']  # Format: YYYY-MM-DD
-        time_after = args['time_after']    # Format: YYYY-MM-DD
+        time_before = args['time_before']  # Format: HH:MM
+        time_after = args['time_after']    # Format: HH:MM
 
         searchQuery = {}
 
@@ -84,5 +89,19 @@ class SensorInformation(Resource):
             searchQuery["cart.end_time"] = {"$lte": str(time_after)}
 
         document = globalDataCollection.find(searchQuery)
+
+        return json.loads(json_util.dumps(document))
+
+
+@namespace.route("/orchestrator")
+class GlobalDataOrchestrator(Resource):
+    @namespace.marshal_with(orchestrator_position_attributes)
+    @namespace.response(200, 'Success')
+    @namespace.response(404, 'Incorrect Request')
+    def get(self):
+        """
+        Returns the orchestrator position.
+        """
+        document = globalDataCollection.find_one({})
 
         return json.loads(json_util.dumps(document))

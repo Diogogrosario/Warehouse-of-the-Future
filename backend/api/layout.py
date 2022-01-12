@@ -28,7 +28,7 @@ layoutAttributes = namespace.model("Layout", {
         fields.Nested(bucketAttributes),
         description="List of buckets in layout"
     ),
-    "date": fields.DateTime(required=True, description="The layout time"),
+    "date": fields.String(required=True, description="The layout time"),
 })
 
 # ------------------------------------------------------------------------------
@@ -61,11 +61,11 @@ class Layouts(Resource):
 
         if time_after is not None or time_before is not None:
             if time_before is None:
-                searchQuery["date"] = {"$lte": time_after}
+                searchQuery["date"] = {"$lte": str(time_after)}
             elif time_after is None:
-                searchQuery["date"] = {"$gte": time_before}
+                searchQuery["date"] = {"$gte": str(time_before)}
             else:
-                searchQuery["date"]["$lte"] = time_after
+                searchQuery["date"]["$lte"] = str(time_after)
 
         response = layoutsCollection.find(searchQuery)
 

@@ -3,7 +3,6 @@ import sched
 import time
 import requests
 from bson.objectid import ObjectId
-import datetime
 
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.sys.path.append(parentdir)
@@ -103,7 +102,7 @@ def populate_staff():
     employees = requests.get(f"{API_BASE_URL}/staff").json()
 
     for employee in employees:
-        employee["_id"] = ObjectId(employee["_id"]["$oid"])
+        employee["_id"] = ObjectId(employee["_id"])
 
     db.client.WoF.Employees.insert_many(employees)
 
@@ -118,7 +117,6 @@ def populate_items():
         item["_id"] = ObjectId(item["_id"]["$oid"])
 
     db.client.WoF.Items.insert_many(items)
-
 
 db.client.WoF.Buckets.drop()
 db.client.WoF.create_collection("Buckets")
@@ -137,7 +135,7 @@ db.client.WoF.create_collection("Manifests")
 
 time.sleep(5)
 
-# Worker starts by populating staff and global, which are needed only once
+# Worker starts by populating staff and global, which are needed only once  
 populate_staff()
 populate_items()
 populate_global()

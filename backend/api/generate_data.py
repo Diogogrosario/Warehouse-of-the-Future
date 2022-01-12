@@ -97,7 +97,7 @@ class Manifest(Resource):
 
         manifest = {
             "_id": ObjectId(secrets.token_hex(12)),
-            "time": datetime.datetime.now(),
+            "time": str(datetime.datetime.now()),
             "staff_id": random.choice(employees)["_id"],
             "items": items
         }
@@ -477,14 +477,14 @@ def generate_sensor(device_id, staff_ids):
     movement_timestamps = []
 
     for _ in range(number_of_movements):
-        movement_timestamps.append(utils.get_random_date_last_day())
+        movement_timestamps.append(str(utils.get_random_date_last_day()))
 
     staff_contacts = []
     number_of_staff_contacts = random.randint(1, 10)
 
     for _ in range(number_of_staff_contacts):
         staff_contact = {
-            "time": utils.get_random_date_last_day(),
+            "time": str(utils.get_random_date_last_day()),
             "staff_id": ObjectId(random.choice(staff_ids))
         }
 
@@ -549,7 +549,7 @@ class Layout(Resource):
 
         layout = {
             "_id": ObjectId(secrets.token_hex(12)),
-            "time": datetime.datetime.now(),
+            "time": str(datetime.datetime.now()),
             "racks": layout["racks"],
             "shelves": layout["shelves"],
             "buckets": layout["buckets"],
