@@ -31,7 +31,7 @@ class Storage:
         products = []
 
         for _, p in df_products.iterrows():
-            product = Product(p['id'], p['name'], p['length'], p['height'], p['width'], p['weight'], p['type_id'], p['frequency'])
+            product = Product(p['id'], p['name'], p['height'], p['width'], p['weight'], p['type_id'], p['frequency'])
             products.append(product)
 
         return products
@@ -53,7 +53,7 @@ class Storage:
                 continue
 
             for _, r in racks.iterrows():
-                rack = Rack(r['id'], r['length'], r['width'], r['height'], r['y'], r['capacity'], shelf_id)
+                rack = Rack(r['id'], r['width'], r['height'], r['y'], r['capacity'], shelf_id)
                 shelf.add_rack(rack)
 
             warehouse.add_shelf(shelf)
