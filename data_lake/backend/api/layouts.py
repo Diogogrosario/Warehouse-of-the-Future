@@ -35,9 +35,9 @@ layoutAttributes = namespace.model("Layout", {
 
 parser = reqparse.RequestParser()
 parser.add_argument("time_after", required=False, type=inputs.date,
-                    help="The lower bound for the timestamp of layouts.")
+                    help="The lower bound for the timestamp of layouts (Format YYYY-MM-DD).")
 parser.add_argument("time_before", required=False, type=inputs.date,
-                    help="The upper bound for the timestamp of layouts.")
+                    help="The upper bound for the timestamp of layouts (Format YYYY-MM-DD) .")
 
 @namespace.route("/")
 class Layouts(Resource):

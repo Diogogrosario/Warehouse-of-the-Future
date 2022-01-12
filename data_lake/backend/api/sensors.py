@@ -59,12 +59,12 @@ parser.add_argument("time_before",
                     required=False,
                     type=inputs.date,
                     help="The lower bound for the timestamp " +
-                    "of the selected sensor.")
+                    "of the selected sensor (Format YYYY-MM-DD).")
 parser.add_argument("time_after",
                     required=False,
                     type=inputs.date,
                     help="The upper bound for the timestamp of " +
-                    "the selected sensor.")
+                    "the selected sensor (Format YYYY-MM-DD).")
 
 
 @namespace.route("/<string:id>/staff_contacts")
