@@ -1,4 +1,14 @@
+FROM composer:1.10 as builder
+
+WORKDIR /app/
+
+COPY ./src/web/composer.* ./
+
+RUN composer install --no-autoloader
+
 FROM php:7.4-fpm
+
+COPY --from=builder /usr/bin/composer /usr/bin/composer
 
 # Arguments defined in docker-compose.yml
 ARG user
@@ -19,9 +29,9 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && \
-apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev && \
-docker-php-ext-configure gd --with-freetype --with-jpeg && \
-docker-php-ext-install gd
+    apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath
@@ -33,9 +43,6 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
 RUN apt-get -y install nodejs
 
 
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
@@ -44,10 +51,6 @@ RUN mkdir -p /home/$user/.composer && \
 # Set working directory
 WORKDIR /var/www
 
-COPY ./src/web/ .
-
-RUN npm install && npm run prod
-
-RUN composer install
-
 USER $user
+
+CMD composer install && npm install && npm run prod && cp .env.example .env && php artisan key:generate && php-fpm -F
