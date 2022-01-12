@@ -27,25 +27,28 @@ def run_server():
 
         conn.sendall(data)
         data = json.loads(data)
-        metrics = []
+        metrics = {}
 
         if 'optimization-parameters' not in data.keys():
             print(f"Request not well formed")
             conn.close()
             continue
 
-        if 'weight' in data['optimization-parameters']:
-            metrics.append('weight')
+        valid_metrics = ['weight', 'organization', 'work', 'frequency', 'windows', 'minimize-errors']
 
-        if 'sector' in data['optimization-parameters']:
-            metrics.append('sector')
+        for i in range(len(data['optimization-parameters'])):
+            if data['optimization-parameters'][i] not in valid_metrics:
+                continue
 
-        if 'work' in data['optimization-parameters']:
-            metrics.append('work')
+            if len(data['optimization-weights']) > i:
+                factor = data['optimization-weights'][i]
+            else:
+                factor = 1
 
-        if 'frequency' in data['optimization-parameters']:
-            metrics.append('frequency')
+            metrics[data['optimization-parameters'][i]] = {'factor': factor}
+
         try:
+            print(metrics)
             if len(sys.argv) > 1 and sys.argv[1] == 'docker':
                 logic.main(True, metrics)
             else:
