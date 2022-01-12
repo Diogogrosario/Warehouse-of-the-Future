@@ -15,14 +15,16 @@ namespace = Namespace("Manifests", path="/manifests",
 # ------------------------------------------------------------------------------
 
 itemAttributes = namespace.model("ManifestItem", {
-    "item": fields.String(required=True, description=""),
-    "quantity": fields.Integer(required=True, description=""),
+    "item_id": fields.String(required=True, attribute="item_id.$oid", description="Item in manifest"),
+    "quantity": fields.Integer(required=True, description="Item quantity in manifest"),
 })
 
 manifestAttributes = namespace.model("Manifest", {
+    "id": fields.String(required=True, attribute='_id.$oid', description="The unique identificator \
+    of the manifest"),
     "items": fields.List(fields.Nested(itemAttributes),
                          description="List of items in manifest"),
-    "date": fields.DateTime(required=True, description="The manifest time"),
+    "time": fields.String(required=True, description="The manifest time"),
     "staff_id": fields.String(
         required=True,
         attribute='staff_id.$oid',
@@ -41,47 +43,17 @@ parser.add_argument("time_before", required=False, type=inputs.date,
                     help="The upper bound for the timestamp of manifests.")
 
 
-@namespace.route("/reposition")
-class RepositionManifests(Resource):
-    # @namespace.marshal_list_with(manifestAttributes)
-    @namespace.expect(parser)
-    def get(self):
-        """
-        Returns information of reposition manifests
-
-        Returns data about every "reposition" manifest on a determined time
-        interval.
-        """
-        args = parser.parse_args()
-        time_before = args['time_before']  # Format: YYYY-MM-DD
-        time_after = args['time_after']    # Format: YYYY-MM-DD
-
-        searchQuery = {}
-
-        if time_after is not None or time_before is not None:
-            if time_before is None:
-                searchQuery["date"] = {"$lte": time_after}
-            elif time_after is None:
-                searchQuery["date"] = {"$gte": time_before}
-            else:
-                searchQuery["date"]["$lte"] = time_after
-
-        response = manifestCollection.find(searchQuery)
-
-        return json.loads(json_util.dumps(response))
-
-
 # ------------------------------------------------------------------------------
 # Collection Manifests
 # ------------------------------------------------------------------------------
 
 parser.add_argument("staff_id", required=False, type=str,
-                    help="The ID of the resposible staff.")
+                    help="The ID of the responsible staff.")
 
-
-@namespace.route("/collection")
+ 
+@namespace.route("/")
 class CollectionManifests(Resource):
-    # @namespace.marshal_list_with(manifestAttributes)
+    @namespace.marshal_list_with(manifestAttributes)
     @namespace.expect(parser)
     def get(self):
         """
@@ -102,11 +74,11 @@ class CollectionManifests(Resource):
 
         if time_after is not None or time_before is not None:
             if time_before is None:
-                searchQuery["date"] = {"$lte": time_after}
+                searchQuery["time"] = {"$lte": str(time_after)}
             elif time_after is None:
-                searchQuery["date"] = {"$gte": time_before}
+                searchQuery["time"] = {"$gte": str(time_before)}
             else:
-                searchQuery["date"]["$lte"] = time_after
+                searchQuery["time"]["$lte"] = str(time_after)
 
         response = manifestCollection.find(searchQuery)
 

@@ -2,7 +2,7 @@ from flask_restx import Api
 
 from .global_data import namespace as global_data_namespace
 from .manifest import namespace as manifests_namespace
-from .sensor import namespace as sensors_namespace
+from .sensor import namespace as sensor_namespace
 from .staff import namespace as staff_namespace
 from .stock import namespace as stock_namespace
 from .layout import namespace as layouts_namespace
@@ -16,7 +16,7 @@ api = Api(
 
 api.add_namespace(global_data_namespace)
 api.add_namespace(manifests_namespace)
-api.add_namespace(sensors_namespace)
+api.add_namespace(sensor_namespace)
 api.add_namespace(staff_namespace)
 api.add_namespace(stock_namespace)
 api.add_namespace(layouts_namespace)

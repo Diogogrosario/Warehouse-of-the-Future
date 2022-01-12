@@ -34,9 +34,21 @@ services:
         volumes:
             - ./backend:/app
         networks:
+            - workerapi
             - grafnet
 
+    worker:
+        build: ./worker
+        ports:
+            - 8080:8080
+        volumes:
+            - .:/app
+        networks:
+            - workerapi
+
 networks:
+    workerapi:
+        driver: bridge
     grafnet:
         external: false
 

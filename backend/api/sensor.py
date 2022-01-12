@@ -4,7 +4,7 @@ from bson import json_util
 import json
 from .db import client
 
-devicesCollection = client.WoF.Devices
+sensorsCollection = client.WoF.Sensors
 
 namespace = Namespace("Sensors", path="/sensors",
                       description="Sensor related operations")
@@ -14,9 +14,9 @@ namespace = Namespace("Sensors", path="/sensors",
 # ------------------------------------------------------------------------------
 
 staff_contact_in_sensor_attributes = namespace.model("StaffContactInSensor", {
-    "time": fields.DateTime(
+    "time": fields.String(
         required=True,
-        attribute='time.$date',
+        attribute='time',
         description="Timestamp of when the sensor registered the contact"
     ),
     "staff_id": fields.String(
@@ -26,29 +26,19 @@ staff_contact_in_sensor_attributes = namespace.model("StaffContactInSensor", {
     )
 })
 
-movement_sensor_attributes = namespace.model("StaffContactInSensor", {
-    "time": fields.DateTime(
-        required=True,
-        attribute='time.$date',
-        description="Timestamp of when the sensor registered the contact"
-    )
-})
-
 sensor_attributes = namespace.model("Sensor", {
     "id": fields.String(
         required=True,
         attribute='_id.$oid',
         description="The unique identifier of the sensor"
     ),
-    "bucket": fields.String(
+    "device": fields.String(
         required=True,
-        attribute='bucket.$oid',
-        description="The unique identifier of the associated bucket"
+        attribute='device.$oid',
+        description="The unique identifier of the associated device"
     ),
-    "movement_sensor": fields.List(
-        fields.DateTime(
-            attribute="$date"
-        ),
+    "movement_records": fields.List(
+        fields.String(),
         required=True,
         description="Timestamps of the movement detections."
     ),
@@ -77,7 +67,7 @@ parser.add_argument("time_after",
                     "the selected sensor.")
 
 
-@namespace.route("/<string:id>/timestamps")
+@namespace.route("/<string:id>/staff_contacts")
 @namespace.param('id', 'The sensor ID')
 class SensorInformationWithTimestamps(Resource):
     @namespace.marshal_with(staff_contact_in_sensor_attributes)
@@ -98,13 +88,13 @@ class SensorInformationWithTimestamps(Resource):
         searchQuery = {"_id": ObjectId(id)}
 
         if time_before is not None:
-            searchQuery["staff_contacts.time"] = {"$gte": time_before}
+            searchQuery["staff_contacts.time"] = {"$gte": str(time_before)}
         if time_after is not None and time_before is not None:
-            searchQuery["staff_contacts.time"]["$lte"] = time_after
+            searchQuery["staff_contacts.time"]["$lte"] = str(time_after)
         elif time_after is not None and time_before is None:
-            searchQuery["staff_contacts.time"] = {"$lte": time_after}
+            searchQuery["staff_contacts.time"] = {"$lte": str(time_after)}
 
-        document = devicesCollection.aggregate([
+        document = sensorsCollection.aggregate([
             {"$unwind": "$staff_contacts"},
             {"$match": searchQuery},
             {"$project": {
@@ -118,7 +108,7 @@ class SensorInformationWithTimestamps(Resource):
 
 @namespace.route("/<string:id>")
 @namespace.param('id', 'The sensor ID')
-class SensorInformation(Resource):
+class DeviceInformation(Resource):
     @namespace.marshal_with(sensor_attributes)
     @namespace.response(200, 'Success')
     @namespace.response(404, 'Incorrect Request')
@@ -128,7 +118,21 @@ class SensorInformation(Resource):
 
         Returns data about the sensor that has the passed "id".
         """
-        document = devicesCollection.find({"_id": ObjectId(id)})
+        document = sensorsCollection.find({"_id": ObjectId(id)})
+
+        return json.loads(json_util.dumps(document))
+
+
+@namespace.route("/")
+class AllSensorInformation(Resource):
+    @namespace.marshal_with(sensor_attributes)
+    @namespace.response(200, 'Success')
+    @namespace.response(404, 'Incorrect Request')
+    def get(self):
+        """
+        Returns information of all sensors.
+        """
+        document = sensorsCollection.find({})
 
         return json.loads(json_util.dumps(document))
 
@@ -140,7 +144,6 @@ class SensorInformation(Resource):
 @namespace.route("/<string:id>/movements")
 @namespace.param('id', 'The sensor ID')
 class SensorMovements(Resource):
-    @namespace.marshal_with(movement_sensor_attributes)
     @namespace.expect(parser)
     @namespace.response(200, 'Success')
     @namespace.response(404, 'Incorrect Request')
@@ -158,16 +161,20 @@ class SensorMovements(Resource):
         searchQuery = {"_id": ObjectId(id)}
 
         if time_before is not None:
-            searchQuery["movement_sensor"] = {"$gte": time_before}
+            searchQuery["movement_records"] = {"$gte": str(time_before)}
         if time_after is not None and time_before is not None:
-            searchQuery["movement_sensor"]["$lte"] = time_after
+            searchQuery["movement_records"]["$lte"] = str(time_after)
         elif time_after is not None and time_before is None:
-            searchQuery["movement_sensor"] = {"$lte": time_after}
+            searchQuery["movement_records"] = {"$lte": str(time_after)}
 
-        document = devicesCollection.aggregate([
-            {"$unwind": "$movement_sensor"},
+        document = sensorsCollection.aggregate([
+            {"$unwind": "$movement_records"},
             {"$match": searchQuery},
-            {"$project": {"time": "$movement_sensor"}}
+            {"$group": {
+                "_id": None,
+                "movement_records": {"$push": "$movement_records"}
+            }},
+            {"$project": {"_id": False, "movement_records": True}},
         ])
 
         return json.loads(json_util.dumps(document))
