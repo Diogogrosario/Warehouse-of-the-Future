@@ -50,7 +50,7 @@ parser.add_argument("time_before", required=False, type=inputs.date,
 parser.add_argument("staff_id", required=False, type=str,
                     help="The ID of the responsible staff.")
 
-
+ 
 @namespace.route("/")
 class CollectionManifests(Resource):
     @namespace.marshal_list_with(manifestAttributes)

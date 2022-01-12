@@ -14,21 +14,43 @@ namespace = Namespace("Layouts", path="/layouts",
 # ------------------------------------------------------------------------------
 
 bucketAttributes = namespace.model("LayoutBucket", {
-    "_id": fields.Integer(required=True, description=""),
-    "bucket": fields.Integer(required=True, description=""),
-    "item": fields.Integer(required=True, description=""),
-    "quantity": fields.Integer(required=True, description=""),
-    "coordinates": fields.List(fields.Integer(required=True, description="")),
-    "shelf": fields.Integer(required=True, description=""),
+    "id": fields.String(
+        required=True,
+        attribute="_id.$oid",
+        description="Bucket id"
+    ),
+    "width": fields.Float(required=True, description="Width of the bucket, in cm"),
+    "height": fields.Float(required=True, description="Height of the bucket, in cm"),
+    "length": fields.Float(required=True, description="Length of the bucket, in cm"),
+    "position": fields.List(
+        fields.Integer(
+            required=True,
+            description="Bucket position")
+    ),
+    "item_id": fields.String(
+        required=True,
+        attribute="item_id.$oid",
+        description="Associated item id"
+    ),
+    "quantity": fields.Integer(required=True, description="Item quantity"),
+    "shelf_id": fields.String(
+        required=True,
+        attribute="shelf_id.$oid",
+        description="Associated shelf id"
+    )
 })
 
 layoutAttributes = namespace.model("Layout", {
-    "_id": fields.Integer(required=True, description=""),
+    "id": fields.String(
+        required=True,
+        attribute="_id.$oid",
+        description="Layout id"
+    ),
     "buckets": fields.List(
         fields.Nested(bucketAttributes),
         description="List of buckets in layout"
     ),
-    "date": fields.String(required=True, description="The layout time"),
+    "time": fields.String(required=True, description="The layout time"),
 })
 
 # ------------------------------------------------------------------------------
@@ -41,10 +63,9 @@ parser.add_argument("time_after", required=False, type=inputs.date,
 parser.add_argument("time_before", required=False, type=inputs.date,
                     help="The upper bound for the timestamp of layouts.")
 
-
 @namespace.route("/")
 class Layouts(Resource):
-    # @namespace.marshal_list_with(layoutAttributes)
+    @namespace.marshal_list_with(layoutAttributes)
     @namespace.expect(parser)
     def get(self):
         """
@@ -61,11 +82,11 @@ class Layouts(Resource):
 
         if time_after is not None or time_before is not None:
             if time_before is None:
-                searchQuery["date"] = {"$lte": str(time_after)}
+                searchQuery["time"] = {"$lte": str(time_after)}
             elif time_after is None:
-                searchQuery["date"] = {"$gte": str(time_before)}
+                searchQuery["time"] = {"$gte": str(time_before)}
             else:
-                searchQuery["date"]["$lte"] = str(time_after)
+                searchQuery["time"]["$lte"] = str(time_after)
 
         response = layoutsCollection.find(searchQuery)
 
