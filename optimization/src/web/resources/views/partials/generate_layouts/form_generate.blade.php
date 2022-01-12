@@ -105,7 +105,7 @@
                     <div class="col">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
-                                   value="type"
+                                   value="organization"
                                    id="organization">
                             <label class="form-check-label" for="organization">
                                 Optimize By Type of Sector

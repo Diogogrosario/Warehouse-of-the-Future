@@ -71,7 +71,8 @@ class Layout:
     def get_score(self):
         score = 0
 
-        if 'weight' in self.metrics_to_optimize:
+        if 'weight' in self.metrics_to_optimize.keys():
+            factor = float(self.metrics_to_optimize['weight']['factor'])
             weight_score = 0
             max_score = 0
             max_int = sys.maxsize * 2 + 1
@@ -88,7 +89,8 @@ class Layout:
 
             score += weight_score / max_score
 
-        if 'work' in self.metrics_to_optimize:
+        if 'work' in self.metrics_to_optimize.keys():
+            factor = float(self.metrics_to_optimize['work']['factor'])
             work_score = 0
             max_score = 0
             adj_side = 0.2
@@ -108,7 +110,8 @@ class Layout:
 
             # print(f'Work score: {work_score}')
 
-        if 'frequency' in self.metrics_to_optimize:
+        if 'frequency' in self.metrics_to_optimize.keys():
+            factor = float(self.metrics_to_optimize['frequency']['factor'])
             frequency_score = 0
             max_score = 0
             shelves_frequencies = []
@@ -130,7 +133,8 @@ class Layout:
 
             # print(f'Frequency score: {frequency_score}')
 
-        if 'organization' in self.metrics_to_optimize:
+        if 'organization' in self.metrics_to_optimize.keys():
+            factor = float(self.metrics_to_optimize['organization']['factor'])
             organization_score = 0
             total_types = {}
 
