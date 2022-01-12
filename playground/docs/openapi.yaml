@@ -59,8 +59,13 @@ paths:
       responses:
         "200":
           description: "Success: Device created."
+          content:
+            application/json:
+              schema:
+                description: "The created device."
+                $ref: '#/components/schemas/Device'
         "400":
-          description: "Error: No parameters provided."
+          description: "Error: Bad request."
     
     delete:
       operationId: "D3"
@@ -71,7 +76,7 @@ paths:
         "200":
           description: "Success."
         "500":
-          description: "Error: No registered devices."
+          description: "Error: On delete all devices."
 
   /device/{id}:
     get:
@@ -89,6 +94,13 @@ paths:
       responses:
         "200":
           description: "Success: Device Exists"
+          content:
+            application/json:
+              schema:
+                description: "The requested Device."
+                $ref: '#/components/schemas/Device'
+              example:
+                id: "470A"
         "404":
           description: "Error: No registered device with that ID."
         "500":
@@ -132,12 +144,16 @@ paths:
                   $ref: "#/components/schemas/Action"
               example:
                 - id: 55
-                  report_id: 40
-                  employee_id: 54D
+                  reportId: 40
+                  employeeId: "Pedro"
+                  createdAt: "2021-06-21 08:30"
+                  updatedAt: "2021-06-21 08:30"
 
                 - id: 56
-                  report_id: 40
-                  employee_id: 53A
+                  reportId: 40
+                  employeeId: "Mário"
+                  createdAt: "2021-06-21 08:30"
+                  updatedAt: "2021-06-21 08:30"
         "404":
           description: "Error: No registered devices."
     post:
@@ -150,14 +166,35 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Action"
+              type: object
+              properties:
+                id:
+                  type: string
+                reportId: 
+                  type: integer
+                  description: "Id of the report to which the action belongs to."
+                description:
+                  type: string
+                  description: "Decription of the action."
             example:
-              - report_id: 40
-                employee_id: 54D
-                description: "Replaced Batery."
+              reportId: 40
+              employeeId: "Manuel"
+              description: "Replaced Batery."
       responses:
         "200":
           description: "Success: Device created."
+          content:
+            application/json:
+              schema:
+                description: "The created action."
+                $ref: '#/components/schemas/Action'
+              example:
+                id: 45
+                reportId: 40
+                description: "Replaced batery."
+                employeeId: "Manuel"
+                createdAt: "2021-06-21 08:30"
+                updatedAt: "2021-06-21 08:30"
         "400":
           description: "Error: No parameters provided."
     delete:
@@ -191,16 +228,14 @@ paths:
           content:
             application/json:
               schema:
-                description: "Array containing every action."
-                type: string
                 $ref: "#/components/schemas/Action"
               example:
-                - id: 55
-                  report_id: 40
-                  employee_id: 54D
-                  description: "Replaced batery."
-                  createdAt: "2021-12-21 15:30"
-                  updatedAt: "2021-12-21 15:30"
+                id: 55
+                reportId: 40
+                employeeId: Manuel
+                description: "Replaced batery."
+                createdAt: "2021-12-21 15:30"
+                updatedAt: "2021-12-21 15:30"
         "404":
           description: "Error: Action not found."
         "500":
@@ -222,12 +257,38 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Action"
+              type: object
+              properties:
+                id:
+                  type: string
+                reportId: 
+                  type: integer
+                  description: "Id of the report to which the action belongs to."
+                description:
+                  type: string
+                  description: "Decription of the action."   
+            example:
+              reportId: 40
+              employeeId: Manuel
+              description: "Replaced display."
       responses:
         "200":
           description: "Success: Action edited."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Action'
+              example:
+                id: 45
+                reportId: 40
+                description: "Replaced display."
+                employeeId: "Manuel"
+                createdAt: "2021-06-21 08:30"
+                updatedAt: "2021-06-21 08:35"
         "404":
-          description: "Error: Can't update action."
+          description: "Error: Action not found."
+        "500":
+          description: "Server error."
     delete:
       operationId: A6
       summary: "A6: Delete action."
@@ -245,6 +306,8 @@ paths:
           description: "Success: Action deleted."
         "404":
           description: "Error: Action not found."
+        "500":
+          description: "Server error."
 
 
 # ===================== REPORTS =====================   
@@ -263,7 +326,26 @@ paths:
                   description: "Array containing every report."
                   type: array
                   items:
-                    $ref: "#/components/schemas/Action"
+                    $ref: "#/components/schemas/Report"
+                example:
+                  - id: 45
+                    severity: error
+                    title: Unresponsive
+                    description: "Device 356A isn't responding."
+                    resolved: false
+                    actions:
+                      - id: 45
+                        reportId: 865
+                        description: "Replaced batery."
+                        employeeId: "Manuel"
+                        createdAt: "2021-06-21 08:30"
+                        updatedAt: "2021-06-21 08:30"
+                      - id: 46
+                        report_id: 865
+                        description: "Replaced display."
+                        employeeId: "Fontão"
+                        createdAt: "2021-06-21 08:35"
+                        updatedAt: "2021-06-21 08:35"
           "404":
             description: "Error: No registered devices."
       post:
@@ -277,9 +359,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Report"
+              example:
+                severity: error
+                title: Unresponsive
+                description: "Device 356A isn't responding."
         responses:
           "200":
             description: "Success: Report created."
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Report'
+                example:
+                  id: 45
+                  severity: error
+                  title: Unresponsive
+                  description: "Device 356A isn't responding."
+                  resolved: false
+                  actions: []
           "400":
             description: "Error: No parameters provided."
       delete:
@@ -291,7 +388,7 @@ paths:
           "200":
             description: "Success."
           "500":
-            description: "Error: No registered reports."
+            description: "Server error."
       
 
   /report/{id}:
@@ -313,17 +410,28 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                $ref: "#/components/schemas/Action"
+                $ref: "#/components/schemas/Report"
               example:
-                - id: 55
-                  report_id: 40
-                  severity: Error
-                  title: Unresponsive
-                  description: "Device A35 isn't responding."
-                  resolved: false
-                  createdAt: "2021-12-21 15:30"
-                  updatedAt: "2021-12-21 15:30"
+                id: 55
+                severity: error
+                title: Unresponsive
+                description: "Device A35 isn't responding."
+                resolved: false
+                actions:
+                      - id: 45
+                        reportId: 865
+                        description: "Replaced batery."
+                        employeeId: "Manuel"
+                        createdAt: "2021-06-21 08:30"
+                        updatedAt: "2021-06-21 08:30"
+                      - id: 46
+                        report_id: 865
+                        description: "Replaced display."
+                        employeeId: "Fontão"
+                        createdAt: "2021-06-21 08:35"
+                        updatedAt: "2021-06-21 08:35"
+                createdAt: "2021-12-21 15:30"
+                updatedAt: "2021-12-21 15:30"
         "404":
           description: "Error: Report not found."
     put:
@@ -344,9 +452,25 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Report"
+            example:
+              severity: warning
+              title: Minor failure
       responses:
         "200":
           description: "Success: Updated report."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              example:
+                id: 55
+                severity: warning
+                title: Minor failure
+                description: "Device A35 isn't responding."
+                resolved: false
+                actions: []
+                createdAt: "2021-12-21 15:30"
+                updatedAt: "2021-12-21 15:30"
         "404":
           description: "Error: Can't find report."
     delete:
@@ -367,37 +491,6 @@ paths:
         "404":
           description: "Error: Report not found."
 
-  /report/solved/{id}:
-    put:
-      operationId: R7
-      summary: "R7: Mark report as solved."
-      description: "Marks a report as solved and adds a 'solved' action."
-      tags: ["Report"]
-      parameters:
-        - in: query
-          name: "id"
-          description: "ID of report."
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                employee_id:
-                  description: "ID of the employed that executed the action."
-                  type: string
-              example:
-                - employee_id: 24F
-      responses:
-        "200":
-          description: "Success."
-        "404":
-          description: "Error: Can't find report."
-
 components:
   schemas:
     Device:
@@ -413,20 +506,22 @@ components:
         id: 
           description: "ID of the Action."
           type: string
-        report_id:
+        reportId:
           description: "ID of the Report to which the current action refers to."
           type: string
         description:
           description: "Description of the Action."
           type: string
-        employee_id:
+        employeeId:
           description: "ID of the employed that executed the action."
           type: string
-      example:
-        - id: 45
-          report_id: 865
-          description: "Replaced batery."
-          employee_id: 24F
+        createdAt:
+          description: "Timestamp of creation."
+          type: string
+        updatedAt:
+          description: "Timestamp of updation."
+          type: string
+
 
     Report:
       type: object
@@ -438,8 +533,8 @@ components:
           description: "Field indicating the severity of the error."
           type: string
           enum:
-            - Error
-            - Warning
+            - error
+            - warning
         title:
           description: "Title of the Report."
           type: string
@@ -449,15 +544,17 @@ components:
         resolved:
           description: "Field indicating if the issue was solved."
           type: boolean
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Action'
         createdAt:
           description: "Timestamp of origin."
           type: string
         updatedAt:
           description:  "Timestamp on edit."
           type: string
-      example:
-        - severity: Error
-          title: Unresponsive
-          description: "Device 356A isn't responding."
-          resolved: false
+      
+      
+
 
