@@ -47,8 +47,11 @@ layoutAttributes = namespace.model("Layout", {
         description="Layout id"
     ),
     "buckets": fields.List(
-        fields.Nested(bucketAttributes),
-        description="List of buckets in layout"
+        fields.String(
+            required=True,
+            attribute="$oid"
+        ),
+        description="Bucket ids in layout"
     ),
     "time": fields.String(required=True, description="The layout time"),
 })
