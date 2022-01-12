@@ -2,9 +2,9 @@ name: T2 - Mesh network build+test CI/CD
 
 on:
   push:
-    branches: [ t2_development ]
+    branches: [ development, t2_development ]
   pull_request:
-    branches: [ t2_development ]
+    branches: [ development, t2_development ]
 
 jobs:
   build_and_test:

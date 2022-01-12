@@ -2,7 +2,7 @@ name: T2 - Auto Generate API's HTML When Pushing To Github CI/CD
 
 on:
   push:
-    branches: [ t2_development ]
+    branches: [ development, t2_development ]
 
 jobs:
   gen-javadocs:

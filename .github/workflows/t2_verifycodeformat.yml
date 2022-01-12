@@ -2,7 +2,7 @@ name: T2 - Mesh network verify code formatting CI/CD
 
 on:
   push:
-    branches: [ t2_development ]
+    branches: [ development, t2_development ]
 
 jobs:
   gen-javadocs:

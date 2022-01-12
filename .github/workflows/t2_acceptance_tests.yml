@@ -2,9 +2,9 @@ name: T2 - Mesh communication acceptance tests CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ development, t2_development ]
   pull_request:
-    branches: [ t2_development ]
+    branches: [ development, t2_development ]
 
 jobs:
   acceptance_tests:
