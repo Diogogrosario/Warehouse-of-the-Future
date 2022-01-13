@@ -136,7 +136,7 @@
 			},
 			"gridPos": {
 				"h": 9,
-				"w": 12,
+				"w": 13,
 				"x": 0,
 				"y": 1
 			},
@@ -255,8 +255,8 @@
 				"overrides": []
 			},
 			"gridPos": {
-				"h": 7,
-				"w": 6,
+				"h": 5,
+				"w": 4,
 				"x": 0,
 				"y": 11
 			},
@@ -337,9 +337,9 @@
 				"overrides": []
 			},
 			"gridPos": {
-				"h": 7,
-				"w": 6,
-				"x": 6,
+				"h": 5,
+				"w": 4,
+				"x": 4,
 				"y": 11
 			},
 			"id": 5,
@@ -395,6 +395,84 @@
 		},
 		{
 			"datasource": null,
+			"description": "Orchestrator position, in the form [x, y, z].",
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "super-light-orange",
+								"value": null
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 10,
+				"w": 5,
+				"x": 8,
+				"y": 11
+			},
+			"id": 12,
+			"options": {
+				"colorMode": "background",
+				"graphMode": "none",
+				"justifyMode": "center",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": ["lastNotNull"],
+					"fields": "/^position$/",
+					"values": false
+				},
+				"text": {},
+				"textMode": "auto"
+			},
+			"pluginVersion": "8.2.6",
+			"targets": [
+				{
+					"columns": [
+						{
+							"selector": "position",
+							"text": "position",
+							"type": "string"
+						}
+					],
+					"filters": [],
+					"format": "table",
+					"global_query_id": "",
+					"refId": "A",
+					"root_selector": "",
+					"source": "url",
+					"type": "json",
+					"url": "http://backend:5000/globalData/orchestrator",
+					"url_options": {
+						"data": "",
+						"headers": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "header-key",
+								"value": "header-value"
+							}
+						],
+						"method": "GET"
+					}
+				}
+			],
+			"title": "Orchestrator [x, y, z] Position",
+			"type": "stat"
+		},
+		{
+			"datasource": null,
 			"description": "Cart speed, in cm/s.",
 			"fieldConfig": {
 				"defaults": {
@@ -415,10 +493,10 @@
 				"overrides": []
 			},
 			"gridPos": {
-				"h": 7,
-				"w": 6,
+				"h": 5,
+				"w": 4,
 				"x": 0,
-				"y": 18
+				"y": 16
 			},
 			"id": 6,
 			"options": {
@@ -493,10 +571,10 @@
 				"overrides": []
 			},
 			"gridPos": {
-				"h": 7,
-				"w": 6,
-				"x": 6,
-				"y": 18
+				"h": 5,
+				"w": 4,
+				"x": 4,
+				"y": 16
 			},
 			"id": 7,
 			"options": {
