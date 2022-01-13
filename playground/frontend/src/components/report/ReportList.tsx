@@ -53,29 +53,33 @@ const labels = [
 		name: "warning",
 		color: "warning.main",
 		description: "Warning reports",
+		group: "severity",
 	},
 	{
 		name: "error",
 		color: "error.main",
 		description: "Error reports",
+		group: "severity",
 	},
 	{
 		name: "open",
 		color: "green.main",
 		description: "Open reports",
+		group: "status",
 	},
 	{
 		name: "closed",
 		color: "purple.main",
 		description: "Resolved reports",
+		group: "status",
 	},
 ];
 
 const labelFilter: ((report: ReportResource) => boolean)[] = [
 	(report) => report.severity == "warning",
 	(report) => report.severity == "error",
-	(report) => report.resolved,
 	(report) => !report.resolved,
+	(report) => report.resolved,
 ];
 
 const ReportList: React.FC = () => {
@@ -426,10 +430,15 @@ const ReportList: React.FC = () => {
 				<List style={{ overflow: "auto" }}>
 					{reports
 						.filter((report: ReportResource) => {
-							if (
-								!selectedLabels.every((labelIdx: number) =>
-									labelFilter[labelIdx](report)
-								)
+							if (selectedLabels.length &&
+								!Object.values(selectedLabels.reduce(
+									(prevValue : {[key : string]: number[]}, labelIdx : number) => {
+										const key = labels[labelIdx].group;
+										(prevValue[key] = prevValue[key] || []).push(labelIdx);
+										return prevValue;
+									},
+									{}
+								)).every( (groupFilters : number[]) => groupFilters.some( (labelFilterIdx : number) => labelFilter[labelFilterIdx](report) ))
 							)
 								return false;
 

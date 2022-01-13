@@ -27,6 +27,7 @@ export interface Label {
 	name: string;
 	color: string;
 	description?: string;
+	group?: string;
 }
 
 interface PopperComponentProps {
@@ -194,6 +195,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 							open
 							multiple
 							value={selected}
+							groupBy={( option : Label ) => option.group ?? "" }
 							onClose={(
 								event: React.SyntheticEvent,
 								reason: AutocompleteCloseReason
@@ -210,19 +212,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 							PopperComponent={PopperComponent}
 							renderTags={() => null}
 							noOptionsText="No tags"
-							options={[...labels].sort((labelA, labelB) => {
-								let labelAIdx = selected.indexOf(labelA);
-								let labelBIdx = selected.indexOf(labelB);
-								labelAIdx =
-									labelAIdx === -1
-										? selected.length + labels.indexOf(labelA)
-										: labelAIdx;
-								labelBIdx =
-									labelBIdx === -1
-										? selected.length + labels.indexOf(labelB)
-										: labelBIdx;
-								return labelAIdx - labelBIdx;
-							})}
+							options={labels}
 							sx={{
 								backgroundColor: "inherit",
 							}}

@@ -102,6 +102,8 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 								margin: "0 10px 0 0",
 								padding: 0,
 								height: "inherit",
+								borderTopLeftRadius: "4px",
+								borderBottomLeftRadius: "4px",
 							}}
 						/>
 					</Tooltip>
