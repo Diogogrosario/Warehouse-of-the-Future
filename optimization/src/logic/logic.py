@@ -99,8 +99,9 @@ def main(docker=False, metrics=None):
     global db
     global storage
 
-    if metrics is None:
-        metrics = ['minimize-errors']
+    # FOR TESTING PURPOSES (delete before delivery of the project)
+    # if metrics is None: 
+    #     metrics = ['minimize-errors']
 
     # Overwrite Database configs if Docker tag is defined
     if docker:
