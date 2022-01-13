@@ -107,7 +107,12 @@
             "id": 16,
             "options": {
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": false,
+                        "displayName": "id"
+                    }
+                ]
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -206,7 +211,12 @@
             "id": 17,
             "options": {
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "height (cm)"
+                    }
+                ]
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -409,7 +419,12 @@
             "id": 18,
             "options": {
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "quantity"
+                    }
+                ]
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -505,13 +520,6 @@
                             {
                                 "id": "displayName",
                                 "value": "width (cm)"
-                            },
-                            {
-                                "id": "color",
-                                "value": {
-                                    "fixedColor": "super-light-orange",
-                                    "mode": "fixed"
-                                }
                             }
                         ]
                     },
@@ -538,13 +546,6 @@
                             {
                                 "id": "displayName",
                                 "value": "height (cm)"
-                            },
-                            {
-                                "id": "color",
-                                "value": {
-                                    "fixedColor": "light-blue",
-                                    "mode": "fixed"
-                                }
                             }
                         ]
                     },
@@ -565,13 +566,6 @@
                             {
                                 "id": "displayName",
                                 "value": "length (cm)"
-                            },
-                            {
-                                "id": "color",
-                                "value": {
-                                    "fixedColor": "light-purple",
-                                    "mode": "fixed"
-                                }
                             }
                         ]
                     },
@@ -596,52 +590,6 @@
                                 "value": "weight (cm)"
                             }
                         ]
-                    },
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "quantity"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.displayMode",
-                                "value": "gradient-gauge"
-                            },
-                            {
-                                "id": "color",
-                                "value": {
-                                    "mode": "thresholds"
-                                }
-                            },
-                            {
-                                "id": "thresholds",
-                                "value": {
-                                    "mode": "absolute",
-                                    "steps": [
-                                        {
-                                            "color": "dark-red",
-                                            "value": null
-                                        },
-                                        {
-                                            "color": "light-orange",
-                                            "value": 1
-                                        },
-                                        {
-                                            "color": "semi-dark-green",
-                                            "value": 2
-                                        },
-                                        {
-                                            "color": "dark-green",
-                                            "value": 3
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-                                "id": "max",
-                                "value": 3
-                            }
-                        ]
                     }
                 ]
             },
@@ -654,7 +602,12 @@
             "id": 20,
             "options": {
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "weight (cm)"
+                    }
+                ]
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -684,13 +637,108 @@
             "type": "table"
         },
         {
+            "datasource": null,
+            "description": "Layouts data, namely its id, list of bucket ids, and timestamp.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "time"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "dateTimeAsIso"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "buckets"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "buckets (list of ids)"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 19,
+                "x": 0,
+                "y": 30
+            },
+            "id": 22,
+            "options": {
+                "showHeader": true
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/layouts",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Layouts",
+            "type": "table"
+        },
+        {
             "collapsed": false,
             "datasource": null,
             "gridPos": {
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 30
+                "y": 34
             },
             "id": 11,
             "panels": [],
@@ -794,12 +842,17 @@
                 "h": 8,
                 "w": 19,
                 "x": 0,
-                "y": 31
+                "y": 35
             },
             "id": 2,
             "options": {
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "height (cm)"
+                    }
+                ]
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -878,7 +931,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 39
+                "y": 43
             },
             "id": 9,
             "panels": [],
@@ -914,7 +967,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 40
+                "y": 44
             },
             "id": 4,
             "options": {
@@ -996,7 +1049,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 40
+                "y": 44
             },
             "id": 5,
             "options": {
@@ -1074,7 +1127,7 @@
                 "h": 10,
                 "w": 5,
                 "x": 8,
-                "y": 40
+                "y": 44
             },
             "id": 12,
             "options": {
@@ -1152,7 +1205,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 45
+                "y": 49
             },
             "id": 6,
             "options": {
@@ -1230,7 +1283,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 45
+                "y": 49
             },
             "id": 7,
             "options": {
@@ -1299,5 +1352,5 @@
     "timezone": "",
     "title": "Data Lake",
     "uid": "BwcXP3cnz",
-    "version": 22
+    "version": 25
 }
