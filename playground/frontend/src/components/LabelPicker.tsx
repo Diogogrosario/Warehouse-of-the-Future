@@ -52,6 +52,10 @@ const StyledPopperComponent = styled("div")(({ theme }) => ({
 		margin: 0,
 		color: "inherit",
 		fontSize: 13,
+		backgroundColor: "inherit",
+	},
+	[`& .${autocompleteClasses.noOptions}`]: {
+		color: Coloring.rgba(theme.palette.white.main, 0.6),
 	},
 	[`& .${autocompleteClasses.listbox}`]: {
 		backgroundColor: theme.palette.lightDark.main,
@@ -99,6 +103,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 	const [selected, setSelected] = React.useState<Label[]>([]);
+	const [searchValue, setSearchValue] = React.useState<string>("");
 	const open = Boolean(anchorEl);
 
 	const closeLabelPicker = () => {
@@ -199,11 +204,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 								value: Label[],
 								reason: AutocompleteChangeReason
 								) => {
-									if (reason === "selectOption") {
-										setSelected(value);
-									} else if (reason === "removeOption") {
-										setSelected(value);
-									}
+									setSelected(value);
 									onSelectedLabelsChange?.(value.map((label) => labels.indexOf(label)));
 							}}
 							disableCloseOnSelect
@@ -283,6 +284,11 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 								</StyledOptionComponent>
 							)}
 							getOptionLabel={(option) => option.name}
+							inputValue={searchValue}
+							onInputChange={(_: React.SyntheticEvent, value: string, reason: string) => {
+								if (reason !== "reset")
+									setSearchValue(value);
+							}}
 							renderInput={(params) => (
 								<InputBase
 									sx={{
@@ -296,7 +302,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 										},
 										backgroundColor: "inherit",
 										"> input": {
-											color: "white.main",
+											color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
 											padding: "8px",
 											"&::placeholder": {
 												opacity: 0.6,
@@ -325,6 +331,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 													);
 													return `rgba(${r}, ${g}, ${b}, 0.6)`;
 												},
+												color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.8),
 											},
 											"&:focus": {
 												boxShadow: (theme: Theme) =>
@@ -332,6 +339,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 												border: (theme: Theme) =>
 													`1px solid ${theme.palette.white.main}`,
 												backgroundColor: "dark.main",
+												color: "white.main",
 											},
 										},
 									}}
