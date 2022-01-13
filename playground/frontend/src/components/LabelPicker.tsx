@@ -204,11 +204,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 									} else if (reason === "removeOption") {
 										setSelected(value);
 									}
-									console.log("value (before): ", value);
-									console.log("selected (before): ", selected);
 									onSelectedLabelsChange?.(value.map((label) => labels.indexOf(label)));
-									console.log("value (after): ", value);
-									console.log("selected (after): ", selected);
 							}}
 							disableCloseOnSelect
 							PopperComponent={PopperComponent}

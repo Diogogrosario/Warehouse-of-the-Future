@@ -336,7 +336,6 @@ const ReportList: React.FC = () => {
 							labels={labels}
 							onSelectedLabelsChange={(newState: number[]) => {
 								setSelectedLabels(newState);
-								console.log("onChange: " + newState);
 							}}
 							buttonProps={{
 								color: "lightDark",
@@ -355,6 +354,9 @@ const ReportList: React.FC = () => {
 				<List style={{ overflow: "auto" }}>
 					{reports
 						.filter((report : ReportResource) => {
+							if (!selectedLabels.every((labelIdx : number) => labelFilter[labelIdx](report)))
+								return false;
+
 							if (dateRange[0] && ((new Date(report.createdAt)) < dateRange[0]))
 								return false;
 
