@@ -99,8 +99,8 @@
                 ]
             },
             "gridPos": {
-                "h": 8,
-                "w": 12,
+                "h": 9,
+                "w": 5,
                 "x": 0,
                 "y": 1
             },
@@ -198,9 +198,9 @@
                 ]
             },
             "gridPos": {
-                "h": 8,
-                "w": 12,
-                "x": 12,
+                "h": 9,
+                "w": 8,
+                "x": 5,
                 "y": 1
             },
             "id": 17,
@@ -240,13 +240,170 @@
             "type": "table"
         },
         {
+            "datasource": null,
+            "description": "Shelves information, namely its id, height, and associated rack_id.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "height"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "none"
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "height (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "width"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "super-light-orange",
+                                    "mode": "fixed"
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "width (cm)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "length"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-purple",
+                                    "mode": "fixed"
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "length (cm)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "position"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "position [x, y, z] (m)"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 13,
+                "x": 0,
+                "y": 10
+            },
+            "id": 18,
+            "options": {
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/buckets",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Shelves",
+            "type": "table"
+        },
+        {
             "collapsed": false,
             "datasource": null,
             "gridPos": {
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 9
+                "y": 20
             },
             "id": 11,
             "panels": [],
@@ -347,10 +504,10 @@
                 ]
             },
             "gridPos": {
-                "h": 9,
+                "h": 8,
                 "w": 13,
                 "x": 0,
-                "y": 10
+                "y": 21
             },
             "id": 2,
             "options": {
@@ -434,7 +591,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 19
+                "y": 29
             },
             "id": 9,
             "panels": [],
@@ -470,7 +627,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 20
+                "y": 30
             },
             "id": 4,
             "options": {
@@ -552,7 +709,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 20
+                "y": 30
             },
             "id": 5,
             "options": {
@@ -630,7 +787,7 @@
                 "h": 10,
                 "w": 5,
                 "x": 8,
-                "y": 20
+                "y": 30
             },
             "id": 12,
             "options": {
@@ -708,7 +865,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 25
+                "y": 35
             },
             "id": 6,
             "options": {
@@ -786,7 +943,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 25
+                "y": 35
             },
             "id": 7,
             "options": {
