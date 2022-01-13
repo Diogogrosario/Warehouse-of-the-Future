@@ -21,7 +21,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 
 import Coloring from "../../utils/coloring";
-import AddActionForm from "../AddActionForm";
+import AddActionForm from "./AddActionForm";
 import NoResultsOverlay from "../NoResultsOverlay";
 
 export interface ReportProps {

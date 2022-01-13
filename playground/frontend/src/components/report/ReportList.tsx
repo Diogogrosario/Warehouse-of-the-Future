@@ -9,17 +9,21 @@ import {
 	Menu,
 	MenuItem,
 	Paper,
-	Popper,
-	styled,
 	TextField,
 	Theme,
 } from "@mui/material";
 import { NetworkErrorBoundary, useResource, useSubscription } from "rest-hooks";
 import SearchIcon from "@mui/icons-material/Search";
 import SortIcon from "@mui/icons-material/Sort";
-import DateRangeIcon from '@mui/icons-material/DateRange';
+import DateRangeIcon from "@mui/icons-material/DateRange";
 import { North, South } from "@mui/icons-material";
-import { DateRange, DateRangePicker, DateRangePickerDay, DateRangePickerDayProps, LocalizationProvider, StaticDateRangePicker } from "@mui/lab";
+import {
+	DateRange,
+	DateRangePickerDay,
+	DateRangePickerDayProps,
+	LocalizationProvider,
+	StaticDateRangePicker,
+} from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 import { ReportResource } from "../../resources/ReportResource";
@@ -67,11 +71,11 @@ const labels = [
 	},
 ];
 
-const labelFilter : ((report : ReportResource) => boolean)[] = [
-    (report) => report.severity == "warning",
-    (report) => report.severity == "error",
-    (report) => report.resolved,
-    (report) => !report.resolved,
+const labelFilter: ((report: ReportResource) => boolean)[] = [
+	(report) => report.severity == "warning",
+	(report) => report.severity == "error",
+	(report) => report.resolved,
+	(report) => !report.resolved,
 ];
 
 const ReportList: React.FC = () => {
@@ -95,7 +99,9 @@ const ReportList: React.FC = () => {
 	// Filtering
 	const [selectedLabels, setSelectedLabels] = React.useState<number[]>([]);
 	const [dateRange, setDateRange] = React.useState<DateRange<Date>>([null, null]);
-	const [filterDateMenuAnchorEl, setFilterDateMenuAnchorEl] = React.useState<null | HTMLElement>(null);
+	const [filterDateMenuAnchorEl, setFilterDateMenuAnchorEl] = React.useState<null | HTMLElement>(
+		null
+	);
 	const filterDateMenuOpen = Boolean(filterDateMenuAnchorEl);
 
 	return (
@@ -108,7 +114,8 @@ const ReportList: React.FC = () => {
 							display: "flex",
 							alignItems: "center",
 							ml: "5px",
-							borderColor: (theme: Theme) => Coloring.rgba(theme.palette.white.main, 0.2),
+							borderColor: (theme: Theme) =>
+								Coloring.rgba(theme.palette.white.main, 0.2),
 							backgroundColor: "transparent",
 							"&:focus-within": {
 								border: "1px solid white.main",
@@ -197,13 +204,15 @@ const ReportList: React.FC = () => {
 							aria-expanded={filterDateMenuOpen ? "true" : undefined}
 							color="lightDark"
 							onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-								setFilterDateMenuAnchorEl(filterDateMenuAnchorEl ? null : event.currentTarget)
+								setFilterDateMenuAnchorEl(
+									filterDateMenuAnchorEl ? null : event.currentTarget
+								)
 							}
 							style={{
 								borderTopRightRadius: 0,
 								borderBottomRightRadius: 0,
 								borderRight: "1px solid #bdbdbd",
-    							borderColor: "rgb(23, 23, 23)",
+								borderColor: "rgb(23, 23, 23)",
 							}}
 						>
 							<DateRangeIcon />
@@ -215,7 +224,8 @@ const ReportList: React.FC = () => {
 							onClose={() => setFilterDateMenuAnchorEl(null)}
 							sx={{
 								".MuiMenu-paper": {
-									border: (theme : Theme) => `1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
+									border: (theme: Theme) =>
+										`1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
 								},
 								".MuiMenu-list": {
 									"> .MuiPickerStaticWrapper-root": {
@@ -224,14 +234,26 @@ const ReportList: React.FC = () => {
 										"> div": {
 											"> .PrivatePickersToolbar-root": {
 												"> .MuiTypography-root": {
-													color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
+													color: (theme: Theme) =>
+														Coloring.rgba(
+															theme.palette.white.main,
+															0.6
+														),
 												},
 												".MuiGrid-root > div": {
 													"> .MuiTypography-root": {
-														color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.6
+															),
 													},
 													"> .MuiButton-root > .MuiTypography-root": {
-														color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.8),
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.8
+															),
 														"&:hover": {
 															color: "white.main",
 														},
@@ -240,7 +262,11 @@ const ReportList: React.FC = () => {
 											},
 											"> div:nth-last-of-type(2)": {
 												"> .MuiTypography-root": {
-													color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
+													color: (theme: Theme) =>
+														Coloring.rgba(
+															theme.palette.white.main,
+															0.6
+														),
 												},
 											},
 										},
@@ -251,15 +277,29 @@ const ReportList: React.FC = () => {
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<StaticDateRangePicker
 									allowSameDateSelection
-									onChange={(newValue) => { setDateRange(newValue); } }
+									onChange={(newValue) => {
+										setDateRange(newValue);
+									}}
 									value={dateRange}
-									renderDay={(_ : Date, dateRangePickerDayProps: DateRangePickerDayProps<Date>) => {
+									renderDay={(
+										_: Date,
+										dateRangePickerDayProps: DateRangePickerDayProps<Date>
+									) => {
 										return (
-											<DateRangePickerDay {...dateRangePickerDayProps} 
+											<DateRangePickerDay
+												{...dateRangePickerDayProps}
 												sx={{
-													color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
+													color: (theme: Theme) =>
+														Coloring.rgba(
+															theme.palette.white.main,
+															0.6
+														),
 													"&:hover": {
-														color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.8),
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.8
+															),
 													},
 												}}
 											/>
@@ -275,60 +315,93 @@ const ReportList: React.FC = () => {
 									}}
 									renderInput={(startProps, endProps) => (
 										<React.Fragment>
-											<TextField {...startProps}
+											<TextField
+												{...startProps}
 												InputLabelProps={{
 													shrink: true,
 													sx: {
-														color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.4),
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.4
+															),
 													},
 												}}
 												InputProps={{
 													sx: {
-														color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.8),
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.8
+															),
 														"&:hover": {
 															color: "white.main",
 															".MuiOutlinedInput-notchedOutline": {
-																borderColor: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
+																borderColor: (theme: Theme) =>
+																	Coloring.rgba(
+																		theme.palette.white.main,
+																		0.6
+																	),
 															},
 														},
 														"&::placeholder": {
 															opacity: 0.6,
 														},
 														".MuiOutlinedInput-notchedOutline": {
-															borderColor: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.2),
+															borderColor: (theme: Theme) =>
+																Coloring.rgba(
+																	theme.palette.white.main,
+																	0.2
+																),
 														},
 													},
 												}}
 											/>
 											<Box sx={{ mx: 2, opacity: 0.4 }}> to </Box>
-											<TextField {...endProps}
+											<TextField
+												{...endProps}
 												InputLabelProps={{
 													shrink: true,
 													sx: {
-														color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.4),
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.4
+															),
 													},
 												}}
 												InputProps={{
 													sx: {
-														color: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.8),
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.8
+															),
 														"&:hover": {
 															color: "white.main",
 															".MuiOutlinedInput-notchedOutline": {
-																borderColor: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.6),
+																borderColor: (theme: Theme) =>
+																	Coloring.rgba(
+																		theme.palette.white.main,
+																		0.6
+																	),
 															},
 														},
 														"&::placeholder": {
 															opacity: 0.6,
 														},
 														".MuiOutlinedInput-notchedOutline": {
-															borderColor: (theme : Theme) => Coloring.rgba(theme.palette.white.main, 0.2),
+															borderColor: (theme: Theme) =>
+																Coloring.rgba(
+																	theme.palette.white.main,
+																	0.2
+																),
 														},
 													},
 												}}
 											/>
 										</React.Fragment>
 									)}
-									
 								/>
 							</LocalizationProvider>
 						</Menu>
@@ -348,21 +421,24 @@ const ReportList: React.FC = () => {
 								height: "inherit",
 							}}
 						/>
-
 					</ButtonGroup>
 				</div>
 				<List style={{ overflow: "auto" }}>
 					{reports
-						.filter((report : ReportResource) => {
-							if (!selectedLabels.every((labelIdx : number) => labelFilter[labelIdx](report)))
+						.filter((report: ReportResource) => {
+							if (
+								!selectedLabels.every((labelIdx: number) =>
+									labelFilter[labelIdx](report)
+								)
+							)
 								return false;
 
-							if (dateRange[0] && ((new Date(report.createdAt)) < dateRange[0]))
+							if (dateRange[0] && new Date(report.createdAt) < dateRange[0])
 								return false;
 
-							if (dateRange[1] && ((new Date(report.createdAt)) > dateRange[1]))
+							if (dateRange[1] && new Date(report.createdAt) > dateRange[1])
 								return false;
-							
+
 							return true;
 						})
 						.sort((reportA: ReportResource, reportB: ReportResource) =>
