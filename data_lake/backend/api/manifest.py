@@ -27,7 +27,7 @@ manifestAttributes = namespace.model("Manifest", {
     "time": fields.String(required=True, description="The manifest time"),
     "staff_id": fields.String(
         required=True,
-        attribute='staff_id',
+        attribute='staff_id.$oid',
         description="Id of the operator that was next to the sensor"
     ),
 })

@@ -18,7 +18,7 @@ namespace = Namespace("Stock", path="/stock",
 itemAttributes = namespace.model("StockItem", {
     "id": fields.String(
         required=True,
-        attribute='_id',
+        attribute='_id.$oid',
         description="Name of the item"),
     "designation": fields.String(
         required=True,

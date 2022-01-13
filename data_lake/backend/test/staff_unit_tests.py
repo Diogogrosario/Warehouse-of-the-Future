@@ -53,4 +53,4 @@ class StaffTests():
     def testWrongURLParam(self, wrong_param):
         # staff/:id (Incorrect Request)
         response = self.client.get(f'staff/{wrong_param}')
-        self.TestClass.assertEqual(response.status_code, 404)
+        self.TestClass.assertEqual(response.status_code, 400)

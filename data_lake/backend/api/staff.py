@@ -19,7 +19,10 @@ staffAttributes = namespace.model("Staff", {
 of the staff member"),
     "name": fields.String(required=True, description="The name of this staff \
 member"),
-    "birth_date": fields.String(required=True, description="Birth date of this staff member"),
+    "birth_date": fields.String(
+        required=True,
+        description="Birth date of this staff member"
+    ),
     "height": fields.Integer(require=True, description="Staff member age")
 })
 
@@ -93,6 +96,6 @@ class StaffInformation(Resource):
         try:
             document = employeesCollection.find_one({"_id": ObjectId(id)})
         except Exception:
-            abort(404, 'Incorrect Staff member ID passed.')
+            abort(400, 'Incorrect Staff member ID passed.')
 
         return json.loads(json_util.dumps(document))
