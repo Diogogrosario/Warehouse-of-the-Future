@@ -23,7 +23,7 @@
     "fiscalYearStartMonth": 0,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 1,
+    "id": 2,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -35,6 +35,218 @@
                 "w": 24,
                 "x": 0,
                 "y": 0
+            },
+            "id": 14,
+            "panels": [],
+            "title": "Layouts",
+            "type": "row"
+        },
+        {
+            "datasource": null,
+            "description": "Racks information, namely its id and width.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "width"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "lcd-gauge"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "none"
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "width (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 1
+            },
+            "id": 16,
+            "options": {
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/racks",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Racks",
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "description": "Shelves information, namely its id, height, and associated rack_id.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "height"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "lcd-gauge"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "none"
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "height (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 1
+            },
+            "id": 17,
+            "options": {
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/shelves",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Shelves",
+            "type": "table"
+        },
+        {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 9
             },
             "id": 11,
             "panels": [],
@@ -138,7 +350,7 @@
                 "h": 9,
                 "w": 13,
                 "x": 0,
-                "y": 1
+                "y": 10
             },
             "id": 2,
             "options": {
@@ -222,7 +434,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 10
+                "y": 19
             },
             "id": 9,
             "panels": [],
@@ -258,7 +470,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 11
+                "y": 20
             },
             "id": 4,
             "options": {
@@ -340,7 +552,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 11
+                "y": 20
             },
             "id": 5,
             "options": {
@@ -418,7 +630,7 @@
                 "h": 10,
                 "w": 5,
                 "x": 8,
-                "y": 11
+                "y": 20
             },
             "id": 12,
             "options": {
@@ -496,7 +708,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 16
+                "y": 25
             },
             "id": 6,
             "options": {
@@ -574,7 +786,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 16
+                "y": 25
             },
             "id": 7,
             "options": {
