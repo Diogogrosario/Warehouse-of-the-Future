@@ -9,7 +9,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 RUN apk add --no-cache postgresql-client
 
 # Install app dependencies
-COPY package.json ./
+COPY package.json yarn.lock ./
 RUN yarn install
 
 # Copy all files from current directory to container
