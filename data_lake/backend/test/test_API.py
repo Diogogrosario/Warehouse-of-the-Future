@@ -9,8 +9,8 @@ from pymongo import MongoClient
 
 from ..api import api
 
-from .globalData_PBT import GlobalPBT
-from .globalData_unit_tests import GlobalDataTests
+from .global_data_PBT import GlobalPBT
+from .global_data_unit_tests import GlobalDataTests
 from .layout_PBT import LayoutPBT
 from .layout_unit_tests import LayoutTests
 from .manifest_PBT import ManifestPBT
@@ -25,7 +25,7 @@ from .stock_unit_tests import StockTests
 class APITesting(TestCase):
     def populateTestDatabase(self):
         self.populateEmployees()
-        # self.populateGlobalData()
+        self.populateGlobalData()
         # self.populateSensorData()
         # self.populateLayouts()
 
@@ -84,22 +84,16 @@ class APITesting(TestCase):
     def populateGlobalData(self):
         global_data = [
             {
-                "orchestrator_position": [1, 2, 3],
+                "orchestrator": {
+                    "position": [1, 2, 3]
+                },
                 "cart": {
-                    "speed": 3,
-                    "start_time": datetime.datetime(2022, 1, 2, 8, 30, 0),
-                    "end_time": datetime.datetime(2022, 1, 2, 20, 0, 0)
-                }
-            },
-            {
-                "orchestrator_position": [2, 3, 4],
-                "cart": {
-                    "speed": 10,
-                    "start_time": datetime.datetime(2022, 1, 1, 8, 00, 0),
-                    "end_time": datetime.datetime(2022, 1, 1, 19, 30, 0)
+                    "start_position": [250, 100],
+                    "speed": 300.50,
+                    "start_time": "08:00",
+                    "end_time": "20:00"
                 }
             }
-
         ]
         self.db.WoF.GlobalData.insert_many(global_data)
 
@@ -255,11 +249,10 @@ class APITesting(TestCase):
         staff_tests.testWrongRequest()
         staff_tests.testWrongURLParam("abc")
 
-    # def test_globalData_enpoint(self):
-    #     global_tests = GlobalDataTests(self, self.client)
-    #     global_tests.testWithTimeBefore("2021-01-01")
-    #     global_tests.testWithTimeBeforeAndAfter("2022-01-02", "2022-01-03")
-    #     global_tests.testWrongRequest()
+    def test_globalData_enpoint(self):
+        global_tests = GlobalDataTests(self, self.client)
+        global_tests.testEndpoint("cart")
+        global_tests.testEndpoint("orchestrator")
 
     # def test_sensors_endpoint(self):
     #     sensor_tests = SensorsTests(self, self.client)
