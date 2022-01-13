@@ -107,12 +107,7 @@
             "id": 16,
             "options": {
                 "showHeader": true,
-                "sortBy": [
-                    {
-                        "desc": false,
-                        "displayName": "id"
-                    }
-                ]
+                "sortBy": []
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -211,12 +206,7 @@
             "id": 17,
             "options": {
                 "showHeader": true,
-                "sortBy": [
-                    {
-                        "desc": true,
-                        "displayName": "height (cm)"
-                    }
-                ]
+                "sortBy": []
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -419,12 +409,7 @@
             "id": 18,
             "options": {
                 "showHeader": true,
-                "sortBy": [
-                    {
-                        "desc": true,
-                        "displayName": "quantity"
-                    }
-                ]
+                "sortBy": []
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -520,6 +505,13 @@
                             {
                                 "id": "displayName",
                                 "value": "width (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "super-light-orange",
+                                    "mode": "fixed"
+                                }
                             }
                         ]
                     },
@@ -546,6 +538,13 @@
                             {
                                 "id": "displayName",
                                 "value": "height (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-blue",
+                                    "mode": "fixed"
+                                }
                             }
                         ]
                     },
@@ -566,6 +565,13 @@
                             {
                                 "id": "displayName",
                                 "value": "length (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-purple",
+                                    "mode": "fixed"
+                                }
                             }
                         ]
                     },
@@ -590,6 +596,52 @@
                                 "value": "weight (cm)"
                             }
                         ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "quantity"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "mode": "thresholds"
+                                }
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "dark-red",
+                                            "value": null
+                                        },
+                                        {
+                                            "color": "light-orange",
+                                            "value": 1
+                                        },
+                                        {
+                                            "color": "semi-dark-green",
+                                            "value": 2
+                                        },
+                                        {
+                                            "color": "dark-green",
+                                            "value": 3
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "max",
+                                "value": 3
+                            }
+                        ]
                     }
                 ]
             },
@@ -602,12 +654,7 @@
             "id": 20,
             "options": {
                 "showHeader": true,
-                "sortBy": [
-                    {
-                        "desc": true,
-                        "displayName": "weight (cm)"
-                    }
-                ]
+                "sortBy": []
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -752,12 +799,7 @@
             "id": 2,
             "options": {
                 "showHeader": true,
-                "sortBy": [
-                    {
-                        "desc": true,
-                        "displayName": "height (cm)"
-                    }
-                ]
+                "sortBy": []
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -1257,5 +1299,5 @@
     "timezone": "",
     "title": "Data Lake",
     "uid": "BwcXP3cnz",
-    "version": 19
+    "version": 22
 }
