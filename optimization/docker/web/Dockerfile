@@ -53,4 +53,4 @@ WORKDIR /var/www
 
 USER $user
 
-CMD composer install && npm install && npm run prod && cp .env.example .env && php artisan key:generate && php-fpm -F
+CMD composer install && npm install && npm run prod && php-fpm -F
