@@ -77,7 +77,7 @@
                         "properties": [
                             {
                                 "id": "custom.displayMode",
-                                "value": "lcd-gauge"
+                                "value": "gradient-gauge"
                             },
                             {
                                 "id": "unit",
@@ -90,7 +90,7 @@
                             {
                                 "id": "color",
                                 "value": {
-                                    "fixedColor": "light-blue",
+                                    "fixedColor": "super-light-orange",
                                     "mode": "fixed"
                                 }
                             }
@@ -107,7 +107,12 @@
             "id": 16,
             "options": {
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": false,
+                        "displayName": "id"
+                    }
+                ]
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -176,7 +181,7 @@
                         "properties": [
                             {
                                 "id": "custom.displayMode",
-                                "value": "lcd-gauge"
+                                "value": "gradient-gauge"
                             },
                             {
                                 "id": "unit",
@@ -206,7 +211,12 @@
             "id": 17,
             "options": {
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "height (cm)"
+                    }
+                ]
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -467,13 +477,173 @@
             "type": "table"
         },
         {
+            "datasource": null,
+            "description": "Items information, namely the id, designation, width, height and length (in cm), the weight (in g) and the quantity.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "width"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "max",
+                                "value": 30
+                            },
+                            {
+                                "id": "color"
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "width (cm)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "height"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "max",
+                                "value": 30
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "mode": "thresholds"
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "height (cm)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "length"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "max",
+                                "value": 95
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "length (cm)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "weight"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "mode": "continuous-GrYlRd"
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "weight (cm)"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 19,
+                "x": 0,
+                "y": 20
+            },
+            "id": 20,
+            "options": {
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "weight (cm)"
+                    }
+                ]
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/stock/",
+                    "url_options": {
+                        "data": "",
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Stock",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {}
+                }
+            ],
+            "type": "table"
+        },
+        {
             "collapsed": false,
             "datasource": null,
             "gridPos": {
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 20
+                "y": 30
             },
             "id": 11,
             "panels": [],
@@ -577,12 +747,17 @@
                 "h": 8,
                 "w": 19,
                 "x": 0,
-                "y": 21
+                "y": 31
             },
             "id": 2,
             "options": {
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "height (cm)"
+                    }
+                ]
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -661,7 +836,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 29
+                "y": 39
             },
             "id": 9,
             "panels": [],
@@ -697,7 +872,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 30
+                "y": 40
             },
             "id": 4,
             "options": {
@@ -779,7 +954,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 30
+                "y": 40
             },
             "id": 5,
             "options": {
@@ -857,7 +1032,7 @@
                 "h": 10,
                 "w": 5,
                 "x": 8,
-                "y": 30
+                "y": 40
             },
             "id": 12,
             "options": {
@@ -935,7 +1110,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 35
+                "y": 45
             },
             "id": 6,
             "options": {
@@ -1013,7 +1188,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 35
+                "y": 45
             },
             "id": 7,
             "options": {
@@ -1082,5 +1257,5 @@
     "timezone": "",
     "title": "Data Lake",
     "uid": "BwcXP3cnz",
-    "version": 11
+    "version": 19
 }
