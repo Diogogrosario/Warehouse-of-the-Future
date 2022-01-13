@@ -1,0 +1,9002 @@
+[
+	{
+	  "_id": "d4a8fb45fd9c69b5a8fa2b86",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 23,
+	  "height": 18,
+	  "length": 80,
+	  "weight": 61827,
+	  "quantity": 1
+	},
+	{
+	  "_id": "0241a3b1e49c379e776a0479",
+	  "designation": "cirtuito elétrico do motor",
+	  "width": 1,
+	  "height": 8,
+	  "length": 35,
+	  "weight": 11370,
+	  "quantity": 2
+	},
+	{
+	  "_id": "1096695dadf81b119fb60758",
+	  "designation": "sensores de estacionamento",
+	  "width": 15,
+	  "height": 6,
+	  "length": 10,
+	  "weight": 10784,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a1cf30efe9426534fc8882ef",
+	  "designation": "porta traseira",
+	  "width": 24,
+	  "height": 5,
+	  "length": 86,
+	  "weight": 16956,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c57f1489035e23638f2bb73d",
+	  "designation": "travão de estacionamento",
+	  "width": 8,
+	  "height": 4,
+	  "length": 31,
+	  "weight": 18867,
+	  "quantity": 3
+	},
+	{
+	  "_id": "df04b4af9a5b0ac57ebf5fb1",
+	  "designation": "disco de travão de alto rendimento",
+	  "width": 1,
+	  "height": 5,
+	  "length": 18,
+	  "weight": 8359,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0ca00cae824463a4c9f9b03d",
+	  "designation": "compressor",
+	  "width": 7,
+	  "height": 3,
+	  "length": 32,
+	  "weight": 27400,
+	  "quantity": 2
+	},
+	{
+	  "_id": "7c3b5c16801210eec351cb94",
+	  "designation": "tambor de travão",
+	  "width": 2,
+	  "height": 4,
+	  "length": 7,
+	  "weight": 31700,
+	  "quantity": 2
+	},
+	{
+	  "_id": "1cb8bc8e8deccf0dfc79c02b",
+	  "designation": "pastilhas de travão",
+	  "width": 5,
+	  "height": 8,
+	  "length": 28,
+	  "weight": 9622,
+	  "quantity": 3
+	},
+	{
+	  "_id": "262430d0d5e8a96c4c9ddf4f",
+	  "designation": "guia",
+	  "width": 25,
+	  "height": 22,
+	  "length": 43,
+	  "weight": 4658,
+	  "quantity": 1
+	},
+	{
+	  "_id": "921a94907beb644a11fb83f5",
+	  "designation": "cambota",
+	  "width": 9,
+	  "height": 6,
+	  "length": 13,
+	  "weight": 49935,
+	  "quantity": 2
+	},
+	{
+	  "_id": "94effe829681159d2731886b",
+	  "designation": "árvore de cames",
+	  "width": 1,
+	  "height": 10,
+	  "length": 18,
+	  "weight": 15786,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c9f23537add34808d5bd3d22",
+	  "designation": "sensor de combustível",
+	  "width": 9,
+	  "height": 2,
+	  "length": 17,
+	  "weight": 23281,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6b18609115e908dff185d724",
+	  "designation": "amortecedor de vibrações",
+	  "width": 14,
+	  "height": 4,
+	  "length": 38,
+	  "weight": 2873,
+	  "quantity": 2
+	},
+	{
+	  "_id": "fce5063cc302b73fed958f19",
+	  "designation": "regulador de força de travagem",
+	  "width": 17,
+	  "height": 2,
+	  "length": 73,
+	  "weight": 28060,
+	  "quantity": 1
+	},
+	{
+	  "_id": "38794d6584517e264ef556c1",
+	  "designation": "correntes de distribuição",
+	  "width": 7,
+	  "height": 4,
+	  "length": 6,
+	  "weight": 11818,
+	  "quantity": 3
+	},
+	{
+	  "_id": "91111ab68e1861968b1135b7",
+	  "designation": "cambota",
+	  "width": 8,
+	  "height": 22,
+	  "length": 15,
+	  "weight": 8302,
+	  "quantity": 1
+	},
+	{
+	  "_id": "0d4eabaa1a8137434fcb29e2",
+	  "designation": "correia dentada",
+	  "width": 6,
+	  "height": 7,
+	  "length": 45,
+	  "weight": 401,
+	  "quantity": 2
+	},
+	{
+	  "_id": "96137b38e6a0d1eeaac68c04",
+	  "designation": "amortecedor de vibrações",
+	  "width": 4,
+	  "height": 8,
+	  "length": 25,
+	  "weight": 12974,
+	  "quantity": 3
+	},
+	{
+	  "_id": "00af7835352b79ee7c969ef9",
+	  "designation": "amortecedor de capô",
+	  "width": 14,
+	  "height": 3,
+	  "length": 74,
+	  "weight": 61087,
+	  "quantity": 1
+	},
+	{
+	  "_id": "465b86b0a859cd1829fddfe8",
+	  "designation": "bomba de água",
+	  "width": 9,
+	  "height": 11,
+	  "length": 78,
+	  "weight": 52851,
+	  "quantity": 1
+	},
+	{
+	  "_id": "529039ac12116a146d9f1506",
+	  "designation": "painel lateral",
+	  "width": 7,
+	  "height": 15,
+	  "length": 33,
+	  "weight": 34248,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5c9dffbc40a0df74a7097aaa",
+	  "designation": "filtro de ar",
+	  "width": 11,
+	  "height": 12,
+	  "length": 30,
+	  "weight": 87678,
+	  "quantity": 1
+	},
+	{
+	  "_id": "2826195fea7877514f5c7426",
+	  "designation": "porta traseira",
+	  "width": 21,
+	  "height": 11,
+	  "length": 37,
+	  "weight": 35700,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b30b123632c4c66d1d0b4b96",
+	  "designation": "interruptor de luz de stop",
+	  "width": 8,
+	  "height": 25,
+	  "length": 94,
+	  "weight": 12162,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a8b1ca69edcbbe8ddcea5875",
+	  "designation": "cabo de freio de mão",
+	  "width": 6,
+	  "height": 12,
+	  "length": 2,
+	  "weight": 29076,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b962ed40d5f316bda85230a3",
+	  "designation": "gancho de roboque",
+	  "width": 12,
+	  "height": 5,
+	  "length": 39,
+	  "weight": 36659,
+	  "quantity": 2
+	},
+	{
+	  "_id": "268c5b3241f0917b67b2eea6",
+	  "designation": "amortecedor de vibrações",
+	  "width": 5,
+	  "height": 15,
+	  "length": 30,
+	  "weight": 12127,
+	  "quantity": 2
+	},
+	{
+	  "_id": "034e36784dfa61167393c7fe",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 15,
+	  "height": 6,
+	  "length": 21,
+	  "weight": 9173,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2a83bb3e84d4e7ee7c287013",
+	  "designation": "mangueira de travão",
+	  "width": 11,
+	  "height": 9,
+	  "length": 28,
+	  "weight": 11761,
+	  "quantity": 2
+	},
+	{
+	  "_id": "df5f084bbe8a9834c8b704e3",
+	  "designation": "tambor de travão",
+	  "width": 9,
+	  "height": 9,
+	  "length": 6,
+	  "weight": 28274,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c95a44e2cc350c3b9b5b3e4c",
+	  "designation": "anel de sensor de abs",
+	  "width": 3,
+	  "height": 7,
+	  "length": 10,
+	  "weight": 9417,
+	  "quantity": 3
+	},
+	{
+	  "_id": "14b7bee0646cf1b1d37ab89c",
+	  "designation": "disco de travão de alto rendimento",
+	  "width": 13,
+	  "height": 11,
+	  "length": 15,
+	  "weight": 7627,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2726c774fc87762fccb50bd0",
+	  "designation": "filtro de óleo",
+	  "width": 1,
+	  "height": 2,
+	  "length": 4,
+	  "weight": 437,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7345802eadf04da109583002",
+	  "designation": "vidro farol",
+	  "width": 4,
+	  "height": 2,
+	  "length": 29,
+	  "weight": 24634,
+	  "quantity": 2
+	},
+	{
+	  "_id": "466d62da156d710cfe9e9fe6",
+	  "designation": "cilindro de travão de roda",
+	  "width": 13,
+	  "height": 2,
+	  "length": 16,
+	  "weight": 29644,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f1e8034af603e2b369661bac",
+	  "designation": "guarda-lamas",
+	  "width": 3,
+	  "height": 14,
+	  "length": 62,
+	  "weight": 69362,
+	  "quantity": 1
+	},
+	{
+	  "_id": "42282c4849c3f3e3e5ce2c80",
+	  "designation": "embreagem do ventilador",
+	  "width": 7,
+	  "height": 14,
+	  "length": 47,
+	  "weight": 18036,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b9ce08229d7e033dfa061e21",
+	  "designation": "faróis de xénon",
+	  "width": 15,
+	  "height": 9,
+	  "length": 46,
+	  "weight": 26903,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c7ef60a1f05126aa149c4f52",
+	  "designation": "pinças de travão",
+	  "width": 5,
+	  "height": 4,
+	  "length": 23,
+	  "weight": 7742,
+	  "quantity": 3
+	},
+	{
+	  "_id": "bb69e2c3066b3c358d7e3ee8",
+	  "designation": "para-choques",
+	  "width": 11,
+	  "height": 3,
+	  "length": 11,
+	  "weight": 18799,
+	  "quantity": 2
+	},
+	{
+	  "_id": "adce662a15b10136dcc56219",
+	  "designation": "bobila de ignição",
+	  "width": 5,
+	  "height": 6,
+	  "length": 9,
+	  "weight": 6981,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c796507b653da76b20dc5985",
+	  "designation": "amortecedor de vibrações",
+	  "width": 9,
+	  "height": 4,
+	  "length": 24,
+	  "weight": 30261,
+	  "quantity": 3
+	},
+	{
+	  "_id": "134b26fde113aae2e682e997",
+	  "designation": "correntes de distribuição",
+	  "width": 1,
+	  "height": 8,
+	  "length": 24,
+	  "weight": 19523,
+	  "quantity": 3
+	},
+	{
+	  "_id": "a980a87c83bfbe8b80144c3b",
+	  "designation": "mangueira de travão",
+	  "width": 30,
+	  "height": 3,
+	  "length": 40,
+	  "weight": 9218,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c80e3852d5d4a5a73ab7835b",
+	  "designation": "maxilas do travão",
+	  "width": 8,
+	  "height": 10,
+	  "length": 9,
+	  "weight": 9479,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ef3174c600b88ecf5ad60166",
+	  "designation": "válvula de admissão",
+	  "width": 9,
+	  "height": 3,
+	  "length": 16,
+	  "weight": 8201,
+	  "quantity": 2
+	},
+	{
+	  "_id": "7371831abba48695303d7efd",
+	  "designation": "bujão do carter",
+	  "width": 15,
+	  "height": 2,
+	  "length": 34,
+	  "weight": 48872,
+	  "quantity": 2
+	},
+	{
+	  "_id": "4429239d26be2f150ee067bb",
+	  "designation": "cabo de freio de mão",
+	  "width": 6,
+	  "height": 1,
+	  "length": 7,
+	  "weight": 38102,
+	  "quantity": 2
+	},
+	{
+	  "_id": "269acf22a9284b9cd50dba36",
+	  "designation": "bomba de água",
+	  "width": 10,
+	  "height": 6,
+	  "length": 44,
+	  "weight": 40832,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5cb75456ce13b2e9573c32cc",
+	  "designation": "disco de travão",
+	  "width": 8,
+	  "height": 6,
+	  "length": 29,
+	  "weight": 15831,
+	  "quantity": 3
+	},
+	{
+	  "_id": "74545d98f11785cc727f22c5",
+	  "designation": "anel de sensor de abs",
+	  "width": 3,
+	  "height": 8,
+	  "length": 24,
+	  "weight": 17810,
+	  "quantity": 3
+	},
+	{
+	  "_id": "737715733dad1c0c502f236f",
+	  "designation": "tambor de travão",
+	  "width": 5,
+	  "height": 7,
+	  "length": 5,
+	  "weight": 11654,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1eb8dd946c64141fa8d700ba",
+	  "designation": "kit de travões",
+	  "width": 19,
+	  "height": 17,
+	  "length": 47,
+	  "weight": 62854,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a8abfe2f6e3e17f6e7c88112",
+	  "designation": "cabo de freio de mão",
+	  "width": 2,
+	  "height": 16,
+	  "length": 69,
+	  "weight": 92529,
+	  "quantity": 1
+	},
+	{
+	  "_id": "51974c7c254345b0fdce73d6",
+	  "designation": "faróis de xénon",
+	  "width": 12,
+	  "height": 3,
+	  "length": 47,
+	  "weight": 43119,
+	  "quantity": 2
+	},
+	{
+	  "_id": "264dd60b7fe99806d0c5ca3a",
+	  "designation": "fecho central",
+	  "width": 6,
+	  "height": 13,
+	  "length": 4,
+	  "weight": 15943,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ae3eefd44d85db7ade2f6d8f",
+	  "designation": "vidro farol",
+	  "width": 4,
+	  "height": 13,
+	  "length": 30,
+	  "weight": 30909,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8e373e319e3beba2967af4e5",
+	  "designation": "guia",
+	  "width": 7,
+	  "height": 2,
+	  "length": 12,
+	  "weight": 27923,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a0ddbfb9f15e40194f5ad972",
+	  "designation": "vidro farol",
+	  "width": 8,
+	  "height": 24,
+	  "length": 9,
+	  "weight": 75679,
+	  "quantity": 1
+	},
+	{
+	  "_id": "94eb9749b66c8b40f131bf0c",
+	  "designation": "painel lateral",
+	  "width": 11,
+	  "height": 1,
+	  "length": 34,
+	  "weight": 26592,
+	  "quantity": 2
+	},
+	{
+	  "_id": "7c52191871c7817185c1a5a6",
+	  "designation": "espelho retrovisor",
+	  "width": 10,
+	  "height": 8,
+	  "length": 29,
+	  "weight": 13366,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8d5dbcd443678ca99e84dd70",
+	  "designation": "amortecedor de capô",
+	  "width": 29,
+	  "height": 10,
+	  "length": 5,
+	  "weight": 87199,
+	  "quantity": 1
+	},
+	{
+	  "_id": "914cfd0c999769c99d955d89",
+	  "designation": "vareta de óleo",
+	  "width": 15,
+	  "height": 29,
+	  "length": 86,
+	  "weight": 60475,
+	  "quantity": 1
+	},
+	{
+	  "_id": "318e34a5608e2f944152ffbf",
+	  "designation": "guarda-lamas",
+	  "width": 16,
+	  "height": 13,
+	  "length": 8,
+	  "weight": 23416,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6c9e04720756cfafa1c795eb",
+	  "designation": "radiador de óleo",
+	  "width": 14,
+	  "height": 27,
+	  "length": 63,
+	  "weight": 14494,
+	  "quantity": 1
+	},
+	{
+	  "_id": "17f62dfe8df5362595cca4c6",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 4,
+	  "height": 3,
+	  "length": 16,
+	  "weight": 18248,
+	  "quantity": 3
+	},
+	{
+	  "_id": "cb9cdbc1eed52ec7bbadc7dc",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 6,
+	  "height": 6,
+	  "length": 15,
+	  "weight": 22387,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0621d658cc7938cd51215f73",
+	  "designation": "anilhas da cambota",
+	  "width": 7,
+	  "height": 27,
+	  "length": 89,
+	  "weight": 31663,
+	  "quantity": 1
+	},
+	{
+	  "_id": "911fccd30bdc04a8eb77f7d0",
+	  "designation": "árvore de cames",
+	  "width": 22,
+	  "height": 16,
+	  "length": 1,
+	  "weight": 86901,
+	  "quantity": 1
+	},
+	{
+	  "_id": "18d51111f1679e507551df13",
+	  "designation": "correia dentada",
+	  "width": 1,
+	  "height": 7,
+	  "length": 31,
+	  "weight": 14827,
+	  "quantity": 3
+	},
+	{
+	  "_id": "38019c4cd912f8d3a7b4dbac",
+	  "designation": "luz de stop",
+	  "width": 4,
+	  "height": 5,
+	  "length": 29,
+	  "weight": 19198,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b00b44c410965c80c39ab1c3",
+	  "designation": "embreagem do ventilador",
+	  "width": 5,
+	  "height": 1,
+	  "length": 27,
+	  "weight": 18634,
+	  "quantity": 3
+	},
+	{
+	  "_id": "9472b2f110a19c6d34b11ac3",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 5,
+	  "height": 16,
+	  "length": 45,
+	  "weight": 46363,
+	  "quantity": 1
+	},
+	{
+	  "_id": "be0c4c732dadb1087068aae1",
+	  "designation": "sensores de estacionamento",
+	  "width": 4,
+	  "height": 5,
+	  "length": 28,
+	  "weight": 1610,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e2e4465f2a6c7e5ffdd92196",
+	  "designation": "pastilhas de travão",
+	  "width": 1,
+	  "height": 3,
+	  "length": 19,
+	  "weight": 27354,
+	  "quantity": 3
+	},
+	{
+	  "_id": "9610476c041b5489cec23fa9",
+	  "designation": "para-choques",
+	  "width": 3,
+	  "height": 15,
+	  "length": 47,
+	  "weight": 3069,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9876147166a49b456ce60335",
+	  "designation": "sensores de estacionamento",
+	  "width": 4,
+	  "height": 6,
+	  "length": 16,
+	  "weight": 4040,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8884cb81d1ff91a8f8f13b1e",
+	  "designation": "suporte da bateria",
+	  "width": 6,
+	  "height": 6,
+	  "length": 13,
+	  "weight": 7388,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ad103960a0f5566fd44d3638",
+	  "designation": "fecho central",
+	  "width": 10,
+	  "height": 3,
+	  "length": 31,
+	  "weight": 24510,
+	  "quantity": 3
+	},
+	{
+	  "_id": "feeb0dea299fb9aa11de38a7",
+	  "designation": "guia",
+	  "width": 5,
+	  "height": 8,
+	  "length": 20,
+	  "weight": 2679,
+	  "quantity": 3
+	},
+	{
+	  "_id": "aa2883e639c00557b23d4f87",
+	  "designation": "cabeçote",
+	  "width": 10,
+	  "height": 7,
+	  "length": 27,
+	  "weight": 23493,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ee78c767276b7b1042314334",
+	  "designation": "amortecedor de capô",
+	  "width": 6,
+	  "height": 1,
+	  "length": 11,
+	  "weight": 22312,
+	  "quantity": 3
+	},
+	{
+	  "_id": "9092dbd9d2f6f8d2591f8435",
+	  "designation": "radiador de óleo",
+	  "width": 7,
+	  "height": 9,
+	  "length": 24,
+	  "weight": 9467,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6e34222893571aefff2f7347",
+	  "designation": "embreagem do ventilador",
+	  "width": 28,
+	  "height": 25,
+	  "length": 65,
+	  "weight": 71934,
+	  "quantity": 1
+	},
+	{
+	  "_id": "0fcd6f06ed62bd75e3bf650a",
+	  "designation": "sensor de abs",
+	  "width": 10,
+	  "height": 16,
+	  "length": 88,
+	  "weight": 72911,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ee35c1d1c75910faa2e60aab",
+	  "designation": "para-brisas",
+	  "width": 22,
+	  "height": 23,
+	  "length": 77,
+	  "weight": 47201,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9ae356ab0191c73f138d9061",
+	  "designation": "guia",
+	  "width": 21,
+	  "height": 26,
+	  "length": 55,
+	  "weight": 62469,
+	  "quantity": 1
+	},
+	{
+	  "_id": "41fc731ade37daf88e364598",
+	  "designation": "guia",
+	  "width": 14,
+	  "height": 20,
+	  "length": 30,
+	  "weight": 42310,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8f1362bfc83d9499f3fdb6e6",
+	  "designation": "radiador",
+	  "width": 1,
+	  "height": 4,
+	  "length": 60,
+	  "weight": 48471,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a360e25370bdb74f20409ed5",
+	  "designation": "guarda-lamas",
+	  "width": 9,
+	  "height": 2,
+	  "length": 21,
+	  "weight": 20487,
+	  "quantity": 3
+	},
+	{
+	  "_id": "340c1881e60d33c3c97bf4c2",
+	  "designation": "vela de ignição",
+	  "width": 4,
+	  "height": 2,
+	  "length": 7,
+	  "weight": 5927,
+	  "quantity": 3
+	},
+	{
+	  "_id": "113550c6a1159df1bdeaef8e",
+	  "designation": "cirtuito elétrico do motor",
+	  "width": 13,
+	  "height": 9,
+	  "length": 34,
+	  "weight": 27855,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8ef21b6455fbad9afcee5d17",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 15,
+	  "height": 8,
+	  "length": 13,
+	  "weight": 28527,
+	  "quantity": 2
+	},
+	{
+	  "_id": "6f1f9646824b82707ad2f160",
+	  "designation": "espelho retrovisor",
+	  "width": 10,
+	  "height": 9,
+	  "length": 47,
+	  "weight": 23211,
+	  "quantity": 2
+	},
+	{
+	  "_id": "53e93093628ce984aeb535f3",
+	  "designation": "pinças de travão",
+	  "width": 20,
+	  "height": 12,
+	  "length": 83,
+	  "weight": 23962,
+	  "quantity": 1
+	},
+	{
+	  "_id": "36358bfb09159fe3d3ba31c7",
+	  "designation": "guia",
+	  "width": 29,
+	  "height": 3,
+	  "length": 56,
+	  "weight": 40342,
+	  "quantity": 1
+	},
+	{
+	  "_id": "673eed37adeb33e0806922e4",
+	  "designation": "vidro de espelho",
+	  "width": 20,
+	  "height": 13,
+	  "length": 4,
+	  "weight": 9671,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ab947a20c77cec312a86a319",
+	  "designation": "regulador de força de travagem",
+	  "width": 1,
+	  "height": 6,
+	  "length": 7,
+	  "weight": 21922,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d1053a860778eeee64a450a2",
+	  "designation": "faróis de xénon",
+	  "width": 1,
+	  "height": 11,
+	  "length": 9,
+	  "weight": 45920,
+	  "quantity": 2
+	},
+	{
+	  "_id": "39f10f326c5d674e78c0db09",
+	  "designation": "cabeçote",
+	  "width": 20,
+	  "height": 12,
+	  "length": 42,
+	  "weight": 71036,
+	  "quantity": 1
+	},
+	{
+	  "_id": "994dbd30c48d5130e6a0839a",
+	  "designation": "radiador de óleo",
+	  "width": 1,
+	  "height": 1,
+	  "length": 14,
+	  "weight": 2132,
+	  "quantity": 3
+	},
+	{
+	  "_id": "36be5086c0e1342faf9271a4",
+	  "designation": "correntes de distribuição",
+	  "width": 4,
+	  "height": 2,
+	  "length": 40,
+	  "weight": 38623,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8b7a47f1925a439ee7375f19",
+	  "designation": "cilindro de travão de roda",
+	  "width": 5,
+	  "height": 9,
+	  "length": 20,
+	  "weight": 22903,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0383b2942ea523fe94989480",
+	  "designation": "bobila de ignição",
+	  "width": 29,
+	  "height": 12,
+	  "length": 53,
+	  "weight": 89469,
+	  "quantity": 1
+	},
+	{
+	  "_id": "1fc47435fa84ba58dfcf4e15",
+	  "designation": "pastilhas de travão",
+	  "width": 23,
+	  "height": 29,
+	  "length": 88,
+	  "weight": 48942,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b5e9c3bee5b4b0c63c7c42c3",
+	  "designation": "radiador",
+	  "width": 1,
+	  "height": 5,
+	  "length": 20,
+	  "weight": 13772,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d4838bd982dfe15916cf960c",
+	  "designation": "tambor de travão",
+	  "width": 23,
+	  "height": 5,
+	  "length": 66,
+	  "weight": 44676,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7b939e940e98ce52c2708107",
+	  "designation": "filtro de ar",
+	  "width": 15,
+	  "height": 1,
+	  "length": 17,
+	  "weight": 14801,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2a3a32c859921338c6e0214d",
+	  "designation": "interruptor de luz de stop",
+	  "width": 21,
+	  "height": 5,
+	  "length": 53,
+	  "weight": 78569,
+	  "quantity": 1
+	},
+	{
+	  "_id": "5c478f818e6bc798fba9ef44",
+	  "designation": "fecho central",
+	  "width": 17,
+	  "height": 17,
+	  "length": 5,
+	  "weight": 30413,
+	  "quantity": 1
+	},
+	{
+	  "_id": "20a7cf8a0a916bfbe0dc46a6",
+	  "designation": "defletor de discos de travão",
+	  "width": 10,
+	  "height": 10,
+	  "length": 14,
+	  "weight": 24572,
+	  "quantity": 2
+	},
+	{
+	  "_id": "40a8c497901865a11bf45dfd",
+	  "designation": "pinças de travão",
+	  "width": 7,
+	  "height": 19,
+	  "length": 29,
+	  "weight": 66284,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9fbaceb880ea3268876caab3",
+	  "designation": "sensor de abs",
+	  "width": 15,
+	  "height": 6,
+	  "length": 7,
+	  "weight": 12101,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a80c40d3579467a722805e0e",
+	  "designation": "bobila de ignição",
+	  "width": 30,
+	  "height": 27,
+	  "length": 60,
+	  "weight": 21438,
+	  "quantity": 1
+	},
+	{
+	  "_id": "bfe08906213c7e30233917ff",
+	  "designation": "revestimento traseiro",
+	  "width": 1,
+	  "height": 14,
+	  "length": 37,
+	  "weight": 46127,
+	  "quantity": 2
+	},
+	{
+	  "_id": "48e224082df54d8e3dd88aa4",
+	  "designation": "árvore de cames",
+	  "width": 3,
+	  "height": 6,
+	  "length": 10,
+	  "weight": 477,
+	  "quantity": 2
+	},
+	{
+	  "_id": "dfe6bf8ffe26ec84a40c09fc",
+	  "designation": "tampa do radiador",
+	  "width": 2,
+	  "height": 10,
+	  "length": 19,
+	  "weight": 19892,
+	  "quantity": 3
+	},
+	{
+	  "_id": "708c7c7e7b18888dd4678e74",
+	  "designation": "apoios de motor",
+	  "width": 2,
+	  "height": 10,
+	  "length": 28,
+	  "weight": 4342,
+	  "quantity": 3
+	},
+	{
+	  "_id": "39e33e96d9305b629970a28b",
+	  "designation": "guia",
+	  "width": 8,
+	  "height": 2,
+	  "length": 11,
+	  "weight": 5300,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c764e0c29a7b284130d54b09",
+	  "designation": "bujão do carter",
+	  "width": 4,
+	  "height": 3,
+	  "length": 47,
+	  "weight": 857,
+	  "quantity": 2
+	},
+	{
+	  "_id": "bbaa32deed324c84704b873f",
+	  "designation": "anel de sensor de abs",
+	  "width": 14,
+	  "height": 1,
+	  "length": 17,
+	  "weight": 14281,
+	  "quantity": 2
+	},
+	{
+	  "_id": "997a77b6be3b6efd9cacc866",
+	  "designation": "painel lateral",
+	  "width": 9,
+	  "height": 3,
+	  "length": 28,
+	  "weight": 23096,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ef03bb0da8801685fb91e6da",
+	  "designation": "cambota",
+	  "width": 25,
+	  "height": 18,
+	  "length": 22,
+	  "weight": 87296,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6569c2b5d83cd965b45c43db",
+	  "designation": "porta traseira",
+	  "width": 1,
+	  "height": 8,
+	  "length": 46,
+	  "weight": 9943,
+	  "quantity": 2
+	},
+	{
+	  "_id": "477c875d674ab96735cf05ea",
+	  "designation": "cambota",
+	  "width": 21,
+	  "height": 20,
+	  "length": 28,
+	  "weight": 46254,
+	  "quantity": 1
+	},
+	{
+	  "_id": "d890a5c6c09d20c868e11564",
+	  "designation": "mangueira de travão",
+	  "width": 3,
+	  "height": 12,
+	  "length": 33,
+	  "weight": 31971,
+	  "quantity": 1
+	},
+	{
+	  "_id": "13cb62051a81d827295c0357",
+	  "designation": "apoios de motor",
+	  "width": 10,
+	  "height": 3,
+	  "length": 2,
+	  "weight": 6978,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e12f2bb23d815c6c75822ae6",
+	  "designation": "vidro farol",
+	  "width": 8,
+	  "height": 6,
+	  "length": 17,
+	  "weight": 5282,
+	  "quantity": 3
+	},
+	{
+	  "_id": "811b5ef6808efc2ce13171f0",
+	  "designation": "sensor de abs",
+	  "width": 13,
+	  "height": 29,
+	  "length": 20,
+	  "weight": 53725,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b0a6aaa300ff4a1f4cb745f8",
+	  "designation": "suporte da bateria",
+	  "width": 30,
+	  "height": 5,
+	  "length": 83,
+	  "weight": 65219,
+	  "quantity": 1
+	},
+	{
+	  "_id": "13fd8349440b3ca29847efe6",
+	  "designation": "farol principal",
+	  "width": 5,
+	  "height": 2,
+	  "length": 24,
+	  "weight": 8348,
+	  "quantity": 3
+	},
+	{
+	  "_id": "f7a82dad81ce999048dfafc4",
+	  "designation": "porta dianteira",
+	  "width": 12,
+	  "height": 15,
+	  "length": 11,
+	  "weight": 41726,
+	  "quantity": 2
+	},
+	{
+	  "_id": "6e89c537f8228ca455d274a3",
+	  "designation": "amortecedor de vibrações",
+	  "width": 7,
+	  "height": 7,
+	  "length": 46,
+	  "weight": 1566,
+	  "quantity": 2
+	},
+	{
+	  "_id": "dca145fd779f867dbddb1eca",
+	  "designation": "correia dentada",
+	  "width": 8,
+	  "height": 8,
+	  "length": 30,
+	  "weight": 3851,
+	  "quantity": 3
+	},
+	{
+	  "_id": "fc619a0b142ecae1e228c863",
+	  "designation": "sensor de abs",
+	  "width": 12,
+	  "height": 11,
+	  "length": 7,
+	  "weight": 36367,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2abd7aa36541adab04955578",
+	  "designation": "correntes de distribuição",
+	  "width": 5,
+	  "height": 4,
+	  "length": 17,
+	  "weight": 18909,
+	  "quantity": 3
+	},
+	{
+	  "_id": "dd58c47401897102d599d241",
+	  "designation": "disco de travão de alto rendimento",
+	  "width": 3,
+	  "height": 1,
+	  "length": 31,
+	  "weight": 11177,
+	  "quantity": 3
+	},
+	{
+	  "_id": "bb041e4e79f6717d8bc172c7",
+	  "designation": "porta traseira",
+	  "width": 7,
+	  "height": 5,
+	  "length": 33,
+	  "weight": 219,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2954e3ee929e980797af347f",
+	  "designation": "farol principal",
+	  "width": 9,
+	  "height": 8,
+	  "length": 6,
+	  "weight": 6142,
+	  "quantity": 3
+	},
+	{
+	  "_id": "a2f4019eb27f17d33ccefc5b",
+	  "designation": "anel de sensor de abs",
+	  "width": 7,
+	  "height": 24,
+	  "length": 29,
+	  "weight": 40722,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f52871e8f0e9a35a0f2de987",
+	  "designation": "vareta de óleo",
+	  "width": 12,
+	  "height": 1,
+	  "length": 14,
+	  "weight": 5771,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ddf3cbb57c8cd398020e21fd",
+	  "designation": "sensor de combustível",
+	  "width": 4,
+	  "height": 5,
+	  "length": 1,
+	  "weight": 4308,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5e83912e7256d7f5c9399de3",
+	  "designation": "luz de stop",
+	  "width": 3,
+	  "height": 4,
+	  "length": 26,
+	  "weight": 20875,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4fbcaa8ee5844cfd61f770d6",
+	  "designation": "luz de travão suplementar",
+	  "width": 13,
+	  "height": 12,
+	  "length": 31,
+	  "weight": 6047,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2251bc55dc3ab6a99a282d13",
+	  "designation": "sensores de estacionamento",
+	  "width": 1,
+	  "height": 10,
+	  "length": 3,
+	  "weight": 9677,
+	  "quantity": 3
+	},
+	{
+	  "_id": "13ef57ff067303146b9bd3e2",
+	  "designation": "servo freio",
+	  "width": 7,
+	  "height": 3,
+	  "length": 28,
+	  "weight": 4915,
+	  "quantity": 3
+	},
+	{
+	  "_id": "233b470ca4c47835e750210a",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 4,
+	  "height": 4,
+	  "length": 11,
+	  "weight": 9702,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1020d4fb38c2930d00b49e04",
+	  "designation": "correia dentada",
+	  "width": 3,
+	  "height": 6,
+	  "length": 25,
+	  "weight": 27172,
+	  "quantity": 3
+	},
+	{
+	  "_id": "129fe7872c6bd98c4c50b8a3",
+	  "designation": "radiador",
+	  "width": 17,
+	  "height": 27,
+	  "length": 84,
+	  "weight": 5599,
+	  "quantity": 1
+	},
+	{
+	  "_id": "418be5068c26cce9229861da",
+	  "designation": "guia",
+	  "width": 8,
+	  "height": 9,
+	  "length": 2,
+	  "weight": 15308,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5abd5a9c68b1702c9334130d",
+	  "designation": "cirtuito elétrico do motor",
+	  "width": 1,
+	  "height": 8,
+	  "length": 6,
+	  "weight": 12361,
+	  "quantity": 2
+	},
+	{
+	  "_id": "73149f927c9eb127870295e6",
+	  "designation": "fecho central",
+	  "width": 9,
+	  "height": 8,
+	  "length": 16,
+	  "weight": 2513,
+	  "quantity": 3
+	},
+	{
+	  "_id": "92c1538788eeabb7f53228ac",
+	  "designation": "vidro lateral",
+	  "width": 5,
+	  "height": 4,
+	  "length": 17,
+	  "weight": 26320,
+	  "quantity": 3
+	},
+	{
+	  "_id": "74a4a8996a6f014b78303729",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 3,
+	  "height": 7,
+	  "length": 28,
+	  "weight": 23710,
+	  "quantity": 3
+	},
+	{
+	  "_id": "34e6739429257c43588ce193",
+	  "designation": "sensores de estacionamento",
+	  "width": 4,
+	  "height": 5,
+	  "length": 11,
+	  "weight": 11752,
+	  "quantity": 3
+	},
+	{
+	  "_id": "fdf03c7908f05a0350107a7d",
+	  "designation": "sensores de estacionamento",
+	  "width": 7,
+	  "height": 6,
+	  "length": 62,
+	  "weight": 86615,
+	  "quantity": 1
+	},
+	{
+	  "_id": "5236db94535987d106a25b70",
+	  "designation": "bomba de vácuo",
+	  "width": 10,
+	  "height": 7,
+	  "length": 3,
+	  "weight": 31931,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4f3f8b229e8d219f10f4a0ee",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 10,
+	  "height": 2,
+	  "length": 5,
+	  "weight": 32677,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b57b16f272b8779e76af6c85",
+	  "designation": "cárter de óleo",
+	  "width": 11,
+	  "height": 15,
+	  "length": 68,
+	  "weight": 60826,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7592bfebe5cb3686f92326d3",
+	  "designation": "disco de travão de alto rendimento",
+	  "width": 24,
+	  "height": 23,
+	  "length": 95,
+	  "weight": 89634,
+	  "quantity": 1
+	},
+	{
+	  "_id": "783723913f1ddb8d069c7238",
+	  "designation": "revestimento traseiro",
+	  "width": 24,
+	  "height": 8,
+	  "length": 59,
+	  "weight": 87059,
+	  "quantity": 1
+	},
+	{
+	  "_id": "09b589a51bea8e218e194e85",
+	  "designation": "servo freio",
+	  "width": 4,
+	  "height": 8,
+	  "length": 33,
+	  "weight": 15818,
+	  "quantity": 2
+	},
+	{
+	  "_id": "48f0586ec4832654d5320e64",
+	  "designation": "amortecedor de vibrações",
+	  "width": 11,
+	  "height": 25,
+	  "length": 18,
+	  "weight": 17563,
+	  "quantity": 1
+	},
+	{
+	  "_id": "29364d18b5925c9d67dbbf9e",
+	  "designation": "vela de ignição",
+	  "width": 3,
+	  "height": 7,
+	  "length": 9,
+	  "weight": 40090,
+	  "quantity": 1
+	},
+	{
+	  "_id": "14e6a4cb6e2e5c7fb8b5cd5f",
+	  "designation": "vela de ignição",
+	  "width": 2,
+	  "height": 15,
+	  "length": 27,
+	  "weight": 2294,
+	  "quantity": 2
+	},
+	{
+	  "_id": "de492ff68eec4dc16e80bcff",
+	  "designation": "árvore de cames",
+	  "width": 29,
+	  "height": 11,
+	  "length": 25,
+	  "weight": 53823,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f63a234d5b3232d25f7e0cd5",
+	  "designation": "árvore de cames",
+	  "width": 4,
+	  "height": 10,
+	  "length": 26,
+	  "weight": 27288,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4993cdbe760ca6fef760dd1e",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 10,
+	  "height": 13,
+	  "length": 10,
+	  "weight": 10375,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8aa65621a6379326124389f8",
+	  "designation": "vareta de óleo",
+	  "width": 10,
+	  "height": 5,
+	  "length": 30,
+	  "weight": 23590,
+	  "quantity": 3
+	},
+	{
+	  "_id": "225d736541e155a2e499c9d3",
+	  "designation": "luz de stop",
+	  "width": 5,
+	  "height": 8,
+	  "length": 37,
+	  "weight": 41645,
+	  "quantity": 2
+	},
+	{
+	  "_id": "441e660c76cec88c861fdef8",
+	  "designation": "tambor de travão",
+	  "width": 28,
+	  "height": 5,
+	  "length": 52,
+	  "weight": 51673,
+	  "quantity": 1
+	},
+	{
+	  "_id": "1770c0977d7b234052b35a3c",
+	  "designation": "painel lateral",
+	  "width": 3,
+	  "height": 8,
+	  "length": 67,
+	  "weight": 38732,
+	  "quantity": 1
+	},
+	{
+	  "_id": "32c022a40a862ed660abf08f",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 1,
+	  "height": 12,
+	  "length": 34,
+	  "weight": 36446,
+	  "quantity": 2
+	},
+	{
+	  "_id": "115087dffce01bde8f99f7bd",
+	  "designation": "anel de sensor de abs",
+	  "width": 3,
+	  "height": 4,
+	  "length": 5,
+	  "weight": 27332,
+	  "quantity": 3
+	},
+	{
+	  "_id": "797f442805e4d83344d5cbce",
+	  "designation": "eixo",
+	  "width": 13,
+	  "height": 13,
+	  "length": 43,
+	  "weight": 7840,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e92c967a6d72234d164cebfe",
+	  "designation": "cambota",
+	  "width": 22,
+	  "height": 11,
+	  "length": 71,
+	  "weight": 19012,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4502e8487c2b9cc11593f006",
+	  "designation": "disco de travão",
+	  "width": 2,
+	  "height": 5,
+	  "length": 15,
+	  "weight": 24083,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8ed31fd2ab68ef544866d7fa",
+	  "designation": "bomba de água",
+	  "width": 7,
+	  "height": 10,
+	  "length": 19,
+	  "weight": 31058,
+	  "quantity": 2
+	},
+	{
+	  "_id": "0e1b79ebd3af84ec6b9b691c",
+	  "designation": "faróis de xénon",
+	  "width": 5,
+	  "height": 8,
+	  "length": 16,
+	  "weight": 18932,
+	  "quantity": 3
+	},
+	{
+	  "_id": "84219e5dd3c1e5c76698b976",
+	  "designation": "cambota",
+	  "width": 14,
+	  "height": 13,
+	  "length": 30,
+	  "weight": 15478,
+	  "quantity": 2
+	},
+	{
+	  "_id": "649c648fae7115c06e8d0eaf",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 8,
+	  "height": 4,
+	  "length": 1,
+	  "weight": 27366,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ab3556ce7b7cdec995be98cd",
+	  "designation": "luz de stop",
+	  "width": 2,
+	  "height": 3,
+	  "length": 20,
+	  "weight": 25139,
+	  "quantity": 3
+	},
+	{
+	  "_id": "628efae2b71dc9503bc94220",
+	  "designation": "painel de radiador",
+	  "width": 7,
+	  "height": 5,
+	  "length": 29,
+	  "weight": 28528,
+	  "quantity": 3
+	},
+	{
+	  "_id": "05ffffe575ecff593ee3cb67",
+	  "designation": "compressor",
+	  "width": 12,
+	  "height": 2,
+	  "length": 7,
+	  "weight": 1109,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ec0132bb9dec2b5141ef4ffe",
+	  "designation": "cabo de freio de mão",
+	  "width": 8,
+	  "height": 4,
+	  "length": 19,
+	  "weight": 20733,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7a3dffcc8d30e1adaa070a19",
+	  "designation": "travão de estacionamento",
+	  "width": 2,
+	  "height": 9,
+	  "length": 32,
+	  "weight": 9516,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9dbb317a9706789172aba835",
+	  "designation": "borracha de vidro",
+	  "width": 10,
+	  "height": 2,
+	  "length": 9,
+	  "weight": 22032,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c660abcdea81810c387d8f19",
+	  "designation": "pinças de travão",
+	  "width": 6,
+	  "height": 11,
+	  "length": 16,
+	  "weight": 21942,
+	  "quantity": 2
+	},
+	{
+	  "_id": "4c67acad98b82a37526215a4",
+	  "designation": "farol principal",
+	  "width": 6,
+	  "height": 25,
+	  "length": 67,
+	  "weight": 3273,
+	  "quantity": 1
+	},
+	{
+	  "_id": "878d7e949f4d2ddf75654031",
+	  "designation": "fecho central",
+	  "width": 5,
+	  "height": 9,
+	  "length": 3,
+	  "weight": 712,
+	  "quantity": 3
+	},
+	{
+	  "_id": "965ba8abb818a8ea35fbbb9d",
+	  "designation": "anel de sensor de abs",
+	  "width": 1,
+	  "height": 4,
+	  "length": 30,
+	  "weight": 29781,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c4a77e100e65280022f8fa35",
+	  "designation": "regulador de força de travagem",
+	  "width": 8,
+	  "height": 6,
+	  "length": 30,
+	  "weight": 18446,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2293161158ec3d08a65abe11",
+	  "designation": "espelho retrovisor",
+	  "width": 14,
+	  "height": 5,
+	  "length": 13,
+	  "weight": 43766,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9a436f08ad3d60dd8df7dd0f",
+	  "designation": "para-choques",
+	  "width": 1,
+	  "height": 2,
+	  "length": 28,
+	  "weight": 5797,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8c7a8dd5ad883476fcab3747",
+	  "designation": "para-choques",
+	  "width": 7,
+	  "height": 1,
+	  "length": 2,
+	  "weight": 759,
+	  "quantity": 3
+	},
+	{
+	  "_id": "9c3901d8806a326aac1728ee",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 8,
+	  "height": 1,
+	  "length": 9,
+	  "weight": 15226,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c65a78e435de1f8d3a7e559e",
+	  "designation": "tampa do radiador",
+	  "width": 7,
+	  "height": 6,
+	  "length": 17,
+	  "weight": 48958,
+	  "quantity": 2
+	},
+	{
+	  "_id": "7a147230b1a220710091e289",
+	  "designation": "sensores de estacionamento",
+	  "width": 23,
+	  "height": 28,
+	  "length": 76,
+	  "weight": 9308,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e3965cabc0f151f2606a638b",
+	  "designation": "filtro de ar",
+	  "width": 22,
+	  "height": 3,
+	  "length": 47,
+	  "weight": 68185,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6f8d26ad0e72e6693aefe94d",
+	  "designation": "radiador de óleo",
+	  "width": 7,
+	  "height": 2,
+	  "length": 27,
+	  "weight": 48089,
+	  "quantity": 2
+	},
+	{
+	  "_id": "0aabe8961c2180acfb4829e9",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 15,
+	  "height": 4,
+	  "length": 6,
+	  "weight": 5376,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b91b2c62f98666934c2f9f3c",
+	  "designation": "turbocompressor",
+	  "width": 29,
+	  "height": 6,
+	  "length": 15,
+	  "weight": 39273,
+	  "quantity": 1
+	},
+	{
+	  "_id": "36eb4efee60f92ece435c1a1",
+	  "designation": "cabo de freio de mão",
+	  "width": 6,
+	  "height": 2,
+	  "length": 5,
+	  "weight": 49596,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a0c4cb4c71e1b5feee0747f2",
+	  "designation": "filtro de ar",
+	  "width": 11,
+	  "height": 4,
+	  "length": 42,
+	  "weight": 55208,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3bc9207ce4c35253a27f7b84",
+	  "designation": "mangueira de travão",
+	  "width": 10,
+	  "height": 6,
+	  "length": 31,
+	  "weight": 47269,
+	  "quantity": 2
+	},
+	{
+	  "_id": "13071d2cd5289bcc63cb3733",
+	  "designation": "mangueira de travão",
+	  "width": 13,
+	  "height": 13,
+	  "length": 20,
+	  "weight": 2714,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a91fb7e7b7a3a1114496b192",
+	  "designation": "radiador",
+	  "width": 12,
+	  "height": 4,
+	  "length": 27,
+	  "weight": 51854,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6e0f8104bab9912b5d777c31",
+	  "designation": "tampa do radiador",
+	  "width": 8,
+	  "height": 2,
+	  "length": 31,
+	  "weight": 16273,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e88a45028d38883ccfc1ff13",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 3,
+	  "height": 22,
+	  "length": 17,
+	  "weight": 75801,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7b7a826c095b2133e8f3b914",
+	  "designation": "travão de estacionamento",
+	  "width": 11,
+	  "height": 15,
+	  "length": 25,
+	  "weight": 4395,
+	  "quantity": 1
+	},
+	{
+	  "_id": "07865f6560e6a6250ccaca5d",
+	  "designation": "tubo de óleo",
+	  "width": 4,
+	  "height": 8,
+	  "length": 6,
+	  "weight": 30267,
+	  "quantity": 3
+	},
+	{
+	  "_id": "2ed28954be58f380500ed810",
+	  "designation": "tambor de travão",
+	  "width": 13,
+	  "height": 20,
+	  "length": 89,
+	  "weight": 87552,
+	  "quantity": 1
+	},
+	{
+	  "_id": "236bbafc57cb234de73cdad1",
+	  "designation": "bujão do carter",
+	  "width": 16,
+	  "height": 18,
+	  "length": 34,
+	  "weight": 39610,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7242cef826b25747d6011814",
+	  "designation": "bujão do carter",
+	  "width": 29,
+	  "height": 7,
+	  "length": 53,
+	  "weight": 74930,
+	  "quantity": 1
+	},
+	{
+	  "_id": "32b73f407c1e04c23721d2cc",
+	  "designation": "luz de travão suplementar",
+	  "width": 1,
+	  "height": 6,
+	  "length": 10,
+	  "weight": 30162,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d0043dad25024a98eaf3ae0e",
+	  "designation": "travão de estacionamento",
+	  "width": 27,
+	  "height": 27,
+	  "length": 31,
+	  "weight": 12054,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3c365ada9f124ab6603880c1",
+	  "designation": "painel de radiador",
+	  "width": 4,
+	  "height": 7,
+	  "length": 11,
+	  "weight": 8481,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b97f6dddfafdda347f2a8f34",
+	  "designation": "cilindro de travão de roda",
+	  "width": 2,
+	  "height": 8,
+	  "length": 45,
+	  "weight": 48126,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a61f15e326ea04851d62b984",
+	  "designation": "compressor",
+	  "width": 2,
+	  "height": 10,
+	  "length": 59,
+	  "weight": 79385,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e56327335d89b5417e12f978",
+	  "designation": "vareta de óleo",
+	  "width": 11,
+	  "height": 12,
+	  "length": 8,
+	  "weight": 39949,
+	  "quantity": 1
+	},
+	{
+	  "_id": "05113e63c8ba8651e2bd3e99",
+	  "designation": "bomba de vácuo",
+	  "width": 9,
+	  "height": 7,
+	  "length": 23,
+	  "weight": 4155,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e7c68cbd07849a7798ab01d8",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 9,
+	  "height": 8,
+	  "length": 28,
+	  "weight": 26034,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1b90b38c9708992d9fa491ed",
+	  "designation": "radiador",
+	  "width": 5,
+	  "height": 28,
+	  "length": 85,
+	  "weight": 14257,
+	  "quantity": 1
+	},
+	{
+	  "_id": "257338df4de3cfdf63425362",
+	  "designation": "radiador de óleo",
+	  "width": 3,
+	  "height": 10,
+	  "length": 24,
+	  "weight": 30495,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d5f2a1bb57beac3a4851ee61",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 1,
+	  "height": 8,
+	  "length": 19,
+	  "weight": 31362,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7e4431f5ac298d7ccdfaaec2",
+	  "designation": "anilhas da cambota",
+	  "width": 27,
+	  "height": 17,
+	  "length": 22,
+	  "weight": 64280,
+	  "quantity": 1
+	},
+	{
+	  "_id": "60ac4f48dc3dde300ecafe13",
+	  "designation": "cabeçote",
+	  "width": 20,
+	  "height": 16,
+	  "length": 44,
+	  "weight": 27690,
+	  "quantity": 1
+	},
+	{
+	  "_id": "300b106eeac33632b9c82623",
+	  "designation": "sensores de estacionamento",
+	  "width": 3,
+	  "height": 8,
+	  "length": 24,
+	  "weight": 12496,
+	  "quantity": 3
+	},
+	{
+	  "_id": "05fd9539158e70b4052c0955",
+	  "designation": "tampa do radiador",
+	  "width": 2,
+	  "height": 5,
+	  "length": 21,
+	  "weight": 25236,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d999f14301d1957a66b925aa",
+	  "designation": "vidro lateral",
+	  "width": 2,
+	  "height": 3,
+	  "length": 29,
+	  "weight": 2350,
+	  "quantity": 3
+	},
+	{
+	  "_id": "244aad870bcb968f2586a1fe",
+	  "designation": "vidro de espelho",
+	  "width": 6,
+	  "height": 8,
+	  "length": 26,
+	  "weight": 30569,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c8687de48df3edf13bf5f4af",
+	  "designation": "compressor",
+	  "width": 11,
+	  "height": 4,
+	  "length": 51,
+	  "weight": 93905,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a71f0b8bfe585fe990b4ef87",
+	  "designation": "cambota",
+	  "width": 3,
+	  "height": 13,
+	  "length": 40,
+	  "weight": 35316,
+	  "quantity": 2
+	},
+	{
+	  "_id": "3b627c31eace8f7d1d8247ca",
+	  "designation": "vidro de espelho",
+	  "width": 25,
+	  "height": 19,
+	  "length": 49,
+	  "weight": 40418,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ba0076b160a670ff1dee6146",
+	  "designation": "kit de travões",
+	  "width": 7,
+	  "height": 8,
+	  "length": 13,
+	  "weight": 4632,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ff98e28b2895a624db609d64",
+	  "designation": "tubo de óleo",
+	  "width": 7,
+	  "height": 1,
+	  "length": 9,
+	  "weight": 2110,
+	  "quantity": 3
+	},
+	{
+	  "_id": "356965842c45c8b48e6af562",
+	  "designation": "embreagem do ventilador",
+	  "width": 14,
+	  "height": 7,
+	  "length": 19,
+	  "weight": 13889,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a205c59f85fc0940be639203",
+	  "designation": "luz de stop",
+	  "width": 7,
+	  "height": 9,
+	  "length": 14,
+	  "weight": 13460,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ccc8d2c7849485ea7d8741ba",
+	  "designation": "espelho retrovisor",
+	  "width": 12,
+	  "height": 14,
+	  "length": 26,
+	  "weight": 36441,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ffdc94d240cc2dd9ce7bf4c5",
+	  "designation": "anel de sensor de abs",
+	  "width": 4,
+	  "height": 5,
+	  "length": 4,
+	  "weight": 13483,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e456d5ffb4cbc5220bd4174a",
+	  "designation": "luz de travão suplementar",
+	  "width": 12,
+	  "height": 9,
+	  "length": 33,
+	  "weight": 47526,
+	  "quantity": 2
+	},
+	{
+	  "_id": "302af219c59f3659f968b817",
+	  "designation": "bomba central dos travões",
+	  "width": 9,
+	  "height": 9,
+	  "length": 5,
+	  "weight": 3490,
+	  "quantity": 3
+	},
+	{
+	  "_id": "2271fb4e1c98d33c60ea7f3b",
+	  "designation": "maxilas do travão",
+	  "width": 7,
+	  "height": 8,
+	  "length": 8,
+	  "weight": 32039,
+	  "quantity": 2
+	},
+	{
+	  "_id": "7d72d8b91b80ca2eb22d0978",
+	  "designation": "painel lateral",
+	  "width": 2,
+	  "height": 5,
+	  "length": 7,
+	  "weight": 5340,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8c279553e55ab7c9c7f7eb0b",
+	  "designation": "vidro lateral",
+	  "width": 13,
+	  "height": 9,
+	  "length": 44,
+	  "weight": 1550,
+	  "quantity": 2
+	},
+	{
+	  "_id": "866508a5adf478e76501ed46",
+	  "designation": "tampa do radiador",
+	  "width": 5,
+	  "height": 10,
+	  "length": 3,
+	  "weight": 2204,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7a2d866cd4679120d6ce772a",
+	  "designation": "porta traseira",
+	  "width": 4,
+	  "height": 11,
+	  "length": 19,
+	  "weight": 38097,
+	  "quantity": 2
+	},
+	{
+	  "_id": "419ba5c794d7da7c1fa6dbd5",
+	  "designation": "turbocompressor",
+	  "width": 6,
+	  "height": 2,
+	  "length": 18,
+	  "weight": 30464,
+	  "quantity": 3
+	},
+	{
+	  "_id": "87e72176e6be87d7b553146a",
+	  "designation": "radiador de óleo",
+	  "width": 3,
+	  "height": 6,
+	  "length": 14,
+	  "weight": 16380,
+	  "quantity": 3
+	},
+	{
+	  "_id": "9058c833696152aef5936fb0",
+	  "designation": "amortecedor de vibrações",
+	  "width": 21,
+	  "height": 3,
+	  "length": 83,
+	  "weight": 13115,
+	  "quantity": 1
+	},
+	{
+	  "_id": "67a78fc6525ae2832828a3e4",
+	  "designation": "tambor de travão",
+	  "width": 30,
+	  "height": 8,
+	  "length": 50,
+	  "weight": 42044,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a216fb793e40763f19829510",
+	  "designation": "cambota",
+	  "width": 24,
+	  "height": 18,
+	  "length": 21,
+	  "weight": 38622,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ba7daa94d9dbab21761c401f",
+	  "designation": "válvula de admissão",
+	  "width": 8,
+	  "height": 7,
+	  "length": 20,
+	  "weight": 7061,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e470662ba3452d0c216efd92",
+	  "designation": "vareta de óleo",
+	  "width": 6,
+	  "height": 12,
+	  "length": 30,
+	  "weight": 835,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2dc4aeef3b2f5a152a523397",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 30,
+	  "height": 27,
+	  "length": 17,
+	  "weight": 16162,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8f4b965a3c10a641b7d89df0",
+	  "designation": "para-brisas",
+	  "width": 9,
+	  "height": 6,
+	  "length": 9,
+	  "weight": 17147,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6ad9a71af1d062360dae738c",
+	  "designation": "regulador de força de travagem",
+	  "width": 2,
+	  "height": 11,
+	  "length": 32,
+	  "weight": 11774,
+	  "quantity": 1
+	},
+	{
+	  "_id": "bc0ef94bc5cbb29e7460d3c2",
+	  "designation": "para-choques",
+	  "width": 2,
+	  "height": 5,
+	  "length": 17,
+	  "weight": 22514,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2c7e850ea2fee3248ef566d4",
+	  "designation": "porta dianteira",
+	  "width": 16,
+	  "height": 22,
+	  "length": 81,
+	  "weight": 55586,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7aa0570847bb5ca13537e984",
+	  "designation": "luz de stop",
+	  "width": 4,
+	  "height": 7,
+	  "length": 19,
+	  "weight": 33210,
+	  "quantity": 3
+	},
+	{
+	  "_id": "deccf19bfb757ecab497e1b1",
+	  "designation": "radiador",
+	  "width": 7,
+	  "height": 6,
+	  "length": 17,
+	  "weight": 7860,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7f256f3cd5908b764ccd5c12",
+	  "designation": "tampa do radiador",
+	  "width": 1,
+	  "height": 1,
+	  "length": 2,
+	  "weight": 6181,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d0dd562e8491c133ff48f6ce",
+	  "designation": "tambor de travão",
+	  "width": 8,
+	  "height": 3,
+	  "length": 11,
+	  "weight": 47181,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5c0954545a48cd0f1db9fd06",
+	  "designation": "mangueira de travão",
+	  "width": 1,
+	  "height": 8,
+	  "length": 14,
+	  "weight": 552,
+	  "quantity": 3
+	},
+	{
+	  "_id": "099473e8ebdaccf881506411",
+	  "designation": "filtro de óleo",
+	  "width": 17,
+	  "height": 30,
+	  "length": 20,
+	  "weight": 32577,
+	  "quantity": 1
+	},
+	{
+	  "_id": "db40842ba292e5e13c583393",
+	  "designation": "filtro de óleo",
+	  "width": 5,
+	  "height": 7,
+	  "length": 2,
+	  "weight": 2271,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4b19e3a118504a76764b50a2",
+	  "designation": "kit de travões",
+	  "width": 9,
+	  "height": 7,
+	  "length": 17,
+	  "weight": 1192,
+	  "quantity": 3
+	},
+	{
+	  "_id": "2482e4aa1965bf6ebc7201d2",
+	  "designation": "guia",
+	  "width": 5,
+	  "height": 12,
+	  "length": 54,
+	  "weight": 83044,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e134e599635f47c9d347f57e",
+	  "designation": "luz de stop",
+	  "width": 14,
+	  "height": 14,
+	  "length": 44,
+	  "weight": 45763,
+	  "quantity": 2
+	},
+	{
+	  "_id": "50a9308c4a6b0bcd62da4c92",
+	  "designation": "amortecedor de vibrações",
+	  "width": 7,
+	  "height": 2,
+	  "length": 10,
+	  "weight": 14671,
+	  "quantity": 3
+	},
+	{
+	  "_id": "97f057effbb732d70566a3b9",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 9,
+	  "height": 3,
+	  "length": 14,
+	  "weight": 38948,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d61f09124d355b85a1ef9b9b",
+	  "designation": "vidro farol",
+	  "width": 20,
+	  "height": 4,
+	  "length": 6,
+	  "weight": 25424,
+	  "quantity": 1
+	},
+	{
+	  "_id": "d2062d673e556e4b20bfb81f",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 4,
+	  "height": 7,
+	  "length": 8,
+	  "weight": 3327,
+	  "quantity": 3
+	},
+	{
+	  "_id": "debf57acef88bd04f4db2117",
+	  "designation": "turbocompressor",
+	  "width": 20,
+	  "height": 14,
+	  "length": 33,
+	  "weight": 50093,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f3ebe36c09384b5e64ffaebd",
+	  "designation": "sensor de combustível",
+	  "width": 5,
+	  "height": 3,
+	  "length": 1,
+	  "weight": 7038,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b4fb10fd8528908bce9c9815",
+	  "designation": "farol principal",
+	  "width": 3,
+	  "height": 14,
+	  "length": 39,
+	  "weight": 613,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ef45033f21886f1c43229e91",
+	  "designation": "cabo de freio de mão",
+	  "width": 4,
+	  "height": 3,
+	  "length": 46,
+	  "weight": 45746,
+	  "quantity": 2
+	},
+	{
+	  "_id": "eed0d892db76ca4a1dc12324",
+	  "designation": "suporte da bateria",
+	  "width": 8,
+	  "height": 4,
+	  "length": 31,
+	  "weight": 3476,
+	  "quantity": 3
+	},
+	{
+	  "_id": "a784f239f221d4c71567ab76",
+	  "designation": "mangueira de travão",
+	  "width": 13,
+	  "height": 4,
+	  "length": 44,
+	  "weight": 5767,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f8ed4f67e06a6eefac34d1ca",
+	  "designation": "tambor de travão",
+	  "width": 3,
+	  "height": 3,
+	  "length": 34,
+	  "weight": 14760,
+	  "quantity": 2
+	},
+	{
+	  "_id": "987f79b4451d51be8ea041c9",
+	  "designation": "cirtuito elétrico do motor",
+	  "width": 8,
+	  "height": 2,
+	  "length": 6,
+	  "weight": 8712,
+	  "quantity": 3
+	},
+	{
+	  "_id": "fb36b08255f293bc8e813d98",
+	  "designation": "anilhas da cambota",
+	  "width": 6,
+	  "height": 1,
+	  "length": 25,
+	  "weight": 5030,
+	  "quantity": 3
+	},
+	{
+	  "_id": "2bce0c3503885ea2abab531d",
+	  "designation": "para-choques",
+	  "width": 3,
+	  "height": 5,
+	  "length": 4,
+	  "weight": 47082,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c5c888d68fd8703acd36c2df",
+	  "designation": "faróis de xénon",
+	  "width": 7,
+	  "height": 12,
+	  "length": 25,
+	  "weight": 42634,
+	  "quantity": 1
+	},
+	{
+	  "_id": "194cb31e8defd77ecf87c4b8",
+	  "designation": "sensor de combustível",
+	  "width": 4,
+	  "height": 2,
+	  "length": 47,
+	  "weight": 3477,
+	  "quantity": 2
+	},
+	{
+	  "_id": "fb6c6fd41b2e5f126e797d61",
+	  "designation": "sensor de combustível",
+	  "width": 5,
+	  "height": 9,
+	  "length": 22,
+	  "weight": 7196,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5fcf74a2b7c3a1c6a1fcd89e",
+	  "designation": "radiador",
+	  "width": 21,
+	  "height": 21,
+	  "length": 28,
+	  "weight": 53376,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e170201d599eaa4d3ba65852",
+	  "designation": "painel lateral",
+	  "width": 3,
+	  "height": 8,
+	  "length": 26,
+	  "weight": 24395,
+	  "quantity": 2
+	},
+	{
+	  "_id": "349852561d2c471cd12dc220",
+	  "designation": "vidro lateral",
+	  "width": 12,
+	  "height": 28,
+	  "length": 59,
+	  "weight": 15094,
+	  "quantity": 1
+	},
+	{
+	  "_id": "d1c2ac9211587e2fde71dc73",
+	  "designation": "filtro de óleo",
+	  "width": 19,
+	  "height": 7,
+	  "length": 23,
+	  "weight": 46,
+	  "quantity": 1
+	},
+	{
+	  "_id": "60fae9b67e393af2c3b1637e",
+	  "designation": "anilhas da cambota",
+	  "width": 12,
+	  "height": 2,
+	  "length": 20,
+	  "weight": 1029,
+	  "quantity": 2
+	},
+	{
+	  "_id": "84d34211b42431c73104c5af",
+	  "designation": "bomba de vácuo",
+	  "width": 4,
+	  "height": 8,
+	  "length": 24,
+	  "weight": 19484,
+	  "quantity": 3
+	},
+	{
+	  "_id": "94ca1361b54287b30880da96",
+	  "designation": "para-brisas",
+	  "width": 13,
+	  "height": 29,
+	  "length": 5,
+	  "weight": 84726,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4bf6e7d77a3dc23b3fcf6b7b",
+	  "designation": "anel de sensor de abs",
+	  "width": 10,
+	  "height": 8,
+	  "length": 2,
+	  "weight": 27307,
+	  "quantity": 3
+	},
+	{
+	  "_id": "86c5403fc64486faf69b4904",
+	  "designation": "embreagem do ventilador",
+	  "width": 2,
+	  "height": 9,
+	  "length": 13,
+	  "weight": 5730,
+	  "quantity": 3
+	},
+	{
+	  "_id": "80cb2940e0a971af9b3333fe",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 15,
+	  "height": 15,
+	  "length": 47,
+	  "weight": 5958,
+	  "quantity": 2
+	},
+	{
+	  "_id": "832ea226ef45b3ecb2879964",
+	  "designation": "para-brisas",
+	  "width": 3,
+	  "height": 14,
+	  "length": 26,
+	  "weight": 12269,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ecea691fedd305c5e285f406",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 9,
+	  "height": 8,
+	  "length": 13,
+	  "weight": 12580,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6686b206c3406993f94ed591",
+	  "designation": "sensores de estacionamento",
+	  "width": 6,
+	  "height": 7,
+	  "length": 44,
+	  "weight": 36964,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d1595fae66bf80a6a47698a0",
+	  "designation": "para-choques",
+	  "width": 5,
+	  "height": 7,
+	  "length": 22,
+	  "weight": 7755,
+	  "quantity": 3
+	},
+	{
+	  "_id": "fac7f1e715418de5cb8808be",
+	  "designation": "espelho retrovisor",
+	  "width": 5,
+	  "height": 4,
+	  "length": 9,
+	  "weight": 21817,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4820c055d5f7b22e464cc9fb",
+	  "designation": "cirtuito elétrico do motor",
+	  "width": 17,
+	  "height": 12,
+	  "length": 6,
+	  "weight": 14353,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6965b85f4df05dc0bdfa3e57",
+	  "designation": "vareta de óleo",
+	  "width": 2,
+	  "height": 9,
+	  "length": 20,
+	  "weight": 28388,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e67d94ce75cca9a72d7a9600",
+	  "designation": "cambota",
+	  "width": 9,
+	  "height": 13,
+	  "length": 89,
+	  "weight": 65044,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9b07c673f47eb635e8b658a6",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 9,
+	  "height": 15,
+	  "length": 33,
+	  "weight": 11763,
+	  "quantity": 2
+	},
+	{
+	  "_id": "4537c2c113f0a333a6dc8a44",
+	  "designation": "suporte da bateria",
+	  "width": 3,
+	  "height": 5,
+	  "length": 25,
+	  "weight": 28771,
+	  "quantity": 3
+	},
+	{
+	  "_id": "9eee8c03a6d03c8490527940",
+	  "designation": "espelho retrovisor",
+	  "width": 10,
+	  "height": 9,
+	  "length": 7,
+	  "weight": 16353,
+	  "quantity": 2
+	},
+	{
+	  "_id": "300ea7f839b062d6bca0f2e8",
+	  "designation": "correntes de distribuição",
+	  "width": 1,
+	  "height": 13,
+	  "length": 47,
+	  "weight": 49856,
+	  "quantity": 2
+	},
+	{
+	  "_id": "1b08c90ea8032c47c779b0b0",
+	  "designation": "apoios de motor",
+	  "width": 8,
+	  "height": 4,
+	  "length": 2,
+	  "weight": 20789,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6f319e1b27a067387afc8e76",
+	  "designation": "vidro farol",
+	  "width": 2,
+	  "height": 8,
+	  "length": 16,
+	  "weight": 26305,
+	  "quantity": 3
+	},
+	{
+	  "_id": "04e384e8df1e42e5d1b0cbe3",
+	  "designation": "porta traseira",
+	  "width": 14,
+	  "height": 10,
+	  "length": 9,
+	  "weight": 8910,
+	  "quantity": 2
+	},
+	{
+	  "_id": "cf5c566775364c34dbe74264",
+	  "designation": "luz de stop",
+	  "width": 9,
+	  "height": 27,
+	  "length": 67,
+	  "weight": 48412,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e541ec7b9e26f5b2a7ae4a04",
+	  "designation": "filtro de óleo",
+	  "width": 6,
+	  "height": 28,
+	  "length": 79,
+	  "weight": 74448,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7875da10d48d2520bb649a0b",
+	  "designation": "válvula de admissão",
+	  "width": 24,
+	  "height": 21,
+	  "length": 45,
+	  "weight": 43548,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8c54d732bc018eb77115b5fb",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 10,
+	  "height": 10,
+	  "length": 4,
+	  "weight": 631,
+	  "quantity": 3
+	},
+	{
+	  "_id": "12732c8b387e100023a1d417",
+	  "designation": "cabo de freio de mão",
+	  "width": 1,
+	  "height": 3,
+	  "length": 3,
+	  "weight": 12796,
+	  "quantity": 3
+	},
+	{
+	  "_id": "def79633897c2efb42e7517a",
+	  "designation": "pinças de travão",
+	  "width": 18,
+	  "height": 19,
+	  "length": 29,
+	  "weight": 69543,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3f732513ad41f6262bffaf0e",
+	  "designation": "painel de radiador",
+	  "width": 7,
+	  "height": 3,
+	  "length": 27,
+	  "weight": 15537,
+	  "quantity": 2
+	},
+	{
+	  "_id": "41cc3eb8da1662a5b0547da3",
+	  "designation": "gancho de roboque",
+	  "width": 1,
+	  "height": 14,
+	  "length": 40,
+	  "weight": 31033,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8c5e97068d13fed23b1e6548",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 7,
+	  "height": 9,
+	  "length": 42,
+	  "weight": 30115,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b7fa7ef919e2a201b2bdefea",
+	  "designation": "compressor",
+	  "width": 15,
+	  "height": 4,
+	  "length": 36,
+	  "weight": 4164,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c35805b2abce3b086b14cc44",
+	  "designation": "mangueira de travão",
+	  "width": 3,
+	  "height": 1,
+	  "length": 4,
+	  "weight": 42806,
+	  "quantity": 2
+	},
+	{
+	  "_id": "6a215ebd34e7ee094a01cab9",
+	  "designation": "tubo de óleo",
+	  "width": 6,
+	  "height": 7,
+	  "length": 2,
+	  "weight": 9784,
+	  "quantity": 3
+	},
+	{
+	  "_id": "2830d4c21607123b4f7e030f",
+	  "designation": "válvula de admissão",
+	  "width": 5,
+	  "height": 29,
+	  "length": 8,
+	  "weight": 5434,
+	  "quantity": 1
+	},
+	{
+	  "_id": "1ebc59e7e8f0964843ccf12b",
+	  "designation": "borracha de vidro",
+	  "width": 10,
+	  "height": 6,
+	  "length": 44,
+	  "weight": 22313,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b4196d0bb952612fa90590d3",
+	  "designation": "revestimento traseiro",
+	  "width": 11,
+	  "height": 15,
+	  "length": 46,
+	  "weight": 14391,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e176de1a6da7ca7656ca363a",
+	  "designation": "pastilhas de travão",
+	  "width": 22,
+	  "height": 10,
+	  "length": 81,
+	  "weight": 68358,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6a0231266d07e32e7f416be2",
+	  "designation": "travão de estacionamento",
+	  "width": 25,
+	  "height": 10,
+	  "length": 55,
+	  "weight": 27714,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7e02c00ac9e32d4664ccc45a",
+	  "designation": "tampa do radiador",
+	  "width": 2,
+	  "height": 5,
+	  "length": 31,
+	  "weight": 25065,
+	  "quantity": 2
+	},
+	{
+	  "_id": "09fdce79f226485beb576475",
+	  "designation": "pastilhas de travão",
+	  "width": 7,
+	  "height": 7,
+	  "length": 4,
+	  "weight": 25756,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c3e1e4a9c02e4afd71bb17ae",
+	  "designation": "disco de travão",
+	  "width": 4,
+	  "height": 10,
+	  "length": 24,
+	  "weight": 34583,
+	  "quantity": 2
+	},
+	{
+	  "_id": "de021281759b48b31567323d",
+	  "designation": "faróis de xénon",
+	  "width": 9,
+	  "height": 12,
+	  "length": 45,
+	  "weight": 32305,
+	  "quantity": 2
+	},
+	{
+	  "_id": "089c393db2592b27cfb56ac2",
+	  "designation": "mangueira de travão",
+	  "width": 5,
+	  "height": 27,
+	  "length": 56,
+	  "weight": 13348,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3f34f8b98b04d8bbde224f0d",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 29,
+	  "height": 26,
+	  "length": 27,
+	  "weight": 25129,
+	  "quantity": 1
+	},
+	{
+	  "_id": "cef4b95216ad140cec698311",
+	  "designation": "defletor de discos de travão",
+	  "width": 13,
+	  "height": 11,
+	  "length": 88,
+	  "weight": 59188,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b878068b892582d2909b5f23",
+	  "designation": "árvore de cames",
+	  "width": 2,
+	  "height": 10,
+	  "length": 8,
+	  "weight": 12610,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ae5cadd38b888fb5b088a08e",
+	  "designation": "interruptor de luz de stop",
+	  "width": 6,
+	  "height": 1,
+	  "length": 15,
+	  "weight": 12963,
+	  "quantity": 3
+	},
+	{
+	  "_id": "35307a0e2f22379d132d2f58",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 5,
+	  "height": 14,
+	  "length": 79,
+	  "weight": 72486,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8be1458ad3fba63f168fed38",
+	  "designation": "travão de estacionamento",
+	  "width": 8,
+	  "height": 13,
+	  "length": 4,
+	  "weight": 22409,
+	  "quantity": 2
+	},
+	{
+	  "_id": "305b171f816b04bada790120",
+	  "designation": "fecho central",
+	  "width": 2,
+	  "height": 8,
+	  "length": 15,
+	  "weight": 12721,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b3555e98c3891780e179bff2",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 13,
+	  "height": 10,
+	  "length": 35,
+	  "weight": 32459,
+	  "quantity": 2
+	},
+	{
+	  "_id": "40c29dbec2a31f8bb0135bd9",
+	  "designation": "cilindro de travão de roda",
+	  "width": 20,
+	  "height": 22,
+	  "length": 2,
+	  "weight": 52520,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ffdccb7b89ab2c6d3ada10af",
+	  "designation": "bujão do carter",
+	  "width": 14,
+	  "height": 19,
+	  "length": 63,
+	  "weight": 30745,
+	  "quantity": 1
+	},
+	{
+	  "_id": "05f37cd60b4550d7ab850509",
+	  "designation": "radiador de óleo",
+	  "width": 4,
+	  "height": 1,
+	  "length": 15,
+	  "weight": 7439,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c844c112b8c12a57ad641d87",
+	  "designation": "árvore de cames",
+	  "width": 23,
+	  "height": 22,
+	  "length": 60,
+	  "weight": 42869,
+	  "quantity": 1
+	},
+	{
+	  "_id": "fd3ee487168f0630bb81b2a9",
+	  "designation": "bomba de vácuo",
+	  "width": 3,
+	  "height": 20,
+	  "length": 38,
+	  "weight": 26123,
+	  "quantity": 1
+	},
+	{
+	  "_id": "703ba72c86e211e95876e51a",
+	  "designation": "sensor de abs",
+	  "width": 9,
+	  "height": 15,
+	  "length": 65,
+	  "weight": 32002,
+	  "quantity": 1
+	},
+	{
+	  "_id": "72f47cf0fe034a7b53b03cc1",
+	  "designation": "cilindro de travão de roda",
+	  "width": 4,
+	  "height": 9,
+	  "length": 32,
+	  "weight": 40737,
+	  "quantity": 2
+	},
+	{
+	  "_id": "0f4ca635aa26344da6f7f61a",
+	  "designation": "porta traseira",
+	  "width": 18,
+	  "height": 30,
+	  "length": 92,
+	  "weight": 34774,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b299d140cbd4cb95e32fa773",
+	  "designation": "correntes de distribuição",
+	  "width": 10,
+	  "height": 8,
+	  "length": 19,
+	  "weight": 12060,
+	  "quantity": 2
+	},
+	{
+	  "_id": "149d2241e16f23d2bb16f275",
+	  "designation": "faróis de xénon",
+	  "width": 3,
+	  "height": 11,
+	  "length": 25,
+	  "weight": 16339,
+	  "quantity": 2
+	},
+	{
+	  "_id": "6855e33a5014cfc161b1896e",
+	  "designation": "compressor",
+	  "width": 8,
+	  "height": 4,
+	  "length": 22,
+	  "weight": 21960,
+	  "quantity": 2
+	},
+	{
+	  "_id": "6e3a62fa933c21eb1fc82847",
+	  "designation": "apoios de motor",
+	  "width": 10,
+	  "height": 9,
+	  "length": 32,
+	  "weight": 47241,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8adcb9fb4a5bc67d71faf97e",
+	  "designation": "compressor",
+	  "width": 1,
+	  "height": 2,
+	  "length": 3,
+	  "weight": 20955,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4fe00550cd4d7ab4224ab35f",
+	  "designation": "suporte da bateria",
+	  "width": 7,
+	  "height": 1,
+	  "length": 7,
+	  "weight": 7989,
+	  "quantity": 3
+	},
+	{
+	  "_id": "353810c1ce8a7d192df6cb76",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 10,
+	  "height": 10,
+	  "length": 7,
+	  "weight": 30988,
+	  "quantity": 3
+	},
+	{
+	  "_id": "cfab81e003ee52a1ac108c5e",
+	  "designation": "vareta de óleo",
+	  "width": 13,
+	  "height": 12,
+	  "length": 9,
+	  "weight": 15983,
+	  "quantity": 2
+	},
+	{
+	  "_id": "3bd6b89c29f52b6efc725ca2",
+	  "designation": "radiador de óleo",
+	  "width": 25,
+	  "height": 20,
+	  "length": 20,
+	  "weight": 97243,
+	  "quantity": 1
+	},
+	{
+	  "_id": "99d56622e425e74ed3db55c6",
+	  "designation": "cabo de freio de mão",
+	  "width": 3,
+	  "height": 12,
+	  "length": 28,
+	  "weight": 36687,
+	  "quantity": 2
+	},
+	{
+	  "_id": "3168c90a2f3b11c1d604a0ef",
+	  "designation": "luz de travão suplementar",
+	  "width": 5,
+	  "height": 3,
+	  "length": 2,
+	  "weight": 4727,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6c26242681f8a38d01c39edf",
+	  "designation": "correia dentada",
+	  "width": 4,
+	  "height": 19,
+	  "length": 19,
+	  "weight": 90059,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b2b652bc4c6d8121e35e24b3",
+	  "designation": "apoios de motor",
+	  "width": 22,
+	  "height": 9,
+	  "length": 61,
+	  "weight": 37742,
+	  "quantity": 1
+	},
+	{
+	  "_id": "dc327a5099deeb932744e435",
+	  "designation": "vela de ignição",
+	  "width": 5,
+	  "height": 9,
+	  "length": 20,
+	  "weight": 1099,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b6da60a2a237bc1a13465817",
+	  "designation": "tambor de travão",
+	  "width": 1,
+	  "height": 8,
+	  "length": 26,
+	  "weight": 18379,
+	  "quantity": 1
+	},
+	{
+	  "_id": "64861a27b8942cc4cb6b224f",
+	  "designation": "válvula de admissão",
+	  "width": 14,
+	  "height": 23,
+	  "length": 1,
+	  "weight": 42209,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4a180f9ff5fb0c84341b8383",
+	  "designation": "vidro lateral",
+	  "width": 10,
+	  "height": 2,
+	  "length": 28,
+	  "weight": 19931,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b74b671ab7fcf58b5e633b85",
+	  "designation": "cabeçote",
+	  "width": 10,
+	  "height": 8,
+	  "length": 1,
+	  "weight": 19651,
+	  "quantity": 3
+	},
+	{
+	  "_id": "bed56fe14a8c6bed0b1821e3",
+	  "designation": "vela de ignição",
+	  "width": 16,
+	  "height": 25,
+	  "length": 73,
+	  "weight": 97830,
+	  "quantity": 1
+	},
+	{
+	  "_id": "5584ddfef419ee0fbbbb68de",
+	  "designation": "painel lateral",
+	  "width": 2,
+	  "height": 10,
+	  "length": 13,
+	  "weight": 13669,
+	  "quantity": 3
+	},
+	{
+	  "_id": "fe704e6d950b2f04e9ffbe75",
+	  "designation": "tambor de travão",
+	  "width": 10,
+	  "height": 5,
+	  "length": 45,
+	  "weight": 43782,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8a53caa832a38ba74a8a8e2f",
+	  "designation": "disco de travão de alto rendimento",
+	  "width": 9,
+	  "height": 10,
+	  "length": 12,
+	  "weight": 32139,
+	  "quantity": 3
+	},
+	{
+	  "_id": "30a7a114105217eb026dfa2c",
+	  "designation": "anilhas da cambota",
+	  "width": 2,
+	  "height": 1,
+	  "length": 35,
+	  "weight": 35421,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ee68e8aa4fc7997fa490066a",
+	  "designation": "para-choques",
+	  "width": 27,
+	  "height": 7,
+	  "length": 95,
+	  "weight": 55214,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e9e223b2c4b8cd0b6f2c9ba0",
+	  "designation": "servo freio",
+	  "width": 13,
+	  "height": 15,
+	  "length": 4,
+	  "weight": 4929,
+	  "quantity": 2
+	},
+	{
+	  "_id": "574cb4dfcb604acf1169fd8c",
+	  "designation": "tubo de óleo",
+	  "width": 4,
+	  "height": 10,
+	  "length": 4,
+	  "weight": 39540,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e0284fe9774f110517ff898a",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 14,
+	  "height": 28,
+	  "length": 74,
+	  "weight": 55491,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e55dbcd0228b7bc94febdf71",
+	  "designation": "correntes de distribuição",
+	  "width": 2,
+	  "height": 9,
+	  "length": 30,
+	  "weight": 2532,
+	  "quantity": 3
+	},
+	{
+	  "_id": "403646df710db8e4df2ec558",
+	  "designation": "tampa do radiador",
+	  "width": 30,
+	  "height": 5,
+	  "length": 67,
+	  "weight": 84228,
+	  "quantity": 1
+	},
+	{
+	  "_id": "cd7f781225884cdea5ffb21b",
+	  "designation": "cabo de freio de mão",
+	  "width": 28,
+	  "height": 17,
+	  "length": 39,
+	  "weight": 18587,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4df5ffae0c32b654c7574104",
+	  "designation": "anilhas da cambota",
+	  "width": 6,
+	  "height": 7,
+	  "length": 22,
+	  "weight": 32736,
+	  "quantity": 3
+	},
+	{
+	  "_id": "207aee617b2efbc1bbb13954",
+	  "designation": "compressor",
+	  "width": 5,
+	  "height": 1,
+	  "length": 30,
+	  "weight": 9870,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c313225ca9396ca94ab353ef",
+	  "designation": "vareta de óleo",
+	  "width": 7,
+	  "height": 4,
+	  "length": 12,
+	  "weight": 5458,
+	  "quantity": 2
+	},
+	{
+	  "_id": "6a73cea247274df808dd7a2b",
+	  "designation": "kit de travões",
+	  "width": 8,
+	  "height": 2,
+	  "length": 24,
+	  "weight": 19544,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4174524730c37a61030cce5f",
+	  "designation": "guia",
+	  "width": 11,
+	  "height": 19,
+	  "length": 45,
+	  "weight": 554,
+	  "quantity": 1
+	},
+	{
+	  "_id": "dd4de9b4b4e08eb6f288521e",
+	  "designation": "gancho de roboque",
+	  "width": 8,
+	  "height": 10,
+	  "length": 19,
+	  "weight": 12137,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1fa578dcf89290dc3cc4a62c",
+	  "designation": "correntes de distribuição",
+	  "width": 24,
+	  "height": 3,
+	  "length": 22,
+	  "weight": 5756,
+	  "quantity": 1
+	},
+	{
+	  "_id": "baa874c865ff02423081277b",
+	  "designation": "radiador",
+	  "width": 28,
+	  "height": 19,
+	  "length": 32,
+	  "weight": 63861,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8bcb4a1d20a0670ef8913069",
+	  "designation": "farol principal",
+	  "width": 2,
+	  "height": 9,
+	  "length": 36,
+	  "weight": 32479,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8f13431b0dcdd8a36bf8846e",
+	  "designation": "radiador",
+	  "width": 10,
+	  "height": 1,
+	  "length": 3,
+	  "weight": 12225,
+	  "quantity": 3
+	},
+	{
+	  "_id": "afe7a40d6728cda7f2f8c64d",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 5,
+	  "height": 28,
+	  "length": 82,
+	  "weight": 57888,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9e3f6faf4d1ecbf925f766cd",
+	  "designation": "luz de travão suplementar",
+	  "width": 23,
+	  "height": 19,
+	  "length": 39,
+	  "weight": 46111,
+	  "quantity": 1
+	},
+	{
+	  "_id": "960046dba0552575d0d58dee",
+	  "designation": "kit de travões",
+	  "width": 1,
+	  "height": 4,
+	  "length": 30,
+	  "weight": 24255,
+	  "quantity": 3
+	},
+	{
+	  "_id": "09fee5a499e2dbe524e84103",
+	  "designation": "tambor de travão",
+	  "width": 19,
+	  "height": 15,
+	  "length": 77,
+	  "weight": 37594,
+	  "quantity": 1
+	},
+	{
+	  "_id": "dc92b2ef56d4d1ad74411296",
+	  "designation": "kit de travões",
+	  "width": 2,
+	  "height": 6,
+	  "length": 3,
+	  "weight": 29871,
+	  "quantity": 3
+	},
+	{
+	  "_id": "490161f1843ae25bc8d7719f",
+	  "designation": "turbocompressor",
+	  "width": 13,
+	  "height": 1,
+	  "length": 42,
+	  "weight": 23017,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f7a0c8a1c3b98b2528a21682",
+	  "designation": "tambor de travão",
+	  "width": 19,
+	  "height": 17,
+	  "length": 29,
+	  "weight": 99296,
+	  "quantity": 1
+	},
+	{
+	  "_id": "2b7877ea69bd18445a5f69be",
+	  "designation": "defletor de discos de travão",
+	  "width": 3,
+	  "height": 15,
+	  "length": 23,
+	  "weight": 17504,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c42b0907c4506d0f598e87a3",
+	  "designation": "eixo",
+	  "width": 15,
+	  "height": 5,
+	  "length": 4,
+	  "weight": 12039,
+	  "quantity": 2
+	},
+	{
+	  "_id": "cbdd3ee020a3a294f15c8673",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 3,
+	  "height": 7,
+	  "length": 23,
+	  "weight": 4415,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5e80fb5afd0823970be54226",
+	  "designation": "fecho central",
+	  "width": 12,
+	  "height": 14,
+	  "length": 5,
+	  "weight": 26808,
+	  "quantity": 1
+	},
+	{
+	  "_id": "fae18f1fd59453d17899e475",
+	  "designation": "bomba de água",
+	  "width": 6,
+	  "height": 17,
+	  "length": 7,
+	  "weight": 63913,
+	  "quantity": 1
+	},
+	{
+	  "_id": "cf8ac3ee753ef3e8c0571bc5",
+	  "designation": "vidro de espelho",
+	  "width": 4,
+	  "height": 2,
+	  "length": 18,
+	  "weight": 17218,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4647ebbf7d64748b9b92ec48",
+	  "designation": "turbocompressor",
+	  "width": 3,
+	  "height": 8,
+	  "length": 16,
+	  "weight": 27151,
+	  "quantity": 3
+	},
+	{
+	  "_id": "2d96024bfd6f2ceac970bd76",
+	  "designation": "gancho de roboque",
+	  "width": 4,
+	  "height": 5,
+	  "length": 2,
+	  "weight": 4355,
+	  "quantity": 2
+	},
+	{
+	  "_id": "23fd6e4bfef651481e70b4a0",
+	  "designation": "guia",
+	  "width": 7,
+	  "height": 8,
+	  "length": 20,
+	  "weight": 11481,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5cbc3d44df21083bffe2e600",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 3,
+	  "height": 8,
+	  "length": 16,
+	  "weight": 17403,
+	  "quantity": 3
+	},
+	{
+	  "_id": "24df37b3aaf6c794a7a9b390",
+	  "designation": "correntes de distribuição",
+	  "width": 29,
+	  "height": 26,
+	  "length": 95,
+	  "weight": 96444,
+	  "quantity": 1
+	},
+	{
+	  "_id": "fb416cd5dbaa2cef7cfa8217",
+	  "designation": "luz de travão suplementar",
+	  "width": 23,
+	  "height": 11,
+	  "length": 22,
+	  "weight": 55854,
+	  "quantity": 1
+	},
+	{
+	  "_id": "71d0b4eff1c261bcf234d790",
+	  "designation": "anel de sensor de abs",
+	  "width": 9,
+	  "height": 6,
+	  "length": 9,
+	  "weight": 18053,
+	  "quantity": 3
+	},
+	{
+	  "_id": "f57d76c55d991c7f9acdd53d",
+	  "designation": "correia dentada",
+	  "width": 5,
+	  "height": 4,
+	  "length": 28,
+	  "weight": 32949,
+	  "quantity": 3
+	},
+	{
+	  "_id": "abc88ce25292315a5b757429",
+	  "designation": "guarda-lamas",
+	  "width": 16,
+	  "height": 28,
+	  "length": 49,
+	  "weight": 45343,
+	  "quantity": 1
+	},
+	{
+	  "_id": "137ac1f501fbac0df5b42637",
+	  "designation": "eixo",
+	  "width": 7,
+	  "height": 5,
+	  "length": 3,
+	  "weight": 9897,
+	  "quantity": 3
+	},
+	{
+	  "_id": "a82d809751ebb9ac90cdf2d1",
+	  "designation": "guia",
+	  "width": 16,
+	  "height": 3,
+	  "length": 56,
+	  "weight": 49383,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8ca87b8e6e836e0f4a9e029b",
+	  "designation": "válvula de admissão",
+	  "width": 13,
+	  "height": 28,
+	  "length": 66,
+	  "weight": 42697,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f4e5cd20b594e054cf61d8e6",
+	  "designation": "luz de travão suplementar",
+	  "width": 29,
+	  "height": 4,
+	  "length": 60,
+	  "weight": 31479,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ce45e2c690349703f721dcb1",
+	  "designation": "para-brisas",
+	  "width": 1,
+	  "height": 9,
+	  "length": 5,
+	  "weight": 20953,
+	  "quantity": 3
+	},
+	{
+	  "_id": "bdba5d5cdd4265b766e6cfd0",
+	  "designation": "faróis de xénon",
+	  "width": 9,
+	  "height": 5,
+	  "length": 31,
+	  "weight": 11574,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d6ab68ca1bb8718e0b097e0a",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 13,
+	  "height": 10,
+	  "length": 16,
+	  "weight": 27044,
+	  "quantity": 1
+	},
+	{
+	  "_id": "80eb4b3f008c278a9b23de52",
+	  "designation": "embreagem do ventilador",
+	  "width": 8,
+	  "height": 12,
+	  "length": 26,
+	  "weight": 40372,
+	  "quantity": 2
+	},
+	{
+	  "_id": "856401ba685f28f468aaaa62",
+	  "designation": "radiador de óleo",
+	  "width": 4,
+	  "height": 13,
+	  "length": 1,
+	  "weight": 17716,
+	  "quantity": 2
+	},
+	{
+	  "_id": "068d53b5572b0d02bd7838e5",
+	  "designation": "disco de travão",
+	  "width": 5,
+	  "height": 5,
+	  "length": 82,
+	  "weight": 77464,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b8493fcab19aa0abb4689811",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 24,
+	  "height": 7,
+	  "length": 23,
+	  "weight": 70108,
+	  "quantity": 1
+	},
+	{
+	  "_id": "db462b8b2b1cabddeea4e0cd",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 2,
+	  "height": 18,
+	  "length": 16,
+	  "weight": 26170,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6c053b2d610ba2a35b93fff4",
+	  "designation": "radiador de óleo",
+	  "width": 12,
+	  "height": 29,
+	  "length": 85,
+	  "weight": 30602,
+	  "quantity": 1
+	},
+	{
+	  "_id": "816783c8b740310e5f27096c",
+	  "designation": "revestimento traseiro",
+	  "width": 3,
+	  "height": 8,
+	  "length": 18,
+	  "weight": 32028,
+	  "quantity": 3
+	},
+	{
+	  "_id": "630a477641ac7adf25e331f8",
+	  "designation": "cabo de freio de mão",
+	  "width": 10,
+	  "height": 7,
+	  "length": 4,
+	  "weight": 13585,
+	  "quantity": 3
+	},
+	{
+	  "_id": "62097d746c3653072d296ab9",
+	  "designation": "travão de estacionamento",
+	  "width": 12,
+	  "height": 8,
+	  "length": 42,
+	  "weight": 20306,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8212a8ac967d3573e71ea9d7",
+	  "designation": "árvore de cames",
+	  "width": 9,
+	  "height": 25,
+	  "length": 62,
+	  "weight": 44244,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ebbd51db7c255ddc0edd264d",
+	  "designation": "válvula de admissão",
+	  "width": 4,
+	  "height": 6,
+	  "length": 91,
+	  "weight": 70889,
+	  "quantity": 1
+	},
+	{
+	  "_id": "620bf204183a738dfc5b6aaa",
+	  "designation": "filtro de óleo",
+	  "width": 25,
+	  "height": 13,
+	  "length": 6,
+	  "weight": 99463,
+	  "quantity": 1
+	},
+	{
+	  "_id": "23f89da75ada7a3e1d0c22a9",
+	  "designation": "kit de travões",
+	  "width": 10,
+	  "height": 1,
+	  "length": 26,
+	  "weight": 21095,
+	  "quantity": 3
+	},
+	{
+	  "_id": "db7209b8ff4376d754e58efd",
+	  "designation": "para-choques",
+	  "width": 21,
+	  "height": 16,
+	  "length": 85,
+	  "weight": 41861,
+	  "quantity": 1
+	},
+	{
+	  "_id": "bdf37a704eca1a485331ac1e",
+	  "designation": "mangueira de travão",
+	  "width": 8,
+	  "height": 12,
+	  "length": 27,
+	  "weight": 57768,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e4c0fa3f63320240dd8f2c05",
+	  "designation": "mangueira de travão",
+	  "width": 2,
+	  "height": 9,
+	  "length": 25,
+	  "weight": 17565,
+	  "quantity": 3
+	},
+	{
+	  "_id": "79f24a1d73f6e9d98263ad6c",
+	  "designation": "turbocompressor",
+	  "width": 7,
+	  "height": 12,
+	  "length": 3,
+	  "weight": 28991,
+	  "quantity": 2
+	},
+	{
+	  "_id": "3a2224848a11f70095760853",
+	  "designation": "sensores de estacionamento",
+	  "width": 4,
+	  "height": 10,
+	  "length": 4,
+	  "weight": 11958,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8d085a74d10c8dc94148dcb7",
+	  "designation": "disco de travão",
+	  "width": 1,
+	  "height": 11,
+	  "length": 4,
+	  "weight": 24971,
+	  "quantity": 2
+	},
+	{
+	  "_id": "79e31202b3f57d5c4b3afe30",
+	  "designation": "regulador de força de travagem",
+	  "width": 15,
+	  "height": 4,
+	  "length": 18,
+	  "weight": 95073,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f80393f62990a8f96fe27be0",
+	  "designation": "tubo de óleo",
+	  "width": 6,
+	  "height": 2,
+	  "length": 8,
+	  "weight": 3867,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e3ed658ef8daa63732508d36",
+	  "designation": "regulador de força de travagem",
+	  "width": 25,
+	  "height": 6,
+	  "length": 44,
+	  "weight": 26181,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6104332369cc5ec453c27f97",
+	  "designation": "turbocompressor",
+	  "width": 2,
+	  "height": 3,
+	  "length": 15,
+	  "weight": 15298,
+	  "quantity": 3
+	},
+	{
+	  "_id": "966eb5a1fae38b380e7f1560",
+	  "designation": "cárter de óleo",
+	  "width": 2,
+	  "height": 15,
+	  "length": 40,
+	  "weight": 2592,
+	  "quantity": 2
+	},
+	{
+	  "_id": "1a9067faa21f04a0515a53f9",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 5,
+	  "height": 8,
+	  "length": 40,
+	  "weight": 43733,
+	  "quantity": 2
+	},
+	{
+	  "_id": "0989c60956e2d2ca696fcefb",
+	  "designation": "borracha de vidro",
+	  "width": 22,
+	  "height": 20,
+	  "length": 46,
+	  "weight": 39415,
+	  "quantity": 1
+	},
+	{
+	  "_id": "32d29a7f287e2101b051c07d",
+	  "designation": "guia",
+	  "width": 4,
+	  "height": 16,
+	  "length": 29,
+	  "weight": 40122,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a48e446af6b1b0c6b840233d",
+	  "designation": "radiador",
+	  "width": 6,
+	  "height": 2,
+	  "length": 13,
+	  "weight": 28788,
+	  "quantity": 2
+	},
+	{
+	  "_id": "466c56277efff900c483c212",
+	  "designation": "cambota",
+	  "width": 21,
+	  "height": 3,
+	  "length": 31,
+	  "weight": 27594,
+	  "quantity": 1
+	},
+	{
+	  "_id": "755368ccea83e2059df89b07",
+	  "designation": "tampa do radiador",
+	  "width": 11,
+	  "height": 12,
+	  "length": 4,
+	  "weight": 38785,
+	  "quantity": 2
+	},
+	{
+	  "_id": "0aef8f60a10ef70a64e0ff18",
+	  "designation": "mangueira de travão",
+	  "width": 5,
+	  "height": 28,
+	  "length": 49,
+	  "weight": 60595,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3b07ead3adc7967189970b7e",
+	  "designation": "tubo de óleo",
+	  "width": 21,
+	  "height": 19,
+	  "length": 44,
+	  "weight": 71205,
+	  "quantity": 1
+	},
+	{
+	  "_id": "dcdaa04320735befe9d0bf24",
+	  "designation": "pastilhas de travão",
+	  "width": 7,
+	  "height": 4,
+	  "length": 16,
+	  "weight": 3718,
+	  "quantity": 3
+	},
+	{
+	  "_id": "2a2ef70944a79a7e1d35c694",
+	  "designation": "defletor de discos de travão",
+	  "width": 13,
+	  "height": 15,
+	  "length": 41,
+	  "weight": 25935,
+	  "quantity": 2
+	},
+	{
+	  "_id": "44e07004b111f07915007e98",
+	  "designation": "compressor",
+	  "width": 17,
+	  "height": 6,
+	  "length": 8,
+	  "weight": 53331,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6a262a9f7642d828af29f16d",
+	  "designation": "disco de travão de alto rendimento",
+	  "width": 27,
+	  "height": 27,
+	  "length": 90,
+	  "weight": 60856,
+	  "quantity": 1
+	},
+	{
+	  "_id": "74960e342ecb8701aa56c655",
+	  "designation": "vidro farol",
+	  "width": 13,
+	  "height": 10,
+	  "length": 42,
+	  "weight": 37375,
+	  "quantity": 2
+	},
+	{
+	  "_id": "50fc40d71157ea261c17f9f3",
+	  "designation": "correia dentada",
+	  "width": 5,
+	  "height": 10,
+	  "length": 31,
+	  "weight": 16303,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7fa8a894f1fbbb4fcaa97959",
+	  "designation": "eixo",
+	  "width": 1,
+	  "height": 30,
+	  "length": 82,
+	  "weight": 10169,
+	  "quantity": 1
+	},
+	{
+	  "_id": "93456ceb77f961d56b3b0a21",
+	  "designation": "cilindro de travão de roda",
+	  "width": 1,
+	  "height": 11,
+	  "length": 33,
+	  "weight": 18118,
+	  "quantity": 2
+	},
+	{
+	  "_id": "39e1d413f83409bb16238554",
+	  "designation": "sensor de abs",
+	  "width": 13,
+	  "height": 1,
+	  "length": 73,
+	  "weight": 53543,
+	  "quantity": 1
+	},
+	{
+	  "_id": "5d8f8a4546f33e7eb0e23bcf",
+	  "designation": "árvore de cames",
+	  "width": 4,
+	  "height": 5,
+	  "length": 15,
+	  "weight": 16204,
+	  "quantity": 3
+	},
+	{
+	  "_id": "35cd2cc1cf45932a7493f42b",
+	  "designation": "bujão do carter",
+	  "width": 17,
+	  "height": 19,
+	  "length": 1,
+	  "weight": 45992,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a5a5c180c2087b2a6ce67497",
+	  "designation": "fecho central",
+	  "width": 17,
+	  "height": 6,
+	  "length": 81,
+	  "weight": 39351,
+	  "quantity": 1
+	},
+	{
+	  "_id": "dcb84ce2da4b148e73153f67",
+	  "designation": "turbocompressor",
+	  "width": 11,
+	  "height": 2,
+	  "length": 6,
+	  "weight": 28043,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9f1cda9a216f3f5febf54716",
+	  "designation": "travão de estacionamento",
+	  "width": 5,
+	  "height": 5,
+	  "length": 29,
+	  "weight": 39910,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d75fcb6af0fbb11b79f9edce",
+	  "designation": "defletor de discos de travão",
+	  "width": 10,
+	  "height": 7,
+	  "length": 12,
+	  "weight": 12051,
+	  "quantity": 3
+	},
+	{
+	  "_id": "fb3d40f5da54a3b34d4f30f2",
+	  "designation": "radiador de óleo",
+	  "width": 28,
+	  "height": 23,
+	  "length": 90,
+	  "weight": 88290,
+	  "quantity": 1
+	},
+	{
+	  "_id": "d4a2d2de938b4f25a2bfa14a",
+	  "designation": "apoios de motor",
+	  "width": 7,
+	  "height": 27,
+	  "length": 17,
+	  "weight": 60016,
+	  "quantity": 1
+	},
+	{
+	  "_id": "5b819688f8e9ee0a5523b389",
+	  "designation": "painel lateral",
+	  "width": 11,
+	  "height": 3,
+	  "length": 39,
+	  "weight": 27539,
+	  "quantity": 2
+	},
+	{
+	  "_id": "65c5c3a8b40637bcd5db2ebf",
+	  "designation": "pastilhas de travão",
+	  "width": 17,
+	  "height": 17,
+	  "length": 66,
+	  "weight": 48763,
+	  "quantity": 1
+	},
+	{
+	  "_id": "0504a0de90209c4dac5aede5",
+	  "designation": "painel de radiador",
+	  "width": 28,
+	  "height": 16,
+	  "length": 4,
+	  "weight": 77889,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4de562357899e66d8eceef83",
+	  "designation": "árvore de cames",
+	  "width": 3,
+	  "height": 5,
+	  "length": 26,
+	  "weight": 3372,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5ca16d4a7132d95e9c7419be",
+	  "designation": "tubo de óleo",
+	  "width": 13,
+	  "height": 2,
+	  "length": 73,
+	  "weight": 38156,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b728db0932e8e0302f040591",
+	  "designation": "anel de sensor de abs",
+	  "width": 15,
+	  "height": 9,
+	  "length": 33,
+	  "weight": 30401,
+	  "quantity": 2
+	},
+	{
+	  "_id": "35ced004f18e6760d5efc101",
+	  "designation": "filtro de óleo",
+	  "width": 7,
+	  "height": 2,
+	  "length": 27,
+	  "weight": 8422,
+	  "quantity": 3
+	},
+	{
+	  "_id": "de6363bfa293cf83474d9a06",
+	  "designation": "vela de ignição",
+	  "width": 13,
+	  "height": 16,
+	  "length": 47,
+	  "weight": 74467,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ff1c387b2988c090ade1903f",
+	  "designation": "travão de estacionamento",
+	  "width": 5,
+	  "height": 13,
+	  "length": 43,
+	  "weight": 25442,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8b20004bd15b49240054b0ab",
+	  "designation": "fecho central",
+	  "width": 13,
+	  "height": 27,
+	  "length": 85,
+	  "weight": 21654,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ff4eb6cdb35999a224881cbb",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 6,
+	  "height": 3,
+	  "length": 15,
+	  "weight": 31874,
+	  "quantity": 3
+	},
+	{
+	  "_id": "912666b8708cdec99eec1495",
+	  "designation": "soleira de porta",
+	  "width": 4,
+	  "height": 8,
+	  "length": 23,
+	  "weight": 36735,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c20d2673f5f9862c6396eb18",
+	  "designation": "travão de estacionamento",
+	  "width": 2,
+	  "height": 8,
+	  "length": 22,
+	  "weight": 15092,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1745d3db9d191a252f79c77a",
+	  "designation": "revestimento traseiro",
+	  "width": 12,
+	  "height": 2,
+	  "length": 42,
+	  "weight": 30961,
+	  "quantity": 2
+	},
+	{
+	  "_id": "3cd79b0d1a39354a5b4871bb",
+	  "designation": "para-choques",
+	  "width": 8,
+	  "height": 13,
+	  "length": 47,
+	  "weight": 960,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a9d67745f6bb96fb563251fb",
+	  "designation": "turbocompressor",
+	  "width": 27,
+	  "height": 15,
+	  "length": 37,
+	  "weight": 76005,
+	  "quantity": 1
+	},
+	{
+	  "_id": "130a86f9fc67219e23a65a71",
+	  "designation": "anilhas da cambota",
+	  "width": 5,
+	  "height": 2,
+	  "length": 36,
+	  "weight": 3817,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9c59bcbbc63af26cf94e5d72",
+	  "designation": "cambota",
+	  "width": 15,
+	  "height": 2,
+	  "length": 27,
+	  "weight": 43483,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d0546dd433441d928f65528a",
+	  "designation": "guia",
+	  "width": 4,
+	  "height": 10,
+	  "length": 1,
+	  "weight": 24174,
+	  "quantity": 3
+	},
+	{
+	  "_id": "de5f44ff246b605d4897c35b",
+	  "designation": "guarda-lamas",
+	  "width": 9,
+	  "height": 3,
+	  "length": 2,
+	  "weight": 27390,
+	  "quantity": 3
+	},
+	{
+	  "_id": "31a6152773566d9236a5884e",
+	  "designation": "amortecedor de vibrações",
+	  "width": 1,
+	  "height": 9,
+	  "length": 11,
+	  "weight": 27615,
+	  "quantity": 3
+	},
+	{
+	  "_id": "aa3387e676990b93a067195b",
+	  "designation": "para-choques",
+	  "width": 28,
+	  "height": 22,
+	  "length": 67,
+	  "weight": 17855,
+	  "quantity": 1
+	},
+	{
+	  "_id": "fd9211a792c87a422570b1f3",
+	  "designation": "válvula de admissão",
+	  "width": 6,
+	  "height": 4,
+	  "length": 37,
+	  "weight": 22040,
+	  "quantity": 2
+	},
+	{
+	  "_id": "06af0937ea71a240097638be",
+	  "designation": "guarda-lamas",
+	  "width": 28,
+	  "height": 12,
+	  "length": 35,
+	  "weight": 96536,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9f714ca7cce4c8acc5555686",
+	  "designation": "pastilhas de travão",
+	  "width": 2,
+	  "height": 10,
+	  "length": 35,
+	  "weight": 12377,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c25319872d5c18247488ecf8",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 14,
+	  "height": 6,
+	  "length": 52,
+	  "weight": 71850,
+	  "quantity": 1
+	},
+	{
+	  "_id": "22566b94a09f911e3aacb2e5",
+	  "designation": "vela de ignição",
+	  "width": 7,
+	  "height": 4,
+	  "length": 35,
+	  "weight": 31906,
+	  "quantity": 2
+	},
+	{
+	  "_id": "cac63eae711351c4b686b792",
+	  "designation": "filtro de ar",
+	  "width": 3,
+	  "height": 9,
+	  "length": 5,
+	  "weight": 13445,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e325049721c3fa4e41c01bf2",
+	  "designation": "sensores de estacionamento",
+	  "width": 3,
+	  "height": 7,
+	  "length": 6,
+	  "weight": 6028,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1bdf0226f05c9705f57feb04",
+	  "designation": "soleira de porta",
+	  "width": 10,
+	  "height": 11,
+	  "length": 45,
+	  "weight": 5194,
+	  "quantity": 1
+	},
+	{
+	  "_id": "69ae8504a9030537964adc26",
+	  "designation": "para-brisas",
+	  "width": 6,
+	  "height": 5,
+	  "length": 16,
+	  "weight": 17835,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5002bff861640b70c77fe8f3",
+	  "designation": "borracha de vidro",
+	  "width": 14,
+	  "height": 7,
+	  "length": 79,
+	  "weight": 25,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8af547fd592d97d1f505acd2",
+	  "designation": "disco de travão",
+	  "width": 11,
+	  "height": 14,
+	  "length": 3,
+	  "weight": 20718,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c8885068c03021732dba6324",
+	  "designation": "painel de radiador",
+	  "width": 8,
+	  "height": 4,
+	  "length": 11,
+	  "weight": 11140,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6a6d614c414dcb0a0057b4f3",
+	  "designation": "guia",
+	  "width": 9,
+	  "height": 10,
+	  "length": 14,
+	  "weight": 26292,
+	  "quantity": 2
+	},
+	{
+	  "_id": "562c533ee3fdaee48ac482bc",
+	  "designation": "borracha de vidro",
+	  "width": 10,
+	  "height": 6,
+	  "length": 78,
+	  "weight": 24762,
+	  "quantity": 1
+	},
+	{
+	  "_id": "90945d91cf122a22b7640fdc",
+	  "designation": "gancho de roboque",
+	  "width": 17,
+	  "height": 28,
+	  "length": 4,
+	  "weight": 97439,
+	  "quantity": 1
+	},
+	{
+	  "_id": "40ff45de0757fd751f3df332",
+	  "designation": "para-brisas",
+	  "width": 18,
+	  "height": 6,
+	  "length": 20,
+	  "weight": 48542,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e4a200c0715f0bc27cd11cfd",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 4,
+	  "height": 15,
+	  "length": 8,
+	  "weight": 43311,
+	  "quantity": 2
+	},
+	{
+	  "_id": "911590cf8222c74190693410",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 10,
+	  "height": 4,
+	  "length": 19,
+	  "weight": 5704,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1c3068df34d915c9ef03968a",
+	  "designation": "guia",
+	  "width": 24,
+	  "height": 17,
+	  "length": 79,
+	  "weight": 95600,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8e32603a3f112d4f93bef285",
+	  "designation": "bobila de ignição",
+	  "width": 8,
+	  "height": 14,
+	  "length": 35,
+	  "weight": 42663,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c11cbebc5590c7f56340a33f",
+	  "designation": "disco de travão de alto rendimento",
+	  "width": 18,
+	  "height": 21,
+	  "length": 93,
+	  "weight": 19094,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a31fef98f95056053eac495c",
+	  "designation": "amortecedor de vibrações",
+	  "width": 12,
+	  "height": 5,
+	  "length": 40,
+	  "weight": 17013,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a3a52549a965d8133c51e343",
+	  "designation": "amortecedor de vibrações",
+	  "width": 12,
+	  "height": 9,
+	  "length": 40,
+	  "weight": 63601,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e977e6130a2245a28c106d68",
+	  "designation": "pinças de travão",
+	  "width": 2,
+	  "height": 13,
+	  "length": 8,
+	  "weight": 11178,
+	  "quantity": 2
+	},
+	{
+	  "_id": "0e625b4e80df6759948314d0",
+	  "designation": "amortecedor de vibrações",
+	  "width": 8,
+	  "height": 4,
+	  "length": 21,
+	  "weight": 8656,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4b47b59d1945db4322495791",
+	  "designation": "suporte da bateria",
+	  "width": 7,
+	  "height": 10,
+	  "length": 7,
+	  "weight": 54558,
+	  "quantity": 1
+	},
+	{
+	  "_id": "96a1ca69d87a4f4f9c2ca360",
+	  "designation": "guia",
+	  "width": 9,
+	  "height": 9,
+	  "length": 29,
+	  "weight": 31463,
+	  "quantity": 1
+	},
+	{
+	  "_id": "924622041bdb31c2343d7cd8",
+	  "designation": "painel lateral",
+	  "width": 5,
+	  "height": 9,
+	  "length": 11,
+	  "weight": 10459,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5321a2bfed48f13b343d1cac",
+	  "designation": "interruptor de luz de stop",
+	  "width": 2,
+	  "height": 5,
+	  "length": 15,
+	  "weight": 32060,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7f053a91bc3dd0439f6c7296",
+	  "designation": "porta dianteira",
+	  "width": 23,
+	  "height": 22,
+	  "length": 24,
+	  "weight": 7686,
+	  "quantity": 1
+	},
+	{
+	  "_id": "add81295dfde8c50263d1888",
+	  "designation": "correntes de distribuição",
+	  "width": 7,
+	  "height": 2,
+	  "length": 9,
+	  "weight": 10454,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2a6f9666c3b58e4e10d4af85",
+	  "designation": "defletor de discos de travão",
+	  "width": 5,
+	  "height": 15,
+	  "length": 58,
+	  "weight": 32464,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ca047ce2dbad89c5c76c793a",
+	  "designation": "farol principal",
+	  "width": 4,
+	  "height": 5,
+	  "length": 21,
+	  "weight": 29604,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7b8570ad90c05cb735cf6d26",
+	  "designation": "correntes de distribuição",
+	  "width": 4,
+	  "height": 4,
+	  "length": 5,
+	  "weight": 44341,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c1f9b62d63561014e6c361fd",
+	  "designation": "correntes de distribuição",
+	  "width": 6,
+	  "height": 2,
+	  "length": 28,
+	  "weight": 21436,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ed52654245c296c12bdf758f",
+	  "designation": "faróis de xénon",
+	  "width": 30,
+	  "height": 23,
+	  "length": 91,
+	  "weight": 85845,
+	  "quantity": 1
+	},
+	{
+	  "_id": "433e7de40048e1b0244bb409",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 12,
+	  "height": 14,
+	  "length": 43,
+	  "weight": 41039,
+	  "quantity": 2
+	},
+	{
+	  "_id": "beb4190202000295fb1a279f",
+	  "designation": "apoios de motor",
+	  "width": 3,
+	  "height": 1,
+	  "length": 28,
+	  "weight": 24701,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ce56338e1cba66b5d8d57fd8",
+	  "designation": "borracha de vidro",
+	  "width": 28,
+	  "height": 18,
+	  "length": 64,
+	  "weight": 12468,
+	  "quantity": 1
+	},
+	{
+	  "_id": "1c6662f0a3d22ea762abb064",
+	  "designation": "cabo de freio de mão",
+	  "width": 6,
+	  "height": 14,
+	  "length": 44,
+	  "weight": 16589,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f52f636ab504868db80d868e",
+	  "designation": "compressor",
+	  "width": 10,
+	  "height": 16,
+	  "length": 16,
+	  "weight": 89460,
+	  "quantity": 1
+	},
+	{
+	  "_id": "5e2f84b724c9c39d7a386881",
+	  "designation": "cabeçote",
+	  "width": 28,
+	  "height": 28,
+	  "length": 80,
+	  "weight": 79355,
+	  "quantity": 1
+	},
+	{
+	  "_id": "5f17abfddafe6d9dd05eff68",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 15,
+	  "height": 3,
+	  "length": 25,
+	  "weight": 17572,
+	  "quantity": 2
+	},
+	{
+	  "_id": "260113df34f43157b07846bb",
+	  "designation": "sensor de combustível",
+	  "width": 26,
+	  "height": 28,
+	  "length": 64,
+	  "weight": 20196,
+	  "quantity": 1
+	},
+	{
+	  "_id": "65ab07c5cda4a2878834dc4c",
+	  "designation": "disco de travão",
+	  "width": 17,
+	  "height": 5,
+	  "length": 22,
+	  "weight": 54068,
+	  "quantity": 1
+	},
+	{
+	  "_id": "936e22a2abf67dca929da5f9",
+	  "designation": "tambor de travão",
+	  "width": 10,
+	  "height": 22,
+	  "length": 73,
+	  "weight": 41348,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7ff04f8204b121bffaf2f697",
+	  "designation": "mangueira de travão",
+	  "width": 6,
+	  "height": 6,
+	  "length": 27,
+	  "weight": 13947,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7081e3533e0dba5982eb03d0",
+	  "designation": "sensor de abs",
+	  "width": 8,
+	  "height": 11,
+	  "length": 89,
+	  "weight": 54794,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e7555cb51d92545835d74776",
+	  "designation": "árvore de cames",
+	  "width": 9,
+	  "height": 5,
+	  "length": 25,
+	  "weight": 15804,
+	  "quantity": 3
+	},
+	{
+	  "_id": "df022741262f027924a35175",
+	  "designation": "cabeçote",
+	  "width": 8,
+	  "height": 3,
+	  "length": 40,
+	  "weight": 10908,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b7a2b26dde8e158a3c687d77",
+	  "designation": "tambor de travão",
+	  "width": 7,
+	  "height": 23,
+	  "length": 54,
+	  "weight": 79096,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8b63fb7117072b88fed5971d",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 13,
+	  "height": 5,
+	  "length": 77,
+	  "weight": 57534,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a8c8cb765afacc28af2d2ada",
+	  "designation": "amortecedor de vibrações",
+	  "width": 2,
+	  "height": 4,
+	  "length": 28,
+	  "weight": 26357,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b6deb62bac66b6ab35b352fa",
+	  "designation": "maxilas do travão",
+	  "width": 6,
+	  "height": 24,
+	  "length": 12,
+	  "weight": 17911,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a725252f7de6b78bf8be260b",
+	  "designation": "disco de travão",
+	  "width": 8,
+	  "height": 5,
+	  "length": 25,
+	  "weight": 3969,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7a70941df89462cfac7037a6",
+	  "designation": "vidro de espelho",
+	  "width": 5,
+	  "height": 12,
+	  "length": 21,
+	  "weight": 12622,
+	  "quantity": 2
+	},
+	{
+	  "_id": "77b4b3cd36e8b5c974f444bd",
+	  "designation": "suporte da bateria",
+	  "width": 4,
+	  "height": 5,
+	  "length": 15,
+	  "weight": 31025,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e5bbe506d9575232a2e5f577",
+	  "designation": "cambota",
+	  "width": 11,
+	  "height": 15,
+	  "length": 1,
+	  "weight": 17337,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7fb9ddf275c6475904c7a4f6",
+	  "designation": "revestimento traseiro",
+	  "width": 27,
+	  "height": 8,
+	  "length": 78,
+	  "weight": 27074,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7cc62df8f488bbe82cd687a9",
+	  "designation": "vidro de espelho",
+	  "width": 15,
+	  "height": 13,
+	  "length": 60,
+	  "weight": 32685,
+	  "quantity": 1
+	},
+	{
+	  "_id": "394087fd310f79011d716256",
+	  "designation": "suporte da bateria",
+	  "width": 26,
+	  "height": 9,
+	  "length": 73,
+	  "weight": 93679,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4b9d96cebbd55078c1e91aca",
+	  "designation": "sensor de combustível",
+	  "width": 11,
+	  "height": 15,
+	  "length": 20,
+	  "weight": 39833,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f7e9ff3b5f6050e7e9345681",
+	  "designation": "luz de stop",
+	  "width": 20,
+	  "height": 16,
+	  "length": 79,
+	  "weight": 63881,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c4f51d58eb2443b1c27c03bb",
+	  "designation": "soleira de porta",
+	  "width": 5,
+	  "height": 5,
+	  "length": 24,
+	  "weight": 789,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7f0e82e5fb781dc528f1d8a0",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 7,
+	  "height": 10,
+	  "length": 11,
+	  "weight": 9844,
+	  "quantity": 3
+	},
+	{
+	  "_id": "a22082ae0a5ea1c7a03d790c",
+	  "designation": "eixo",
+	  "width": 10,
+	  "height": 1,
+	  "length": 19,
+	  "weight": 22211,
+	  "quantity": 2
+	},
+	{
+	  "_id": "280be8550cad505a61d13b21",
+	  "designation": "compressor",
+	  "width": 21,
+	  "height": 1,
+	  "length": 35,
+	  "weight": 45650,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8c3a94e28bea07faec81cd14",
+	  "designation": "farol principal",
+	  "width": 20,
+	  "height": 5,
+	  "length": 37,
+	  "weight": 53738,
+	  "quantity": 1
+	},
+	{
+	  "_id": "71a7800f72ccd1aaf7f532be",
+	  "designation": "turbocompressor",
+	  "width": 2,
+	  "height": 17,
+	  "length": 92,
+	  "weight": 57153,
+	  "quantity": 1
+	},
+	{
+	  "_id": "125c8118ff51e7ba5ce07c1f",
+	  "designation": "amortecedor de vibrações",
+	  "width": 9,
+	  "height": 7,
+	  "length": 8,
+	  "weight": 47300,
+	  "quantity": 2
+	},
+	{
+	  "_id": "fc6b14a666c97815d9c84fb7",
+	  "designation": "para-brisas",
+	  "width": 1,
+	  "height": 6,
+	  "length": 22,
+	  "weight": 10297,
+	  "quantity": 2
+	},
+	{
+	  "_id": "52692c304074bf3c9557cfc5",
+	  "designation": "espelho retrovisor",
+	  "width": 5,
+	  "height": 11,
+	  "length": 14,
+	  "weight": 47582,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2dac948474fe7126f6a71778",
+	  "designation": "bomba de água",
+	  "width": 20,
+	  "height": 23,
+	  "length": 83,
+	  "weight": 70497,
+	  "quantity": 1
+	},
+	{
+	  "_id": "950b9d1f6c107ee8f2d5f65e",
+	  "designation": "interruptor de luz de stop",
+	  "width": 8,
+	  "height": 3,
+	  "length": 26,
+	  "weight": 14988,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d631245c5248baea9f03b2a9",
+	  "designation": "árvore de cames",
+	  "width": 19,
+	  "height": 20,
+	  "length": 58,
+	  "weight": 96478,
+	  "quantity": 1
+	},
+	{
+	  "_id": "df56e1672c6d1bb4ba4b9eed",
+	  "designation": "bomba de água",
+	  "width": 13,
+	  "height": 7,
+	  "length": 20,
+	  "weight": 85026,
+	  "quantity": 1
+	},
+	{
+	  "_id": "0ec678ec8d2d4193aaa5839d",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 4,
+	  "height": 4,
+	  "length": 88,
+	  "weight": 94727,
+	  "quantity": 1
+	},
+	{
+	  "_id": "bd680430b256b153f2d8453b",
+	  "designation": "sensor de combustível",
+	  "width": 9,
+	  "height": 5,
+	  "length": 1,
+	  "weight": 21631,
+	  "quantity": 3
+	},
+	{
+	  "_id": "118c0621a844bd5e9b918d57",
+	  "designation": "painel de radiador",
+	  "width": 10,
+	  "height": 9,
+	  "length": 33,
+	  "weight": 35341,
+	  "quantity": 2
+	},
+	{
+	  "_id": "0824b60c7efec9615ce0c543",
+	  "designation": "compressor",
+	  "width": 7,
+	  "height": 8,
+	  "length": 30,
+	  "weight": 851,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8ff888594370f7626af0dcb4",
+	  "designation": "luz de stop",
+	  "width": 4,
+	  "height": 6,
+	  "length": 19,
+	  "weight": 7040,
+	  "quantity": 3
+	},
+	{
+	  "_id": "87ca99065ad8229bc6b819f6",
+	  "designation": "pinças de travão",
+	  "width": 3,
+	  "height": 4,
+	  "length": 16,
+	  "weight": 14751,
+	  "quantity": 3
+	},
+	{
+	  "_id": "95e3b859d3dc2dfbac90d344",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 20,
+	  "height": 24,
+	  "length": 21,
+	  "weight": 10976,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b9c57e016ccc21cdafc7b1df",
+	  "designation": "bomba central dos travões",
+	  "width": 9,
+	  "height": 7,
+	  "length": 37,
+	  "weight": 41037,
+	  "quantity": 2
+	},
+	{
+	  "_id": "273416ae32616007643b6e8f",
+	  "designation": "luz de travão suplementar",
+	  "width": 6,
+	  "height": 6,
+	  "length": 2,
+	  "weight": 14671,
+	  "quantity": 3
+	},
+	{
+	  "_id": "83063d3b3c9061419effcb8f",
+	  "designation": "sensores de estacionamento",
+	  "width": 3,
+	  "height": 6,
+	  "length": 31,
+	  "weight": 29391,
+	  "quantity": 3
+	},
+	{
+	  "_id": "f3f5b8296b5f9f24ee584efe",
+	  "designation": "anilhas da cambota",
+	  "width": 11,
+	  "height": 6,
+	  "length": 47,
+	  "weight": 6697,
+	  "quantity": 2
+	},
+	{
+	  "_id": "bdc3e2e5851c11cb168a44d1",
+	  "designation": "guarda-lamas",
+	  "width": 22,
+	  "height": 19,
+	  "length": 83,
+	  "weight": 5777,
+	  "quantity": 1
+	},
+	{
+	  "_id": "33d9265a78b63a80a7ce5a3f",
+	  "designation": "compressor",
+	  "width": 3,
+	  "height": 9,
+	  "length": 43,
+	  "weight": 16512,
+	  "quantity": 2
+	},
+	{
+	  "_id": "814c042eec0063d92922ae11",
+	  "designation": "amortecedor de capô",
+	  "width": 27,
+	  "height": 24,
+	  "length": 19,
+	  "weight": 36729,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9415adcd7ae1bd7198446d79",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 9,
+	  "height": 3,
+	  "length": 36,
+	  "weight": 48210,
+	  "quantity": 2
+	},
+	{
+	  "_id": "833175a7f3963dc0d8d3b6bd",
+	  "designation": "filtro de óleo",
+	  "width": 14,
+	  "height": 5,
+	  "length": 38,
+	  "weight": 28072,
+	  "quantity": 2
+	},
+	{
+	  "_id": "dd2273d2c37faba0304577e4",
+	  "designation": "bomba de vácuo",
+	  "width": 8,
+	  "height": 9,
+	  "length": 4,
+	  "weight": 272,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7cfdbe254365645aa5c8fb93",
+	  "designation": "farol principal",
+	  "width": 15,
+	  "height": 2,
+	  "length": 5,
+	  "weight": 25723,
+	  "quantity": 2
+	},
+	{
+	  "_id": "747ef4a98675f776005d0203",
+	  "designation": "correntes de distribuição",
+	  "width": 6,
+	  "height": 14,
+	  "length": 6,
+	  "weight": 4742,
+	  "quantity": 2
+	},
+	{
+	  "_id": "06dc1cd2a3d7c2bf9d29689b",
+	  "designation": "vidro lateral",
+	  "width": 1,
+	  "height": 1,
+	  "length": 20,
+	  "weight": 16025,
+	  "quantity": 3
+	},
+	{
+	  "_id": "491a91eaac7c6c015666d92d",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 10,
+	  "height": 4,
+	  "length": 37,
+	  "weight": 27474,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a05f23345deb21de4ca9fa62",
+	  "designation": "amortecedor de capô",
+	  "width": 6,
+	  "height": 28,
+	  "length": 27,
+	  "weight": 29916,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4b5629acab17e095260a7538",
+	  "designation": "vareta de óleo",
+	  "width": 25,
+	  "height": 3,
+	  "length": 83,
+	  "weight": 93355,
+	  "quantity": 1
+	},
+	{
+	  "_id": "17f3985bd4d95f8eba625e19",
+	  "designation": "cambota",
+	  "width": 14,
+	  "height": 7,
+	  "length": 1,
+	  "weight": 34783,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e514ec99000fd7b5b2aff495",
+	  "designation": "porta traseira",
+	  "width": 13,
+	  "height": 24,
+	  "length": 72,
+	  "weight": 36451,
+	  "quantity": 1
+	},
+	{
+	  "_id": "77157763516bda56a7dd6690",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 10,
+	  "height": 7,
+	  "length": 24,
+	  "weight": 45000,
+	  "quantity": 2
+	},
+	{
+	  "_id": "19c385d55d32680f985e8df5",
+	  "designation": "painel de radiador",
+	  "width": 8,
+	  "height": 21,
+	  "length": 90,
+	  "weight": 80939,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a57e5f1874a16c47fb9a6dec",
+	  "designation": "correntes de distribuição",
+	  "width": 1,
+	  "height": 7,
+	  "length": 9,
+	  "weight": 12604,
+	  "quantity": 3
+	},
+	{
+	  "_id": "eea69b53a5f02819b706ed1c",
+	  "designation": "vidro farol",
+	  "width": 7,
+	  "height": 3,
+	  "length": 18,
+	  "weight": 21215,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b79a247e87c2d5337b230c48",
+	  "designation": "bomba de água",
+	  "width": 5,
+	  "height": 9,
+	  "length": 12,
+	  "weight": 53836,
+	  "quantity": 1
+	},
+	{
+	  "_id": "256c6e1d4c4142098fc99e15",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 11,
+	  "height": 6,
+	  "length": 27,
+	  "weight": 49149,
+	  "quantity": 2
+	},
+	{
+	  "_id": "df67e50ff21ba4b750546c20",
+	  "designation": "interruptor de luz de stop",
+	  "width": 10,
+	  "height": 8,
+	  "length": 17,
+	  "weight": 9002,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8e20d01493c530963b095a37",
+	  "designation": "tubo de óleo",
+	  "width": 14,
+	  "height": 10,
+	  "length": 30,
+	  "weight": 23342,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5e0e4bda17474925eb0bb51a",
+	  "designation": "bomba de vácuo",
+	  "width": 8,
+	  "height": 15,
+	  "length": 42,
+	  "weight": 3205,
+	  "quantity": 2
+	},
+	{
+	  "_id": "eaf2d404eb6b2d6a74a33ac4",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 16,
+	  "height": 2,
+	  "length": 10,
+	  "weight": 75382,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f7a604a6a31fa69033d1c35c",
+	  "designation": "apoios de motor",
+	  "width": 1,
+	  "height": 10,
+	  "length": 17,
+	  "weight": 32283,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8454272478572fed972bad71",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 1,
+	  "height": 7,
+	  "length": 14,
+	  "weight": 26226,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f976747b88644fce1d2631c8",
+	  "designation": "turbocompressor",
+	  "width": 13,
+	  "height": 10,
+	  "length": 92,
+	  "weight": 86474,
+	  "quantity": 1
+	},
+	{
+	  "_id": "673e3f557fc9d109aedbfe27",
+	  "designation": "filtro de ar",
+	  "width": 7,
+	  "height": 7,
+	  "length": 3,
+	  "weight": 2912,
+	  "quantity": 3
+	},
+	{
+	  "_id": "bfd6eabaa779ff6c94a02845",
+	  "designation": "suporte da bateria",
+	  "width": 19,
+	  "height": 17,
+	  "length": 45,
+	  "weight": 36767,
+	  "quantity": 1
+	},
+	{
+	  "_id": "fab742281f284bbdabbf3f80",
+	  "designation": "pastilhas de travão",
+	  "width": 10,
+	  "height": 8,
+	  "length": 39,
+	  "weight": 44796,
+	  "quantity": 2
+	},
+	{
+	  "_id": "18e81780f41f61efdc3b34cb",
+	  "designation": "porta dianteira",
+	  "width": 9,
+	  "height": 13,
+	  "length": 16,
+	  "weight": 35642,
+	  "quantity": 2
+	},
+	{
+	  "_id": "eb6449ac471dcd3c766602b9",
+	  "designation": "para-choques",
+	  "width": 28,
+	  "height": 28,
+	  "length": 90,
+	  "weight": 25910,
+	  "quantity": 1
+	},
+	{
+	  "_id": "d5a6de2713653feaf98cf08b",
+	  "designation": "pinças de travão",
+	  "width": 12,
+	  "height": 2,
+	  "length": 27,
+	  "weight": 36424,
+	  "quantity": 1
+	},
+	{
+	  "_id": "d58b4eca193596b9eb32fee8",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 11,
+	  "height": 3,
+	  "length": 20,
+	  "weight": 40060,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b5fad2ad5c8b299d39953200",
+	  "designation": "bomba de vácuo",
+	  "width": 1,
+	  "height": 8,
+	  "length": 27,
+	  "weight": 2448,
+	  "quantity": 3
+	},
+	{
+	  "_id": "4059978e24ad07677e5407fe",
+	  "designation": "defletor de discos de travão",
+	  "width": 3,
+	  "height": 10,
+	  "length": 27,
+	  "weight": 11257,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8939cfc85ae6dc4673e2caed",
+	  "designation": "farol principal",
+	  "width": 12,
+	  "height": 7,
+	  "length": 86,
+	  "weight": 5215,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ece70eb69b8c66dc8d0324c0",
+	  "designation": "soleira de porta",
+	  "width": 12,
+	  "height": 12,
+	  "length": 26,
+	  "weight": 3601,
+	  "quantity": 2
+	},
+	{
+	  "_id": "76ee247e95355d542a13b33a",
+	  "designation": "painel de radiador",
+	  "width": 9,
+	  "height": 10,
+	  "length": 19,
+	  "weight": 9167,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d5eab5c71cd7a007eb5f6619",
+	  "designation": "vidro farol",
+	  "width": 7,
+	  "height": 7,
+	  "length": 10,
+	  "weight": 10318,
+	  "quantity": 3
+	},
+	{
+	  "_id": "817fe30183cfe6b936660052",
+	  "designation": "anel de sensor de abs",
+	  "width": 2,
+	  "height": 2,
+	  "length": 24,
+	  "weight": 23042,
+	  "quantity": 3
+	},
+	{
+	  "_id": "30c369a05eecc2c0fe2dd458",
+	  "designation": "tampa do radiador",
+	  "width": 9,
+	  "height": 5,
+	  "length": 15,
+	  "weight": 9028,
+	  "quantity": 3
+	},
+	{
+	  "_id": "967726ee0e3e0c8ef062af01",
+	  "designation": "bomba de água",
+	  "width": 7,
+	  "height": 9,
+	  "length": 23,
+	  "weight": 10517,
+	  "quantity": 3
+	},
+	{
+	  "_id": "038386dbf8fe9a28d5ed4275",
+	  "designation": "painel lateral",
+	  "width": 11,
+	  "height": 7,
+	  "length": 37,
+	  "weight": 5448,
+	  "quantity": 2
+	},
+	{
+	  "_id": "75c9b7eb49845cf10b5d69dd",
+	  "designation": "gancho de roboque",
+	  "width": 17,
+	  "height": 22,
+	  "length": 76,
+	  "weight": 70031,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3040e0c3472c8306ed1980de",
+	  "designation": "radiador",
+	  "width": 1,
+	  "height": 11,
+	  "length": 11,
+	  "weight": 815,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f5f982b6100f4b16d6bdabb5",
+	  "designation": "anilhas da cambota",
+	  "width": 14,
+	  "height": 16,
+	  "length": 64,
+	  "weight": 45123,
+	  "quantity": 1
+	},
+	{
+	  "_id": "d1bbad32f722f26c41acc78e",
+	  "designation": "regulador de força de travagem",
+	  "width": 30,
+	  "height": 24,
+	  "length": 45,
+	  "weight": 21002,
+	  "quantity": 1
+	},
+	{
+	  "_id": "160ed080f9cfe8e98c564a46",
+	  "designation": "maxilas do travão",
+	  "width": 5,
+	  "height": 14,
+	  "length": 4,
+	  "weight": 33536,
+	  "quantity": 2
+	},
+	{
+	  "_id": "285d090711d73e2246dd1ea9",
+	  "designation": "faróis de xénon",
+	  "width": 12,
+	  "height": 5,
+	  "length": 9,
+	  "weight": 43489,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c08e0c82b1a812f4254e068e",
+	  "designation": "guia",
+	  "width": 27,
+	  "height": 13,
+	  "length": 88,
+	  "weight": 51021,
+	  "quantity": 1
+	},
+	{
+	  "_id": "25e67e475c6496d9c90759b8",
+	  "designation": "cárter de óleo",
+	  "width": 4,
+	  "height": 8,
+	  "length": 11,
+	  "weight": 1620,
+	  "quantity": 3
+	},
+	{
+	  "_id": "677b758462e7a5955124c8c0",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 15,
+	  "height": 2,
+	  "length": 40,
+	  "weight": 10333,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f2b9ad351838a7070bb03543",
+	  "designation": "pinças de travão",
+	  "width": 29,
+	  "height": 8,
+	  "length": 32,
+	  "weight": 89353,
+	  "quantity": 1
+	},
+	{
+	  "_id": "23e189cc96cbe3fd4b8a9752",
+	  "designation": "bujão do carter",
+	  "width": 7,
+	  "height": 10,
+	  "length": 4,
+	  "weight": 45346,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a30a05b2ae95cfa94612f243",
+	  "designation": "bomba de vácuo",
+	  "width": 3,
+	  "height": 2,
+	  "length": 35,
+	  "weight": 12349,
+	  "quantity": 2
+	},
+	{
+	  "_id": "95d1b61ea7913003e5448c5c",
+	  "designation": "sensor de combustível",
+	  "width": 23,
+	  "height": 5,
+	  "length": 90,
+	  "weight": 67431,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c6bd813cd57976bc5542cd98",
+	  "designation": "guia",
+	  "width": 4,
+	  "height": 6,
+	  "length": 1,
+	  "weight": 1362,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0d2a286cec48a8fcb9ca4a39",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 2,
+	  "height": 6,
+	  "length": 3,
+	  "weight": 27252,
+	  "quantity": 3
+	},
+	{
+	  "_id": "af6d74f426a65f32e16ecd93",
+	  "designation": "bomba de vácuo",
+	  "width": 13,
+	  "height": 15,
+	  "length": 67,
+	  "weight": 62127,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3d9acb0d6bd1f57bf60c122c",
+	  "designation": "regulador de força de travagem",
+	  "width": 9,
+	  "height": 2,
+	  "length": 9,
+	  "weight": 23290,
+	  "quantity": 3
+	},
+	{
+	  "_id": "14a1d1f9ad5413ee27d037b4",
+	  "designation": "regulador de força de travagem",
+	  "width": 19,
+	  "height": 8,
+	  "length": 9,
+	  "weight": 15211,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3c528a7e5c86d229a55c68a1",
+	  "designation": "vidro farol",
+	  "width": 1,
+	  "height": 2,
+	  "length": 57,
+	  "weight": 83523,
+	  "quantity": 1
+	},
+	{
+	  "_id": "72db8ace2c686c9e8cf26a70",
+	  "designation": "árvore de cames",
+	  "width": 15,
+	  "height": 19,
+	  "length": 91,
+	  "weight": 16782,
+	  "quantity": 1
+	},
+	{
+	  "_id": "292a780b87da5571eb211a78",
+	  "designation": "luz de stop",
+	  "width": 1,
+	  "height": 3,
+	  "length": 24,
+	  "weight": 33223,
+	  "quantity": 3
+	},
+	{
+	  "_id": "a0961a6700a8c2cb492c5d1e",
+	  "designation": "soleira de porta",
+	  "width": 1,
+	  "height": 15,
+	  "length": 9,
+	  "weight": 49130,
+	  "quantity": 2
+	},
+	{
+	  "_id": "4329b48ce50874684382d718",
+	  "designation": "vidro de espelho",
+	  "width": 14,
+	  "height": 10,
+	  "length": 38,
+	  "weight": 49965,
+	  "quantity": 2
+	},
+	{
+	  "_id": "3d3c6e87f90e8ba47cfa8960",
+	  "designation": "mangueira de travão",
+	  "width": 28,
+	  "height": 16,
+	  "length": 44,
+	  "weight": 3983,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a471614a39ac18400e4712c8",
+	  "designation": "sensor de combustível",
+	  "width": 1,
+	  "height": 12,
+	  "length": 30,
+	  "weight": 29350,
+	  "quantity": 2
+	},
+	{
+	  "_id": "01046c800b4c36faf057c83a",
+	  "designation": "painel lateral",
+	  "width": 7,
+	  "height": 7,
+	  "length": 4,
+	  "weight": 15243,
+	  "quantity": 3
+	},
+	{
+	  "_id": "185da762df80ceab8cb3b395",
+	  "designation": "turbocompressor",
+	  "width": 3,
+	  "height": 7,
+	  "length": 5,
+	  "weight": 16948,
+	  "quantity": 3
+	},
+	{
+	  "_id": "9f76444cacb743788dcd52e3",
+	  "designation": "farol principal",
+	  "width": 10,
+	  "height": 3,
+	  "length": 8,
+	  "weight": 30564,
+	  "quantity": 3
+	},
+	{
+	  "_id": "06050d006128b1739c6f611c",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 8,
+	  "height": 7,
+	  "length": 27,
+	  "weight": 29749,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5b235d363dbd6a7d06f4ec00",
+	  "designation": "bomba de vácuo",
+	  "width": 3,
+	  "height": 9,
+	  "length": 31,
+	  "weight": 27992,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c3260644da477dbf5c53a48c",
+	  "designation": "radiador",
+	  "width": 4,
+	  "height": 10,
+	  "length": 6,
+	  "weight": 28828,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b2fd98c86edf8250868910b1",
+	  "designation": "soleira de porta",
+	  "width": 9,
+	  "height": 1,
+	  "length": 84,
+	  "weight": 33828,
+	  "quantity": 1
+	},
+	{
+	  "_id": "94a04264f71fdc3c321658b9",
+	  "designation": "bujão do carter",
+	  "width": 3,
+	  "height": 13,
+	  "length": 67,
+	  "weight": 25432,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ed7956d153300fe6f4c1f6a6",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 22,
+	  "height": 27,
+	  "length": 67,
+	  "weight": 51338,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a0648d61052cea7483f96a0d",
+	  "designation": "embreagem do ventilador",
+	  "width": 1,
+	  "height": 7,
+	  "length": 7,
+	  "weight": 26637,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ca85281a49002b7ce24758c5",
+	  "designation": "tubo de óleo",
+	  "width": 8,
+	  "height": 5,
+	  "length": 5,
+	  "weight": 23651,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7c676f8ef22be086cb943b85",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 13,
+	  "height": 27,
+	  "length": 54,
+	  "weight": 82021,
+	  "quantity": 1
+	},
+	{
+	  "_id": "27b8301a0702a73c3a8311c9",
+	  "designation": "farol principal",
+	  "width": 1,
+	  "height": 8,
+	  "length": 12,
+	  "weight": 35066,
+	  "quantity": 2
+	},
+	{
+	  "_id": "808cd1fd3a5f6776139eb284",
+	  "designation": "porta traseira",
+	  "width": 22,
+	  "height": 10,
+	  "length": 21,
+	  "weight": 18049,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8d349ae203db68dd0309c5a7",
+	  "designation": "disco de travão",
+	  "width": 1,
+	  "height": 9,
+	  "length": 5,
+	  "weight": 14556,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d019a96688c39fcb828f47d2",
+	  "designation": "anel de sensor de abs",
+	  "width": 11,
+	  "height": 30,
+	  "length": 23,
+	  "weight": 14245,
+	  "quantity": 1
+	},
+	{
+	  "_id": "43cf57b4dad50fed7047288c",
+	  "designation": "anel de sensor de abs",
+	  "width": 20,
+	  "height": 9,
+	  "length": 49,
+	  "weight": 470,
+	  "quantity": 1
+	},
+	{
+	  "_id": "433652061c2af631f22414ea",
+	  "designation": "soleira de porta",
+	  "width": 4,
+	  "height": 15,
+	  "length": 3,
+	  "weight": 63583,
+	  "quantity": 1
+	},
+	{
+	  "_id": "64898e4a2d1c03eaf1a0fcc2",
+	  "designation": "servo freio",
+	  "width": 9,
+	  "height": 14,
+	  "length": 21,
+	  "weight": 25221,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d3123ed9937cdda7172719a7",
+	  "designation": "apoios de motor",
+	  "width": 4,
+	  "height": 8,
+	  "length": 31,
+	  "weight": 30295,
+	  "quantity": 2
+	},
+	{
+	  "_id": "7c8822f3e8f38188b3c8406b",
+	  "designation": "painel de radiador",
+	  "width": 8,
+	  "height": 5,
+	  "length": 21,
+	  "weight": 4559,
+	  "quantity": 3
+	},
+	{
+	  "_id": "01de94b7f95f0a9fe2d23ee8",
+	  "designation": "embreagem do ventilador",
+	  "width": 17,
+	  "height": 26,
+	  "length": 94,
+	  "weight": 87403,
+	  "quantity": 1
+	},
+	{
+	  "_id": "2864ade664c6239ec915c49b",
+	  "designation": "anel de sensor de abs",
+	  "width": 6,
+	  "height": 2,
+	  "length": 30,
+	  "weight": 75380,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ba1c94b2bed3185040f1892f",
+	  "designation": "anilhas da cambota",
+	  "width": 1,
+	  "height": 4,
+	  "length": 20,
+	  "weight": 30591,
+	  "quantity": 3
+	},
+	{
+	  "_id": "bb0154843226239dee4d2b66",
+	  "designation": "faróis de xénon",
+	  "width": 6,
+	  "height": 1,
+	  "length": 30,
+	  "weight": 98160,
+	  "quantity": 1
+	},
+	{
+	  "_id": "bb0fb0490671575b0ceb0d42",
+	  "designation": "vidro farol",
+	  "width": 7,
+	  "height": 5,
+	  "length": 30,
+	  "weight": 5193,
+	  "quantity": 2
+	},
+	{
+	  "_id": "6b5a5c3903ce4c80d28cdac6",
+	  "designation": "borracha de vidro",
+	  "width": 5,
+	  "height": 6,
+	  "length": 11,
+	  "weight": 40093,
+	  "quantity": 2
+	},
+	{
+	  "_id": "6f0852b94142f16ed3f98c5d",
+	  "designation": "disco de travão",
+	  "width": 9,
+	  "height": 29,
+	  "length": 1,
+	  "weight": 64280,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b3160fda8328ad513a9c3bc3",
+	  "designation": "cabeçote",
+	  "width": 13,
+	  "height": 13,
+	  "length": 47,
+	  "weight": 46725,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2c7629c020a80b6d984905c2",
+	  "designation": "borracha de vidro",
+	  "width": 24,
+	  "height": 8,
+	  "length": 9,
+	  "weight": 49246,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c052c4a27391f6bca2a80bcd",
+	  "designation": "vidro lateral",
+	  "width": 21,
+	  "height": 13,
+	  "length": 8,
+	  "weight": 56943,
+	  "quantity": 1
+	},
+	{
+	  "_id": "75d99f64af475984c6551da1",
+	  "designation": "farol principal",
+	  "width": 4,
+	  "height": 1,
+	  "length": 25,
+	  "weight": 26378,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5764cdd8f8c9851ec617017e",
+	  "designation": "árvore de cames",
+	  "width": 7,
+	  "height": 3,
+	  "length": 7,
+	  "weight": 12261,
+	  "quantity": 3
+	},
+	{
+	  "_id": "dd200d353814396e85435271",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 18,
+	  "height": 29,
+	  "length": 49,
+	  "weight": 3364,
+	  "quantity": 1
+	},
+	{
+	  "_id": "722c380be7b6792c1d1cd9f3",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 14,
+	  "height": 13,
+	  "length": 12,
+	  "weight": 1118,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d72d4269965e4e4dbd8b9fc0",
+	  "designation": "amortecedor de vibrações",
+	  "width": 1,
+	  "height": 10,
+	  "length": 3,
+	  "weight": 17556,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0a841f9917093689ca785f0f",
+	  "designation": "porta traseira",
+	  "width": 8,
+	  "height": 6,
+	  "length": 28,
+	  "weight": 20705,
+	  "quantity": 3
+	},
+	{
+	  "_id": "295bbbafc9b577b5d81077ff",
+	  "designation": "válvula de admissão",
+	  "width": 7,
+	  "height": 4,
+	  "length": 15,
+	  "weight": 21835,
+	  "quantity": 3
+	},
+	{
+	  "_id": "25b2459a783a8c80055c9557",
+	  "designation": "painel de radiador",
+	  "width": 4,
+	  "height": 10,
+	  "length": 28,
+	  "weight": 17380,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ca09e442137feec928ddee42",
+	  "designation": "válvula de admissão",
+	  "width": 7,
+	  "height": 24,
+	  "length": 42,
+	  "weight": 46493,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a226b7a405d6211830366ba2",
+	  "designation": "tampa do radiador",
+	  "width": 21,
+	  "height": 12,
+	  "length": 64,
+	  "weight": 18357,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4b8767ee31ca0c5b64a4ccb3",
+	  "designation": "radiador",
+	  "width": 7,
+	  "height": 12,
+	  "length": 12,
+	  "weight": 7554,
+	  "quantity": 2
+	},
+	{
+	  "_id": "102932847c6cc006ae1225b9",
+	  "designation": "sensor de combustível",
+	  "width": 9,
+	  "height": 5,
+	  "length": 2,
+	  "weight": 27497,
+	  "quantity": 3
+	},
+	{
+	  "_id": "92f5a548fbdab12173ac1667",
+	  "designation": "anel de sensor de abs",
+	  "width": 10,
+	  "height": 1,
+	  "length": 20,
+	  "weight": 2127,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f5492eab6cb86fa7eb679183",
+	  "designation": "borracha de vidro",
+	  "width": 5,
+	  "height": 18,
+	  "length": 14,
+	  "weight": 3011,
+	  "quantity": 1
+	},
+	{
+	  "_id": "5ea61a1e62ac360ef62ab9a2",
+	  "designation": "revestimento traseiro",
+	  "width": 23,
+	  "height": 4,
+	  "length": 25,
+	  "weight": 36082,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f85fed9b6dc0da0536437b8a",
+	  "designation": "vareta de óleo",
+	  "width": 4,
+	  "height": 3,
+	  "length": 25,
+	  "weight": 45225,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c2744e1e7fac6a517522c4ff",
+	  "designation": "para-choques",
+	  "width": 11,
+	  "height": 11,
+	  "length": 12,
+	  "weight": 20309,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c08e18adc7862d2a14af376a",
+	  "designation": "vidro farol",
+	  "width": 4,
+	  "height": 5,
+	  "length": 42,
+	  "weight": 10205,
+	  "quantity": 2
+	},
+	{
+	  "_id": "377e52c84887799cb5796581",
+	  "designation": "painel lateral",
+	  "width": 9,
+	  "height": 4,
+	  "length": 16,
+	  "weight": 20616,
+	  "quantity": 3
+	},
+	{
+	  "_id": "451ff350065c6757533531d1",
+	  "designation": "eixo",
+	  "width": 8,
+	  "height": 5,
+	  "length": 30,
+	  "weight": 24082,
+	  "quantity": 2
+	},
+	{
+	  "_id": "26137b4764c399a91e627dff",
+	  "designation": "luz de travão suplementar",
+	  "width": 2,
+	  "height": 6,
+	  "length": 32,
+	  "weight": 44173,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5498549d312287db70fda912",
+	  "designation": "radiador",
+	  "width": 15,
+	  "height": 1,
+	  "length": 21,
+	  "weight": 6018,
+	  "quantity": 1
+	},
+	{
+	  "_id": "bac25c2332b32e031f22adfd",
+	  "designation": "disco de travão",
+	  "width": 3,
+	  "height": 11,
+	  "length": 41,
+	  "weight": 35300,
+	  "quantity": 2
+	},
+	{
+	  "_id": "bd76dbcf15c5cc10bb461f66",
+	  "designation": "painel lateral",
+	  "width": 7,
+	  "height": 8,
+	  "length": 18,
+	  "weight": 21429,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1f9e727bf6c744e4e7951aa6",
+	  "designation": "pinças de travão",
+	  "width": 5,
+	  "height": 21,
+	  "length": 46,
+	  "weight": 66804,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a2ef561cf2ffc3202036c82c",
+	  "designation": "servo freio",
+	  "width": 4,
+	  "height": 15,
+	  "length": 1,
+	  "weight": 32068,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e44039d7b9dd0b22abebd914",
+	  "designation": "cabo de freio de mão",
+	  "width": 23,
+	  "height": 16,
+	  "length": 18,
+	  "weight": 38188,
+	  "quantity": 1
+	},
+	{
+	  "_id": "59ab6dd15dc7423f3baef2fc",
+	  "designation": "radiador de óleo",
+	  "width": 26,
+	  "height": 19,
+	  "length": 8,
+	  "weight": 69943,
+	  "quantity": 1
+	},
+	{
+	  "_id": "dd6251666649cf4a364c0729",
+	  "designation": "borracha de vidro",
+	  "width": 3,
+	  "height": 10,
+	  "length": 22,
+	  "weight": 19202,
+	  "quantity": 3
+	},
+	{
+	  "_id": "00f913a2c6ce02d40b3fc8fa",
+	  "designation": "revestimento traseiro",
+	  "width": 10,
+	  "height": 9,
+	  "length": 17,
+	  "weight": 30063,
+	  "quantity": 3
+	},
+	{
+	  "_id": "de2fb8238b8eaade835fa636",
+	  "designation": "pinças de travão",
+	  "width": 6,
+	  "height": 3,
+	  "length": 94,
+	  "weight": 42715,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a666e35000239352528ba424",
+	  "designation": "amortecedor de vibrações",
+	  "width": 8,
+	  "height": 1,
+	  "length": 31,
+	  "weight": 247,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8a81f2c9d2bd02deadb4e8e3",
+	  "designation": "luz de travão suplementar",
+	  "width": 7,
+	  "height": 3,
+	  "length": 16,
+	  "weight": 27713,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2c60c081dbafdc1c1a3331ee",
+	  "designation": "eixo do travão de estacionamento",
+	  "width": 10,
+	  "height": 7,
+	  "length": 6,
+	  "weight": 13459,
+	  "quantity": 3
+	},
+	{
+	  "_id": "279b84bab5576288d63622b8",
+	  "designation": "bomba de vácuo",
+	  "width": 15,
+	  "height": 15,
+	  "length": 22,
+	  "weight": 15179,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c0e75c4adb9b21437526ecf4",
+	  "designation": "correntes de distribuição",
+	  "width": 3,
+	  "height": 10,
+	  "length": 45,
+	  "weight": 9137,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9a145e39b91cdf805b2f062f",
+	  "designation": "gancho de roboque",
+	  "width": 13,
+	  "height": 3,
+	  "length": 5,
+	  "weight": 4116,
+	  "quantity": 2
+	},
+	{
+	  "_id": "39481859783d797b25fc480d",
+	  "designation": "pinças de travão",
+	  "width": 5,
+	  "height": 18,
+	  "length": 65,
+	  "weight": 50500,
+	  "quantity": 1
+	},
+	{
+	  "_id": "956d370bdd1e8d140c35cd39",
+	  "designation": "sensor de combustível",
+	  "width": 13,
+	  "height": 3,
+	  "length": 15,
+	  "weight": 58711,
+	  "quantity": 1
+	},
+	{
+	  "_id": "87bf42db0229e2c1fcb7121e",
+	  "designation": "maxilas do travão",
+	  "width": 24,
+	  "height": 4,
+	  "length": 28,
+	  "weight": 41882,
+	  "quantity": 1
+	},
+	{
+	  "_id": "dbfd636e016fdff5007b8289",
+	  "designation": "bobila de ignição",
+	  "width": 11,
+	  "height": 9,
+	  "length": 6,
+	  "weight": 35820,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e49a242b39793e83f8a1c31e",
+	  "designation": "filtro de óleo",
+	  "width": 7,
+	  "height": 8,
+	  "length": 2,
+	  "weight": 21507,
+	  "quantity": 3
+	},
+	{
+	  "_id": "822889b9adac92e80e0e4c88",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 6,
+	  "height": 5,
+	  "length": 24,
+	  "weight": 18193,
+	  "quantity": 3
+	},
+	{
+	  "_id": "cdc27bb1b460efe33093d658",
+	  "designation": "bujão do carter",
+	  "width": 2,
+	  "height": 4,
+	  "length": 19,
+	  "weight": 17813,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1ad9550cf9a14d6de3e59caf",
+	  "designation": "apoios de motor",
+	  "width": 12,
+	  "height": 7,
+	  "length": 21,
+	  "weight": 2341,
+	  "quantity": 2
+	},
+	{
+	  "_id": "874aca50cb430dfee3b1a5e8",
+	  "designation": "tambor de travão",
+	  "width": 3,
+	  "height": 10,
+	  "length": 21,
+	  "weight": 4554,
+	  "quantity": 3
+	},
+	{
+	  "_id": "63ed07d3284027f927c95e1f",
+	  "designation": "embreagem do ventilador",
+	  "width": 6,
+	  "height": 16,
+	  "length": 8,
+	  "weight": 98761,
+	  "quantity": 1
+	},
+	{
+	  "_id": "44b990816ee6a1e714301c72",
+	  "designation": "servo freio",
+	  "width": 13,
+	  "height": 26,
+	  "length": 94,
+	  "weight": 86010,
+	  "quantity": 1
+	},
+	{
+	  "_id": "bd48aeb09cf9290b8e5a9949",
+	  "designation": "revestimento traseiro",
+	  "width": 14,
+	  "height": 4,
+	  "length": 2,
+	  "weight": 44498,
+	  "quantity": 2
+	},
+	{
+	  "_id": "bfef1cf449fec1a12b6f2413",
+	  "designation": "defletor de discos de travão",
+	  "width": 7,
+	  "height": 10,
+	  "length": 11,
+	  "weight": 4718,
+	  "quantity": 3
+	},
+	{
+	  "_id": "75e8bb95f1770169c20c19ae",
+	  "designation": "mangueira de travão",
+	  "width": 9,
+	  "height": 4,
+	  "length": 21,
+	  "weight": 16763,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1ea2fbad32ec5f5e4fa59bb9",
+	  "designation": "bujão do carter",
+	  "width": 9,
+	  "height": 9,
+	  "length": 15,
+	  "weight": 9235,
+	  "quantity": 3
+	},
+	{
+	  "_id": "094b5e6499e1368e51869541",
+	  "designation": "pastilhas de travão",
+	  "width": 6,
+	  "height": 4,
+	  "length": 23,
+	  "weight": 30792,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7e57a3bb596598d9aea1f183",
+	  "designation": "anel de sensor de abs",
+	  "width": 12,
+	  "height": 14,
+	  "length": 86,
+	  "weight": 10150,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4e669f3cddda967652ea8067",
+	  "designation": "radiador de óleo",
+	  "width": 2,
+	  "height": 3,
+	  "length": 30,
+	  "weight": 14938,
+	  "quantity": 2
+	},
+	{
+	  "_id": "bc5ae0b681e1bcd76af98318",
+	  "designation": "mangueira de travão",
+	  "width": 2,
+	  "height": 1,
+	  "length": 21,
+	  "weight": 4123,
+	  "quantity": 3
+	},
+	{
+	  "_id": "2ac34782008acc84cb36bf55",
+	  "designation": "farol principal",
+	  "width": 10,
+	  "height": 2,
+	  "length": 53,
+	  "weight": 17681,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b815620d35a8f759d57a16b4",
+	  "designation": "vidro de espelho",
+	  "width": 15,
+	  "height": 15,
+	  "length": 44,
+	  "weight": 88442,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c351c0751dbbc11e181d766e",
+	  "designation": "bomba de vácuo",
+	  "width": 7,
+	  "height": 8,
+	  "length": 4,
+	  "weight": 20500,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6a60e76b9b22e92a1caf3076",
+	  "designation": "cirtuito elétrico do motor",
+	  "width": 7,
+	  "height": 28,
+	  "length": 66,
+	  "weight": 77734,
+	  "quantity": 1
+	},
+	{
+	  "_id": "2a3d7386d6647b3938e6b9e3",
+	  "designation": "amortecedor de capô",
+	  "width": 13,
+	  "height": 11,
+	  "length": 64,
+	  "weight": 66538,
+	  "quantity": 1
+	},
+	{
+	  "_id": "950f39f83d3e079096e1879d",
+	  "designation": "sensor de abs",
+	  "width": 10,
+	  "height": 5,
+	  "length": 91,
+	  "weight": 22565,
+	  "quantity": 1
+	},
+	{
+	  "_id": "05bf60443fb75406da2c0eaa",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 12,
+	  "height": 8,
+	  "length": 35,
+	  "weight": 23027,
+	  "quantity": 2
+	},
+	{
+	  "_id": "07516efdb9a9c0f5fa7a473f",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 14,
+	  "height": 1,
+	  "length": 24,
+	  "weight": 57748,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c48d96474259a8c96b6cf80c",
+	  "designation": "bomba central dos travões",
+	  "width": 6,
+	  "height": 11,
+	  "length": 57,
+	  "weight": 13005,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b472f311276470e962376f9d",
+	  "designation": "correia dentada",
+	  "width": 6,
+	  "height": 8,
+	  "length": 1,
+	  "weight": 18694,
+	  "quantity": 3
+	},
+	{
+	  "_id": "fba761247d58e8224e910c13",
+	  "designation": "espelho retrovisor",
+	  "width": 10,
+	  "height": 8,
+	  "length": 3,
+	  "weight": 4936,
+	  "quantity": 3
+	},
+	{
+	  "_id": "bd3d5f1f59e90d8c61cd09e4",
+	  "designation": "pinças de travão",
+	  "width": 3,
+	  "height": 8,
+	  "length": 4,
+	  "weight": 7166,
+	  "quantity": 3
+	},
+	{
+	  "_id": "83a765248171d4440e24eae4",
+	  "designation": "espelho retrovisor",
+	  "width": 29,
+	  "height": 26,
+	  "length": 52,
+	  "weight": 63312,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9f2c5ae0126dddbd69869a16",
+	  "designation": "kit de travões",
+	  "width": 2,
+	  "height": 7,
+	  "length": 7,
+	  "weight": 27662,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8fdfb53d36f00c471c0b83e9",
+	  "designation": "farol principal",
+	  "width": 11,
+	  "height": 7,
+	  "length": 22,
+	  "weight": 34324,
+	  "quantity": 2
+	},
+	{
+	  "_id": "18bc894e25a4b19a020835bf",
+	  "designation": "correia dentada",
+	  "width": 12,
+	  "height": 30,
+	  "length": 84,
+	  "weight": 45926,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b37c82655896b6fd727bc2e2",
+	  "designation": "faróis de xénon",
+	  "width": 6,
+	  "height": 7,
+	  "length": 18,
+	  "weight": 9506,
+	  "quantity": 3
+	},
+	{
+	  "_id": "696d3c4415c79328c29d57da",
+	  "designation": "para-brisas",
+	  "width": 10,
+	  "height": 4,
+	  "length": 3,
+	  "weight": 25833,
+	  "quantity": 2
+	},
+	{
+	  "_id": "7786e3a37b1b5b2acc62c598",
+	  "designation": "para-brisas",
+	  "width": 11,
+	  "height": 28,
+	  "length": 36,
+	  "weight": 37161,
+	  "quantity": 1
+	},
+	{
+	  "_id": "206c8186db68803e76de636e",
+	  "designation": "gancho de roboque",
+	  "width": 3,
+	  "height": 2,
+	  "length": 34,
+	  "weight": 12522,
+	  "quantity": 2
+	},
+	{
+	  "_id": "016030c50a66046e03509e47",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 9,
+	  "height": 25,
+	  "length": 14,
+	  "weight": 98118,
+	  "quantity": 1
+	},
+	{
+	  "_id": "74b1325d155b8841a6612e03",
+	  "designation": "árvore de cames",
+	  "width": 6,
+	  "height": 1,
+	  "length": 13,
+	  "weight": 31696,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b93c70d43dd20ad04cf2b3fc",
+	  "designation": "radiador",
+	  "width": 30,
+	  "height": 2,
+	  "length": 32,
+	  "weight": 41631,
+	  "quantity": 1
+	},
+	{
+	  "_id": "1bc0293f954fc01e409eb5fb",
+	  "designation": "bomba central dos travões",
+	  "width": 16,
+	  "height": 18,
+	  "length": 29,
+	  "weight": 42953,
+	  "quantity": 1
+	},
+	{
+	  "_id": "0faf8a2718bde959d46b8c76",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 1,
+	  "height": 5,
+	  "length": 18,
+	  "weight": 11442,
+	  "quantity": 3
+	},
+	{
+	  "_id": "251985c98de0e59840214b3d",
+	  "designation": "compressor",
+	  "width": 9,
+	  "height": 6,
+	  "length": 21,
+	  "weight": 15711,
+	  "quantity": 3
+	},
+	{
+	  "_id": "2472ff56297b52a46a6daa82",
+	  "designation": "radiador de óleo",
+	  "width": 10,
+	  "height": 2,
+	  "length": 11,
+	  "weight": 31339,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0a5126ee9e2b23ec566e86e0",
+	  "designation": "para-brisas",
+	  "width": 25,
+	  "height": 18,
+	  "length": 77,
+	  "weight": 62917,
+	  "quantity": 1
+	},
+	{
+	  "_id": "acacc69aa1aad364d6e09409",
+	  "designation": "bomba central dos travões",
+	  "width": 5,
+	  "height": 3,
+	  "length": 22,
+	  "weight": 16123,
+	  "quantity": 3
+	},
+	{
+	  "_id": "f93ba05bffd28654f582133b",
+	  "designation": "faróis de xénon",
+	  "width": 5,
+	  "height": 8,
+	  "length": 59,
+	  "weight": 65929,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e55d2fffe2fbc8033580bf18",
+	  "designation": "pinças de travão",
+	  "width": 7,
+	  "height": 10,
+	  "length": 34,
+	  "weight": 28453,
+	  "quantity": 2
+	},
+	{
+	  "_id": "1ce68bb2cb39ffd6f5d97f1d",
+	  "designation": "porta dianteira",
+	  "width": 30,
+	  "height": 12,
+	  "length": 65,
+	  "weight": 32191,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f36bfb95261143230b90cab0",
+	  "designation": "fecho central",
+	  "width": 7,
+	  "height": 1,
+	  "length": 29,
+	  "weight": 24162,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0fd07770f1acd7246454812e",
+	  "designation": "borracha de vidro",
+	  "width": 6,
+	  "height": 10,
+	  "length": 21,
+	  "weight": 7719,
+	  "quantity": 3
+	},
+	{
+	  "_id": "00e9c18f9f680a910f5f9050",
+	  "designation": "travão de estacionamento",
+	  "width": 10,
+	  "height": 5,
+	  "length": 5,
+	  "weight": 24313,
+	  "quantity": 2
+	},
+	{
+	  "_id": "82edd4d983c2eb59470fa197",
+	  "designation": "turbocompressor",
+	  "width": 9,
+	  "height": 9,
+	  "length": 19,
+	  "weight": 21163,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6317248bea1cf84096c85e31",
+	  "designation": "filtro de ar",
+	  "width": 9,
+	  "height": 15,
+	  "length": 45,
+	  "weight": 29871,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5696c1115cc7eddc3ff8e843",
+	  "designation": "defletor de discos de travão",
+	  "width": 17,
+	  "height": 3,
+	  "length": 44,
+	  "weight": 21773,
+	  "quantity": 1
+	},
+	{
+	  "_id": "2534d1a8701a95482a6c8ebd",
+	  "designation": "vareta de óleo",
+	  "width": 6,
+	  "height": 30,
+	  "length": 63,
+	  "weight": 58259,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b4108e9bade3974b06e870a6",
+	  "designation": "bujão do carter",
+	  "width": 5,
+	  "height": 9,
+	  "length": 24,
+	  "weight": 4198,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2243130361f5b21650599307",
+	  "designation": "tampa do radiador",
+	  "width": 9,
+	  "height": 24,
+	  "length": 1,
+	  "weight": 65461,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4da9180d33a963269a3d1466",
+	  "designation": "gancho de roboque",
+	  "width": 1,
+	  "height": 8,
+	  "length": 8,
+	  "weight": 27860,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ddeb45bfd0b113e172c95b90",
+	  "designation": "revestimento traseiro",
+	  "width": 8,
+	  "height": 9,
+	  "length": 5,
+	  "weight": 6437,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5ffefcbd20d560bcce4cfaab",
+	  "designation": "kit de travões",
+	  "width": 9,
+	  "height": 10,
+	  "length": 30,
+	  "weight": 20654,
+	  "quantity": 3
+	},
+	{
+	  "_id": "81f7d6df589c64a1bf639d53",
+	  "designation": "disco de travão",
+	  "width": 13,
+	  "height": 7,
+	  "length": 20,
+	  "weight": 44844,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ee74dd896aeba5901079723d",
+	  "designation": "vareta de óleo",
+	  "width": 10,
+	  "height": 9,
+	  "length": 14,
+	  "weight": 14683,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0b88e59420c3121df0c31a43",
+	  "designation": "anel de sensor de abs",
+	  "width": 2,
+	  "height": 5,
+	  "length": 12,
+	  "weight": 28062,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b581fe07971122e7d352e461",
+	  "designation": "tambor de travão",
+	  "width": 10,
+	  "height": 13,
+	  "length": 32,
+	  "weight": 27014,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5e454a5736c753c04384e4b6",
+	  "designation": "cilindro de travão de roda",
+	  "width": 24,
+	  "height": 20,
+	  "length": 76,
+	  "weight": 6442,
+	  "quantity": 1
+	},
+	{
+	  "_id": "67533505c7ff5cdf847b2a75",
+	  "designation": "sensor de combustível",
+	  "width": 7,
+	  "height": 21,
+	  "length": 62,
+	  "weight": 47138,
+	  "quantity": 1
+	},
+	{
+	  "_id": "114218980bb72df666e16b98",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 1,
+	  "height": 4,
+	  "length": 23,
+	  "weight": 47529,
+	  "quantity": 2
+	},
+	{
+	  "_id": "01b8d8c96b55130b721021c8",
+	  "designation": "painel lateral",
+	  "width": 3,
+	  "height": 5,
+	  "length": 15,
+	  "weight": 67927,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7449fc869c00ce3fa84250d1",
+	  "designation": "guarda-lamas",
+	  "width": 8,
+	  "height": 11,
+	  "length": 74,
+	  "weight": 913,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9ec6fbe5b1e5bd77f43cef38",
+	  "designation": "amortecedor de vibrações",
+	  "width": 11,
+	  "height": 9,
+	  "length": 9,
+	  "weight": 87190,
+	  "quantity": 1
+	},
+	{
+	  "_id": "46ae64ec433456787b803182",
+	  "designation": "disco de travão",
+	  "width": 4,
+	  "height": 4,
+	  "length": 15,
+	  "weight": 17236,
+	  "quantity": 3
+	},
+	{
+	  "_id": "578ad2917bc8862499271fb2",
+	  "designation": "bomba de vácuo",
+	  "width": 28,
+	  "height": 25,
+	  "length": 64,
+	  "weight": 61983,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9a17632dbda08636fdf56b05",
+	  "designation": "anilhas da cambota",
+	  "width": 8,
+	  "height": 4,
+	  "length": 17,
+	  "weight": 8062,
+	  "quantity": 3
+	},
+	{
+	  "_id": "fe7f3009ebd8fdbf31abd927",
+	  "designation": "luz de travão suplementar",
+	  "width": 9,
+	  "height": 4,
+	  "length": 29,
+	  "weight": 26069,
+	  "quantity": 3
+	},
+	{
+	  "_id": "921041bbc533fcb117c416a2",
+	  "designation": "filtro de óleo",
+	  "width": 1,
+	  "height": 14,
+	  "length": 5,
+	  "weight": 574,
+	  "quantity": 2
+	},
+	{
+	  "_id": "05a733275a034319047e1558",
+	  "designation": "defletor de discos de travão",
+	  "width": 7,
+	  "height": 11,
+	  "length": 17,
+	  "weight": 26403,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c279145a7b21a9fde3e0a9ca",
+	  "designation": "bomba central dos travões",
+	  "width": 4,
+	  "height": 15,
+	  "length": 24,
+	  "weight": 26317,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b98f0a04f9397dbca0fecf10",
+	  "designation": "pastilhas de travão",
+	  "width": 22,
+	  "height": 11,
+	  "length": 40,
+	  "weight": 31712,
+	  "quantity": 1
+	},
+	{
+	  "_id": "80a5fe3cba0411843b8aa9eb",
+	  "designation": "disco de travão",
+	  "width": 4,
+	  "height": 8,
+	  "length": 21,
+	  "weight": 353,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e036c5b0c1914edf3df270d6",
+	  "designation": "faróis de xénon",
+	  "width": 14,
+	  "height": 14,
+	  "length": 31,
+	  "weight": 39494,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c201a922f8d446898aed676c",
+	  "designation": "porta dianteira",
+	  "width": 20,
+	  "height": 18,
+	  "length": 69,
+	  "weight": 63536,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a5ca2c080560b5de2420b512",
+	  "designation": "painel de radiador",
+	  "width": 10,
+	  "height": 2,
+	  "length": 26,
+	  "weight": 11527,
+	  "quantity": 3
+	},
+	{
+	  "_id": "3bf9e24dbdccba99a9a608cb",
+	  "designation": "cárter de óleo",
+	  "width": 17,
+	  "height": 24,
+	  "length": 11,
+	  "weight": 69681,
+	  "quantity": 1
+	},
+	{
+	  "_id": "62baa73d7dd6ab2109ca1733",
+	  "designation": "vareta de óleo",
+	  "width": 4,
+	  "height": 14,
+	  "length": 72,
+	  "weight": 55429,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c7d0503cf8336a5332e7474a",
+	  "designation": "bujão do carter",
+	  "width": 14,
+	  "height": 9,
+	  "length": 5,
+	  "weight": 8356,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ecad29d01486c7ff24531416",
+	  "designation": "interruptor de luz de stop",
+	  "width": 28,
+	  "height": 11,
+	  "length": 9,
+	  "weight": 12554,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6e55d0326cc2cfbf8f03e744",
+	  "designation": "mangueira de travão",
+	  "width": 14,
+	  "height": 1,
+	  "length": 19,
+	  "weight": 37213,
+	  "quantity": 2
+	},
+	{
+	  "_id": "c2e0058dabdccdd28e95ab97",
+	  "designation": "cárter de óleo",
+	  "width": 6,
+	  "height": 9,
+	  "length": 2,
+	  "weight": 23527,
+	  "quantity": 3
+	},
+	{
+	  "_id": "04217dc18d51f8f74b03291e",
+	  "designation": "borracha de vidro",
+	  "width": 4,
+	  "height": 4,
+	  "length": 20,
+	  "weight": 35536,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9574b83bcb47462dc352da79",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 28,
+	  "height": 22,
+	  "length": 77,
+	  "weight": 68618,
+	  "quantity": 1
+	},
+	{
+	  "_id": "0252d8fa7990d3f428eeb846",
+	  "designation": "cilindro de travão de roda",
+	  "width": 12,
+	  "height": 2,
+	  "length": 16,
+	  "weight": 1476,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b51595c5360168b73c1a5300",
+	  "designation": "para-choques",
+	  "width": 8,
+	  "height": 24,
+	  "length": 43,
+	  "weight": 8997,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9d0d3c2c8999b7e9329de5e8",
+	  "designation": "correntes de distribuição",
+	  "width": 10,
+	  "height": 1,
+	  "length": 24,
+	  "weight": 20445,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ca6defe1e95a077c2cd96f50",
+	  "designation": "anel de sensor de abs",
+	  "width": 3,
+	  "height": 9,
+	  "length": 18,
+	  "weight": 40937,
+	  "quantity": 1
+	},
+	{
+	  "_id": "14a867cad0950f12685d7011",
+	  "designation": "cabo de freio de mão",
+	  "width": 8,
+	  "height": 13,
+	  "length": 59,
+	  "weight": 10636,
+	  "quantity": 1
+	},
+	{
+	  "_id": "06f02e17e6c166a6d9864bfe",
+	  "designation": "sensor de combustível",
+	  "width": 30,
+	  "height": 26,
+	  "length": 15,
+	  "weight": 74422,
+	  "quantity": 1
+	},
+	{
+	  "_id": "74d46ade7d9223e8ef8c4f60",
+	  "designation": "filtro de ar",
+	  "width": 10,
+	  "height": 8,
+	  "length": 21,
+	  "weight": 33680,
+	  "quantity": 2
+	},
+	{
+	  "_id": "60120c518903943f390dfba3",
+	  "designation": "cambota",
+	  "width": 1,
+	  "height": 5,
+	  "length": 20,
+	  "weight": 555,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0c6513a61cbb3ce4a45523ec",
+	  "designation": "porta traseira",
+	  "width": 12,
+	  "height": 2,
+	  "length": 47,
+	  "weight": 17398,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e19cbe547e27474e07dcdad8",
+	  "designation": "disco de travão de alto rendimento",
+	  "width": 10,
+	  "height": 21,
+	  "length": 13,
+	  "weight": 17526,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e64986fabe8ae90b0eb38f1b",
+	  "designation": "disco de travão",
+	  "width": 8,
+	  "height": 5,
+	  "length": 13,
+	  "weight": 4916,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7a38d9e9a809451615a13371",
+	  "designation": "sensor de abs",
+	  "width": 19,
+	  "height": 26,
+	  "length": 83,
+	  "weight": 74307,
+	  "quantity": 1
+	},
+	{
+	  "_id": "126a6e30ad1e5dc114473478",
+	  "designation": "maxilas do travão",
+	  "width": 20,
+	  "height": 14,
+	  "length": 15,
+	  "weight": 21522,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8f6be281ae68b59b724b8e9a",
+	  "designation": "apoios de motor",
+	  "width": 13,
+	  "height": 22,
+	  "length": 95,
+	  "weight": 76547,
+	  "quantity": 1
+	},
+	{
+	  "_id": "900fda87bac0c83dce0aaac4",
+	  "designation": "pastilhas de travão",
+	  "width": 12,
+	  "height": 13,
+	  "length": 41,
+	  "weight": 5476,
+	  "quantity": 2
+	},
+	{
+	  "_id": "0162650c5798852bfea85b5b",
+	  "designation": "bomba de vácuo",
+	  "width": 5,
+	  "height": 4,
+	  "length": 17,
+	  "weight": 21240,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6b3c4387429c11b3d3aaed46",
+	  "designation": "cabo de freio de mão",
+	  "width": 7,
+	  "height": 13,
+	  "length": 24,
+	  "weight": 15533,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8322d7ccab90d70e1c36e3c5",
+	  "designation": "travão de estacionamento",
+	  "width": 8,
+	  "height": 7,
+	  "length": 25,
+	  "weight": 8236,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1193077af3adf23419c9bfb4",
+	  "designation": "tampa do radiador",
+	  "width": 1,
+	  "height": 19,
+	  "length": 82,
+	  "weight": 59140,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9661a2668fbc9f3a0b2d0135",
+	  "designation": "luz de stop",
+	  "width": 5,
+	  "height": 2,
+	  "length": 3,
+	  "weight": 14889,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2346ce5b55403ccd7ad6e382",
+	  "designation": "anel de sensor de abs",
+	  "width": 7,
+	  "height": 6,
+	  "length": 3,
+	  "weight": 17716,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0ce2fc8cc4ded9e469e1dad1",
+	  "designation": "correia dentada",
+	  "width": 7,
+	  "height": 12,
+	  "length": 30,
+	  "weight": 23360,
+	  "quantity": 1
+	},
+	{
+	  "_id": "590607a08a7daaadaf4f39f4",
+	  "designation": "filtro de ar",
+	  "width": 2,
+	  "height": 1,
+	  "length": 7,
+	  "weight": 2072,
+	  "quantity": 3
+	},
+	{
+	  "_id": "df5629a8f6f09c1e21581aec",
+	  "designation": "embreagem do ventilador",
+	  "width": 5,
+	  "height": 23,
+	  "length": 35,
+	  "weight": 80895,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b299ae9b1ae29e9a0cfd743c",
+	  "designation": "farol principal",
+	  "width": 9,
+	  "height": 25,
+	  "length": 18,
+	  "weight": 56349,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4b5e6864644c0904b4234fb3",
+	  "designation": "anilhas da cambota",
+	  "width": 14,
+	  "height": 12,
+	  "length": 94,
+	  "weight": 74212,
+	  "quantity": 1
+	},
+	{
+	  "_id": "61432f5fe98ae81f24d67375",
+	  "designation": "correntes de distribuição",
+	  "width": 7,
+	  "height": 13,
+	  "length": 29,
+	  "weight": 8250,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f0cc0b8830679c6058aa1632",
+	  "designation": "painel lateral",
+	  "width": 7,
+	  "height": 4,
+	  "length": 15,
+	  "weight": 49747,
+	  "quantity": 2
+	},
+	{
+	  "_id": "57876ac357101c7a23fd2f7c",
+	  "designation": "vidro lateral",
+	  "width": 8,
+	  "height": 3,
+	  "length": 26,
+	  "weight": 44019,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b97dc2178c7cf658755af3c5",
+	  "designation": "vidro de espelho",
+	  "width": 13,
+	  "height": 12,
+	  "length": 25,
+	  "weight": 37889,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d244a7d6012bdb578e45a156",
+	  "designation": "tubo de óleo",
+	  "width": 10,
+	  "height": 1,
+	  "length": 30,
+	  "weight": 2562,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c92017b6eaf2ada5c1992452",
+	  "designation": "sensor de abs",
+	  "width": 3,
+	  "height": 6,
+	  "length": 21,
+	  "weight": 14504,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e0a44fd7161daea38d4b0737",
+	  "designation": "compressor",
+	  "width": 22,
+	  "height": 2,
+	  "length": 73,
+	  "weight": 26906,
+	  "quantity": 1
+	},
+	{
+	  "_id": "82004dafcffbe3f5425693b3",
+	  "designation": "radiador",
+	  "width": 10,
+	  "height": 4,
+	  "length": 13,
+	  "weight": 30520,
+	  "quantity": 3
+	},
+	{
+	  "_id": "726747e4948a7cb3c34c1491",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 19,
+	  "height": 8,
+	  "length": 33,
+	  "weight": 75295,
+	  "quantity": 1
+	},
+	{
+	  "_id": "945701e28535121930f9e0d5",
+	  "designation": "luz de travão suplementar",
+	  "width": 2,
+	  "height": 9,
+	  "length": 33,
+	  "weight": 3391,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9a8ac3a001f9d8924d9a4c29",
+	  "designation": "faróis de xénon",
+	  "width": 1,
+	  "height": 3,
+	  "length": 6,
+	  "weight": 25076,
+	  "quantity": 3
+	},
+	{
+	  "_id": "87dde845033007aac6faeedd",
+	  "designation": "amortecedor de capô",
+	  "width": 12,
+	  "height": 12,
+	  "length": 59,
+	  "weight": 21638,
+	  "quantity": 1
+	},
+	{
+	  "_id": "79ec1a894b5387bb9e487186",
+	  "designation": "luz de travão suplementar",
+	  "width": 12,
+	  "height": 8,
+	  "length": 2,
+	  "weight": 87667,
+	  "quantity": 1
+	},
+	{
+	  "_id": "f77200318f044e5eaf43007c",
+	  "designation": "bomba de água",
+	  "width": 3,
+	  "height": 10,
+	  "length": 16,
+	  "weight": 4974,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5c866a90269e63bb0cbce1ea",
+	  "designation": "interruptor de luz de stop",
+	  "width": 3,
+	  "height": 6,
+	  "length": 17,
+	  "weight": 22811,
+	  "quantity": 3
+	},
+	{
+	  "_id": "26c6b01d2db6491ca6ce1252",
+	  "designation": "fecho central",
+	  "width": 6,
+	  "height": 15,
+	  "length": 2,
+	  "weight": 37881,
+	  "quantity": 2
+	},
+	{
+	  "_id": "52bed63b520905c59c07bc7f",
+	  "designation": "eixo",
+	  "width": 5,
+	  "height": 10,
+	  "length": 20,
+	  "weight": 29055,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1db1d10deb922ed4b1115044",
+	  "designation": "pinças de travão",
+	  "width": 8,
+	  "height": 4,
+	  "length": 21,
+	  "weight": 1632,
+	  "quantity": 3
+	},
+	{
+	  "_id": "9caff8bea1e58b4a7eba686d",
+	  "designation": "amortecedor de capô",
+	  "width": 4,
+	  "height": 14,
+	  "length": 82,
+	  "weight": 34094,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8f9a2f6fd82828c1a6419d35",
+	  "designation": "árvore de cames",
+	  "width": 7,
+	  "height": 10,
+	  "length": 2,
+	  "weight": 36252,
+	  "quantity": 2
+	},
+	{
+	  "_id": "dafb70f9efdfc803d0fed761",
+	  "designation": "tubo de óleo",
+	  "width": 21,
+	  "height": 27,
+	  "length": 38,
+	  "weight": 30708,
+	  "quantity": 1
+	},
+	{
+	  "_id": "ff0cfbff970749a89df202ea",
+	  "designation": "disco de travão",
+	  "width": 3,
+	  "height": 6,
+	  "length": 30,
+	  "weight": 6442,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9fc829cb69550a3454beb880",
+	  "designation": "guia",
+	  "width": 8,
+	  "height": 4,
+	  "length": 17,
+	  "weight": 11649,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b8851996f7a8b2a5e2a0a5a3",
+	  "designation": "radiador",
+	  "width": 7,
+	  "height": 7,
+	  "length": 14,
+	  "weight": 13745,
+	  "quantity": 3
+	},
+	{
+	  "_id": "86c6d36876474e71dd09d8fb",
+	  "designation": "sensores de estacionamento",
+	  "width": 9,
+	  "height": 11,
+	  "length": 35,
+	  "weight": 39916,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9d72d5353d9c653029246ff8",
+	  "designation": "gancho de roboque",
+	  "width": 15,
+	  "height": 23,
+	  "length": 26,
+	  "weight": 38866,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8363406a6b4685d2a19c81cf",
+	  "designation": "luz de stop",
+	  "width": 1,
+	  "height": 10,
+	  "length": 19,
+	  "weight": 4016,
+	  "quantity": 3
+	},
+	{
+	  "_id": "3c27b20098d81d148ab54d48",
+	  "designation": "cabo de freio de mão",
+	  "width": 6,
+	  "height": 5,
+	  "length": 1,
+	  "weight": 3011,
+	  "quantity": 2
+	},
+	{
+	  "_id": "40f2c0b84c32b3eaa593b423",
+	  "designation": "amortecedor de vibrações",
+	  "width": 12,
+	  "height": 5,
+	  "length": 37,
+	  "weight": 27402,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a92e2fdcef0060d241dce976",
+	  "designation": "porta dianteira",
+	  "width": 5,
+	  "height": 6,
+	  "length": 31,
+	  "weight": 11954,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b45c496d354b451125a32995",
+	  "designation": "travão de estacionamento",
+	  "width": 8,
+	  "height": 7,
+	  "length": 6,
+	  "weight": 25947,
+	  "quantity": 3
+	},
+	{
+	  "_id": "534abfdf09592fb2c48ebb01",
+	  "designation": "sensor de abs",
+	  "width": 4,
+	  "height": 9,
+	  "length": 13,
+	  "weight": 26517,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8ada65c2d8d56d234b9645d3",
+	  "designation": "correntes de distribuição",
+	  "width": 15,
+	  "height": 7,
+	  "length": 30,
+	  "weight": 15629,
+	  "quantity": 2
+	},
+	{
+	  "_id": "962a9ac60071646cb56b2215",
+	  "designation": "cilindro de travão de roda",
+	  "width": 2,
+	  "height": 2,
+	  "length": 8,
+	  "weight": 2842,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1e1246178bff5489168ded9b",
+	  "designation": "fecho central",
+	  "width": 17,
+	  "height": 13,
+	  "length": 20,
+	  "weight": 5179,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a633a52a68cc01d251792702",
+	  "designation": "bomba central dos travões",
+	  "width": 6,
+	  "height": 2,
+	  "length": 26,
+	  "weight": 32846,
+	  "quantity": 3
+	},
+	{
+	  "_id": "889b54927ebf6a61d1bed7f8",
+	  "designation": "pastilhas de travão",
+	  "width": 5,
+	  "height": 22,
+	  "length": 15,
+	  "weight": 1053,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3d7be14d10c8b58aa57d3348",
+	  "designation": "correia trapezoidal estriada",
+	  "width": 11,
+	  "height": 13,
+	  "length": 12,
+	  "weight": 35965,
+	  "quantity": 2
+	},
+	{
+	  "_id": "03f16847e2bee377c56de1d4",
+	  "designation": "sensor de combustível",
+	  "width": 8,
+	  "height": 5,
+	  "length": 24,
+	  "weight": 15070,
+	  "quantity": 3
+	},
+	{
+	  "_id": "843c24c5aa30e5fcb7459d4d",
+	  "designation": "vidro de espelho",
+	  "width": 1,
+	  "height": 5,
+	  "length": 17,
+	  "weight": 9410,
+	  "quantity": 3
+	},
+	{
+	  "_id": "f7c3e64d79004fa60a366223",
+	  "designation": "eixo",
+	  "width": 29,
+	  "height": 30,
+	  "length": 44,
+	  "weight": 58801,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4bf90f54e03944cef8984d55",
+	  "designation": "gancho de roboque",
+	  "width": 21,
+	  "height": 8,
+	  "length": 63,
+	  "weight": 88929,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7dc35469287f758782750919",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 7,
+	  "height": 19,
+	  "length": 27,
+	  "weight": 67435,
+	  "quantity": 1
+	},
+	{
+	  "_id": "1884346be21825450215bf6b",
+	  "designation": "cabo de freio de mão",
+	  "width": 11,
+	  "height": 14,
+	  "length": 38,
+	  "weight": 30903,
+	  "quantity": 2
+	},
+	{
+	  "_id": "4dbc09469ea1d2069f4ef3c4",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 7,
+	  "height": 4,
+	  "length": 21,
+	  "weight": 2701,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1875aac3275890f89c2f029e",
+	  "designation": "faróis de xénon",
+	  "width": 6,
+	  "height": 7,
+	  "length": 22,
+	  "weight": 27262,
+	  "quantity": 3
+	},
+	{
+	  "_id": "38369a35739353d8e9a7fc88",
+	  "designation": "travão de estacionamento",
+	  "width": 9,
+	  "height": 4,
+	  "length": 17,
+	  "weight": 47401,
+	  "quantity": 2
+	},
+	{
+	  "_id": "109e5384a68c96fee61f1aba",
+	  "designation": "válvula de admissão",
+	  "width": 7,
+	  "height": 11,
+	  "length": 37,
+	  "weight": 34561,
+	  "quantity": 2
+	},
+	{
+	  "_id": "5bc0ba0b7bca7ba9626a665f",
+	  "designation": "tubo de óleo",
+	  "width": 5,
+	  "height": 26,
+	  "length": 1,
+	  "weight": 54096,
+	  "quantity": 1
+	},
+	{
+	  "_id": "14bc7d171167079e276e5203",
+	  "designation": "porta dianteira",
+	  "width": 6,
+	  "height": 1,
+	  "length": 8,
+	  "weight": 30701,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8ea974160854289ba72651e1",
+	  "designation": "amortecedor de vibrações",
+	  "width": 6,
+	  "height": 10,
+	  "length": 15,
+	  "weight": 20298,
+	  "quantity": 3
+	},
+	{
+	  "_id": "02bfb4bb51e5ebf0d70f7b40",
+	  "designation": "faróis de xénon",
+	  "width": 15,
+	  "height": 5,
+	  "length": 87,
+	  "weight": 1370,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e34a3a1b8c944fa83292ce71",
+	  "designation": "amortecedor de capô",
+	  "width": 1,
+	  "height": 2,
+	  "length": 15,
+	  "weight": 9587,
+	  "quantity": 3
+	},
+	{
+	  "_id": "34dec1ecfbc20cd0e19fd9f2",
+	  "designation": "bomba central dos travões",
+	  "width": 8,
+	  "height": 26,
+	  "length": 61,
+	  "weight": 10499,
+	  "quantity": 1
+	},
+	{
+	  "_id": "70158fef229c3c7c106be911",
+	  "designation": "pinças de travão",
+	  "width": 14,
+	  "height": 13,
+	  "length": 10,
+	  "weight": 15750,
+	  "quantity": 2
+	},
+	{
+	  "_id": "3ba1994d484c48c4c9d96be4",
+	  "designation": "tambor de travão",
+	  "width": 23,
+	  "height": 7,
+	  "length": 11,
+	  "weight": 62902,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7b21f133811acb7a90fbdcb6",
+	  "designation": "vareta de óleo",
+	  "width": 24,
+	  "height": 18,
+	  "length": 55,
+	  "weight": 14297,
+	  "quantity": 1
+	},
+	{
+	  "_id": "26a2b746022b2ee69037c368",
+	  "designation": "disco de travão",
+	  "width": 15,
+	  "height": 9,
+	  "length": 15,
+	  "weight": 11227,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ed9f6236f9cb73b673c9c252",
+	  "designation": "faróis de xénon",
+	  "width": 10,
+	  "height": 2,
+	  "length": 20,
+	  "weight": 16794,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5c602359f495ab40aceb6d3c",
+	  "designation": "compressor",
+	  "width": 4,
+	  "height": 3,
+	  "length": 13,
+	  "weight": 24398,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b08ff96297df23c54bae760d",
+	  "designation": "vidro farol",
+	  "width": 11,
+	  "height": 8,
+	  "length": 26,
+	  "weight": 36915,
+	  "quantity": 2
+	},
+	{
+	  "_id": "25be3a4f9b8b3f5a679d64c0",
+	  "designation": "sensor de abs",
+	  "width": 30,
+	  "height": 17,
+	  "length": 92,
+	  "weight": 29550,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b29d2b0386e0188e84ef4530",
+	  "designation": "porta traseira",
+	  "width": 17,
+	  "height": 4,
+	  "length": 10,
+	  "weight": 42672,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c5688b0f359466583f9146d3",
+	  "designation": "vidro farol",
+	  "width": 1,
+	  "height": 3,
+	  "length": 41,
+	  "weight": 5942,
+	  "quantity": 2
+	},
+	{
+	  "_id": "26f8f6bd679636d0d1125032",
+	  "designation": "fecho central",
+	  "width": 8,
+	  "height": 17,
+	  "length": 60,
+	  "weight": 16003,
+	  "quantity": 1
+	},
+	{
+	  "_id": "96a49deeae14ec40625ee191",
+	  "designation": "disco de travão",
+	  "width": 4,
+	  "height": 6,
+	  "length": 27,
+	  "weight": 9665,
+	  "quantity": 2
+	},
+	{
+	  "_id": "bb18843113c605457d45959b",
+	  "designation": "correia dentada",
+	  "width": 10,
+	  "height": 15,
+	  "length": 17,
+	  "weight": 22116,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9e81bf333e5e871ead74d9a0",
+	  "designation": "suporte da bateria",
+	  "width": 5,
+	  "height": 3,
+	  "length": 25,
+	  "weight": 19700,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e9f5dac174a5f54cfd50c853",
+	  "designation": "pinças de travão",
+	  "width": 1,
+	  "height": 18,
+	  "length": 46,
+	  "weight": 45405,
+	  "quantity": 1
+	},
+	{
+	  "_id": "78d046a0eb10293fe919618d",
+	  "designation": "bomba de vácuo",
+	  "width": 14,
+	  "height": 10,
+	  "length": 69,
+	  "weight": 49226,
+	  "quantity": 1
+	},
+	{
+	  "_id": "4e2baeca4135d015a781b28d",
+	  "designation": "bobila de ignição",
+	  "width": 14,
+	  "height": 5,
+	  "length": 12,
+	  "weight": 808,
+	  "quantity": 2
+	},
+	{
+	  "_id": "3648a77ed95361b45420f57a",
+	  "designation": "compressor",
+	  "width": 27,
+	  "height": 21,
+	  "length": 40,
+	  "weight": 68021,
+	  "quantity": 1
+	},
+	{
+	  "_id": "28c6b8c5031e2cbb18d614d0",
+	  "designation": "bobila de ignição",
+	  "width": 17,
+	  "height": 15,
+	  "length": 93,
+	  "weight": 78755,
+	  "quantity": 1
+	},
+	{
+	  "_id": "870729fb28bbd67c1cf3fee9",
+	  "designation": "válvula de admissão",
+	  "width": 5,
+	  "height": 1,
+	  "length": 30,
+	  "weight": 19010,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5df68d386071f4b7f5696f77",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 12,
+	  "height": 9,
+	  "length": 37,
+	  "weight": 31431,
+	  "quantity": 2
+	},
+	{
+	  "_id": "2457c8eadc378772bdd4fa74",
+	  "designation": "vidro farol",
+	  "width": 9,
+	  "height": 3,
+	  "length": 25,
+	  "weight": 6681,
+	  "quantity": 2
+	},
+	{
+	  "_id": "03b907e7feaf510c69093b7d",
+	  "designation": "bujão do carter",
+	  "width": 4,
+	  "height": 13,
+	  "length": 11,
+	  "weight": 47839,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d50a05c404303313e65f1646",
+	  "designation": "cárter de óleo",
+	  "width": 3,
+	  "height": 8,
+	  "length": 11,
+	  "weight": 9036,
+	  "quantity": 3
+	},
+	{
+	  "_id": "8bb31d8f38a4865af3556170",
+	  "designation": "interruptor de luz de stop",
+	  "width": 4,
+	  "height": 15,
+	  "length": 26,
+	  "weight": 37678,
+	  "quantity": 2
+	},
+	{
+	  "_id": "0e18daaeaa0cd482c62739eb",
+	  "designation": "soleira de porta",
+	  "width": 7,
+	  "height": 13,
+	  "length": 8,
+	  "weight": 18276,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a7a5a5044b8b78011834b3a8",
+	  "designation": "cabeçote",
+	  "width": 18,
+	  "height": 15,
+	  "length": 22,
+	  "weight": 2663,
+	  "quantity": 1
+	},
+	{
+	  "_id": "daeb47dcb9c01f08a26d9e3d",
+	  "designation": "sensores de estacionamento",
+	  "width": 8,
+	  "height": 12,
+	  "length": 43,
+	  "weight": 19600,
+	  "quantity": 2
+	},
+	{
+	  "_id": "bff29711279b9fe61ad2b31f",
+	  "designation": "defletor de discos de travão",
+	  "width": 8,
+	  "height": 2,
+	  "length": 30,
+	  "weight": 29404,
+	  "quantity": 3
+	},
+	{
+	  "_id": "0a70b4beb00090a8e16851c9",
+	  "designation": "regulador de força de travagem",
+	  "width": 1,
+	  "height": 10,
+	  "length": 30,
+	  "weight": 8107,
+	  "quantity": 3
+	},
+	{
+	  "_id": "54813aacd1ead5cfc4126938",
+	  "designation": "cabo de freio de mão",
+	  "width": 12,
+	  "height": 10,
+	  "length": 36,
+	  "weight": 74599,
+	  "quantity": 1
+	},
+	{
+	  "_id": "737ff0be94b62745edc5e601",
+	  "designation": "compressor",
+	  "width": 11,
+	  "height": 15,
+	  "length": 33,
+	  "weight": 17441,
+	  "quantity": 2
+	},
+	{
+	  "_id": "6f38313ddf2ec5b29deabde2",
+	  "designation": "guia",
+	  "width": 10,
+	  "height": 4,
+	  "length": 23,
+	  "weight": 19104,
+	  "quantity": 3
+	},
+	{
+	  "_id": "73e8c16ce7530ec68c926de4",
+	  "designation": "bomba central dos travões",
+	  "width": 7,
+	  "height": 10,
+	  "length": 2,
+	  "weight": 3255,
+	  "quantity": 3
+	},
+	{
+	  "_id": "aa75ad59618373c72f8d01b8",
+	  "designation": "cambota",
+	  "width": 7,
+	  "height": 7,
+	  "length": 8,
+	  "weight": 25066,
+	  "quantity": 3
+	},
+	{
+	  "_id": "67031ef3f5d3411429adbafa",
+	  "designation": "porta dianteira",
+	  "width": 30,
+	  "height": 28,
+	  "length": 66,
+	  "weight": 62619,
+	  "quantity": 1
+	},
+	{
+	  "_id": "bf3165d246bad2565333bad5",
+	  "designation": "sensores de estacionamento",
+	  "width": 8,
+	  "height": 27,
+	  "length": 36,
+	  "weight": 33468,
+	  "quantity": 1
+	},
+	{
+	  "_id": "565222dddba0c7033dc1efd1",
+	  "designation": "vela de ignição",
+	  "width": 10,
+	  "height": 8,
+	  "length": 10,
+	  "weight": 25621,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1a1cf0d6eff422bfdbc9f11b",
+	  "designation": "vela de ignição",
+	  "width": 6,
+	  "height": 11,
+	  "length": 39,
+	  "weight": 27778,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b64d325750a9863c31dc32c2",
+	  "designation": "porta traseira",
+	  "width": 17,
+	  "height": 26,
+	  "length": 59,
+	  "weight": 71814,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e4a5c67f16a6c5f611d180f4",
+	  "designation": "regulador de força de travagem",
+	  "width": 16,
+	  "height": 29,
+	  "length": 77,
+	  "weight": 39327,
+	  "quantity": 1
+	},
+	{
+	  "_id": "c0b9f82aac3e7d4f0daa6609",
+	  "designation": "vidro farol",
+	  "width": 1,
+	  "height": 5,
+	  "length": 11,
+	  "weight": 13282,
+	  "quantity": 3
+	},
+	{
+	  "_id": "f630065a4ac231eac0bc68c7",
+	  "designation": "farol principal",
+	  "width": 10,
+	  "height": 8,
+	  "length": 17,
+	  "weight": 5781,
+	  "quantity": 3
+	},
+	{
+	  "_id": "3d94a3dea7ab349b3d6ba108",
+	  "designation": "revestimento traseiro",
+	  "width": 22,
+	  "height": 11,
+	  "length": 20,
+	  "weight": 93459,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9b4cfac6372434aa6b16fbc2",
+	  "designation": "pinças de travão",
+	  "width": 5,
+	  "height": 9,
+	  "length": 25,
+	  "weight": 1875,
+	  "quantity": 3
+	},
+	{
+	  "_id": "6c0db3380b3dadd6e83e1e2a",
+	  "designation": "gancho de roboque",
+	  "width": 9,
+	  "height": 27,
+	  "length": 11,
+	  "weight": 33461,
+	  "quantity": 1
+	},
+	{
+	  "_id": "903a4fcbbc2d6e95acf6ae07",
+	  "designation": "mangueira de travão",
+	  "width": 12,
+	  "height": 6,
+	  "length": 25,
+	  "weight": 16290,
+	  "quantity": 2
+	},
+	{
+	  "_id": "dbf73d36e35844605154f6b4",
+	  "designation": "mangueira de travão",
+	  "width": 9,
+	  "height": 6,
+	  "length": 26,
+	  "weight": 571,
+	  "quantity": 3
+	},
+	{
+	  "_id": "176620ebfbdb9c2b2d9785db",
+	  "designation": "tambor de travão",
+	  "width": 1,
+	  "height": 2,
+	  "length": 17,
+	  "weight": 23435,
+	  "quantity": 3
+	},
+	{
+	  "_id": "7da46dc1cd71c4e29ea14c9c",
+	  "designation": "vidro de espelho",
+	  "width": 3,
+	  "height": 4,
+	  "length": 11,
+	  "weight": 24277,
+	  "quantity": 3
+	},
+	{
+	  "_id": "693945da6edd9c2348b58d94",
+	  "designation": "radiador",
+	  "width": 29,
+	  "height": 25,
+	  "length": 26,
+	  "weight": 2096,
+	  "quantity": 1
+	},
+	{
+	  "_id": "e81336420208680bf4a68851",
+	  "designation": "travão de estacionamento",
+	  "width": 15,
+	  "height": 12,
+	  "length": 74,
+	  "weight": 17565,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a55641af3d3ef9132456e8b7",
+	  "designation": "sensor de desgaste pastilha de travão",
+	  "width": 27,
+	  "height": 21,
+	  "length": 95,
+	  "weight": 15431,
+	  "quantity": 1
+	},
+	{
+	  "_id": "5012313866826db4c8fae030",
+	  "designation": "gancho de roboque",
+	  "width": 27,
+	  "height": 26,
+	  "length": 39,
+	  "weight": 61228,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a6c4d3e57cd076a0666272c2",
+	  "designation": "compressor",
+	  "width": 24,
+	  "height": 1,
+	  "length": 43,
+	  "weight": 50823,
+	  "quantity": 1
+	},
+	{
+	  "_id": "3cf8d69c7ea4fde609b1d858",
+	  "designation": "bujão do carter",
+	  "width": 3,
+	  "height": 9,
+	  "length": 47,
+	  "weight": 24430,
+	  "quantity": 2
+	},
+	{
+	  "_id": "f12d4a2adf0a92833db361c7",
+	  "designation": "espelho retrovisor",
+	  "width": 3,
+	  "height": 7,
+	  "length": 23,
+	  "weight": 30258,
+	  "quantity": 3
+	},
+	{
+	  "_id": "5abc5af1763f95ac5787bfb1",
+	  "designation": "porta dianteira",
+	  "width": 20,
+	  "height": 20,
+	  "length": 41,
+	  "weight": 66287,
+	  "quantity": 1
+	},
+	{
+	  "_id": "9534a31ebcced6a092a8c773",
+	  "designation": "turbocompressor",
+	  "width": 9,
+	  "height": 9,
+	  "length": 13,
+	  "weight": 12731,
+	  "quantity": 3
+	},
+	{
+	  "_id": "de2efc9f06ef53b081044fbc",
+	  "designation": "mangueira de travão",
+	  "width": 2,
+	  "height": 8,
+	  "length": 46,
+	  "weight": 46647,
+	  "quantity": 2
+	},
+	{
+	  "_id": "d18fde8ba720b9b6c3ceba0d",
+	  "designation": "apoios de motor",
+	  "width": 20,
+	  "height": 23,
+	  "length": 64,
+	  "weight": 76640,
+	  "quantity": 1
+	},
+	{
+	  "_id": "b91783706d8881476b61cf5f",
+	  "designation": "cabo de freio de mão",
+	  "width": 5,
+	  "height": 1,
+	  "length": 20,
+	  "weight": 6670,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e139bb94c632c2137e4e179e",
+	  "designation": "tambor de travão",
+	  "width": 13,
+	  "height": 7,
+	  "length": 34,
+	  "weight": 1063,
+	  "quantity": 1
+	},
+	{
+	  "_id": "8db35a175dbef11b545d01cc",
+	  "designation": "filtro de óleo",
+	  "width": 6,
+	  "height": 14,
+	  "length": 5,
+	  "weight": 24600,
+	  "quantity": 1
+	},
+	{
+	  "_id": "78c234ee3fa72da284e1c2eb",
+	  "designation": "soleira de porta",
+	  "width": 2,
+	  "height": 8,
+	  "length": 5,
+	  "weight": 31879,
+	  "quantity": 3
+	},
+	{
+	  "_id": "a152947de62a9da4da2a89f0",
+	  "designation": "maxilas do travão",
+	  "width": 1,
+	  "height": 12,
+	  "length": 44,
+	  "weight": 30571,
+	  "quantity": 2
+	},
+	{
+	  "_id": "ecef5b4a6168cfe9375c6fcb",
+	  "designation": "painel de radiador",
+	  "width": 10,
+	  "height": 3,
+	  "length": 16,
+	  "weight": 30459,
+	  "quantity": 3
+	},
+	{
+	  "_id": "ec7f46f23f705d1cbcc48a88",
+	  "designation": "guia",
+	  "width": 3,
+	  "height": 7,
+	  "length": 13,
+	  "weight": 4784,
+	  "quantity": 3
+	},
+	{
+	  "_id": "464b681553a8b27af1e1c4b5",
+	  "designation": "disco de travão",
+	  "width": 4,
+	  "height": 5,
+	  "length": 25,
+	  "weight": 12991,
+	  "quantity": 2
+	},
+	{
+	  "_id": "51090584559bcb21e35afa21",
+	  "designation": "correia dentada",
+	  "width": 8,
+	  "height": 29,
+	  "length": 35,
+	  "weight": 25619,
+	  "quantity": 1
+	},
+	{
+	  "_id": "964b8b132c34f80bd2a729ab",
+	  "designation": "radiador",
+	  "width": 9,
+	  "height": 4,
+	  "length": 15,
+	  "weight": 9862,
+	  "quantity": 3
+	},
+	{
+	  "_id": "66dd71e40a128c3a88902d9c",
+	  "designation": "correia dentada",
+	  "width": 1,
+	  "height": 4,
+	  "length": 47,
+	  "weight": 43101,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b0c1b3f19a45a27fa480c4de",
+	  "designation": "sensor de combustível",
+	  "width": 12,
+	  "height": 24,
+	  "length": 16,
+	  "weight": 86797,
+	  "quantity": 1
+	},
+	{
+	  "_id": "13e501c5c3c28c41a20e4a08",
+	  "designation": "tampa do radiador",
+	  "width": 9,
+	  "height": 12,
+	  "length": 6,
+	  "weight": 21197,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b745cfeba2e67f6067067091",
+	  "designation": "amortecedor de capô",
+	  "width": 7,
+	  "height": 6,
+	  "length": 21,
+	  "weight": 5743,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d15fd8b62d043c87c207fd80",
+	  "designation": "maxilas do travão",
+	  "width": 13,
+	  "height": 9,
+	  "length": 15,
+	  "weight": 318,
+	  "quantity": 2
+	},
+	{
+	  "_id": "44a51fc62208acf021416196",
+	  "designation": "cilindro de travão de roda",
+	  "width": 9,
+	  "height": 12,
+	  "length": 26,
+	  "weight": 7801,
+	  "quantity": 1
+	},
+	{
+	  "_id": "bb2f63902b82307b52aab0a8",
+	  "designation": "juntas da cabeça do motor",
+	  "width": 3,
+	  "height": 5,
+	  "length": 90,
+	  "weight": 88376,
+	  "quantity": 1
+	},
+	{
+	  "_id": "251417399fca2207ed99d233",
+	  "designation": "embreagem do ventilador",
+	  "width": 22,
+	  "height": 22,
+	  "length": 52,
+	  "weight": 48915,
+	  "quantity": 1
+	},
+	{
+	  "_id": "34946e7a6d6cabbe3775c652",
+	  "designation": "cárter de óleo",
+	  "width": 1,
+	  "height": 3,
+	  "length": 11,
+	  "weight": 21646,
+	  "quantity": 2
+	},
+	{
+	  "_id": "e2e3fb101e7430185335b794",
+	  "designation": "suporte da bateria",
+	  "width": 2,
+	  "height": 2,
+	  "length": 8,
+	  "weight": 19517,
+	  "quantity": 3
+	},
+	{
+	  "_id": "b0723f5940aed30c8db5a6f8",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 8,
+	  "height": 4,
+	  "length": 17,
+	  "weight": 29433,
+	  "quantity": 3
+	},
+	{
+	  "_id": "e073648fa5b4e3be73e88dae",
+	  "designation": "porta traseira",
+	  "width": 16,
+	  "height": 5,
+	  "length": 63,
+	  "weight": 98178,
+	  "quantity": 1
+	},
+	{
+	  "_id": "7c9ea47cb5d73be1cfb9de97",
+	  "designation": "kit de travões",
+	  "width": 8,
+	  "height": 4,
+	  "length": 20,
+	  "weight": 2501,
+	  "quantity": 3
+	},
+	{
+	  "_id": "d13cc3ae3a63211f42dc9e81",
+	  "designation": "kit de travões",
+	  "width": 28,
+	  "height": 22,
+	  "length": 55,
+	  "weight": 82477,
+	  "quantity": 1
+	},
+	{
+	  "_id": "0d2fa2caf2a5889b3b716730",
+	  "designation": "tampa do radiador",
+	  "width": 3,
+	  "height": 7,
+	  "length": 8,
+	  "weight": 23308,
+	  "quantity": 2
+	},
+	{
+	  "_id": "bc65f6f2f6a085434ebd4577",
+	  "designation": "sensor de combustível",
+	  "width": 8,
+	  "height": 6,
+	  "length": 24,
+	  "weight": 26555,
+	  "quantity": 3
+	},
+	{
+	  "_id": "3cf53edb6a2e177e623d6ce0",
+	  "designation": "pastilhas de travão",
+	  "width": 1,
+	  "height": 7,
+	  "length": 35,
+	  "weight": 15871,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b77d7f2998418e779caa9d58",
+	  "designation": "guia",
+	  "width": 15,
+	  "height": 10,
+	  "length": 8,
+	  "weight": 13965,
+	  "quantity": 2
+	},
+	{
+	  "_id": "bfedebb33739e16126cc5c35",
+	  "designation": "radiador",
+	  "width": 3,
+	  "height": 8,
+	  "length": 3,
+	  "weight": 48209,
+	  "quantity": 2
+	},
+	{
+	  "_id": "8ae42af5e63a720b197fbbe4",
+	  "designation": "tubo flexível de vácuo",
+	  "width": 4,
+	  "height": 4,
+	  "length": 26,
+	  "weight": 12362,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a9b53c94ffd594c45e60752f",
+	  "designation": "guia",
+	  "width": 30,
+	  "height": 14,
+	  "length": 61,
+	  "weight": 28785,
+	  "quantity": 1
+	},
+	{
+	  "_id": "270cb757277f746a99af44d3",
+	  "designation": "interruptor de luz de stop",
+	  "width": 6,
+	  "height": 5,
+	  "length": 30,
+	  "weight": 15004,
+	  "quantity": 2
+	},
+	{
+	  "_id": "395a6b74a6991dea5e1ad1b0",
+	  "designation": "embreagem do ventilador",
+	  "width": 13,
+	  "height": 13,
+	  "length": 20,
+	  "weight": 25860,
+	  "quantity": 2
+	},
+	{
+	  "_id": "516be87df224bedac92318bf",
+	  "designation": "cambota",
+	  "width": 10,
+	  "height": 5,
+	  "length": 39,
+	  "weight": 46368,
+	  "quantity": 2
+	},
+	{
+	  "_id": "24c1f1c9003948540e327f98",
+	  "designation": "bomba central dos travões",
+	  "width": 8,
+	  "height": 2,
+	  "length": 30,
+	  "weight": 25156,
+	  "quantity": 3
+	},
+	{
+	  "_id": "30e09082ae2b5dd8f404aa0c",
+	  "designation": "bomba hidráulica de abs",
+	  "width": 28,
+	  "height": 7,
+	  "length": 21,
+	  "weight": 34466,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6783e8fd7cb5fb3d74caae60",
+	  "designation": "disco de travão de alto rendimento",
+	  "width": 11,
+	  "height": 12,
+	  "length": 10,
+	  "weight": 49409,
+	  "quantity": 2
+	},
+	{
+	  "_id": "50d1ffb108c223b18502b40a",
+	  "designation": "espelho retrovisor",
+	  "width": 3,
+	  "height": 1,
+	  "length": 22,
+	  "weight": 30951,
+	  "quantity": 3
+	},
+	{
+	  "_id": "76f1232838b22b2862246f49",
+	  "designation": "cabo de freio de mão",
+	  "width": 10,
+	  "height": 14,
+	  "length": 29,
+	  "weight": 18712,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b4c33a0e3d2f4796e426870c",
+	  "designation": "porta dianteira",
+	  "width": 3,
+	  "height": 5,
+	  "length": 12,
+	  "weight": 42402,
+	  "quantity": 2
+	},
+	{
+	  "_id": "42238e4cd0eddfb752e12d5f",
+	  "designation": "cilindro de travão de roda",
+	  "width": 12,
+	  "height": 2,
+	  "length": 45,
+	  "weight": 4146,
+	  "quantity": 2
+	},
+	{
+	  "_id": "b32a4b77f967cacde457b106",
+	  "designation": "interruptor de luz de stop",
+	  "width": 3,
+	  "height": 9,
+	  "length": 34,
+	  "weight": 23582,
+	  "quantity": 1
+	},
+	{
+	  "_id": "a2f1d50034340dbd38680ba6",
+	  "designation": "válvula de admissão",
+	  "width": 1,
+	  "height": 5,
+	  "length": 6,
+	  "weight": 33245,
+	  "quantity": 2
+	},
+	{
+	  "_id": "9ae5775b7c18fd991a99614c",
+	  "designation": "espelho retrovisor",
+	  "width": 9,
+	  "height": 3,
+	  "length": 29,
+	  "weight": 1553,
+	  "quantity": 3
+	},
+	{
+	  "_id": "9aaba85891b4416885db3479",
+	  "designation": "vidro de espelho",
+	  "width": 1,
+	  "height": 8,
+	  "length": 15,
+	  "weight": 16029,
+	  "quantity": 3
+	},
+	{
+	  "_id": "c27d27eb9ba76f7aa2d74957",
+	  "designation": "regulador de força de travagem",
+	  "width": 4,
+	  "height": 3,
+	  "length": 50,
+	  "weight": 68439,
+	  "quantity": 1
+	},
+	{
+	  "_id": "fd5ceceaf96e8f56d7062cbb",
+	  "designation": "soleira de porta",
+	  "width": 2,
+	  "height": 8,
+	  "length": 19,
+	  "weight": 18447,
+	  "quantity": 2
+	},
+	{
+	  "_id": "a5bde1653cd856d458f14565",
+	  "designation": "painel lateral",
+	  "width": 12,
+	  "height": 8,
+	  "length": 23,
+	  "weight": 47560,
+	  "quantity": 2
+	},
+	{
+	  "_id": "26d8a3bb213092f3f88c325c",
+	  "designation": "bomba de vácuo",
+	  "width": 3,
+	  "height": 7,
+	  "length": 28,
+	  "weight": 21677,
+	  "quantity": 3
+	},
+	{
+	  "_id": "a88bf336e6725f14678d71fd",
+	  "designation": "árvore de cames",
+	  "width": 4,
+	  "height": 19,
+	  "length": 70,
+	  "weight": 14937,
+	  "quantity": 1
+	},
+	{
+	  "_id": "6055201a85967fa93b3423dd",
+	  "designation": "vidro lateral",
+	  "width": 2,
+	  "height": 1,
+	  "length": 18,
+	  "weight": 15780,
+	  "quantity": 3
+	},
+	{
+	  "_id": "1469a826e9c578839586ac7a",
+	  "designation": "sensores de estacionamento",
+	  "width": 15,
+	  "height": 6,
+	  "length": 42,
+	  "weight": 22785,
+	  "quantity": 2
+	}
+  ]
