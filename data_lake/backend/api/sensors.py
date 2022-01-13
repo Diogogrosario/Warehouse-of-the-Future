@@ -118,7 +118,7 @@ class DeviceInformation(Resource):
 
         Returns data about the sensor that has the passed "id".
         """
-        document = sensorsCollection.find({"_id": ObjectId(id)})
+        document = sensorsCollection.find_one({"_id": ObjectId(id)})
 
         return json.loads(json_util.dumps(document))
 

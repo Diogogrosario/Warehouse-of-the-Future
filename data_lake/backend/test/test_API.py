@@ -25,60 +25,60 @@ class APITesting(TestCase):
     def populateTestDatabase(self):
         self.populateEmployees()
         self.populateGlobalData()
-        # self.populateSensorData()
+        self.populateSensorData()
         # self.populateLayouts()
 
     def populateSensorData(self):
-        devices_data = [
+        sensors_data = [
             {
                 "_id": ObjectId("b07f1f77bcf86cd799439011"),
-                "bucket": ObjectId("107f1f77bcf86cd799439011"),
-                "movement_sensor": [
-                    datetime.datetime(2022, 1, 2, 8, 35, 3),
-                    datetime.datetime(2022, 1, 2, 8, 40, 5),
-                    datetime.datetime(2022, 1, 2, 8, 50, 45),
+                "device": ObjectId("107f1f77bcf86cd799439011"),
+                "movement_records": [
+                    str(datetime.datetime(2022, 1, 2, 8, 35, 3)),
+                    str(datetime.datetime(2022, 1, 2, 8, 40, 5)),
+                    str(datetime.datetime(2022, 1, 2, 8, 50, 45)),
                 ],
                 "staff_contacts": [
                     {
-                        "time": datetime.datetime(2022, 1, 2, 8, 35, 3),
+                        "time": str(datetime.datetime(2022, 1, 2, 8, 35, 3)),
                         "staff_id": ObjectId("107f1f77bcf86cd799439012")
                     },
                     {
-                        "time": datetime.datetime(2022, 1, 2, 8, 40, 5),
+                        "time": str(datetime.datetime(2022, 1, 2, 8, 40, 5)),
                         "staff_id": ObjectId("107f1f77bcf86cd799439013")
                     }
                 ]
             },
             {
                 "_id": ObjectId("b07f1f77bcf86cd799439012"),
-                "bucket": ObjectId("907f1f77bcf86cd799439011"),
-                "movement_sensor": [
-                    datetime.datetime(2022, 1, 3, 8, 35, 3),
-                    datetime.datetime(2022, 1, 3, 8, 40, 5),
-                    datetime.datetime(2022, 1, 3, 8, 50, 45),
-                    datetime.datetime(2022, 1, 3, 9, 50, 1),
-                    datetime.datetime(2022, 1, 3, 12, 50, 10),
-                    datetime.datetime(2022, 1, 5, 8, 50, 45),
-                    datetime.datetime(2022, 1, 5, 9, 50, 1),
-                    datetime.datetime(2022, 1, 5, 12, 50, 10),
+                "device": ObjectId("907f1f77bcf86cd799439011"),
+                "movement_records": [
+                    str(datetime.datetime(2022, 1, 3, 8, 35, 3)),
+                    str(datetime.datetime(2022, 1, 3, 8, 40, 5)),
+                    str(datetime.datetime(2022, 1, 3, 8, 50, 45)),
+                    str(datetime.datetime(2022, 1, 3, 9, 50, 1)),
+                    str(datetime.datetime(2022, 1, 3, 12, 50, 10)),
+                    str(datetime.datetime(2022, 1, 5, 8, 50, 45)),
+                    str(datetime.datetime(2022, 1, 5, 9, 50, 1)),
+                    str(datetime.datetime(2022, 1, 5, 12, 50, 10)),
                 ],
                 "staff_contacts": [
                     {
-                        "time": datetime.datetime(2022, 1, 3, 8, 35, 3),
+                        "time": str(datetime.datetime(2022, 1, 3, 8, 35, 3)),
                         "staff_id": ObjectId("907f1f77bcf86cd799439012")
                     },
                     {
-                        "time": datetime.datetime(2022, 1, 4, 9, 55, 0),
+                        "time": str(datetime.datetime(2022, 1, 4, 9, 55, 0)),
                         "staff_id": ObjectId("907f1f77bcf86cd799439012")
                     },
                     {
-                        "time": datetime.datetime(2022, 1, 5, 10, 35, 25),
+                        "time": str(datetime.datetime(2022, 1, 5, 10, 35, 25)),
                         "staff_id": ObjectId("907f1f77bcf86cd799439012")
                     },
                 ]
             }
         ]
-        self.db.WoF.Devices.insert_many(devices_data)
+        self.db.WoF.Sensors.insert_many(sensors_data)
 
     def populateGlobalData(self):
         global_data = [
@@ -226,7 +226,7 @@ class APITesting(TestCase):
     def tearDown(self):
         self.db.WoF.Employees.drop()
         self.db.WoF.GlobalData.drop()
-        self.db.WoF.Devices.drop()
+        self.db.WoF.Sensors.drop()
 
     def create_app(self):
         app = Flask(__name__)
@@ -253,16 +253,18 @@ class APITesting(TestCase):
         global_tests.testEndpoint("cart")
         global_tests.testEndpoint("orchestrator")
 
-    # def test_sensors_endpoint(self):
-    #     sensor_tests = SensorsTests(self, self.client)
-    #     sensor_tests.testRoot()
-    #     sensor_tests.testSpecificSensor("b07f1f77bcf86cd799439012")
-    #     sensor_tests.testSensorMovements("b07f1f77bcf86cd799439012")
-    #     sensor_tests.testSensorMovementsWithTime("b07f1f77bcf86cd799439012",
-    #                                              "2022-01-03", "2022-01-04")
-    #     sensor_tests.testSensorTimestamps("b07f1f77bcf86cd799439012")
-    #     sensor_tests.testSensorTimestampsWithTime("b07f1f77bcf86cd799439012",
-    #                                               "2022-01-03", "2022-01-04")
+    def test_sensors_endpoint(self):
+        sensor_tests = SensorsTests(self, self.client)
+        sensor_tests.testRoot()
+        sensor_tests.testSpecificSensor("b07f1f77bcf86cd799439012")
+        sensor_tests.testSensorMovements("b07f1f77bcf86cd799439012")
+        sensor_tests.testSensorMovementsWithTime("b07f1f77bcf86cd799439012",
+                                                 "2022-01-03", "2022-01-04")
+        sensor_tests.testSensorStaffContacts("b07f1f77bcf86cd799439012")
+        sensor_tests.testSensorStaffContactsWithTime(
+            "b07f1f77bcf86cd799439012",
+            "2022-01-03", "2022-01-04"
+        )
 
     # def test_layout_endpoint(self):
     #     layout_tests = LayoutTests(self, self.client)
