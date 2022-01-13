@@ -16,7 +16,7 @@ class StaffPBT():
         for staff in staff_data:
             birth_date = datetime.strptime(
                 staff['birth_date'],
-                '%Y-%m-%dT%H:%M:%S%z').replace(tzinfo=None)
+                '%Y-%m-%d %H:%M:%S').replace(tzinfo=None)
             diff_years = int((today - birth_date).days / 365.2425)
             self.TestClass.assertTrue(diff_years >= queryMinimumAge)
 

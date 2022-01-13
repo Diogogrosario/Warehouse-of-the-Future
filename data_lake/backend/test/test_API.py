@@ -25,9 +25,9 @@ from .stock_unit_tests import StockTests
 class APITesting(TestCase):
     def populateTestDatabase(self):
         self.populateEmployees()
-        self.populateGlobalData()
-        self.populateSensorData()
-        self.populateLayouts()
+        # self.populateGlobalData()
+        # self.populateSensorData()
+        # self.populateLayouts()
 
     def populateSensorData(self):
         devices_data = [
@@ -108,31 +108,31 @@ class APITesting(TestCase):
             {
                 "_id": ObjectId("a07f1f77bcf86cd799439011"),
                 "name": "Alcides Cabides",
-                "birth_date": datetime.datetime(2000, 10, 30),
+                "birth_date": str(datetime.datetime(2000, 10, 30)),
                 "height": 175
             },
             {
                 "_id": ObjectId("a07f1f77bcf86cd799439012"),
                 "name": "Rosa Mota",
-                "birth_date": datetime.datetime(1970, 5, 24),
+                "birth_date": str(datetime.datetime(1970, 5, 24)),
                 "height": 163
             },
             {
                 "_id": ObjectId("a07f1f77bcf86cd799439013"),
                 "name": "Deolinda Gomes",
-                "birth_date": datetime.datetime(1975, 3, 2),
+                "birth_date": str(datetime.datetime(1975, 3, 2)),
                 "height": 187
             },
             {
                 "_id": ObjectId("a07f1f77bcf86cd799439014"),
                 "name": "Joao de Deus",
-                "birth_date": datetime.datetime(1980, 1, 1),
+                "birth_date": str(datetime.datetime(1980, 1, 1)),
                 "height": 172
             },
             {
                 "_id": ObjectId("a07f1f77bcf86cd799439015"),
                 "name": "Jorge Jesus",
-                "birth_date": datetime.datetime(1990, 8, 11),
+                "birth_date": str(datetime.datetime(1990, 8, 11)),
                 "height": 186
             },
         ]
@@ -255,52 +255,52 @@ class APITesting(TestCase):
         staff_tests.testWrongRequest()
         staff_tests.testWrongURLParam("abc")
 
-    def test_globalData_enpoint(self):
-        global_tests = GlobalDataTests(self, self.client)
-        global_tests.testWithTimeBefore("2021-01-01")
-        global_tests.testWithTimeBeforeAndAfter("2022-01-02", "2022-01-03")
-        global_tests.testWrongRequest()
+    # def test_globalData_enpoint(self):
+    #     global_tests = GlobalDataTests(self, self.client)
+    #     global_tests.testWithTimeBefore("2021-01-01")
+    #     global_tests.testWithTimeBeforeAndAfter("2022-01-02", "2022-01-03")
+    #     global_tests.testWrongRequest()
 
-    def test_sensors_endpoint(self):
-        sensor_tests = SensorsTests(self, self.client)
-        sensor_tests.testRoot()
-        sensor_tests.testSpecificSensor("b07f1f77bcf86cd799439012")
-        sensor_tests.testSensorMovements("b07f1f77bcf86cd799439012")
-        sensor_tests.testSensorMovementsWithTime("b07f1f77bcf86cd799439012",
-                                                 "2022-01-03", "2022-01-04")
-        sensor_tests.testSensorTimestamps("b07f1f77bcf86cd799439012")
-        sensor_tests.testSensorTimestampsWithTime("b07f1f77bcf86cd799439012",
-                                                  "2022-01-03", "2022-01-04")
+    # def test_sensors_endpoint(self):
+    #     sensor_tests = SensorsTests(self, self.client)
+    #     sensor_tests.testRoot()
+    #     sensor_tests.testSpecificSensor("b07f1f77bcf86cd799439012")
+    #     sensor_tests.testSensorMovements("b07f1f77bcf86cd799439012")
+    #     sensor_tests.testSensorMovementsWithTime("b07f1f77bcf86cd799439012",
+    #                                              "2022-01-03", "2022-01-04")
+    #     sensor_tests.testSensorTimestamps("b07f1f77bcf86cd799439012")
+    #     sensor_tests.testSensorTimestampsWithTime("b07f1f77bcf86cd799439012",
+    #                                               "2022-01-03", "2022-01-04")
 
-    def test_layout_endpoint(self):
-        layout_tests = LayoutTests(self, self.client)
-        layout_tests.testSimple()
-        layout_tests.testWithTimeBefore("2022-01-01")
-        layout_tests.testWithTimeAfter("2020-01-01")
-        layout_tests.testWithTimeBeforeAndAfter("2022-01-02", "2022-01-03")
+    # def test_layout_endpoint(self):
+    #     layout_tests = LayoutTests(self, self.client)
+    #     layout_tests.testSimple()
+    #     layout_tests.testWithTimeBefore("2022-01-01")
+    #     layout_tests.testWithTimeAfter("2020-01-01")
+    #     layout_tests.testWithTimeBeforeAndAfter("2022-01-02", "2022-01-03")
 
-    def test_manifest_endpoint(self):
-        manifest_tests = ManifestTests(self, self.client)
-        manifest_tests.testReposition()
-        manifest_tests.testRepositionWithTimeBefore("2022-01-01")
-        manifest_tests.testRepositionWithTimeAfter("2020-01-01")
-        manifest_tests.testRepositionWithTimeBeforeAndAfter(
-            "2022-01-02", "2022-01-03")
-        manifest_tests.testCollection()
-        manifest_tests.testCollectionWithTimeBefore("2022-01-01")
-        manifest_tests.testCollectionWithTimeAfter("2020-01-01")
-        manifest_tests.testCollectionWithTimeBeforeAndAfter(
-            "2022-01-02", "2022-01-03")
-        manifest_tests.testCollectionWithStaffId(
-            "0e1544f0b3d31188f2c7de9b")
-        manifest_tests.testCollectionWithAll(
-            "2022-01-02", "2022-01-03",
-            "0e1544f0b3d31188f2c7de9b")
+    # def test_manifest_endpoint(self):
+    #     manifest_tests = ManifestTests(self, self.client)
+    #     manifest_tests.testReposition()
+    #     manifest_tests.testRepositionWithTimeBefore("2022-01-01")
+    #     manifest_tests.testRepositionWithTimeAfter("2020-01-01")
+    #     manifest_tests.testRepositionWithTimeBeforeAndAfter(
+    #         "2022-01-02", "2022-01-03")
+    #     manifest_tests.testCollection()
+    #     manifest_tests.testCollectionWithTimeBefore("2022-01-01")
+    #     manifest_tests.testCollectionWithTimeAfter("2020-01-01")
+    #     manifest_tests.testCollectionWithTimeBeforeAndAfter(
+    #         "2022-01-02", "2022-01-03")
+    #     manifest_tests.testCollectionWithStaffId(
+    #         "0e1544f0b3d31188f2c7de9b")
+    #     manifest_tests.testCollectionWithAll(
+    #         "2022-01-02", "2022-01-03",
+    #         "0e1544f0b3d31188f2c7de9b")
 
-    def test_stock_endpoint(self):
-        stock_tests = StockTests(self, self.client)
-        stock_tests.testRoot()
-        stock_tests.testStockWithId("9810484eb5c7829c605fc915")
+    # def test_stock_endpoint(self):
+    #     stock_tests = StockTests(self, self.client)
+    #     stock_tests.testRoot()
+    #     stock_tests.testStockWithId("9810484eb5c7829c605fc915")
 
     # ----------------------------------------------------------
     # Property Based Tests
@@ -326,81 +326,81 @@ class APITesting(TestCase):
 
     # GlobalData
 
-    @settings(max_examples=15, deadline=None)
-    @given(st.tuples(st.datetimes(), st.datetimes()).filter(
-        lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
-    def test_global_endpoint_PBT(self, times):
-        global_tests = GlobalPBT(self, self.client)
-        (time_before, time_after) = times
-        global_tests.testGlobalDataWithTimeBeforeAndAfter(
-            time_before,
-            time_after
-        )
+    # @settings(max_examples=15, deadline=None)
+    # @given(st.tuples(st.datetimes(), st.datetimes()).filter(
+    #     lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
+    # def test_global_endpoint_PBT(self, times):
+    #     global_tests = GlobalPBT(self, self.client)
+    #     (time_before, time_after) = times
+    #     global_tests.testGlobalDataWithTimeBeforeAndAfter(
+    #         time_before,
+    #         time_after
+    #     )
 
     # Sensors
 
-    @settings(max_examples=15, deadline=None)
-    @given(sensor_id=st.sampled_from([
-        "b07f1f77bcf86cd799439011",
-        "b07f1f77bcf86cd799439012"]),
-        times=st.tuples(st.datetimes(), st.datetimes()).filter(
-            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
-    def test_sensors_endpoint_movements_PBT(self, sensor_id, times):
-        global_tests = SensorsPBT(self, self.client)
-        (time_before, time_after) = times
-        global_tests.testSensorsMovementWithTime(
-            sensor_id,
-            time_before,
-            time_after
-        )
+    # @settings(max_examples=15, deadline=None)
+    # @given(sensor_id=st.sampled_from([
+    #     "b07f1f77bcf86cd799439011",
+    #     "b07f1f77bcf86cd799439012"]),
+    #     times=st.tuples(st.datetimes(), st.datetimes()).filter(
+    #         lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
+    # def test_sensors_endpoint_movements_PBT(self, sensor_id, times):
+    #     global_tests = SensorsPBT(self, self.client)
+    #     (time_before, time_after) = times
+    #     global_tests.testSensorsMovementWithTime(
+    #         sensor_id,
+    #         time_before,
+    #         time_after
+    #     )
 
-    @settings(max_examples=15, deadline=None)
-    @given(sensor_id=st.sampled_from([
-        "b07f1f77bcf86cd799439011",
-        "b07f1f77bcf86cd799439012"]),
-        times=st.tuples(st.datetimes(), st.datetimes()).filter(
-            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
-    def test_sensors_endpoint_timestamps_PBT(self, sensor_id, times):
-        global_tests = SensorsPBT(self, self.client)
-        (time_before, time_after) = times
-        global_tests.testSensorsTimestampWithTime(
-            sensor_id,
-            time_before,
-            time_after
-        )
+    # @settings(max_examples=15, deadline=None)
+    # @given(sensor_id=st.sampled_from([
+    #     "b07f1f77bcf86cd799439011",
+    #     "b07f1f77bcf86cd799439012"]),
+    #     times=st.tuples(st.datetimes(), st.datetimes()).filter(
+    #         lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
+    # def test_sensors_endpoint_timestamps_PBT(self, sensor_id, times):
+    #     global_tests = SensorsPBT(self, self.client)
+    #     (time_before, time_after) = times
+    #     global_tests.testSensorsTimestampWithTime(
+    #         sensor_id,
+    #         time_before,
+    #         time_after
+    #     )
 
     # Layouts
 
-    @settings(max_examples=15, deadline=None)
-    @given(st.tuples(st.datetimes(), st.datetimes()).filter(
-        lambda x: x[0] < x[1]
-        and x[0].year > 999
-        and x[1].year > 999
-        and x[0].year != x[1].year
-        and x[0].month != x[1].month
-        and x[0].day != x[1].day))
-    def test_layout_endpoint_PBT(self, times):
-        global_tests = LayoutPBT(self, self.client)
-        time_before, time_after = times
-        global_tests.testLayoutWithTimeBeforeAndAfter(
-            time_before,
-            time_after
-        )
+    # @settings(max_examples=15, deadline=None)
+    # @given(st.tuples(st.datetimes(), st.datetimes()).filter(
+    #     lambda x: x[0] < x[1]
+    #     and x[0].year > 999
+    #     and x[1].year > 999
+    #     and x[0].year != x[1].year
+    #     and x[0].month != x[1].month
+    #     and x[0].day != x[1].day))
+    # def test_layout_endpoint_PBT(self, times):
+    #     global_tests = LayoutPBT(self, self.client)
+    #     time_before, time_after = times
+    #     global_tests.testLayoutWithTimeBeforeAndAfter(
+    #         time_before,
+    #         time_after
+    #     )
 
     # Manifests
 
-    @settings(max_examples=15, deadline=None)
-    @given(st.tuples(st.datetimes(), st.datetimes()).filter(
-        lambda x: x[0] < x[1]
-        and x[0].year > 999
-        and x[1].year > 999
-        and x[0].year != x[1].year
-        and x[0].month != x[1].month
-        and x[0].day != x[1].day))
-    def test_manifest_endpoint_PBT(self, times):
-        global_tests = ManifestPBT(self, self.client)
-        time_before, time_after = times
-        global_tests.testManifestWithTimeBeforeAndAfter(
-            time_before,
-            time_after
-        )
+    # @settings(max_examples=15, deadline=None)
+    # @given(st.tuples(st.datetimes(), st.datetimes()).filter(
+    #     lambda x: x[0] < x[1]
+    #     and x[0].year > 999
+    #     and x[1].year > 999
+    #     and x[0].year != x[1].year
+    #     and x[0].month != x[1].month
+    #     and x[0].day != x[1].day))
+    # def test_manifest_endpoint_PBT(self, times):
+    #     global_tests = ManifestPBT(self, self.client)
+    #     time_before, time_after = times
+    #     global_tests.testManifestWithTimeBeforeAndAfter(
+    #         time_before,
+    #         time_after
+    #     )
