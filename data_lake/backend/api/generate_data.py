@@ -1,329 +1,39 @@
-from flask_restx import fields, Namespace, Resource
+from flask_restx import Namespace, Resource
 import random
 import datetime
-import uuid
 import names
 import json
+import secrets
 from .utils import utils
+from bson.objectid import ObjectId
+from bson import json_util
 
 namespace = Namespace(
     "GenerateData",
     path="/generate_data",
-    description="Generate random data to simulate the warehouse"
+    description="Generate random data to simulate the warehouse.\
+        This endpoint is only used by the populate worker."
 )
 
-# ------------------------------------------------------------------------------
-# Models
-# ------------------------------------------------------------------------------
+available_item_names = []
 
-# Items
-
-item_attributes = namespace.model("Item", {
-    "id": fields.String(
-        required=True,
-        description="Id of the item"
-    ),
-    "designation": fields.String(
-        required=True,
-        description="Name of the item"
-    ),
-    "width": fields.Float(
-        required=True,
-        description="Width of the item, in cm"
-    ),
-    "height": fields.Float(
-        required=True,
-        description="Height of the item, in cm"
-    ),
-    "length": fields.Float(
-        required=True,
-        description="Length of the item, in cm"
-    ),
-    "weight": fields.Float(
-        required=True,
-        description="Weight of the item, in g"
-    ),
-    "quantity": fields.Integer(
-        required=True,
-        description="Quantity of the item"
-    ),
-    "bucket_id": fields.String(
-        required=True,
-        description="Id of the item's bucket"
-    ),
-})
-
-item_in_manifest_attributes = namespace.model("ItemInManifest", {
-    "item_id": fields.String(
-        required=True,
-        description="Id of the item"
-    ),
-    "quantity": fields.Integer(
-        required=True,
-        description="Quantity of the item"
-    ),
-})
-
-available_item_names = [
-    # items relacionados com o sistema de travagem
-    "pastilhas de travão", "kit de travões", "maxilas do travão",
-    "pinças de travão", "cilindro de travão de roda", "tubo flexível de vácuo",
-    "bomba hidráulica de abs", "bomba central dos travões",
-    "interruptor de luz de stop", "regulador de força de travagem",
-    "sensor de desgaste pastilha de travão", "defletor de discos de travão",
-    "tambor de travão", "disco de travão", "eixo do travão de estacionamento",
-    "mangueira de travão", "bomba de vácuo",
-    "disco de travão de alto rendimento", "travão de estacionamento",
-    "sensor de abs", "servo freio", "anel de sensor de abs",
-    "cabo de freio de mão",
-
-    # items relacionados com o motor
-    "cirtuito elétrico do motor", "bujão do carter", "cárter de óleo",
-    "radiador de óleo", "tubo de óleo", "compressor",
-    "correntes de distribuição", "correia dentada",
-    "correia trapezoidal estriada", "amortecedor de vibrações",
-    "juntas da cabeça do motor", "válvula de admissão", "cabeçote",
-    "filtro de óleo", "filtro de ar", "anilhas da cambota", "cambota",
-    "turbocompressor", "embreagem do ventilador", "tampa do radiador",
-    "bobila de ignição", "radiador", "sensor de combustível",
-    "vela de ignição", "árvore de cames", "apoios de motor", "guia",
-    "vareta de óleo", "bomba de água",
-
-    # items relacionados com a carroçaria
-    "espelho retrovisor", "guarda-lamas", "farol principal",
-    "luz de travão suplementar", "luz de stop", "para-choques",
-    "gancho de roboque", "painel de radiador", "amortecedor de capô",
-    "vidro de espelho", "sensores de estacionamento", "vidro farol",
-    "faróis de xénon", "borracha de vidro", "vidro lateral",
-    "soleira de porta", "painel lateral", "revestimento traseiro",
-    "porta dianteira", "porta traseira", "para-brisas", "suporte da bateria",
-    "eixo", "fecho central",
-]
-
-# Manifest
-
-manifest_attributes = namespace.model("Manifest", {
-    "id": fields.String(
-        required=True,
-        description="Id of the manifest"
-    ),
-    "time": fields.DateTime(
-        required=True,
-        description="The manifest time"
-    ),
-    "staff_id": fields.String(
-        required=True,
-        description="Id of the operator who makes the collection of items"
-    ),
-    "items": fields.List(
-        fields.Nested(item_in_manifest_attributes),
-        required=True,
-        description="Manifest Items"
-    ),
-})
-
-# Staff
-
-staff_attributes = namespace.model("Staff", {
-    "id": fields.String(
-        required=True,
-        description="Id of the employee"
-    ),
-    "name": fields.String(
-        required=True,
-        description="Name of the employee"
-    ),
-    "height": fields.Float(
-        required=True,
-        description="Height of the employee, in cm."
-    ),
-    "birth_date": fields.DateTime(
-        required=True,
-        description="Birth date of the employee"
-    ),
-})
-
-# Sensors
-
-staff_contact_in_sensor_attributes = namespace.model("StaffContactInSensor", {
-    "time": fields.DateTime(
-        required=True,
-        description="Timestamp of when the sensor registered the contact"
-    ),
-    "staff_id": fields.String(
-        required=True,
-        description="Id of the operator that was next to the sensor"
-    )
-})
-
-sensor_attributes = namespace.model("Sensor", {
-    "id": fields.String(
-        required=True,
-        description="Id of the sensor"
-    ),
-    "bucket": fields.String(
-        required=True,
-        description="Id of the associated bucket"
-    ),
-    "movement_records": fields.List(
-        fields.DateTime,
-        required=True,
-        description="Timestamps of the movement detections."
-    ),
-    "staff_contacts": fields.List(
-        fields.Nested(staff_contact_in_sensor_attributes),
-        required=True,
-        description="Array of objects with timestamp and staff_id, that"
-                    + " represents when an operator was next to the sensor."
-    )
-})
-
-# Layout
-
-bucket_attributes = namespace.model("Bucket", {
-    "id": fields.String(
-        required=True,
-        description="Id of the bucket"
-    ),
-    "width": fields.Float(
-        required=True,
-        description="Width of the bucket, in cm"
-    ),
-    "height": fields.Float(
-        required=True,
-        description="Height of the bucket, in cm"
-    ),
-    "length": fields.Float(
-        required=True,
-        description="Length of the bucket, in cm"
-    ),
-    "position": fields.List(
-        fields.Integer,
-        required=True,
-        description="Coordinates of the bucket, "
-                    + "in the form of list ([x, y, z])"
-    ),
-    "item_id": fields.String(
-        required=True,
-        description="Id of the item inside the bucket"
-    ),
-    "quantity": fields.Integer(
-        required=True,
-        description="Quantity of the item that is inside the bucket"
-    ),
-    "shelf_id": fields.String(
-        required=True,
-        description="Id of the shelf where the bucket is located"
-    )
-})
-
-shelf_attributes = namespace.model("Shelf", {
-    "id": fields.String(
-        required=True,
-        description="Id of the shelf"
-    ),
-    "height": fields.Float(
-        required=True,
-        description="Height of the shelf in relation to the gound, in cm"
-    ),
-    "rack_id": fields.String(
-        required=True,
-        description="Id of the rack where the shelf is located"
-    ),
-})
-
-rack_attributes = namespace.model("Rack", {
-    "id": fields.String(
-        required=True,
-        description="Id of the rack"
-    ),
-    "width": fields.Float(
-        required=True,
-        description="Width of the rack, in cm"
-    ),
-})
-
-layout_attributes = namespace.model("Layout", {
-    "time": fields.DateTime(
-        required=True,
-        description="The current time"
-    ),
-    "racks": fields.List(
-        fields.Nested(rack_attributes),
-        required=True,
-        description="Racks present in the warehouse"
-    ),
-    "shelves": fields.List(
-        fields.Nested(shelf_attributes),
-        required=True,
-        description="Shelves present in the warehouse"
-    ),
-    "buckets": fields.List(
-        fields.Nested(bucket_attributes),
-        required=True,
-        description="Buckets present in the warehouse"
-    ),
-    "sensors": fields.List(
-        fields.Nested(sensor_attributes),
-        required=True,
-        description="Sensors present in the warehouse"
-    ),
-    "items": fields.List(
-        fields.Nested(item_attributes),
-        required=True,
-        description="Items present in the warehouse"
-    )
-})
-
-# Cart
-
-cart_attributes = namespace.model("Cart", {
-    "start_position": fields.List(
-        fields.Integer,
-        required=True,
-        description="Coordinates of the cart start position, "
-                    + "in the form of list ([x, y])"
-    ),
-    "speed": fields.Float(
-        required=True,
-        description="Speed of the cart, in cm/min"
-    ),
-    "start_time": fields.String(
-        required=True,
-        description="The time of the day when the cart starts"
-    ),
-    "end_time": fields.String(
-        required=True,
-        description="The time of the day when the cart stops"
-    ),
-})
-
-# Orchestrator
-
-orchestrator_attributes = namespace.model("Orchestrator", {
-    "position": fields.List(
-        fields.Integer,
-        required=True,
-        description="Coordinates of the orchestrator, "
-                    + "in the form of list ([x, y, z])"
-    )
-})
+with open("./api/static_files/items_ids.json", "r") as file:
+    available_item_names = json.load(file)
 
 
 # ------------------------------------------------------------------------------
 # Manifests
 # ------------------------------------------------------------------------------
 
-def generate_items_for_manifest(number_of_items=None):
+def generate_items_for_manifest():
     manifest_items = []
-    items_ids = get_static_items_ids()
 
-    if (number_of_items is None):
-        number_of_items = random.randint(1, 4)
+    static_items = get_static_items_data()
+    items_ids = [item["_id"] for item in static_items]
 
     selected_items_indexes = random.sample(
         range(0, len(items_ids)-1),
-        number_of_items
+        random.randint(1, 4)
     )
 
     for index in selected_items_indexes:
@@ -332,11 +42,11 @@ def generate_items_for_manifest(number_of_items=None):
         quantity = random.randint(1, 3)
 
         manifest_items.append({
-            "item_id": id,
+            "item_id": ObjectId(id),
             "quantity": quantity
         })
 
-    return manifest_items
+    return json.loads(json_util.dumps(manifest_items))
 
 
 def get_static_items_ids():
@@ -346,7 +56,6 @@ def get_static_items_ids():
 
 @namespace.route("/manifest")
 class Manifest(Resource):
-    @namespace.marshal_list_with(manifest_attributes)
     def get(self):
         """
         Returns a random manifest.
@@ -356,13 +65,13 @@ class Manifest(Resource):
         employees = get_static_employee_data()
 
         manifest = {
-            "id": uuid.uuid4(),
-            "time": datetime.datetime.now(),
-            "staff_id": random.choice(employees)["id"],
+            "_id": ObjectId(secrets.token_hex(12)),
+            "time": str(datetime.datetime.now()),
+            "staff_id": random.choice(employees)["_id"],
             "items": items
         }
 
-        return manifest
+        return json.loads(json_util.dumps(manifest))
 
 
 # ------------------------------------------------------------------------------
@@ -371,16 +80,16 @@ class Manifest(Resource):
 
 def generate_employee_data(id=None):
     if (id is None):
-        id = uuid.uuid4()
+        id = ObjectId(secrets.token_hex(12))
 
     employee = {
-        "id": id,
+        "_id": id,
         "name": names.get_full_name(),
         "height": round(random.uniform(140, 220)),
-        "birth_date": utils.get_random_birth_date(),
+        "birth_date": str(utils.get_random_birth_date()),
     }
 
-    return employee
+    return json.loads(json_util.dumps(employee))
 
 
 def get_static_employee_data():
@@ -393,7 +102,6 @@ GENERATE_RANDOM_STAFF = False
 
 @namespace.route("/staff")
 class Staff(Resource):
-    @namespace.marshal_list_with(staff_attributes)
     def get(self):
         """
         Returns a list with all the employees.
@@ -407,7 +115,35 @@ class Staff(Resource):
         else:
             employees = get_static_employee_data()
 
-        return employees
+        # for employee in employees:
+        #     employee["_id"] = ObjectId(employee["_id"])
+
+        return json.loads(json_util.dumps(employees))
+
+
+# ------------------------------------------------------------------------------
+# Items
+# ------------------------------------------------------------------------------
+
+
+def get_static_items_data():
+    with open("./api/static_files/items.json", "r") as file:
+        return json.load(file)
+
+
+@namespace.route("/items")
+class Item(Resource):
+    def get(self):
+        """
+        Returns a list with all the items.
+        """
+
+        items = get_static_items_data()
+
+        for item in items:
+            item["_id"] = ObjectId(item["_id"])
+
+        return json.loads(json_util.dumps(items))
 
 
 # ------------------------------------------------------------------------------
@@ -416,7 +152,6 @@ class Staff(Resource):
 
 @namespace.route("/orchestrator")
 class Orchestrator(Resource):
-    @namespace.marshal_list_with(orchestrator_attributes)
     def get(self):
         """
         Returns the position of the orchestrator.
@@ -445,9 +180,9 @@ class Orchestrator(Resource):
 
 # cart starts at (width2/2, 0)
 
-SUPER_RACK1_MAX_WIDTH = 10*100
+SUPER_RACK1_MAX_WIDTH = 20*100
 SUPER_RACK2_MAX_WIDTH = 10*100
-SUPER_RACK3_MAX_WIDTH = 10*100
+SUPER_RACK3_MAX_WIDTH = 20*100
 
 RACK_MIN_WIDTH = 1*100
 RACK_MAX_WIDTH = 4*100
@@ -478,11 +213,11 @@ def generate_super_rack(
     staff_ids,
     items_ids,
 ):
-    items = []
     sensors = []
     buckets = []
     racks = []
     shelves = []
+    devices = []
 
     # track the width of the racks we are creating
     current_super_rack_width = 0
@@ -510,7 +245,7 @@ def generate_super_rack(
         current_rack_height = 0
 
         rack = {
-            "id": uuid.uuid4(),
+            "_id": ObjectId(secrets.token_hex(12)),
             "width": rack_width
         }
         racks.append(rack)
@@ -526,10 +261,10 @@ def generate_super_rack(
                 break
 
             shelf = {
-                "id": uuid.uuid4(),
+                "_id": ObjectId(secrets.token_hex(12)),
                 # the height of the shelf is in relation to the ground
                 "height": current_rack_height - shelf_height,
-                "rack_id": rack["id"]
+                "rack_id": rack["_id"]
             }
             shelves.append(shelf)
 
@@ -598,48 +333,42 @@ def generate_super_rack(
 
                 bucket = generate_bucket(
                     shelf=shelf,
-                    item_id=item_id,
+                    item_id=ObjectId(item_id),
                     position=position,
                     width=bucket_width,
                     shelf_height=shelf_height
                 )
                 buckets.append(bucket)
 
-                sensor = generate_sensor(
-                    bucket_id=bucket["id"],
+                device, sensor = generate_device(
+                    bucket_id=bucket["_id"],
                     staff_ids=staff_ids
                 )
+
+                devices.append(device)
                 sensors.append(sensor)
 
-                item = generate_item(
-                    id=item_id,
-                    bucket_id=bucket["id"],
-                    # remove 1 cm to the max_width and max_height
-                    # to be sure the item will fit in the bucket
-                    max_width=bucket["width"] - 1,
-                    max_height=bucket["height"] - 1
-                )
-                items.append(item)
-
-    return {
+    superrack = {
         "final_super_rack1_width": final_current_super_rack1_width,
         "racks": racks,
         "shelves": shelves,
         "buckets": buckets,
         "sensors": sensors,
-        "items": items
+        "devices": devices
     }
+
+    return json.loads(json_util.dumps(superrack))
 
 
 def coherent_generate_layout():
-    items = []
     sensors = []
     buckets = []
     racks = []
     shelves = []
+    devices = []
 
     employees = get_static_employee_data()
-    staff_ids = [employee["id"] for employee in employees]
+    staff_ids = [employee["_id"] for employee in employees]
 
     items_ids = get_static_items_ids()
 
@@ -671,20 +400,21 @@ def coherent_generate_layout():
                                      + super_rack3["buckets"]
     sensors = super_rack1["sensors"] + super_rack2["sensors"] \
                                      + super_rack3["sensors"]
-    items = super_rack1["items"] + super_rack2["items"] \
-                                 + super_rack3["items"]
+    devices = super_rack1["devices"] + super_rack2["devices"] \
+                                     + super_rack3["devices"]
 
-    return {
+    coherent_layout = {
         "racks": racks,
         "shelves": shelves,
         "buckets": buckets,
         "sensors": sensors,
-        "items": items
+        "devices": devices
     }
 
+    return json.loads(json_util.dumps(coherent_layout))
 
-def generate_item(id, bucket_id, max_width, max_height):
 
+def generate_item(max_width, max_height):
     quantity = random.randint(1, 3)
 
     # Here we are choosing a random name of the item,
@@ -699,45 +429,57 @@ def generate_item(id, bucket_id, max_width, max_height):
     weight = random.randint(1, 1000*100 // quantity)
 
     item = {
-        "id": id,
+        "_id": ObjectId(secrets.token_hex(12)),
         "designation": item_name,
         "width": width,
         "height": height,
         "length": length,
         "weight": weight,
         "quantity": quantity,
-        "bucket_id": bucket_id
     }
 
-    return item
+    return json.loads(json_util.dumps(item))
 
 
-def generate_sensor(bucket_id, staff_ids):
+def generate_sensor(device_id, staff_ids):
     number_of_movements = random.randint(1, 10)
     movement_timestamps = []
 
     for _ in range(number_of_movements):
-        movement_timestamps.append(utils.get_random_date_last_day())
+        movement_timestamps.append(str(utils.get_random_date_last_day()))
 
     staff_contacts = []
     number_of_staff_contacts = random.randint(1, 10)
 
     for _ in range(number_of_staff_contacts):
         staff_contact = {
-            "time": utils.get_random_date_last_day(),
-            "staff_id": random.choice(staff_ids)
+            "time": str(utils.get_random_date_last_day()),
+            "staff_id": ObjectId(random.choice(staff_ids))
         }
 
         staff_contacts.append(staff_contact)
 
     sensor = {
-        "id": uuid.uuid4(),
-        "bucket": bucket_id,
+        "_id": ObjectId(secrets.token_hex(12)),
+        "device": device_id,
         "movement_records": movement_timestamps,
         "staff_contacts": staff_contacts
     }
 
-    return sensor
+    return json.loads(json_util.dumps(sensor))
+
+def generate_device(bucket_id, staff_ids):
+    device_id = ObjectId(secrets.token_hex(12))
+
+    sensor = generate_sensor(device_id, staff_ids)
+
+    device = {
+        "_id": device_id,
+        "bucket": bucket_id,
+        "sensor": sensor["_id"]
+    }
+
+    return json.loads(json_util.dumps(device)), sensor
 
 
 def generate_bucket(shelf, item_id, position, width, shelf_height):
@@ -751,22 +493,21 @@ def generate_bucket(shelf, item_id, position, width, shelf_height):
     quantity = random.randint(1, 3)
 
     bucket = {
-        "id": uuid.uuid4(),
+        "_id": ObjectId(secrets.token_hex(12)),
         "width": width,
         "height": height,
         "length": length,
         "position": position,
         "item_id": item_id,
         "quantity": quantity,
-        "shelf_id": shelf["id"]
+        "shelf_id": shelf["_id"]
     }
 
-    return bucket
+    return json.loads(json_util.dumps(bucket))
 
 
 @namespace.route("/layout")
 class Layout(Resource):
-    @namespace.marshal_list_with(layout_attributes)
     def get(self):
         """
         Returns the racks, shelves, buckets, sensors
@@ -776,15 +517,16 @@ class Layout(Resource):
         layout = coherent_generate_layout()
 
         layout = {
-            "time": datetime.datetime.now(),
+            "_id": ObjectId(secrets.token_hex(12)),
+            "time": str(datetime.datetime.now()),
             "racks": layout["racks"],
             "shelves": layout["shelves"],
             "buckets": layout["buckets"],
             "sensors": layout["sensors"],
-            "items": layout["items"]
+            "devices": layout["devices"]
         }
 
-        return layout
+        return json.loads(json_util.dumps(layout))
 
 
 # ------------------------------------------------------------------------------
@@ -793,7 +535,6 @@ class Layout(Resource):
 
 @namespace.route("/cart")
 class Cart(Resource):
-    @namespace.marshal_list_with(cart_attributes)
     def get(self):
         """
         Returns the speed, start and end times of the cart.

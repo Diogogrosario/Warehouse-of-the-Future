@@ -19,8 +19,7 @@ staffAttributes = namespace.model("Staff", {
 of the staff member"),
     "name": fields.String(required=True, description="The name of this staff \
 member"),
-    "birth_date": fields.DateTime(required=True, attribute='birth_date.$date', description="Birth date of this \
-staff member"),
+    "birth_date": fields.String(required=True, description="Birth date of this staff member"),
     "height": fields.Integer(require=True, description="Staff member age")
 })
 
@@ -48,23 +47,22 @@ class StaffQuery(Resource):
         Returns information about all the staff members that match the name \
             and minimum age passed as query parameters.
         """
+
         args = parser.parse_args()
         name = args['name']
         age = args['age']
         searchQuery = {}
 
         if age is not None:
-            try:
-                today = datetime.date.today()
+            today = datetime.date.today()
 
-                dt = datetime.datetime(
-                    year=today.year - age,
-                    month=today.month,
-                    day=today.day
-                )
-                searchQuery["birth_date"] = {"$lte": dt}
-            except Exception:
-                return json.loads(json_util.dumps([]))
+            dt = datetime.datetime(
+                year=today.year - age,
+                month=today.month,
+                day=today.day
+            )
+            searchQuery["birth_date"] = {"$lte": str(dt)}
+
         if name is not None:
             searchQuery["name"] = name
 
