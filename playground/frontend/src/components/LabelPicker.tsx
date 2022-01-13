@@ -37,7 +37,7 @@ interface PopperComponentProps {
 }
 
 const StyledPopper = styled(Popper)(({ theme }) => ({
-	border: `1px solid ${Coloring.rgba(theme.palette.white.main, 0.6)}`,
+	border: `1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
 	borderRadius: 6,
 	width: 300,
 	zIndex: theme.zIndex.modal,
@@ -99,14 +99,11 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 	const [selected, setSelected] = React.useState<Label[]>([]);
-	const [searchValue, setSearchValue] = React.useState<Label[]>([]);
 	const open = Boolean(anchorEl);
 
 	const closeLabelPicker = () => {
-		setSelected(searchValue);
 		if (anchorEl) anchorEl.focus();
 		setAnchorEl(null);
-		onSelectedLabelsChange?.(selected.map((label: Label) => labels.indexOf(label)));
 	};
 
 	const labelPickerId = open ? "label-picker" : undefined;
@@ -118,10 +115,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 					disableRipple
 					aria-describedby={labelPickerId}
 					{...buttonProps}
-					onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-						setSearchValue(selected);
-						setAnchorEl(event.currentTarget);
-					}}
+					onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => setAnchorEl(event.currentTarget)}
 					endIcon={<SettingsIcon />}
 					sx={{
 						width: "100%",
@@ -193,7 +187,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 						<Autocomplete
 							open
 							multiple
-							value={searchValue}
+							value={selected}
 							onClose={(
 								event: React.SyntheticEvent,
 								reason: AutocompleteCloseReason
@@ -204,15 +198,17 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 								event: React.SyntheticEvent,
 								value: Label[],
 								reason: AutocompleteChangeReason
-							) => {
-								if (
-									event.type === "keydown" &&
-									(event as React.KeyboardEvent).key === "Backspace" &&
-									reason === "removeOption"
-								)
-									return;
-
-								setSearchValue(value);
+								) => {
+									if (reason === "selectOption") {
+										setSelected(value);
+									} else if (reason === "removeOption") {
+										setSelected(value);
+									}
+									console.log("value (before): ", value);
+									console.log("selected (before): ", selected);
+									onSelectedLabelsChange?.(value.map((label) => labels.indexOf(label)));
+									console.log("value (after): ", value);
+									console.log("selected (after): ", selected);
 							}}
 							disableCloseOnSelect
 							PopperComponent={PopperComponent}
