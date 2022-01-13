@@ -3,7 +3,7 @@ from bson.objectid import ObjectId
 from dotenv import load_dotenv
 from flask import Flask
 from flask_testing import TestCase
-from hypothesis import given, settings, strategies as st
+from hypothesis import HealthCheck, given, settings, strategies as st
 from os import getenv
 from pymongo import MongoClient
 
@@ -320,35 +320,43 @@ class APITesting(TestCase):
 
     # Sensors
 
-    # @settings(max_examples=15, deadline=None)
-    # @given(sensor_id=st.sampled_from([
-    #     "b07f1f77bcf86cd799439011",
-    #     "b07f1f77bcf86cd799439012"]),
-    #     times=st.tuples(st.datetimes(), st.datetimes()).filter(
-    #         lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
-    # def test_sensors_endpoint_movements_PBT(self, sensor_id, times):
-    #     global_tests = SensorsPBT(self, self.client)
-    #     (time_before, time_after) = times
-    #     global_tests.testSensorsMovementWithTime(
-    #         sensor_id,
-    #         time_before,
-    #         time_after
-    #     )
+    @settings(
+        max_examples=15,
+        deadline=None,
+        suppress_health_check=(HealthCheck.data_too_large,)
+    )
+    @given(sensor_id=st.sampled_from([
+        "b07f1f77bcf86cd799439011",
+        "b07f1f77bcf86cd799439012"]),
+        times=st.tuples(st.datetimes(), st.datetimes()).filter(
+            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
+    def test_sensors_endpoint_movements_PBT(self, sensor_id, times):
+        global_tests = SensorsPBT(self, self.client)
+        (time_before, time_after) = times
+        global_tests.testSensorsMovementWithTime(
+            sensor_id,
+            time_before,
+            time_after
+        )
 
-    # @settings(max_examples=15, deadline=None)
-    # @given(sensor_id=st.sampled_from([
-    #     "b07f1f77bcf86cd799439011",
-    #     "b07f1f77bcf86cd799439012"]),
-    #     times=st.tuples(st.datetimes(), st.datetimes()).filter(
-    #         lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
-    # def test_sensors_endpoint_timestamps_PBT(self, sensor_id, times):
-    #     global_tests = SensorsPBT(self, self.client)
-    #     (time_before, time_after) = times
-    #     global_tests.testSensorsTimestampWithTime(
-    #         sensor_id,
-    #         time_before,
-    #         time_after
-    #     )
+    @settings(
+        max_examples=15,
+        deadline=None,
+        suppress_health_check=(HealthCheck.data_too_large,)
+    )
+    @given(sensor_id=st.sampled_from([
+        "b07f1f77bcf86cd799439011",
+        "b07f1f77bcf86cd799439012"]),
+        times=st.tuples(st.datetimes(), st.datetimes()).filter(
+            lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
+    def test_sensors_endpoint_Staff_contacts_PBT(self, sensor_id, times):
+        global_tests = SensorsPBT(self, self.client)
+        (time_before, time_after) = times
+        global_tests.testSensorsStaffContactsWithTime(
+            sensor_id,
+            time_before,
+            time_after
+        )
 
     # Layouts
 
