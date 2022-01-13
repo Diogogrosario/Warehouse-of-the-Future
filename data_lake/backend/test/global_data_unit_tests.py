@@ -1,6 +1,3 @@
-import json
-
-
 class GlobalDataTests():
     def __init__(self, TestClass, client):
         self.TestClass = TestClass
