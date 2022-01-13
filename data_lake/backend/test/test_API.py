@@ -9,7 +9,6 @@ from pymongo import MongoClient
 
 from ..api import api
 
-from .global_data_PBT import GlobalPBT
 from .global_data_unit_tests import GlobalDataTests
 from .layout_PBT import LayoutPBT
 from .layout_unit_tests import LayoutTests
@@ -316,19 +315,6 @@ class APITesting(TestCase):
     def test_staff_endpoint_name_PBT(self, name):
         staff_tests = StaffPBT(self, self.client)
         staff_tests.testStaffWithName(name)
-
-    # GlobalData
-
-    # @settings(max_examples=15, deadline=None)
-    # @given(st.tuples(st.datetimes(), st.datetimes()).filter(
-    #     lambda x: x[0] < x[1] and x[0].year > 999 and x[1].year > 999))
-    # def test_global_endpoint_PBT(self, times):
-    #     global_tests = GlobalPBT(self, self.client)
-    #     (time_before, time_after) = times
-    #     global_tests.testGlobalDataWithTimeBeforeAndAfter(
-    #         time_before,
-    #         time_after
-    #     )
 
     # Sensors
 
