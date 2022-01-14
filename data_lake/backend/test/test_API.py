@@ -33,6 +33,22 @@ class APITesting(TestCase):
         self.populateManifests()
         self.populateRackData()
         self.populateBucketsData()
+        self.populateDevicesData()
+
+    def populateDevicesData(self):
+        devices_data = [
+            {
+                "_id": ObjectId("f07f1f77bcf86cd799439011"),
+                "bucket": ObjectId("f07f1f77bcf86cd799439012"),
+                "sensor": ObjectId("f07f1f77bcf86cd799439013")
+            },
+            {
+                "_id": ObjectId("f07f1f77bcf86cd799439014"),
+                "bucket": ObjectId("f07f1f77bcf86cd799439015"),
+                "sensor": ObjectId("f07f1f77bcf86cd799439016")
+            }
+        ]
+        self.db.WoF.Devices.insert_many(devices_data)
 
     def populateBucketsData(self):
         buckets_data = [
@@ -302,6 +318,7 @@ class APITesting(TestCase):
         self.db.WoF.Manifests.drop()
         self.db.WoF.Racks.drop()
         self.db.WoF.Buckets.drop()
+        self.db.WoF.Devices.drop()
 
     def create_app(self):
         app = Flask(__name__)
@@ -389,6 +406,13 @@ class APITesting(TestCase):
         path = "buckets/"
         buckets_tests.testRoot(keys, len(keys), path)
         buckets_tests.testEndpoint("e07f1f77bcf86cd799439011", path)
+    
+    def test_devices_endpoint(self):
+        buckets_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
+        keys = ['id', 'bucket', 'sensor']
+        path = "devices/"
+        buckets_tests.testRoot(keys, len(keys), path)
+        buckets_tests.testEndpoint("f07f1f77bcf86cd799439011", path)
 
     # ----------------------------------------------------------
     # Property Based Tests
