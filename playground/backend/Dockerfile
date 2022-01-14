@@ -18,4 +18,5 @@ COPY . ./
 # Start app
 EXPOSE 3001
 
-CMD ["./wait-for-postgres.sh", "db", "yarn", "serve"]
+RUN chmod +x wait-for-postgres.sh
+CMD ["sh", "./wait-for-postgres.sh", "db", "yarn", "serve"]
