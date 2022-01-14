@@ -792,13 +792,73 @@
             "type": "table"
         },
         {
+            "datasource": null,
+            "description": "Sensors data, namely its id, associated device id, movement records, and staff_contacts.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 19,
+                "x": 0,
+                "y": 37
+            },
+            "id": 25,
+            "options": {
+                "showHeader": true
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/sensors",
+                    "url_options": {
+                        "data": "",
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Sensors",
+            "type": "table"
+        },
+        {
             "collapsed": false,
             "datasource": null,
             "gridPos": {
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 37
+                "y": 43
             },
             "id": 11,
             "panels": [],
@@ -902,7 +962,7 @@
                 "h": 8,
                 "w": 19,
                 "x": 0,
-                "y": 38
+                "y": 44
             },
             "id": 2,
             "options": {
@@ -991,7 +1051,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 46
+                "y": 52
             },
             "id": 9,
             "panels": [],
@@ -1027,7 +1087,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 47
+                "y": 53
             },
             "id": 4,
             "options": {
@@ -1109,7 +1169,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 47
+                "y": 53
             },
             "id": 5,
             "options": {
@@ -1187,7 +1247,7 @@
                 "h": 10,
                 "w": 5,
                 "x": 8,
-                "y": 47
+                "y": 53
             },
             "id": 12,
             "options": {
@@ -1265,7 +1325,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 52
+                "y": 58
             },
             "id": 6,
             "options": {
@@ -1343,7 +1403,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 52
+                "y": 58
             },
             "id": 7,
             "options": {
@@ -1412,5 +1472,5 @@
     "timezone": "",
     "title": "Data Lake",
     "uid": "BwcXP3cnz",
-    "version": 27
+    "version": 30
 }
