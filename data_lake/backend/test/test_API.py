@@ -9,6 +9,7 @@ from pymongo import MongoClient
 
 from ..api import api
 
+from .shelves_unit_tests import ShelvesTests
 from .global_data_unit_tests import GlobalDataTests
 from .layout_PBT import LayoutPBT
 from .layout_unit_tests import LayoutTests
@@ -26,7 +27,28 @@ class APITesting(TestCase):
         self.populateEmployees()
         self.populateGlobalData()
         self.populateSensorData()
+        self.populateShelvesData()
         # self.populateLayouts()
+
+    def populateShelvesData(self):
+        shelves_data = [
+            {
+                "_id": ObjectId("c07f1f77bcf86cd799439011"),
+                "height": 10,
+                "rack_id": ObjectId("d07f1f77bcf86cd799439011"),
+            },
+            {
+                "_id": ObjectId("c07f1f77bcf86cd799439012"),
+                "height": 10,
+                "rack_id": ObjectId("d07f1f77bcf86cd799439012"),
+            },
+            {
+                "_id": ObjectId("c07f1f77bcf86cd799439013"),
+                "height": 10,
+                "rack_id": ObjectId("d07f1f77bcf86cd799439013"),
+            },
+        ]
+        self.db.WoF.Shelves.insert_many(shelves_data)
 
     def populateSensorData(self):
         sensors_data = [
@@ -227,6 +249,7 @@ class APITesting(TestCase):
         self.db.WoF.Employees.drop()
         self.db.WoF.GlobalData.drop()
         self.db.WoF.Sensors.drop()
+        self.db.WoF.Shelves.drop()
 
     def create_app(self):
         app = Flask(__name__)
@@ -265,6 +288,10 @@ class APITesting(TestCase):
             "b07f1f77bcf86cd799439012",
             "2022-01-03", "2022-01-04"
         )
+
+    def test_shelves_endpoint(self):
+        shelves_tests = ShelvesTests(self, self.client)
+        shelves_tests.testEndpoint("c07f1f77bcf86cd799439011")
 
     # def test_layout_endpoint(self):
     #     layout_tests = LayoutTests(self, self.client)
