@@ -36,6 +36,418 @@
                 "x": 0,
                 "y": 0
             },
+            "id": 9,
+            "panels": [],
+            "title": "Cart",
+            "type": "row"
+        },
+        {
+            "datasource": null,
+            "description": "Cart start time.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 0,
+                "y": 1
+            },
+            "id": 4,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^start_time$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "start_time",
+                            "text": "start_time",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/cart",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Cart Start Time",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "description": "Cart end time.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 4,
+                "y": 1
+            },
+            "id": 5,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^end_time$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "end_time",
+                            "text": "end_time",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/cart",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Cart End Time",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "description": "Orchestrator position, in the form [x, y, z].",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "super-light-orange",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 5,
+                "x": 8,
+                "y": 1
+            },
+            "id": 12,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^position$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "position",
+                            "text": "position",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/orchestrator",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Orchestrator [x, y, z] Position",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "description": "Cart speed, in cm/s.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "light-blue",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 0,
+                "y": 6
+            },
+            "id": 6,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^speed$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "speed",
+                            "text": "speed",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/cart",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Cart Speed (cm/s)",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "description": "Cart position, in the form [x, y].",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "light-purple",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 4,
+                "y": 6
+            },
+            "id": 7,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^start_position$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "start_position",
+                            "text": "start_position",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/cart",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Cart Start [x, y] Position",
+            "type": "stat"
+        },
+        {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 11
+            },
             "id": 14,
             "panels": [],
             "title": "Layouts",
@@ -102,7 +514,7 @@
                 "h": 9,
                 "w": 7,
                 "x": 0,
-                "y": 1
+                "y": 12
             },
             "id": 16,
             "options": {
@@ -206,7 +618,7 @@
                 "h": 9,
                 "w": 12,
                 "x": 7,
-                "y": 1
+                "y": 12
             },
             "id": 17,
             "options": {
@@ -414,7 +826,7 @@
                 "h": 10,
                 "w": 19,
                 "x": 0,
-                "y": 10
+                "y": 21
             },
             "id": 18,
             "options": {
@@ -611,6 +1023,18 @@
                                 "value": "weight (cm)"
                             }
                         ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "designation"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.filterable",
+                                "value": true
+                            }
+                        ]
                     }
                 ]
             },
@@ -618,7 +1042,7 @@
                 "h": 10,
                 "w": 19,
                 "x": 0,
-                "y": 20
+                "y": 31
             },
             "id": 20,
             "options": {
@@ -626,7 +1050,7 @@
                 "sortBy": [
                     {
                         "desc": true,
-                        "displayName": "weight (cm)"
+                        "displayName": "designation"
                     }
                 ]
             },
@@ -715,7 +1139,7 @@
                 "h": 7,
                 "w": 9,
                 "x": 0,
-                "y": 30
+                "y": 41
             },
             "id": 22,
             "options": {
@@ -785,7 +1209,7 @@
                 "h": 7,
                 "w": 10,
                 "x": 9,
-                "y": 30
+                "y": 41
             },
             "id": 24,
             "options": {
@@ -845,7 +1269,7 @@
                 "h": 6,
                 "w": 19,
                 "x": 0,
-                "y": 37
+                "y": 48
             },
             "id": 25,
             "options": {
@@ -918,7 +1342,7 @@
                 "h": 6,
                 "w": 19,
                 "x": 0,
-                "y": 43
+                "y": 54
             },
             "id": 26,
             "options": {
@@ -962,7 +1386,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 49
+                "y": 60
             },
             "id": 11,
             "panels": [],
@@ -1066,17 +1490,12 @@
                 "h": 8,
                 "w": 19,
                 "x": 0,
-                "y": 50
+                "y": 61
             },
             "id": 2,
             "options": {
                 "showHeader": true,
-                "sortBy": [
-                    {
-                        "desc": true,
-                        "displayName": "height (cm)"
-                    }
-                ]
+                "sortBy": []
             },
             "pluginVersion": "8.2.6",
             "targets": [
@@ -1147,418 +1566,6 @@
                 }
             ],
             "type": "table"
-        },
-        {
-            "collapsed": false,
-            "datasource": null,
-            "gridPos": {
-                "h": 1,
-                "w": 24,
-                "x": 0,
-                "y": 58
-            },
-            "id": 9,
-            "panels": [],
-            "title": "Cart",
-            "type": "row"
-        },
-        {
-            "datasource": null,
-            "description": "Cart start time.",
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 5,
-                "w": 4,
-                "x": 0,
-                "y": 59
-            },
-            "id": 4,
-            "options": {
-                "colorMode": "background",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": ["lastNotNull"],
-                    "fields": "/^start_time$/",
-                    "values": false
-                },
-                "text": {},
-                "textMode": "auto"
-            },
-            "pluginVersion": "8.2.6",
-            "targets": [
-                {
-                    "columns": [
-                        {
-                            "selector": "start_time",
-                            "text": "start_time",
-                            "type": "string"
-                        }
-                    ],
-                    "filters": [],
-                    "format": "table",
-                    "global_query_id": "",
-                    "refId": "A",
-                    "root_selector": "",
-                    "source": "url",
-                    "type": "json",
-                    "url": "http://backend:5000/globalData/cart",
-                    "url_options": {
-                        "data": "",
-                        "headers": [
-                            {
-                                "key": "Content-Type",
-                                "value": ""
-                            },
-                            {
-                                "key": "header-key",
-                                "value": "header-value"
-                            }
-                        ],
-                        "method": "GET"
-                    }
-                }
-            ],
-            "title": "Cart Start Time",
-            "type": "stat"
-        },
-        {
-            "datasource": null,
-            "description": "Cart end time.",
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "red",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 5,
-                "w": 4,
-                "x": 4,
-                "y": 59
-            },
-            "id": 5,
-            "options": {
-                "colorMode": "background",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": ["lastNotNull"],
-                    "fields": "/^end_time$/",
-                    "values": false
-                },
-                "text": {},
-                "textMode": "auto"
-            },
-            "pluginVersion": "8.2.6",
-            "targets": [
-                {
-                    "columns": [
-                        {
-                            "selector": "end_time",
-                            "text": "end_time",
-                            "type": "string"
-                        }
-                    ],
-                    "filters": [],
-                    "format": "table",
-                    "global_query_id": "",
-                    "refId": "A",
-                    "root_selector": "",
-                    "source": "url",
-                    "type": "json",
-                    "url": "http://backend:5000/globalData/cart",
-                    "url_options": {
-                        "data": "",
-                        "headers": [
-                            {
-                                "key": "Content-Type",
-                                "value": ""
-                            },
-                            {
-                                "key": "header-key",
-                                "value": "header-value"
-                            }
-                        ],
-                        "method": "GET"
-                    }
-                }
-            ],
-            "title": "Cart End Time",
-            "type": "stat"
-        },
-        {
-            "datasource": null,
-            "description": "Orchestrator position, in the form [x, y, z].",
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "super-light-orange",
-                                "value": null
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 10,
-                "w": 5,
-                "x": 8,
-                "y": 59
-            },
-            "id": 12,
-            "options": {
-                "colorMode": "background",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": ["lastNotNull"],
-                    "fields": "/^position$/",
-                    "values": false
-                },
-                "text": {},
-                "textMode": "auto"
-            },
-            "pluginVersion": "8.2.6",
-            "targets": [
-                {
-                    "columns": [
-                        {
-                            "selector": "position",
-                            "text": "position",
-                            "type": "string"
-                        }
-                    ],
-                    "filters": [],
-                    "format": "table",
-                    "global_query_id": "",
-                    "refId": "A",
-                    "root_selector": "",
-                    "source": "url",
-                    "type": "json",
-                    "url": "http://backend:5000/globalData/orchestrator",
-                    "url_options": {
-                        "data": "",
-                        "headers": [
-                            {
-                                "key": "Content-Type",
-                                "value": ""
-                            },
-                            {
-                                "key": "header-key",
-                                "value": "header-value"
-                            }
-                        ],
-                        "method": "GET"
-                    }
-                }
-            ],
-            "title": "Orchestrator [x, y, z] Position",
-            "type": "stat"
-        },
-        {
-            "datasource": null,
-            "description": "Cart speed, in cm/s.",
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "light-blue",
-                                "value": null
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 5,
-                "w": 4,
-                "x": 0,
-                "y": 64
-            },
-            "id": 6,
-            "options": {
-                "colorMode": "background",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": ["lastNotNull"],
-                    "fields": "/^speed$/",
-                    "values": false
-                },
-                "text": {},
-                "textMode": "auto"
-            },
-            "pluginVersion": "8.2.6",
-            "targets": [
-                {
-                    "columns": [
-                        {
-                            "selector": "speed",
-                            "text": "speed",
-                            "type": "string"
-                        }
-                    ],
-                    "filters": [],
-                    "format": "table",
-                    "global_query_id": "",
-                    "refId": "A",
-                    "root_selector": "",
-                    "source": "url",
-                    "type": "json",
-                    "url": "http://backend:5000/globalData/cart",
-                    "url_options": {
-                        "data": "",
-                        "headers": [
-                            {
-                                "key": "Content-Type",
-                                "value": ""
-                            },
-                            {
-                                "key": "header-key",
-                                "value": "header-value"
-                            }
-                        ],
-                        "method": "GET"
-                    }
-                }
-            ],
-            "title": "Cart Speed (cm/s)",
-            "type": "stat"
-        },
-        {
-            "datasource": null,
-            "description": "Cart position, in the form [x, y].",
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "light-purple",
-                                "value": null
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 5,
-                "w": 4,
-                "x": 4,
-                "y": 64
-            },
-            "id": 7,
-            "options": {
-                "colorMode": "background",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": ["lastNotNull"],
-                    "fields": "/^start_position$/",
-                    "values": false
-                },
-                "text": {},
-                "textMode": "auto"
-            },
-            "pluginVersion": "8.2.6",
-            "targets": [
-                {
-                    "columns": [
-                        {
-                            "selector": "start_position",
-                            "text": "start_position",
-                            "type": "string"
-                        }
-                    ],
-                    "filters": [],
-                    "format": "table",
-                    "global_query_id": "",
-                    "refId": "A",
-                    "root_selector": "",
-                    "source": "url",
-                    "type": "json",
-                    "url": "http://backend:5000/globalData/cart",
-                    "url_options": {
-                        "data": "",
-                        "headers": [
-                            {
-                                "key": "Content-Type",
-                                "value": ""
-                            },
-                            {
-                                "key": "header-key",
-                                "value": "header-value"
-                            }
-                        ],
-                        "method": "GET"
-                    }
-                }
-            ],
-            "title": "Cart Start [x, y] Position",
-            "type": "stat"
         }
     ],
     "refresh": "",
@@ -1576,5 +1583,5 @@
     "timezone": "",
     "title": "Data Lake",
     "uid": "BwcXP3cnz",
-    "version": 34
+    "version": 36
 }
