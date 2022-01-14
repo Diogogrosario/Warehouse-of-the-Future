@@ -520,6 +520,13 @@
                             {
                                 "id": "displayName",
                                 "value": "width (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "super-light-orange",
+                                    "mode": "fixed"
+                                }
                             }
                         ]
                     },
@@ -546,6 +553,13 @@
                             {
                                 "id": "displayName",
                                 "value": "height (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-blue",
+                                    "mode": "fixed"
+                                }
                             }
                         ]
                     },
@@ -566,6 +580,13 @@
                             {
                                 "id": "displayName",
                                 "value": "length (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-purple",
+                                    "mode": "fixed"
+                                }
                             }
                         ]
                     },
@@ -1555,5 +1576,5 @@
     "timezone": "",
     "title": "Data Lake",
     "uid": "BwcXP3cnz",
-    "version": 32
+    "version": 34
 }
