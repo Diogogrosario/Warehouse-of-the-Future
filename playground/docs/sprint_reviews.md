@@ -111,3 +111,17 @@ Unit test automation for API tests.
 Receiving configuration file to draw the whole warehouse.  
 
 In the next sprint, we will ad another json version to support arbitray buckets; add support for device representation; and integrate with other verticals.
+
+## Retrospective
+
+Went well:
++ GitHub communication (PR + issues)
++ Integration of backend + frontend went smoothly, communication-wise
++ Less strict division of the team between renderer/frontend/backend
+
+Meh:
++ Requirements changing due to vertical merging (without asking the client)
+
+Could have gone better:
++ Integration led to many unexpected bugs
++ GitHub actions going down
