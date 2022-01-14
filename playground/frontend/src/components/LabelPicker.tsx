@@ -195,7 +195,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 							open
 							multiple
 							value={selected}
-							groupBy={( option : Label ) => option.group ?? "" }
+							groupBy={(option: Label) => option.group ?? ""}
 							onClose={(
 								event: React.SyntheticEvent,
 								reason: AutocompleteCloseReason

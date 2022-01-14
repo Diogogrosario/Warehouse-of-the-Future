@@ -430,15 +430,25 @@ const ReportList: React.FC = () => {
 				<List style={{ overflow: "auto" }}>
 					{reports
 						.filter((report: ReportResource) => {
-							if (selectedLabels.length &&
-								!Object.values(selectedLabels.reduce(
-									(prevValue : {[key : string]: number[]}, labelIdx : number) => {
-										const key = labels[labelIdx].group;
-										(prevValue[key] = prevValue[key] || []).push(labelIdx);
-										return prevValue;
-									},
-									{}
-								)).every( (groupFilters : number[]) => groupFilters.some( (labelFilterIdx : number) => labelFilter[labelFilterIdx](report) ))
+							if (
+								selectedLabels.length &&
+								!Object.values(
+									selectedLabels.reduce(
+										(
+											prevValue: { [key: string]: number[] },
+											labelIdx: number
+										) => {
+											const key = labels[labelIdx].group;
+											(prevValue[key] = prevValue[key] || []).push(labelIdx);
+											return prevValue;
+										},
+										{}
+									)
+								).every((groupFilters: number[]) =>
+									groupFilters.some((labelFilterIdx: number) =>
+										labelFilter[labelFilterIdx](report)
+									)
+								)
 							)
 								return false;
 
