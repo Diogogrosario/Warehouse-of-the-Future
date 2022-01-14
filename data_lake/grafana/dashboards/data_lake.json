@@ -852,13 +852,96 @@
             "type": "table"
         },
         {
+            "datasource": null,
+            "description": "Manifests data, namely its id, associated items, timestamp, and staff id.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "time"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "time: YYYY-MM-DD HH:MM:SS"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 19,
+                "x": 0,
+                "y": 43
+            },
+            "id": 26,
+            "options": {
+                "showHeader": true
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/manifests",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Manifests",
+            "type": "table"
+        },
+        {
             "collapsed": false,
             "datasource": null,
             "gridPos": {
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 43
+                "y": 49
             },
             "id": 11,
             "panels": [],
@@ -962,7 +1045,7 @@
                 "h": 8,
                 "w": 19,
                 "x": 0,
-                "y": 44
+                "y": 50
             },
             "id": 2,
             "options": {
@@ -1051,7 +1134,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 52
+                "y": 58
             },
             "id": 9,
             "panels": [],
@@ -1087,7 +1170,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 53
+                "y": 59
             },
             "id": 4,
             "options": {
@@ -1169,7 +1252,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 53
+                "y": 59
             },
             "id": 5,
             "options": {
@@ -1247,7 +1330,7 @@
                 "h": 10,
                 "w": 5,
                 "x": 8,
-                "y": 53
+                "y": 59
             },
             "id": 12,
             "options": {
@@ -1325,7 +1408,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 58
+                "y": 64
             },
             "id": 6,
             "options": {
@@ -1403,7 +1486,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 58
+                "y": 64
             },
             "id": 7,
             "options": {
@@ -1472,5 +1555,5 @@
     "timezone": "",
     "title": "Data Lake",
     "uid": "BwcXP3cnz",
-    "version": 30
+    "version": 32
 }
