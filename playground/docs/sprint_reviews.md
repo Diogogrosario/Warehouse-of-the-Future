@@ -76,7 +76,38 @@ Problems finding out the difference between one-sided and double-sided materials
 
 In the next sprint, the file containing the structure of the warehouse and its parser will be defined. In addition to this, buckets should also be placed inside the shelves.
 
+# Sprint 3 Review
 
+## Frontend
 
+Added filtering, sorting of reports.  
+Fully implemented tab panels on the webapp.  
+Major redesign of the webapp.  
+Removed mark as solved button and added new action form to add actions to a given report.  
+Acceptance tests with Gherkin Cucumber.  
+Integration with backend.  
 
+Problems with rest-hooks package. The examples provided in the documentation didn't work out of the box. A lot of time was dispended implementing the connections to the backend API.  
+When developing the backend and frontend are served from different ports as such the browser sees the requests have different origins and does not accept any calls to the backend (if not running from localhost, eg. from a tablet in the same network). This is not a priority, as in production proxing would not be needed.   
+Async/Network boundaries and Suspense. When the frontend request the databse for data it should render something while it is waiting (async boundaries and suspense). When these requests fail, the frontend simply goes down and shows a white page. This should be fixed with network error boundaries. This will be analyzed in another sprint.
 
+In the next sprint, we will focus on bug fixing and integration with other verticals.
+
+## Backend
+
+Updated API documentation with the changes that occurred in this milestone.
+Created a database clear command.
+Fixed minor issues in backend controllers.
+Added wait for db initiation command to docker container.
+
+In the future, we will need to remove the employee ID from the database as it goes against the companie's privacy policy. Will also focus on the integration with other verticals.
+
+## Dev Ops
+
+Unit test automation for API tests.
+
+## 3D Renderer
+
+Receiving configuration file to draw the whole warehouse.  
+
+In the next sprint, we will ad another json version to support arbitray buckets; add support for device representation; and integrate with other verticals.
