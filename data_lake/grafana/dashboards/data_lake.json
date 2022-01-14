@@ -1035,6 +1035,49 @@
                                 "value": true
                             }
                         ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "quantity"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color"
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "dark-red",
+                                            "value": null
+                                        },
+                                        {
+                                            "color": "light-orange",
+                                            "value": 1
+                                        },
+                                        {
+                                            "color": "semi-dark-green",
+                                            "value": 2
+                                        },
+                                        {
+                                            "color": "dark-green",
+                                            "value": 3
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "max",
+                                "value": 3
+                            }
+                        ]
                     }
                 ]
             },
@@ -1583,5 +1626,5 @@
     "timezone": "",
     "title": "Data Lake",
     "uid": "BwcXP3cnz",
-    "version": 36
+    "version": 39
 }
