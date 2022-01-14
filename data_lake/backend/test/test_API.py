@@ -28,7 +28,23 @@ class APITesting(TestCase):
         self.populateGlobalData()
         self.populateSensorData()
         self.populateShelvesData()
-        # self.populateLayouts()
+        self.populateStock()
+        self.populateLayouts()
+        self.populateManifests()
+        self.populateRackData()
+
+    def populateRackData(self):
+        rack_data = [
+            {
+                "_id": ObjectId("d07f1f77bcf86cd799439011"),
+                "width": 240
+            },
+            {
+                "_id": ObjectId("d07f1f77bcf86cd799439012"),
+                "width": 150
+            }
+        ]
+        self.db.WoF.Racks.insert_many(rack_data)
 
     def populateShelvesData(self):
         shelves_data = [
@@ -157,24 +173,24 @@ class APITesting(TestCase):
         layouts_data = [
             {
                 "_id": ObjectId("a07f1f99bcf86cd799439011"),
-                "time": datetime.datetime(2019, 8, 11),
-                "buckets": {}
+                "time": str(datetime.datetime(2019, 8, 11)),
+                "buckets": []
             }, {
                 "_id": ObjectId("a07f1f99bcf86cd799439012"),
-                "time": datetime.datetime(2023, 8, 11),
-                "buckets": {}
+                "time": str(datetime.datetime(2023, 8, 11)),
+                "buckets": []
             }, {
                 "_id": ObjectId("a07f1f99bcf86cd799439013"),
-                "time": datetime.datetime(2022, 8, 11),
-                "buckets": {}
+                "time": str(datetime.datetime(2022, 8, 11)),
+                "buckets": []
             }, {
                 "_id": ObjectId("a07f1f99bcf86cd799439014"),
-                "time": datetime.datetime(2021, 8, 11),
-                "buckets": {}
+                "time": str(datetime.datetime(2021, 8, 11)),
+                "buckets": []
             }, {
                 "_id": ObjectId("a07f1f99bcf86cd799439015"),
-                "time": datetime.datetime(2020, 8, 11),
-                "buckets": {}
+                "time": str(datetime.datetime(2020, 8, 11)),
+                "buckets": []
             }
         ]
         self.db.WoF.Layouts.insert_many(layouts_data)
@@ -183,19 +199,27 @@ class APITesting(TestCase):
         manifests_data = [
             {
                 "_id": ObjectId("a07f1e00bcf86cd799439011"),
-                "time": datetime.datetime(2021, 8, 11),
-                "items": {},
-                "staff": ObjectId("a07f1f77bcf86cd799439011")
+                "time": str(datetime.datetime(2021, 8, 11)),
+                "items": {
+                    "item_id": ObjectId("a07f1e98bcf86cd799439011"),
+                    "quantity": 2
+                },
+                "staff_id": ObjectId("a07f1f77bcf86cd799439011")
             }, {
                 "_id": ObjectId("a07f1e00bcf86cd799439012"),
-                "time": datetime.datetime(2019, 8, 11),
-                "items": {},
-                "staff": ObjectId("a07f1f77bcf86cd799439011")
+                "time": str(datetime.datetime(2019, 8, 11)),
+                "items": [
+                    {
+                        "item_id": ObjectId("a07f1e98bcf86cd799439011"),
+                        "quantity": 2
+                    }
+                ],
+                "staff_id": ObjectId("a07f1f77bcf86cd799439011")
             }, {
                 "_id": ObjectId("a07f1e00bcf86cd799439013"),
-                "time": datetime.datetime(2020, 8, 11),
+                "time": str(datetime.datetime(2020, 8, 11)),
                 "items": {},
-                "staff": ObjectId("a07f1f77bcf86cd799439011")
+                "staff_id": ObjectId("a07f1f77bcf86cd799439011")
             }
         ]
         self.db.WoF.Manifests.insert_many(manifests_data)
@@ -209,8 +233,7 @@ class APITesting(TestCase):
                 "height": 20,
                 "length": 15,
                 "weight": 20,
-                "quantity": 400,
-                "bucket": ObjectId("907f1f77bcf86cd799439011")
+                "quantity": 400
             }, {
                 "_id": ObjectId("a07f1e98bcf86cd799439012"),
                 "designation": "Porcas",
@@ -218,8 +241,7 @@ class APITesting(TestCase):
                 "height": 20,
                 "length": 15,
                 "weight": 20,
-                "quantity": 400,
-                "bucket": ObjectId("907f1f77bcf86cd799439011")
+                "quantity": 400
             }, {
                 "_id": ObjectId("a07f1e98bcf86cd799439013"),
                 "designation": "Roscas",
@@ -227,8 +249,7 @@ class APITesting(TestCase):
                 "height": 20,
                 "length": 15,
                 "weight": 20,
-                "quantity": 400,
-                "bucket": ObjectId("907f1f77bcf86cd799439011")
+                "quantity": 400
             }
         ]
         self.db.WoF.Items.insert_many(items_data)
@@ -250,6 +271,9 @@ class APITesting(TestCase):
         self.db.WoF.GlobalData.drop()
         self.db.WoF.Sensors.drop()
         self.db.WoF.Shelves.drop()
+        self.db.WoF.Layouts.drop()
+        self.db.WoF.Items.drop()
+        self.db.WoF.Manifests.drop()
         self.db.WoF.Racks.drop()
 
     def create_app(self):
@@ -295,35 +319,37 @@ class APITesting(TestCase):
         shelves_tests.testRoot(['id', 'height', 'rack_id'], 3, 'shelves/')
         shelves_tests.testEndpoint("c07f1f77bcf86cd799439011", 'shelves/')
 
-    # def test_layout_endpoint(self):
-    #     layout_tests = LayoutTests(self, self.client)
-    #     layout_tests.testSimple()
-    #     layout_tests.testWithTimeBefore("2022-01-01")
-    #     layout_tests.testWithTimeAfter("2020-01-01")
-    #     layout_tests.testWithTimeBeforeAndAfter("2022-01-02", "2022-01-03")
+    def test_racks_endpoint(self):
+        shelves_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
+        shelves_tests.testRoot(['id', 'width'], 2, 'racks/')
+        shelves_tests.testEndpoint("d07f1f77bcf86cd799439011", 'racks/')
 
-    # def test_manifest_endpoint(self):
-    #     manifest_tests = ManifestTests(self, self.client)
-    #     manifest_tests.testReposition()
-    #     manifest_tests.testRepositionWithTimeBefore("2022-01-01")
-    #     manifest_tests.testRepositionWithTimeAfter("2020-01-01")
-    #     manifest_tests.testRepositionWithTimeBeforeAndAfter(
-    #         "2022-01-02", "2022-01-03")
-    #     manifest_tests.testCollection()
-    #     manifest_tests.testCollectionWithTimeBefore("2022-01-01")
-    #     manifest_tests.testCollectionWithTimeAfter("2020-01-01")
-    #     manifest_tests.testCollectionWithTimeBeforeAndAfter(
-    #         "2022-01-02", "2022-01-03")
-    #     manifest_tests.testCollectionWithStaffId(
-    #         "0e1544f0b3d31188f2c7de9b")
-    #     manifest_tests.testCollectionWithAll(
-    #         "2022-01-02", "2022-01-03",
-    #         "0e1544f0b3d31188f2c7de9b")
+    def test_layout_endpoint(self):
+        layout_tests = LayoutTests(self, self.client)
+        layout_tests.testSimple()
+        layout_tests.testWithTimeBefore("2020-01-01")
+        layout_tests.testWithTimeAfter("2020-01-01")
+        layout_tests.testWithTimeBeforeAndAfter("2020-01-02", "2022-01-03")
 
-    # def test_stock_endpoint(self):
-    #     stock_tests = StockTests(self, self.client)
-    #     stock_tests.testRoot()
-    #     stock_tests.testStockWithId("9810484eb5c7829c605fc915")
+    def test_manifest_endpoint(self):
+        manifest_tests = ManifestTests(self, self.client)
+        manifest_tests.testSimple()
+        manifest_tests.testWithTimeBefore("2022-01-01")
+        manifest_tests.testWithTimeAfter("2020-01-01")
+        manifest_tests.testWithTimeBeforeAndAfter(
+            "2022-01-02", "2022-01-03")
+        manifest_tests.testWithStaffId(
+            "0e1544f0b3d31188f2c7de9b")
+        manifest_tests.testWithAll(
+            "2022-01-02", "2022-01-03",
+            "0e1544f0b3d31188f2c7de9b")
+
+    """
+    def test_stock_endpoint(self):
+        stock_tests = StockTests(self, self.client)
+        stock_tests.testRoot()
+        stock_tests.testStockWithId("9810484eb5c7829c605fc915")
+    """
 
     # ----------------------------------------------------------
     # Property Based Tests

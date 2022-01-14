@@ -54,15 +54,12 @@ class Layouts(Resource):
         time_before = args['time_before']  # Format: YYYY-MM-DD
         time_after = args['time_after']    # Format: YYYY-MM-DD
 
-        searchQuery = {}
+        searchQuery = {"time" : {}}
 
-        if time_after is not None or time_before is not None:
-            if time_before is None:
-                searchQuery["time"] = {"$lte": str(time_after)}
-            elif time_after is None:
-                searchQuery["time"] = {"$gte": str(time_before)}
-            else:
-                searchQuery["time"]["$lte"] = str(time_after)
+        if time_after is not None:
+            searchQuery["time"]["$lte"] = str(time_after)
+        if time_before is not None:
+            searchQuery["time"]["$gte"] = str(time_before)
 
         response = layoutsCollection.find(searchQuery)
 
