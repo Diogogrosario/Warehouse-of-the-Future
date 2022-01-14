@@ -310,25 +310,20 @@ class APITesting(TestCase):
         layout_tests.testWithTimeAfter("2020-01-01")
         layout_tests.testWithTimeBeforeAndAfter("2020-01-02", "2022-01-03")
 
-    """
     def test_manifest_endpoint(self):
         manifest_tests = ManifestTests(self, self.client)
-        manifest_tests.testReposition()
-        manifest_tests.testRepositionWithTimeBefore("2022-01-01")
-        manifest_tests.testRepositionWithTimeAfter("2020-01-01")
-        manifest_tests.testRepositionWithTimeBeforeAndAfter(
+        manifest_tests.testSimple()
+        manifest_tests.testWithTimeBefore("2022-01-01")
+        manifest_tests.testWithTimeAfter("2020-01-01")
+        manifest_tests.testWithTimeBeforeAndAfter(
             "2022-01-02", "2022-01-03")
-        manifest_tests.testCollection()
-        manifest_tests.testCollectionWithTimeBefore("2022-01-01")
-        manifest_tests.testCollectionWithTimeAfter("2020-01-01")
-        manifest_tests.testCollectionWithTimeBeforeAndAfter(
-            "2022-01-02", "2022-01-03")
-        manifest_tests.testCollectionWithStaffId(
+        manifest_tests.testWithStaffId(
             "0e1544f0b3d31188f2c7de9b")
-        manifest_tests.testCollectionWithAll(
+        manifest_tests.testWithAll(
             "2022-01-02", "2022-01-03",
             "0e1544f0b3d31188f2c7de9b")
 
+    """
     def test_stock_endpoint(self):
         stock_tests = StockTests(self, self.client)
         stock_tests.testRoot()
