@@ -21,7 +21,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 
 import Coloring from "../../utils/coloring";
-import AddActionForm from "../AddActionForm";
+import AddActionForm from "./AddActionForm";
 import NoResultsOverlay from "../NoResultsOverlay";
 
 export interface ReportProps {
@@ -102,6 +102,8 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 								margin: "0 10px 0 0",
 								padding: 0,
 								height: "inherit",
+								borderTopLeftRadius: "4px",
+								borderBottomLeftRadius: "4px",
 							}}
 						/>
 					</Tooltip>

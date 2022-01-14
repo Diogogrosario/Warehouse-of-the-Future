@@ -134,16 +134,10 @@ export default function App() {
 								aria-controls="app-tabpanel-0"
 							/>
 							<Tab
-								label="Logs"
+								label="Devices"
 								id="app-tab-1"
 								className="app-tab"
 								aria-controls="app-tabpanel-1"
-							/>
-							<Tab
-								label="Devices"
-								id="app-tab-2"
-								className="app-tab"
-								aria-controls="app-tabpanel-2"
 							/>
 						</Tabs>
 
@@ -158,17 +152,10 @@ export default function App() {
 						</StyledTabPanel>
 						<StyledTabPanel
 							value={selectedTab}
-							emptyComponent={<NoResultsOverlay text="No logs found" />}
+							emptyComponent={<NoResultsOverlay text="No devices found" />}
 							index={1}
 							id="app-tabpanel-1"
 							aria-labelledby="app-tab-1"
-						></StyledTabPanel>
-						<StyledTabPanel
-							value={selectedTab}
-							emptyComponent={<NoResultsOverlay text="No devices found" />}
-							index={2}
-							id="app-tabpanel-2"
-							aria-labelledby="app-tab-2"
 						></StyledTabPanel>
 
 						<FullscreenButton

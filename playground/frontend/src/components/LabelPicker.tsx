@@ -1,7 +1,6 @@
 import React from "react";
 import {
 	Autocomplete,
-	AutocompleteChangeReason,
 	autocompleteClasses,
 	AutocompleteCloseReason,
 	Box,
@@ -28,6 +27,7 @@ export interface Label {
 	name: string;
 	color: string;
 	description?: string;
+	group?: string;
 }
 
 interface PopperComponentProps {
@@ -37,7 +37,7 @@ interface PopperComponentProps {
 }
 
 const StyledPopper = styled(Popper)(({ theme }) => ({
-	border: `1px solid ${Coloring.rgba(theme.palette.white.main, 0.6)}`,
+	border: `1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
 	borderRadius: 6,
 	width: 300,
 	zIndex: theme.zIndex.modal,
@@ -52,6 +52,10 @@ const StyledPopperComponent = styled("div")(({ theme }) => ({
 		margin: 0,
 		color: "inherit",
 		fontSize: 13,
+		backgroundColor: "inherit",
+	},
+	[`& .${autocompleteClasses.noOptions}`]: {
+		color: Coloring.rgba(theme.palette.white.main, 0.6),
 	},
 	[`& .${autocompleteClasses.listbox}`]: {
 		backgroundColor: theme.palette.lightDark.main,
@@ -99,14 +103,12 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 	const [selected, setSelected] = React.useState<Label[]>([]);
-	const [searchValue, setSearchValue] = React.useState<Label[]>([]);
+	const [searchValue, setSearchValue] = React.useState<string>("");
 	const open = Boolean(anchorEl);
 
 	const closeLabelPicker = () => {
-		setSelected(searchValue);
 		if (anchorEl) anchorEl.focus();
 		setAnchorEl(null);
-		onSelectedLabelsChange?.(selected.map((label: Label) => labels.indexOf(label)));
 	};
 
 	const labelPickerId = open ? "label-picker" : undefined;
@@ -118,10 +120,9 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 					disableRipple
 					aria-describedby={labelPickerId}
 					{...buttonProps}
-					onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-						setSearchValue(selected);
-						setAnchorEl(event.currentTarget);
-					}}
+					onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) =>
+						setAnchorEl(event.currentTarget)
+					}
 					endIcon={<SettingsIcon />}
 					sx={{
 						width: "100%",
@@ -193,44 +194,25 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 						<Autocomplete
 							open
 							multiple
-							value={searchValue}
+							value={selected}
+							groupBy={( option : Label ) => option.group ?? "" }
 							onClose={(
 								event: React.SyntheticEvent,
 								reason: AutocompleteCloseReason
 							) => {
 								if (reason === "escape") closeLabelPicker();
 							}}
-							onChange={(
-								event: React.SyntheticEvent,
-								value: Label[],
-								reason: AutocompleteChangeReason
-							) => {
-								if (
-									event.type === "keydown" &&
-									(event as React.KeyboardEvent).key === "Backspace" &&
-									reason === "removeOption"
-								)
-									return;
-
-								setSearchValue(value);
+							onChange={(_: React.SyntheticEvent, value: Label[]) => {
+								setSelected(value);
+								onSelectedLabelsChange?.(
+									value.map((label) => labels.indexOf(label))
+								);
 							}}
 							disableCloseOnSelect
 							PopperComponent={PopperComponent}
 							renderTags={() => null}
 							noOptionsText="No tags"
-							options={[...labels].sort((labelA, labelB) => {
-								let labelAIdx = selected.indexOf(labelA);
-								let labelBIdx = selected.indexOf(labelB);
-								labelAIdx =
-									labelAIdx === -1
-										? selected.length + labels.indexOf(labelA)
-										: labelAIdx;
-								labelBIdx =
-									labelBIdx === -1
-										? selected.length + labels.indexOf(labelB)
-										: labelBIdx;
-								return labelAIdx - labelBIdx;
-							})}
+							options={labels}
 							sx={{
 								backgroundColor: "inherit",
 							}}
@@ -291,6 +273,14 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 								</StyledOptionComponent>
 							)}
 							getOptionLabel={(option) => option.name}
+							inputValue={searchValue}
+							onInputChange={(
+								_: React.SyntheticEvent,
+								value: string,
+								reason: string
+							) => {
+								if (reason !== "reset") setSearchValue(value);
+							}}
 							renderInput={(params) => (
 								<InputBase
 									sx={{
@@ -304,7 +294,8 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 										},
 										backgroundColor: "inherit",
 										"> input": {
-											color: "white.main",
+											color: (theme: Theme) =>
+												Coloring.rgba(theme.palette.white.main, 0.6),
 											padding: "8px",
 											"&::placeholder": {
 												opacity: 0.6,
@@ -333,6 +324,8 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 													);
 													return `rgba(${r}, ${g}, ${b}, 0.6)`;
 												},
+												color: (theme: Theme) =>
+													Coloring.rgba(theme.palette.white.main, 0.8),
 											},
 											"&:focus": {
 												boxShadow: (theme: Theme) =>
@@ -340,6 +333,7 @@ const LabelPicker: React.FC<LabelPickerProps & Record<string, any>> = (props) =>
 												border: (theme: Theme) =>
 													`1px solid ${theme.palette.white.main}`,
 												backgroundColor: "dark.main",
+												color: "white.main",
 											},
 										},
 									}}

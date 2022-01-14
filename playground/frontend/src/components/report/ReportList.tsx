@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import {
+	Box,
 	Button,
 	ButtonGroup,
 	InputBase,
@@ -8,12 +9,22 @@ import {
 	Menu,
 	MenuItem,
 	Paper,
+	TextField,
 	Theme,
 } from "@mui/material";
 import { NetworkErrorBoundary, useResource, useSubscription } from "rest-hooks";
 import SearchIcon from "@mui/icons-material/Search";
 import SortIcon from "@mui/icons-material/Sort";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 import { North, South } from "@mui/icons-material";
+import {
+	DateRange,
+	DateRangePickerDay,
+	DateRangePickerDayProps,
+	LocalizationProvider,
+	StaticDateRangePicker,
+} from "@mui/lab";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 import { ReportResource } from "../../resources/ReportResource";
 import Coloring from "../../utils/coloring";
@@ -42,30 +53,34 @@ const labels = [
 		name: "warning",
 		color: "warning.main",
 		description: "Warning reports",
+		group: "severity",
 	},
 	{
 		name: "error",
 		color: "error.main",
 		description: "Error reports",
+		group: "severity",
 	},
 	{
 		name: "open",
 		color: "green.main",
 		description: "Open reports",
+		group: "status",
 	},
 	{
 		name: "closed",
 		color: "purple.main",
 		description: "Resolved reports",
+		group: "status",
 	},
 ];
 
-// const labelFilter : ((report : ReportResource) => boolean)[] = [
-//     (report) => report.severity == "warning",
-//     (report) => report.severity == "error",
-//     (report) => report.resolved,
-//     (report) => !report.resolved,
-// ];
+const labelFilter: ((report: ReportResource) => boolean)[] = [
+	(report) => report.severity == "warning",
+	(report) => report.severity == "error",
+	(report) => !report.resolved,
+	(report) => report.resolved,
+];
 
 const ReportList: React.FC = () => {
 	const reports = useResource(ReportResource.list(), {});
@@ -86,26 +101,32 @@ const ReportList: React.FC = () => {
 	const sortMenuOpen = Boolean(sortMenuAnchorEl);
 
 	// Filtering
-	// const [selectedLabels, setSelectedLabels] = React.useState<number[]>([]);
+	const [selectedLabels, setSelectedLabels] = React.useState<number[]>([]);
+	const [dateRange, setDateRange] = React.useState<DateRange<Date>>([null, null]);
+	const [filterDateMenuAnchorEl, setFilterDateMenuAnchorEl] = React.useState<null | HTMLElement>(
+		null
+	);
+	const filterDateMenuOpen = Boolean(filterDateMenuAnchorEl);
 
 	return (
 		<AsyncBoundary>
 			<div style={{ height: "100%", display: "grid", gridTemplateRows: "auto 1fr" }}>
-				<div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
+				<div style={{ display: "grid", gridTemplateColumns: "1fr auto auto", gap: 2 }}>
 					<Paper
 						component="div"
 						sx={{
 							display: "flex",
 							alignItems: "center",
 							ml: "5px",
-							border: (theme: Theme) => Coloring.rgba(theme.palette.white.main, 0.2),
+							borderColor: (theme: Theme) =>
+								Coloring.rgba(theme.palette.white.main, 0.2),
 							backgroundColor: "transparent",
 							"&:focus-within": {
 								border: "1px solid white.main",
 								backgroundColor: "dark.main",
 							},
 							"&:hover": {
-								border: (theme: Theme) =>
+								borderColor: (theme: Theme) =>
 									Coloring.rgba(theme.palette.white.main, 0.4),
 								backgroundColor: (theme: Theme) =>
 									Coloring.rgba(theme.palette.dark.main, 0.6),
@@ -177,16 +198,230 @@ const ReportList: React.FC = () => {
 						>
 							{ascending ? <South /> : <North />}
 						</Button>
+					</ButtonGroup>
+					<ButtonGroup variant="contained" aria-label="filter options">
+						<Button
+							id="report-filter-date-button"
+							aria-label="filter reports by date range"
+							aria-describedby="report-filter-date-menu"
+							aria-haspopup="true"
+							aria-expanded={filterDateMenuOpen ? "true" : undefined}
+							color="lightDark"
+							onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+								setFilterDateMenuAnchorEl(
+									filterDateMenuAnchorEl ? null : event.currentTarget
+								)
+							}
+							style={{
+								borderTopRightRadius: 0,
+								borderBottomRightRadius: 0,
+								borderRight: "1px solid #bdbdbd",
+								borderColor: "rgb(23, 23, 23)",
+							}}
+						>
+							<DateRangeIcon />
+						</Button>
+						<Menu
+							id="report-filter-date-menu"
+							anchorEl={filterDateMenuAnchorEl}
+							open={filterDateMenuOpen}
+							onClose={() => setFilterDateMenuAnchorEl(null)}
+							sx={{
+								".MuiMenu-paper": {
+									border: (theme: Theme) =>
+										`1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
+								},
+								".MuiMenu-list": {
+									"> .MuiPickerStaticWrapper-root": {
+										backgroundColor: "inherit",
+										color: "inherit",
+										"> div": {
+											"> .PrivatePickersToolbar-root": {
+												"> .MuiTypography-root": {
+													color: (theme: Theme) =>
+														Coloring.rgba(
+															theme.palette.white.main,
+															0.6
+														),
+												},
+												".MuiGrid-root > div": {
+													"> .MuiTypography-root": {
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.6
+															),
+													},
+													"> .MuiButton-root > .MuiTypography-root": {
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.8
+															),
+														"&:hover": {
+															color: "white.main",
+														},
+													},
+												},
+											},
+											"> div:nth-last-of-type(2)": {
+												"> .MuiTypography-root": {
+													color: (theme: Theme) =>
+														Coloring.rgba(
+															theme.palette.white.main,
+															0.6
+														),
+												},
+											},
+										},
+									},
+								},
+							}}
+						>
+							<LocalizationProvider dateAdapter={AdapterDateFns}>
+								<StaticDateRangePicker
+									allowSameDateSelection
+									onChange={(newValue) => {
+										setDateRange(newValue);
+									}}
+									value={dateRange}
+									renderDay={(
+										_: Date,
+										dateRangePickerDayProps: DateRangePickerDayProps<Date>
+									) => {
+										return (
+											<DateRangePickerDay
+												{...dateRangePickerDayProps}
+												sx={{
+													color: (theme: Theme) =>
+														Coloring.rgba(
+															theme.palette.white.main,
+															0.6
+														),
+													"&:hover": {
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.8
+															),
+													},
+												}}
+											/>
+										);
+									}}
+									componentsProps={{
+										leftArrowButton: {
+											color: "white",
+										},
+										rightArrowButton: {
+											color: "white",
+										},
+									}}
+									renderInput={(startProps, endProps) => (
+										<React.Fragment>
+											<TextField
+												{...startProps}
+												InputLabelProps={{
+													shrink: true,
+													sx: {
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.4
+															),
+													},
+												}}
+												InputProps={{
+													sx: {
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.8
+															),
+														"&:hover": {
+															color: "white.main",
+															".MuiOutlinedInput-notchedOutline": {
+																borderColor: (theme: Theme) =>
+																	Coloring.rgba(
+																		theme.palette.white.main,
+																		0.6
+																	),
+															},
+														},
+														"&::placeholder": {
+															opacity: 0.6,
+														},
+														".MuiOutlinedInput-notchedOutline": {
+															borderColor: (theme: Theme) =>
+																Coloring.rgba(
+																	theme.palette.white.main,
+																	0.2
+																),
+														},
+													},
+												}}
+											/>
+											<Box sx={{ mx: 2, opacity: 0.4 }}> to </Box>
+											<TextField
+												{...endProps}
+												InputLabelProps={{
+													shrink: true,
+													sx: {
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.4
+															),
+													},
+												}}
+												InputProps={{
+													sx: {
+														color: (theme: Theme) =>
+															Coloring.rgba(
+																theme.palette.white.main,
+																0.8
+															),
+														"&:hover": {
+															color: "white.main",
+															".MuiOutlinedInput-notchedOutline": {
+																borderColor: (theme: Theme) =>
+																	Coloring.rgba(
+																		theme.palette.white.main,
+																		0.6
+																	),
+															},
+														},
+														"&::placeholder": {
+															opacity: 0.6,
+														},
+														".MuiOutlinedInput-notchedOutline": {
+															borderColor: (theme: Theme) =>
+																Coloring.rgba(
+																	theme.palette.white.main,
+																	0.2
+																),
+														},
+													},
+												}}
+											/>
+										</React.Fragment>
+									)}
+								/>
+							</LocalizationProvider>
+						</Menu>
 						<LabelPicker
 							labels={labels}
-							// onSelectedLabelsChange={(newState: number[]) =>
-							// 	setSelectedLabels(newState)
-							// }
+							onSelectedLabelsChange={(newState: number[]) => {
+								setSelectedLabels(newState);
+							}}
 							buttonProps={{
 								color: "lightDark",
+								style: {
+									borderTopLeftRadius: 0,
+									borderBottomLeftRadius: 0,
+								},
 							}}
 							style={{
-								marginLeft: "4px",
 								height: "inherit",
 							}}
 						/>
@@ -194,6 +429,27 @@ const ReportList: React.FC = () => {
 				</div>
 				<List style={{ overflow: "auto" }}>
 					{reports
+						.filter((report: ReportResource) => {
+							if (selectedLabels.length &&
+								!Object.values(selectedLabels.reduce(
+									(prevValue : {[key : string]: number[]}, labelIdx : number) => {
+										const key = labels[labelIdx].group;
+										(prevValue[key] = prevValue[key] || []).push(labelIdx);
+										return prevValue;
+									},
+									{}
+								)).every( (groupFilters : number[]) => groupFilters.some( (labelFilterIdx : number) => labelFilter[labelFilterIdx](report) ))
+							)
+								return false;
+
+							if (dateRange[0] && new Date(report.createdAt) < dateRange[0])
+								return false;
+
+							if (dateRange[1] && new Date(report.createdAt) > dateRange[1])
+								return false;
+
+							return true;
+						})
 						.sort((reportA: ReportResource, reportB: ReportResource) =>
 							reportA[sortMenuOptions[sortOption] as keyof ReportResource] ==
 							reportB[sortMenuOptions[sortOption] as keyof ReportResource]
