@@ -9,15 +9,15 @@ class StockTests():
 
     def testRoot(self):
         # stock/
-        response = self.client.get('/stock')
+        response = self.client.get('/stock/')
         stock_data = json.loads(response.data.decode('utf-8'))
         for item in stock_data:
-            self.TestClass.assertEqual(len(item), 8)
+            self.TestClass.assertEqual(len(item), 7)
             to_assert = ['width', 'height', 'length', 'weight', 'quantity']
             # Get the items from the item
-            to_assert = map(lambda x: item[x] for x in to_assert)
+            to_assert = map(lambda x: item[x], to_assert)
             # Change to_assert to a boolean list
-            to_assert = map(lambda x: int(x) > 0 for x in to_assert)
+            to_assert = map(lambda x: int(x) > 0, to_assert)
             # Assert there's only true values
             map(self.TestClass.assertTrue, to_assert)
 
@@ -28,5 +28,5 @@ class StockTests():
         stock_url = urllib.parse.quote(stock_id)
         response = self.client.get(f'/stock/{stock_url}')
         stock_data = json.loads(response.data.decode('utf-8'))
-        self.TestClass.assertEqual(len(stock_data), 8)
+        self.TestClass.assertEqual(len(stock_data), 7)
         self.TestClass.assertEqual(response.status_code, 200)

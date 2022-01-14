@@ -323,12 +323,10 @@ class APITesting(TestCase):
             "2022-01-02", "2022-01-03",
             "0e1544f0b3d31188f2c7de9b")
 
-    """
     def test_stock_endpoint(self):
         stock_tests = StockTests(self, self.client)
         stock_tests.testRoot()
-        stock_tests.testStockWithId("9810484eb5c7829c605fc915")
-    """
+        stock_tests.testStockWithId("a07f1e98bcf86cd799439011")
 
     # ----------------------------------------------------------
     # Property Based Tests
