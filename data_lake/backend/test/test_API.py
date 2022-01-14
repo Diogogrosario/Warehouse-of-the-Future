@@ -9,7 +9,7 @@ from pymongo import MongoClient
 
 from ..api import api
 
-from .shelves_unit_tests import ShelvesTests
+from .shelves_unit_tests import ShelvesBucketsRacksDeviceTests
 from .global_data_unit_tests import GlobalDataTests
 from .layout_PBT import LayoutPBT
 from .layout_unit_tests import LayoutTests
@@ -250,6 +250,7 @@ class APITesting(TestCase):
         self.db.WoF.GlobalData.drop()
         self.db.WoF.Sensors.drop()
         self.db.WoF.Shelves.drop()
+        self.db.WoF.Racks.drop()
 
     def create_app(self):
         app = Flask(__name__)
@@ -290,8 +291,9 @@ class APITesting(TestCase):
         )
 
     def test_shelves_endpoint(self):
-        shelves_tests = ShelvesTests(self, self.client)
-        shelves_tests.testEndpoint("c07f1f77bcf86cd799439011")
+        shelves_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
+        shelves_tests.testRoot(['id', 'height', 'rack_id'], 3, 'shelves/')
+        shelves_tests.testEndpoint("c07f1f77bcf86cd799439011", 'shelves/')
 
     # def test_layout_endpoint(self):
     #     layout_tests = LayoutTests(self, self.client)
