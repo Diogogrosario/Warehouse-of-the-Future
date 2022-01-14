@@ -691,8 +691,8 @@
                 ]
             },
             "gridPos": {
-                "h": 4,
-                "w": 19,
+                "h": 7,
+                "w": 9,
                 "x": 0,
                 "y": 30
             },
@@ -732,13 +732,73 @@
             "type": "table"
         },
         {
+            "datasource": null,
+            "description": "Devices data, namely its id, associated bucket id, and sensor id.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 10,
+                "x": 9,
+                "y": 30
+            },
+            "id": 24,
+            "options": {
+                "showHeader": true
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/devices",
+                    "url_options": {
+                        "data": "",
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Devices",
+            "type": "table"
+        },
+        {
             "collapsed": false,
             "datasource": null,
             "gridPos": {
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 34
+                "y": 37
             },
             "id": 11,
             "panels": [],
@@ -842,7 +902,7 @@
                 "h": 8,
                 "w": 19,
                 "x": 0,
-                "y": 35
+                "y": 38
             },
             "id": 2,
             "options": {
@@ -931,7 +991,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 43
+                "y": 46
             },
             "id": 9,
             "panels": [],
@@ -967,7 +1027,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 44
+                "y": 47
             },
             "id": 4,
             "options": {
@@ -1049,7 +1109,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 44
+                "y": 47
             },
             "id": 5,
             "options": {
@@ -1127,7 +1187,7 @@
                 "h": 10,
                 "w": 5,
                 "x": 8,
-                "y": 44
+                "y": 47
             },
             "id": 12,
             "options": {
@@ -1205,7 +1265,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 0,
-                "y": 49
+                "y": 52
             },
             "id": 6,
             "options": {
@@ -1283,7 +1343,7 @@
                 "h": 5,
                 "w": 4,
                 "x": 4,
-                "y": 49
+                "y": 52
             },
             "id": 7,
             "options": {
@@ -1352,5 +1412,5 @@
     "timezone": "",
     "title": "Data Lake",
     "uid": "BwcXP3cnz",
-    "version": 25
+    "version": 27
 }
