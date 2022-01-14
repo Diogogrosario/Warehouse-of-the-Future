@@ -9,7 +9,7 @@ from pymongo import MongoClient
 
 from ..api import api
 
-from .shelves_unit_tests import ShelvesTests
+from .shelves_unit_tests import ShelvesBucketsRacksDeviceTests
 from .global_data_unit_tests import GlobalDataTests
 from .layout_PBT import LayoutPBT
 from .layout_unit_tests import LayoutTests
@@ -31,6 +31,20 @@ class APITesting(TestCase):
         self.populateStock()
         self.populateLayouts()
         self.populateManifests()
+        self.populateRackData()
+
+    def populateRackData(self):
+        rack_data = [
+            {
+                "_id": ObjectId("d07f1f77bcf86cd799439011"),
+                "width": 240
+            },
+            {
+                "_id": ObjectId("d07f1f77bcf86cd799439012"),
+                "width": 150
+            }
+        ]
+        self.db.WoF.Racks.insert_many(rack_data)
 
     def populateShelvesData(self):
         shelves_data = [
@@ -260,6 +274,7 @@ class APITesting(TestCase):
         self.db.WoF.Layouts.drop()
         self.db.WoF.Items.drop()
         self.db.WoF.Manifests.drop()
+        self.db.WoF.Racks.drop()
 
     def create_app(self):
         app = Flask(__name__)
@@ -300,8 +315,14 @@ class APITesting(TestCase):
         )
 
     def test_shelves_endpoint(self):
-        shelves_tests = ShelvesTests(self, self.client)
-        shelves_tests.testEndpoint("c07f1f77bcf86cd799439011")
+        shelves_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
+        shelves_tests.testRoot(['id', 'height', 'rack_id'], 3, 'shelves/')
+        shelves_tests.testEndpoint("c07f1f77bcf86cd799439011", 'shelves/')
+
+    def test_racks_endpoint(self):
+        shelves_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
+        shelves_tests.testRoot(['id', 'width'], 2, 'racks/')
+        shelves_tests.testEndpoint("d07f1f77bcf86cd799439011", 'racks/')
 
     def test_layout_endpoint(self):
         layout_tests = LayoutTests(self, self.client)
