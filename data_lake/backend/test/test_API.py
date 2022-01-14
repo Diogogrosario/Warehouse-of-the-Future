@@ -9,7 +9,7 @@ from pymongo import MongoClient
 
 from ..api import api
 
-from .shelves_unit_tests import ShelvesBucketsRacksDeviceTests
+from .general_unit_tests import ShelvesBucketsRacksDeviceTests
 from .global_data_unit_tests import GlobalDataTests
 from .layout_PBT import LayoutPBT
 from .layout_unit_tests import LayoutTests
@@ -32,6 +32,32 @@ class APITesting(TestCase):
         self.populateLayouts()
         self.populateManifests()
         self.populateRackData()
+        self.populateBucketsData()
+
+    def populateBucketsData(self):
+        buckets_data = [
+            {
+                "_id": ObjectId("e07f1f77bcf86cd799439011"),
+                "width": 32,
+                "height": 50,
+                "length": 33,
+                "position": [1, 2, 3],
+                "item_id": ObjectId("e07f1f77bcf86cd799439012"),
+                "quantity": 2,
+                "shelf_id": ObjectId("e07f1f77bcf86cd799439013")
+            },
+            {
+                "_id": ObjectId("e07f1f77bcf86cd799439014"),
+                "width": 23,
+                "height": 19,
+                "length": 30,
+                "position": [4, 5, 6],
+                "item_id": ObjectId("e07f1f77bcf86cd799439015"),
+                "quantity": 5,
+                "shelf_id": ObjectId("e07f1f77bcf86cd799439016")
+            }
+        ]
+        self.db.WoF.Buckets.insert_many(buckets_data)
 
     def populateRackData(self):
         rack_data = [
@@ -275,6 +301,7 @@ class APITesting(TestCase):
         self.db.WoF.Items.drop()
         self.db.WoF.Manifests.drop()
         self.db.WoF.Racks.drop()
+        self.db.WoF.Buckets.drop()
 
     def create_app(self):
         app = Flask(__name__)
@@ -316,13 +343,10 @@ class APITesting(TestCase):
 
     def test_shelves_endpoint(self):
         shelves_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
-        shelves_tests.testRoot(['id', 'height', 'rack_id'], 3, 'shelves/')
-        shelves_tests.testEndpoint("c07f1f77bcf86cd799439011", 'shelves/')
-
-    def test_racks_endpoint(self):
-        shelves_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
-        shelves_tests.testRoot(['id', 'width'], 2, 'racks/')
-        shelves_tests.testEndpoint("d07f1f77bcf86cd799439011", 'racks/')
+        keys = ['id', 'height', 'rack_id']
+        path = 'shelves/'
+        shelves_tests.testRoot(keys, len(keys), path)
+        shelves_tests.testEndpoint("c07f1f77bcf86cd799439011", path)
 
     def test_layout_endpoint(self):
         layout_tests = LayoutTests(self, self.client)
@@ -344,10 +368,27 @@ class APITesting(TestCase):
             "2022-01-02", "2022-01-03",
             "0e1544f0b3d31188f2c7de9b")
 
+    def test_racks_endpoint(self):
+        racks_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
+        keys = ['id', 'width']
+        path = 'racks/'
+        racks_tests.testRoot(keys, len(keys), path)
+        racks_tests.testEndpoint("d07f1f77bcf86cd799439011", path)
+
     def test_stock_endpoint(self):
         stock_tests = StockTests(self, self.client)
         stock_tests.testRoot()
         stock_tests.testStockWithId("a07f1e98bcf86cd799439011")
+
+    def test_buckets_endpoint(self):
+        buckets_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
+        keys = [
+            'id', 'width', 'height', 'length', 'position',
+            'item_id', 'quantity', 'shelf_id'
+        ]
+        path = "buckets/"
+        buckets_tests.testRoot(keys, len(keys), path)
+        buckets_tests.testEndpoint("e07f1f77bcf86cd799439011", path)
 
     # ----------------------------------------------------------
     # Property Based Tests

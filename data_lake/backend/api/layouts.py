@@ -35,9 +35,12 @@ layoutAttributes = namespace.model("Layout", {
 
 parser = reqparse.RequestParser()
 parser.add_argument("time_after", required=False, type=inputs.date,
-                    help="The lower bound for the timestamp of layouts (Format YYYY-MM-DD).")
+                    help="The lower bound for the timestamp of layouts " +
+                    "(Format YYYY-MM-DD).")
 parser.add_argument("time_before", required=False, type=inputs.date,
-                    help="The upper bound for the timestamp of layouts (Format YYYY-MM-DD) .")
+                    help="The upper bound for the timestamp of layouts " +
+                    "(Format YYYY-MM-DD) .")
+
 
 @namespace.route("/")
 class Layouts(Resource):
@@ -54,7 +57,7 @@ class Layouts(Resource):
         time_before = args['time_before']  # Format: YYYY-MM-DD
         time_after = args['time_after']    # Format: YYYY-MM-DD
 
-        searchQuery = {"time" : {}}
+        searchQuery = {"time": {}}
 
         if time_after is not None:
             searchQuery["time"]["$lte"] = str(time_after)

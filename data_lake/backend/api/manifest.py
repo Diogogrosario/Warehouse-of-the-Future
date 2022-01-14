@@ -15,8 +15,15 @@ namespace = Namespace("Manifests", path="/manifests",
 # ------------------------------------------------------------------------------
 
 itemAttributes = namespace.model("ManifestItem", {
-    "item_id": fields.String(required=True, attribute="item_id.$oid", description="Item in manifest"),
-    "quantity": fields.Integer(required=True, description="Item quantity in manifest"),
+    "item_id": fields.String(
+        required=True,
+        attribute="item_id.$oid",
+        description="Item in manifest"
+    ),
+    "quantity": fields.Integer(
+        required=True,
+        description="Item quantity in manifest"
+    ),
 })
 
 manifestAttributes = namespace.model("Manifest", {
@@ -38,9 +45,11 @@ manifestAttributes = namespace.model("Manifest", {
 
 parser = reqparse.RequestParser()
 parser.add_argument("time_after", required=False, type=inputs.date,
-                    help="The lower bound for the timestamp of manifests (Format YYYY-MM-DD).")
+                    help="The lower bound for the timestamp of manifests " +
+                    "(Format YYYY-MM-DD).")
 parser.add_argument("time_before", required=False, type=inputs.date,
-                    help="The upper bound for the timestamp of manifests (Format YYYY-MM-DD).")
+                    help="The upper bound for the timestamp of manifests " +
+                    "(Format YYYY-MM-DD).")
 
 
 # ------------------------------------------------------------------------------
