@@ -87,12 +87,12 @@ class SensorInformationWithTimestamps(Resource):
 
         searchQuery = {"_id": ObjectId(id)}
 
-        if time_before is not None:
-            searchQuery["staff_contacts.time"] = {"$gte": str(time_before)}
-        if time_after is not None and time_before is not None:
-            searchQuery["staff_contacts.time"]["$lte"] = str(time_after)
-        elif time_after is not None and time_before is None:
-            searchQuery["staff_contacts.time"] = {"$lte": str(time_after)}
+        if time_before is not None or time_after is not None:
+            searchQuery["staff_contacts.time"] = {}
+            if time_before is not None:
+                searchQuery["staff_contacts.time"]["$gte"] = str(time_before)
+            if time_after is not None:
+                searchQuery["staff_contacts.time"]["$lte"] = str(time_after)
 
         document = sensorsCollection.aggregate([
             {"$unwind": "$staff_contacts"},
@@ -160,12 +160,12 @@ class SensorMovements(Resource):
 
         searchQuery = {"_id": ObjectId(id)}
 
-        if time_before is not None:
-            searchQuery["movement_records"] = {"$gte": str(time_before)}
-        if time_after is not None and time_before is not None:
-            searchQuery["movement_records"]["$lte"] = str(time_after)
-        elif time_after is not None and time_before is None:
-            searchQuery["movement_records"] = {"$lte": str(time_after)}
+        if time_before is not None or time_after is not None:
+            searchQuery["movement_records"] = {}
+            if time_before is not None:
+                searchQuery["movement_records"]["$gte"] = str(time_before)
+            if time_after is not None:
+                searchQuery["movement_records"]["$lte"] = str(time_after)
 
         document = sensorsCollection.aggregate([
             {"$unwind": "$movement_records"},
