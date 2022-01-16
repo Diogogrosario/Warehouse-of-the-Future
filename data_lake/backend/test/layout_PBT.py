@@ -19,6 +19,6 @@ class LayoutPBT():
         for data in layout_data:
             data_time = datetime.strptime(
                 data['time'],
-                '%Y-%m-%dT%H:%M:%S%z').replace(tzinfo=None)
+                '%Y-%m-%d %H:%M:%S').replace(tzinfo=None)
             self.TestClass.assertTrue(time_before <= data_time)
             self.TestClass.assertTrue(time_after >= data_time)
