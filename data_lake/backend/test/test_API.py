@@ -242,10 +242,12 @@ class APITesting(TestCase):
             {
                 "_id": ObjectId("a07f1e00bcf86cd799439011"),
                 "time": str(datetime.datetime(2021, 8, 11)),
-                "items": {
-                    "item_id": ObjectId("a07f1e98bcf86cd799439011"),
-                    "quantity": 2
-                },
+                "items": [
+                    {
+                        "item_id": ObjectId("a07f1e98bcf86cd799439011"),
+                        "quantity": 2
+                    }
+                ],
                 "staff_id": ObjectId("a07f1f77bcf86cd799439011")
             }, {
                 "_id": ObjectId("a07f1e00bcf86cd799439012"),
@@ -260,7 +262,7 @@ class APITesting(TestCase):
             }, {
                 "_id": ObjectId("a07f1e00bcf86cd799439013"),
                 "time": str(datetime.datetime(2020, 8, 11)),
-                "items": {},
+                "items": [],
                 "staff_id": ObjectId("a07f1f77bcf86cd799439011")
             }
         ]
@@ -496,18 +498,21 @@ class APITesting(TestCase):
 
     # Manifests
 
-    # @settings(max_examples=15, deadline=None)
-    # @given(st.tuples(st.datetimes(), st.datetimes()).filter(
-    #     lambda x: x[0] < x[1]
-    #     and x[0].year > 999
-    #     and x[1].year > 999
-    #     and x[0].year != x[1].year
-    #     and x[0].month != x[1].month
-    #     and x[0].day != x[1].day))
-    # def test_manifest_endpoint_PBT(self, times):
-    #     global_tests = ManifestPBT(self, self.client)
-    #     time_before, time_after = times
-    #     global_tests.testManifestWithTimeBeforeAndAfter(
-    #         time_before,
-    #         time_after
-    #     )
+    @settings(max_examples=15,
+             deadline=None,
+             suppress_health_check=(HealthCheck.data_too_large,)
+    )
+    @given(st.tuples(st.datetimes(), st.datetimes()).filter(
+        lambda x: x[0] < x[1]
+        and x[0].year > 999
+        and x[1].year > 999
+        and x[0].year != x[1].year
+        and x[0].month != x[1].month
+        and x[0].day != x[1].day))
+    def test_manifest_endpoint_PBT(self, times):
+        manifest_tests = ManifestPBT(self, self.client)
+        time_before, time_after = times
+        manifest_tests.testManifestPBTWithTimeBeforeAndAfter(
+            time_before,
+            time_after
+        )
