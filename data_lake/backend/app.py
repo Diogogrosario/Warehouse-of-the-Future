@@ -1,9 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from api.init import api
-from dotenv import load_dotenv
-
-load_dotenv()
+from api import api
 
 app = Flask(__name__)
 

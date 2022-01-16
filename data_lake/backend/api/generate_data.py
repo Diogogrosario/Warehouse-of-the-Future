@@ -541,7 +541,7 @@ class Cart(Resource):
         """
 
         cart = {
-            "start_position":  [SUPER_RACK2_MAX_WIDTH//2, 0],
+            "start_position": [SUPER_RACK2_MAX_WIDTH//2, 0],
             "speed": round(random.uniform(500, 1000), 2),
             "start_time": "07:00",
             "end_time": "19:00"

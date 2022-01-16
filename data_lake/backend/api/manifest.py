@@ -15,8 +15,15 @@ namespace = Namespace("Manifests", path="/manifests",
 # ------------------------------------------------------------------------------
 
 itemAttributes = namespace.model("ManifestItem", {
-    "item_id": fields.String(required=True, attribute="item_id.$oid", description="Item in manifest"),
-    "quantity": fields.Integer(required=True, description="Item quantity in manifest"),
+    "item_id": fields.String(
+        required=True,
+        attribute="item_id.$oid",
+        description="Item in manifest"
+    ),
+    "quantity": fields.Integer(
+        required=True,
+        description="Item quantity in manifest"
+    ),
 })
 
 manifestAttributes = namespace.model("Manifest", {
@@ -38,9 +45,11 @@ manifestAttributes = namespace.model("Manifest", {
 
 parser = reqparse.RequestParser()
 parser.add_argument("time_after", required=False, type=inputs.date,
-                    help="The lower bound for the timestamp of manifests (Format YYYY-MM-DD).")
+                    help="The lower bound for the timestamp of manifests " +
+                    "(Format YYYY-MM-DD).")
 parser.add_argument("time_before", required=False, type=inputs.date,
-                    help="The upper bound for the timestamp of manifests (Format YYYY-MM-DD).")
+                    help="The upper bound for the timestamp of manifests " +
+                    "(Format YYYY-MM-DD).")
 
 
 # ------------------------------------------------------------------------------
@@ -50,7 +59,7 @@ parser.add_argument("time_before", required=False, type=inputs.date,
 parser.add_argument("staff_id", required=False, type=str,
                     help="The ID of the responsible staff.")
 
- 
+
 @namespace.route("/")
 class CollectionManifests(Resource):
     @namespace.marshal_list_with(manifestAttributes)
@@ -67,18 +76,15 @@ class CollectionManifests(Resource):
         time_before = args['time_before']  # Format: YYYY-MM-DD
         time_after = args['time_after']    # Format: YYYY-MM-DD
 
-        searchQuery = {}
+        searchQuery = {"time": {}}
 
         if staff_id is not None:
             searchQuery["staff_id"] = ObjectId(staff_id)
 
-        if time_after is not None or time_before is not None:
-            if time_before is None:
-                searchQuery["time"] = {"$lte": str(time_after)}
-            elif time_after is None:
-                searchQuery["time"] = {"$gte": str(time_before)}
-            else:
-                searchQuery["time"]["$lte"] = str(time_after)
+        if time_after is not None:
+            searchQuery["time"]["$lte"] = str(time_after)
+        if time_before is not None:
+            searchQuery["time"]["$gte"] = str(time_before)
 
         response = manifestCollection.find(searchQuery)
 
