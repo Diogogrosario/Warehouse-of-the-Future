@@ -19,7 +19,10 @@ staffAttributes = namespace.model("Staff", {
 of the staff member"),
     "name": fields.String(required=True, description="The name of this staff \
 member"),
-    "birth_date": fields.String(required=True, description="Birth date of this staff member"),
+    "birth_date": fields.String(
+        required=True,
+        description="Birth date of this staff member"
+    ),
     "height": fields.Integer(require=True, description="Staff member age")
 })
 
@@ -54,14 +57,17 @@ class StaffQuery(Resource):
         searchQuery = {}
 
         if age is not None:
-            today = datetime.date.today()
+            try:
+                today = datetime.date.today()
 
-            dt = datetime.datetime(
-                year=today.year - age,
-                month=today.month,
-                day=today.day
-            )
-            searchQuery["birth_date"] = {"$lte": str(dt)}
+                dt = datetime.datetime(
+                    year=today.year - age,
+                    month=today.month,
+                    day=today.day
+                )
+                searchQuery["birth_date"] = {"$lte": str(dt)}
+            except Exception:
+                return json.loads(json_util.dumps([]))
 
         if name is not None:
             searchQuery["name"] = name
