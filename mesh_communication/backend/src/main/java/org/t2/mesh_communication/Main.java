@@ -51,7 +51,8 @@ public class Main {
         // add devices (and orchestrator)
         this.orchestrator =
                 new Orchestrator(
-                        devices.get(MeshGrid.ORCHESTRATOR_ID), new FloodStrategy(this.meshGrid));
+                        devices.get(MeshGrid.ORCHESTRATOR_ID),
+                        new FloodStrategy(this.meshGrid, Config.getInstance().timeToLive));
         devices.remove(MeshGrid.ORCHESTRATOR_ID);
         this.meshGrid.addDevice(this.orchestrator);
         this.meshGrid.addDevices(devices);
@@ -97,7 +98,8 @@ public class Main {
         // add devices (and orchestrator)
         this.orchestrator =
                 new Orchestrator(
-                        devices.get(MeshGrid.ORCHESTRATOR_ID), new FloodStrategy(this.meshGrid));
+                        devices.get(MeshGrid.ORCHESTRATOR_ID),
+                        new FloodStrategy(this.meshGrid, Config.getInstance().timeToLive));
         devices.remove(MeshGrid.ORCHESTRATOR_ID);
         this.meshGrid.addDevice(this.orchestrator);
         this.meshGrid.addDevices(devices);

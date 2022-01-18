@@ -12,6 +12,8 @@ public class Config {
     public int receivingConsumption;
     public int sendingConsumption;
 
+    public int timeToLive;
+
     private Config() {
         Config.instance = this;
     }
@@ -34,6 +36,8 @@ public class Config {
                 + "\nreceivingConsumption: "
                 + receivingConsumption
                 + "\nsendingConsumption: "
-                + sendingConsumption;
+                + sendingConsumption
+                + "\ntimeToLive: "
+                + timeToLive;
     }
 }
