@@ -13,6 +13,7 @@ import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.Orchestrator;
 import org.t2.mesh_communication.devices.Position;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
+import org.t2.mesh_communication.devices.components.BatteryObserver;
 import org.t2.mesh_communication.log.Logger;
 
 @Component
@@ -20,10 +21,12 @@ public class Main {
     private Orchestrator orchestrator;
     private MeshGrid meshGrid;
     private List<Product> products;
+    private BatteryObserver batteryObserver;
 
     public Main() {
         this.meshGrid = new MeshGrid();
         this.products = new ArrayList<>();
+        batteryObserver = BatteryObserver.getInstance();
     }
 
     public Orchestrator getOrchestrator() {
@@ -126,7 +129,12 @@ public class Main {
         for (int i = 0; i < n; ++i) {
             System.out.println("Tick " + Logger.getInstance().getTick());
             if (!meshGrid.update()) System.out.println("No updates...");
+
+            // print total battery consumption for current tick
+            System.out.println(batteryObserver);
+
             Logger.getInstance().nextTick();
+            batteryObserver.reset(); // reset tick battery consumption count
         }
     }
 
