@@ -231,7 +231,7 @@ class Layout:
                     num_intervals = len(type_products) - 1
                     biggest_differences = sorted(differences, reverse=True)[:num_intervals]
 
-                    difference_sum = sum(biggest_differences)
+                    difference_sum = sum(biggest_differences) / (len(biggest_differences)**5)
                     shelves_similarities_scores[shelf.id] -= 1/difference_sum if difference_sum != 0 else 1/len(type_products)
 
                 if len(repeated_types) > 0:
@@ -240,7 +240,7 @@ class Layout:
             for id, dic in shelves_count_types.items():
                 if dic:
                     repeated_values = sum(dic.values()) - len(dic)
-                    minimize_errors_score += 1/(2**repeated_values) if repeated_values != 0 else 1
+                    minimize_errors_score += 1/(1.5**repeated_values)
                     minimize_errors_score += shelves_similarities_scores[id]
 
                 max_score = 2*len(self.warehouse.shelves)
