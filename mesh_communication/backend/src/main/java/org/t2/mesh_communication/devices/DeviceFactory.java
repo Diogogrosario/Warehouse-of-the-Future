@@ -20,14 +20,7 @@ public class DeviceFactory {
         FloodStrategy strat = new FloodStrategy(grid, ttl);
 
         return new Device(
-                id,
-                pos,
-                strat,
-                receivingConsumption,
-                sendingConsumption,
-                range,
-                battery,
-                screen);
+                id, pos, strat, receivingConsumption, sendingConsumption, range, battery, screen);
     }
 
     public static Device deviceFromConfig(int id, Position pos, MeshGrid grid) {
