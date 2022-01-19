@@ -36,12 +36,12 @@ public class DeviceTests {
         Position pos = new Position(1, 1);
         Battery bat = new Battery(50, 7);
         Screen screen = new Screen(5, 10);
-        Device device1 = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
+        Device device1 = new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
 
         Position pos2 = new Position(1, 1);
         Battery bat2 = new Battery(50, 7);
         Screen screen2 = new Screen(5, 10);
-        Device device2 = new Device(2, pos2, new FloodStrategy(mg), 10, 10, bat2, screen2);
+        Device device2 = new Device(2, pos2, new FloodStrategy(mg), 10, 10, 1, bat2, screen2);
 
         when(mg.getDevices())
                 .thenAnswer(

@@ -12,6 +12,7 @@ public class Config {
     public int receivingConsumption;
     public int sendingConsumption;
 
+    public int deviceRange;
     public int timeToLive;
 
     private Config() {
@@ -37,6 +38,8 @@ public class Config {
                 + receivingConsumption
                 + "\nsendingConsumption: "
                 + sendingConsumption
+                + "\ndeviceRange: "
+                + deviceRange
                 + "\ntimeToLive: "
                 + timeToLive;
     }

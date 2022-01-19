@@ -12,13 +12,23 @@ public class DeviceFactory {
         int sendingConsumption = c.sendingConsumption;
         int ttl = c.timeToLive;
 
+        int range = c.deviceRange;
+        int ttl = c.timeToLive;
+
         Battery battery = new Battery(c.totalBattery, c.batIdleConsumption);
         Screen screen = new Screen(c.screenIdleConsumption, c.screenOnConsumption);
 
         FloodStrategy strat = new FloodStrategy(grid, ttl);
 
         return new Device(
-                id, pos, strat, receivingConsumption, sendingConsumption, battery, screen);
+                id,
+                pos,
+                strat,
+                receivingConsumption,
+                sendingConsumption,
+                range,
+                battery,
+                screen);
     }
 
     public static Device deviceFromConfig(int id, Position pos, MeshGrid grid) {
