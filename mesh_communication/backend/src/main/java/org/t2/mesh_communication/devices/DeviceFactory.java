@@ -10,6 +10,8 @@ public class DeviceFactory {
     public static Device deviceFromConfig(Config c, int id, Position pos, MeshGrid grid) {
         int receivingConsumption = c.receivingConsumption;
         int sendingConsumption = c.sendingConsumption;
+
+        int range = c.deviceRange;
         int ttl = c.timeToLive;
 
         Battery battery = new Battery(c.totalBattery, c.batIdleConsumption);
@@ -18,7 +20,14 @@ public class DeviceFactory {
         FloodStrategy strat = new FloodStrategy(grid, ttl);
 
         return new Device(
-                id, pos, strat, receivingConsumption, sendingConsumption, battery, screen);
+                id,
+                pos,
+                strat,
+                receivingConsumption,
+                sendingConsumption,
+                range,
+                battery,
+                screen);
     }
 
     public static Device deviceFromConfig(int id, Position pos, MeshGrid grid) {

@@ -23,8 +23,8 @@ public class MeshGridTests {
         Position pos = new Position(1, 1);
         Position fakePos = new Position(1, 2);
 
-        MeshDevice device1 = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
-        MeshDevice device2 = new Device(2, pos, new FloodStrategy(mg), 10, 10, bat, screen);
+        MeshDevice device1 = new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
+        MeshDevice device2 = new Device(2, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
 
         mg.addDevice(device1);
         assertEquals(1, mg.getDevices().size());
@@ -62,6 +62,7 @@ public class MeshGridTests {
                             new FloodStrategy(meshGrid),
                             0,
                             0,
+                            1,
                             bat,
                             Mockito.mock(Screen.class));
             meshGrid.addDevice(d);
@@ -76,6 +77,7 @@ public class MeshGridTests {
                         new FloodStrategy(meshGrid),
                         0,
                         0,
+                        1,
                         bat_dead,
                         Mockito.mock(Screen.class));
         meshGrid.addDevice(toBeDead);

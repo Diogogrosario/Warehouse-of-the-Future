@@ -20,10 +20,10 @@ public class Device extends MeshDevice {
             CommunicationStrategy commStrat,
             int receivingConsumption,
             int sendingConsumption,
+            int range,
             Battery battery,
             Screen screen) {
-        // TODO don't hard code range
-        super(id, pos, 1, commStrat);
+        super(id, pos, range, commStrat);
 
         this.receivingConsumption = receivingConsumption;
         this.sendingConsumption = sendingConsumption;
