@@ -1,6 +1,8 @@
 import math
 import random
 import sys
+import operator
+import itertools
 import random as r
 import numpy as np
 from copy import deepcopy
@@ -193,13 +195,68 @@ class Layout:
 
             score += organization_score / max_score
 
-        # Penalize layouts with products out
+        if 'minimize-errors' in self.metrics_to_optimize:
+            minimize_errors_score = 0
 
+            shelves_count_types = {} # shelf_id : [{type_x : num_x, type_y, num_y, ...}, ...]
+            shelves_similarities_scores = {} # shelf_id : score
+
+            for shelf in self.warehouse.shelves:
+                count_types = {}  # { type_x : n_products_type_x }
+                products_properties = {} # type_x : [[prod_1_height, prod_1_width, prod_1_weight], ...]
+    
+                for rack in shelf.racks:
+                    for product in rack.products:
+                        if product.type_id not in count_types:
+                            count_types[product.type_id] = 1
+                        else:
+                            count_types[product.type_id] += 1
+
+                        if product.type_id not in products_properties:
+                            products_properties[product.type_id] = [[float(product.height), float(product.width), float(product.weight)]]
+                        else:
+                            products_properties[product.type_id].append([float(product.height), float(product.width), float(product.weight)])
+
+                shelves_count_types[shelf.id] = count_types
+
+                repeated_types = []
+                for p_type, products in products_properties.items():
+                    if len(products) > 1:
+                        repeated_types.append(products)
+
+                shelves_similarities_scores[shelf.id] = len(repeated_types) if len(repeated_types) > 0 else 1
+                for type_products in repeated_types:
+                    product_pairs = list(itertools.combinations(type_products, 2))
+                    differences = []
+                    for pair in product_pairs:
+                        dif = np.linalg.norm(np.array(pair[0]) - np.array(pair[1]))
+                        differences.append(dif)
+
+                    num_intervals = len(type_products) - 1
+                    biggest_differences = sorted(differences, reverse=True)[:num_intervals]
+
+                    difference_sum = sum(biggest_differences) / (len(biggest_differences)**5)
+                    shelves_similarities_scores[shelf.id] -= 1/difference_sum if difference_sum != 0 else 1/len(type_products)
+
+                if len(repeated_types) > 0:
+                    shelves_similarities_scores[shelf.id] = shelves_similarities_scores[shelf.id] / len(repeated_types)
+
+            for id, dic in shelves_count_types.items():
+                if dic:
+                    repeated_values = sum(dic.values()) - len(dic)
+                    minimize_errors_score += 1/(1.5**repeated_values)
+                    minimize_errors_score += shelves_similarities_scores[id]
+
+                max_score = 2*len(self.warehouse.shelves)
+
+            score += minimize_errors_score / max_score
+
+        # Penalize layouts with products out
         score -= len(self.products_out) * 100
 
         return score
 
-    def remove_product(self, product):
+    def remove_product(self, product):   # username : { ip: , port: , followers:[] , following:[] }
         for shelf in self.warehouse.shelves:
             for rack in shelf.racks:
                 for prod in rack.products:

@@ -95,12 +95,13 @@ def dump_results_to_database(layout):
                 db.df_query(query_insert_out_product_rack, [x_orig, x_end, result_id, rack.id, product.id])
 
 
-def main(docker=False, list_parameters=None):
+def main(docker=False, metrics=None):
     global db
     global storage
 
-    if list_parameters is None:
-        list_parameters = []
+    # FOR TESTING PURPOSES (delete before delivery of the project)
+    # if metrics is None: 
+    #     metrics = ['minimize-errors']
 
     # Overwrite Database configs if Docker tag is defined
     if docker:
@@ -120,9 +121,9 @@ def main(docker=False, list_parameters=None):
 
     warehouse = storage.create_warehouse(warehouse_id)
 
-    initial_population = generate_population(warehouse, 10, list_parameters)
+    initial_population = generate_population(warehouse, 10, metrics)
 
-    final_layout = genetic_algorithm(warehouse, initial_population, MAX_ITERATIONS, list_parameters)
+    final_layout = genetic_algorithm(warehouse, initial_population, MAX_ITERATIONS, metrics)
 
     print('----- FINAL LAYOUT -----')
 
