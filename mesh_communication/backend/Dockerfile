@@ -4,8 +4,7 @@
 FROM maven:3.8.3-openjdk-17-slim AS build
 WORKDIR /app
 
-COPY src src
-COPY pom.xml .
+COPY . .
 RUN mvn -B -f pom.xml clean package -DskipTests
 
 ################
