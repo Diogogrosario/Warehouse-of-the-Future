@@ -1,20 +1,26 @@
+import random
+
+import pandas as pd
+import requests
+
 from warehouse import Warehouse, Shelf, Rack, Product
+
 
 class Storage:
     def __init__(self, db):
         self.db = db
 
         query_shelf = "SELECT * FROM Shelf"
+        query_types = "SELECT id FROM Product_Type"
         query_rack = "SELECT * FROM Rack"
-        query_product = "SELECT * FROM Product"
         query_month_manifesto_product = "SELECT * FROM Month_Manifesto_Product"
 
         self.df_shelves = db.df_query(query_shelf)
         self.df_racks = db.df_query(query_rack)
-        self.df_products = db.df_query(query_product)
+        self.df_types = db.df_query(query_types)
         self.df_month_manifesto_products = db.df_query(query_month_manifesto_product)
 
-        self.products = self.create_products(self.df_products)
+        self.products = self.create_products()
 
     def get_manifestos(self, manifestos):
         manifestos_dict = {}
@@ -27,12 +33,32 @@ class Storage:
 
         return manifestos_dict
 
-    def create_products(self, df_products):
-        products = []
+    def create_products(self):
 
+        list_types = self.df_types['id'].to_list()
+
+        response = requests.get('http://localhost:8001/stock/')
+
+        if response.status_code != 200:
+            print("Error Fetching Database Products")
+            return
+
+        df_products = pd.DataFrame.from_records(response.json())
+
+        products = []
+        counter = 1
         for _, p in df_products.iterrows():
-            product = Product(p['id'], p['name'], p['height'], p['width'], p['weight'], p['type_id'], p['frequency'])
+
+            if len(list_types) == 0:
+                product_type = random.randint(0, 10)
+            else:
+                product_type = random.choice(list_types)
+
+            product = Product(counter, p['designation'], p['height'], p['width'], p['weight'], product_type,
+                              random.uniform(0.0, 1.0))
             products.append(product)
+
+            counter += 1
 
         return products
 
@@ -59,7 +85,7 @@ class Storage:
             warehouse.add_shelf(shelf)
 
         return warehouse
-    
+
     def calculate_frequencies(self):
         for product in self.products:
             self.db.df_query(f"CALL calculate_product_frequency({product.id})")

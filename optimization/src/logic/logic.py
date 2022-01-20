@@ -100,7 +100,9 @@ def main(docker=False, list_parameters=None):
     global storage
 
     if list_parameters is None:
-        list_parameters = []
+        list_parameters = {'frequency': {
+            'factor': 1
+        }}
 
     # Overwrite Database configs if Docker tag is defined
     if docker:
@@ -112,7 +114,6 @@ def main(docker=False, list_parameters=None):
         storage = Storage(db)
 
     query_warehouse = "SELECT * FROM Warehouse"
-    # query_month_manifesto = "SELECT * FROM Month_Manifesto"
 
     warehouses = db.df_query(query_warehouse)
 
