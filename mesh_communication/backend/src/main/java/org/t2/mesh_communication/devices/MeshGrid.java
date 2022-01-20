@@ -15,9 +15,30 @@ public class MeshGrid {
     private MeshDevice orchestrator;
     private List<MeshDevice> devices;
 
+    private int nTicks;
+    private int lastTickBat;
+
     public MeshGrid() {
         this.orchestrator = null;
         this.devices = new ArrayList<>();
+        this.nTicks = 0;
+        this.lastTickBat = 0;
+    }
+
+    public int getCurrentBat() {
+        int bat = 0;
+        for (MeshDevice md : devices) {
+            bat += md.getBattery().getRemainingBattery();
+        }
+        return bat;
+    }
+
+    public int getNTicks() {
+        return nTicks;
+    }
+
+    public int getLastTickBat() {
+        return lastTickBat;
     }
 
     public MeshDevice getOrchestrator() {
@@ -54,6 +75,8 @@ public class MeshGrid {
 
     public boolean update() {
         boolean hadUpdates = false;
+        this.lastTickBat = this.getCurrentBat();
+        this.nTicks++;
 
         for (MeshDevice md : this.devices) {
             if (md.update()) hadUpdates = true;
@@ -73,5 +96,13 @@ public class MeshGrid {
             MeshDevice d = DeviceFactory.deviceFromConfig(id, pos, this);
             this.addDevice(d);
         }
+    }
+
+    public int getTotalInnitialBat() {
+        int total = 0;
+        for (MeshDevice md : this.devices) {
+            total += md.getBattery().getTotalBattery();
+        }
+        return total;
     }
 }

@@ -303,7 +303,29 @@ paths:
                 Device 6:
                   - "Received message: [source=0], [msg=padoru], [lastHop=0]"
                   - "Relaying message: [destination=8], [msg=padoru]"
-
+  /metrics:
+    get:
+      summary: Gets metrics with which the communication is evaluated
+      operationId: getMetrics
+      description:
+        "Path that returns, for the whole communication, some metrics to serve as evaluation."
+      responses:
+        200:
+          description: "Success: Received all logs"
+          content:
+            application/json:
+              schema:
+                description: "Dictionary in which its keys are the metrics, and its values are a number which represents the metric's score"
+                type: object
+                additionalProperties:
+                  items:
+                    $ref: '#/components/schemas/metrics'
+              example:
+                  batTick: 10
+                  batCommunication: 20
+                  failed: 0
+                  tick: 2
+                  
 components:
   schemas:
     SendMessage:
@@ -328,7 +350,22 @@ components:
         failed:
           description: "Wether or not the message was lost in the current tick"
           type: boolean
-
+    Metrics:
+      type: object
+      properties:
+        batTick:
+          description: "Battery consumed in the last tick"
+          type: integer
+        batCommunication:
+          description: "Battery consumed in the whole communication"
+          type: integer
+        failed:
+          description: "Number of failures that happened in the system"
+          type: integer
+        tick:
+          description: "Number of tick since the beginning of the communication"
+          type: integer
+        
     Device:
       type: object
 

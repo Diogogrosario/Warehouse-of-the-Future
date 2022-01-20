@@ -4,6 +4,7 @@ import java.util.List;
 import org.t2.mesh_communication.config.Product;
 import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
+import org.t2.mesh_communication.devices.components.OrchestratorBattery;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
@@ -12,7 +13,7 @@ import org.t2.mesh_communication.log.Logger;
 public class Orchestrator extends MeshDevice {
     public Orchestrator(Position pos, CommunicationStrategy commStrat) {
         // TODO don't hard code range
-        super(MeshGrid.ORCHESTRATOR_ID, pos, 1, commStrat);
+        super(MeshGrid.ORCHESTRATOR_ID, pos, 1, commStrat, new OrchestratorBattery());
     }
 
     public void orchestrate(List<Product> products) {
