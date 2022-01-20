@@ -362,7 +362,7 @@ components:
         failed:
           description: "Number of failures that happened in the system"
           type: integer
-        tick:
+        ticks:
           description: "Number of tick since the beginning of the communication"
           type: integer
         
