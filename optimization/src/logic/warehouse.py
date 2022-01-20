@@ -353,11 +353,6 @@ class Rack:
         return state
 
 
-class MonthManifesto:  # TODO: use this class instead of dictionary of dictionaries in get_manifestos()
-    def __init__(self, products):
-        self.products = products  # {id : quantity}
-
-
 def valid_placement(rack, product):
     if (rack.get_current_weight() + product.weight) > rack.capacity:
         return False

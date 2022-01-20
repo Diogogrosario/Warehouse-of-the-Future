@@ -13,25 +13,12 @@ class Storage:
         query_shelf = "SELECT * FROM Shelf"
         query_types = "SELECT id FROM Product_Type"
         query_rack = "SELECT * FROM Rack"
-        query_month_manifesto_product = "SELECT * FROM Month_Manifesto_Product"
 
         self.df_shelves = db.df_query(query_shelf)
         self.df_racks = db.df_query(query_rack)
         self.df_types = db.df_query(query_types)
-        self.df_month_manifesto_products = db.df_query(query_month_manifesto_product)
 
         self.products = self.create_products()
-
-    def get_manifestos(self, manifestos):
-        manifestos_dict = {}
-
-        for _, manifesto in manifestos.iterrows():
-            manifesto_id = manifesto['id']
-            m_list = self.df_month_manifesto_products.loc[
-                self.df_month_manifesto_products['manifesto_id'] == manifesto_id]
-            manifestos_dict[manifesto_id] = dict(zip(m_list['product_id'], m_list['quantity']))
-
-        return manifestos_dict
 
     def create_products(self):
 
