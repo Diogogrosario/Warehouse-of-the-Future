@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: API for mesh communication backend
-  version: 1.0.0
+  version: 1.0.1
   title: MeshCommunication API
 
 paths:
@@ -308,24 +308,20 @@ paths:
       summary: Gets metrics with which the communication is evaluated
       operationId: getMetrics
       description:
-        "Path that returns, for the whole communication, some metrics to serve as evaluation."
+        "Path that returns, for the whole communication, a collection of metrics for the current tick."
       responses:
         200:
-          description: "Success: Received all logs"
+          description: "Success: Received all metrics"
           content:
             application/json:
               schema:
-                description: "Dictionary in which its keys are the metrics, and its values are a number which represents the metric's score"
-                type: object
-                additionalProperties:
-                  items:
-                    $ref: '#/components/schemas/metrics'
+                  $ref: '#/components/schemas/Metrics'
               example:
                   batTick: 10
                   batCommunication: 20
                   failed: 0
-                  tick: 2
-                  
+                  ticks: 2
+
 components:
   schemas:
     SendMessage:
