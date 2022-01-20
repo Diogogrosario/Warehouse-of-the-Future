@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: API for mesh communication backend
-  version: 1.0.0
+  version: 1.0.2
   title: MeshCommunication API
 
 paths:
@@ -303,6 +303,20 @@ paths:
                 Device 6:
                   - "Received message: [source=0], [msg=padoru], [lastHop=0]"
                   - "Relaying message: [destination=8], [msg=padoru]"
+
+  /restart:
+    post:
+      summary: Restart simulation
+      operationId: restart
+      description: 
+        "Path that restarts the simulation"
+      responses:
+        200:
+          description: "Success: Restarted simulation"
+        500:
+          description: "Internal Server Error"
+          
+      
 
 components:
   schemas:
