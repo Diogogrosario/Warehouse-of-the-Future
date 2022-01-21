@@ -107,11 +107,11 @@ def main(docker=False, list_parameters=None):
     # Overwrite Database configs if Docker tag is defined
     if docker:
         db = Database('test', True)
-        storage = Storage(db)
         print("Running Docker ENV")
     else:
         db = Database()
-        storage = Storage(db)
+
+    storage = Storage(db, docker)
 
     query_warehouse = "SELECT * FROM Warehouse"
 

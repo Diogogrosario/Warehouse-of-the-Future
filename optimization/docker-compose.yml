@@ -45,7 +45,7 @@ services:
     build:
       context: ../data_lake/backend/      
     ports:
-        - 8001:5000
+        - "8001:5000"
     env_file:
         - ../data_lake/backend/.env
     volumes:

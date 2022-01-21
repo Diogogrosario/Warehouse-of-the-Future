@@ -7,7 +7,7 @@ from warehouse import Warehouse, Shelf, Rack, Product
 
 
 class Storage:
-    def __init__(self, db):
+    def __init__(self, db, docker):
         self.db = db
 
         query_shelf = "SELECT * FROM Shelf"
@@ -18,13 +18,16 @@ class Storage:
         self.df_racks = db.df_query(query_rack)
         self.df_types = db.df_query(query_types)
 
-        self.products = self.create_products()
+        self.products = self.create_products(docker)
 
-    def create_products(self):
+    def create_products(self, docker):
 
         list_types = self.df_types['id'].to_list()
 
-        response = requests.get('http://localhost:8001/stock/')
+        if docker:
+            response = requests.get('http://backend:5000/stock/')
+        else:
+            response = requests.get('localhost:8001/stock')
 
         if response.status_code != 200:
             print("Error Fetching Database Products")
