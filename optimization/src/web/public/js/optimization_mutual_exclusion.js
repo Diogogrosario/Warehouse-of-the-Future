@@ -40,11 +40,43 @@
     }
 
     const handleMinimizeErrorsSelect = (event) => {
+
         event.preventDefault()
+
+        if (typeMetric.checked) {
+            $("#alert-mutual-exclusion").show()
+
+            const col_elem = document.querySelector('#col-organization')
+
+            const input_elem = col_elem.querySelector('select')
+
+            col_elem.classList.remove('d-block')
+            col_elem.classList.add('d-none')
+
+            input_elem.value = null
+
+            return typeMetric.checked = false
+        }
+
 
     }
     const handleTypeSelect = (event) => {
         event.preventDefault()
+
+        if (minimizeErrors.checked) {
+            $("#alert-mutual-exclusion").show()
+
+            const col_elem = document.querySelector('#col-minimize-errors')
+
+            const input_elem = col_elem.querySelector('select')
+
+            col_elem.classList.remove('d-block')
+            col_elem.classList.add('d-none')
+
+            input_elem.value = null
+
+            return minimizeErrors.checked = false
+        }
 
     }
 
@@ -57,7 +89,7 @@
     weightInput.addEventListener('change', handleWeightSelect)
     workInput.addEventListener('change', handleWorkSelect)
     minimizeErrors.addEventListener('change', handleMinimizeErrorsSelect)
-    typeMetric.addEventListener('change', handleMinimizeErrorsSelect)
+    typeMetric.addEventListener('change', handleTypeSelect)
 
 })()
 
