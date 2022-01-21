@@ -140,7 +140,7 @@ create table Products_Left_Out
     FOREIGN KEY (product_id) REFERENCES Product (id)
 );
 create table Window (
-    id      SERIAL PRIMARY KEY, 
+    id      SERIAL PRIMARY KEY,
     x            DECIMAL(4, 1),
     y            DECIMAL(4, 1)
 );

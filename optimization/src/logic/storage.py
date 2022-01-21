@@ -24,10 +24,17 @@ class Storage:
 
         list_types = self.df_types['id'].to_list()
 
+        products_list = self.db.df_query("SELECT name FROM Product")
+
+        if products_list is None:
+            products_already_added = []
+        else:
+            products_already_added = list(products_list)
+
         if docker:
             response = requests.get('http://backend:5000/stock/')
         else:
-            response = requests.get('localhost:8001/stock')
+            response = requests.get('http://localhost:8001/stock')
 
         if response.status_code != 200:
             print("Error Fetching Database Products")
@@ -37,6 +44,7 @@ class Storage:
 
         products = []
         counter = 1
+
         for _, p in df_products.iterrows():
 
             if len(list_types) == 0:
@@ -45,7 +53,18 @@ class Storage:
                 product_type = random.choice(list_types)
 
             product = Product(counter, p['designation'], p['height'], p['width'], p['weight'], product_type,
-                              random.uniform(0.0, 1.0))
+                              round(random.uniform(0, 1), 3))
+
+            if p['designation'] not in products_already_added:
+                query_insert_product = f"INSERT INTO Product (name, height, width, weight, type_id, frequency) values (%s,%s,%s,%s,%s,%s);"
+
+                product.id = self.db.df_query(query_insert_product,
+                                              [product.name, product.height, product.width, product.weight,
+                                               product.type_id,
+                                               product.frequency])
+            else:
+                print("Product Already inserted")
+
             products.append(product)
 
             counter += 1

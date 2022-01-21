@@ -1,12 +1,16 @@
 CREATE DATABASE IF NOT EXISTS test;
 
+DROP TABLE IF EXISTS Product;
 DROP TABLE IF EXISTS Warehouse;
 DROP TABLE IF EXISTS Shelf;
 DROP TABLE IF EXISTS Product_Type;
 DROP TABLE IF EXISTS Rack;
 DROP TABLE IF EXISTS Product_Rack;
 DROP TABLE IF EXISTS Results;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS Products_Left_Out;
+
+
 
 create table Warehouse
 (
@@ -16,8 +20,8 @@ create table Warehouse
 create table Shelf
 (
     id           SERIAL PRIMARY KEY,
-    x            DECIMAL,
-    y            DECIMAL,
+    x            DECIMAL(10, 3),
+    y            DECIMAL(10, 3),
     warehouse_id BIGINT UNSIGNED NOT NULL,
 
     FOREIGN KEY (warehouse_id) REFERENCES Warehouse (id)
@@ -26,17 +30,30 @@ create table Shelf
 create table Product_Type
 (
     id   SERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name TEXT
+);
+
+create table Product
+(
+    id        SERIAL PRIMARY KEY,
+    name      TEXT,
+    height    DECIMAL(10, 3),
+    width     DECIMAL(10, 3),
+    weight    DECIMAL(10, 3),
+    type_id   BIGINT UNSIGNED NOT NULL,
+    frequency DECIMAL(10, 3) DEFAULT 0,
+
+    FOREIGN KEY (type_id) REFERENCES Product_Type (id)
 );
 
 create table Rack
 (
     id       SERIAL PRIMARY KEY,
     shelf_id BIGINT UNSIGNED NOT NULL,
-    y        DECIMAL   NOT NULL,
-    width    DECIMAL   NOT NULL,
-    height   DECIMAL   NOT NULL,
-    capacity DECIMAL   NOT NULL,
+    y        DECIMAL(10, 3)  NOT NULL,
+    width    DECIMAL(10, 3)  NOT NULL,
+    height   DECIMAL(10, 3)  NOT NULL,
+    capacity DECIMAL(10, 3)  NOT NULL,
 
 
     FOREIGN KEY (shelf_id) REFERENCES Shelf (id)
@@ -50,11 +67,11 @@ CREATE TABLE users
     id                SERIAL PRIMARY KEY,
     name              varchar(255) NOT NULL,
     email             varchar(255) NOT NULL,
-    email_verified_at timestamp NULL DEFAULT NULL,
+    email_verified_at timestamp    NULL DEFAULT NULL,
     password          varchar(255) NOT NULL,
-    remember_token    varchar(100) DEFAULT NULL,
-    created_at        timestamp NULL DEFAULT NULL,
-    updated_at        timestamp NULL DEFAULT NULL
+    remember_token    varchar(100)      DEFAULT NULL,
+    created_at        timestamp    NULL DEFAULT NULL,
+    updated_at        timestamp    NULL DEFAULT NULL
 );
 
 -- OUTPUT --
@@ -67,12 +84,14 @@ create table Results
 create table Product_Rack
 (
     id         SERIAL PRIMARY KEY,
-    x_orig     INT NOT NULL,
-    x_end      INT NOT NULL,
+    x_orig     INT             NOT NULL,
+    x_end      INT             NOT NULL,
     result_id  BIGINT UNSIGNED NOT NULL,
     rack_id    BIGINT UNSIGNED NOT NULL,
-    product_id TEXT NOT NULL,
+    product_id BIGINT UNSIGNED NOT NULL,
 
+
+    FOREIGN KEY (product_id) REFERENCES Product (id),
     FOREIGN KEY (result_id) REFERENCES Results (id),
     FOREIGN KEY (rack_id) REFERENCES Rack (id)
 );
@@ -81,7 +100,9 @@ create table Products_Left_Out
 (
     id         SERIAL PRIMARY KEY,
     result_id  BIGINT UNSIGNED NOT NULL,
-    product_id TEXT NOT NULL,
+    product_id BIGINT UNSIGNED NOT NULL,
+
+    FOREIGN KEY (product_id) REFERENCES Product (id),
     FOREIGN KEY (result_id) REFERENCES Results (id)
 );
 
