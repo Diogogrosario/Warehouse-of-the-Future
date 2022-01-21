@@ -100,9 +100,8 @@ def main(docker=False, list_parameters=None):
     global storage
 
     if list_parameters is None:
-        list_parameters = {'frequency': {
-            'factor': 1
-        }}
+        print("List Parameters is Null")
+        return
 
     # Overwrite Database configs if Docker tag is defined
     if docker:
