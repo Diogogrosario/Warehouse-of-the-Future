@@ -35,6 +35,7 @@ jobs:
                   flake8 . --count --max-complexity=10 --max-line-length=127 --statistics --ignore=E402,E226,W503,W504
             - name: Build .env.test
               run: |
+                  ls
                   echo FLASK_APP=app.py > backend/.env.test  
                   echo FLASK_DEBUG=1 >> backend/.env.test  
                   echo FLASK_ENV=development >> backend/.env.test  
