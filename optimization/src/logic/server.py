@@ -12,7 +12,7 @@ def run_server():
 
     data_sock.bind(('', port))
 
-    data_sock.listen(1000)
+    data_sock.listen()
 
     while True:
         conn, address = data_sock.accept()
@@ -34,7 +34,7 @@ def run_server():
             conn.close()
             continue
 
-        valid_metrics = ['weight', 'organization', 'work', 'frequency', 'windows', 'minimize-errors']
+        valid_metrics = ['weight', 'organization', 'work', 'frequency', 'minimize-errors']
 
         for i in range(len(data['optimization-parameters'])):
             if data['optimization-parameters'][i] not in valid_metrics:

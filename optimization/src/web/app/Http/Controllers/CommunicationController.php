@@ -17,7 +17,6 @@ class CommunicationController extends Controller
     {
         /* Get the IP address for the target host. */
         $address = gethostbyname('optimization');
-        #$address = gethostbyname('host.docker.internal');
 
         /* Create a TCP/IP socket. */
         $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);

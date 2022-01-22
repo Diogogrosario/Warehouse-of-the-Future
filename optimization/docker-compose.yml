@@ -39,6 +39,17 @@ services:
       - ./src/web:/var/www
     networks:
       - internal
+  backend:
+    build:
+      context: ../data_lake/backend/      
+    ports:
+        - "8001:5000"
+    env_file:
+        - ../data_lake/backend/.env
+    volumes:
+        - ../data_lake/backend:/app
+    networks:
+        - internal          
   db:
     image: mariadb
     environment:

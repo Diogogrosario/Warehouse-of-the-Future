@@ -2,7 +2,7 @@
     @csrf
     <div class="form generateLayoutTab">
         <div class="form-row justify-content-around mx-3">
-            <div class="col">
+            <div class="col-5">
                 <h1 class="pl-3">Human</h1>
                 <div class="form-row">
                     <div class="col">
@@ -80,26 +80,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <h1 class="pl-3">Hardware</h1>
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="optimization-parameters[]"
-                                   value="windows" id="windows">
-                            <label class="form-check-label" for="windows">
-                                Optimize Hardware Solar Battery
-                            </label>
-                        </div>
-                    </div>
-                    <div id="col-windows" class="col-4 d-none">
-                        <select class="form-control" name="optimization-weights[]">
-                            @include('partials.generate_layouts.select')
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
+            <div class="col-5">
                 <h1 class="pl-3">Warehouse</h1>
                 <div class="form-row">
                     <div class="col">
