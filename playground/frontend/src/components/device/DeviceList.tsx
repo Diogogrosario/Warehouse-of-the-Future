@@ -1,5 +1,5 @@
 import React from "react";
-import DeviceCard from "./DeviceCard";
+import Device from "./Device";
 import { Grid } from "@mui/material";
 
 export default function DeviceList(): React.ReactElement {
@@ -8,7 +8,7 @@ export default function DeviceList(): React.ReactElement {
 	for (let i = 0; i < 10; i++)
 		cards.push(
 			<Grid item key={i}>
-				<DeviceCard />
+				<Device />
 			</Grid>
 		);
 

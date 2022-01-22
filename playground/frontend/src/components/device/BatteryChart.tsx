@@ -6,7 +6,7 @@ import { scaleTime, scaleLinear } from "@visx/scale";
 import { AxisLeft, AxisBottom } from "@visx/axis";
 import { GridRows, GridColumns } from "@visx/grid";
 
-const batteryData = require(".//../../public/battery.json");
+import batteryData from "./battery.json";
 
 export const background = "#f3f3f3";
 

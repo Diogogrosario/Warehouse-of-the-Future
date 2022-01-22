@@ -9,7 +9,7 @@ const style = {
 	justifyContent: "center",
 };
 
-export default function DeviceCard(): React.ReactElement {
+export default function Device(): React.ReactElement {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -25,7 +25,7 @@ export default function DeviceCard(): React.ReactElement {
 			<Card sx={{ display: "flex", width: 350, height: 200, p: 1 }}>
 				<CardMedia
 					component="img"
-					image={require("../assets/images/device.png").default}
+					image="images/device.png"
 					alt="Device Image"
 					sx={{ width: 1 / 3 }}
 				/>

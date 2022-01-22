@@ -12,7 +12,7 @@ export default function DeviceDetails(): React.ReactElement {
 				<div style={{ textAlign: "center" }}>
 					<img
 						height={400}
-						src={require("../assets/images/device.png").default}
+						src={"images/device.png"}
 						alt="DeviceDetails Image"
 					/>
 				</div>

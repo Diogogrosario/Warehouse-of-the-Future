@@ -9,6 +9,7 @@ import ReportList from "./components/report/ReportList";
 import TabPanel from "./components/TabPanel";
 import NoResultsOverlay from "./components/NoResultsOverlay";
 import theme from "./styles/theme";
+import DeviceList from "./components/device/DeviceList";
 
 export enum FullscreenState {
 	Left,
@@ -141,6 +142,7 @@ export default function App() {
 							/>
 						</Tabs>
 
+						{/* Reports */}
 						<StyledTabPanel
 							emptyComponent={<NoResultsOverlay text="No reports found" />}
 							value={selectedTab}
@@ -150,13 +152,17 @@ export default function App() {
 						>
 							<ReportList />
 						</StyledTabPanel>
+
+						{/* Devices */}
 						<StyledTabPanel
 							value={selectedTab}
 							emptyComponent={<NoResultsOverlay text="No devices found" />}
 							index={1}
 							id="app-tabpanel-1"
 							aria-labelledby="app-tab-1"
-						></StyledTabPanel>
+						>
+							<DeviceList />
+						</StyledTabPanel>
 
 						<FullscreenButton
 							fullscreenState={fullscreen}
