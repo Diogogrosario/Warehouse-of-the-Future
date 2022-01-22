@@ -100,8 +100,7 @@ class Storage:
             self.db.df_query(f"CALL calculate_product_frequency({product.id})")
 
     def fill_warehouse(self, layout):
-        # Place the heaviest products first
-        # TODO: Which is the concept of best product to FIT?
+        # Place the heaviest and longest products first
         products = sorted(self.products, key=lambda x: (x.weight, x.width), reverse=True)
 
         for product in products:

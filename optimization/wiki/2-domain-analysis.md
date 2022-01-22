@@ -4,7 +4,7 @@
 
 Our final client is the factory of the French automaker Peugeot in Viseu, Portugal, PSA. However, our direct call is to the FEUP Research Lab, DIGI 2. It is that as middleman and consultant in the process to promote faster and more efficient communication.
 
-PSA Peugeot-Citroen: Located in Mangualde, Viseu, is one of two factories that produce cars in Portugal. Founded in 1962, it employes 700 workers and has a production line of light cargo vehicles for Citroen Peugeot and Opel.
+PSA Peugeot-Citroen: Located in Mangualde, Viseu, is one of two factories that produce cars in Portugal. Founded in 1962, it employs 700 workers and has a production line of light cargo vehicles for Citroen Peugeot and Opel.
 
 DIGI 2: Lab funded at FEUP that presents itself on the website as follows:
 * The Digital and Intelligent Industry Lab is part of the Research Center for Systems and Technologies (SYSTEC), Faculty of Engineering of the University of Porto (FEUP).
@@ -52,7 +52,7 @@ The last Scrum sprints will target the integration in a unique tool that united 
 
 #### Current Tasks of Stakeholder:
 
-Ours analyse identified using information gathered from the client that there are mainly two stakeholders identified for this optimization project:
+Our analyses identified using information gathered from the client that there are mainly two stakeholders identified for this optimization project:
 
 * The Operation Manager - This warehouse has a chief of operations whose task is to organize items in it as well as stocks. Coordinate the operation of parts refill, the introduction of new parts as well as the removal of deprecated ones. 
 

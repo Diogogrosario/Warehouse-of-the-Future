@@ -2,6 +2,7 @@ import math
 import random
 import re
 import sys
+import itertools
 import random as r
 import numpy as np
 from copy import deepcopy
@@ -11,7 +12,6 @@ worker_average_height = 1.75
 
 
 class Layout:
-    # TODO: Talvez manter lista com todos os produtos e respetivas posições
     def __init__(self, warehouse, metrics_to_optimize):
         self.warehouse = warehouse
         self.products_out = []
@@ -34,7 +34,7 @@ class Layout:
 
         return random.choice(valid_racks)
 
-    def get_product_rack_id(self, product):  # Assumindo que cada id do produto é único
+    def get_product_rack_id(self, product):  # Assuming that each product ID is unique
         for shelf in self.warehouse.shelves:
             for rack in shelf.racks:
                 if product in rack.products:
@@ -63,7 +63,6 @@ class Layout:
             iteration += 1
             if iteration == MAX_ITERATIONS:
                 self.products_out.append(product)
-                print(f'DELETED FROM CROSSOVER/MUTATION: {product.id}')
                 break
             random_shelf = r.choice(self.warehouse.shelves)
             random_rack = r.choice(random_shelf.racks)
@@ -73,7 +72,7 @@ class Layout:
         score = 0
 
         if 'weight' in self.metrics_to_optimize.keys():
-            factor = float(self.metrics_to_optimize['weight']['factor'])
+            factor = int(self.metrics_to_optimize['weight']['factor'])
             weight_score = 0
             max_score = 0
             max_int = sys.maxsize * 2 + 1
@@ -88,10 +87,13 @@ class Layout:
                         max_score += float(product.weight) / min_y
                         weight_score += float(product.weight) / max(float(rack.y), 0.01)
 
-            score += weight_score / max_score
+            try:
+                score += (weight_score / max_score) * factor
+            except ZeroDivisionError:
+                print('Weight metric might not be appropriate since the weight of all the products is zero.')
 
         if 'work' in self.metrics_to_optimize.keys():
-            factor = float(self.metrics_to_optimize['work']['factor'])
+            factor = int(self.metrics_to_optimize['work']['factor'])
             work_score = 0
             max_score = 0
             adj_side = 0.2
@@ -107,10 +109,13 @@ class Layout:
                         max_score += float(product.weight)
                         work_score += math.cos(math.radians(theta)) * float(product.weight)
 
-            score += work_score / max_score
+            try:
+                score += (work_score / max_score) * factor
+            except ZeroDivisionError:
+                print('Work metric might not be appropriate since the weight of all the products is zero.')
 
         if 'frequency' in self.metrics_to_optimize.keys():
-            factor = float(self.metrics_to_optimize['frequency']['factor'])
+            factor = int(self.metrics_to_optimize['frequency']['factor'])
             frequency_score = 0
             max_score = 0
             shelves_frequencies = []
@@ -128,10 +133,13 @@ class Layout:
 
             frequency_score += float(sum(np.diff(shelves_frequencies)))
 
-            score += frequency_score / max_score
+            try:
+                score += (frequency_score / max_score) * factor
+            except ZeroDivisionError:
+                print('Frequency metric might not be appropriate since the frequency of all the products is zero.')
 
         if 'organization' in self.metrics_to_optimize.keys():
-            factor = float(self.metrics_to_optimize['organization']['factor'])
+            factor = int(self.metrics_to_optimize['organization']['factor'])
             organization_score = 0
             total_types = {}
 
@@ -188,15 +196,77 @@ class Layout:
                 max_score += 2 ** elem
                 num_shelves = num_shelves - 1
 
-            score += organization_score / max_score
+            try:
+                score += (organization_score / max_score) * factor
+            except ZeroDivisionError:
+                print("Organization metric might not be appropriate since the products don't have types associated.")
+
+        if 'minimize-errors' in self.metrics_to_optimize:
+            factor = int(self.metrics_to_optimize['minimize-errors']['factor'])
+            minimize_errors_score = 0
+
+            shelves_count_types = {} # shelf_id : [{type_x : num_x, type_y, num_y, ...}, ...]
+            shelves_similarities_scores = {} # shelf_id : score
+
+            for shelf in self.warehouse.shelves:
+                count_types = {}  # { type_x : n_products_type_x }
+                products_properties = {} # type_x : [[prod_1_height, prod_1_width, prod_1_weight], ...]
+    
+                for rack in shelf.racks:
+                    for product in rack.products:
+                        if product.type_id not in count_types:
+                            count_types[product.type_id] = 1
+                        else:
+                            count_types[product.type_id] += 1
+
+                        if product.type_id not in products_properties:
+                            products_properties[product.type_id] = [[float(product.height), float(product.width), float(product.weight)]]
+                        else:
+                            products_properties[product.type_id].append([float(product.height), float(product.width), float(product.weight)])
+
+                shelves_count_types[shelf.id] = count_types
+
+                repeated_types = []
+                for p_type, products in products_properties.items():
+                    if len(products) > 1:
+                        repeated_types.append(products)
+
+                shelves_similarities_scores[shelf.id] = len(repeated_types) if len(repeated_types) > 0 else 1
+                for type_products in repeated_types:
+                    product_pairs = list(itertools.combinations(type_products, 2))
+                    differences = []
+                    for pair in product_pairs:
+                        dif = np.linalg.norm(np.array(pair[0]) - np.array(pair[1]))
+                        differences.append(dif)
+
+                    num_intervals = len(type_products) - 1
+                    biggest_differences = sorted(differences, reverse=True)[:num_intervals]
+
+                    difference_sum = sum(biggest_differences) / (len(biggest_differences)**5)
+                    shelves_similarities_scores[shelf.id] -= 1/difference_sum if difference_sum != 0 else 1/len(type_products)
+
+                if len(repeated_types) > 0:
+                    shelves_similarities_scores[shelf.id] = shelves_similarities_scores[shelf.id] / len(repeated_types)
+
+            for id, dic in shelves_count_types.items():
+                if dic:
+                    repeated_values = sum(dic.values()) - len(dic)
+                    minimize_errors_score += 1/(1.5**repeated_values)
+                    minimize_errors_score += shelves_similarities_scores[id]
+
+                max_score = 2*len(self.warehouse.shelves)
+
+            try:
+                score += (minimize_errors_score / max_score) * factor
+            except ZeroDivisionError:
+                print('Minimize Errors metric might not be appropriate since there are no shelves.')
 
         # Penalize layouts with products out
-
         score -= len(self.products_out) * 100
 
         return score
 
-    def remove_product(self, product):
+    def remove_product(self, product):   # username : { ip: , port: , followers:[] , following:[] }
         for shelf in self.warehouse.shelves:
             for rack in shelf.racks:
                 for prod in rack.products:
@@ -279,9 +349,10 @@ class Product:
     def __hash__(self):
         return hash(str(self.id))
 
-    def __str__(self) -> str:  # TODO: print other attributes
+    def __str__(self) -> str:
         state = ""
         state += f'PRODUCT {self.id}:\n'
+        state += f'\t\t\t\t\tNAME {self.name}\n'
         state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
         state += f'\t\t\t\t\tWIDTH {self.width}\n'
         state += f'\t\t\t\t\tHEIGHT {self.height}\n'

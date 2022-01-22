@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This project was done as part of the Large Scale Software Development Course at FEUP in colaboration with the DIGI-2 lab.
+This project was done as part of the Large Scale Software Development Course at FEUP in collaboration with the DIGI-2 lab.
 
 #### DS FEUP - 2021/2022
 
-##### Disclaimer: This is an academic project. Authors don't take responsability for any defect in the code. Use it at your own risk.
+##### Disclaimer: This is an academic project. Authors don't take responsibility for any defect in the code. Use it at your own risk.
 
 * David Ferreira, up202102686@fe.up.pt (SM)
 * Diogo Gomes, up201806572@fe.up.pt
