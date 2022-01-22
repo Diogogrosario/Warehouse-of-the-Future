@@ -1,7 +1,6 @@
 import math
 import random
 import sys
-import operator
 import itertools
 import random as r
 import numpy as np
@@ -12,7 +11,6 @@ worker_average_height = 1.75
 
 
 class Layout:
-    # TODO: Talvez manter lista com todos os produtos e respetivas posições
     def __init__(self, warehouse, metrics_to_optimize):
         self.warehouse = warehouse
         self.products_out = []
@@ -35,7 +33,7 @@ class Layout:
 
         return random.choice(valid_racks)
 
-    def get_product_rack_id(self, product):  # Assumindo que cada id do produto é único
+    def get_product_rack_id(self, product):  # Assuming that each product ID is unique
         for shelf in self.warehouse.shelves:
             for rack in shelf.racks:
                 if product in rack.products:
@@ -64,7 +62,6 @@ class Layout:
             iteration += 1
             if iteration == MAX_ITERATIONS:
                 self.products_out.append(product)
-                print(f'DELETED FROM CROSSOVER/MUTATION: {product.id}')
                 break
             random_shelf = r.choice(self.warehouse.shelves)
             random_rack = r.choice(random_shelf.racks)
@@ -74,7 +71,7 @@ class Layout:
         score = 0
 
         if 'weight' in self.metrics_to_optimize.keys():
-            factor = float(self.metrics_to_optimize['weight']['factor'])
+            factor = int(self.metrics_to_optimize['weight']['factor'])
             weight_score = 0
             max_score = 0
             max_int = sys.maxsize * 2 + 1
@@ -89,10 +86,11 @@ class Layout:
                         max_score += float(product.weight) / min_y
                         weight_score += float(product.weight) / max(float(rack.y), 0.01)
 
-            score += weight_score / max_score
+            score += (weight_score / max_score) * factor
+
 
         if 'work' in self.metrics_to_optimize.keys():
-            factor = float(self.metrics_to_optimize['work']['factor'])
+            factor = int(self.metrics_to_optimize['work']['factor'])
             work_score = 0
             max_score = 0
             adj_side = 0.2
@@ -108,12 +106,10 @@ class Layout:
                         max_score += float(product.weight)
                         work_score += math.cos(math.radians(theta)) * float(product.weight)
 
-            score += work_score / max_score
-
-            # print(f'Work score: {work_score}')
+            score += (work_score / max_score) * factor
 
         if 'frequency' in self.metrics_to_optimize.keys():
-            factor = float(self.metrics_to_optimize['frequency']['factor'])
+            factor = int(self.metrics_to_optimize['frequency']['factor'])
             frequency_score = 0
             max_score = 0
             shelves_frequencies = []
@@ -131,12 +127,10 @@ class Layout:
 
             frequency_score += float(sum(np.diff(shelves_frequencies)))
 
-            score += frequency_score / max_score
-
-            # print(f'Frequency score: {frequency_score}')
+            score += (frequency_score / max_score) * factor
 
         if 'organization' in self.metrics_to_optimize.keys():
-            factor = float(self.metrics_to_optimize['organization']['factor'])
+            factor = int(self.metrics_to_optimize['organization']['factor'])
             organization_score = 0
             total_types = {}
 
@@ -193,9 +187,10 @@ class Layout:
                 max_score += 2 ** elem
                 num_shelves = num_shelves - 1
 
-            score += organization_score / max_score
+            score += (organization_score / max_score) * factor
 
         if 'minimize-errors' in self.metrics_to_optimize:
+            factor = int(self.metrics_to_optimize['minimize-errors']['factor'])
             minimize_errors_score = 0
 
             shelves_count_types = {} # shelf_id : [{type_x : num_x, type_y, num_y, ...}, ...]
@@ -249,7 +244,7 @@ class Layout:
 
                 max_score = 2*len(self.warehouse.shelves)
 
-            score += minimize_errors_score / max_score
+            score += (minimize_errors_score / max_score) * factor
 
         # Penalize layouts with products out
         score -= len(self.products_out) * 100
@@ -339,9 +334,10 @@ class Product:
     def __hash__(self):
         return hash(str(self.id))
 
-    def __str__(self) -> str:  # TODO: print other attributes
+    def __str__(self) -> str:
         state = ""
         state += f'PRODUCT {self.id}:\n'
+        state += f'\t\t\t\t\tNAME {self.name}\n'
         state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
         state += f'\t\t\t\t\tWIDTH {self.width}\n'
         state += f'\t\t\t\t\tHEIGHT {self.height}\n'
@@ -412,11 +408,6 @@ class Rack:
             state += f'\t\t\t\t{product}\n'
             state += f'\t\t\t\t\tPOSITION: ({x_orig}, {x_end})\n'
         return state
-
-
-class MonthManifesto:  # TODO: use this class instead of dictionary of dictionaries in get_manifestos()
-    def __init__(self, products):
-        self.products = products  # {id : quantity}
 
 
 def valid_placement(rack, product):

@@ -50,7 +50,6 @@ create table Rack
 
 
     FOREIGN KEY (shelf_id) REFERENCES Shelf (id)
-
 );
 
 create table Product

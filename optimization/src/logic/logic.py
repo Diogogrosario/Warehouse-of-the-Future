@@ -28,14 +28,19 @@ def generate_population(warehouse, num, metrics_to_optimize):
 
 
 def mutate(child):
+    # Change the place of a random product
     product = child.get_random_product()
     child.change_place(product)
 
+    # Try to fit a product that was out into the warehouse
+    try:
+        product_out = r.choice(child.products_out)
+        child.add_product_random(product_out)
+    except:
+        pass
+
 
 def reproduce(parent1, parent2, warehouse, metrics_to_optimize):
-    # percorrer todos os produtos
-    # para cada produto, fazer random(1,2) e ir buscá-lo ao respetivo pai
-    # caso estiverem os 2 ocupados, escolher rack aleatória
     parents = [parent1, parent2]
 
     products = sorted(storage.products, key=lambda x: (x.weight, x.width), reverse=True)
@@ -50,6 +55,8 @@ def reproduce(parent1, parent2, warehouse, metrics_to_optimize):
             rack_id = parents[parent].get_product_rack_id(product)
             if rack_id and not child.add_product_rack_id(rack_id, product):
                 child.add_product_random(product)
+
+    child.products_out = [product for product in products if child.get_product_rack_id(product) == None]
 
     return child
 
@@ -99,10 +106,6 @@ def main(docker=False, metrics=None):
     global db
     global storage
 
-    # FOR TESTING PURPOSES (delete before delivery of the project)
-    # if metrics is None: 
-    #     metrics = ['minimize-errors']
-
     # Overwrite Database configs if Docker tag is defined
     if docker:
         db = Database('test', True)
@@ -113,11 +116,10 @@ def main(docker=False, metrics=None):
         storage = Storage(db)
 
     query_warehouse = "SELECT * FROM Warehouse"
-    # query_month_manifesto = "SELECT * FROM Month_Manifesto"
 
     warehouses = db.df_query(query_warehouse)
 
-    warehouse_id = warehouses.iloc[0]['id']  # Initial test with only 1 warehouse
+    warehouse_id = warehouses.iloc[0]['id']  # Use the first warehouse
 
     warehouse = storage.create_warehouse(warehouse_id)
 
