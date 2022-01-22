@@ -1,12 +1,12 @@
 #!/bin/bash  
 
+composer install
+
 php artisan db:wipe
 
-php artisan db:seed
+php artisan db:seed &
 
-composer install &
-
-npm install &
+npm install
 
 npm run prod &
 
