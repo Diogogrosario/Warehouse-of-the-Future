@@ -77,11 +77,14 @@ jobs:
                   DOCKERHUB_REPO: "dsmeic/ds-meic2"
                   FRONTEND_TAG: "frontend"
                   BACKEND_TAG: "backend"
+                  GRAFANA_TAG: "grafana"
               run: |
-                  docker tag ds-meic2_${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
+                  docker tag data_lake_${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
                   docker push ${DOCKERHUB_REPO}:${BACKEND_TAG}
-                  docker tag ds-meic2_${FRONTEND_TAG} ${DOCKERHUB_REPO}:${FRONTEND_TAG}
+                  docker tag data_lake_${FRONTEND_TAG} ${DOCKERHUB_REPO}:${FRONTEND_TAG}
                   docker push ${DOCKERHUB_REPO}:${FRONTEND_TAG}
+                  docker tag data_lake_${GRAFANA_TAG} ${DOCKERHUB_REPO}:${GRAFANA_TAG}
+                  docker push ${DOCKERHUB_REPO}:${GRAFANA_TAG}
 
     deploy:
         runs-on: ubuntu-latest
@@ -95,6 +98,7 @@ jobs:
                   DOCKERHUB_REPO: "dsmeic/ds-meic2"
                   FRONTEND_TAG: "frontend"
                   BACKEND_TAG: "backend"
+                  GRAFANA_TAG: "grafana"
               with:
                   host: ${{secrets.T1_SSH_IP}}
                   username: ${{secrets.T1_SSH_USERNAME}}
@@ -104,9 +108,13 @@ jobs:
                       echo ${FRONTEND_TAG}
                       docker stop ${FRONTEND_TAG}
                       docker stop ${BACKEND_TAG}
+                      docker stop ${GRAFANA_TAG}
                       docker rm ${FRONTEND_TAG}
                       docker rm ${BACKEND_TAG}
+                      docker rm ${GRAFANA_TAG}
                       docker pull ${DOCKERHUB_REPO}:${FRONTEND_TAG}
                       docker pull ${DOCKERHUB_REPO}:${BACKEND_TAG}
+                      docker pull ${DOCKERHUB_REPO}:${GRAFANA_TAG}
                       docker run -d -p 8000:3000 --restart always --name ${FRONTEND_TAG} ${DOCKERHUB_REPO}:${FRONTEND_TAG}
                       docker run -d -p 8001:5000 --restart always --name ${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
+                      docker run -d -p 9000:3000 --restart always --name ${GRAFANA_TAG} ${DOCKERHUB_REPO}:${GRAFANA_TAG}

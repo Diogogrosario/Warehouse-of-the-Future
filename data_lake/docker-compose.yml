@@ -13,7 +13,6 @@ services:
         tty: true
 
     grafana:
-        image: grafana/grafana
         build: ./grafana
         container_name: grafana
         ports:

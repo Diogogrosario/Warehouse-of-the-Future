@@ -408,7 +408,7 @@ class APITesting(TestCase):
         path = "buckets/"
         buckets_tests.testRoot(keys, len(keys), path)
         buckets_tests.testEndpoint("e07f1f77bcf86cd799439011", path)
-    
+
     def test_devices_endpoint(self):
         buckets_tests = ShelvesBucketsRacksDeviceTests(self, self.client)
         keys = ['id', 'bucket', 'sensor']
@@ -498,9 +498,10 @@ class APITesting(TestCase):
 
     # Manifests
 
-    @settings(max_examples=15,
-             deadline=None,
-             suppress_health_check=(HealthCheck.data_too_large,)
+    @settings(
+        max_examples=15,
+        deadline=None,
+        suppress_health_check=(HealthCheck.data_too_large,)
     )
     @given(st.tuples(st.datetimes(), st.datetimes()).filter(
         lambda x: x[0] < x[1]
