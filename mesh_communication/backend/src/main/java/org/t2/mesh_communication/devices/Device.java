@@ -11,7 +11,6 @@ import org.t2.mesh_communication.log.Logger;
 public class Device extends MeshDevice {
     private final int receivingConsumption;
     private final int sendingConsumption;
-    private final Battery battery;
     private final Screen screen;
 
     public Device(
@@ -23,11 +22,10 @@ public class Device extends MeshDevice {
             int range,
             Battery battery,
             Screen screen) {
-        super(id, pos, range, commStrat);
+        super(id, pos, range, commStrat, battery);
 
         this.receivingConsumption = receivingConsumption;
         this.sendingConsumption = sendingConsumption;
-        this.battery = battery;
         this.screen = screen;
     }
 
@@ -91,24 +89,12 @@ public class Device extends MeshDevice {
         this.screen.setOn(false);
     }
 
-    public void rechargeBattery() {
-        this.battery.batteryRecharge();
-    }
-
-    public Battery getBattery() {
-        return battery;
+    public Screen getScreen() {
+        return screen;
     }
 
     public int getSendingConsumption() {
         return sendingConsumption;
-    }
-
-    public int getReceivingConsumption() {
-        return receivingConsumption;
-    }
-
-    public Screen getScreen() {
-        return screen;
     }
 
     @Override

@@ -414,6 +414,29 @@ public class API implements ErrorController {
         return node;
     }
 
+    @RequestMapping("/metrics")
+    @ResponseBody
+    public ObjectNode getMetrics(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode node = mapper.createObjectNode();
+
+        int totalInnitialBat = this.getMeshGrid().getTotalInnitialBat();
+        int currentBattery = this.getMeshGrid().getCurrentBat();
+        int tickBattery = this.getMeshGrid().getLastTickBat() - currentBattery;
+        if (tickBattery < 0) {
+            tickBattery = 0;
+        }
+
+        node.put("batTick", tickBattery);
+        node.put("batCommunication", totalInnitialBat - currentBattery);
+        node.put("failed", 0);
+        node.put("ticks", this.getMeshGrid().getNTicks());
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return node;
+    }
+
     @RequestMapping("/error")
     @ResponseBody
     public String elPejo(HttpServletRequest request) {
