@@ -2,7 +2,7 @@ FROM composer:1.10 as composerBoot
 
 WORKDIR /app/
 
-COPY ./src/web/composer.* .
+COPY ./src/web/composer.* ./
 
 RUN composer install --no-autoloader
 
@@ -53,4 +53,4 @@ WORKDIR /var/www
 
 USER $user
 
-CMD ./startup.sh
+CMD bash startup.sh
