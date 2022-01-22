@@ -171,6 +171,8 @@ public class MessageTests {
         assertEquals(
                 "\"Sent message [destination=4], [msg=test message 3]\"",
                 response.get("Device 2").get(1).toString());
+
+        logger.close();
     }
 
     @Test

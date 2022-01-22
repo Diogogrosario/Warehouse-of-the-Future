@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: API for mesh communication backend
-  version: 1.0.1
+  version: 1.0.2
   title: MeshCommunication API
 
 paths:
@@ -321,6 +321,20 @@ paths:
                   batCommunication: 20
                   failed: 0
                   ticks: 2
+
+  /restart:
+    post:
+      summary: Restart simulation
+      operationId: restart
+      description: 
+        "Path that restarts the simulation"
+      responses:
+        200:
+          description: "Success: Restarted simulation"
+        500:
+          description: "Internal Server Error"
+          
+      
 
 components:
   schemas:
