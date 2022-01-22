@@ -1,15 +1,24 @@
-FROM composer:1.10 as builder
+FROM composer:1.10 as composerBoot
 
 WORKDIR /app/
 
-COPY ./src/web/composer.* ./
+COPY ./src/web/composer.* .
 
 RUN composer install --no-autoloader
 
+
+FROM node:12-alpine as npmBoot
+
+WORKDIR /app/
+
+COPY ./src/web/package.* .
+
+RUN npm install
+
 FROM php:7.4-fpm
 
-COPY --from=builder /usr/bin/composer /usr/bin/composer
-
+COPY --from=composerBoot /usr/bin/composer /usr/bin/composer
+COPY --from=npmBoot /usr/local/bin/npm /usr/local/bin/npm
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
@@ -38,11 +47,6 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath
 
 RUN docker-php-ext-install sockets
 
-RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
-
-RUN apt-get -y install nodejs
-
-
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
@@ -51,6 +55,16 @@ RUN mkdir -p /home/$user/.composer && \
 # Set working directory
 WORKDIR /var/www
 
-USER $user
+COPY --from=composerBoot /app/vendor ./vendor
+COPY --from=npmBoot /app/node_modules ./node_modules
 
-CMD composer install && npm install && npm run prod && php-fpm -F
+COPY --chown=www-data ./src/web .
+
+RUN chown -R www-data ./storage/
+RUN chmod -R ug+w ./storage/
+
+USER root
+
+RUN composer dump-autoload
+
+USER $user
