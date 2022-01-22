@@ -6,19 +6,10 @@ COPY ./src/web/composer.* .
 
 RUN composer install --no-autoloader
 
-
-FROM node:12-alpine as npmBoot
-
-WORKDIR /app/
-
-COPY ./src/web/package.* .
-
-RUN npm install
-
 FROM php:7.4-fpm
 
 COPY --from=composerBoot /usr/bin/composer /usr/bin/composer
-COPY --from=npmBoot /usr/local/bin/npm /usr/local/bin/npm
+
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
@@ -42,6 +33,11 @@ RUN apt-get update && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd
 
+
+RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
+
+RUN apt-get -y install nodejs
+
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath
 
@@ -55,16 +51,6 @@ RUN mkdir -p /home/$user/.composer && \
 # Set working directory
 WORKDIR /var/www
 
-COPY --from=composerBoot /app/vendor ./vendor
-COPY --from=npmBoot /app/node_modules ./node_modules
-
-COPY --chown=www-data ./src/web .
-
-RUN chown -R www-data ./storage/
-RUN chmod -R ug+w ./storage/
-
-USER root
-
-RUN composer dump-autoload
-
 USER $user
+
+CMD ./startup.sh

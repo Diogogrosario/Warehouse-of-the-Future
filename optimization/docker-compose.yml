@@ -6,9 +6,7 @@ services:
       context: .
       dockerfile: ./docker/logic/Dockerfile
     depends_on:
-      - db
-    volumes:
-      - ./src/logic:/tmp/genetic/logic
+      - db          
     ports:
       - "5800:5800"
     restart: "on-failure"
@@ -37,6 +35,8 @@ services:
       - "9000:9000"    
     depends_on:
       - db
+    volumes:
+      - ./src/web:/var/www
     networks:
       - internal
   db:
