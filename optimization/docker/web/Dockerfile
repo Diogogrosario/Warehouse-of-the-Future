@@ -1,4 +1,4 @@
-FROM composer:1.10 as builder
+FROM composer:1.10 as composerBoot
 
 WORKDIR /app/
 
@@ -8,7 +8,7 @@ RUN composer install --no-autoloader
 
 FROM php:7.4-fpm
 
-COPY --from=builder /usr/bin/composer /usr/bin/composer
+COPY --from=composerBoot /usr/bin/composer /usr/bin/composer
 
 # Arguments defined in docker-compose.yml
 ARG user
@@ -33,15 +33,15 @@ RUN apt-get update && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath
-
-RUN docker-php-ext-install sockets
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
 
 RUN apt-get -y install nodejs
 
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath
+
+RUN docker-php-ext-install sockets
 
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
@@ -53,4 +53,4 @@ WORKDIR /var/www
 
 USER $user
 
-CMD composer install && npm install && npm run prod && php-fpm -F
+CMD bash startup.sh
