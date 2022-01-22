@@ -100,19 +100,19 @@ def main(docker=False, list_parameters=None):
     global storage
 
     if list_parameters is None:
-        list_parameters = []
+        print("List Parameters is Null")
+        return
 
     # Overwrite Database configs if Docker tag is defined
     if docker:
         db = Database('test', True)
-        storage = Storage(db)
         print("Running Docker ENV")
     else:
         db = Database()
-        storage = Storage(db)
+
+    storage = Storage(db, docker)
 
     query_warehouse = "SELECT * FROM Warehouse"
-    # query_month_manifesto = "SELECT * FROM Month_Manifesto"
 
     warehouses = db.df_query(query_warehouse)
 

@@ -108,8 +108,6 @@ class Layout:
 
             score += work_score / max_score
 
-            # print(f'Work score: {work_score}')
-
         if 'frequency' in self.metrics_to_optimize.keys():
             factor = float(self.metrics_to_optimize['frequency']['factor'])
             frequency_score = 0
@@ -130,8 +128,6 @@ class Layout:
             frequency_score += float(sum(np.diff(shelves_frequencies)))
 
             score += frequency_score / max_score
-
-            # print(f'Frequency score: {frequency_score}')
 
         if 'organization' in self.metrics_to_optimize.keys():
             factor = float(self.metrics_to_optimize['organization']['factor'])
@@ -267,7 +263,7 @@ class Shelf:
 
 
 class Product:
-    def __init__(self, id, name, height, width, weight, type_id, frequency):
+    def __init__(self, id, name: str, height: int, width: int, weight: int, type_id: int, frequency: int):
         self.id = id
         self.name = name
         self.height = height
@@ -355,11 +351,6 @@ class Rack:
             state += f'\t\t\t\t{product}\n'
             state += f'\t\t\t\t\tPOSITION: ({x_orig}, {x_end})\n'
         return state
-
-
-class MonthManifesto:  # TODO: use this class instead of dictionary of dictionaries in get_manifestos()
-    def __init__(self, products):
-        self.products = products  # {id : quantity}
 
 
 def valid_placement(rack, product):
