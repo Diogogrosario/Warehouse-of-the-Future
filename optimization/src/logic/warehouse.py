@@ -86,8 +86,10 @@ class Layout:
                         max_score += float(product.weight) / min_y
                         weight_score += float(product.weight) / max(float(rack.y), 0.01)
 
-            score += (weight_score / max_score) * factor
-
+            try:
+                score += (weight_score / max_score) * factor
+            except ZeroDivisionError:
+                print('Weight metric might not be appropriate since the weight of all the products is zero.')
 
         if 'work' in self.metrics_to_optimize.keys():
             factor = int(self.metrics_to_optimize['work']['factor'])
@@ -106,7 +108,10 @@ class Layout:
                         max_score += float(product.weight)
                         work_score += math.cos(math.radians(theta)) * float(product.weight)
 
-            score += (work_score / max_score) * factor
+            try:
+                score += (work_score / max_score) * factor
+            except ZeroDivisionError:
+                print('Work metric might not be appropriate since the weight of all the products is zero.')
 
         if 'frequency' in self.metrics_to_optimize.keys():
             factor = int(self.metrics_to_optimize['frequency']['factor'])
@@ -127,7 +132,10 @@ class Layout:
 
             frequency_score += float(sum(np.diff(shelves_frequencies)))
 
-            score += (frequency_score / max_score) * factor
+            try:
+                score += (frequency_score / max_score) * factor
+            except ZeroDivisionError:
+                print('Frequency metric might not be appropriate since the frequency of all the products is zero.')
 
         if 'organization' in self.metrics_to_optimize.keys():
             factor = int(self.metrics_to_optimize['organization']['factor'])
@@ -187,7 +195,10 @@ class Layout:
                 max_score += 2 ** elem
                 num_shelves = num_shelves - 1
 
-            score += (organization_score / max_score) * factor
+            try:
+                score += (organization_score / max_score) * factor
+            except ZeroDivisionError:
+                print("Organization metric might not be appropriate since the products don't have types associated.")
 
         if 'minimize-errors' in self.metrics_to_optimize:
             factor = int(self.metrics_to_optimize['minimize-errors']['factor'])
@@ -244,7 +255,10 @@ class Layout:
 
                 max_score = 2*len(self.warehouse.shelves)
 
-            score += (minimize_errors_score / max_score) * factor
+            try:
+                score += (minimize_errors_score / max_score) * factor
+            except ZeroDivisionError:
+                print('Minimize Errors metric might not be appropriate since there are no shelves.')
 
         # Penalize layouts with products out
         score -= len(self.products_out) * 100
