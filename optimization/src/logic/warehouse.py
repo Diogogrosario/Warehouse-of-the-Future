@@ -1,7 +1,6 @@
 import math
 import random
 import sys
-import operator
 import itertools
 import random as r
 import numpy as np
@@ -12,7 +11,6 @@ worker_average_height = 1.75
 
 
 class Layout:
-    # TODO: Talvez manter lista com todos os produtos e respetivas posições
     def __init__(self, warehouse, metrics_to_optimize):
         self.warehouse = warehouse
         self.products_out = []
@@ -64,7 +62,6 @@ class Layout:
             iteration += 1
             if iteration == MAX_ITERATIONS:
                 self.products_out.append(product)
-                print(f'DELETED FROM CROSSOVER/MUTATION: {product.id}')
                 break
             random_shelf = r.choice(self.warehouse.shelves)
             random_rack = r.choice(random_shelf.racks)
@@ -339,9 +336,10 @@ class Product:
     def __hash__(self):
         return hash(str(self.id))
 
-    def __str__(self) -> str:  # TODO: print other attributes
+    def __str__(self) -> str:
         state = ""
         state += f'PRODUCT {self.id}:\n'
+        state += f'\t\t\t\t\tNAME {self.name}\n'
         state += f'\t\t\t\t\tWEIGHT {self.weight}\n'
         state += f'\t\t\t\t\tWIDTH {self.width}\n'
         state += f'\t\t\t\t\tHEIGHT {self.height}\n'
@@ -412,11 +410,6 @@ class Rack:
             state += f'\t\t\t\t{product}\n'
             state += f'\t\t\t\t\tPOSITION: ({x_orig}, {x_end})\n'
         return state
-
-
-class MonthManifesto:  # TODO: use this class instead of dictionary of dictionaries in get_manifestos()
-    def __init__(self, products):
-        self.products = products  # {id : quantity}
 
 
 def valid_placement(rack, product):
