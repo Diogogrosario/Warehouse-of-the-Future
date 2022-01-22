@@ -12,7 +12,7 @@ def run_server():
 
     data_sock.bind(('', port))
 
-    data_sock.listen(1000)
+    data_sock.listen()
 
     while True:
         conn, address = data_sock.accept()
