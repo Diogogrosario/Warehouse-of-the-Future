@@ -65,7 +65,7 @@ export default function App() {
 
 	return (
 		<Layout noScroll>
-			<Grid container sx={{ mb: "16px" }} direction={mobile ? "column" : "row"}>
+			<Grid container direction={mobile ? "column" : "row"}>
 				{fullscreen != FullscreenState.Right && (
 					<Grid
 						item
