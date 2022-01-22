@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Grid, styled, Tab, Tabs, useMediaQuery } from "@mui/material";
 
 import FullscreenButton from "./components/FullscreenButton";
@@ -31,7 +31,8 @@ export default function App() {
 	const minPanelSize = 20,
 		maxPanelSize = 80;
 
-	const handleChange = (event: React.SyntheticEvent, newValue: SetStateAction<number>) => {
+	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+		console.log("value", typeof newValue, newValue);
 		setSelectedTab(newValue);
 	};
 
