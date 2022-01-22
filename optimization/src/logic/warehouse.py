@@ -1,5 +1,6 @@
 import math
 import random
+import re
 import sys
 import random as r
 import numpy as np
@@ -265,7 +266,7 @@ class Shelf:
 class Product:
     def __init__(self, id, name: str, height: int, width: int, weight: int, type_id: int, frequency: int):
         self.id = id
-        self.name = name
+        self.name = re.sub('[^A-Za-z0-9]+', '', name)
         self.height = height
         self.width = width
         self.weight = weight

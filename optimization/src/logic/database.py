@@ -42,7 +42,7 @@ class Database:
         else:
             cursor.execute(query, value)
             self.db.commit()
-            return None
+            return cursor.lastrowid
 
     # Execute SQL queries and retrieve a pandas dataframe
     def df_query(self, query, value=None):
@@ -60,8 +60,7 @@ class Database:
             df.columns = result['header']
             return df
         else:
-            self.execute(query, value)
-            return None
+            return self.execute(query, value)
 
     # Close the database connection
     def __del__(self):
