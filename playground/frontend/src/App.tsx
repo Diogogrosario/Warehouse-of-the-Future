@@ -32,7 +32,6 @@ export default function App() {
 		maxPanelSize = 80;
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		console.log("value", typeof newValue, newValue);
 		setSelectedTab(newValue);
 	};
 
