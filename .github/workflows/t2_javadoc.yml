@@ -1,0 +1,32 @@
+name: T2 - Mesh network javadoc CI/CD
+
+on:
+  push:
+    branches: [ development, t2_development ]
+
+jobs:
+  gen-javadocs:
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./mesh_communication
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v1
+      with:
+        java-version: 17
+    - name: Generate javadocs
+      run: mvn -f backend/pom.xml javadoc:javadoc
+    - name: setup git config
+      run: |
+        git config user.name "GitHub Actions Bot [T2]"
+        git config user.email "<joaocosta.work@posteo.net>"
+    - name: commit (this step prints a message if nothing is commited)
+      run: |
+        test "$(git diff --name-only | wc -l)" -gt 0 && \
+          git add docs/javadoc && \
+          git commit -m "Doc: regenerate javadocs" && \
+          git push origin t2_development || \
+          echo "The commit/push failed which is ok"
