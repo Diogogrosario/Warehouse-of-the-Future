@@ -1,0 +1,28 @@
+@startuml
+
+!theme amiga
+
+hide empty members
+
+object ManifestAPI
+
+object MNAPI
+
+object FrontEnd
+
+package MeshNetwork{
+    object Orchestrator
+    object "Sensor" as S1
+    object "Sensor" as S2
+    object "Sensor" as S3
+}
+
+MNAPI <-up-> MeshNetwork
+ManifestAPI -down-> Orchestrator : Sends Manifest Data
+Orchestrator <-right-> S1
+Orchestrator <-down-> S2
+Orchestrator <-left-> S3
+
+FrontEnd <-left-> MNAPI
+
+@enduml

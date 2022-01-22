@@ -1,4 +1,0 @@
-# don't ever format node_modules
-node_modules
-# don't format build output
-dist

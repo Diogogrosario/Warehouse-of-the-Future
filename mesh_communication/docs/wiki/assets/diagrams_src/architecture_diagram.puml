@@ -1,0 +1,71 @@
+@startuml architecture_diagram
+
+!theme amiga
+
+hide empty members
+
+package Backend {
+    component "Java 17 - Maven App" as JavaApp {
+        component "Manifest Parser" as parser
+        component "Manifest Generator" as generator
+        component "Communication Simulation" as commSim
+        component "Device Simulation" as devSim
+        component "REST API" as api
+    }
+
+    component Javadoc 
+
+    component Configuration
+
+    component Manifest
+
+    component Tests
+
+        
+    note as JavaDocNote
+        Documentation of the Java Application
+    end note
+
+    note as Jack
+        Jackson
+    end note
+
+    note as yaml
+        YAML
+    end note
+
+    note as tests
+        JUnit 5
+        Mockito
+        Pitest
+    end note
+
+    note as spring
+        Spring Boot
+    end note
+}
+
+package Frontend {
+    component "Flutter App" as FlutterApp {
+        component "Mesh Visualization"
+        component "Communication Logs"
+    }
+}
+
+
+Configuration .. yaml
+generator -down-> Manifest
+Manifest .. yaml
+parser .. Jack
+Javadoc .right. JavaDocNote
+Javadoc <-- JavaApp
+Configuration -up-> commSim
+Configuration -up-> devSim
+Manifest -up-> parser
+tests .left. Tests
+JavaApp --> Tests
+api .down. spring
+
+FlutterApp -left-> api
+
+@enduml
