@@ -103,5 +103,5 @@ jobs:
                       docker rm ${GRAFANA_TAG}
                       docker pull ${DOCKERHUB_REPO}:${BACKEND_TAG}
                       docker pull ${DOCKERHUB_REPO}:${GRAFANA_TAG}
-                      docker run -d -p 8001:5000 --restart always --name ${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
-                      docker run -d -p 9000:3000 --restart always --name ${GRAFANA_TAG} ${DOCKERHUB_REPO}:${GRAFANA_TAG}
+                      docker run -d -p 8001:5000 --restart always --network grafnet --name ${BACKEND_TAG} ${DOCKERHUB_REPO}:${BACKEND_TAG}
+                      docker run -d -p 9000:3000 --restart always --network grafnet --name ${GRAFANA_TAG} ${DOCKERHUB_REPO}:${GRAFANA_TAG}
