@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,13 +84,10 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/")
-    public String root(HttpServletResponse response) throws IOException {
-        File file = new File("../docs/api/api.html");
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        StringBuilder ret = new StringBuilder();
-        String add;
-        while ((add = br.readLine()) != null) ret.append(add).append("\n");
-        return ret.toString();
+    public String root(HttpServletResponse response) throws IOException, URISyntaxException {
+        InputStream apiStream = API.class.getClassLoader().getResourceAsStream("api.html");
+        assert apiStream != null;
+        return new String(apiStream.readAllBytes());
     }
 
     @GetMapping({"/devices/{status}", "/devices"})
