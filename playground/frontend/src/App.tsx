@@ -9,6 +9,11 @@ import ReportList from "./components/report/ReportList";
 import TabPanel from "./components/TabPanel";
 import NoResultsOverlay from "./components/NoResultsOverlay";
 import theme from "./styles/theme";
+import {
+	getCurrentDevices,
+	advanceTick,
+	orchestrate
+} from "./resources/Simulation";
 
 export enum FullscreenState {
 	Left,
@@ -62,6 +67,13 @@ export default function App() {
 			document.removeEventListener("mousemove", handleMouseMove);
 		};
 	});
+
+	// orchestrate();
+	// getCurrentDevices();
+	// advanceTick();
+	// getCurrentDevices();
+	// advanceTick();
+	// getCurrentDevices();
 
 	return (
 		<Layout noScroll>
