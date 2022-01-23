@@ -2,10 +2,10 @@
 
 <table class="table table-striped table-bordered table-hover">
     <thead>
-    <tr class="text-center font-weight-bold">
+    <tr class="text-left font-weight-bold">
         <td colspan="{{$sizes[$shelf->id] +2 }}"><h4 class="font-weight-bold">{{$shelf->id}}</h4></td>
     </tr>
-    <tr class="text-center">
+    <tr class="text-left">
         <td class="align-middle font-weight-bold">Racks</td>
         <td colspan="{{$sizes[$shelf->id]}}" class="align-middle font-weight-bold">Products</td>
         <td class="align-middle font-weight-bold">Racks</td>
