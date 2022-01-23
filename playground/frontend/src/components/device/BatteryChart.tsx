@@ -8,7 +8,7 @@ import { GridRows, GridColumns } from "@visx/grid";
 
 import batteryData from "./battery.json";
 
-export const background = "#f3f3f3";
+export const background = "#F3F3F3";
 
 const timestamp = (d: any) => new Date(d["timestamp"] * 1000).valueOf();
 const batteryPower = (d: any) => d["battery_power"];
@@ -24,11 +24,11 @@ const batteryPowerScale = scaleLinear<number>({
 
 const defaultMargin = { top: 40, right: 30, bottom: 50, left: 40 };
 
-export type ThresholdProps = {
+interface ThresholdProps {
 	width: number;
 	height: number;
 	margin?: { top: number; right: number; bottom: number; left: number };
-};
+}
 
 export default function BatteryChart({ width, height, margin = defaultMargin }: ThresholdProps) {
 	if (width < 10) return null;
@@ -67,10 +67,12 @@ export default function BatteryChart({ width, height, margin = defaultMargin }: 
 						height={yMax}
 						stroke="#e0e0e0"
 					/>
+
 					<GridColumns scale={timeScale} width={xMax} height={yMax} stroke="#e0e0e0" />
 
-					<AxisBottom top={yMax} scale={timeScale} numTicks={width > 520 ? 10 : 5} />
-					<AxisLeft scale={batteryPowerScale} />
+					{/* TODO: This is breaking for some reason */}
+					{/*<AxisBottom top={yMax} scale={timeScale} numTicks={width > 520 ? 10 : 5} />*/}
+					{/*<AxisLeft scale={batteryPowerScale} />*/}
 
 					<text x="-70" y="15" transform="rotate(-90)" fontSize={10}>
 						Battery power (%)

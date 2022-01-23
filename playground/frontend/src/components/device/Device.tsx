@@ -1,45 +1,21 @@
 import React from "react";
-import { Box, Button, Card, CardContent, CardMedia, Modal, Typography } from "@mui/material";
-import DeviceDetails from "./DeviceDetails";
-
-const style = {
-	width: 1500,
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "center",
-};
+import { Card, CardContent, CardMedia, Stack, Typography } from "@mui/material";
+import BatteryChart from "./BatteryChart";
 
 export default function Device(): React.ReactElement {
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
-
 	return (
 		<div>
-			<Modal open={open} onClose={handleClose} sx={style}>
-				<Box sx={{ backgroundColor: "white", borderRadius: 3 }}>
-					<DeviceDetails />
-				</Box>
-			</Modal>
+			<Stack direction="column" spacing={1}>
+				<Typography variant="h5">Mesh Device</Typography>
 
-			<Card sx={{ display: "flex", width: 350, height: 200, p: 1 }}>
-				<CardMedia
-					component="img"
-					image="images/device.png"
-					alt="Device Image"
-					sx={{ width: 1 / 3 }}
-				/>
+				<Typography variant="body1">ID: 123456</Typography>
 
-				<CardContent>
-					<Typography variant="h5">Mesh Device</Typography>
+				<Typography variant="h5" sx={{ mb: 2 }}>
+					Battery
+				</Typography>
 
-					<Typography variant="body2">ID: 123456</Typography>
-
-					<Button variant="contained" onClick={handleOpen}>
-						View Details
-					</Button>
-				</CardContent>
-			</Card>
+				<BatteryChart width={800} height={500} />
+			</Stack>
 		</div>
 	);
 }
