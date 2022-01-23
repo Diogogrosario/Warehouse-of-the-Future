@@ -56,7 +56,7 @@ export default class SceneManager {
 		const whStructure = new Warehouse(this, mockJSON as WarehouseStructure);
 		this.scene.add(whStructure.getObject());
 
-		this.addAxes();
+		// this.addAxes();
 	}
 
 	public render() {

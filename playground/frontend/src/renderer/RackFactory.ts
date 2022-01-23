@@ -1,12 +1,19 @@
 import * as THREE from "three";
 import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { BucketType, BucketManager } from "./BucketManager";
+import { BucketFactory } from "./BucketFactory";
 import { WarehouseDimensions } from "./Warehouse";
 import SceneManager from "./SceneManager";
+import { SpaceEvenly } from "./utils/Spacing";
 
-export interface ShelfLevelConfig {
-	height: number;
-	bucketType: BucketType;
+export interface BucketConfig {
+	height?: number;
+	width: number;
+	id: number;
+}
+
+export interface ShelfConfig {
+	y: number,
+	buckets: BucketConfig[]
 }
 
 enum Orientation {
@@ -16,16 +23,18 @@ enum Orientation {
 	WEST = "west",
 }
 
-export interface ShelfConfig {
+export interface RackConfig {
 	orientation: Orientation;
 	x: number;
 	z: number;
 	width: number;
 	depth: number;
 	height: number;
-	levels: ShelfLevelConfig[];
+	shelves: ShelfConfig[];
 }
 
+
+// Internal mapping only
 interface FrameIdentifier {
 	width: number;
 	depth: number;
@@ -37,21 +46,21 @@ interface ShelvesIdentifier {
 	depth: number;
 }
 
-export class ShelfFactory {
+export class RackFactory {
 	private frameMaterial: THREE.Material;
-	private shelveMaterial: THREE.Material;
+	private shelfMaterial: THREE.Material;
 
 	private static readonly frameThickness = 0.1;
 
 	private static readonly shelfAngle = Math.PI / 48;
-	private static readonly levelEdgeHeight = 0.075;
+	private static readonly shelfEdgeHeight = 0.075;
 
 	private readonly frameGeometries: Map<FrameIdentifier, THREE.BufferGeometry> = new Map();
-	private readonly shelveGeometries: Map<ShelvesIdentifier, THREE.BufferGeometry> = new Map();
+	private readonly shelfGeometries: Map<ShelvesIdentifier, THREE.BufferGeometry> = new Map();
 
-	private readonly bucketManager: BucketManager;
+	private readonly bucketManager: BucketFactory;
 
-	constructor(sceneManager: SceneManager, bucketManager: BucketManager) {
+	constructor(sceneManager: SceneManager, bucketManager: BucketFactory) {
 		this.bucketManager = bucketManager;
 
 		this.frameMaterial = new THREE.MeshPhongMaterial({
@@ -59,112 +68,110 @@ export class ShelfFactory {
 			shininess: 40,
 		});
 
-		this.shelveMaterial = new THREE.MeshPhongMaterial({
+		this.shelfMaterial = new THREE.MeshPhongMaterial({
 			color: 0xc2c2c2,
 			shininess: 5,
 		});
 	}
 
-	public getShelf(config: ShelfConfig, dimensions: WarehouseDimensions): THREE.Object3D {
-		const shelf = new THREE.Group();
-		shelf.name = "Shelf";
+	public getRack(config: RackConfig, dimensions: WarehouseDimensions, obj: THREE.Object3D): Map<number, THREE.Object3D> {
+		const rack = new THREE.Group();
+		rack.name = "Rack";
 
 		const frameMesh = new THREE.Mesh(this.getFrameGeometry(config), this.frameMaterial);
 		frameMesh.translateX(-config.width / 2);
 		frameMesh.translateZ(-config.depth / 2);
-		frameMesh.name = "ShelfFrame";
-		shelf.add(frameMesh);
+		frameMesh.name = "RackFrame";
+		rack.add(frameMesh);
 
-		this.addLevels(shelf, config);
+		this.addShelves(rack, config);
 
-		this.positionShelf(shelf, config, dimensions);
+		this.positionRack(rack, config, dimensions);
 
-		return shelf;
+		obj.add(rack);
+
+		return new Map();
 	}
 
-	private positionShelf(
-		shelf: THREE.Object3D,
-		config: ShelfConfig,
+	private positionRack(
+		rack: THREE.Object3D,
+		config: RackConfig,
 		dimensions: WarehouseDimensions
 	) {
 		// Update position
 		switch (config.orientation) {
 			case Orientation.NORTH:
 			case Orientation.SOUTH:
-				shelf.translateX(config.x + config.width / 2);
-				shelf.translateZ(config.z + config.depth / 2);
+				rack.translateX(config.x + config.width / 2);
+				rack.translateZ(config.z + config.depth / 2);
 				break;
 			case Orientation.EAST:
 			case Orientation.WEST:
-				shelf.translateX(config.x + config.depth / 2);
-				shelf.translateZ(config.z + config.width / 2);
+				rack.translateX(config.x + config.depth / 2);
+				rack.translateZ(config.z + config.width / 2);
 				break;
 		}
 
-		shelf.translateY(config.height / 2);
-		shelf.translateX(-dimensions.width / 2);
-		shelf.translateZ(-dimensions.depth / 2);
+		rack.translateY(config.height / 2);
+		rack.translateX(-dimensions.width / 2);
+		rack.translateZ(-dimensions.depth / 2);
 
 		// Update rotation
 		switch (config.orientation) {
 			case Orientation.NORTH:
-				shelf.rotateY(Math.PI);
+				rack.rotateY(Math.PI);
 				break;
 			case Orientation.EAST:
-				shelf.rotateY(Math.PI / 2);
+				rack.rotateY(Math.PI / 2);
 				break;
 			case Orientation.WEST:
-				shelf.rotateY(-Math.PI / 2);
+				rack.rotateY(-Math.PI / 2);
 				break;
 		}
 	}
 
-	private addLevels(shelf: THREE.Object3D, config: ShelfConfig) {
+	private addShelves(rack: THREE.Object3D, config: RackConfig) {
 		// Individual shelves
 		const shelfGeometry = this.getShelveGeometry(config);
 
-		for (const sh of config.levels) {
-			if (sh.height >= config.height)
+		for (const sh of config.shelves) {
+			if (sh.y >= config.height)
 				console.warn("Shelf contains level higher than its height");
 
-			const m = new THREE.Mesh(shelfGeometry, this.shelveMaterial);
-			m.name = `ShelfHeight${sh.height}`;
+			const shelf = new THREE.Mesh(shelfGeometry, this.shelfMaterial);
+			shelf.name = `ShelfHeight${sh.y}`;
 
-			m.translateX(-config.width / 2);
-			m.translateZ(-config.depth / 2);
-			m.translateY(sh.height - config.height / 2);
+			shelf.translateX(-config.width / 2);
+			shelf.translateZ(-config.depth / 2);
+			shelf.translateY(sh.y - config.height / 2);
 
-			shelf.add(m);
+			rack.add(shelf);
 
-			// Buckets
-			const bWidth = this.bucketManager.getWidth(sh.bucketType);
-			const availableSpace = config.width - ShelfFactory.frameThickness;
-			const no_buckets = Math.floor(availableSpace / bWidth);
+			const spacing = new SpaceEvenly(config.width - RackFactory.frameThickness * 2, sh.buckets.map((bucketConfig: BucketConfig) => bucketConfig.width));
+			for (let i = 0; i < sh.buckets.length; i++) {
+				const bconfig = sh.buckets[i];
 
-			const freeSpace = availableSpace - no_buckets * bWidth;
-			const spacing = freeSpace / (no_buckets + 1);
+				// TODO: Calculate default height based on decent parameters
+				const bheight = bconfig.height ?? 2;
 
-			for (let i = 0; i < no_buckets; i++) {
-				const bucket = new THREE.Group();
-				bucket.name = "PlacedBucket";
+				const bucket = new THREE.Mesh();
+				bucket.name = "Bucket " + bconfig.id;
 
-				bucket.scale.multiply(new THREE.Vector3(1, 1, config.depth));
-				bucket.rotateX(ShelfFactory.shelfAngle);
-				// CSS equivalent of space-evenly
-				bucket.translateX(
-					ShelfFactory.frameThickness / 2 + spacing * (i + 1) + bWidth * (i + 0.5)
-				);
-				bucket.translateY(-0.05);
+				bucket.rotateX(RackFactory.shelfAngle);
+
+				bucket.translateX(RackFactory.frameThickness + spacing.position(i));
+				bucket.translateY(bheight / 2);
+				bucket.translateY(RackFactory.shelfEdgeHeight);
 				bucket.translateZ(config.depth / 2);
 
-				this.bucketManager.addBucket(sh.bucketType, bucket);
+				this.bucketManager.addBucketToExistingMesh(bconfig.width - 0.05, config.depth - 0.05, bheight, bucket);
 
-				m.add(bucket);
+				shelf.add(bucket);
 			}
 		}
 	}
 
-	private getFrameGeometry(config: ShelfConfig): THREE.BufferGeometry {
+	private getFrameGeometry(config: RackConfig): THREE.BufferGeometry {
 		const identifier = {
 			width: config.width,
 			depth: config.depth,
@@ -179,14 +186,14 @@ export class ShelfFactory {
 		} else return geo;
 	}
 
-	private generateFrameGeometry(config: ShelfConfig): THREE.BufferGeometry {
+	private generateFrameGeometry(config: RackConfig): THREE.BufferGeometry {
 		const geometries: THREE.BufferGeometry[] = [];
 		const positionHelper = new THREE.Object3D();
 
 		// Vertical beams
 		for (let i = 0; i < 2; i++) {
 			for (let j = 0; j < 2; j++) {
-				const supportBeam = new THREE.BoxGeometry(0.1, config.height, 0.1);
+				const supportBeam = new THREE.BoxGeometry(RackFactory.frameThickness, config.height, RackFactory.frameThickness);
 
 				positionHelper.position.setX(config.width * i);
 				positionHelper.position.setY(0);
@@ -258,35 +265,35 @@ export class ShelfFactory {
 		return mergedGeometry;
 	}
 
-	private getShelveGeometry(config: ShelfConfig): THREE.BufferGeometry {
+	private getShelveGeometry(config: RackConfig): THREE.BufferGeometry {
 		const identifier = {
 			width: config.width,
 			depth: config.depth,
 		};
-		const geo = this.shelveGeometries.get(identifier);
+		const geo = this.shelfGeometries.get(identifier);
 
 		if (!geo) {
 			const generated_geo = this.generateShelveGeometry(config);
-			this.shelveGeometries.set(identifier, generated_geo);
+			this.shelfGeometries.set(identifier, generated_geo);
 			return generated_geo;
 		} else return geo;
 	}
 
-	private generateShelveGeometry(config: ShelfConfig) {
+	private generateShelveGeometry(config: RackConfig) {
 		const positionHelper = new THREE.Object3D();
 		const geometries: THREE.BufferGeometry[] = [];
 
-		const shelfHeightOffset = Math.tan(ShelfFactory.shelfAngle) * (config.depth / 2);
+		const shelfHeightOffset = Math.tan(RackFactory.shelfAngle) * (config.depth / 2);
 
 		const shelfGeometry = new THREE.BoxGeometry(config.width - 0.1, 0.025, config.depth);
 		const shelfEdge = new THREE.BoxGeometry(
 			config.width - 0.1,
-			ShelfFactory.levelEdgeHeight,
+			RackFactory.shelfEdgeHeight,
 			0.01
 		);
 
 		// Shelf base
-		positionHelper.rotateX(ShelfFactory.shelfAngle);
+		positionHelper.rotateX(RackFactory.shelfAngle);
 		positionHelper.position.set(config.width / 2, shelfHeightOffset, config.depth / 2);
 
 		positionHelper.updateMatrixWorld();
@@ -294,7 +301,7 @@ export class ShelfFactory {
 		geometries.push(shelfGeometry);
 
 		// Edge
-		positionHelper.translateY(ShelfFactory.levelEdgeHeight / 2);
+		positionHelper.translateY(RackFactory.shelfEdgeHeight / 2);
 		positionHelper.translateZ(config.depth / 2);
 
 		positionHelper.updateMatrixWorld();
