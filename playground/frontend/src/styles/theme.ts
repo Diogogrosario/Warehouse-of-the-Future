@@ -96,7 +96,7 @@ const baseTheme = createTheme({
 			main: "#212121",
 		},
 		secondary: {
-			main: "#e5c1d6",
+			main: "#7397f4",
 		},
 		error: {
 			main: "#bc0000",

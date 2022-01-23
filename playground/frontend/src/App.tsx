@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Grid, styled, Tab, Tabs, useMediaQuery } from "@mui/material";
 
 import FullscreenButton from "./components/FullscreenButton";
@@ -31,7 +31,7 @@ export default function App() {
 	const minPanelSize = 20,
 		maxPanelSize = 80;
 
-	const handleChange = (event: React.SyntheticEvent, newValue: SetStateAction<number>) => {
+	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setSelectedTab(newValue);
 	};
 
@@ -65,7 +65,7 @@ export default function App() {
 
 	return (
 		<Layout noScroll>
-			<Grid container sx={{ mb: "16px" }} direction={mobile ? "column" : "row"}>
+			<Grid container direction={mobile ? "column" : "row"}>
 				{fullscreen != FullscreenState.Right && (
 					<Grid
 						item
