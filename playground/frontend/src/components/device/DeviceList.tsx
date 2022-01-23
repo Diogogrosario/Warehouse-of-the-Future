@@ -1,21 +1,12 @@
 import React from "react";
 import Device from "./Device";
-import { Grid } from "@mui/material";
+import { Grid, List } from "@mui/material";
 
 export default function DeviceList(): React.ReactElement {
 	const cards = [];
 
-	for (let i = 0; i < 10; i++)
-		cards.push(
-			<Grid item key={i}>
-				<Device />
-			</Grid>
-		);
+	for (let i = 0; i < 5; i++) cards.push(<Device />);
 
-	return (
-		<Grid container justifyContent="flex-start" spacing={3} >
-			{cards}
-		</Grid>
-	);
+	return <List sx={{ overflow: "auto" }}>{cards}</List>;
 }
 

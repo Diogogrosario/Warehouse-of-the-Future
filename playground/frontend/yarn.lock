@@ -2437,6 +2437,20 @@
     "@typescript-eslint/types" "5.9.0"
     eslint-visitor-keys "^3.0.0"
 
+"@visx/axis@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@visx/axis/-/axis-2.6.0.tgz#33c7713590818705ae4a10bc6ab6d589bdb9ce9c"
+  integrity sha512-Ti8AxclK4m/2SHQPGMMsvotTxZGaLQIMB10C9tyHP9JNBCLWKWtq1XTrGxlySffnfhXML80zLYsEdLPumzxFvw==
+  dependencies:
+    "@types/react" "*"
+    "@visx/group" "2.1.0"
+    "@visx/point" "2.6.0"
+    "@visx/scale" "2.2.2"
+    "@visx/shape" "2.4.0"
+    "@visx/text" "2.3.0"
+    classnames "^2.3.1"
+    prop-types "^15.6.0"
+
 "@visx/curve@2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@visx/curve/-/curve-2.1.0.tgz#f614bfe3db66df7db7382db7a75ced1506b94602"
@@ -2444,6 +2458,20 @@
   dependencies:
     "@types/d3-shape" "^1.3.1"
     d3-shape "^1.0.6"
+
+"@visx/grid@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@visx/grid/-/grid-2.6.0.tgz#bb24e88dafd3eba3a867a4327dc9dad32bfda2be"
+  integrity sha512-LH4yioffUZRT1ic3KSYqhimF6GPZCs3jzv4Xdz5gNVsSbEY4BOQyulxtq8375Z80DpLwK1VQAMxoNdj1EDkxIg==
+  dependencies:
+    "@types/react" "*"
+    "@visx/curve" "2.1.0"
+    "@visx/group" "2.1.0"
+    "@visx/point" "2.6.0"
+    "@visx/scale" "2.2.2"
+    "@visx/shape" "2.4.0"
+    classnames "^2.3.1"
+    prop-types "^15.6.2"
 
 "@visx/group@2.1.0", "@visx/group@^2.1.0":
   version "2.1.0"
@@ -2462,6 +2490,22 @@
     "@types/d3-random" "^2.2.0"
     d3-random "^2.2.2"
 
+"@visx/point@2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@visx/point/-/point-2.6.0.tgz#c4316ca409b5b829c5455f07118d8c14a92cc633"
+  integrity sha512-amBi7yMz4S2VSchlPdliznN41TuES64506ySI22DeKQ+mc1s1+BudlpnY90sM1EIw4xnqbKmrghTTGfy6SVqvQ==
+
+"@visx/responsive@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@visx/responsive/-/responsive-2.4.1.tgz#7f471c7d5d754adf101a23dc7a72f24ee2210672"
+  integrity sha512-x5zPUmmsdVX/QaeDj9rLg3mGtNuiomBWUvwBo5oQs2KOtAFiviHx0NpLfY09h+p5gvkmGfTM+8gHEtVtIwLXPg==
+  dependencies:
+    "@types/lodash" "^4.14.172"
+    "@types/react" "*"
+    lodash "^4.17.21"
+    prop-types "^15.6.1"
+    resize-observer-polyfill "1.5.1"
+
 "@visx/scale@2.2.2", "@visx/scale@^2.2.2":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@visx/scale/-/scale-2.2.2.tgz#b8eafabdcf92bb45ab196058fe184772ad80fd25"
@@ -2474,7 +2518,7 @@
     d3-scale "^3.3.0"
     d3-time "^2.1.1"
 
-"@visx/shape@^2.4.0":
+"@visx/shape@2.4.0", "@visx/shape@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@visx/shape/-/shape-2.4.0.tgz#d25d6a319c416258e12947d74773edb83051ba03"
   integrity sha512-D6XdGCgWi0/0ZKJ5iK8W5gILCKdrbDwnR/e7o6n/favLU0o+ntiI4a9PZBZ5bYS0aFNG7r+miGMcWV/AQfODuA==
@@ -2491,6 +2535,18 @@
     d3-shape "^1.2.0"
     lodash "^4.17.21"
     prop-types "^15.5.10"
+
+"@visx/text@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@visx/text/-/text-2.3.0.tgz#34b66a467685cf1db2380a2673e032f2f874919a"
+  integrity sha512-5mEcmzWZqbziz6Azv+H6BWrnUbnpygAw4SNzBqF+YiGik5gR/USaBRAs9aKjnoUg6qFe3NZWFOcGpR3BzDR/bQ==
+  dependencies:
+    "@types/lodash" "^4.14.172"
+    "@types/react" "*"
+    classnames "^2.3.1"
+    lodash "^4.17.21"
+    prop-types "^15.7.2"
+    reduce-css-calc "^1.3.0"
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -3141,6 +3197,11 @@ babel-preset-react-app@^10.0.1:
     "@babel/runtime" "^7.16.3"
     babel-plugin-macros "^3.1.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
+
+balanced-match@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
+  integrity sha1-yz8+PHMtwPAe5wtAPzAuYddwmDg=
 
 balanced-match@^1.0.0:
   version "1.0.2"
@@ -6701,6 +6762,11 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
+math-expression-evaluator@^1.2.14:
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.3.8.tgz#320da3b2bc1512f4f50fc3020b2b1cd5c8e9d577"
+  integrity sha512-9FbRY3i6U+CbHgrdNbAUaisjWTozkm1ZfupYQJiZ87NtYHk2Zh9DvxMgp/fifxVhqTLpd5fCCLossUbpZxGeKw==
+
 mdn-data@2.0.14:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.14.tgz#7113fc4281917d63ce29b43446f701e68c25ba50"
@@ -7908,7 +7974,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.10, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8215,6 +8281,22 @@ recursive-readdir@^2.2.2:
   dependencies:
     minimatch "3.0.4"
 
+reduce-css-calc@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/reduce-css-calc/-/reduce-css-calc-1.3.0.tgz#747c914e049614a4c9cfbba629871ad1d2927716"
+  integrity sha1-dHyRTgSWFKTJz7umKYca0dKSdxY=
+  dependencies:
+    balanced-match "^0.4.2"
+    math-expression-evaluator "^1.2.14"
+    reduce-function-call "^1.0.1"
+
+reduce-function-call@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.3.tgz#60350f7fb252c0a67eb10fd4694d16909971300f"
+  integrity sha512-Hl/tuV2VDgWgCSEeWMLwxLZqX7OK59eU1guxXsRKTAyeYimivsKdtcV4fu3r710tpG5GmDKDhQ0HSZLExnNmyQ==
+  dependencies:
+    balanced-match "^1.0.0"
+
 reflect-metadata@0.1.13:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
@@ -8348,6 +8430,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+resize-observer-polyfill@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-cwd@^3.0.0:
   version "3.0.0"

@@ -1,10 +1,10 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
 import BatteryChart from "./BatteryChart";
 
 export default function Device(): React.ReactElement {
 	return (
-		<div>
+		<Container sx={{ width: "100%" }}>
 			<Stack direction="column" spacing={1}>
 				<Typography variant="h5">Mesh Device</Typography>
 
@@ -16,6 +16,6 @@ export default function Device(): React.ReactElement {
 
 				<BatteryChart width={800} height={500} />
 			</Stack>
-		</div>
+		</Container>
 	);
 }

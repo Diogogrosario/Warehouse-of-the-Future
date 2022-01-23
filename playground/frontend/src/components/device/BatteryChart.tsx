@@ -5,6 +5,7 @@ import { LinePath } from "@visx/shape";
 import { scaleTime, scaleLinear } from "@visx/scale";
 import { AxisLeft, AxisBottom } from "@visx/axis";
 import { GridRows, GridColumns } from "@visx/grid";
+import { ScaleSVG } from "@visx/responsive";
 
 import batteryData from "./battery.json";
 
@@ -41,7 +42,7 @@ export default function BatteryChart({ width, height, margin = defaultMargin }: 
 
 	return (
 		<div>
-			<svg width={width} height={height}>
+			<ScaleSVG width={width} height={height} >
 				<linearGradient
 					id="gradient"
 					gradientUnits="userSpaceOnUse"
@@ -70,9 +71,8 @@ export default function BatteryChart({ width, height, margin = defaultMargin }: 
 
 					<GridColumns scale={timeScale} width={xMax} height={yMax} stroke="#e0e0e0" />
 
-					{/* TODO: This is breaking for some reason */}
-					{/*<AxisBottom top={yMax} scale={timeScale} numTicks={width > 520 ? 10 : 5} />*/}
-					{/*<AxisLeft scale={batteryPowerScale} />*/}
+					<AxisBottom top={yMax} scale={timeScale} numTicks={width > 520 ? 10 : 5} />
+					<AxisLeft scale={batteryPowerScale} />
 
 					<text x="-70" y="15" transform="rotate(-90)" fontSize={10}>
 						Battery power (%)
@@ -87,7 +87,7 @@ export default function BatteryChart({ width, height, margin = defaultMargin }: 
 						strokeWidth={1.5}
 					/>
 				</Group>
-			</svg>
+			</ScaleSVG>
 		</div>
 	);
 }
