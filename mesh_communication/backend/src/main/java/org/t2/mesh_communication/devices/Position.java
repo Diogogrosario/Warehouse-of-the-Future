@@ -6,10 +6,16 @@ import java.util.Objects;
 public class Position {
     protected int x;
     protected int y;
+    protected int z;
 
     public Position(int x, int y) {
+        this(x, y, 0);
+    }
+
+    public Position(int x, int y, int z) {
         this.x = x;
         this.y = y;
+        this.z = z;
     }
 
     public int getX() {

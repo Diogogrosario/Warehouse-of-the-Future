@@ -64,8 +64,17 @@ public class API implements ErrorController {
     private void resetStatus() throws IOException {
         this.main.clearMeshGrid();
         this.main.clearProducts();
-        this.main.prepareGrid();
         Main.prepareConfigs();
+        this.main.prepareGrid();
+
+        Logger.getInstance().resetLogger();
+    }
+
+    private void resetStatus(Map<String, Object> jsonObject) {
+        this.main.clearMeshGrid();
+        this.main.clearProducts();
+        Main.prepareConfigs();
+        this.main.prepareGrid(jsonObject);
 
         Logger.getInstance().resetLogger();
     }
@@ -435,6 +444,14 @@ public class API implements ErrorController {
 
         response.setStatus(HttpServletResponse.SC_OK);
         return node;
+    }
+
+    @PostMapping("/layout")
+    public String layout(@RequestBody Map<String, Object> jsonObject) {
+
+        this.resetStatus(jsonObject);
+
+        return "";
     }
 
     @RequestMapping("/error")

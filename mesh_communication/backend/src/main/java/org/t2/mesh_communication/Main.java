@@ -2,11 +2,9 @@ package org.t2.mesh_communication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import org.springframework.stereotype.Component;
 import org.t2.mesh_communication.config.*;
 import org.t2.mesh_communication.devices.MeshGrid;
@@ -45,12 +43,21 @@ public class Main {
         return products;
     }
 
+    public void prepareGrid(Map<String, Object> jsonObject) throws FileNotFoundException {
+        LayoutReader layoutReader = new LayoutReader();
+        layoutReader.readJson(jsonObject);
+        HashMap<Integer, Position> devices = layoutReader.getDevices();
+    }
+
     public void prepareGrid() throws IOException {
         // read devices from layout file
         LayoutReader layoutReader = new LayoutReader();
         layoutReader.read();
         HashMap<Integer, Position> devices = layoutReader.getDevices();
+        this.generateMeshGridAndProducts(devices);
+    }
 
+    public void generateMeshGridAndProducts(HashMap<Integer, Position> devices) throws IOException {
         // add devices (and orchestrator)
         this.orchestrator =
                 new Orchestrator(
