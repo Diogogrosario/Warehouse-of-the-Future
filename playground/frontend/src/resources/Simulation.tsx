@@ -24,9 +24,8 @@ export function orchestrate() {
 		.then((result) => console.log(result));
 }
 
-// TODO: Needs a new merge from t2
-// export function getCurrentMetrics() {
-// 	fetch("http://localhost:8080/metrics")
-// 		.then((response) => response.json())
-// 		.then((result) => console.log(result));
-// }
+export function getCurrentMetrics() {
+	fetch("http://localhost:8080/metrics")
+		.then((response) => response.json())
+		.then((result) => console.log(result));
+}
