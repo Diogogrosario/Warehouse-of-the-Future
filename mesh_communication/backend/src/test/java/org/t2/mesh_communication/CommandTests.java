@@ -31,10 +31,10 @@ public class CommandTests {
 
         Screen screen = new Screen(5, 10);
 
-        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
+        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
 
         devicesInRange = new ArrayList<>();
-        devicesInRange.add(new Device(2, pos, new FloodStrategy(mg), 10, 10, bat, screen));
+        devicesInRange.add(new Device(2, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen));
 
         Mockito.when(mg.devicesInRange(device)).thenReturn(devicesInRange);
     }

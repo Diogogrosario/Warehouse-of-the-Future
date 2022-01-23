@@ -25,7 +25,7 @@ public class BatteryTests {
 
         Screen screen = new Screen(5, 10);
 
-        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
+        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
     }
 
     @Test

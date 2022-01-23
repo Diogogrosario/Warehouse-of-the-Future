@@ -61,6 +61,15 @@ public class API implements ErrorController {
         }
     }
 
+    private void resetStatus() throws IOException {
+        this.main.clearMeshGrid();
+        this.main.clearProducts();
+        this.main.prepareGrid();
+        Main.prepareConfigs();
+
+        Logger.getInstance().resetLogger();
+    }
+
     private MeshGrid getMeshGrid() {
         return this.main.getMeshGrid();
     }
@@ -405,6 +414,29 @@ public class API implements ErrorController {
         return node;
     }
 
+    @RequestMapping("/metrics")
+    @ResponseBody
+    public ObjectNode getMetrics(HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode node = mapper.createObjectNode();
+
+        int totalInnitialBat = this.getMeshGrid().getTotalInnitialBat();
+        int currentBattery = this.getMeshGrid().getCurrentBat();
+        int tickBattery = this.getMeshGrid().getLastTickBat() - currentBattery;
+        if (tickBattery < 0) {
+            tickBattery = 0;
+        }
+
+        node.put("batTick", tickBattery);
+        node.put("batCommunication", totalInnitialBat - currentBattery);
+        node.put("failed", 0);
+        node.put("ticks", this.getMeshGrid().getNTicks());
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return node;
+    }
+
     @RequestMapping("/error")
     @ResponseBody
     public String elPejo(HttpServletRequest request) {
@@ -414,6 +446,17 @@ public class API implements ErrorController {
                 "<html><body><h2>Mesh Communication Error Page</h2><div>Status code: <b>%s</b></div>"
                         + "<div>Exception Message: <b>%s</b></div><body></html>",
                 statusCode, exception == null ? "N/A" : exception.getMessage());
+    }
+
+    @PostMapping("/restart")
+    public String restart(HttpServletResponse response) {
+        try {
+            this.resetStatus();
+        } catch (IOException exception) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error resetting configurations";
+        }
+        return "Mesh status reset.";
     }
 
     private List<JsonNode> devicesToJson(List<MeshDevice> devices) throws JsonProcessingException {

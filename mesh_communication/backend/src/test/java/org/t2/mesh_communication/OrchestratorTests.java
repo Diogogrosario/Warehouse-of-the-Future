@@ -30,7 +30,7 @@ public class OrchestratorTests {
         Battery bat = new Battery(50, 7);
         Screen screen = new Screen(5, 10);
         devicesInRange = new ArrayList<>();
-        devicesInRange.add(new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen));
+        devicesInRange.add(new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen));
 
         Mockito.when(mg.devicesInRange(orchestrator)).thenReturn(devicesInRange);
     }

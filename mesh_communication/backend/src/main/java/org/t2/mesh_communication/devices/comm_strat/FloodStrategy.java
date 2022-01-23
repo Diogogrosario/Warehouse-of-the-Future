@@ -19,6 +19,8 @@ public class FloodStrategy implements CommunicationStrategy {
      * device is believed to be dead.
      */
     private final HashMap<Integer, Integer> neighborTTL;
+
+    private int ttl;
     /** Neighbors that were messaged on the current tick. */
     private final Set<Integer> currentSending;
     /** The last sequence number seen from each source. */
@@ -26,12 +28,17 @@ public class FloodStrategy implements CommunicationStrategy {
 
     private final MeshGrid meshGrid;
 
-    public FloodStrategy(MeshGrid meshGrid) {
+    public FloodStrategy(MeshGrid meshGrid, int ttl) {
         this.meshGrid = meshGrid;
+        this.ttl = ttl;
 
         this.neighborTTL = new HashMap<>();
         this.currentSending = new HashSet<>();
         this.seqMap = new HashMap<>();
+    }
+
+    public FloodStrategy(MeshGrid meshGrid) {
+        this(meshGrid, DEFAULT_TTL);
     }
 
     @Override
@@ -86,7 +93,7 @@ public class FloodStrategy implements CommunicationStrategy {
     }
 
     protected void resetTimeToLive(int id) {
-        if (id != MeshGrid.ORCHESTRATOR_ID) this.neighborTTL.put(id, DEFAULT_TTL);
+        if (id != MeshGrid.ORCHESTRATOR_ID) this.neighborTTL.put(id, this.ttl);
     }
 
     private boolean seenMessage(MeshDevice me, Message msg) {

@@ -32,11 +32,11 @@ public class MeshDeviceTests {
         Position pos = new Position(1, 1);
         Position fakePos = new Position(1, 2);
 
-        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
-        fake = new Device(2, fakePos, new FloodStrategy(mg), 10, 10, bat, screen);
+        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
+        fake = new Device(2, fakePos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
 
         List<MeshDevice> devicesInRange = new ArrayList<>();
-        devicesInRange.add(new Device(2, pos, new FloodStrategy(mg), 10, 10, bat, screen));
+        devicesInRange.add(new Device(2, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen));
 
         Mockito.when(mg.devicesInRange(device)).thenReturn(devicesInRange);
     }
