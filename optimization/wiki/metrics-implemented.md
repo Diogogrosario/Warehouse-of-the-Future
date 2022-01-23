@@ -32,7 +32,16 @@ painting, screws, chassis products).
 ## Optimization Algorithm
 
 ### Warehouse structure
-<!-- falar com backend -->
+
+To simulate the warehouse structure a relational database (in MySQL) was made in parallel with the data_lake team (team 1) to avoid a progression bottleneck that could be caused by different work flows between the teams and to be able to test the algorithms with a sort of placeholder database. For this testing to be possible, different mocks, specialized for the evaluation of the different metrics, were created.
+
+#### Schema
+
+The database follows the following schema:
+
+<Row style="display:flex flex-direction: row">
+    <img src="assets/warehouse_schema.png" style="margin:auto"/>
+</Row>
 
 ### Communication with webapp
 <!-- falar com frontend-->
