@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: API for mesh communication backend
-  version: 1.0.2
+  version: 1.0.3
   title: MeshCommunication API
 
 paths:
@@ -117,12 +117,14 @@ paths:
                     position:
                       x: 2
                       y: 1
+                      z: 4
                   - device_id: 4
                     battery_level: 23
                     battery_max: 100
                     position:
                       x: 5
                       y: 2
+                      z: 6
                 23:
                   - device_id: 13
                     battery_level: 45
@@ -130,6 +132,7 @@ paths:
                     position:
                       x: 5
                       y: 6
+                      z: 7
 
         204:
           description: "No devices found"
@@ -315,12 +318,12 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/Metrics'
+                $ref: '#/components/schemas/Metrics'
               example:
-                  batTick: 10
-                  batCommunication: 20
-                  failed: 0
-                  ticks: 2
+                batTick: 10
+                batCommunication: 20
+                failed: 0
+                ticks: 2
 
   /restart:
     post:
@@ -333,9 +336,39 @@ paths:
           description: "Success: Restarted simulation"
         500:
           description: "Internal Server Error"
-          
-      
 
+  /layout:
+    post:
+      summary: Use a specified layout
+      operationId: specifyLayout
+
+      requestBody:
+        description: The layout to use
+        required: true
+        content:
+          application/json:
+            schema:
+              description: "Dictionary with ids of devices as keys and its respective position as value."
+              type: object
+              additionalProperties:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+            example:
+              1:
+                - x: 1
+                  y: 2
+                  z: 3
+              0:
+                - x: 7
+                  y: 4
+                  z: -3
+
+      description: 
+        "Path that changes the current layout"
+      responses:
+        200:
+          description: "Success: Changed the layout"
 components:
   schemas:
     SendMessage:
@@ -360,6 +393,7 @@ components:
         failed:
           description: "Wether or not the message was lost in the current tick"
           type: boolean
+
     Metrics:
       type: object
       properties:
@@ -375,28 +409,31 @@ components:
         ticks:
           description: "Number of tick since the beginning of the communication"
           type: integer
-        
+
     Device:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+            battery_level:
+              type: integer
+            battery_max:
+              type: integer
+            position:
+              $ref: '#/components/schemas/Position'
+
+    Position:
       type: object
 
       properties:
-        id:
+        x:
           type: integer
-        battery_level:
+        y: 
           type: integer
-        battery_max:
+        z:
           type: integer
-        position:
-          type: object
-          properties:
-            x:
-              type: integer
-            y: 
-              type: integer
       example:
-        device_id: 1
-        battery_level: 68
-        battery_max: 100
-        position:
-          x: 2
-          y: 1
+        x: 2
+        y: 1
+        z: -5
