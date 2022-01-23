@@ -121,6 +121,7 @@ def populate_items():
 
     db.client.WoF.Items.insert_many(items)
 
+
 if (reset):
     db.client.WoF.Buckets.drop()
     db.client.WoF.create_collection("Buckets")
@@ -139,7 +140,7 @@ if (reset):
 
 time.sleep(5)
 
-# Worker starts by populating staff and global, which are needed only once  
+# Worker starts by populating staff and global, which are needed only once
 populate_staff()
 populate_items()
 populate_global()

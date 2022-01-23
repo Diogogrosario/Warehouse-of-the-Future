@@ -14,7 +14,7 @@ class ManifestPBT():
         response = self.client.get("manifests/?" +
                                    f"time_before={query_time_before}&"
                                    f"time_after={query_time_after}")
-        
+
         manifest_data = json.loads(response.data.decode('utf-8'))
 
         for data in manifest_data:

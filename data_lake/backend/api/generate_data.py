@@ -468,6 +468,7 @@ def generate_sensor(device_id, staff_ids):
 
     return json.loads(json_util.dumps(sensor))
 
+
 def generate_device(bucket_id, staff_ids):
     device_id = ObjectId(secrets.token_hex(12))
 
