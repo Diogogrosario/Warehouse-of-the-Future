@@ -1,6 +1,6 @@
 import React from "react";
 import Device from "./Device";
-import { Grid, List } from "@mui/material";
+import { List } from "@mui/material";
 
 export default function DeviceList(): React.ReactElement {
 	const cards = [];
