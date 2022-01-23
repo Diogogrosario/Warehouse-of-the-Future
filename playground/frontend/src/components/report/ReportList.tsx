@@ -108,6 +108,8 @@ const ReportList: React.FC = () => {
 	);
 	const filterDateMenuOpen = Boolean(filterDateMenuAnchorEl);
 
+	const [searchValue, setSearchValue] = React.useState("");
+
 	return (
 		<AsyncBoundary>
 			<div style={{ height: "100%", display: "grid", gridTemplateRows: "auto 1fr" }}>
@@ -138,8 +140,13 @@ const ReportList: React.FC = () => {
 							sx={{ color: "white.main", margin: "0 16px" }}
 						/>
 						<InputBase
+							id="report-list-search"
 							placeholder="Search reports"
-							inputProps={{ "aria-label": "search reports" }}
+							inputProps={{ "aria-label": "search reports", type: "search" }}
+							value={searchValue}
+							onChange={(
+								event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+							) => setSearchValue(event.target.value)}
 							sx={{
 								flex: "1 1 0",
 								margin: "4px 0",
@@ -456,6 +463,9 @@ const ReportList: React.FC = () => {
 								return false;
 
 							if (dateRange[1] && new Date(report.createdAt) > dateRange[1])
+								return false;
+
+							if (searchValue && report.title.toLowerCase().indexOf(searchValue) < 0)
 								return false;
 
 							return true;

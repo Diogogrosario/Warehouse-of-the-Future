@@ -73,6 +73,13 @@ const StyledPopperComponent = styled("div")(({ theme }) => ({
 				backgroundColor: theme.palette.lightDarkBright.main,
 			},
 		},
+		"> li": {
+			"> .MuiListSubheader-root": {
+				backgroundColor: theme.palette.dark.main,
+				color: Coloring.rgba(theme.palette.white.main, 0.6),
+				borderBottom: `1px solid ${Coloring.rgba(theme.palette.white.main, 0.4)}`,
+			},
+		},
 	},
 	[`&.${autocompleteClasses.popperDisablePortal}`]: {
 		position: "relative",
