@@ -5,10 +5,7 @@ import static org.t2.mesh_communication.config.LayoutGenerator.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import org.t2.mesh_communication.devices.Position;
 
 /** Reads ids and positions from genereated layout file and stores them in a hashmap. */
@@ -49,5 +46,20 @@ public class LayoutReader {
         return this.devices;
     }
 
-    public void readJson(Map<String, Object> jsonObject) {}
+    public void readJson(Map<String, Object> jsonObject) {
+
+        for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
+            String id = entry.getKey();
+            ArrayList<Object> list = (ArrayList<Object>) entry.getValue();
+            LinkedHashMap<Integer, Integer> map = (LinkedHashMap<Integer, Integer>) list.get(0);
+
+            List<Integer> coords = new ArrayList<>();
+            for (Map.Entry<Integer, Integer> innerEntry : map.entrySet()) {
+                coords.add(innerEntry.getValue());
+            }
+
+            Position pos = new Position(coords);
+            this.devices.put(Integer.valueOf(id), pos);
+        }
+    }
 }

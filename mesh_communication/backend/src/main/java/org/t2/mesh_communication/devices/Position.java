@@ -1,5 +1,6 @@
 package org.t2.mesh_communication.devices;
 
+import java.util.List;
 import java.util.Objects;
 
 /** Represents the Position of a device. */
@@ -16,6 +17,10 @@ public class Position {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public Position(List<Integer> coords) {
+        this(coords.get(0), coords.get(1), coords.get(2));
     }
 
     public int getX() {
