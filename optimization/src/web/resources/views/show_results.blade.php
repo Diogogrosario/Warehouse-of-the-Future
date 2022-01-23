@@ -1,10 +1,14 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container-fluid m-0 ">
         <h1 class="d-flex justify-content-center mt-5">Visualize Warehouse</h1>
         @if($hasResults)
-            <div class="row my-3">
-                @include('partials.show_results.dropdown',['geneticResults'=>$geneticResults])
+            <div class="row mx-1 my-3">
+                <div class="col"> </div>
+                <div class="col-10">
+                    @include('partials.show_results.dropdown',['geneticResults'=>$geneticResults])
+                </div>
+                <div class="col"></div>
             </div>
             @include('partials.show_results.carousel',['shelves'=>$shelves])
         @else
