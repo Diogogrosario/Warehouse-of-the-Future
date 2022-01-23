@@ -52,7 +52,9 @@ public class Logger {
         this.loggers.add(handler);
     }
 
-    public synchronized void setHandlers(List<StreamHandler> handlers) { this.loggers = handlers; }
+    public synchronized void setHandlers(List<StreamHandler> handlers) {
+        this.loggers = handlers;
+    }
 
     public synchronized int getTick() {
         return tick;
