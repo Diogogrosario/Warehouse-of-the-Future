@@ -31,6 +31,10 @@ public class Position {
         return y;
     }
 
+    public int getZ() {
+        return z;
+    }
+
     public void setX(int x) {
         this.x = x;
     }
@@ -39,8 +43,16 @@ public class Position {
         this.y = y;
     }
 
+    public void setZ(int z) {
+        this.z = z;
+    }
+
     public boolean inRange(Position p2, float range) {
-        return Math.sqrt(Math.pow(this.x - p2.x, 2) + Math.pow(this.y - p2.y, 2)) <= range;
+        return Math.sqrt(
+                        Math.pow(this.x - p2.x, 2)
+                                + Math.pow(this.y - p2.y, 2)
+                                + Math.pow(this.z - p2.z, 2))
+                <= range;
     }
 
     @Override
@@ -48,20 +60,20 @@ public class Position {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
-        return x == position.x && y == position.y;
+        return x == position.x && y == position.y && z == position.z;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(x, y, z);
     }
 
     @Override
     public String toString() {
-        return String.format("{x: %d; y: %d}", this.x, this.y);
+        return String.format("{x: %d; y: %d; z: %d}", this.x, this.y, this.z);
     }
 
     public String toJson() {
-        return String.format("{\"x\":%d,\"y\":%d}", this.x, this.y);
+        return String.format("{\"x\":%d,\"y\":%d,\"z\":%d}", this.x, this.y, this.z);
     }
 }
