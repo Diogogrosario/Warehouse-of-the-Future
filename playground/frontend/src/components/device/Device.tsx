@@ -12,7 +12,20 @@ import BatteryChart from "./BatteryChart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Coloring from "../../utils/coloring";
 
-export default function Device(): React.ReactElement {
+export interface DeviceProps {
+	id: number;
+	position?: {
+		x: number;
+		y: number;
+	};
+	battery_max?: number;
+	battery_level?: number;
+	orchestrator?: boolean;
+}
+
+export default function Device(props: DeviceProps): React.ReactElement {
+	const { id } = props;
+
 	return (
 		<Accordion
 			sx={{
@@ -31,7 +44,7 @@ export default function Device(): React.ReactElement {
 			>
 				<Stack>
 					<Typography variant="h5">Mesh Device</Typography>
-					<Typography variant="body1">ID: 123456</Typography>
+					<Typography variant="body1">ID: {id}</Typography>
 				</Stack>
 			</AccordionSummary>
 
