@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 import org.t2.mesh_communication.devices.Position;
 
@@ -47,4 +48,6 @@ public class LayoutReader {
     public HashMap<Integer, Position> getDevices() {
         return this.devices;
     }
+
+    public void readJson(Map<String, Object> jsonObject) {}
 }

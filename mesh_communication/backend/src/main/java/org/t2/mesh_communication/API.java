@@ -70,7 +70,7 @@ public class API implements ErrorController {
         Logger.getInstance().resetLogger();
     }
 
-    private void resetStatus(Map<String, Object> jsonObject) {
+    private void resetStatus(Map<String, Object> jsonObject) throws FileNotFoundException {
         this.main.clearMeshGrid();
         this.main.clearProducts();
         Main.prepareConfigs();
@@ -447,7 +447,7 @@ public class API implements ErrorController {
     }
 
     @PostMapping("/layout")
-    public String layout(@RequestBody Map<String, Object> jsonObject) {
+    public String layout(@RequestBody Map<String, Object> jsonObject) throws FileNotFoundException {
 
         this.resetStatus(jsonObject);
 
