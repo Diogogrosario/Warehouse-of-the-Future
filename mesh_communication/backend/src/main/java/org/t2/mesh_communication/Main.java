@@ -24,7 +24,7 @@ public class Main {
     private BatteryObserver batteryObserver;
 
     public Main() {
-        this.meshGrid = new MeshGrid();
+        this.meshGrid = new MeshGrid(Config.getInstance().orchestratorId);
         this.products = new ArrayList<>();
         batteryObserver = BatteryObserver.getInstance();
     }
@@ -45,37 +45,8 @@ public class Main {
         return products;
     }
 
-    public void prepareGrid() throws IOException {
-        // read devices from layout file
-        LayoutReader layoutReader = new LayoutReader();
-        layoutReader.read();
-        HashMap<Integer, Position> devices = layoutReader.getDevices();
-
-        // add devices (and orchestrator)
-        this.orchestrator =
-                new Orchestrator(
-                        devices.get(MeshGrid.ORCHESTRATOR_ID),
-                        new FloodStrategy(this.meshGrid, Config.getInstance().timeToLive));
-        devices.remove(MeshGrid.ORCHESTRATOR_ID);
-        this.meshGrid.addDevice(this.orchestrator);
-        this.meshGrid.addDevices(devices);
-
-        // generate manifests
-        if (!ManifestGenerator.manifestFileExists()) {
-            final int nManifests = 1;
-            ManifestGenerator manifestGenerator =
-                    new ManifestGenerator(nManifests, devices.keySet());
-            manifestGenerator.generate();
-        }
-
-        // read manifests
-        ManifestReader manifestReader = new ManifestReader();
-        manifestReader.read();
-        this.products = manifestReader.getProducts();
-    }
-
     public void clearMeshGrid() {
-        this.meshGrid = new MeshGrid();
+        this.meshGrid = new MeshGrid(Config.getInstance().orchestratorId);
     }
 
     public void clearProducts() {
@@ -94,16 +65,20 @@ public class Main {
 
     public void prepareGrid(String layoutFile) throws IOException {
         // read devices from layout file
-        LayoutReader layoutReader = new LayoutReader(layoutFile);
+        LayoutReader layoutReader =
+                (layoutFile != null) ? new LayoutReader(layoutFile) : new LayoutReader();
         layoutReader.read();
         HashMap<Integer, Position> devices = layoutReader.getDevices();
 
         // add devices (and orchestrator)
+        int orchestratorId = this.meshGrid.getOrchestratorId();
         this.orchestrator =
                 new Orchestrator(
-                        devices.get(MeshGrid.ORCHESTRATOR_ID),
+                        orchestratorId,
+                        devices.get(orchestratorId),
+                        Config.getInstance().orchestratorRange,
                         new FloodStrategy(this.meshGrid, Config.getInstance().timeToLive));
-        devices.remove(MeshGrid.ORCHESTRATOR_ID);
+        devices.remove(orchestratorId);
         this.meshGrid.addDevice(this.orchestrator);
         this.meshGrid.addDevices(devices);
 
@@ -119,6 +94,10 @@ public class Main {
         ManifestReader manifestReader = new ManifestReader();
         manifestReader.read();
         this.products = manifestReader.getProducts();
+    }
+
+    public void prepareGrid() throws IOException {
+        this.prepareGrid(null);
     }
 
     public void orchestrate() {

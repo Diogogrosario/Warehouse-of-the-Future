@@ -2,6 +2,7 @@ package org.t2.mesh_communication;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +24,17 @@ public class OrchestratorTests {
     @BeforeAll
     static void init() {
         MeshGrid mg = Mockito.mock(MeshGrid.class);
+        when(mg.getOrchestratorId()).thenReturn(0);
         Position pos = Mockito.mock(Position.class);
 
-        orchestrator = new Orchestrator(pos, new FloodStrategy(mg));
+        orchestrator = new Orchestrator(0, pos, 1, new FloodStrategy(mg));
 
         Battery bat = new Battery(50, 7);
         Screen screen = new Screen(5, 10);
         devicesInRange = new ArrayList<>();
         devicesInRange.add(new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen));
 
-        Mockito.when(mg.devicesInRange(orchestrator)).thenReturn(devicesInRange);
+        when(mg.devicesInRange(orchestrator)).thenReturn(devicesInRange);
     }
 
     @Test

@@ -64,7 +64,7 @@ public class RestartTests {
         Screen screen4 = new Screen(5, 10);
         Device device4 = new Device(2, pos4, new FloodStrategy(mg), 10, 10, 1, bat4, screen4);
 
-        Orchestrator och = new Orchestrator(pos, new FloodStrategy(mg));
+        Orchestrator och = new Orchestrator(0, pos, 1, new FloodStrategy(mg));
 
         when(mg.getDevices())
                 .thenAnswer(

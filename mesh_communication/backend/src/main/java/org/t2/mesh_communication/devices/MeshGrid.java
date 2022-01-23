@@ -10,15 +10,15 @@ import java.util.Map;
  * all devices. Can be queried to find devices in a certain range.
  */
 public class MeshGrid {
-    public static final int ORCHESTRATOR_ID = 0;
-
     private MeshDevice orchestrator;
     private List<MeshDevice> devices;
-
     private int nTicks;
     private int lastTickBat;
 
-    public MeshGrid() {
+    private final int orchestratorId;
+
+    public MeshGrid(int orchestratorId) {
+        this.orchestratorId = orchestratorId;
         this.orchestrator = null;
         this.devices = new ArrayList<>();
         this.nTicks = 0;
@@ -53,9 +53,13 @@ public class MeshGrid {
         this.devices = devices;
     }
 
+    public int getOrchestratorId() {
+        return this.orchestratorId;
+    }
+
     public void addDevice(MeshDevice d) {
         this.devices.add(d);
-        if (d.getId() == MeshGrid.ORCHESTRATOR_ID) {
+        if (d.getId() == this.orchestratorId) {
             assert this.orchestrator == null;
             this.orchestrator = d;
         }
