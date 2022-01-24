@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { Grid, styled, Tab, Tabs, useMediaQuery } from "@mui/material";
+import React, { Suspense, useEffect } from "react";
+import { Grid, styled, Tab, Tabs, Typography, useMediaQuery } from "@mui/material";
+import { NetworkError, NetworkErrorBoundary } from "rest-hooks";
 
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
@@ -9,6 +10,7 @@ import ReportList from "./components/report/ReportList";
 import TabPanel from "./components/TabPanel";
 import NoResultsOverlay from "./components/NoResultsOverlay";
 import theme from "./styles/theme";
+import Simulation from "./components/simulation/Simulation";
 
 export enum FullscreenState {
 	Left,
@@ -20,10 +22,39 @@ const StyledTabPanel = styled(TabPanel)(() => ({
 	height: "100%",
 }));
 
+interface AsyncBoundaryProps {
+	children: React.ReactNode;
+	loadingFallback?: React.ReactElement;
+	errorFallback?: React.ComponentType<{ error: NetworkError }>;
+}
+
+const AsyncBoundary: React.FC<AsyncBoundaryProps> = ({
+	children,
+	loadingFallback,
+	errorFallback,
+}: AsyncBoundaryProps) => {
+	return (
+		<Suspense fallback={loadingFallback ?? <span>loading</span>}>
+			<NetworkErrorBoundary
+				fallbackComponent={
+					errorFallback ??
+					(({ error }: { error: NetworkError }) => (
+						<div>
+							{error.status} {error.response?.statusText}
+						</div>
+					))
+				}
+			>
+				{children}
+			</NetworkErrorBoundary>
+		</Suspense>
+	);
+};
+
 export default function App() {
 	const mobile = useMediaQuery("(max-width: 800px)");
 
-	const [selectedTab, setSelectedTab] = React.useState(0);
+	const [selectedTab, setSelectedTab] = React.useState(1);
 	const [panelSize, setPanelSize] = React.useState(60);
 	const [dragging, setDragging] = React.useState(false);
 	const [fullscreen, setFullscreen] = React.useState(FullscreenState.Disabled);
@@ -134,7 +165,7 @@ export default function App() {
 								aria-controls="app-tabpanel-0"
 							/>
 							<Tab
-								label="Devices"
+								label="Simulation"
 								id="app-tab-1"
 								className="app-tab"
 								aria-controls="app-tabpanel-1"
@@ -148,7 +179,54 @@ export default function App() {
 							id="app-tabpanel-0"
 							aria-labelledby="app-tab-0"
 						>
-							<ReportList />
+							<AsyncBoundary
+								loadingFallback={
+									<div
+										style={{
+											display: "flex",
+											flexDirection: "column",
+											alignItems: "center",
+											justifyContent: "center",
+											height: "100%",
+										}}
+									>
+										<div
+											style={{
+												width: "160px",
+												height: "160px",
+												background: `url("assets/bugcatEggRoll.gif") no-repeat center center`,
+											}}
+										/>
+										<Typography variant="h4" component="h6">
+											Loading reports...
+										</Typography>
+									</div>
+								}
+								errorFallback={() => (
+									<div
+										style={{
+											display: "flex",
+											flexDirection: "column",
+											alignItems: "center",
+											justifyContent: "center",
+											height: "100%",
+										}}
+									>
+										<div
+											style={{
+												width: "160px",
+												height: "160px",
+												background: `url("assets/bugcatShock.webp") no-repeat center center`,
+											}}
+										/>
+										<Typography variant="h4" component="h6">
+											Connection failed
+										</Typography>
+									</div>
+								)}
+							>
+								<ReportList />
+							</AsyncBoundary>
 						</StyledTabPanel>
 						<StyledTabPanel
 							value={selectedTab}
@@ -156,7 +234,9 @@ export default function App() {
 							index={1}
 							id="app-tabpanel-1"
 							aria-labelledby="app-tab-1"
-						></StyledTabPanel>
+						>
+							<Simulation />
+						</StyledTabPanel>
 
 						<FullscreenButton
 							fullscreenState={fullscreen}
