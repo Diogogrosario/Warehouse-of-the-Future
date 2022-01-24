@@ -3,6 +3,9 @@ package org.t2.mesh_communication.config;
 public class Config {
     private static Config instance;
 
+    public int orchestratorId;
+    public int orchestratorRange;
+
     public int totalBattery;
     public int batIdleConsumption;
 
@@ -11,6 +14,9 @@ public class Config {
 
     public int receivingConsumption;
     public int sendingConsumption;
+
+    public int deviceRange;
+    public int timeToLive;
 
     private Config() {
         Config.instance = this;
@@ -23,7 +29,11 @@ public class Config {
 
     @Override
     public String toString() {
-        return "totalBattery: "
+        return "orchestratorId: "
+                + orchestratorId
+                + "\norchestratorRange: "
+                + orchestratorRange
+                + "\ntotalBattery: "
                 + totalBattery
                 + "\nbatIdleConsumption: "
                 + batIdleConsumption
@@ -34,6 +44,10 @@ public class Config {
                 + "\nreceivingConsumption: "
                 + receivingConsumption
                 + "\nsendingConsumption: "
-                + sendingConsumption;
+                + sendingConsumption
+                + "\ndeviceRange: "
+                + deviceRange
+                + "\ntimeToLive: "
+                + timeToLive;
     }
 }

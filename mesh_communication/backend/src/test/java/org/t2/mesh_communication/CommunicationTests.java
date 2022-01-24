@@ -29,7 +29,7 @@ public class CommunicationTests {
         Battery bat = Mockito.mock(Battery.class);
         Screen screen = Mockito.mock(Screen.class);
 
-        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
+        device = new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
     }
 
     @Test

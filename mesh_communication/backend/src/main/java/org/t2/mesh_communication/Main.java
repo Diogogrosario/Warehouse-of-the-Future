@@ -13,6 +13,7 @@ import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.Orchestrator;
 import org.t2.mesh_communication.devices.Position;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
+import org.t2.mesh_communication.devices.components.BatteryObserver;
 import org.t2.mesh_communication.log.Logger;
 
 @Component
@@ -20,10 +21,12 @@ public class Main {
     private Orchestrator orchestrator;
     private MeshGrid meshGrid;
     private List<Product> products;
+    private BatteryObserver batteryObserver;
 
     public Main() {
-        this.meshGrid = new MeshGrid();
+        this.meshGrid = new MeshGrid(Config.getInstance().orchestratorId);
         this.products = new ArrayList<>();
+        batteryObserver = BatteryObserver.getInstance();
     }
 
     public Orchestrator getOrchestrator() {
@@ -42,36 +45,8 @@ public class Main {
         return products;
     }
 
-    public void prepareGrid() throws IOException {
-        // read devices from layout file
-        LayoutReader layoutReader = new LayoutReader();
-        layoutReader.read();
-        HashMap<Integer, Position> devices = layoutReader.getDevices();
-
-        // add devices (and orchestrator)
-        this.orchestrator =
-                new Orchestrator(
-                        devices.get(MeshGrid.ORCHESTRATOR_ID), new FloodStrategy(this.meshGrid));
-        devices.remove(MeshGrid.ORCHESTRATOR_ID);
-        this.meshGrid.addDevice(this.orchestrator);
-        this.meshGrid.addDevices(devices);
-
-        // generate manifests
-        if (!ManifestGenerator.manifestFileExists()) {
-            final int nManifests = 1;
-            ManifestGenerator manifestGenerator =
-                    new ManifestGenerator(nManifests, devices.keySet());
-            manifestGenerator.generate();
-        }
-
-        // read manifests
-        ManifestReader manifestReader = new ManifestReader();
-        manifestReader.read();
-        this.products = manifestReader.getProducts();
-    }
-
     public void clearMeshGrid() {
-        this.meshGrid = new MeshGrid();
+        this.meshGrid = new MeshGrid(Config.getInstance().orchestratorId);
     }
 
     public void clearProducts() {
@@ -90,15 +65,20 @@ public class Main {
 
     public void prepareGrid(String layoutFile) throws IOException {
         // read devices from layout file
-        LayoutReader layoutReader = new LayoutReader(layoutFile);
+        LayoutReader layoutReader =
+                (layoutFile != null) ? new LayoutReader(layoutFile) : new LayoutReader();
         layoutReader.read();
         HashMap<Integer, Position> devices = layoutReader.getDevices();
 
         // add devices (and orchestrator)
+        int orchestratorId = this.meshGrid.getOrchestratorId();
         this.orchestrator =
                 new Orchestrator(
-                        devices.get(MeshGrid.ORCHESTRATOR_ID), new FloodStrategy(this.meshGrid));
-        devices.remove(MeshGrid.ORCHESTRATOR_ID);
+                        orchestratorId,
+                        devices.get(orchestratorId),
+                        Config.getInstance().orchestratorRange,
+                        new FloodStrategy(this.meshGrid, Config.getInstance().timeToLive));
+        devices.remove(orchestratorId);
         this.meshGrid.addDevice(this.orchestrator);
         this.meshGrid.addDevices(devices);
 
@@ -116,6 +96,10 @@ public class Main {
         this.products = manifestReader.getProducts();
     }
 
+    public void prepareGrid() throws IOException {
+        this.prepareGrid(null);
+    }
+
     public void orchestrate() {
         this.orchestrator.orchestrate(this.products.subList(0, 1));
     }
@@ -124,7 +108,12 @@ public class Main {
         for (int i = 0; i < n; ++i) {
             System.out.println("Tick " + Logger.getInstance().getTick());
             if (!meshGrid.update()) System.out.println("No updates...");
+
+            // print total battery consumption for current tick
+            System.out.println(batteryObserver);
+
             Logger.getInstance().nextTick();
+            batteryObserver.reset(); // reset tick battery consumption count
         }
     }
 

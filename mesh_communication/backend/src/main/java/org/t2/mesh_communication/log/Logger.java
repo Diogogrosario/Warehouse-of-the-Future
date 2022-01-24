@@ -14,7 +14,7 @@ public class Logger {
 
     private static volatile Logger instance;
     private final HashMap<Integer, List<LogRecord>> history;
-    private final List<StreamHandler> loggers;
+    private List<StreamHandler> loggers;
     private int tick;
 
     private Logger() {
@@ -52,6 +52,10 @@ public class Logger {
         this.loggers.add(handler);
     }
 
+    public synchronized void setHandlers(List<StreamHandler> handlers) {
+        this.loggers = handlers;
+    }
+
     public synchronized int getTick() {
         return tick;
     }
@@ -84,5 +88,11 @@ public class Logger {
 
     public synchronized void cleanHistory() {
         this.history.clear();
+    }
+
+    public synchronized void resetLogger() {
+        this.cleanHistory();
+        this.tick = 0;
+        this.history.put(this.tick, new ArrayList<>());
     }
 }

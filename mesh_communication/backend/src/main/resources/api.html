@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger UI</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui.css" >
+  <style>
+    html
+    {
+      box-sizing: border-box;
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
+    *,
+    *:before,
+    *:after
+    {
+      box-sizing: inherit;
+    }
+
+    body {
+      margin:0;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+<div id="swagger-ui"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui-bundle.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.24.2/swagger-ui-standalone-preset.js"> </script>
+<script>
+window.onload = function() {
+
+  var spec = {"openapi":"3.0.0","info":{"description":"API for mesh communication backend","version":"1.0.2","title":"MeshCommunication API"},"paths":{"/devices":{"get":{"summary":"gets all devices","operationId":"getAllDevices","description":"Returns all devices present in the mesh network.","responses":{"200":{"description":"Success: Received all devices","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Device"}}}}},"204":{"description":"No devices found"},"400":{"description":"Bad Request"},"500":{"description":"Internal Server Error"}}}},"/devices/{status}":{"get":{"summary":"gets devices by status","operationId":"getDevicesByStatus","description":"Returns devices present in the mesh network with the given status.","parameters":[{"in":"path","name":"status","description":"What type of devices to retrieve","schema":{"type":"string","enum":["all","failed","operational"]},"required":true}],"responses":{"200":{"description":"Success: Received all devices","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Device"}}}}},"204":{"description":"No devices found"},"400":{"description":"Bad Request"},"500":{"description":"Internal Server Error"}}}},"/device/{id}":{"get":{"summary":"gets a specific device","operationId":"getDevice","description":"Returns devices present in the mesh network with the given id.","parameters":[{"in":"path","name":"id","description":"Id of the device to retrieve","schema":{"type":"integer"},"required":true}],"responses":{"200":{"description":"Success: Received all devices","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Device"}}}},"404":{"description":"Device does not exist."},"500":{"description":"Internal Server Error"}}}},"/devices/inrange/all":{"get":{"summary":"gets devices within range of another device","operationId":"getDevicesInRange","description":"For each device in the mesh network, returns devices that are in range to it.","responses":{"200":{"description":"Success: Received all devices within range","content":{"application/json":{"schema":{"description":"Dictionary with device ids as keys, and arrays of devices as values. Each key maps to an array of all devices that are in range of the device with the same id as the key.","type":"object","additionalProperties":{"type":"array","items":{"$ref":"#/components/schemas/Device"}}},"example":{"1":[{"device_id":1,"battery_level":68,"battery_max":100,"position":{"x":2,"y":1}},{"device_id":4,"battery_level":23,"battery_max":100,"position":{"x":5,"y":2}}],"23":[{"device_id":13,"battery_level":45,"battery_max":120,"position":{"x":5,"y":6}}]}}}},"204":{"description":"No devices found"},"500":{"description":"Internal Server Error"}}}},"/devices/inrange/{id}":{"get":{"summary":"gets devices within range of another device","operationId":"getDevicesInRangeWithId","description":"Returns devices present in the mesh network that are within range of a device with the given id.","parameters":[{"in":"path","name":"id","description":"Id of the device to make the search on","schema":{"type":"integer"},"required":true}],"responses":{"200":{"description":"Success: Received all devices within range","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Device"}}}}},"204":{"description":"No devices in range found"},"404":{"description":"Device does not exist."},"500":{"description":"Internal Server Error"}}}},"/tick/{time_flow}":{"post":{"summary":"Update grid ticks","operationId":"position","description":"Path that updates the grid by given number of ticks.","parameters":[{"in":"path","name":"time_flow","description":"In what direction time will advance","schema":{"type":"string","enum":["forwards","backwards"]},"required":true},{"in":"query","name":"n_ticks","description":"Number of ticks to skip","required":false,"schema":{"type":"integer","default":1}}],"responses":{"200":{"description":"Mesh Grid updated"},"404":{"description":"Device does not exist."}}}},"/orchestrate":{"post":{"summary":"Make orchestrator send messages to the network","operationId":"orchestrate","description":"Path that signals orchestrator to send messages for each product in the layout file.","responses":{"200":{"description":"Orchestrator orchestrated"}}}},"/message/send":{"get":{"summary":"Get all messages of type send in the current tick","operationId":"getAllMessagesSend","description":"Path that returns, for all message senders of the current tick, the messages of type `send` that were sent by them.","responses":{"200":{"description":"Success: Received all messages","content":{"application/json":{"schema":{"description":"Dictionary with ids of devices that sent message as keys, and arrays of messages as values. Each key maps to an array of messages that correspond to send commands that were sent by the device which id is the same as the array's key.","type":"object","additionalProperties":{"type":"array","items":{"$ref":"#/components/schemas/SendMessage"}}},"example":{"4":[{"hop":54,"final":2},{"hop":2,"final":1}],"54":[{"hop":68,"final":30},{"hop":21,"final":45}]}}}},"500":{"description":"Internal Server Error"}}}},"/message/receive":{"get":{"summary":"Get all messages of type receive in the current tick","operationId":"getAllMessagesReceive","description":"Path that returns, for all message senders of the current tick, the messages of type `receive` that were sent by them.","responses":{"200":{"description":"Success: Received all messages","content":{"application/json":{"schema":{"description":"Dictionary with ids of devices that sent message as keys, and arrays of messages as values. Each key maps to an array of messages that correspond to receive commands that were sent by the device which id is the same as the array's key.","type":"object","additionalProperties":{"type":"array","items":{"$ref":"#/components/schemas/ReceiveMessage"}}},"example":{"1":[{"hop":68,"final":30,"failed":true},{"hop":21,"final":45,"failed":false}],"30":[{"hop":54,"final":2,"failed":false},{"hop":2,"final":1,"failed":false}]}}}},"500":{"description":"Internal Server Error"}}}},"/log":{"get":{"summary":"Get logs of the current tick","operationId":"getLog","description":"Path that returns, for all devices that had a log in the current tick, their respective log messages.","responses":{"200":{"description":"Success: Received all logs","content":{"application/json":{"schema":{"description":"Dictionary in which its keys are the devices, and its values are arrays of message logs that were sent by its respective key/sender","type":"object","additionalProperties":{"type":"array","items":{"description":"Message log","type":"string"}}},"example":{"Device 6":["Received message: [source=0], [msg=padoru], [lastHop=0]","Relaying message: [destination=8], [msg=padoru]"]}}}}}}},"/restart":{"post":{"summary":"Restart simulation","operationId":"restart","description":"Path that restarts the simulation","responses":{"200":{"description":"Success: Restarted simulation"},"500":{"description":"Internal Server Error"}}}}},"components":{"schemas":{"SendMessage":{"type":"object","properties":{"final":{"description":"ID of the final destination of the message","type":"integer"},"hop":{"description":"ID of the device to receive the message on this hop","type":"integer"}}},"ReceiveMessage":{"type":"object","properties":{"final":{"description":"ID of the final destination of the message","type":"integer"},"hop":{"description":"ID of the device to receive the message on this hop","type":"integer"},"failed":{"description":"Wether or not the message was lost in the current tick","type":"boolean"}}},"Device":{"type":"object","properties":{"id":{"type":"integer"},"battery_level":{"type":"integer"},"battery_max":{"type":"integer"},"position":{"type":"object","properties":{"x":{"type":"integer"},"y":{"type":"integer"}}}},"example":{"device_id":1,"battery_level":68,"battery_max":100,"position":{"x":2,"y":1}}}}}};
+
+  // Build a system
+  const ui = SwaggerUIBundle({
+    spec: spec,
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout"
+  })
+
+  window.ui = ui
+}
+</script>
+</body>
+
+</html>

@@ -14,7 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Generate html
-      run: python backend/swagger-yaml-to-html.py <docs/api/api.yaml >docs/api/api.html
+      run: python backend/swagger-yaml-to-html.py <docs/api/api.yaml >docs/api/api.html &&
+            cp docs/api/api.html backend/src/main/resources/api.html
     - name: setup git config
       run: |
         git config user.name "GitHub Actions Bot [T2]"
