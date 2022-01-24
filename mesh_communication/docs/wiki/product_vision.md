@@ -16,11 +16,6 @@ configuration for said devices. This project allows them to see all interactions
 on a given scenario in a detailed manner, and evaluate what's the best way to
 organize everything based on the given statistics.
 
-## MVP Mock up - PC Client
+## Mockups
 
-![pc_client_front_end_mock](./assets/pc_client_front_end_mock.png)
-
-## MVP Mock up - Phone Client
-
-![phone_client_front_end_mock](./assets/phone_client_front_end_mock.png)
-
+Some mockups are shown in [mockups](mockups.md).
