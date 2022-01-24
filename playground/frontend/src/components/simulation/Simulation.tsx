@@ -155,14 +155,14 @@ const Simulation: React.FC = () => {
 					id="sim-tabpanel-0"
 					aria-labelledby="sim-tab-0"
 				>
-                    <Metrics
-                        ticks={3}
-                        prevBatTick={270}
-                        currBatTick={300}
-                        batCommunication={1000}
-                        failed={4}
-                    />
-                </TabPanel>
+					<Metrics
+						ticks={3}
+						prevBatTick={270}
+						currBatTick={300}
+						batCommunication={1000}
+						failed={4}
+					/>
+				</TabPanel>
 
 				<TabPanel
 					value={selectedTab}
