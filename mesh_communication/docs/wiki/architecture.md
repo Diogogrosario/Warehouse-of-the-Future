@@ -19,7 +19,8 @@ This vertical's architecture is defined in the following component diagram:
 - [Maven 4](https://maven.apache.org/): To build and manage our Java project
   more easily, we will be using the Maven build automation tool. This tool
   allows for better dependency handling and is supported in the most popular
-  IDEs.
+  IDEs. Many maven plugins are used for packaging the application (see pom.xml
+  file for details).
 - [Javadoc](https://www.oracle.com/java/technologies/javase/javadoc-tool.html):
   API documentation generator for the Java source code.
 - [Jackson](https://github.com/FasterXML/jackson): Java-based library that will
