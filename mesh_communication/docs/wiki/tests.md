@@ -47,43 +47,86 @@ flutter drive --driver=test_driver/integration_test_driver.dart --target=integra
 
 ### Graph Visualization
 
-**Given** a layout file with a set of devices,  
-**When** I open the system's graph interface,  
-**Then** I should be able to visualize the devices as they were defined in the
-layout file.
+- **Given** a system that has a set of devices,
+- **When** I open the system's graph interface,
+- **Then** I should be able to visualize the devices.
 
 ### Log Interface
 
-**When** I open the log interface after a number of ticks,  
-**Then** I should see all logs that refer to ticks that have occurred.
+- **Given** a system that has a set of devices **and**
+- **Given** a communcation that will be finished in _N_ ticks,
+- **When** I open the log interface **and**
+- **When** I skip _N_ ticks,
+- **Then** I should be able to visualize the all log messages that the
+  communcation produced.
 
 ### Display message redirection
 
-**Given** a system that has a pending message that will be redirected,  
-**When** I click on the advance tick button,  
-**Then** I should be able to visualize the message being redirected to other
-devices.
+- **Given** a system that has a set of devices: _A_ and _B_ **and**
+- **Given** that device _A_ that will redirect a message to device _B_ in the
+  next tick,
+- **When** I skip _1_ ticks,
+- **Then** I should verify that the edge connecting _A_ and _B_ is colored in
+  green.
 
 ### Pausing the system
 
-**When** I click on the pause button and if I do not make any further
-interactions with the UI,  
-**Then** the interface must remain the same indefinitely.
+- **Given** a system that has a set of devices **and**
+- **Given** that the system is in a paused state,
+- **Then** no ticks shall pass.
 
 ### Automatic time flow
 
-**When** I open the system's graph interface and if I do not interact with the
-time flow buttons,  
-**Then** the system's ticks should advance automatically.
+- **Given** a system that has a set of devices **and**
+- **Given** that the system is in a paused state,
+- **When** I click on the play button,
+- **Then** the system's ticks should advance automatically.
 
 ### Device out of battery
 
-**Given** a device that has ran out of battery,  
-**When** I open the graph interface,  
-**Then** I should see that the device turned off.
+- **Given** a system that has a set of devices: _A_ **and**
+- **Given** that device _A_ will run out of battery in the next tick,
+- **When** I skip _1_ tick,
+- **Then** I should see device _A_ turned off.
 
-## Possible property (use on PBT if we implement it)
+### Message failure
 
-**Given** any system state,  
-if it advances N ticks followed by going back N ticks,  
-**Then** the system's state must remain the same.
+- **Given** a system that has a set of devices: _A_ and _B_ **and**
+- **Given** a device _A_ that will fail send a message to device _B_ in the next
+  tick,
+- **When** I skip _1_ tick,
+- **Then** I should verify that the edge connecting A and B has a red cross.
+
+### Go backwards in time
+
+- **Given** a system that has a set of devices **and**
+- **Given** a communcation that will be finished in _N_ ticks,
+- **When** I skip _N-1_ ticks **and**
+- **When** I click on the undo button,
+- **Then** I should be able to visualize the system as it was in tick _N-1_.
+
+### Metric visualization of a tick
+
+- **Given** a system that has a set of devices,
+- **When** I skip _1_ tick,
+- **Then** I should be able to visualize the energy consumption of the elapsed
+  tick **and** I should be able to visualize how many failures happened during
+  the elapsed tick.
+
+### Metric visualization of a communcation
+
+- **Given** a system that has a set of devices **and**
+- **Given** a communcation that will be finished in _N_ ticks,
+- **When** I skip _N_ ticks,
+- **Then** I should be able to visualize the total energy consumption of the
+  communication **and** I should be able to visualize how many ticks elapsed
+  since the start of the communication.
+
+### System parameterization
+
+- **Given** a system that has a set of devices **and**
+- **Given** a communcation that will be finished in _N_ ticks,
+- **When** I specify a battery range _R_ that all devices must use **and**
+- **When** I skip _N_ ticks,
+- **Then** I should be able to visualize that all messages sent are in
+  accordance with the range _R_.
