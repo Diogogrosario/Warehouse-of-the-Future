@@ -1,5 +1,6 @@
 package org.t2.mesh_communication.devices.comm_strat;
 
+import java.io.Serializable;
 import java.util.*;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.MeshGrid;
@@ -11,7 +12,7 @@ import org.t2.mesh_communication.devices.messages.RequestMessage;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
 
-public class FloodStrategy implements CommunicationStrategy {
+public class FloodStrategy implements CommunicationStrategy, Serializable {
     public static final int DEFAULT_TTL = 6;
     public static final int DEFAULT_MSG_FAIL = 0;
 
@@ -164,8 +165,7 @@ public class FloodStrategy implements CommunicationStrategy {
         int failed = 0;
         for (Command command : me.getCommands()) {
             if (command instanceof ReceiveMsgCmd) {
-                if (((ReceiveMsgCmd) command).isFailed())
-                    failed++;
+                if (((ReceiveMsgCmd) command).isFailed()) failed++;
             }
         }
         return failed;

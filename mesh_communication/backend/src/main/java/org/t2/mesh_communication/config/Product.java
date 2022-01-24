@@ -1,8 +1,9 @@
 package org.t2.mesh_communication.config;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Product {
+public class Product implements Serializable {
     private final int id;
     private final int quantity;
 

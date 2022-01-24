@@ -1,9 +1,10 @@
 package org.t2.mesh_communication.devices;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /** Represents the Position of a device. */
-public class Position {
+public class Position implements Serializable {
     protected int x;
     protected int y;
 
