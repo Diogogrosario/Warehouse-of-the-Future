@@ -2,17 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import Device, { DeviceProps } from "./Device";
 import { List, ListItem } from "@mui/material";
+import { SimulationAPI } from "../../resources/SimulationAPI";
 
 export default function DeviceList(): React.ReactElement {
-	const [devices, setDevices] = useState<DeviceProps[]>([]);
-
-	useEffect(() => {
-		fetch("http://localhost:8080/devices")
-			.then((response) => response.json())
-			.then((result) => {
-				setDevices(result);
-			});
-	}, []);
+	const [devices, setDevices] = useState<DeviceProps[]>(SimulationAPI.devices);
 
 	return (
 		<List style={{ overflow: "visible", height: "100%" }}>

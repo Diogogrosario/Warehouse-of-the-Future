@@ -9,6 +9,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import Coloring from "../../utils/coloring";
 import TabPanel from "../TabPanel";
 import DeviceList from "../device/DeviceList";
+import Metrics from "./Metrics";
 
 const Simulation: React.FC = () => {
 	const [selectedTab, setSelectedTab] = React.useState(0);
@@ -155,7 +156,15 @@ const Simulation: React.FC = () => {
 					index={0}
 					id="sim-tabpanel-0"
 					aria-labelledby="sim-tab-0"
-				/>
+				>
+					<Metrics
+						ticks={3}
+						prevBatTick={270}
+						currBatTick={300}
+						batCommunication={1000}
+						failed={4}
+					/>
+				</TabPanel>
 
 				<TabPanel
 					value={selectedTab}
