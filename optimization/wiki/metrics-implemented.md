@@ -44,7 +44,12 @@ The database follows the following schema:
 </Row>
 
 ### Communication with webapp
-<!-- falar com frontend-->
+
+This web application acts as a frontend that interacts with the optimization algorithm for requesting suggested layouts for the warehouse.
+
+The communication between the web application and the algorithm is handled in app/Http/Controllers/CommunicationController.php.
+
+It uses sockets to establish communication and sending the desired optimization metrics.
 
 ### Algorithm Behaviour
 
