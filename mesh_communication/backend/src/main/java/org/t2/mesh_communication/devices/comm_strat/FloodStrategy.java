@@ -3,6 +3,7 @@ package org.t2.mesh_communication.devices.comm_strat;
 import java.util.*;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.MeshGrid;
+import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
@@ -12,6 +13,7 @@ import org.t2.mesh_communication.log.Logger;
 
 public class FloodStrategy implements CommunicationStrategy {
     public static final int DEFAULT_TTL = 6;
+    public static final int DEFAULT_MSG_FAIL = 0;
 
     /**
      * Neighbor table, including TTLs. Each neighbor device is registered in this table with a
@@ -28,9 +30,12 @@ public class FloodStrategy implements CommunicationStrategy {
 
     private final MeshGrid meshGrid;
 
-    public FloodStrategy(MeshGrid meshGrid, int ttl) {
+    private final int messageFailure;
+
+    public FloodStrategy(MeshGrid meshGrid, int ttl, int messageFailure) {
         this.meshGrid = meshGrid;
         this.ttl = ttl;
+        this.messageFailure = messageFailure;
 
         this.neighborTTL = new HashMap<>();
         this.currentSending = new HashSet<>();
@@ -38,7 +43,7 @@ public class FloodStrategy implements CommunicationStrategy {
     }
 
     public FloodStrategy(MeshGrid meshGrid) {
-        this(meshGrid, DEFAULT_TTL);
+        this(meshGrid, DEFAULT_TTL, DEFAULT_MSG_FAIL);
     }
 
     @Override
@@ -88,7 +93,7 @@ public class FloodStrategy implements CommunicationStrategy {
                 }
             }
 
-            d.addCommand(new ReceiveMsgCmd(d, msg));
+            d.addCommand(new ReceiveMsgCmd(d, msg, this.messageFailure));
         }
     }
 
@@ -152,5 +157,17 @@ public class FloodStrategy implements CommunicationStrategy {
         me.addCommand(new SendMsgCmd(me, msg));
 
         return true;
+    }
+
+    @Override
+    public int getNFailedMessages(MeshDevice me) {
+        int failed = 0;
+        for (Command command : me.getCommands()) {
+            if (command instanceof ReceiveMsgCmd) {
+                if (((ReceiveMsgCmd) command).isFailed())
+                    failed++;
+            }
+        }
+        return failed;
     }
 }

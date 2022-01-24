@@ -18,6 +18,8 @@ public class Config {
     public int deviceRange;
     public int timeToLive;
 
+    public int messageFailure;
+
     private Config() {
         Config.instance = this;
     }
@@ -48,6 +50,8 @@ public class Config {
                 + "\ndeviceRange: "
                 + deviceRange
                 + "\ntimeToLive: "
-                + timeToLive;
+                + timeToLive
+                + "\nmessageFailure: "
+                + messageFailure;
     }
 }
