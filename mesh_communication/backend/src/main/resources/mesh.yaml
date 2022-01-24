@@ -12,3 +12,5 @@ sendingConsumption: 30
 
 deviceRange: 1
 timeToLive: 6
+
+messageFailure: 5

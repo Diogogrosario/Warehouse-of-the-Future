@@ -12,6 +12,7 @@ import org.t2.mesh_communication.log.Logger;
 
 public class FloodStrategy implements CommunicationStrategy {
     public static final int DEFAULT_TTL = 6;
+    public static final int DEFAULT_MSG_FAIL = 0;
 
     /**
      * Neighbor table, including TTLs. Each neighbor device is registered in this table with a
@@ -28,9 +29,12 @@ public class FloodStrategy implements CommunicationStrategy {
 
     private final MeshGrid meshGrid;
 
-    public FloodStrategy(MeshGrid meshGrid, int ttl) {
+    private final int messageFailure;
+
+    public FloodStrategy(MeshGrid meshGrid, int ttl, int messageFailure) {
         this.meshGrid = meshGrid;
         this.ttl = ttl;
+        this.messageFailure = messageFailure;
 
         this.neighborTTL = new HashMap<>();
         this.currentSending = new HashSet<>();
@@ -38,7 +42,7 @@ public class FloodStrategy implements CommunicationStrategy {
     }
 
     public FloodStrategy(MeshGrid meshGrid) {
-        this(meshGrid, DEFAULT_TTL);
+        this(meshGrid, DEFAULT_TTL, DEFAULT_MSG_FAIL);
     }
 
     @Override
@@ -88,7 +92,7 @@ public class FloodStrategy implements CommunicationStrategy {
                 }
             }
 
-            d.addCommand(new ReceiveMsgCmd(d, msg));
+            d.addCommand(new ReceiveMsgCmd(d, msg, this.messageFailure));
         }
     }
 

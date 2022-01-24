@@ -77,7 +77,7 @@ public class Main {
                         orchestratorId,
                         devices.get(orchestratorId),
                         Config.getInstance().orchestratorRange,
-                        new FloodStrategy(this.meshGrid, Config.getInstance().timeToLive));
+                        new FloodStrategy(this.meshGrid, Config.getInstance().timeToLive, Config.getInstance().messageFailure));
         devices.remove(orchestratorId);
         this.meshGrid.addDevice(this.orchestrator);
         this.meshGrid.addDevices(devices);

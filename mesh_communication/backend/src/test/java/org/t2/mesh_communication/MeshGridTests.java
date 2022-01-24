@@ -35,7 +35,7 @@ public class MeshGridTests {
         assertEquals(1, devicesInRange.size());
 
         device1.addCommand(
-                new ReceiveMsgCmd(device1, new RequestMessage(device1.getId(), 1, 0, "")));
+                new ReceiveMsgCmd(device1, new RequestMessage(device1.getId(), 1, 0, ""), 0));
         boolean updateOnce = mg.update();
         boolean updateTwice = mg.update();
         assertFalse(updateOnce);

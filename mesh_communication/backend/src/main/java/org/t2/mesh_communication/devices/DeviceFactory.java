@@ -13,11 +13,12 @@ public class DeviceFactory {
 
         int range = c.deviceRange;
         int ttl = c.timeToLive;
+        int msgFail = c.messageFailure;
 
         Battery battery = new Battery(c.totalBattery, c.batIdleConsumption);
         Screen screen = new Screen(c.screenIdleConsumption, c.screenOnConsumption);
 
-        FloodStrategy strat = new FloodStrategy(grid, ttl);
+        FloodStrategy strat = new FloodStrategy(grid, ttl, msgFail);
 
         return new Device(
                 id, pos, strat, receivingConsumption, sendingConsumption, range, battery, screen);
