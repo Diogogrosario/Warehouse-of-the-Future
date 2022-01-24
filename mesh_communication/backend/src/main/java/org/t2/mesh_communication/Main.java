@@ -81,7 +81,10 @@ public class Main {
                         orchestratorId,
                         devices.get(orchestratorId),
                         Config.getInstance().orchestratorRange,
-                        new FloodStrategy(this.meshGrid, Config.getInstance().timeToLive));
+                        new FloodStrategy(
+                                this.meshGrid,
+                                Config.getInstance().timeToLive,
+                                Config.getInstance().messageFailure));
         devices.remove(orchestratorId);
         this.meshGrid.addDevice(this.orchestrator);
         this.meshGrid.addDevices(devices);
@@ -129,14 +132,21 @@ public class Main {
             System.out.println("Can't undo that many ticks.");
             return -1;
         }
-        this.loadState(n);
+
+        if (this.loadState(n) < 0) {
+            System.out.println("Can't undo that many ticks.");
+            return -1;
+        }
+
         logger.resetToTick(tick);
         System.out.println("Reset to tick " + tick);
         return 0;
     }
 
-    public void loadState(int n) {
+    public int loadState(int n) {
         Memento memento = this.caretaker.loadState(n);
+
+        if (memento == null) return -1;
 
         try {
             ByteArrayOutputStream bo = new ByteArrayOutputStream();
@@ -178,6 +188,7 @@ public class Main {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public void saveState() {

@@ -15,6 +15,7 @@ public class MeshGrid implements Serializable {
     private List<MeshDevice> devices;
     private int nTicks;
     private int lastTickBat;
+    private int nFailedMsg;
 
     private final int orchestratorId;
 
@@ -24,6 +25,7 @@ public class MeshGrid implements Serializable {
         this.devices = new ArrayList<>();
         this.nTicks = 0;
         this.lastTickBat = 0;
+        this.nFailedMsg = 0;
     }
 
     public int getCurrentBat() {
@@ -88,6 +90,7 @@ public class MeshGrid implements Serializable {
         }
 
         for (MeshDevice md : this.devices) {
+            this.nFailedMsg += md.getNFailedMessages();
             md.nextCommands();
         }
 
@@ -103,11 +106,15 @@ public class MeshGrid implements Serializable {
         }
     }
 
-    public int getTotalInnitialBat() {
+    public int getTotalInitialBat() {
         int total = 0;
         for (MeshDevice md : this.devices) {
             total += md.getBattery().getTotalBattery();
         }
         return total;
+    }
+
+    public int getFailedMessages() {
+        return this.nFailedMsg;
     }
 }

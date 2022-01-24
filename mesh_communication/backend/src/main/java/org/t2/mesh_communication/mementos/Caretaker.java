@@ -1,5 +1,6 @@
 package org.t2.mesh_communication.mementos;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /** Stores past states of the program */
@@ -16,8 +17,10 @@ public class Caretaker {
 
     public Memento loadState(int nTicks) {
         Memento state = null;
-        for (int i = 0; i < nTicks; i++) {
-            state = states.pop();
+        try {
+            for (int i = 0; i < nTicks; i++) state = states.pop();
+        } catch (EmptyStackException e) {
+            return null;
         }
         return state;
     }

@@ -1,0 +1,84 @@
+version: '3'
+
+services:
+  optimization:
+    build:
+      context: .
+      dockerfile: ./docker/logic/Dockerfile
+    depends_on:
+      - db          
+    ports:
+      - "5800:5800"
+    restart: "on-failure"
+    networks:
+      - internal
+  server:
+    image: nginx:alpine
+    volumes:
+      - ./src/web:/var/www
+      - ./conf/nginx:/etc/nginx/conf.d
+    ports:
+      - "8000:80"
+    networks:
+      - internal
+      - external
+    depends_on:
+      - laravel
+  laravel:
+    build:
+      args:
+        user: ruben
+        uid: 1000
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    ports:
+      - "9000:9000"    
+    depends_on:
+      - db
+    volumes:
+      - ./src/web:/var/www
+    networks:
+      - internal
+  backend:
+    build:
+      context: ../data_lake/backend/      
+    ports:
+        - "8001:5000"
+    env_file:
+        - ../data_lake/backend/.env
+    volumes:
+        - ../data_lake/backend:/app
+    networks:
+        - internal          
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+    ports:
+      - "9002:3306"
+    volumes:
+      - ./src/model/db:/var/lib/mysql
+    networks:
+      - internal
+      - external
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
+    depends_on:
+      - db
+    networks:
+      - external
+networks:
+  internal:
+    driver: bridge
+
+  external:
+    driver: bridge

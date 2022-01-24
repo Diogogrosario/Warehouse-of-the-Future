@@ -419,16 +419,17 @@ public class API implements ErrorController {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
 
-        int totalInnitialBat = this.getMeshGrid().getTotalInnitialBat();
+        int totalInnitialBat = this.getMeshGrid().getTotalInitialBat();
         int currentBattery = this.getMeshGrid().getCurrentBat();
         int tickBattery = this.getMeshGrid().getLastTickBat() - currentBattery;
         if (tickBattery < 0) {
             tickBattery = 0;
         }
+        int failedMsg = this.getMeshGrid().getFailedMessages();
 
         node.put("batTick", tickBattery);
         node.put("batCommunication", totalInnitialBat - currentBattery);
-        node.put("failed", 0);
+        node.put("failed", failedMsg);
         node.put("ticks", this.getMeshGrid().getNTicks());
 
         response.setStatus(HttpServletResponse.SC_OK);

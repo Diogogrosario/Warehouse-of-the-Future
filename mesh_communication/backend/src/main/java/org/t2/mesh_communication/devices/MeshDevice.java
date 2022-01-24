@@ -159,4 +159,8 @@ public abstract class MeshDevice implements Updatable, Serializable {
     public Battery getBattery() {
         return battery;
     }
+
+    public int getNFailedMessages() {
+        return this.commStrat.getNFailedMessages(this);
+    }
 }
