@@ -32,6 +32,13 @@ export default function Device(props: DeviceProps): React.ReactElement {
 				backgroundColor: "lightDark.main",
 				color: "white.main",
 				width: "100%",
+				border: (theme: Theme) =>
+					`1px solid ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
+				"&:hover": {
+					".MuiAccordionSummary-root": {
+						backgroundColor: "lightDarkBright.main",
+					},
+				},
 			}}
 		>
 			<AccordionSummary
@@ -42,10 +49,17 @@ export default function Device(props: DeviceProps): React.ReactElement {
 					},
 				}}
 			>
-				<Stack>
-					<Typography variant="h5">Mesh Device</Typography>
-					<Typography variant="body1">ID: {id}</Typography>
-				</Stack>
+				<Typography variant="h5" sx={{ pr: 2 }}>
+					Mesh Device
+				</Typography>
+				<Typography
+					variant="h5"
+					sx={{
+						color: (theme: Theme) => Coloring.rgba(theme.palette.white.main, 0.8),
+					}}
+				>
+					#{id}
+				</Typography>
 			</AccordionSummary>
 
 			<Divider orientation="horizontal" flexItem />
