@@ -11,9 +11,9 @@ import org.t2.mesh_communication.log.Logger;
 
 /** The device responsible for initiating communications on the mesh network. */
 public class Orchestrator extends MeshDevice {
-    public Orchestrator(Position pos, CommunicationStrategy commStrat) {
-        // TODO don't hard code range
-        super(MeshGrid.ORCHESTRATOR_ID, pos, 1, commStrat, new OrchestratorBattery());
+    public Orchestrator(
+            int orchestratorId, Position pos, int range, CommunicationStrategy commStrat) {
+        super(orchestratorId, pos, range, commStrat, new OrchestratorBattery());
     }
 
     public void orchestrate(List<Product> products) {

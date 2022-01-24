@@ -67,7 +67,7 @@ public class MeshDeviceTests {
 
         device.addCommand(
                 new ReceiveMsgCmd(
-                        device, new RequestMessage(device.getId(), device.getSeqNum(), 0, "")));
+                        device, new RequestMessage(device.getId(), device.getSeqNum(), 0, ""), 0));
         assertEquals(0, device.getCommands().size());
         assertNotEquals(0, device.getCommandsNext().size());
         assertFalse(device.update());
