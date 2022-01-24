@@ -1,5 +1,5 @@
 export class SimulationAPI {
-	public static devices = [];
+	public static devices: object[] = [];
 	public static currentTick = 0;
 	public static lastTickBatteryConsumption = 0;
 	public static currentTickBatteryConsumption = 0;
@@ -8,7 +8,9 @@ export class SimulationAPI {
 		fetch("http://localhost:8080/devices")
 			.then((response) => response.json())
 			.then((result) => {
-				this.devices = result;
+				// UNTESTED
+				if (this.devices[this.currentTick] == undefined)
+					this.devices.push(result)
 			});
 	}
 
@@ -68,6 +70,7 @@ export class SimulationAPI {
 		this.currentTick = 0;
 		this.currentTickBatteryConsumption = 0;
 		this.lastTickBatteryConsumption = 0;
+		this.devices = [];
 
 		this.orchestrate();
 	}
