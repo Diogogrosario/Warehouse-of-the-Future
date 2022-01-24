@@ -159,5 +159,7 @@ public abstract class MeshDevice implements Updatable {
         return battery;
     }
 
-    public int getNFailedMessages() { return this.commStrat.getNFailedMessages(this); }
+    public int getNFailedMessages() {
+        return this.commStrat.getNFailedMessages(this);
+    }
 }

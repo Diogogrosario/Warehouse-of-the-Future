@@ -164,8 +164,7 @@ public class FloodStrategy implements CommunicationStrategy {
         int failed = 0;
         for (Command command : me.getCommands()) {
             if (command instanceof ReceiveMsgCmd) {
-                if (((ReceiveMsgCmd) command).isFailed())
-                    failed++;
+                if (((ReceiveMsgCmd) command).isFailed()) failed++;
             }
         }
         return failed;

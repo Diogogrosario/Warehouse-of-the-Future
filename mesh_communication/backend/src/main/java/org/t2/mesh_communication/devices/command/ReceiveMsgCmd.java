@@ -1,14 +1,11 @@
 package org.t2.mesh_communication.devices.command;
 
+import java.util.Random;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.messages.Message;
 
-import java.util.Random;
-
 public class ReceiveMsgCmd implements Command {
-    /**
-     * Who will receive the message *
-     */
+    /** Who will receive the message * */
     private final MeshDevice meshDevice;
 
     private final boolean fail;
@@ -22,13 +19,10 @@ public class ReceiveMsgCmd implements Command {
         this.fail = random.nextDouble() < (messageFailure / 100.0);
     }
 
-    /**
-     * It's important to try to send the message before the next tick *
-     */
+    /** It's important to try to send the message before the next tick * */
     @Override
     public void execute() {
-        if (!this.fail)
-            this.meshDevice.receiveMessage(this.message);
+        if (!this.fail) this.meshDevice.receiveMessage(this.message);
     }
 
     public Message getMessage() {
