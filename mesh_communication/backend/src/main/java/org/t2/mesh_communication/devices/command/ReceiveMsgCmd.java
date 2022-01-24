@@ -1,9 +1,10 @@
 package org.t2.mesh_communication.devices.command;
 
+import java.io.Serializable;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.messages.Message;
 
-public class ReceiveMsgCmd implements Command {
+public class ReceiveMsgCmd implements Command, Serializable {
     /** Who will receive the message * */
     private final MeshDevice meshDevice;
 

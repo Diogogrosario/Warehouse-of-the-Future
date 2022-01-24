@@ -2,7 +2,7 @@ package org.t2.mesh_communication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -137,13 +137,51 @@ public class Main {
 
     public void loadState(int n) {
         Memento memento = this.caretaker.loadState(n);
-        this.orchestrator = memento.getOrchestrator();
-        this.meshGrid = memento.getMeshGrid();
-        this.products = memento.getProducts();
+
+        try {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            ObjectOutputStream o = new ObjectOutputStream(bo);
+
+            o.writeObject(memento.getOrchestrator());
+
+            o.close();
+            bo.close();
+
+            ByteArrayInputStream bi = new ByteArrayInputStream(bo.toByteArray());
+            ObjectInputStream i = new ObjectInputStream(bi);
+
+            this.orchestrator = (Orchestrator) i.readObject();
+
+            i.close();
+            bi.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            ObjectOutputStream o = new ObjectOutputStream(bo);
+
+            o.writeObject(memento.getMeshGrid());
+
+            o.close();
+            bo.close();
+
+            ByteArrayInputStream bi = new ByteArrayInputStream(bo.toByteArray());
+            ObjectInputStream i = new ObjectInputStream(bi);
+
+            this.meshGrid = (MeshGrid) i.readObject();
+
+            i.close();
+            bi.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveState() {
-        Memento memento = new Memento(this.orchestrator, this.meshGrid, this.products);
+        Memento memento = new Memento(this.orchestrator, this.meshGrid);
         this.caretaker.saveState(memento);
     }
 

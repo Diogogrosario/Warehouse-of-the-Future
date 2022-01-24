@@ -1,10 +1,11 @@
 package org.t2.mesh_communication.devices.messages;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /** Messages distribute in the mesh network. */
-public abstract class Message {
+public abstract class Message implements Serializable {
     /** The source of the message. */
     private final int source;
     /** The destination of the message. */
