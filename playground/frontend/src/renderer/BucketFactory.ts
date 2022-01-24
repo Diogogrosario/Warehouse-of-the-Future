@@ -1,4 +1,7 @@
+import { height } from "@mui/system";
 import * as THREE from "three";
+import { Device } from "./Device";
+import { BucketConfig, RackFactory } from "./RackFactory";
 import SceneManager from "./SceneManager";
 import { WarehouseStructure } from "./Warehouse";
 
@@ -17,6 +20,9 @@ export class BucketFactory {
 	private readonly deviceMaterial: THREE.Material;
 
 	private readonly geometries: Map<BucketIdentifier, THREE.BufferGeometry> = new Map();
+	private readonly deviceGeometry = new THREE.BoxGeometry(0.1, 0.1, 0.025);
+
+	public readonly devices: Map<number, Device> = new Map();
 
 	constructor(sceneManager: SceneManager) {
 		this.sceneManager = sceneManager;
@@ -32,18 +38,22 @@ export class BucketFactory {
 		for (const rack of config.racks) {
 			for (const sh of rack.shelves) {
 				for (const bucket of sh.buckets) {
-					bucket.width *= 0.9;
+					bucket.width *= 0.85;
 				}
 			}
 		}
 	}
 
 
-	public addBucketToExistingMesh(width: number, depth: number, height: number, mesh: THREE.Mesh) {
+	public addBucket(bconfig: BucketConfig, depth: number, pos: number, obj: THREE.Object3D) {
+		// TODO: Calculate decent default height
+		const bheight = bconfig.height ?? 2;
+		depth = depth - RackFactory.shelfEdgeDepth;
+
 		const identifier = {
-			width: width,
-			depth: depth,
-			height: height
+			width: bconfig.width,
+			depth: depth - RackFactory.shelfEdgeDepth,
+			height: bheight
 		}
 
 		let geometry = this.geometries.get(identifier);
@@ -51,33 +61,28 @@ export class BucketFactory {
 			geometry = this.generateBucket(identifier);
 		}
 
-		mesh.geometry = geometry;
-		mesh.material = this.material;
-	}
+		const bucket = new THREE.Mesh(geometry, this.material);
+		obj.add(bucket);
+		bucket.name = "Bucket " + bconfig.id;
 
-	public addDeviceToExistingMesh(width: number, depth: number, height: number, mesh: THREE.Mesh){
-		const identifier = {
-			width: width,
-			depth: depth,
-			height: height
-		}
+		bucket.translateX(pos);
+		bucket.translateZ(depth);
 
-		let geometry = this.geometries.get(identifier);
-		if (!geometry) {
-			geometry = this.generateDevice(identifier);
-		}
+		// DEVICE
+		const device = new THREE.Mesh(this.deviceGeometry, this.deviceMaterial);
+		device.name = "Device  " + bconfig.id;
+		bucket.add(device);
 
-		mesh.geometry = geometry;
-		mesh.material = this.deviceMaterial;
-	}
+		device.translateX(bconfig.width / 2 - 0.05);
+		device.translateY(bheight - 0.05);
+		device.translateZ(0.025 / 2);
 
-	private generateDevice(identifier: BucketIdentifier): THREE.BufferGeometry {
-		return new THREE.BoxGeometry(identifier.width, identifier.height, identifier.depth);
+		this.devices.set(bconfig.id, new Device(bconfig.id, device))
 	}
 
 	private generateBucket(identifier: BucketIdentifier): THREE.BufferGeometry {
 		const bucket = new THREE.BoxGeometry(identifier.width, identifier.height, identifier.depth);
-		bucket.translate(0, identifier.height / 2, 0);
+		bucket.translate(0, identifier.height / 2, -identifier.depth / 2);
 
 		return bucket;
 	}

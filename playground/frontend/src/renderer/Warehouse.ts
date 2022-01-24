@@ -55,7 +55,7 @@ export class Warehouse {
 		this.addGround(structure.dimensions);
 
 		for (const shelfConfig of structure.racks) {
-			this.rackFactory.getRack(shelfConfig, structure.dimensions, this.warehouse);
+			this.rackFactory.addRack(shelfConfig, structure.dimensions, this.warehouse);
 		}
 
 		this.addLights(structure.dimensions);

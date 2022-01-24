@@ -53,10 +53,11 @@ export class RackFactory {
 	private frameMaterial: THREE.Material;
 	private shelfMaterial: THREE.Material;
 
-	private static readonly frameThickness = 0.1;
+	public static readonly frameThickness = 0.1;
 
-	private static readonly shelfAngle = Math.PI / 48;
-	private static readonly shelfEdgeHeight = 0.075;
+	public static readonly shelfAngle = Math.PI / 48;
+	public static readonly shelfEdgeHeight = 0.075;
+	public static readonly shelfEdgeDepth = 0.01;
 
 	private readonly frameGeometries: Map<FrameIdentifier, THREE.BufferGeometry> = new Map();
 	private readonly shelfGeometries: Map<ShelvesIdentifier, THREE.BufferGeometry> = new Map();
@@ -79,7 +80,7 @@ export class RackFactory {
 		});
 	}
 
-	public getRack(config: RackConfig, dimensions: WarehouseDimensions, obj: THREE.Object3D): Map<number, THREE.Object3D> {
+	public addRack(config: RackConfig, dimensions: WarehouseDimensions, obj: THREE.Object3D) {
 		const rack = new THREE.Group();
 		rack.name = "Rack";
 
@@ -100,8 +101,6 @@ export class RackFactory {
 		this.positionRack(rack, config, dimensions);
 
 		obj.add(rack);
-
-		return new Map();
 	}
 
 	private positionRack(
@@ -166,37 +165,9 @@ export class RackFactory {
 
 			const spacing = new SpaceEvenly(config.width - RackFactory.frameThickness * 2, sh.buckets.map((bucketConfig: BucketConfig) => bucketConfig.width));
 			for (let i = 0; i < sh.buckets.length; i++) {
-				const bconfig = sh.buckets[i];
+				const pos = RackFactory.frameThickness + spacing.position(i);
 
-				// TODO: Calculate default height based on decent parameters
-				const bheight = bconfig.height ?? 2;
-
-				const bucket = new THREE.Mesh();
-				bucket.name = "Bucket " + bconfig.id;
-
-				bucket.translateX(RackFactory.frameThickness + spacing.position(i));
-				bucket.translateZ(config.depth / 2);
-
-				this.bucketManager.addBucketToExistingMesh(bconfig.width - 0.05, config.depth - 0.05, bheight, bucket);
-
-				const device = new THREE.Mesh();
-
-				device.name = "Device  " + bconfig.id;
-
-				device.rotateX(RackFactory.shelfAngle);
-
-				device.translateX(RackFactory.frameThickness + spacing.position(i));
-				device.translateY(bheight / 2);
-				device.translateY(RackFactory.shelfEdgeHeight);
-				device.translateZ(config.depth / 2);
-
-				device.translateY(bheight / 2)
-				device.translateZ(config.depth / 2)
-				this.devices.set(bconfig.id, new Device(bconfig.id, device))
-				this.bucketManager.addDeviceToExistingMesh(0.1, 0.1, 0.1, device);
-
-				shelf.add(bucket);
-				shelf.add(device);
+				this.bucketManager.addBucket(sh.buckets[i], config.depth, pos, shelf);
 			}
 		}
 	}
@@ -319,7 +290,7 @@ export class RackFactory {
 		const shelfEdge = new THREE.BoxGeometry(
 			config.width - RackFactory.frameThickness,
 			RackFactory.shelfEdgeHeight,
-			0.01
+			RackFactory.shelfEdgeDepth
 		);
 
 		// Shelf base
