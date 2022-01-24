@@ -78,8 +78,9 @@ The backend is tested using Unit-tests and Mutation tests.
 
 ### Frontend
 
-The frontend is tested using integration tests, using flutter-gherkin. We're
-using the experimental backend
+The frontend is tested using acceptance tests, using
+[Flutter gherkin](https://github.com/jonsamwell/flutter_gherkin). We're using
+the experimental backend
 [integration test](https://docs.flutter.dev/testing/integration-tests), instead
 of the old widget driver. Since we are using flutter web, there is no need for
 an android emulator in our project. As such, we use
