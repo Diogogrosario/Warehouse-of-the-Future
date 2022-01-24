@@ -104,6 +104,6 @@ public class MeshDeviceTests {
         copy = null;
         assertNotEquals(copy, pos);
 
-        assertEquals(Objects.hash(1, 1), pos.hashCode());
+        assertEquals(Objects.hash(1, 1, 0), pos.hashCode());
     }
 }
