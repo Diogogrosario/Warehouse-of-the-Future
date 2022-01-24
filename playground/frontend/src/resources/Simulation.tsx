@@ -1,3 +1,5 @@
+import { RepeatOneSharp } from "@mui/icons-material";
+
 export function getCurrentDevices() {
 	fetch("http://localhost:8080/devices")
 		.then((response) => response.json())
@@ -28,4 +30,16 @@ export function getCurrentMetrics() {
 	fetch("http://localhost:8080/metrics")
 		.then((response) => response.json())
 		.then((result) => console.log(result));
+}
+
+export function getSendMessages() {
+	fetch("http://localhost:8080/messages/send")
+		.then((response) => response.json())
+		.then((result) => console.log(result));
+}
+
+export function getReceiveMessages() {
+	fetch("http://localhost:8080/messages/receive")
+		.then((response) => response.json())
+		.then((result) => console.log(result))
 }

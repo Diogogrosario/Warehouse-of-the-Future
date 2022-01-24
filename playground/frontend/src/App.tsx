@@ -12,7 +12,9 @@ import theme from "./styles/theme";
 import {
 	getCurrentDevices,
 	advanceTick,
-	orchestrate
+	orchestrate,
+	getSendMessages,
+	getReceiveMessages
 } from "./resources/Simulation";
 
 export enum FullscreenState {
@@ -68,9 +70,11 @@ export default function App() {
 		};
 	});
 
-	// orchestrate();
-	// getCurrentDevices();
-	// advanceTick();
+	orchestrate();
+	getCurrentDevices();
+	advanceTick();
+	getSendMessages();
+	getReceiveMessages();
 	// getCurrentDevices();
 	// advanceTick();
 	// getCurrentDevices();
