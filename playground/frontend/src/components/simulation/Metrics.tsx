@@ -11,7 +11,8 @@ import Coloring from "../../utils/coloring";
 
 export interface MetricsProps {
 	ticks: number;
-    batTick: number;
+    prevBatTick: number;
+    currBatTick: number;
     batCommunication: number;
     failed: number;
 } 
@@ -19,7 +20,8 @@ export interface MetricsProps {
 const Metrics: React.FC<MetricsProps> = (props : MetricsProps) => {
     const {
         ticks,
-        batTick,
+        prevBatTick,
+        currBatTick,
         batCommunication,
         failed
     } = props;
@@ -30,11 +32,11 @@ const Metrics: React.FC<MetricsProps> = (props : MetricsProps) => {
     const criticalUsageLimit = avgUsage * 1.2;
 
     const batteryUsageTooltip =
-                (batTick < lowUsageLimit) ?
+                (currBatTick < lowUsageLimit) ?
                     "Low battery usage" :
-                    (batTick > criticalUsageLimit) ?
+                    (currBatTick > criticalUsageLimit) ?
                         "Critical battery usage" :
-                        (batTick > highUsageLimit) ?
+                        (currBatTick > highUsageLimit) ?
                             "High battery usage" :
                             "Normal battery usage";
 
@@ -106,40 +108,41 @@ const Metrics: React.FC<MetricsProps> = (props : MetricsProps) => {
                             alignItems: "center",
                         }}
                     >
-                        {batTick}mAh
+                        {currBatTick}mAh
                         <Typography
                             variant="h5"
                             component="span"
                             sx={{
                                 marginLeft: "8px",
                                 opacity: 1.0,
-                                ...(batTick < lowUsageLimit && {
+                                ...(currBatTick < lowUsageLimit && {
                                     color: "success.main",  
                                 }),
-                                ...(batTick > criticalUsageLimit && {
+                                ...(currBatTick > criticalUsageLimit && {
                                     color: "error.main",  
                                 }),
-                                ...((batTick > highUsageLimit && batTick <= criticalUsageLimit) && {
+                                ...((currBatTick > highUsageLimit && currBatTick <= criticalUsageLimit) && {
                                     color: "warning.main",
                                 }),
-                                ...((batTick >= lowUsageLimit && batTick <= highUsageLimit) && {
-                                    color: "white.main",  
+                                ...((currBatTick >= lowUsageLimit && currBatTick <= highUsageLimit) && {
+                                    color: "white.main",
+                                    opacity: 0.8,
                                 }),
                             }}
                         >
-                            ({batTick >= avgUsage ? "+" : ""}{((batTick/avgUsage - 1) * 100).toFixed(2)}%)
+                            ({currBatTick >= prevBatTick ? "+" : ""}{((currBatTick/prevBatTick - 1) * 100).toFixed(2)}%)
                         </Typography>
-                        {batTick < lowUsageLimit &&
+                        {currBatTick < lowUsageLimit &&
                             <Battery20Icon color="success" fontSize="large" />
                         }
-                        {batTick > criticalUsageLimit &&
+                        {currBatTick > criticalUsageLimit &&
                             <BatteryAlertIcon color="error" fontSize="large" />
                         }
-                        {(batTick > highUsageLimit && batTick <= criticalUsageLimit) &&
+                        {(currBatTick > highUsageLimit && currBatTick <= criticalUsageLimit) &&
                             <Battery90Icon color="warning" fontSize="large" />
                         }
-                        {(batTick >= lowUsageLimit && batTick <= highUsageLimit) &&
-                            <Battery50Icon color="inherit" fontSize="large" />
+                        {(currBatTick >= lowUsageLimit && currBatTick <= highUsageLimit) &&
+                            <Battery50Icon style={{ opacity: 0.8 }} fontSize="large" />
                         }
                     </Typography>
                 </Tooltip>

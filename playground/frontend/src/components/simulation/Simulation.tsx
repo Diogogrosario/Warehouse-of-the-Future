@@ -157,7 +157,8 @@ const Simulation: React.FC = () => {
 				>
                     <Metrics
                         ticks={3}
-                        batTick={300}
+                        prevBatTick={270}
+                        currBatTick={300}
                         batCommunication={1000}
                         failed={4}
                     />
