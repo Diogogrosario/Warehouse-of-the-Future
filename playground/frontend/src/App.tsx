@@ -11,7 +11,6 @@ import TabPanel from "./components/TabPanel";
 import NoResultsOverlay from "./components/NoResultsOverlay";
 import theme from "./styles/theme";
 import Simulation from "./components/simulation/Simulation";
-import { SimulationAPI } from "./resources/SimulationAPI";
 
 export enum FullscreenState {
 	Left,
@@ -94,12 +93,6 @@ export default function App() {
 			document.removeEventListener("mousemove", handleMouseMove);
 		};
 	});
-
-	SimulationAPI.orchestrate()
-	SimulationAPI.getCurrentDevices();
-	SimulationAPI.advanceTick();
-	SimulationAPI.getSendMessages();
-	SimulationAPI.getReceiveMessages();
 
 	return (
 		<Layout noScroll>

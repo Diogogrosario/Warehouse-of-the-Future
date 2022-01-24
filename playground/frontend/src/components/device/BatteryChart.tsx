@@ -42,7 +42,7 @@ export default function BatteryChart({ width, height, margin = defaultMargin }: 
 
 	return (
 		<div>
-			<ScaleSVG width={width} height={height} >
+			<ScaleSVG width={width} height={height}>
 				<linearGradient
 					id="gradient"
 					gradientUnits="userSpaceOnUse"

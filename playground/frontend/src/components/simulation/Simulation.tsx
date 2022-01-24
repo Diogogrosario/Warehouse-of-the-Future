@@ -9,6 +9,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import Coloring from "../../utils/coloring";
 import TabPanel from "../TabPanel";
 import DeviceList from "../device/DeviceList";
+import { SimulationAPI } from "../../resources/SimulationAPI";
 
 const Simulation: React.FC = () => {
 	const [selectedTab, setSelectedTab] = React.useState(0);
@@ -60,7 +61,10 @@ const Simulation: React.FC = () => {
 								borderTopRightRadius: 0,
 								borderBottomRightRadius: 0,
 							}}
-							onClick={() => setCurrentTick(0)}
+							onClick={() => {
+								SimulationAPI.restart();
+								setCurrentTick(SimulationAPI.currentTick);
+							}}
 						>
 							Reset
 						</Button>
@@ -102,7 +106,10 @@ const Simulation: React.FC = () => {
 								borderTopLeftRadius: 0,
 								borderBottomLeftRadius: 0,
 							}}
-							onClick={() => setCurrentTick((prevState) => prevState + 1)}
+							onClick={() => {
+								SimulationAPI.advanceTick();
+								setCurrentTick(SimulationAPI.currentTick);
+							}}
 						>
 							Advance
 						</Button>

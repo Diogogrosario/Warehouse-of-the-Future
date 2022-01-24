@@ -30,7 +30,7 @@ const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
 				<link rel="apple-touch-icon" type="image/x-icon" href="favicon.ico" />
 				<link rel="icon" type="image/x-icon" href="favicon.ico" />
 			</Helmet>
-			<MuiThemeProvider theme={theme} >
+			<MuiThemeProvider theme={theme}>
 				<EmotionThemeProvider theme={theme}>
 					<Global styles={styles(theme)} />
 					<div className="appWrapper">
