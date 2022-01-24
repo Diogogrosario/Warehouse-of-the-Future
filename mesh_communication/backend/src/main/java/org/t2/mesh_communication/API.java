@@ -260,9 +260,8 @@ public class API implements ErrorController {
                 this.main.advanceTick(nTicks);
                 break;
             case "backwards":
-                // TODO: when UNDO ticks is implemented
-                response.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
-                return "Backwards time flow not implemented yet.";
+                this.main.goBackTick(nTicks);
+                break;
             default:
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 return "Invalid time flow.";

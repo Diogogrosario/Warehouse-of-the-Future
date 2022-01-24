@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
+import java.util.stream.Collectors;
 
 public class Logger {
     private static final String LOGFILE = "el_log.json";
@@ -94,5 +96,17 @@ public class Logger {
         this.cleanHistory();
         this.tick = 0;
         this.history.put(this.tick, new ArrayList<>());
+    }
+
+    public void resetToTick(int tick) {
+        this.tick = tick;
+
+        // remove old ticks from history
+        Set<Integer> oldTicks =
+                this.history.keySet().stream()
+                        .filter(key -> key >= tick)
+                        .collect(Collectors.toSet());
+
+        for (int t : oldTicks) history.remove(t);
     }
 }

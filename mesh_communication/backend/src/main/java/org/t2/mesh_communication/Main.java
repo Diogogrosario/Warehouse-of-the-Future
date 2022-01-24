@@ -15,6 +15,8 @@ import org.t2.mesh_communication.devices.Position;
 import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 import org.t2.mesh_communication.devices.components.BatteryObserver;
 import org.t2.mesh_communication.log.Logger;
+import org.t2.mesh_communication.mementos.Caretaker;
+import org.t2.mesh_communication.mementos.Memento;
 
 @Component
 public class Main {
@@ -22,11 +24,13 @@ public class Main {
     private MeshGrid meshGrid;
     private List<Product> products;
     private BatteryObserver batteryObserver;
+    private Caretaker caretaker;
 
     public Main() {
         this.meshGrid = new MeshGrid(Config.getInstance().orchestratorId);
         this.products = new ArrayList<>();
         batteryObserver = BatteryObserver.getInstance();
+        this.caretaker = new Caretaker();
     }
 
     public Orchestrator getOrchestrator() {
@@ -114,7 +118,34 @@ public class Main {
 
             Logger.getInstance().nextTick();
             batteryObserver.reset(); // reset tick battery consumption count
+
+            // store state
+            this.saveState();
         }
+    }
+
+    public void goBackTick(int n) {
+        Logger logger = Logger.getInstance();
+        int tick = logger.getTick() - n;
+        if (tick < 0) {
+            System.out.println("Can't go back that many ticks.");
+            return;
+        }
+        this.loadState(n);
+        logger.resetToTick(tick);
+        System.out.println("Reset to tick " + tick);
+    }
+
+    public void loadState(int n) {
+        Memento memento = this.caretaker.loadState(n);
+        this.orchestrator = memento.getOrchestrator();
+        this.meshGrid = memento.getMeshGrid();
+        this.products = memento.getProducts();
+    }
+
+    public void saveState() {
+        Memento memento = new Memento(this.orchestrator, this.meshGrid, this.products);
+        this.caretaker.saveState(memento);
     }
 
     public void run() {
@@ -134,6 +165,10 @@ public class Main {
                 case 'n':
                 case 'N':
                     this.advanceTick(cmd == 'n' ? 1 : 10);
+                    break;
+                case 'b':
+                case 'B':
+                    this.goBackTick(cmd == 'b' ? 1 : 10);
                     break;
                 case 'o':
                     this.orchestrate();
