@@ -1,12 +1,17 @@
 import React from "react";
-import { Tab, Tabs, Theme, Typography } from "@mui/material";
+import { Box, Button, Tab, Tabs, Theme, Typography } from "@mui/material";
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DeviceHubIcon from '@mui/icons-material/DeviceHub';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 import Coloring from "../../utils/coloring";
+import TabPanel from "../TabPanel";
 
 const Simulation: React.FC = () => {
     const [selectedTab, setSelectedTab] = React.useState(0);
+
+    const [currentTick, setCurrentTick] = React.useState(0);
 
     return (
         <div
@@ -22,14 +27,69 @@ const Simulation: React.FC = () => {
             }}
         >
             <div style={{ gridArea: "sim-header" }}>
-                <Typography align="left" component="h3" variant="h5"
+                <div
                     style={{
-                        padding: "10px",
-                        opacity: 0.8,
+                        display: "flex",
+                        flexDirection: "row",
                     }}
                 >
-                    Mesh Communication
-                </Typography>
+                    <Typography align="left" component="h3" variant="h5"
+                        style={{
+                            padding: "10px",
+                            opacity: 0.8,
+                        }}
+                    >
+                        Mesh Communication
+                    </Typography>
+                    <div
+                        style={{
+                            marginLeft: "auto",
+                            display: "flex",
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                borderRight: "1px solid transparent",
+								borderColor: "rgb(23, 23, 23)",
+                                borderRadius: "4px",
+                                borderTopRightRadius: 0,
+                                borderBottomRightRadius: 0,
+                                padding: "6px 16px",
+                                backgroundColor: (theme : Theme) => Coloring.rgba(theme.palette.lightDark.main, 0.6),
+                                display: "flex",
+                                alignItems: "center",
+                            }}
+                            >
+                            <Typography variant="caption" component="span"
+                                style={{
+                                    fontSize: "large",
+                                    display: "flex",
+                                    alignItems: "center",
+                                }}
+                            >
+                                Tick
+                                <AccessTimeIcon fontSize="small"
+                                    style={{
+                                        margin: "0 4px 0 8px",
+                                    }}
+                                />
+                                {currentTick}
+                            </Typography>
+                        </Box>
+                        <Button
+                            variant="contained"
+                            endIcon={<SkipNextIcon />}
+                            color="lightDark"
+                            sx={{
+                                borderTopLeftRadius: 0,
+                                borderBottomLeftRadius: 0,
+                            }}
+                            onClick={ () => setCurrentTick(prevState => prevState + 1) }
+                        >
+                            Advance
+                        </Button>
+                    </div>
+                </div>
                 <Tabs
                     value={selectedTab}
                     onChange={(event: React.SyntheticEvent, newValue: number) => setSelectedTab(newValue) }
@@ -65,6 +125,19 @@ const Simulation: React.FC = () => {
                         iconPosition="start"
                     />
                 </Tabs>
+
+                <TabPanel
+                    value={selectedTab}
+                    index={0}
+                    id="sim-tabpanel-0"
+                    aria-labelledby="sim-tab-0"
+                ></TabPanel>
+                <TabPanel
+                    value={selectedTab}
+                    index={1}
+                    id="sim-tabpanel-1"
+                    aria-labelledby="sim-tab-1"
+                ></TabPanel>
             </div>
         </div>
     );
