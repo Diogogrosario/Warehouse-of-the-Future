@@ -42,6 +42,9 @@ export class BucketFactory {
 	}
 
 	private generateBucket(identifier: BucketIdentifier): THREE.BufferGeometry {
-		return new THREE.BoxGeometry(identifier.width, identifier.height, identifier.depth);
+		const bucket = new THREE.BoxGeometry(identifier.width, identifier.height, identifier.depth);
+		bucket.translate(0, identifier.height / 2, 0);
+
+		return bucket;
 	}
 }

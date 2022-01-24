@@ -52,7 +52,7 @@ export class RackFactory {
 
 	private static readonly frameThickness = 0.1;
 
-	private static readonly shelfAngle = Math.PI / 48;
+	private static readonly shelfAngle = Math.PI / 12;
 	private static readonly shelfEdgeHeight = 0.075;
 
 	private readonly frameGeometries: Map<FrameIdentifier, THREE.BufferGeometry> = new Map();
@@ -141,9 +141,14 @@ export class RackFactory {
 			const shelf = new THREE.Mesh(shelfGeometry, this.shelfMaterial);
 			shelf.name = `ShelfHeight${sh.y}`;
 
+			// Move to rack coordinate system
 			shelf.translateX(-config.width / 2);
 			shelf.translateZ(-config.depth / 2);
 			shelf.translateY(sh.y - config.height / 2);
+
+			const shelfAngleHeightOffset = Math.tan(RackFactory.shelfAngle) * config.depth;
+			shelf.translateY(shelfAngleHeightOffset);
+			shelf.rotateX(RackFactory.shelfAngle);
 
 			rack.add(shelf);
 
@@ -157,11 +162,7 @@ export class RackFactory {
 				const bucket = new THREE.Mesh();
 				bucket.name = "Bucket " + bconfig.id;
 
-				bucket.rotateX(RackFactory.shelfAngle);
-
 				bucket.translateX(RackFactory.frameThickness + spacing.position(i));
-				bucket.translateY(bheight / 2);
-				bucket.translateY(RackFactory.shelfEdgeHeight);
 				bucket.translateZ(config.depth / 2);
 
 				this.bucketManager.addBucketToExistingMesh(bconfig.width - 0.05, config.depth - 0.05, bheight, bucket);
@@ -283,32 +284,32 @@ export class RackFactory {
 		const positionHelper = new THREE.Object3D();
 		const geometries: THREE.BufferGeometry[] = [];
 
-		const shelfHeightOffset = Math.tan(RackFactory.shelfAngle) * (config.depth / 2);
+		const realShelfDepth = config.depth / Math.cos(RackFactory.shelfAngle);
 
-		const shelfGeometry = new THREE.BoxGeometry(config.width - 0.1, 0.025, config.depth);
+		const shelfGeometry = new THREE.BoxGeometry(config.width - RackFactory.frameThickness, 0.025, realShelfDepth);
 		const shelfEdge = new THREE.BoxGeometry(
-			config.width - 0.1,
+			config.width - RackFactory.frameThickness,
 			RackFactory.shelfEdgeHeight,
 			0.01
 		);
 
 		// Shelf base
-		positionHelper.rotateX(RackFactory.shelfAngle);
-		positionHelper.position.set(config.width / 2, shelfHeightOffset, config.depth / 2);
+		positionHelper.position.set(config.width / 2, 0, realShelfDepth / 2);
 
 		positionHelper.updateMatrixWorld();
 		shelfGeometry.applyMatrix4(positionHelper.matrixWorld);
 		geometries.push(shelfGeometry);
 
 		// Edge
+		positionHelper.translateZ(realShelfDepth / 2);
 		positionHelper.translateY(RackFactory.shelfEdgeHeight / 2);
-		positionHelper.translateZ(config.depth / 2);
 
 		positionHelper.updateMatrixWorld();
 		shelfEdge.applyMatrix4(positionHelper.matrixWorld);
 		geometries.push(shelfEdge);
 
 		const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(geometries, false);
+		mergedGeometry.translate(0, 0, 0);
 		return mergedGeometry;
 	}
 }
