@@ -20,7 +20,6 @@ public class ReceiveMsgCmd implements Command {
         this.message = msg;
         Random random = new Random();
         this.fail = random.nextDouble() < (messageFailure / 100.0);
-        System.out.println(this.fail);
     }
 
     /**

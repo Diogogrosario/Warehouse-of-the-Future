@@ -3,6 +3,7 @@ package org.t2.mesh_communication.devices.comm_strat;
 import java.util.*;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.MeshGrid;
+import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.command.ReceiveMsgCmd;
 import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
@@ -156,5 +157,17 @@ public class FloodStrategy implements CommunicationStrategy {
         me.addCommand(new SendMsgCmd(me, msg));
 
         return true;
+    }
+
+    @Override
+    public int getNFailedMessages(MeshDevice me) {
+        int failed = 0;
+        for (Command command : me.getCommands()) {
+            if (command instanceof ReceiveMsgCmd) {
+                if (((ReceiveMsgCmd) command).isFailed())
+                    failed++;
+            }
+        }
+        return failed;
     }
 }
