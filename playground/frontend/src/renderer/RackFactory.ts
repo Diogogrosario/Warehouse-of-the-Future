@@ -13,6 +13,7 @@ export interface BucketConfig {
 
 export interface ShelfConfig {
 	y: number,
+	grounded?: boolean,
 	buckets: BucketConfig[]
 }
 
@@ -31,6 +32,7 @@ export interface RackConfig {
 	depth: number;
 	height: number;
 	shelves: ShelfConfig[];
+	hasFrame?: boolean;
 }
 
 
@@ -52,7 +54,7 @@ export class RackFactory {
 
 	private static readonly frameThickness = 0.1;
 
-	private static readonly shelfAngle = Math.PI / 12;
+	private static readonly shelfAngle = Math.PI / 48;
 	private static readonly shelfEdgeHeight = 0.075;
 
 	private readonly frameGeometries: Map<FrameIdentifier, THREE.BufferGeometry> = new Map();
@@ -78,7 +80,13 @@ export class RackFactory {
 		const rack = new THREE.Group();
 		rack.name = "Rack";
 
-		const frameMesh = new THREE.Mesh(this.getFrameGeometry(config), this.frameMaterial);
+		const frameMesh = new THREE.Mesh();
+
+		if (config.hasFrame !== false) {
+			frameMesh.geometry = this.getFrameGeometry(config);
+			frameMesh.material = this.frameMaterial;
+		}
+		
 		frameMesh.translateX(-config.width / 2);
 		frameMesh.translateZ(-config.depth / 2);
 		frameMesh.name = "RackFrame";
@@ -131,14 +139,11 @@ export class RackFactory {
 	}
 
 	private addShelves(rack: THREE.Object3D, config: RackConfig) {
-		// Individual shelves
-		const shelfGeometry = this.getShelveGeometry(config);
-
 		for (const sh of config.shelves) {
 			if (sh.y >= config.height)
 				console.warn("Shelf contains level higher than its height");
 
-			const shelf = new THREE.Mesh(shelfGeometry, this.shelfMaterial);
+			const shelf = new THREE.Mesh();
 			shelf.name = `ShelfHeight${sh.y}`;
 
 			// Move to rack coordinate system
@@ -146,10 +151,14 @@ export class RackFactory {
 			shelf.translateZ(-config.depth / 2);
 			shelf.translateY(sh.y - config.height / 2);
 
-			const shelfAngleHeightOffset = Math.tan(RackFactory.shelfAngle) * config.depth;
-			shelf.translateY(shelfAngleHeightOffset);
-			shelf.rotateX(RackFactory.shelfAngle);
+			if ((sh.grounded === undefined || sh.grounded === false)) {
+				shelf.geometry = this.getShelveGeometry(config);
+				shelf.material = this.shelfMaterial;
 
+				const shelfAngleHeightOffset = Math.tan(RackFactory.shelfAngle) * config.depth;
+				shelf.translateY(shelfAngleHeightOffset);
+				shelf.rotateX(RackFactory.shelfAngle);
+			}
 			rack.add(shelf);
 
 			const spacing = new SpaceEvenly(config.width - RackFactory.frameThickness * 2, sh.buckets.map((bucketConfig: BucketConfig) => bucketConfig.width));

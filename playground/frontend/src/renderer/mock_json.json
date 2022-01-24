@@ -1,7 +1,7 @@
 {
     "dimensions": {
-        "width": 14,
-        "depth": 16,
+        "width": 12,
+        "depth": 15,
         "height": 6
     },
     "racks": [
@@ -9,12 +9,92 @@
             "orientation": "south",
             "x": 0,
             "z": 0,
-            "width": 2,
+            "width": 3,
             "depth": 1,
-            "height": 4,
+            "height": 5,
             "shelves": [
                 {
                     "y": 0,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1015
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1016
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1017
+                        }
+                    ]
+                },
+                {
+                    "y": 1,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1005
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1006
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1007
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1008
+                        }
+                    ]
+                },
+                {
+                    "y": 2,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1009
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1010
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1011
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1012
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1013
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1014
+                        }
+                    ]
+                },
+                {
+                    "y": 3,
                     "buckets": [
                         {
                             "width": 0.5,
@@ -35,107 +115,17 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1003
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1004
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1005
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1006
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1007
                         }
                     ]
                 },
                 {
-                    "y": 2,
+                    "y": 4,
                     "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1008
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1009
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1010
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1011
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1012
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1013
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1014
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1015
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "south",
-            "x": 2,
-            "z": 0,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1016
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1017
-                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -145,12 +135,7 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1019
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -160,66 +145,6 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1021
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1022
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1023
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1024
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1025
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1026
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1027
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1028
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1029
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1030
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1031
                         }
                     ]
                 }
@@ -227,64 +152,14 @@
         },
         {
             "orientation": "south",
-            "x": 4,
+            "x": 3,
             "z": 0,
-            "width": 2,
+            "width": 3,
             "depth": 1,
-            "height": 4,
+            "height": 5,
             "shelves": [
                 {
                     "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1032
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1033
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1034
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1035
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1036
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1037
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1038
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1039
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
                     "buckets": [
                         {
                             "width": 0.5,
@@ -309,7 +184,172 @@
                     ]
                 },
                 {
+                    "y": 1,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1022
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1023
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1024
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1025
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1026
+                        }
+                    ]
+                },
+                {
+                    "y": 2,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1027
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1028
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1029
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1030
+                        }
+                    ]
+                },
+                {
                     "y": 3,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1031
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1032
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1033
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1034
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1035
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1036
+                        }
+                    ]
+                },
+                {
+                    "y": 4,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1037
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1038
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1039
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orientation": "south",
+            "x": 6,
+            "z": 0,
+            "width": 3,
+            "depth": 1,
+            "height": 5,
+            "shelves": [
+                {
+                    "y": 0,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1049
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1050
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1051
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1052
+                        }
+                    ]
+                },
+                {
+                    "y": 1,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1059
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1060
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1061
+                        }
+                    ]
+                },
+                {
+                    "y": 2,
                     "buckets": [
                         {
                             "width": 0.5,
@@ -330,52 +370,17 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1047
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "south",
-            "x": 6,
-            "z": 0,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1048
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1049
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1050
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1051
                         }
                     ]
                 },
                 {
-                    "y": 1,
+                    "y": 3,
                     "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1052
-                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -390,12 +395,7 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1055
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -410,27 +410,12 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1058
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1059
                         }
                     ]
                 },
                 {
-                    "y": 3,
+                    "y": 4,
                     "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1060
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1061
-                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -440,22 +425,7 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1063
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "south",
-            "x": 8,
-            "z": 0,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -465,72 +435,27 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1065
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1066
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1067
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "orientation": "south",
+            "x": 9,
+            "z": 0,
+            "width": 3,
+            "depth": 1,
+            "height": 5,
+            "shelves": [
                 {
-                    "y": 1,
+                    "y": 0,
                     "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1068
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1069
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1070
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1071
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1072
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1073
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1074
-                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1075
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -550,41 +475,11 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1079
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "south",
-            "x": 10,
-            "z": 0,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1080
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1081
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1082
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1083
                         }
                     ]
                 },
@@ -619,22 +514,27 @@
                         {
                             "width": 0.5,
                             "height": 0.33,
-                            "id": 1088
+                            "id": 1066
                         },
                         {
                             "width": 0.5,
                             "height": 0.33,
-                            "id": 1089
+                            "id": 1067
                         },
                         {
                             "width": 0.5,
                             "height": 0.33,
-                            "id": 1090
+                            "id": 1068
                         },
                         {
                             "width": 0.5,
                             "height": 0.33,
-                            "id": 1091
+                            "id": 1069
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1070
                         }
                     ]
                 },
@@ -644,31 +544,51 @@
                         {
                             "width": 0.5,
                             "height": 0.33,
-                            "id": 1092
+                            "id": 1071
                         },
                         {
                             "width": 0.5,
                             "height": 0.33,
-                            "id": 1093
+                            "id": 1072
                         },
                         {
                             "width": 0.5,
                             "height": 0.33,
-                            "id": 1094
+                            "id": 1073
                         },
                         {
                             "width": 0.5,
                             "height": 0.33,
-                            "id": 1095
+                            "id": 1074
+                        }
+                    ]
+                },
+                {
+                    "y": 4,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1081
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1082
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1083
                         }
                     ]
                 }
             ]
         },
         {
-            "orientation": "south",
-            "x": 12,
-            "z": 0,
+            "orientation": "east",
+            "x": 0,
+            "z": 5,
             "width": 2,
             "depth": 1,
             "height": 4,
@@ -676,6 +596,73 @@
                 {
                     "y": 0,
                     "buckets": [
+                        {
+                            "width": 1,
+                            "height": 1,
+                            "id": 1088
+                        },
+                        {
+                            "width": 1,
+                            "height": 1,
+                            "id": 1089
+                        }
+                    ],
+                    "grounded": true
+                },
+                {
+                    "y": 3,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1090
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1091
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1092
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orientation": "east",
+            "x": 0,
+            "z": 7,
+            "width": 2,
+            "depth": 1,
+            "height": 4,
+            "shelves": [
+                {
+                    "y": 0,
+                    "buckets": [
+                        {
+                            "width": 1,
+                            "height": 1,
+                            "id": 1093
+                        },
+                        {
+                            "width": 1,
+                            "height": 1,
+                            "id": 1094
+                        }
+                    ],
+                    "grounded": true
+                },
+                {
+                    "y": 3,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1095
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -685,21 +672,37 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1097
-                        },
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orientation": "east",
+            "x": 0,
+            "z": 9,
+            "width": 2,
+            "depth": 1,
+            "height": 4,
+            "shelves": [
+                {
+                    "y": 0,
+                    "buckets": [
                         {
-                            "width": 0.5,
-                            "height": 0.33,
+                            "width": 1,
+                            "height": 1,
                             "id": 1098
                         },
                         {
-                            "width": 0.5,
-                            "height": 0.33,
+                            "width": 1,
+                            "height": 1,
                             "id": 1099
                         }
-                    ]
+                    ],
+                    "grounded": true
                 },
                 {
-                    "y": 1,
+                    "y": 3,
                     "buckets": [
                         {
                             "width": 0.5,
@@ -715,22 +718,38 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1102
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1103
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "orientation": "east",
+            "x": 0,
+            "z": 11,
+            "width": 2,
+            "depth": 1,
+            "height": 4,
+            "shelves": [
                 {
-                    "y": 2,
+                    "y": 0,
                     "buckets": [
                         {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1104
+                            "width": 1,
+                            "height": 1,
+                            "id": 1103
                         },
+                        {
+                            "width": 1,
+                            "height": 1,
+                            "id": 1104
+                        }
+                    ],
+                    "grounded": true
+                },
+                {
+                    "y": 3,
+                    "buckets": [
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -747,20 +766,36 @@
                             "id": 1107
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "orientation": "east",
+            "x": 0,
+            "z": 13,
+            "width": 2,
+            "depth": 1,
+            "height": 4,
+            "shelves": [
+                {
+                    "y": 0,
+                    "buckets": [
+                        {
+                            "width": 1,
+                            "height": 1,
+                            "id": 1108
+                        },
+                        {
+                            "width": 1,
+                            "height": 1,
+                            "id": 1109
+                        }
+                    ],
+                    "grounded": true
                 },
                 {
                     "y": 3,
                     "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1108
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1109
-                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -770,57 +805,62 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1111
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1112
                         }
                     ]
                 }
             ]
         },
         {
-            "orientation": "north",
-            "x": 0,
+            "orientation": "west",
+            "x": 5,
             "z": 5,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
                         {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1112
-                        },
-                        {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1113
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1114
+                        }
+                    ]
+                },
+                {
+                    "y": 1.0,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1117
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1116
+                        },
+                        {
+                            "width": 0.3333333333333333,
                             "height": 0.33,
                             "id": 1115
                         }
                     ]
                 },
                 {
-                    "y": 1,
+                    "y": 2.0,
                     "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1116
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1117
-                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -830,17 +870,17 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1119
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1120
-                        },
+                        }
+                    ]
+                },
+                {
+                    "y": 3.0,
+                    "buckets": [
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -855,107 +895,92 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1123
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1124
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1125
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1126
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1127
                         }
                     ]
                 }
             ]
         },
         {
-            "orientation": "east",
-            "x": 2,
-            "z": 5,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 1,
-                            "height": 1,
-                            "id": 1128
-                        },
-                        {
-                            "width": 1,
-                            "height": 1,
-                            "id": 1129
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1130
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1131
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1132
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "east",
-            "x": 2,
+            "orientation": "west",
+            "x": 5,
             "z": 7,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
                         {
-                            "width": 1,
-                            "height": 1,
-                            "id": 1133
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1127
                         },
                         {
-                            "width": 1,
-                            "height": 1,
-                            "id": 1134
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1125
+                        },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1126
                         }
                     ]
                 },
                 {
-                    "y": 3,
+                    "y": 1.0,
                     "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1128
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1129
+                        },
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1130
+                        }
+                    ]
+                },
+                {
+                    "y": 2.0,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1131
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1132
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1133
+                        }
+                    ]
+                },
+                {
+                    "y": 3.0,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1134
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -965,86 +990,76 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1136
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1137
                         }
                     ]
                 }
             ]
         },
         {
-            "orientation": "east",
-            "x": 2,
+            "orientation": "west",
+            "x": 5,
             "z": 9,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
                         {
-                            "width": 1,
-                            "height": 1,
-                            "id": 1138
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1137
                         },
                         {
-                            "width": 1,
-                            "height": 1,
-                            "id": 1139
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1138
                         }
                     ]
                 },
                 {
-                    "y": 3,
+                    "y": 1.0,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1139
+                        },
+                        {
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1140
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1141
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1142
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "orientation": "east",
-            "x": 2,
-            "z": 11,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
+                },
                 {
-                    "y": 0,
+                    "y": 2.0,
                     "buckets": [
                         {
-                            "width": 1,
-                            "height": 1,
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1142
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
                             "id": 1143
                         },
                         {
-                            "width": 1,
-                            "height": 1,
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
                             "id": 1144
                         }
                     ]
                 },
                 {
-                    "y": 3,
+                    "y": 3.0,
                     "buckets": [
                         {
                             "width": 0.5,
@@ -1060,51 +1075,11 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1147
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "east",
-            "x": 2,
-            "z": 13,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
+                        },
                         {
-                            "width": 1,
-                            "height": 1,
+                            "width": 0.5,
+                            "height": 0.33,
                             "id": 1148
-                        },
-                        {
-                            "width": 1,
-                            "height": 1,
-                            "id": 1149
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1150
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1151
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1152
                         }
                     ]
                 }
@@ -1112,45 +1087,75 @@
         },
         {
             "orientation": "west",
-            "x": 7,
-            "z": 5,
+            "x": 5,
+            "z": 11,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
-                            "id": 1153
+                            "id": 1151
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
-                            "id": 1154
+                            "id": 1149
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
-                            "id": 1155
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1156
+                            "id": 1150
                         }
                     ]
                 },
                 {
-                    "y": 1,
+                    "y": 1.0,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1153
+                        },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1152
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1154
+                        }
+                    ]
+                },
+                {
+                    "y": 2.0,
+                    "buckets": [
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1156
+                        },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1155
+                        },
+                        {
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1157
-                        },
+                        }
+                    ]
+                },
+                {
+                    "y": 3.0,
+                    "buckets": [
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -1165,17 +1170,27 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1160
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1161
-                        },
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orientation": "west",
+            "x": 5,
+            "z": 13,
+            "width": 2,
+            "depth": 1,
+            "height": 4,
+            "shelves": [
+                {
+                    "y": 0.0,
+                    "buckets": [
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -1190,102 +1205,107 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1164
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1165
+                        }
+                    ]
+                },
+                {
+                    "y": 1.0,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1168
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
                             "id": 1166
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
                             "id": 1167
+                        }
+                    ]
+                },
+                {
+                    "y": 2.0,
+                    "buckets": [
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1170
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
-                            "id": 1168
+                            "id": 1169
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1171
+                        }
+                    ]
+                },
+                {
+                    "y": 3.0,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1172
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1173
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1174
                         }
                     ]
                 }
             ]
         },
         {
-            "orientation": "west",
-            "x": 7,
-            "z": 7,
+            "orientation": "east",
+            "x": 6,
+            "z": 5,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
                         {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1169
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1170
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1171
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1172
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1173
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1174
-                        },
-                        {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1175
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1176
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1177
                         }
                     ]
                 },
                 {
-                    "y": 2,
+                    "y": 1.3333333333333333,
                     "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1177
-                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -1304,53 +1324,58 @@
                     ]
                 },
                 {
-                    "y": 3,
+                    "y": 2.6666666666666665,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
                             "id": 1181
                         },
                         {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1182
-                        },
-                        {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1183
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
-                            "id": 1184
+                            "id": 1182
                         }
                     ]
                 }
             ]
         },
         {
-            "orientation": "west",
-            "x": 7,
-            "z": 9,
+            "orientation": "east",
+            "x": 6,
+            "z": 7,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
-                            "id": 1185
+                            "id": 1184
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1186
                         },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1185
+                        }
+                    ]
+                },
+                {
+                    "y": 1.3333333333333333,
+                    "buckets": [
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -1360,12 +1385,7 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1188
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -1375,107 +1395,127 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1190
-                        },
+                        }
+                    ]
+                },
+                {
+                    "y": 2.6666666666666665,
+                    "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1191
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1192
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
+                        },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1193
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1194
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1195
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1196
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1197
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1198
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1199
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1200
                         }
                     ]
                 }
             ]
         },
         {
-            "orientation": "west",
-            "x": 7,
+            "orientation": "east",
+            "x": 6,
+            "z": 9,
+            "width": 2,
+            "depth": 1,
+            "height": 4,
+            "shelves": [
+                {
+                    "y": 0.0,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1194
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1195
+                        }
+                    ]
+                },
+                {
+                    "y": 1.3333333333333333,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1196
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1197
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1198
+                        }
+                    ]
+                },
+                {
+                    "y": 2.6666666666666665,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1199
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1200
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1201
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orientation": "east",
+            "x": 6,
             "z": 11,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
                         {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1201
-                        },
-                        {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1202
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1203
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1204
                         }
                     ]
                 },
                 {
-                    "y": 1,
+                    "y": 1.3333333333333333,
                     "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1204
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -1485,64 +1525,94 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1206
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1207
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1208
                         }
                     ]
                 },
                 {
-                    "y": 2,
+                    "y": 2.6666666666666665,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1209
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1208
+                        },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1207
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orientation": "east",
+            "x": 6,
+            "z": 13,
+            "width": 2,
+            "depth": 1,
+            "height": 4,
+            "shelves": [
+                {
+                    "y": 0.0,
+                    "buckets": [
+                        {
+                            "width": 0.3333333333333333,
                             "height": 0.33,
                             "id": 1210
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
                             "id": 1211
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1212
                         }
                     ]
                 },
                 {
-                    "y": 3,
+                    "y": 1.3333333333333333,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1213
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1214
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1215
+                        }
+                    ]
+                },
+                {
+                    "y": 2.6666666666666665,
+                    "buckets": [
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1217
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1218
+                        },
+                        {
+                            "width": 0.3333333333333333,
                             "height": 0.33,
                             "id": 1216
                         }
@@ -1552,125 +1622,120 @@
         },
         {
             "orientation": "west",
-            "x": 7,
-            "z": 13,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1217
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1218
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1219
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1220
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1221
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1222
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1223
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1224
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1225
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1226
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1227
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1228
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1229
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1230
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1231
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1232
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "east",
-            "x": 8,
+            "x": 11,
             "z": 5,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1219
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1220
+                        }
+                    ]
+                },
+                {
+                    "y": 1.3333333333333333,
+                    "buckets": [
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1221
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1223
+                        },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1222
+                        }
+                    ]
+                },
+                {
+                    "y": 2.6666666666666665,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1224
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1225
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orientation": "west",
+            "x": 11,
+            "z": 7,
+            "width": 2,
+            "depth": 1,
+            "height": 4,
+            "shelves": [
+                {
+                    "y": 0.0,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1228
+                        },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1226
+                        },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1227
+                        }
+                    ]
+                },
+                {
+                    "y": 1.3333333333333333,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1231
+                        },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1229
+                        },
+                        {
+                            "width": 0.3333333333333333,
+                            "height": 0.33,
+                            "id": 1230
+                        }
+                    ]
+                },
+                {
+                    "y": 2.6666666666666665,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1232
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -1685,102 +1750,117 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1235
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1236
-                        }
-                    ]
-                },
-                {
-                    "y": 1.3333333333333333,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1237
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1238
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1239
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1240
-                        }
-                    ]
-                },
-                {
-                    "y": 2.6666666666666665,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1241
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1242
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1243
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1244
                         }
                     ]
                 }
             ]
         },
         {
-            "orientation": "east",
-            "x": 8,
-            "z": 7,
+            "orientation": "west",
+            "x": 11,
+            "z": 9,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
-                            "id": 1245
+                            "id": 1238
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
-                            "id": 1246
+                            "id": 1237
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.3333333333333333,
                             "height": 0.33,
-                            "id": 1247
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1248
+                            "id": 1236
                         }
                     ]
                 },
                 {
-                    "y": 1.3333333333333333,
+                    "y": 1.0,
                     "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1239
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1240
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1241
+                        }
+                    ]
+                },
+                {
+                    "y": 2.0,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1242
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1243
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1244
+                        }
+                    ]
+                },
+                {
+                    "y": 3.0,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1245
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1246
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1247
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "orientation": "west",
+            "x": 11,
+            "z": 11,
+            "width": 2,
+            "depth": 1,
+            "height": 4,
+            "shelves": [
+                {
+                    "y": 0.0,
+                    "buckets": [
+                        {
+                            "width": 0.5,
+                            "height": 0.33,
+                            "id": 1248
+                        },
                         {
                             "width": 0.5,
                             "height": 0.33,
@@ -1795,11 +1875,21 @@
                             "width": 0.5,
                             "height": 0.33,
                             "id": 1251
-                        },
+                        }
+                    ]
+                },
+                {
+                    "y": 1.3333333333333333,
+                    "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1252
+                        },
+                        {
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1253
                         }
                     ]
                 },
@@ -1807,829 +1897,74 @@
                     "y": 2.6666666666666665,
                     "buckets": [
                         {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1253
-                        },
-                        {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1254
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1255
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1256
                         }
                     ]
                 }
             ]
         },
         {
-            "orientation": "east",
-            "x": 8,
-            "z": 9,
+            "orientation": "west",
+            "x": 11,
+            "z": 13,
             "width": 2,
             "depth": 1,
             "height": 4,
             "shelves": [
                 {
-                    "y": 0,
+                    "y": 0.0,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
-                            "id": 1257
+                            "id": 1256
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
+                            "height": 0.33,
+                            "id": 1257
+                        }
+                    ]
+                },
+                {
+                    "y": 1.3333333333333333,
+                    "buckets": [
+                        {
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1258
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1259
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1260
                         }
                     ]
                 },
                 {
-                    "y": 1.3333333333333333,
+                    "y": 2.6666666666666665,
                     "buckets": [
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1261
                         },
                         {
-                            "width": 0.5,
+                            "width": 0.6666666666666666,
                             "height": 0.33,
                             "id": 1262
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1263
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1264
-                        }
-                    ]
-                },
-                {
-                    "y": 2.6666666666666665,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1265
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1266
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1267
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1268
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "east",
-            "x": 8,
-            "z": 11,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1269
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1270
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1271
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1272
-                        }
-                    ]
-                },
-                {
-                    "y": 1.3333333333333333,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1273
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1274
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1275
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1276
-                        }
-                    ]
-                },
-                {
-                    "y": 2.6666666666666665,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1277
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1278
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1279
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1280
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "east",
-            "x": 8,
-            "z": 13,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1281
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1282
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1283
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1284
-                        }
-                    ]
-                },
-                {
-                    "y": 1.3333333333333333,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1285
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1286
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1287
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1288
-                        }
-                    ]
-                },
-                {
-                    "y": 2.6666666666666665,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1289
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1290
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1291
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1292
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "west",
-            "x": 13,
-            "z": 5,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1293
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1294
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1295
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1296
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1297
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1298
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1299
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1300
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1301
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1302
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1303
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1304
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1305
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1306
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1307
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1308
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "west",
-            "x": 13,
-            "z": 7,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1309
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1310
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1311
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1312
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1313
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1314
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1315
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1316
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1317
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1318
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1319
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1320
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1321
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1322
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1323
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1324
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "west",
-            "x": 13,
-            "z": 9,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1325
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1326
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1327
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1328
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1329
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1330
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1331
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1332
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1333
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1334
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1335
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1336
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1337
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1338
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1339
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1340
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "west",
-            "x": 13,
-            "z": 11,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1341
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1342
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1343
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1344
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1345
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1346
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1347
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1348
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1349
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1350
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1351
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1352
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1353
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1354
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1355
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1356
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "orientation": "west",
-            "x": 13,
-            "z": 13,
-            "width": 2,
-            "depth": 1,
-            "height": 4,
-            "shelves": [
-                {
-                    "y": 0,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1357
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1358
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1359
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1360
-                        }
-                    ]
-                },
-                {
-                    "y": 1,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1361
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1362
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1363
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1364
-                        }
-                    ]
-                },
-                {
-                    "y": 2,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1365
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1366
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1367
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1368
-                        }
-                    ]
-                },
-                {
-                    "y": 3,
-                    "buckets": [
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1369
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1370
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1371
-                        },
-                        {
-                            "width": 0.5,
-                            "height": 0.33,
-                            "id": 1372
                         }
                     ]
                 }

@@ -77,6 +77,7 @@ export class Warehouse {
 		});
 
 		const groundMesh = new THREE.Mesh(this.planeGeometry, groundMaterial);
+		groundMesh.name = "Ground";
 		groundMesh.scale.set(dim.width, dim.depth, 1);
 		groundMesh.rotateX(-Math.PI / 2);
 
@@ -92,23 +93,27 @@ export class Warehouse {
 		});
 
 		const wallNegX = new THREE.Mesh(this.planeGeometry, wallMaterial);
+		wallNegX.name = "eastWall";
 		wallNegX.scale.set(dim.depth, dim.height, 1);
 		wallNegX.translateY(dim.height / 2);
 		wallNegX.translateX(-dim.width / 2);
 		wallNegX.rotateY(Math.PI / 2);
 
 		const wallPosX = new THREE.Mesh(this.planeGeometry, wallMaterial);
+		wallPosX.name = "westWall";
 		wallPosX.scale.set(dim.depth, dim.height, 1);
 		wallPosX.translateY(dim.height / 2);
 		wallPosX.translateX(dim.width / 2);
 		wallPosX.rotateY(-Math.PI / 2);
 
 		const wallNegZ = new THREE.Mesh(this.planeGeometry, wallMaterial);
+		wallNegZ.name = "southWall";
 		wallNegZ.scale.set(dim.width, dim.height, 1);
 		wallNegZ.translateY(dim.height / 2);
 		wallNegZ.translateZ(-dim.depth / 2);
 
 		const wallPosZ = new THREE.Mesh(this.planeGeometry, wallMaterial);
+		wallPosZ.name = "northWall";
 		wallPosZ.scale.set(dim.width, dim.height, 1);
 		wallPosZ.translateY(dim.height / 2);
 		wallPosZ.translateZ(dim.depth / 2);
