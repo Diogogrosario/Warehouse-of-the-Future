@@ -56,7 +56,7 @@ The specification for this API is available on multiple sources:
 
 - [Main source -- YAML format](./docs/api/api.yaml) - always the most up-to-date
   version in YAML format.
-- [Main source -- HTML format](./docs/api/api.yaml) - rendering of the YAML
+- [Main source -- HTML format](./docs/api/api.html) - rendering of the YAML
   format to interactable HTML.
 - [Secondary source -- Swagger Hub](https://app.swaggerhub.com/apis/cucx/mesh-communication_api/1.0.3) -
   remotelly available (hosted on Swagger Hub). Might not always be up-to-date.
