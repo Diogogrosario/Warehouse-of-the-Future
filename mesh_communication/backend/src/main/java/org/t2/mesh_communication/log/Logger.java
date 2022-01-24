@@ -104,7 +104,7 @@ public class Logger {
         // remove old ticks from history
         Set<Integer> oldTicks =
                 this.history.keySet().stream()
-                        .filter(key -> key >= tick)
+                        .filter(key -> key > tick)
                         .collect(Collectors.toSet());
 
         for (int t : oldTicks) history.remove(t);

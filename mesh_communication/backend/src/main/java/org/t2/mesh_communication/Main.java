@@ -110,6 +110,7 @@ public class Main {
 
     public void advanceTick(int n) {
         for (int i = 0; i < n; ++i) {
+            this.saveState(); // store state
             System.out.println("Tick " + Logger.getInstance().getTick());
             if (!meshGrid.update()) System.out.println("No updates...");
 
@@ -118,22 +119,20 @@ public class Main {
 
             Logger.getInstance().nextTick();
             batteryObserver.reset(); // reset tick battery consumption count
-
-            // store state
-            this.saveState();
         }
     }
 
-    public void goBackTick(int n) {
+    public int goBackTick(int n) {
         Logger logger = Logger.getInstance();
         int tick = logger.getTick() - n;
         if (tick < 0) {
-            System.out.println("Can't go back that many ticks.");
-            return;
+            System.out.println("Can't undo that many ticks.");
+            return -1;
         }
         this.loadState(n);
         logger.resetToTick(tick);
         System.out.println("Reset to tick " + tick);
+        return 0;
     }
 
     public void loadState(int n) {

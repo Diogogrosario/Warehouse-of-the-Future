@@ -260,7 +260,8 @@ public class API implements ErrorController {
                 this.main.advanceTick(nTicks);
                 break;
             case "backwards":
-                this.main.goBackTick(nTicks);
+                int result = this.main.goBackTick(nTicks);
+                if (result < 0) return "Invalid time flow: Can't undo that many ticks.";
                 break;
             default:
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
