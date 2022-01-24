@@ -9,6 +9,7 @@ import ReportList from "./components/report/ReportList";
 import TabPanel from "./components/TabPanel";
 import NoResultsOverlay from "./components/NoResultsOverlay";
 import theme from "./styles/theme";
+import Simulation from "./components/simulation/Simulation";
 
 export enum FullscreenState {
 	Left,
@@ -23,7 +24,7 @@ const StyledTabPanel = styled(TabPanel)(() => ({
 export default function App() {
 	const mobile = useMediaQuery("(max-width: 800px)");
 
-	const [selectedTab, setSelectedTab] = React.useState(0);
+	const [selectedTab, setSelectedTab] = React.useState(1);
 	const [panelSize, setPanelSize] = React.useState(60);
 	const [dragging, setDragging] = React.useState(false);
 	const [fullscreen, setFullscreen] = React.useState(FullscreenState.Disabled);
@@ -134,7 +135,7 @@ export default function App() {
 								aria-controls="app-tabpanel-0"
 							/>
 							<Tab
-								label="Devices"
+								label="Simulation"
 								id="app-tab-1"
 								className="app-tab"
 								aria-controls="app-tabpanel-1"
@@ -156,7 +157,9 @@ export default function App() {
 							index={1}
 							id="app-tabpanel-1"
 							aria-labelledby="app-tab-1"
-						></StyledTabPanel>
+						>
+							<Simulation />
+						</StyledTabPanel>
 
 						<FullscreenButton
 							fullscreenState={fullscreen}
