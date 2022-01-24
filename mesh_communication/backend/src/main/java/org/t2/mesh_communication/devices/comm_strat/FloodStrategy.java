@@ -1,6 +1,5 @@
 package org.t2.mesh_communication.devices.comm_strat;
 
-import java.util.*;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.command.Command;
@@ -11,7 +10,10 @@ import org.t2.mesh_communication.devices.messages.RequestMessage;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
 
-public class FloodStrategy implements CommunicationStrategy {
+import java.io.Serializable;
+import java.util.*;
+
+public class FloodStrategy implements CommunicationStrategy, Serializable {
     public static final int DEFAULT_TTL = 6;
     public static final int DEFAULT_MSG_FAIL = 0;
 

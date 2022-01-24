@@ -1,5 +1,7 @@
 package org.t2.mesh_communication.config;
 
+import org.t2.mesh_communication.devices.Position;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import org.t2.mesh_communication.devices.Position;
 
 /** Generates a file with sequential ids and random positions. */
 public class LayoutGenerator {

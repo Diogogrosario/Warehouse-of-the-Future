@@ -1,35 +1,37 @@
 package org.t2.mesh_communication.devices.command;
 
-import java.util.Random;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.messages.Message;
 
-public class ReceiveMsgCmd implements Command {
-    /** Who will receive the message * */
-    private final MeshDevice meshDevice;
+import java.io.Serializable;
+import java.util.Random;
 
-    private final boolean fail;
+public class ReceiveMsgCmd implements Command, Serializable {
+  /** Who will receive the message * */
+  private final MeshDevice meshDevice;
 
-    private final Message message;
+  private final boolean fail;
 
-    public ReceiveMsgCmd(MeshDevice md, Message msg, int messageFailure) {
-        this.meshDevice = md;
-        this.message = msg;
-        Random random = new Random();
-        this.fail = random.nextDouble() < (messageFailure / 100.0);
-    }
+  private final Message message;
 
-    /** It's important to try to send the message before the next tick * */
-    @Override
-    public void execute() {
-        if (!this.fail) this.meshDevice.receiveMessage(this.message);
-    }
+  public ReceiveMsgCmd(MeshDevice md, Message msg, int messageFailure) {
+    this.meshDevice = md;
+    this.message = msg;
+    Random random = new Random();
+    this.fail = random.nextDouble() < (messageFailure / 100.0);
+  }
 
-    public Message getMessage() {
-        return message;
-    }
+  /** It's important to try to send the message before the next tick * */
+  @Override
+  public void execute() {
+    if (!this.fail) this.meshDevice.receiveMessage(this.message);
+  }
 
-    public boolean isFailed() {
-        return fail;
-    }
+  public Message getMessage() {
+    return message;
+  }
+
+  public boolean isFailed() {
+    return fail;
+  }
 }

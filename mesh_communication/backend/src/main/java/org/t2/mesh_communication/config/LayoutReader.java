@@ -1,12 +1,13 @@
 package org.t2.mesh_communication.config;
 
-import static org.t2.mesh_communication.config.LayoutGenerator.*;
+import org.t2.mesh_communication.devices.Position;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.*;
-import org.t2.mesh_communication.devices.Position;
+
+import static org.t2.mesh_communication.config.LayoutGenerator.*;
 
 /** Reads ids and positions from genereated layout file and stores them in a hashmap. */
 public class LayoutReader {

@@ -5,7 +5,9 @@ import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.ReplyMessage;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
 
-public class SendMsgCmd implements Command {
+import java.io.Serializable;
+
+public class SendMsgCmd implements Command, Serializable {
     private final MeshDevice meshDevice;
     private final Message message;
 

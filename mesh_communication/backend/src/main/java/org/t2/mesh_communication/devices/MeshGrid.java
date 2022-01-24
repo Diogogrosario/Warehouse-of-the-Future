@@ -1,5 +1,6 @@
 package org.t2.mesh_communication.devices;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Map;
  * Holder of the network devices. Represents the network and distributes the tick update commands to
  * all devices. Can be queried to find devices in a certain range.
  */
-public class MeshGrid {
+public class MeshGrid implements Serializable {
     private MeshDevice orchestrator;
     private List<MeshDevice> devices;
     private int nTicks;

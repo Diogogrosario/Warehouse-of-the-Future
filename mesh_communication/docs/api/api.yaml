@@ -3,7 +3,7 @@ openapi: 3.0.0
 info:
   title: MeshCommunication API
   description: API for mesh communication backend
-  version: 1.0.3
+  version: 1.0.4
 servers:
 - url: /
 paths:
@@ -198,7 +198,7 @@ paths:
       responses:
         "200":
           description: Orchestrator orchestrated
-  /message/send:
+  /messages/send:
     get:
       summary: Get all messages of type send in the current tick
       description: Path that returns, for all message senders of the current tick, the messages of type `send` that were sent by them.
@@ -228,7 +228,7 @@ paths:
                   final: 1
         "500":
           description: Internal Server Error
-  /message/receive:
+  /messages/receive:
     get:
       summary: Get all messages of type receive in the current tick
       description: Path that returns, for all message senders of the current tick, the messages of type `receive` that were sent by them.

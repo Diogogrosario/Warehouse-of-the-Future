@@ -5,16 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.io.*;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.LogRecord;
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,6 +18,18 @@ import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.LogRecord;
 
 @SpringBootApplication
 @RestController
@@ -269,9 +271,9 @@ public class API implements ErrorController {
                 this.main.advanceTick(nTicks);
                 break;
             case "backwards":
-                // TODO: when UNDO ticks is implemented
-                response.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
-                return "Backwards time flow not implemented yet.";
+                int result = this.main.goBackTick(nTicks);
+                if (result < 0) return "Invalid time flow: Can't undo that many ticks.";
+                break;
             default:
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 return "Invalid time flow.";
