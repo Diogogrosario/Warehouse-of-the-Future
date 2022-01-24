@@ -2,11 +2,6 @@ package org.t2.mesh_communication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
 import org.springframework.stereotype.Component;
 import org.t2.mesh_communication.config.*;
 import org.t2.mesh_communication.devices.MeshGrid;
@@ -17,6 +12,9 @@ import org.t2.mesh_communication.devices.components.BatteryObserver;
 import org.t2.mesh_communication.log.Logger;
 import org.t2.mesh_communication.mementos.Caretaker;
 import org.t2.mesh_communication.mementos.Memento;
+
+import java.io.IOException;
+import java.util.*;
 
 @Component
 public class Main {
@@ -49,32 +47,30 @@ public class Main {
         return products;
     }
 
-    public void clearMeshGrid() {
-        this.meshGrid = new MeshGrid(Config.getInstance().orchestratorId);
+    public void prepareGrid(Map<String, Object> jsonObject) throws IOException {
+        LayoutReader layoutReader = new LayoutReader();
+        layoutReader.readJson(jsonObject);
+        HashMap<Integer, Position> devices = layoutReader.getDevices();
+        this.generateMeshGridAndProducts(devices);
     }
 
-    public void clearProducts() {
-        this.products = new ArrayList<>();
-    }
-
-    public void readManifest(String manifestFile) {
-        try {
-            ManifestReader manifestReader = new ManifestReader(manifestFile);
-            manifestReader.read();
-            this.products = manifestReader.getProducts();
-        } catch (Exception e) {
-            System.out.println("Couldn't read manifest file!");
-        }
+    public void prepareGrid() throws IOException {
+        // read devices from layout file
+        LayoutReader layoutReader = new LayoutReader();
+        layoutReader.read();
+        HashMap<Integer, Position> devices = layoutReader.getDevices();
+        this.generateMeshGridAndProducts(devices);
     }
 
     public void prepareGrid(String layoutFile) throws IOException {
         // read devices from layout file
-        LayoutReader layoutReader =
-                (layoutFile != null) ? new LayoutReader(layoutFile) : new LayoutReader();
+        LayoutReader layoutReader = new LayoutReader(layoutFile);
         layoutReader.read();
         HashMap<Integer, Position> devices = layoutReader.getDevices();
+        this.generateMeshGridAndProducts(devices);
+    }
 
-        // add devices (and orchestrator)
+    public void generateMeshGridAndProducts(HashMap<Integer, Position> devices) throws IOException {
         int orchestratorId = this.meshGrid.getOrchestratorId();
         this.orchestrator =
                 new Orchestrator(
@@ -103,8 +99,22 @@ public class Main {
         this.products = manifestReader.getProducts();
     }
 
-    public void prepareGrid() throws IOException {
-        this.prepareGrid(null);
+    public void clearMeshGrid() {
+        this.meshGrid = new MeshGrid(Config.getInstance().orchestratorId);
+    }
+
+    public void clearProducts() {
+        this.products = new ArrayList<>();
+    }
+
+    public void readManifest(String manifestFile) {
+        try {
+            ManifestReader manifestReader = new ManifestReader(manifestFile);
+            manifestReader.read();
+            this.products = manifestReader.getProducts();
+        } catch (Exception e) {
+            System.out.println("Couldn't read manifest file!");
+        }
     }
 
     public void orchestrate() {

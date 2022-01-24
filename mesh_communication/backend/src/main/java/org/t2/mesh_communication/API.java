@@ -5,16 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.io.*;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.LogRecord;
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,6 +18,18 @@ import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.LogRecord;
 
 @SpringBootApplication
 @RestController
@@ -65,8 +67,17 @@ public class API implements ErrorController {
     private void resetStatus() throws IOException {
         this.main.clearMeshGrid();
         this.main.clearProducts();
-        this.main.prepareGrid();
         Main.prepareConfigs();
+        this.main.prepareGrid();
+
+        Logger.getInstance().resetLogger();
+    }
+
+    private void resetStatus(Map<String, Object> jsonObject) throws IOException {
+        this.main.clearMeshGrid();
+        this.main.clearProducts();
+        Main.prepareConfigs();
+        this.main.prepareGrid(jsonObject);
 
         Logger.getInstance().resetLogger();
     }
@@ -434,6 +445,13 @@ public class API implements ErrorController {
 
         response.setStatus(HttpServletResponse.SC_OK);
         return node;
+    }
+
+    @PostMapping("/layout")
+    public String layout(@RequestBody Map<String, Object> jsonObject) throws IOException {
+        this.resetStatus(jsonObject);
+
+        return "Layout successfully posted";
     }
 
     @RequestMapping("/error")

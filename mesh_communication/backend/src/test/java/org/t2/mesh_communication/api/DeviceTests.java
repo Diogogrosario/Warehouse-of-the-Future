@@ -90,7 +90,7 @@ public class DeviceTests {
     @Test
     public void getDevicesTest() {
         String expectedOutput =
-                "[{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}, {\"id\":2,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
+                "[{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1,\"z\":0}}, {\"id\":2,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1,\"z\":0}}]";
         List<JsonNode> output = api.devicesStatus("all", Mockito.mock(HttpServletResponse.class));
 
         String outputString = listToString(output);
@@ -111,7 +111,7 @@ public class DeviceTests {
     @Test
     public void getSpecificDeviceTest() {
         String expectedOutput =
-                "{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
+                "{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1,\"z\":0}}";
         JsonNode output = api.devices(1, Mockito.mock(HttpServletResponse.class));
         assertEquals(expectedOutput, output.toString());
 
@@ -123,7 +123,7 @@ public class DeviceTests {
     @Test
     public void getInRangeDevicesTest() {
         String expectedOutput =
-                "[{\"id\":2,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}]";
+                "[{\"id\":2,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1,\"z\":0}}]";
         List<JsonNode> output = api.devicesInRange(1, Mockito.mock(HttpServletResponse.class));
 
         String outputString = listToString(output);
@@ -145,11 +145,11 @@ public class DeviceTests {
         assertEquals(1, output.get("2").size());
 
         String expectedDevice2 =
-                "{\"id\":2,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
+                "{\"id\":2,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1,\"z\":0}}";
         assertEquals(expectedDevice2, output.get("1").get(0).toString());
 
         String expectedDevice1 =
-                "{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1}}";
+                "{\"id\":1,\"battery_max\":50,\"battery_level\":50,\"position\":{\"x\":1,\"y\":1,\"z\":0}}";
         assertEquals(expectedDevice1, output.get("2").get(0).toString());
     }
 }

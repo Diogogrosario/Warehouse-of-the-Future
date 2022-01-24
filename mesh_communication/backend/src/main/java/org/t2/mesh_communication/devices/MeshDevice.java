@@ -1,15 +1,16 @@
 package org.t2.mesh_communication.devices;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.ReplyMessage;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /** A device on a mesh Network. Can be an orchestrator or a normal, passive device. */
 public abstract class MeshDevice implements Updatable, Serializable {
