@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { Grid, styled, Tab, Tabs, useMediaQuery } from "@mui/material";
+import React, { Suspense, useEffect } from "react";
+import { Grid, styled, Tab, Tabs, Typography, useMediaQuery } from "@mui/material";
+import { NetworkError, NetworkErrorBoundary } from "rest-hooks";
 
 import FullscreenButton from "./components/FullscreenButton";
 import PanelDivider from "./components/PanelDivider";
@@ -20,6 +21,35 @@ export enum FullscreenState {
 const StyledTabPanel = styled(TabPanel)(() => ({
 	height: "100%",
 }));
+
+interface AsyncBoundaryProps {
+	children: React.ReactNode;
+	loadingFallback?: React.ReactElement;
+	errorFallback?: React.ComponentType<{ error: NetworkError }>;
+}
+
+const AsyncBoundary: React.FC<AsyncBoundaryProps> = ({
+	children,
+	loadingFallback,
+	errorFallback,
+}: AsyncBoundaryProps) => {
+	return (
+		<Suspense fallback={loadingFallback ?? <span>loading</span>}>
+			<NetworkErrorBoundary
+				fallbackComponent={
+					errorFallback ??
+					(({ error }: { error: NetworkError }) => (
+						<div>
+							{error.status} {error.response?.statusText}
+						</div>
+					))
+				}
+			>
+				{children}
+			</NetworkErrorBoundary>
+		</Suspense>
+	);
+};
 
 export default function App() {
 	const mobile = useMediaQuery("(max-width: 800px)");
@@ -149,7 +179,54 @@ export default function App() {
 							id="app-tabpanel-0"
 							aria-labelledby="app-tab-0"
 						>
-							<ReportList />
+							<AsyncBoundary
+								loadingFallback={
+									<div
+										style={{
+											display: "flex",
+											flexDirection: "column",
+											alignItems: "center",
+											justifyContent: "center",
+											height: "100%",
+										}}
+									>
+										<div
+											style={{
+												width: "160px",
+												height: "160px",
+												background: `url("assets/bugcatEggRoll.gif") no-repeat center center`,
+											}}
+										/>
+										<Typography variant="h4" component="h6">
+											Loading reports...
+										</Typography>
+									</div>
+								}
+								errorFallback={() => (
+									<div
+										style={{
+											display: "flex",
+											flexDirection: "column",
+											alignItems: "center",
+											justifyContent: "center",
+											height: "100%",
+										}}
+									>
+										<div
+											style={{
+												width: "160px",
+												height: "160px",
+												background: `url("assets/bugcatShock.webp") no-repeat center center`,
+											}}
+										/>
+										<Typography variant="h4" component="h6">
+											Connection failed
+										</Typography>
+									</div>
+								)}
+							>
+								<ReportList />
+							</AsyncBoundary>
 						</StyledTabPanel>
 						<StyledTabPanel
 							value={selectedTab}
