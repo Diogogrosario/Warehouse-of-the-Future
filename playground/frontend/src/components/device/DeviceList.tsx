@@ -15,7 +15,7 @@ export default function DeviceList(): React.ReactElement {
 	}, []);
 
 	return (
-		<List sx={{ overflow: "auto" }}>
+		<List style={{ overflow: "auto", height: "100%" }}>
 			{devices.map((device) => (
 				<ListItem key={device.id}>
 					<Device id={device.id} />
