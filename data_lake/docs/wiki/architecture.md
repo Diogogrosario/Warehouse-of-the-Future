@@ -14,7 +14,7 @@ Tools used:
 
 -   Python: Used in Flask and the populate-worker microservice.
 
--   Swagger: Interface Description LAnguage for describing RESTful APIs. It is used to document the API developed with Flask.
+-   Swagger: Interface Description Language for describing RESTful APIs. It is used to document the API developed with Flask.
 
 -   MongoDB: Document-oriented database which will be responsible for storing the data.
 
