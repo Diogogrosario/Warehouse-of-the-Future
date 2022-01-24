@@ -14,6 +14,7 @@ export class BucketFactory {
 	private readonly sceneManager;
 
 	private readonly material: THREE.Material;
+	private readonly deviceMaterial: THREE.Material;
 
 	private readonly geometries: Map<BucketIdentifier, THREE.BufferGeometry> = new Map();
 
@@ -24,6 +25,7 @@ export class BucketFactory {
 
 		// 0x606c2e
 		this.material = new THREE.MeshPhongMaterial({ color: 0x151226 });
+		this.deviceMaterial = new THREE.MeshPhongMaterial({ color: 0xcc3204 });
 	}
 
 	public static fixBucketWidths(config: WarehouseStructure) {
@@ -51,6 +53,26 @@ export class BucketFactory {
 
 		mesh.geometry = geometry;
 		mesh.material = this.material;
+	}
+
+	public addDeviceToExistingMesh(width: number, depth: number, height: number, mesh: THREE.Mesh){
+		const identifier = {
+			width: width,
+			depth: depth,
+			height: height
+		}
+
+		let geometry = this.geometries.get(identifier);
+		if (!geometry) {
+			geometry = this.generateDevice(identifier);
+		}
+
+		mesh.geometry = geometry;
+		mesh.material = this.deviceMaterial;
+	}
+
+	private generateDevice(identifier: BucketIdentifier): THREE.BufferGeometry {
+		return new THREE.BoxGeometry(identifier.width, identifier.height, identifier.depth);
 	}
 
 	private generateBucket(identifier: BucketIdentifier): THREE.BufferGeometry {

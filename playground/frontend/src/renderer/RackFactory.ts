@@ -4,6 +4,7 @@ import { BucketFactory } from "./BucketFactory";
 import { WarehouseDimensions } from "./Warehouse";
 import SceneManager from "./SceneManager";
 import { SpaceEvenly } from "./utils/Spacing";
+import { Device } from "./Device";
 
 export interface BucketConfig {
 	height?: number;
@@ -61,6 +62,8 @@ export class RackFactory {
 	private readonly shelfGeometries: Map<ShelvesIdentifier, THREE.BufferGeometry> = new Map();
 
 	private readonly bucketManager: BucketFactory;
+
+	private readonly devices: Map<number, Device> = new Map();
 
 	constructor(sceneManager: SceneManager, bucketManager: BucketFactory) {
 		this.bucketManager = bucketManager;
@@ -176,7 +179,24 @@ export class RackFactory {
 
 				this.bucketManager.addBucketToExistingMesh(bconfig.width - 0.05, config.depth - 0.05, bheight, bucket);
 
+				const device = new THREE.Mesh();
+
+				device.name = "Device  " + bconfig.id;
+
+				device.rotateX(RackFactory.shelfAngle);
+
+				device.translateX(RackFactory.frameThickness + spacing.position(i));
+				device.translateY(bheight / 2);
+				device.translateY(RackFactory.shelfEdgeHeight);
+				device.translateZ(config.depth / 2);
+
+				device.translateY(bheight / 2)
+				device.translateZ(config.depth / 2)
+				this.devices.set(bconfig.id, new Device(bconfig.id, device))
+				this.bucketManager.addDeviceToExistingMesh(0.1, 0.1, 0.1, device);
+
 				shelf.add(bucket);
+				shelf.add(device);
 			}
 		}
 	}
