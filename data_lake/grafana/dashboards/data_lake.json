@@ -1,0 +1,1630 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "target": {
+                    "limit": 100,
+                    "matchAny": false,
+                    "tags": [],
+                    "type": "dashboard"
+                },
+                "type": "dashboard"
+            }
+        ]
+    },
+    "description": "Data lake dashboard.",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 2,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+        {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 9,
+            "panels": [],
+            "title": "Cart",
+            "type": "row"
+        },
+        {
+            "datasource": null,
+            "description": "Cart start time.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 0,
+                "y": 1
+            },
+            "id": 4,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^start_time$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "start_time",
+                            "text": "start_time",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/cart",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Cart Start Time",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "description": "Cart end time.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 4,
+                "y": 1
+            },
+            "id": 5,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^end_time$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "end_time",
+                            "text": "end_time",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/cart",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Cart End Time",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "description": "Orchestrator position, in the form [x, y, z].",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "super-light-orange",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 5,
+                "x": 8,
+                "y": 1
+            },
+            "id": 12,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^position$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "position",
+                            "text": "position",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/orchestrator",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Orchestrator [x, y, z] Position",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "description": "Cart speed, in cm/s.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "light-blue",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 0,
+                "y": 6
+            },
+            "id": 6,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^speed$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "speed",
+                            "text": "speed",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/cart",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Cart Speed (cm/s)",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "description": "Cart position, in the form [x, y].",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "light-purple",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 4,
+                "y": 6
+            },
+            "id": 7,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "/^start_position$/",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [
+                        {
+                            "selector": "start_position",
+                            "text": "start_position",
+                            "type": "string"
+                        }
+                    ],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/globalData/cart",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Cart Start [x, y] Position",
+            "type": "stat"
+        },
+        {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 11
+            },
+            "id": 14,
+            "panels": [],
+            "title": "Layouts",
+            "type": "row"
+        },
+        {
+            "datasource": null,
+            "description": "Racks information, namely its id and width.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "width"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "none"
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "width (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "super-light-orange",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 7,
+                "x": 0,
+                "y": 12
+            },
+            "id": 16,
+            "options": {
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": false,
+                        "displayName": "id"
+                    }
+                ]
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/racks",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Racks",
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "description": "Shelves information, namely its id, height, and associated rack_id.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "height"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "none"
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "height (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 12,
+                "x": 7,
+                "y": 12
+            },
+            "id": 17,
+            "options": {
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "height (cm)"
+                    }
+                ]
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/shelves",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Shelves",
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "description": "Buckets information, namely its id, width, height, and length (in cm), quantity, position [x, y, z] (m), and its associated item_id and shelf_id.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "height"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "none"
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "height (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "width"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "super-light-orange",
+                                    "mode": "fixed"
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "width (cm)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "length"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-purple",
+                                    "mode": "fixed"
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "length (cm)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "position"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "position [x, y, z] (m)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "quantity"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "mode": "thresholds"
+                                }
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "dark-red",
+                                            "value": null
+                                        },
+                                        {
+                                            "color": "light-orange",
+                                            "value": 1
+                                        },
+                                        {
+                                            "color": "semi-dark-green",
+                                            "value": 2
+                                        },
+                                        {
+                                            "color": "dark-green",
+                                            "value": 3
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "max",
+                                "value": 3
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 19,
+                "x": 0,
+                "y": 21
+            },
+            "id": 18,
+            "options": {
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "quantity"
+                    }
+                ]
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/buckets",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Buckets",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {},
+                        "indexByName": {
+                            "height": 2,
+                            "id": 0,
+                            "item_id": 6,
+                            "length": 3,
+                            "position": 5,
+                            "quantity": 4,
+                            "shelf_id": 7,
+                            "width": 1
+                        },
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "description": "Items information, namely the id, designation, width, height and length (in cm), the weight (in g) and the quantity.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "width"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "max",
+                                "value": 30
+                            },
+                            {
+                                "id": "color"
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "width (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "super-light-orange",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "height"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "max",
+                                "value": 30
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "mode": "thresholds"
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "height (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "length"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "max",
+                                "value": 95
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "length (cm)"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "light-purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "weight"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "mode": "continuous-GrYlRd"
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "weight (cm)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "designation"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.filterable",
+                                "value": true
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "quantity"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "gradient-gauge"
+                            },
+                            {
+                                "id": "color"
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "dark-red",
+                                            "value": null
+                                        },
+                                        {
+                                            "color": "light-orange",
+                                            "value": 1
+                                        },
+                                        {
+                                            "color": "semi-dark-green",
+                                            "value": 2
+                                        },
+                                        {
+                                            "color": "dark-green",
+                                            "value": 3
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "max",
+                                "value": 3
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 19,
+                "x": 0,
+                "y": 31
+            },
+            "id": 20,
+            "options": {
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "designation"
+                    }
+                ]
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/stock/",
+                    "url_options": {
+                        "data": "",
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Stock",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {}
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "description": "Layouts data, namely its id, list of bucket ids, and timestamp.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "time"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "dateTimeAsIso"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "buckets"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "buckets (list of ids)"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 9,
+                "x": 0,
+                "y": 41
+            },
+            "id": 22,
+            "options": {
+                "showHeader": true
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/layouts",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Layouts",
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "description": "Devices data, namely its id, associated bucket id, and sensor id.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 10,
+                "x": 9,
+                "y": 41
+            },
+            "id": 24,
+            "options": {
+                "showHeader": true
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/devices",
+                    "url_options": {
+                        "data": "",
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Devices",
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "description": "Sensors data, namely its id, associated device id, movement records, and staff_contacts.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 19,
+                "x": 0,
+                "y": 48
+            },
+            "id": 25,
+            "options": {
+                "showHeader": true
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/sensors",
+                    "url_options": {
+                        "data": "",
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Sensors",
+            "type": "table"
+        },
+        {
+            "datasource": null,
+            "description": "Manifests data, namely its id, associated items, timestamp, and staff id.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "time"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "time: YYYY-MM-DD HH:MM:SS"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 19,
+                "x": 0,
+                "y": 54
+            },
+            "id": 26,
+            "options": {
+                "showHeader": true
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "table",
+                    "global_query_id": "",
+                    "refId": "A",
+                    "root_selector": "",
+                    "source": "url",
+                    "type": "json",
+                    "url": "http://backend:5000/manifests",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    }
+                }
+            ],
+            "title": "Manifests",
+            "type": "table"
+        },
+        {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 60
+            },
+            "id": 11,
+            "panels": [],
+            "title": "Staff",
+            "type": "row"
+        },
+        {
+            "datasource": null,
+            "description": "Employee data.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "displayMode": "auto",
+                        "filterable": true
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "dateTimeAsIso"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "birth_date"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "time: DD/MM/YYYY"
+                            },
+                            {
+                                "id": "mappings",
+                                "value": []
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "height"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.displayMode",
+                                "value": "auto"
+                            },
+                            {
+                                "id": "custom.displayMode",
+                                "value": "basic"
+                            },
+                            {
+                                "id": "unit"
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "height (cm)"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "name"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "id"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 19,
+                "x": 0,
+                "y": 61
+            },
+            "id": 2,
+            "options": {
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "8.2.6",
+            "targets": [
+                {
+                    "columns": [],
+                    "filters": [],
+                    "format": "time_series",
+                    "global_query_id": "",
+                    "group": [],
+                    "metricColumn": "none",
+                    "rawQuery": false,
+                    "rawSql": "SELECT\n  timestamp AS \"time\",\n  value\nFROM example_table\nWHERE\n  $__timeFilter(timestamp)\nORDER BY timestamp",
+                    "refId": "A",
+                    "root_selector": "",
+                    "select": [
+                        [
+                            {
+                                "params": ["value"],
+                                "type": "column"
+                            }
+                        ]
+                    ],
+                    "source": "url",
+                    "table": "example_table",
+                    "timeColumn": "timestamp",
+                    "timeColumnType": "datetime",
+                    "type": "json",
+                    "url": "http://backend:5000/staff",
+                    "url_options": {
+                        "data": "",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": ""
+                            },
+                            {
+                                "key": "header-key",
+                                "value": "header-value"
+                            }
+                        ],
+                        "method": "GET"
+                    },
+                    "where": [
+                        {
+                            "name": "$__timeFilter",
+                            "params": [],
+                            "type": "macro"
+                        }
+                    ]
+                }
+            ],
+            "title": "Staff",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "id": true
+                        },
+                        "indexByName": {
+                            "birth_date": 2,
+                            "height": 3,
+                            "id": 0,
+                            "name": 1
+                        },
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "table"
+        }
+    ],
+    "refresh": "",
+    "schemaVersion": 32,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-24h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Data Lake",
+    "uid": "BwcXP3cnz",
+    "version": 39
+}

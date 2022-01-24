@@ -1,0 +1,48 @@
+name: T3 - Lint and Check Formatting
+
+on:
+  pull_request:
+    branches: [t3_development]
+  push:
+    branches: [t3_development]
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playground/frontend
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+      - name: Install dependencies
+        run: yarn
+      - name: Lint Frontend
+        run: yarn lint
+      - name: Check Formatting Frontend
+        if: always()
+        run: yarn check-format
+
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playground/backend
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+      - name: Install dependencies
+        run: yarn
+      - name: Lint Backend
+        run: yarn lint
+      - name: Check Formatting Backend
+        if: always()
+        run: yarn check-format

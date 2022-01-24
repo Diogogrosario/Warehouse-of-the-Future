@@ -56,7 +56,7 @@ The specification for this API is available on multiple sources:
 
 - [Main source -- YAML format](./docs/api/api.yaml) - always the most up-to-date
   version in YAML format.
-- [Main source -- HTML format](./docs/api/api.yaml) - rendering of the YAML
+- [Main source -- HTML format](./docs/api/api.html) - rendering of the YAML
   format to interactable HTML.
 - [Secondary source -- Swagger Hub](https://app.swaggerhub.com/apis/cucx/mesh-communication_api/1.0.3) -
   remotelly available (hosted on Swagger Hub). Might not always be up-to-date.
@@ -78,8 +78,9 @@ The backend is tested using Unit-tests and Mutation tests.
 
 ### Frontend
 
-The frontend is tested using integration tests, using flutter-gherkin. We're
-using the experimental backend
+The frontend is tested using acceptance tests, using
+[Flutter gherkin](https://github.com/jonsamwell/flutter_gherkin). We're using
+the experimental backend
 [integration test](https://docs.flutter.dev/testing/integration-tests), instead
 of the old widget driver. Since we are using flutter web, there is no need for
 an android emulator in our project. As such, we use

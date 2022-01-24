@@ -1,0 +1,25 @@
+{
+	"dimensions": {
+		"width": 1,
+		"height": 2,
+		"depth": 1
+	},
+	"shelves": [
+		{
+			"orientation": "north",
+			"x": 1,
+			"y": 0,
+			"width": 2,
+			"depth": 1,
+			"height": 4,
+			"levels": [
+				{
+					"height": 1,
+					"bucketType": "regular"
+				},
+				{}
+			]
+		}
+	],
+	"lights": [{}]
+}
