@@ -19,4 +19,3 @@ to the specific documentation of each component for a detailed member list.
 
 Contrbuters should refer to each components' documentation to see details on
 contribution guidelines.
-
