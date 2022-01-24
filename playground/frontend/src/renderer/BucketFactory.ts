@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import SceneManager from "./SceneManager";
+import { WarehouseStructure } from "./Warehouse";
 
 
 // Internal
@@ -24,6 +25,17 @@ export class BucketFactory {
 		// 0x606c2e
 		this.material = new THREE.MeshPhongMaterial({ color: 0x151226 });
 	}
+
+	public static fixBucketWidths(config: WarehouseStructure) {
+		for (const rack of config.racks) {
+			for (const sh of rack.shelves) {
+				for (const bucket of sh.buckets) {
+					bucket.width *= 0.9;
+				}
+			}
+		}
+	}
+
 
 	public addBucketToExistingMesh(width: number, depth: number, height: number, mesh: THREE.Mesh) {
 		const identifier = {

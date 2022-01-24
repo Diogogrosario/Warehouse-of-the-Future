@@ -33,8 +33,8 @@ export class Warehouse {
 		this.warehouse.name = "Warehouse";
 
 		this.sceneManager = sceneManager;
-		const bucketManager = new BucketFactory(sceneManager);
-		this.rackFactory = new RackFactory(sceneManager, bucketManager);
+		const bucketFactory = new BucketFactory(sceneManager);
+		this.rackFactory = new RackFactory(sceneManager, bucketFactory);
 
 		// Load textures
 		const loadManager = new THREE.LoadingManager();
@@ -44,7 +44,10 @@ export class Warehouse {
 			this.sceneManager.invalidate();
 		};
 
+		BucketFactory.fixBucketWidths(structure);	
+
 		this.buildWarehouse(structure);
+		this.sceneManager.invalidate();
 	}
 
 	private buildWarehouse(structure: WarehouseStructure) {

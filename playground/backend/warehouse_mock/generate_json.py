@@ -45,7 +45,9 @@ class Rack:
         sample = [
             lambda: [ Bucket(1/4 * w, 0.33) for _ in range(random.randint(3, 4)) ],
             lambda: [ Bucket(1/3 * w, 0.33) for _ in range(random.randint(2, 3)) ],
-            lambda: random.sample([ Bucket(1/6 * w, 0.33), Bucket(1/6 * w, 0.33), Bucket(1/3 * w, 0.33) ], k=3),
+            lambda: random.sample([ Bucket(1/4 * w, 0.33), Bucket(1/4 * w, 0.33), Bucket(1/3 * w, 0.33) ], k=3),
+            lambda: random.sample([ Bucket(1/4 * w, 0.33), Bucket(3/4 * w, 0.33) ], k=2),
+            lambda: random.sample([ Bucket(1/2 * w, 0.33), Bucket(1/3 * w, 0.33) ], k=2),
         ]
         return random.choice(sample)()
 
