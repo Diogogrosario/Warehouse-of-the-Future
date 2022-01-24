@@ -1,11 +1,6 @@
 ---
 openapi: 3.0.0
 info:
-<<<<<<< HEAD
-=======
-  description: API for mesh communication backend
-  version: 1.0.3
->>>>>>> t2_post_layout
   title: MeshCommunication API
   description: API for mesh communication backend
   version: 1.0.3
@@ -108,7 +103,6 @@ paths:
                     $ref: '#/components/schemas/Device'
                 description: Dictionary with device ids as keys, and arrays of devices as values. Each key maps to an array of all devices that are in range of the device with the same id as the key.
               example:
-<<<<<<< HEAD
                 "1":
                 - device_id: 1
                   battery_level: 68
@@ -136,38 +130,6 @@ paths:
           description: No devices found
         "500":
           description: Internal Server Error
-=======
-                1:
-                  - device_id: 1
-                    battery_level: 68
-                    battery_max: 100
-                    position:
-                      x: 2
-                      y: 1
-                      z: 4
-                  - device_id: 4
-                    battery_level: 23
-                    battery_max: 100
-                    position:
-                      x: 5
-                      y: 2
-                      z: 6
-                23:
-                  - device_id: 13
-                    battery_level: 45
-                    battery_max: 120
-                    position:
-                      x: 5
-                      y: 6
-                      z: 7
-
-        204:
-          description: "No devices found"
-
-        500:
-          description: "Internal Server Error"
-
->>>>>>> t2_post_layout
   /devices/inrange/{id}:
     get:
       summary: gets devices within range of another device
@@ -339,17 +301,12 @@ paths:
                 batCommunication: 20
                 failed: 0
                 ticks: 2
-<<<<<<< HEAD
-=======
-
->>>>>>> t2_post_layout
   /restart:
     post:
       summary: Restart simulation
       description: Path that restarts the simulation
       operationId: restart
       responses:
-<<<<<<< HEAD
         "200":
           description: 'Success: Restarted simulation'
         "500":
@@ -364,31 +321,11 @@ paths:
         content:
           application/json:
             schema:
-=======
-        200:
-          description: "Success: Restarted simulation"
-        500:
-          description: "Internal Server Error"
-
-  /layout:
-    post:
-      summary: Use a specified layout
-      operationId: specifyLayout
-
-      requestBody:
-        description: The layout to use
-        required: true
-        content:
-          application/json:
-            schema:
-              description: "Dictionary with ids of devices as keys and its respective position as value."
->>>>>>> t2_post_layout
               type: object
               additionalProperties:
                 type: array
                 items:
                   $ref: '#/components/schemas/Position'
-<<<<<<< HEAD
               description: Dictionary with ids of devices as keys and its respective position as value.
             example:
               "1":
@@ -403,23 +340,6 @@ paths:
       responses:
         "200":
           description: 'Success: Changed the layout'
-=======
-            example:
-              1:
-                - x: 1
-                  y: 2
-                  z: 3
-              0:
-                - x: 7
-                  y: 4
-                  z: -3
-
-      description: 
-        "Path that changes the current layout"
-      responses:
-        200:
-          description: "Success: Changed the layout"
->>>>>>> t2_post_layout
 components:
   schemas:
     SendMessage:
@@ -442,11 +362,7 @@ components:
           description: ID of the device to receive the message on this hop
         failed:
           type: boolean
-<<<<<<< HEAD
           description: Wether or not the message was lost in the current tick
-=======
-
->>>>>>> t2_post_layout
     Metrics:
       type: object
       properties:
@@ -461,7 +377,6 @@ components:
           description: Number of failures that happened in the system
         ticks:
           type: integer
-<<<<<<< HEAD
           description: Number of tick since the beginning of the communication
     Device:
       allOf:
@@ -475,32 +390,12 @@ components:
             type: integer
           position:
             $ref: '#/components/schemas/Position'
-=======
-
-    Device:
-      allOf:
-        - type: object
-          properties:
-            id:
-              type: integer
-            battery_level:
-              type: integer
-            battery_max:
-              type: integer
-            position:
-              $ref: '#/components/schemas/Position'
-
->>>>>>> t2_post_layout
     Position:
       type: object
       properties:
         x:
           type: integer
-<<<<<<< HEAD
         y:
-=======
-        y: 
->>>>>>> t2_post_layout
           type: integer
         z:
           type: integer
