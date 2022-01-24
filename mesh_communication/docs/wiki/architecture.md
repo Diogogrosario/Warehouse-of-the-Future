@@ -16,9 +16,10 @@ This vertical's architecture is defined in the following component diagram:
 - [OpenJDK 17](https://openjdk.java.net/projects/jdk/17/): The software for the
   simulation of devices' communication and behaviour will be developed using
   Java 17.
-- [Maven](https://maven.apache.org/): To build and manage our Java project more
-  easily, we will be using the Maven build automation tool. This tool allows for
-  better dependency handling and is supported in the most popular IDEs.
+- [Maven 4](https://maven.apache.org/): To build and manage our Java project
+  more easily, we will be using the Maven build automation tool. This tool
+  allows for better dependency handling and is supported in the most popular
+  IDEs.
 - [Javadoc](https://www.oracle.com/java/technologies/javase/javadoc-tool.html):
   API documentation generator for the Java source code.
 - [Jackson](https://github.com/FasterXML/jackson): Java-based library that will
@@ -34,13 +35,15 @@ This vertical's architecture is defined in the following component diagram:
 
 ### Frontend
 
-- [Flutter](https://flutter.dev/): Cross-platform UI toolkit. Used for
+- [Flutter 2](https://flutter.dev/): Cross-platform UI toolkit. Used for
   development of the graphical user interface to visualize the mesh
   communication.
+- [GraphView](https://github.com/nabil6391/graphview): Flutter GraphView is used
+  to display data in graph structures. It can display Tree layout, Directed and
+  Layered graph. Useful for Family Tree, Hierarchy View.
 - [Flutter gherkin](https://github.com/jonsamwell/flutter_gherkin): Acceptance
   tests in gherkin.
 - [Chrome driver](https://chromedriver.chromium.org/downloads): Platform to run
   the acceptance tests on.
 - [Integration test](https://docs.flutter.dev/testing/integration-tests): For
   frontend accpetance tests.
-
