@@ -165,7 +165,7 @@ export default function App() {
 								aria-controls="app-tabpanel-0"
 							/>
 							<Tab
-								label="SimulationAPI"
+								label="Simulation"
 								id="app-tab-1"
 								className="app-tab"
 								aria-controls="app-tabpanel-1"

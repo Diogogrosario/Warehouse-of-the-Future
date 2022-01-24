@@ -165,11 +165,11 @@ const Simulation: React.FC = () => {
 					aria-labelledby="sim-tab-0"
 				>
 					<Metrics
-						ticks={3}
-						prevBatTick={270}
-						currBatTick={300}
-						batCommunication={1000}
-						failed={4}
+						ticks={SimulationAPI.currentTick}
+						prevBatTick={SimulationAPI.lastTickBatteryConsumption}
+						currBatTick={SimulationAPI.currentTickBatteryConsumption}
+						batCommunication={SimulationAPI.totalBatteryConsumption}
+						failed={SimulationAPI.failed}
 					/>
 				</TabPanel>
 

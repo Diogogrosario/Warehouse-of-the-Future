@@ -3,14 +3,15 @@ export class SimulationAPI {
 	public static currentTick = 0;
 	public static lastTickBatteryConsumption = 0;
 	public static currentTickBatteryConsumption = 0;
+	public static totalBatteryConsumption = 0;
+	public static failed = 0;
 
 	static getCurrentDevices() {
 		fetch("http://localhost:8080/devices")
 			.then((response) => response.json())
 			.then((result) => {
 				// UNTESTED
-				if (this.devices[this.currentTick] == undefined)
-					this.devices.push(result)
+				if (this.devices[this.currentTick] == undefined) this.devices.push(result);
 			});
 	}
 
@@ -23,14 +24,15 @@ export class SimulationAPI {
 			body: body,
 		})
 			.then((response) => response)
-			.then((result) => console.log(result));
+			.then(() => {
+				if (this.currentTick == 0) {
+					this.orchestrate();
+				}
 
-		if (this.currentTick == 0) {
-			this.orchestrate();
-		}
-
-		this.currentTick++;
-		this.lastTickBatteryConsumption = this.currentTickBatteryConsumption;
+				this.currentTick++;
+				this.lastTickBatteryConsumption = this.currentTickBatteryConsumption;
+				this.getCurrentMetrics();
+			});
 	}
 
 	public static orchestrate() {
@@ -46,6 +48,8 @@ export class SimulationAPI {
 			response.json()
 		);
 		this.currentTickBatteryConsumption = result["batTick"];
+		this.failed = result["failed"];
+		this.totalBatteryConsumption = result["batCommunication"];
 	}
 
 	static getSendMessages() {
@@ -71,6 +75,8 @@ export class SimulationAPI {
 		this.currentTickBatteryConsumption = 0;
 		this.lastTickBatteryConsumption = 0;
 		this.devices = [];
+		this.totalBatteryConsumption = 0;
+		this.failed = 0;
 
 		this.orchestrate();
 	}
