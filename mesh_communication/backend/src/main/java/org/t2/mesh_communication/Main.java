@@ -148,46 +148,9 @@ public class Main {
 
         if (memento == null) return -1;
 
-        try {
-            ByteArrayOutputStream bo = new ByteArrayOutputStream();
-            ObjectOutputStream o = new ObjectOutputStream(bo);
+        this.orchestrator = memento.deepCopy(memento.getOrchestrator());
+        this.meshGrid = memento.deepCopy(memento.getMeshGrid());
 
-            o.writeObject(memento.getOrchestrator());
-
-            o.close();
-            bo.close();
-
-            ByteArrayInputStream bi = new ByteArrayInputStream(bo.toByteArray());
-            ObjectInputStream i = new ObjectInputStream(bi);
-
-            this.orchestrator = (Orchestrator) i.readObject();
-
-            i.close();
-            bi.close();
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            ByteArrayOutputStream bo = new ByteArrayOutputStream();
-            ObjectOutputStream o = new ObjectOutputStream(bo);
-
-            o.writeObject(memento.getMeshGrid());
-
-            o.close();
-            bo.close();
-
-            ByteArrayInputStream bi = new ByteArrayInputStream(bo.toByteArray());
-            ObjectInputStream i = new ObjectInputStream(bi);
-
-            this.meshGrid = (MeshGrid) i.readObject();
-
-            i.close();
-            bi.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         return 0;
     }
 

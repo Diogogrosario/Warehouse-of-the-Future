@@ -10,27 +10,12 @@ public class Memento {
     private MeshGrid meshGrid;
 
     public Memento(Orchestrator orchestrator, MeshGrid meshGrid) {
-        try {
-            ByteArrayOutputStream bo = new ByteArrayOutputStream();
-            ObjectOutputStream o = new ObjectOutputStream(bo);
+        this.meshGrid = this.deepCopy(meshGrid);
+        this.orchestrator = this.deepCopy(orchestrator);
+    }
 
-            o.writeObject(orchestrator);
-
-            o.close();
-            bo.close();
-
-            ByteArrayInputStream bi = new ByteArrayInputStream(bo.toByteArray());
-            ObjectInputStream i = new ObjectInputStream(bi);
-
-            this.orchestrator = (Orchestrator) i.readObject();
-
-            i.close();
-            bi.close();
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+    public MeshGrid deepCopy(MeshGrid meshGrid) {
+        MeshGrid ret = null;
         try {
             ByteArrayOutputStream bo = new ByteArrayOutputStream();
             ObjectOutputStream o = new ObjectOutputStream(bo);
@@ -43,13 +28,40 @@ public class Memento {
             ByteArrayInputStream bi = new ByteArrayInputStream(bo.toByteArray());
             ObjectInputStream i = new ObjectInputStream(bi);
 
-            this.meshGrid = (MeshGrid) i.readObject();
+            ret = (MeshGrid) i.readObject();
 
             i.close();
             bi.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        return ret;
+    }
+
+    public Orchestrator deepCopy(Orchestrator orchestrator) {
+        Orchestrator ret = null;
+        try {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            ObjectOutputStream o = new ObjectOutputStream(bo);
+
+            o.writeObject(orchestrator);
+
+            o.close();
+            bo.close();
+
+            ByteArrayInputStream bi = new ByteArrayInputStream(bo.toByteArray());
+            ObjectInputStream i = new ObjectInputStream(bi);
+
+            ret = (Orchestrator) i.readObject();
+
+            i.close();
+            bi.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ret;
     }
 
     public Orchestrator getOrchestrator() {
