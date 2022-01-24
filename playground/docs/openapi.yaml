@@ -1,0 +1,567 @@
+openapi: 3.0.0
+
+info:
+  version: "1.0"
+  title: "playground"
+  description: "Backlog specification for playground"
+
+tags: [
+    {
+      name: "Device",
+      description: "Operations on Devices"
+    },
+    {
+      name: "Action",
+      description: "Operations on Actions"
+    },
+    {
+      name: "Report",
+      description: "Operations on Reports"
+    }
+  ]
+
+paths:
+  # ===================== DEVICES =====================
+  /device:
+    get:
+      operationId: D1
+      summary: "D1: Get all Devices."
+      description: Retrieves all devices registered in the playground.
+      tags: ["Device"]
+      responses:
+        "200":
+          description: "Success."
+          content:
+            application/json:
+              schema:
+                description: "Array containing every device."
+                type: array
+                items:
+                  $ref: "#/components/schemas/Device"
+              example:
+                - id: 445A
+                - id: 85B3
+        "404":
+          description: "Error: No registered devices."
+    post:
+      operationId: D2
+      summary: "D2: Create new device"
+      description: "Register a new device."
+      tags: ["Device"]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              id: 40H
+      responses:
+        "200":
+          description: "Success: Device created."
+          content:
+            application/json:
+              schema:
+                description: "The created device."
+                $ref: '#/components/schemas/Device'
+        "400":
+          description: "Error: Bad request."
+    
+    delete:
+      operationId: "D3"
+      summary: "D3: Delete all devices."
+      description: "Delete every device."
+      tags: ["Device"]
+      responses:
+        "200":
+          description: "Success."
+        "500":
+          description: "Error: On delete all devices."
+
+  /device/{id}:
+    get:
+      operationId: D4
+      summary: "D4: Check if device exists."
+      description: "Check if device with specified ID is registered."
+      tags: ["Device"]
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of device"
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Success: Device Exists"
+          content:
+            application/json:
+              schema:
+                description: "The requested Device."
+                $ref: '#/components/schemas/Device'
+              example:
+                id: "470A"
+        "404":
+          description: "Error: No registered device with that ID."
+        "500":
+          description: "Server Error." 
+    delete:
+      operationId: "D5"
+      summary: "D5: Delete device."
+      description: "Delete the device with the specified ID."
+      tags: ["Device"]
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of device"
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Success: Device Deleted."
+        "404":
+          description: "Error: No registered device with that ID."
+        "500":
+          description: "Server Error."
+
+# ===================== ACTIONS =====================
+  /action:
+    get:
+      operationId: A1
+      summary: "A1: Get all Actions."
+      description: Retrieves all actions.
+      tags: ["Action"]
+      responses:
+        "200":
+          description: "Success."
+          content:
+            application/json:
+              schema:
+                description: "Array containing every action."
+                type: array
+                items:
+                  $ref: "#/components/schemas/Action"
+              example:
+                - id: 55
+                  reportId: 40
+                  employeeId: "Pedro"
+                  createdAt: "2021-06-21 08:30"
+                  updatedAt: "2021-06-21 08:30"
+
+                - id: 56
+                  reportId: 40
+                  employeeId: "Mário"
+                  createdAt: "2021-06-21 08:30"
+                  updatedAt: "2021-06-21 08:30"
+        "404":
+          description: "Error: No registered devices."
+    post:
+      operationId: A2
+      summary: "A2: Add new action"
+      description: "Register a new action."
+      tags: ["Action"]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                reportId: 
+                  type: integer
+                  description: "Id of the report to which the action belongs to."
+                description:
+                  type: string
+                  description: "Decription of the action."
+            example:
+              reportId: 40
+              employeeId: "Manuel"
+              description: "Replaced Batery."
+      responses:
+        "200":
+          description: "Success: Device created."
+          content:
+            application/json:
+              schema:
+                description: "The created action."
+                $ref: '#/components/schemas/Action'
+              example:
+                id: 45
+                reportId: 40
+                description: "Replaced batery."
+                employeeId: "Manuel"
+                createdAt: "2021-06-21 08:30"
+                updatedAt: "2021-06-21 08:30"
+        "400":
+          description: "Error: No parameters provided."
+    delete:
+      operationId: "A3"
+      summary: "A3: Delete all actions."
+      description: "Delete every action."
+      tags: ["Action"]
+      responses:
+        "200":
+          description: "Success."
+        "500":
+          description: "Error: No registered actions."
+    
+
+  /action/{id}:
+    get:
+      operationId: A4
+      summary: "A4: Get specific action."
+      description: Retrieve action with the specified ID.
+      tags: ["Action"]
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of action"
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Success."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Action"
+              example:
+                id: 55
+                reportId: 40
+                employeeId: Manuel
+                description: "Replaced batery."
+                createdAt: "2021-12-21 15:30"
+                updatedAt: "2021-12-21 15:30"
+        "404":
+          description: "Error: Action not found."
+        "500":
+          description: "Server Error."
+    put:
+      operationId: A5
+      summary: "A5: Edit Action."
+      description: "Edit a certain action."
+      tags: ["Action"]
+      parameters:
+        - in: query
+          name: "id"
+          description: "ID of action."
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                reportId: 
+                  type: integer
+                  description: "Id of the report to which the action belongs to."
+                description:
+                  type: string
+                  description: "Decription of the action."   
+            example:
+              reportId: 40
+              employeeId: Manuel
+              description: "Replaced display."
+      responses:
+        "200":
+          description: "Success: Action edited."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Action'
+              example:
+                id: 45
+                reportId: 40
+                description: "Replaced display."
+                employeeId: "Manuel"
+                createdAt: "2021-06-21 08:30"
+                updatedAt: "2021-06-21 08:35"
+        "404":
+          description: "Error: Action not found."
+        "500":
+          description: "Server error."
+    delete:
+      operationId: A6
+      summary: "A6: Delete action."
+      description: "Delete the action with the specified ID."
+      tags: ["Action"]
+      parameters:
+        - in: path
+          name: "id"
+          description: "ID of action."
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Success: Action deleted."
+        "404":
+          description: "Error: Action not found."
+        "500":
+          description: "Server error."
+
+
+# ===================== REPORTS =====================   
+  /report:
+      get:
+        operationId: R1
+        summary: "R1: Get all Reports."
+        description: Retrieves all reports.
+        tags: ["Report"]
+        responses:
+          "200":
+            description: "Success."
+            content:
+              application/json:
+                schema:
+                  description: "Array containing every report."
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Report"
+                example:
+                  - id: 45
+                    severity: error
+                    title: Unresponsive
+                    deviceId: "422D"
+                    description: "Device 356A isn't responding."
+                    resolved: false
+                    actions:
+                      - id: 45
+                        reportId: 865
+                        description: "Replaced batery."
+                        employeeId: "Manuel"
+                        createdAt: "2021-06-21 08:30"
+                        updatedAt: "2021-06-21 08:30"
+                      - id: 46
+                        report_id: 865
+                        description: "Replaced display."
+                        employeeId: "Fontão"
+                        createdAt: "2021-06-21 08:35"
+                        updatedAt: "2021-06-21 08:35"
+          "404":
+            description: "Error: No registered devices."
+      post:
+        operationId: R2
+        summary: "R2: Add new report"
+        description: "Register a new report."
+        tags: ["Report"]
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Report"
+              example:
+                severity: error
+                title: Unresponsive
+                description: "Device 356A isn't responding."
+        responses:
+          "200":
+            description: "Success: Report created."
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Report'
+                example:
+                  id: 45
+                  severity: error
+                  deviceId: "422D"
+                  title: Unresponsive
+                  description: "Device 356A isn't responding."
+                  resolved: false
+                  actions: []
+          "400":
+            description: "Error: No parameters provided."
+      delete:
+        operationId: "R3"
+        summary: "R3: Delete all reports."
+        description: "Delete every report."
+        tags: ["Report"]
+        responses:
+          "200":
+            description: "Success."
+          "500":
+            description: "Server error."
+      
+
+  /report/{id}:
+    get:
+      operationId: R4
+      summary: "R4: Get specific report."
+      description: Retrieve report with the specified ID.
+      tags: ["Report"]
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of report"
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Success."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Report"
+              example:
+                id: 55
+                severity: error
+                deviceId: "422D"
+                title: Unresponsive
+                description: "Device A35 isn't responding."
+                resolved: false
+                actions:
+                      - id: 45
+                        reportId: 865
+                        description: "Replaced batery."
+                        employeeId: "Manuel"
+                        createdAt: "2021-06-21 08:30"
+                        updatedAt: "2021-06-21 08:30"
+                      - id: 46
+                        reportId: 865
+                        description: "Replaced display."
+                        employeeId: "Fontão"
+                        createdAt: "2021-06-21 08:35"
+                        updatedAt: "2021-06-21 08:35"
+                createdAt: "2021-12-21 15:30"
+                updatedAt: "2021-12-21 15:30"
+        "404":
+          description: "Error: Report not found."
+    put:
+      operationId: R5
+      summary: "R5: Edit report."
+      description: "Edit a certain report."
+      tags: ["Report"]
+      parameters:
+        - in: query
+          name: "id"
+          description: "ID of report."
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Report"
+            example:
+              severity: warning
+              title: Minor failure
+      responses:
+        "200":
+          description: "Success: Updated report."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              example:
+                id: 55
+                severity: warning
+                deviceId: "422D"
+                title: Minor failure
+                description: "Device A35 isn't responding."
+                resolved: false
+                actions: []
+                createdAt: "2021-12-21 15:30"
+                updatedAt: "2021-12-21 15:30"
+        "404":
+          description: "Error: Can't find report."
+    delete:
+      operationId: R6
+      summary: "R6: Delete report."
+      description: "Delete the report with the specified ID."
+      tags: ["Report"]
+      parameters:
+        - in: path
+          name: "id"
+          description: "ID of report."
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: "Success: Report deleted."
+        "404":
+          description: "Error: Report not found."
+
+components:
+  schemas:
+    Device:
+      type: object
+      properties:
+        id:
+          description: "ID of the Device."
+          type: string
+
+    Action:
+      type: object
+      properties:
+        id: 
+          description: "ID of the Action."
+          type: string
+        reportId:
+          description: "ID of the Report to which the current action refers to."
+          type: string
+        description:
+          description: "Description of the Action."
+          type: string
+        employeeId:
+          description: "ID of the employed that executed the action."
+          type: string
+        createdAt:
+          description: "Timestamp of creation."
+          type: string
+        updatedAt:
+          description: "Timestamp of updation."
+          type: string
+
+
+    Report:
+      type: object
+      properties:
+        id: 
+          description: "ID of the Report."
+          type: string
+        severity:
+          description: "Field indicating the severity of the error."
+          type: string
+          enum:
+            - error
+            - warning
+        title:
+          description: "Title of the Report."
+          type: string
+        description:
+          description: "Description of the Report."
+          type: string
+        deviceId:
+          description: "Id of the device to which the report refers to."
+          type: string
+        resolved:
+          description: "Field indicating if the issue was solved."
+          type: boolean
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Action'
+        createdAt:
+          description: "Timestamp of origin."
+          type: string
+        updatedAt:
+          description:  "Timestamp on edit."
+          type: string
+      
+      
+
+
