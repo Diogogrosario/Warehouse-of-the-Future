@@ -1,19 +1,21 @@
 # Architecture
 
-The following diagram illustrates our vertical's architecture. Due to all the uncertainties about the data that we will receive about the current state of the warehouse, we are assuming that there is a warehouse API, from where we can get all the online and offline data we need. Our REST API will periodically check the state of the warehouse, process the data and store it on a database. Then, our system will make that data available through a frontend and through a queue manager.
+The following diagram illustrates our vertical's architecture.
 
 ![Architecture](images/architecture.png)
 
+Note that the populate-worker microservice aims to populate the database with online and offline data. Periodically, it makes HTTP requests to the generate_data endpoint of our Flask API, which generates data to simulate the warehouse. Then, it populates the database with that generated data.
+
 Tools used:
 
-- Docker: The entire project will be built around Docker. It uses OS-level virtualization to deliver software containers which are isolated from one another and bundle their own software.
+-   Docker: The entire project will be built around Docker. It uses OS-level virtualization to deliver software containers isolated from one another and bundle their software.
 
-- Flask: Micro web framework written in Python. It will be used to build a REST API demonstrated in the picture above.
+-   Flask: Microweb framework written in Python. It is used to build a REST API demonstrated in the picture above.
 
-- Swagger: Interface Description LAnguage for describing RESTful APIs. It will by used to the document the API developed with Flask.
+-   Python: Used in Flask and the populate-worker microservice.
 
-- MongoDB: Document-oriented database which will be responsible for storing the data.
+-   Swagger: Interface Description Language for describing RESTful APIs. It is used to document the API developed with Flask.
 
-- React: Front-end JavaScript library used to build a GUI representative of the data stored. It will contain metrics and plots allowing an easier visualization of the data.
+-   MongoDB: Document-oriented database which will be responsible for storing the data.
 
-- RabbitMQ - Message-broker software used to communicate information to other verticals.
+-   Grafana: Multi-platform open-source analytics and interactive visualization web application. It is used to display all the data present in our database.
