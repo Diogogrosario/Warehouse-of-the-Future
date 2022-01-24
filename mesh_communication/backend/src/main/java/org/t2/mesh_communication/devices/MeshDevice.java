@@ -1,8 +1,5 @@
 package org.t2.mesh_communication.devices;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.components.Battery;
@@ -10,8 +7,13 @@ import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.ReplyMessage;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /** A device on a mesh Network. Can be an orchestrator or a normal, passive device. */
-public abstract class MeshDevice implements Updatable {
+public abstract class MeshDevice implements Updatable, Serializable {
     protected final int id;
     protected final Position pos;
     protected final float range;
@@ -157,5 +159,9 @@ public abstract class MeshDevice implements Updatable {
 
     public Battery getBattery() {
         return battery;
+    }
+
+    public int getNFailedMessages() {
+        return this.commStrat.getNFailedMessages(this);
     }
 }

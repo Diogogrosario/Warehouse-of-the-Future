@@ -260,3 +260,13 @@ In this sprint, the front end will continued to be worked on to provide more fea
   - Make API support for metric retreival and see if it is being displayed correctly;
   - Make API endpoint to change device's characteristics (difficult to complete on their part);
 - Prepare project presentation;
+
+### Sprint replaning
+
+- API:
+  - Submit new layouts;
+    - Generate a random manifest with each layout;
+  - Submit new configs (frontend might not have time to implement this on their part so we will not be able to implement);
+- Make undo command (refer to original sprint planning);
+- Random chance of message sending error;
+- Make gifs for the final presentation;

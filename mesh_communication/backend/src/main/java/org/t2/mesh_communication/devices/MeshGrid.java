@@ -1,5 +1,6 @@
 package org.t2.mesh_communication.devices;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,20 +10,22 @@ import java.util.Map;
  * Holder of the network devices. Represents the network and distributes the tick update commands to
  * all devices. Can be queried to find devices in a certain range.
  */
-public class MeshGrid {
-    public static final int ORCHESTRATOR_ID = 0;
-
+public class MeshGrid implements Serializable {
     private MeshDevice orchestrator;
     private List<MeshDevice> devices;
-
     private int nTicks;
     private int lastTickBat;
+    private int nFailedMsg;
 
-    public MeshGrid() {
+    private final int orchestratorId;
+
+    public MeshGrid(int orchestratorId) {
+        this.orchestratorId = orchestratorId;
         this.orchestrator = null;
         this.devices = new ArrayList<>();
         this.nTicks = 0;
         this.lastTickBat = 0;
+        this.nFailedMsg = 0;
     }
 
     public int getCurrentBat() {
@@ -53,9 +56,13 @@ public class MeshGrid {
         this.devices = devices;
     }
 
+    public int getOrchestratorId() {
+        return this.orchestratorId;
+    }
+
     public void addDevice(MeshDevice d) {
         this.devices.add(d);
-        if (d.getId() == MeshGrid.ORCHESTRATOR_ID) {
+        if (d.getId() == this.orchestratorId) {
             assert this.orchestrator == null;
             this.orchestrator = d;
         }
@@ -83,6 +90,7 @@ public class MeshGrid {
         }
 
         for (MeshDevice md : this.devices) {
+            this.nFailedMsg += md.getNFailedMessages();
             md.nextCommands();
         }
 
@@ -98,11 +106,15 @@ public class MeshGrid {
         }
     }
 
-    public int getTotalInnitialBat() {
+    public int getTotalInitialBat() {
         int total = 0;
         for (MeshDevice md : this.devices) {
             total += md.getBattery().getTotalBattery();
         }
         return total;
+    }
+
+    public int getFailedMessages() {
+        return this.nFailedMsg;
     }
 }

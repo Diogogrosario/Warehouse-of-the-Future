@@ -67,7 +67,7 @@ public class MeshDeviceTests {
 
         device.addCommand(
                 new ReceiveMsgCmd(
-                        device, new RequestMessage(device.getId(), device.getSeqNum(), 0, "")));
+                        device, new RequestMessage(device.getId(), device.getSeqNum(), 0, ""), 0));
         assertEquals(0, device.getCommands().size());
         assertNotEquals(0, device.getCommandsNext().size());
         assertFalse(device.update());
@@ -104,6 +104,6 @@ public class MeshDeviceTests {
         copy = null;
         assertNotEquals(copy, pos);
 
-        assertEquals(Objects.hash(1, 1), pos.hashCode());
+        assertEquals(Objects.hash(1, 1, 0), pos.hashCode());
     }
 }

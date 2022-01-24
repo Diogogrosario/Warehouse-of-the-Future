@@ -1,6 +1,8 @@
 package org.t2.mesh_communication.devices.components;
 
-public abstract class Component {
+import java.io.Serializable;
+
+public abstract class Component implements Serializable {
     protected final int idleConsumption;
 
     public Component(int idleConsumption) {

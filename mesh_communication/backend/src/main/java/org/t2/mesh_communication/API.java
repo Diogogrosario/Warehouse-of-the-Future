@@ -5,15 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.LogRecord;
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,6 +18,18 @@ import org.t2.mesh_communication.devices.command.SendMsgCmd;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.log.Log;
 import org.t2.mesh_communication.log.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.LogRecord;
 
 @SpringBootApplication
 @RestController
@@ -64,8 +67,17 @@ public class API implements ErrorController {
     private void resetStatus() throws IOException {
         this.main.clearMeshGrid();
         this.main.clearProducts();
-        this.main.prepareGrid();
         Main.prepareConfigs();
+        this.main.prepareGrid();
+
+        Logger.getInstance().resetLogger();
+    }
+
+    private void resetStatus(Map<String, Object> jsonObject) throws IOException {
+        this.main.clearMeshGrid();
+        this.main.clearProducts();
+        Main.prepareConfigs();
+        this.main.prepareGrid(jsonObject);
 
         Logger.getInstance().resetLogger();
     }
@@ -83,13 +95,10 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/")
-    public String root(HttpServletResponse response) throws IOException {
-        File file = new File("../docs/api/api.html");
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        StringBuilder ret = new StringBuilder();
-        String add;
-        while ((add = br.readLine()) != null) ret.append(add).append("\n");
-        return ret.toString();
+    public String root(HttpServletResponse response) throws IOException, URISyntaxException {
+        InputStream apiStream = API.class.getClassLoader().getResourceAsStream("api.html");
+        assert apiStream != null;
+        return new String(apiStream.readAllBytes());
     }
 
     @GetMapping({"/devices/{status}", "/devices"})
@@ -262,9 +271,9 @@ public class API implements ErrorController {
                 this.main.advanceTick(nTicks);
                 break;
             case "backwards":
-                // TODO: when UNDO ticks is implemented
-                response.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
-                return "Backwards time flow not implemented yet.";
+                int result = this.main.goBackTick(nTicks);
+                if (result < 0) return "Invalid time flow: Can't undo that many ticks.";
+                break;
             default:
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 return "Invalid time flow.";
@@ -421,20 +430,28 @@ public class API implements ErrorController {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
 
-        int totalInnitialBat = this.getMeshGrid().getTotalInnitialBat();
+        int totalInnitialBat = this.getMeshGrid().getTotalInitialBat();
         int currentBattery = this.getMeshGrid().getCurrentBat();
         int tickBattery = this.getMeshGrid().getLastTickBat() - currentBattery;
         if (tickBattery < 0) {
             tickBattery = 0;
         }
+        int failedMsg = this.getMeshGrid().getFailedMessages();
 
         node.put("batTick", tickBattery);
         node.put("batCommunication", totalInnitialBat - currentBattery);
-        node.put("failed", 0);
+        node.put("failed", failedMsg);
         node.put("ticks", this.getMeshGrid().getNTicks());
 
         response.setStatus(HttpServletResponse.SC_OK);
         return node;
+    }
+
+    @PostMapping("/layout")
+    public String layout(@RequestBody Map<String, Object> jsonObject) throws IOException {
+        this.resetStatus(jsonObject);
+
+        return "Layout successfully posted";
     }
 
     @RequestMapping("/error")

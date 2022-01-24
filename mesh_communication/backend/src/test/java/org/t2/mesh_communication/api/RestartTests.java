@@ -1,8 +1,16 @@
 package org.t2.mesh_communication.api;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.LogRecord;
+import java.util.logging.StreamHandler;
+import javax.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
@@ -14,17 +22,6 @@ import org.t2.mesh_communication.devices.command.Command;
 import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 import org.t2.mesh_communication.log.Logger;
-
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.LogRecord;
-import java.util.logging.StreamHandler;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class RestartTests {
     private static API api;
@@ -67,7 +64,7 @@ public class RestartTests {
         Screen screen4 = new Screen(5, 10);
         Device device4 = new Device(2, pos4, new FloodStrategy(mg), 10, 10, 1, bat4, screen4);
 
-        Orchestrator och = new Orchestrator(pos, new FloodStrategy(mg));
+        Orchestrator och = new Orchestrator(0, pos, 1, new FloodStrategy(mg));
 
         when(mg.getDevices())
                 .thenAnswer(
@@ -80,28 +77,34 @@ public class RestartTests {
                                     return lmd;
                                 });
 
-        doAnswer(invocation -> {
-            when(mg.getDevices()).thenAnswer(
-                    (Answer<List<MeshDevice>>)
-                            invocation2 -> {
-                                List<MeshDevice> lmd = new ArrayList<>();
-                                lmd.add(och);
-                                lmd.add(device3);
-                                lmd.add(device4);
-                                return lmd;
-                            });
-            return null;
-        }).when(main).prepareGrid();
+        doAnswer(
+                        invocation -> {
+                            when(mg.getDevices())
+                                    .thenAnswer(
+                                            (Answer<List<MeshDevice>>)
+                                                    invocation2 -> {
+                                                        List<MeshDevice> lmd = new ArrayList<>();
+                                                        lmd.add(och);
+                                                        lmd.add(device3);
+                                                        lmd.add(device4);
+                                                        return lmd;
+                                                    });
+                            return null;
+                        })
+                .when(main)
+                .prepareGrid();
 
-        when(mg.update()).thenAnswer(invocation -> {
-            device1.getBattery().spendBattery(6);
-            device2.getBattery().spendBattery(5);
-            Command commandMock = Mockito.mock(Command.class);
-            device1.getNextCommands().add(commandMock);
-            LogRecord logMock = Mockito.mock(LogRecord.class);
-            Logger.getInstance().publish(logMock);
-            return null;
-        });
+        when(mg.update())
+                .thenAnswer(
+                        invocation -> {
+                            device1.getBattery().spendBattery(6);
+                            device2.getBattery().spendBattery(5);
+                            Command commandMock = Mockito.mock(Command.class);
+                            device1.getNextCommands().add(commandMock);
+                            LogRecord logMock = Mockito.mock(LogRecord.class);
+                            Logger.getInstance().publish(logMock);
+                            return null;
+                        });
 
         main.setMeshGrid(mg);
     }
@@ -112,8 +115,8 @@ public class RestartTests {
 
         assertEquals(3, mg.getDevices().size());
 
-        assertEquals(44, ((Device)mg.getDevices().get(1)).getBattery().getRemainingBattery());
-        assertEquals(45, ((Device)mg.getDevices().get(2)).getBattery().getRemainingBattery());
+        assertEquals(44, ((Device) mg.getDevices().get(1)).getBattery().getRemainingBattery());
+        assertEquals(45, ((Device) mg.getDevices().get(2)).getBattery().getRemainingBattery());
 
         assertEquals(1, mg.getDevices().get(1).getCommandsNext().size());
 
@@ -122,10 +125,9 @@ public class RestartTests {
 
         api.restart(Mockito.mock(HttpServletResponse.class));
 
-
         assertEquals(3, mg.getDevices().size());
-        assertEquals(50, ((Device)mg.getDevices().get(1)).getBattery().getRemainingBattery());
-        assertEquals(50, ((Device)mg.getDevices().get(2)).getBattery().getRemainingBattery());
+        assertEquals(50, ((Device) mg.getDevices().get(1)).getBattery().getRemainingBattery());
+        assertEquals(50, ((Device) mg.getDevices().get(2)).getBattery().getRemainingBattery());
 
         assertEquals(0, mg.getDevices().get(1).getCommandsNext().size());
 
