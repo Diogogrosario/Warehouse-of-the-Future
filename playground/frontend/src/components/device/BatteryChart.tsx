@@ -11,8 +11,13 @@ import batteryData from "./battery.json";
 
 export const background = "#F3F3F3";
 
-const timestamp = (d: any) => new Date(d["timestamp"] * 1000).valueOf();
-const batteryPower = (d: any) => d["battery_power"];
+interface batteryTick {
+	timestamp: number;
+	battery_power: string;
+}
+
+const timestamp = (d: batteryTick) => new Date(d["timestamp"] * 1000).valueOf();
+const batteryPower = (d: batteryTick) => parseFloat(d["battery_power"]);
 
 const timeScale = scaleTime<number>({
 	domain: [Math.min(...batteryData.map(timestamp)), Math.max(...batteryData.map(timestamp))],
@@ -42,7 +47,7 @@ export default function BatteryChart({ width, height, margin = defaultMargin }: 
 
 	return (
 		<div>
-			<ScaleSVG width={width} height={height} >
+			<ScaleSVG width={width} height={height}>
 				<linearGradient
 					id="gradient"
 					gradientUnits="userSpaceOnUse"
@@ -81,8 +86,8 @@ export default function BatteryChart({ width, height, margin = defaultMargin }: 
 					<LinePath
 						data={batteryData}
 						curve={curveBasis}
-						x={(d: any) => timeScale(timestamp(d)) ?? 0}
-						y={(d: any) => batteryPowerScale(batteryPower(d)) ?? 0}
+						x={(d: batteryTick) => timeScale(timestamp(d)) ?? 0}
+						y={(d: batteryTick) => batteryPowerScale(batteryPower(d)) ?? 0}
 						stroke="url(#gradient)"
 						strokeWidth={1.5}
 					/>

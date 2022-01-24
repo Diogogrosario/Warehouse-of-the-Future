@@ -10,7 +10,6 @@ import ReportList from "./components/report/ReportList";
 import TabPanel from "./components/TabPanel";
 import NoResultsOverlay from "./components/NoResultsOverlay";
 import theme from "./styles/theme";
-import DeviceList from "./components/device/DeviceList";
 import Simulation from "./components/simulation/Simulation";
 
 export enum FullscreenState {
