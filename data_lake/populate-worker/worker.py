@@ -1,10 +1,9 @@
-import os
 import sched
 import time
 import requests
 from bson.objectid import ObjectId
 
-import db # noqa (ignore linter in this line)
+import db
 
 DAILY_MANIFESTS = 30
 terminate = False
