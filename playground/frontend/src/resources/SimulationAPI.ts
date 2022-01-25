@@ -21,11 +21,13 @@ export class SimulationAPI {
 						this.devices.push(device);
 					}
 				} else {
-					for (let i = 0; i < this.devices.length; i++)
+					for (let i = 0; i < this.devices.length; i++) {
 						this.devices[i].battery_level.push(result[i].battery_level);
-				}
 
-				console.log(this.devices)
+						if (this.devices[i].battery_level.length > 25)
+							this.devices[i].battery_level.shift();
+					}
+				}
 			});
 	}
 
