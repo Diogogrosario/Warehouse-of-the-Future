@@ -1,0 +1,37 @@
+{
+	"dimensions": {
+		"width": 1,
+		"height": 2,
+		"depth": 1
+	},
+	"racks": [
+		{
+			"orientation": "north",
+			// Canto superior esquerdo
+			"x": 1,
+			"z": 0,
+			"width": 2,
+			"depth": 1,
+			"height": 4,
+			"shelves": [
+				{
+					"y": 1,
+					"buckets": [ // Lista ordenada dos buckets, eles são placed com spacing entre eles auto
+						{
+							"width": 0.5,
+							"height": 0.2, // optional, o default é whatever the fuck works
+							"id": 3						
+						},
+						{
+							"width": 0.5,
+							"height": 0.2, // optional, o default é whatever the fuck works
+							"id": 2						
+						}
+					]
+				},
+				...
+			]
+		},
+		...
+	]
+}
