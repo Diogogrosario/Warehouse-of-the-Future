@@ -172,6 +172,7 @@ export default function App() {
 							/>
 						</Tabs>
 
+						{/* Reports */}
 						<StyledTabPanel
 							emptyComponent={<NoResultsOverlay text="No reports found" />}
 							value={selectedTab}
@@ -228,6 +229,8 @@ export default function App() {
 								<ReportList />
 							</AsyncBoundary>
 						</StyledTabPanel>
+
+						{/* Devices */}
 						<StyledTabPanel
 							value={selectedTab}
 							emptyComponent={<NoResultsOverlay text="No devices found" />}

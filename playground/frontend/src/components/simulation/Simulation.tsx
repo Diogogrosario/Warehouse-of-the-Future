@@ -8,6 +8,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 import Coloring from "../../utils/coloring";
 import TabPanel from "../TabPanel";
+import DeviceList from "../device/DeviceList";
 import Metrics from "./Metrics";
 
 const Simulation: React.FC = () => {
@@ -28,7 +29,7 @@ const Simulation: React.FC = () => {
 				margin: "10px",
 			}}
 		>
-			<div style={{ gridArea: "sim-header" }}>
+			<div style={{ gridArea: "sim-header", height: "100%" }}>
 				<div
 					style={{
 						display: "flex",
@@ -116,7 +117,6 @@ const Simulation: React.FC = () => {
 					aria-label="simulation tabs"
 					variant="standard"
 					sx={{
-						gridArea: "sim-nav",
 						boxShadow: (theme: Theme) =>
 							`inset 0 -1px 0 ${Coloring.rgba(theme.palette.white.main, 0.2)}`,
 						".MuiTabs-flexContainer > .MuiTab-root": {
@@ -148,7 +148,9 @@ const Simulation: React.FC = () => {
 						iconPosition="start"
 					/>
 				</Tabs>
+			</div>
 
+			<div style={{ gridArea: "sim-content", overflow: "auto" }}>
 				<TabPanel
 					value={selectedTab}
 					index={0}
@@ -169,7 +171,10 @@ const Simulation: React.FC = () => {
 					index={1}
 					id="sim-tabpanel-1"
 					aria-labelledby="sim-tab-1"
-				></TabPanel>
+					style={{ height: "100%" }}
+				>
+					<DeviceList />
+				</TabPanel>
 			</div>
 		</div>
 	);

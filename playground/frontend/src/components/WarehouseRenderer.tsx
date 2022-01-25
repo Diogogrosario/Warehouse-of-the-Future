@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import SceneManager from "../renderer/SceneManager";
 import Stats from "../renderer/Stats";
 

@@ -36,7 +36,7 @@ const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
 					<div className="appWrapper">
 						<div
 							className="appContainer"
-							style={{ display: "flex", flexDirection: "column", height: " inherit" }}
+							style={{ display: "flex", flexDirection: "column", height: "100%" }}
 						>
 							<AppBar position="relative">
 								<Toolbar>

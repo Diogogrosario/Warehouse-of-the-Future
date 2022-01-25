@@ -2,6 +2,7 @@ import { FullscreenExit } from "@mui/icons-material";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import { Fab } from "@mui/material";
 import React from "react";
+
 import { FullscreenState } from "../App";
 
 interface FullscreenProps {
