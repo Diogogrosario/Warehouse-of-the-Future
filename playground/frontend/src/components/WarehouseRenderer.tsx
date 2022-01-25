@@ -3,10 +3,12 @@ import React, { Component } from "react";
 import SceneManager from "../renderer/SceneManager";
 import Stats from "../renderer/Stats";
 
+import { SentMessages, RecvMessages } from "../renderer/Device";
+
 interface WarehouseRendererProps {
 	background?: string;
-	sendMessages?: object;
-	receiveMessages?: object;
+	sentMessages?: SentMessages;
+	receiveMessages?: RecvMessages;
 }
 
 class WarehouseRenderer extends Component<WarehouseRendererProps> {
@@ -23,7 +25,7 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 
 	static defaultProps: Partial<WarehouseRendererProps> = {
 		background: "#ffffff",
-		sendMessages: {},
+		sentMessages: {},
 		receiveMessages: {},
 	};
 
@@ -58,6 +60,14 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 	componentDidUpdate(prevProps: WarehouseRendererProps) {
 		if (this.props.background !== prevProps.background && this.props.background)
 			this.sceneManager.updateBackgroundColor(this.props.background);
+		
+		if (this.props.sentMessages !== prevProps.sentMessages && this.props.sentMessages) {
+			this.sceneManager.updateSentMessages(this.props.sentMessages);
+		}
+
+		if (this.props.receiveMessages !== prevProps.receiveMessages && this.props.receiveMessages) {
+			this.sceneManager.updateRecvMessages(this.props.receiveMessages);
+		}
 	}
 
 	componentWillUnmount() {

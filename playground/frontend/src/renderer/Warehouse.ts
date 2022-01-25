@@ -1,9 +1,11 @@
 import * as THREE from "three";
 
 import { RackFactory, RackConfig } from "./RackFactory";
-import { BucketFactory } from "./BucketFactory";
+import { BucketFactory, Coords3 } from "./BucketFactory";
 import SceneManager from "./SceneManager";
 import { SpaceEvenly } from "./utils/Spacing";
+import { RecvMessages, SentMessages } from "./Device";
+import { SimulationAPI } from "../resources/SimulationAPI";
 
 export interface WarehouseDimensions {
 	width: number;
@@ -14,6 +16,7 @@ export interface WarehouseDimensions {
 export interface WarehouseStructure {
 	dimensions: WarehouseDimensions;
 	racks: RackConfig[];
+	orchestrator?: Coords3;
 }
 
 export class Warehouse {
@@ -51,6 +54,7 @@ export class Warehouse {
 		BucketFactory.fixBucketWidths(structure);
 
 		this.buildWarehouse(this.structure);
+		SimulationAPI.postLayout(this.bucketFactory.getDeviceLayout());
 	}
 
 	public addWarehouse(obj: THREE.Object3D) {
@@ -61,11 +65,36 @@ export class Warehouse {
 		this.addWalls(structure.dimensions);
 		this.addGround(structure.dimensions);
 
+		this.addOrchestrator(structure);
+
 		for (const shelfConfig of structure.racks) {
 			this.rackFactory.addRack(shelfConfig, structure.dimensions, this.warehouse);
 		}
 
 		this.addLights(structure.dimensions);
+	}
+
+	public updateSentMessages(msgs: SentMessages) {
+		this.bucketFactory.clearRenderedSentArrows();
+		this.bucketFactory.renderSentArrows(msgs);
+	}
+
+	public updateRecvMessages(msgs: RecvMessages) {
+		this.bucketFactory.clearRenderedRecvArrows();
+		this.bucketFactory.renderRecvArrows(msgs);
+	}
+
+	private addOrchestrator(structure: WarehouseStructure) {
+		const pos = structure.orchestrator ?? {
+			x: structure.dimensions.width / 2,
+			y: structure.dimensions.height / 2,
+			z: structure.dimensions.depth / 2,
+		};
+
+		pos.x -= structure.dimensions.width / 2;
+		pos.z -= structure.dimensions.depth / 2;
+
+		this.bucketFactory.addOrchestrator(pos, this.sceneManager.scene);
 	}
 
 	private addGround(dim: WarehouseDimensions) {

@@ -448,8 +448,10 @@ public class API implements ErrorController {
     }
 
     @PostMapping("/layout")
-    public String layout(@RequestBody Map<String, Object> jsonObject) throws IOException {
+    public String layout(@RequestBody Map<String, Object> jsonObject, HttpServletResponse response) throws IOException {
+        response.addHeader("Access-Control-Allow-Origin", "*");
         this.resetStatus(jsonObject);
+        response.setStatus(HttpServletResponse.SC_OK);
 
         return "Layout successfully posted";
     }

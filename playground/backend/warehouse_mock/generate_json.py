@@ -3,6 +3,17 @@ import json
 import os
 import random
 
+class Coords3:
+    def __init__(self, x: float, y: float, z: float) -> None:
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def __str__(self) -> str:
+        return str(self.__dict__)
+    
+    def __repr__(self) -> str:
+        return str(self.__dict__)
 
 class Bucket:
 
@@ -93,14 +104,16 @@ class WarehouseDimensions:
 
 
 class Warehouse:
-    def __init__(self, dimensions: WarehouseDimensions, racks: list[Rack]) -> None:
+    def __init__(self, dimensions: WarehouseDimensions, racks: list[Rack], orchestrator: Coords3) -> None:
         self.dimensions = dimensions
         self.racks = racks
+        self.orchestrator = orchestrator
 
     @staticmethod
     def mock() -> Warehouse:
         dim = WarehouseDimensions(12, 15, 6)
         racks = []
+        orchestrator = Coords3(6, 2.5, 3)
 
         # Top racks
         for x in range(0, 12, 3):
@@ -122,7 +135,7 @@ class Warehouse:
         for z in range(5, 15, 2):
             racks.append(Rack.normal_rack("west", 11, z, random.randint(3, 4)))
 
-        return Warehouse(dim, racks)
+        return Warehouse(dim, racks, orchestrator)
 
 
 class WarehouseEncoder(json.JSONEncoder):

@@ -1,4 +1,7 @@
 import { DeviceProps } from "../components/device/Device";
+import { DeviceLayout } from "../renderer/BucketFactory";
+import { SentMessages, RecvMessages } from "../renderer/Device";
+
 
 export class SimulationAPI {
 	public static devices: DeviceProps[] = [];
@@ -8,8 +11,8 @@ export class SimulationAPI {
 	public static totalBatteryConsumption = 0;
 	public static failed = 0;
 
-	public static sendMessages: object = {};
-	public static receiveMessages: object = {};
+	public static sentMessages: SentMessages = {};
+	public static receiveMessages: RecvMessages = {};
 
 	static updateCurrentDevices() {
 		fetch("http://localhost:8080/devices")
@@ -21,11 +24,11 @@ export class SimulationAPI {
 
 						device.battery_level = [device.battery_level];
 
-						this.devices.push(device);
+						this.devices.push(device as DeviceProps);
 					}
 				} else {
 					for (let i = 0; i < this.devices.length; i++) {
-						this.devices[i].battery_level.push(result[i].battery_level);
+						this.devices?.[i].battery_level?.push(result[i].battery_level);
 
 						if (this.devices[i].battery_level.length > 25)
 							this.devices[i].battery_level.shift();
@@ -61,8 +64,19 @@ export class SimulationAPI {
 		fetch("http://localhost:8080/orchestrate", {
 			method: "POST",
 		})
-			.then((response) => response)
-			.then((result) => console.log(result));
+			.then((response) => response);
+			// .then((result) => console.log(result));
+	}
+
+	public static postLayout(layout: DeviceLayout) {
+		fetch("http://localhost:8080/layout", {
+			method: "POST",
+			body: JSON.stringify(layout),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then((response) => response)
+		.then((result) => console.log(result));
 	}
 
 	static async getCurrentMetrics() {
@@ -77,13 +91,13 @@ export class SimulationAPI {
 	static updateSendMessages() {
 		fetch("http://localhost:8080/messages/send")
 			.then((response) => response.json())
-			.then((result) => (this.sendMessages = result));
+			.then((result) => (this.sentMessages = result as SentMessages));
 	}
 
 	static updateReceiveMessages() {
 		fetch("http://localhost:8080/messages/receive")
 			.then((response) => response.json())
-			.then((result) => (this.receiveMessages = result));
+			.then((result) => (this.receiveMessages = result as RecvMessages));
 	}
 
 	static restart() {
@@ -99,7 +113,7 @@ export class SimulationAPI {
 		this.devices = [];
 		this.totalBatteryConsumption = 0;
 		this.failed = 0;
-		this.sendMessages = {};
+		this.sentMessages = {};
 		this.receiveMessages = {};
 
 		this.orchestrate();

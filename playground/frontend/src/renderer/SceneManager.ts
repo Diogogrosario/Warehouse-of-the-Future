@@ -2,6 +2,7 @@ import * as THREE from "three";
 import CameraControls from "camera-controls";
 
 import { Warehouse, WarehouseStructure } from "./Warehouse";
+import { RecvMessages, SentMessages } from "./Device";
 
 import mockJSON from "./mock_json.json";
 
@@ -20,6 +21,8 @@ export default class SceneManager {
 	private height: number;
 
 	private invalidFrame = true;
+
+	private warehouse: Warehouse;
 
 	constructor(container: HTMLElement | undefined, width: number, height: number) {
 		this.width = width;
@@ -53,10 +56,18 @@ export default class SceneManager {
 			event.preventDefault();
 		});
 
-		const whStructure = new Warehouse(this, mockJSON as WarehouseStructure);
-		whStructure.addWarehouse(this.scene);
+		this.warehouse = new Warehouse(this, mockJSON as WarehouseStructure);
+		this.warehouse.addWarehouse(this.scene);
 
 		// this.addAxes();
+	}
+
+	public updateSentMessages(msgs: SentMessages) {
+		this.warehouse.updateSentMessages(msgs);
+	}
+
+	public updateRecvMessages(msgs: RecvMessages) {
+		this.warehouse.updateRecvMessages(msgs);
 	}
 
 	public render() {
