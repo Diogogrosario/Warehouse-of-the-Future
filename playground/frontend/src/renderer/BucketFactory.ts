@@ -1,8 +1,10 @@
 import * as THREE from "three";
-import { ArrowType, Device, RecvMessages, RecvMessage, SentMessage, SentMessages } from "./Device";
+import { ArrowType, Device } from "./Device";
+import { RecvMessages, RecvMessage, SentMessage, SentMessages } from "../resources/SimulationInterfaces";
 import { BucketConfig, RackFactory } from "./RackFactory";
 import SceneManager from "./SceneManager";
 import { WarehouseStructure } from "./Warehouse";
+import { dumpObjectToConsole } from "./utils/DebugUtils";
 
 export interface Coords3 {
 	x: number,
@@ -33,7 +35,11 @@ export class BucketFactory {
 
 	public readonly devices: Map<number, Device> = new Map();
 
+	private readonly sceneManager: SceneManager;
+
 	constructor(sceneManager: SceneManager) {
+		this.sceneManager = sceneManager;
+
 		this.sentArrowsHolder = new THREE.Group();
 		this.sentArrowsHolder.name = "sent-arrows-holder";
 		sceneManager.scene.add(this.sentArrowsHolder);
@@ -55,12 +61,12 @@ export class BucketFactory {
 		for (const device of this.devices.values()) {
 			const pos = device.getPosition();
 			layout[device.getId()] = [{
-				x: pos.getComponent(0),
-				y: pos.getComponent(1),
-				z: pos.getComponent(2)
+				x: Math.round(pos.getComponent(0) * 1000),
+				y: Math.round(pos.getComponent(1) * 1000),
+				z: Math.round(pos.getComponent(2) * 1000)
 			}];
 		}
-		
+
 		return layout;
 	}
 
@@ -78,13 +84,21 @@ export class BucketFactory {
 				origin.arrowTo(dest, this.sentArrowsHolder, ArrowType.neutral);
 			}
 		}
+
+		this.sceneManager.invalidate();
 	}
 
+	// TODO: Probably has memory leak
 	public clearRenderedSentArrows() {
-		for (const arrow of this.sentArrowsHolder.children as THREE.Mesh[]) {
-			arrow.removeFromParent();
-			arrow.geometry.dispose();
+		const arr = this.sentArrowsHolder.children;
+		const len = arr.length;
+		for (let i=0; i < len; i++) {
+			const mesh = arr[0] as THREE.Mesh;
+			mesh.removeFromParent();
+			mesh.geometry.dispose();
 		}
+
+		this.sceneManager.invalidate();
 	}
 
 	public renderRecvArrows(msgs: RecvMessages) {
@@ -110,13 +124,21 @@ export class BucketFactory {
 				origin.arrowTo(dest, this.recvArrowsHolder, type);
 			}
 		}
+		
+		this.sceneManager.invalidate();
 	}
 
+	// TODO: Probably has memory leak
 	public clearRenderedRecvArrows() {
-		for (const arrow of this.recvArrowsHolder.children as THREE.Mesh[]) {
-			arrow.removeFromParent();
-			arrow.geometry.dispose();
+		const arr = this.recvArrowsHolder.children;
+		const len = arr.length;
+		for (let i=0; i < len; i++) {
+			const mesh = arr[0] as THREE.Mesh;
+			mesh.removeFromParent();
+			mesh.geometry.dispose();
 		}
+
+		this.sceneManager.invalidate();
 	}
 	
 	public static fixBucketWidths(config: WarehouseStructure) {

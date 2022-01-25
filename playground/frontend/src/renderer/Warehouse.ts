@@ -4,7 +4,7 @@ import { RackFactory, RackConfig } from "./RackFactory";
 import { BucketFactory, Coords3 } from "./BucketFactory";
 import SceneManager from "./SceneManager";
 import { SpaceEvenly } from "./utils/Spacing";
-import { RecvMessages, SentMessages } from "./Device";
+import { RecvMessages, SentMessages, ISimulationMessageObserver } from "../resources/SimulationInterfaces";
 import { SimulationAPI } from "../resources/SimulationAPI";
 
 export interface WarehouseDimensions {
@@ -19,7 +19,7 @@ export interface WarehouseStructure {
 	orchestrator?: Coords3;
 }
 
-export class Warehouse {
+export class Warehouse implements ISimulationMessageObserver {
 	private warehouse: THREE.Object3D;
 
 	private planeGeometry = new THREE.PlaneGeometry(1, 1, 1, 1);
@@ -55,6 +55,17 @@ export class Warehouse {
 
 		this.buildWarehouse(this.structure);
 		SimulationAPI.postLayout(this.bucketFactory.getDeviceLayout());
+		SimulationAPI.subscribeMessages(this);
+	}
+
+	newSentMessages(msgs: SentMessages): void {
+		this.bucketFactory.clearRenderedSentArrows();
+		this.bucketFactory.renderSentArrows(msgs);
+	}
+
+	newRecvMessages(msgs: RecvMessages): void {
+		this.bucketFactory.clearRenderedRecvArrows();
+		this.bucketFactory.renderRecvArrows(msgs);
 	}
 
 	public addWarehouse(obj: THREE.Object3D) {
@@ -72,16 +83,6 @@ export class Warehouse {
 		}
 
 		this.addLights(structure.dimensions);
-	}
-
-	public updateSentMessages(msgs: SentMessages) {
-		this.bucketFactory.clearRenderedSentArrows();
-		this.bucketFactory.renderSentArrows(msgs);
-	}
-
-	public updateRecvMessages(msgs: RecvMessages) {
-		this.bucketFactory.clearRenderedRecvArrows();
-		this.bucketFactory.renderRecvArrows(msgs);
 	}
 
 	private addOrchestrator(structure: WarehouseStructure) {
@@ -191,6 +192,10 @@ export class Warehouse {
 				// this.warehouse.add(helper);
 			}
 		}
+	}
+
+	public dispose() {
+		SimulationAPI.unsubscribeMessages(this);
 	}
 
 	public getObject(): THREE.Object3D {

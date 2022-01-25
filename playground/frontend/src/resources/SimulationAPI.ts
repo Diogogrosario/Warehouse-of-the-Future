@@ -1,7 +1,6 @@
 import { DeviceProps } from "../components/device/Device";
 import { DeviceLayout } from "../renderer/BucketFactory";
-import { SentMessages, RecvMessages } from "../renderer/Device";
-
+import { SentMessages, RecvMessages, ISimulationMessageObserver } from "./SimulationInterfaces";
 
 export class SimulationAPI {
 	public static devices: DeviceProps[] = [];
@@ -13,6 +12,19 @@ export class SimulationAPI {
 
 	public static sentMessages: SentMessages = {};
 	public static receiveMessages: RecvMessages = {};
+
+	private static messageObservers: ISimulationMessageObserver[] = [];
+
+	public static subscribeMessages(observer: ISimulationMessageObserver) {
+		SimulationAPI.messageObservers.push(observer);
+	}
+
+	public static unsubscribeMessages(observer: ISimulationMessageObserver) {
+		const index = SimulationAPI.messageObservers.indexOf(observer);
+		if (index > -1) {
+			SimulationAPI.messageObservers.splice(index, 1); // 2nd parameter means remove one item only
+		}
+	}
 
 	static updateCurrentDevices() {
 		fetch("http://localhost:8080/devices")
@@ -56,7 +68,7 @@ export class SimulationAPI {
 				this.getCurrentMetrics();
 				this.updateCurrentDevices();
 				this.updateReceiveMessages();
-				this.updateSendMessages();
+				this.updateSentMessages();
 			});
 	}
 
@@ -75,8 +87,8 @@ export class SimulationAPI {
 			headers: {
 				'Content-Type': 'application/json'
 			}
-		}).then((response) => response)
-		.then((result) => console.log(result));
+		}).then((response) => response);
+		// .then((result) => console.log(result));
 	}
 
 	static async getCurrentMetrics() {
@@ -88,24 +100,34 @@ export class SimulationAPI {
 		this.totalBatteryConsumption = result["batCommunication"];
 	}
 
-	static updateSendMessages() {
+	static updateSentMessages() {
 		fetch("http://localhost:8080/messages/send")
 			.then((response) => response.json())
-			.then((result) => (this.sentMessages = result as SentMessages));
+			.then((result) => (this.sentMessages = result as SentMessages))
+			.then((result) => {
+				for (const obs of SimulationAPI.messageObservers) {
+					obs.newSentMessages(result);
+				}
+			});
 	}
 
 	static updateReceiveMessages() {
 		fetch("http://localhost:8080/messages/receive")
 			.then((response) => response.json())
-			.then((result) => (this.receiveMessages = result as RecvMessages));
+			.then((result) => (this.receiveMessages = result as RecvMessages))
+			.then((result) => {
+				for (const obs of SimulationAPI.messageObservers) {
+					obs.newRecvMessages(result);
+				}
+			});
 	}
 
 	static restart() {
 		fetch("http://localhost:8080/restart", {
 			method: "POST",
 		})
-			.then((response) => response)
-			.then((result) => console.log(result));
+			.then((response) => response);
+			// .then((result) => console.log(result));
 
 		this.currentTick = 0;
 		this.currentTickBatteryConsumption = 0;
@@ -115,6 +137,11 @@ export class SimulationAPI {
 		this.failed = 0;
 		this.sentMessages = {};
 		this.receiveMessages = {};
+
+		for (const obs of this.messageObservers) {
+			obs.newSentMessages([]);
+			obs.newRecvMessages([]);
+		}
 
 		this.orchestrate();
 	}

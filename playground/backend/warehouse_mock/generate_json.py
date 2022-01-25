@@ -113,7 +113,7 @@ class Warehouse:
     def mock() -> Warehouse:
         dim = WarehouseDimensions(12, 15, 6)
         racks = []
-        orchestrator = Coords3(6, 2.5, 3)
+        orchestrator = Coords3(6, 2.5, 5)
 
         # Top racks
         for x in range(0, 12, 3):

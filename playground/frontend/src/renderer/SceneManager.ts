@@ -2,7 +2,7 @@ import * as THREE from "three";
 import CameraControls from "camera-controls";
 
 import { Warehouse, WarehouseStructure } from "./Warehouse";
-import { RecvMessages, SentMessages } from "./Device";
+
 
 import mockJSON from "./mock_json.json";
 
@@ -62,14 +62,6 @@ export default class SceneManager {
 		// this.addAxes();
 	}
 
-	public updateSentMessages(msgs: SentMessages) {
-		this.warehouse.updateSentMessages(msgs);
-	}
-
-	public updateRecvMessages(msgs: RecvMessages) {
-		this.warehouse.updateRecvMessages(msgs);
-	}
-
 	public render() {
 		const delta = this.clock.getDelta();
 		const controlsUpdated = this.cameraControls?.update(delta);
@@ -82,6 +74,7 @@ export default class SceneManager {
 
 	public dispose() {
 		this.cameraControls?.dispose();
+		this.warehouse.dispose();
 	}
 
 	public resize(width: number, height: number) {

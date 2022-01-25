@@ -116,8 +116,6 @@ export default function App() {
 					>
 						<WarehouseRenderer
 							background={theme.palette.dark.main}
-							sentMessages={SimulationAPI.sentMessages}
-							receiveMessages={SimulationAPI.receiveMessages}
 						/>
 						<FullscreenButton
 							fullscreenState={fullscreen}

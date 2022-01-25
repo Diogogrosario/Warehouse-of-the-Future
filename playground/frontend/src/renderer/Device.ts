@@ -1,24 +1,5 @@
 import * as THREE from "three";
 
-export interface SentMessage {
-	hop: number,
-	final: number
-}
-
-export interface SentMessages {
-	[key: number]: SentMessage[]
-}
-
-export interface RecvMessage {
-	hop: number,
-	final: number,
-	failed: boolean
-}
-
-export interface RecvMessages {
-	[key: number]: SentMessage[]
-}
-
 export enum ArrowType {
 	neutral="neutral",
 	hop="hop",
@@ -59,15 +40,21 @@ export class Device {
 	private static readonly arrowMaterials = {
 		"neutral": new THREE.LineDashedMaterial({
 			color: Device.neutralColor,
+			linewidth: 2,
+			dashSize: 0.03,
+			gapSize: 0.01
 		}),
 		"hop": new THREE.LineBasicMaterial({
 			color: Device.hopColor,
+			linewidth: 2,
 		}),
 		"final": new THREE.LineBasicMaterial({
 			color: Device.finalColor,
+			linewidth: 2,
 		}),
 		"fail": new THREE.LineBasicMaterial({
 			color: Device.failColor,
+			linewidth: 2,
 		})
 	}
 
@@ -122,12 +109,14 @@ export class Device {
 		}
 		const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
 
+
 		const arrowMat = Device.arrowMaterials[type];
 		// Create the final object to add to the scene
 		const arrow = new THREE.Line(
 			lineGeo,
 			arrowMat
 		);
+		arrow.computeLineDistances();
 		arrow.name = `arrow-${this.id}-${d.id}`; 
 		scene.add(arrow);
 
