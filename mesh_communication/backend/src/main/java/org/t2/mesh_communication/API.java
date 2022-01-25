@@ -102,10 +102,10 @@ public class API implements ErrorController {
     }
 
     @GetMapping({"/devices/{status}", "/devices"})
+    @CrossOrigin
     public List<JsonNode> devicesStatus(
             @PathVariable(name = "status", required = false) String status,
             HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         List<MeshDevice> devices;
         if (status == null) status = "all";
@@ -146,8 +146,8 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/device/{id}")
+    @CrossOrigin
     public JsonNode devices(@PathVariable("id") int deviceID, HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         List<MeshDevice> devices = this.getMeshGrid().getDevices();
 
         MeshDevice device = null;
@@ -183,9 +183,9 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/devices/inrange/{id}")
+    @CrossOrigin
     public List<JsonNode> devicesInRange(
             @PathVariable("id") int deviceID, HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         MeshDevice device = null;
         for (MeshDevice dv : this.getMeshGrid().getDevices()) {
@@ -221,8 +221,8 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/devices/inrange/all")
+    @CrossOrigin
     public ObjectNode allInRange(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         HashMap<Integer, ArrayNode> inrangeAll = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
@@ -259,11 +259,11 @@ public class API implements ErrorController {
     }
 
     @PostMapping("/tick/{time_flow}")
+    @CrossOrigin
     public String tick(
             @PathVariable("time_flow") String timeFlow,
             @RequestParam(value = "n_ticks", required = false, defaultValue = "1") int nTicks,
             HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         if (nTicks <= 0) return "NTicks must be a number of value higher than 0.";
         switch (timeFlow) {
@@ -284,16 +284,16 @@ public class API implements ErrorController {
     }
 
     @PostMapping("/orchestrate")
+    @CrossOrigin
     public String orchestrate(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         this.main.orchestrate();
         response.setStatus(HttpServletResponse.SC_OK);
         return "Orchestrator orchestrated";
     }
 
     @GetMapping("/messages/receive")
+    @CrossOrigin
     public ObjectNode messageReceive(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
@@ -329,8 +329,8 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/messages/send")
+    @CrossOrigin
     public ObjectNode messageSend(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
@@ -390,8 +390,8 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/log")
+    @CrossOrigin
     public ObjectNode log(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         HashMap<String, ArrayNode> logs = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
@@ -425,8 +425,8 @@ public class API implements ErrorController {
 
     @RequestMapping("/metrics")
     @ResponseBody
+    @CrossOrigin
     public ObjectNode getMetrics(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
 
@@ -448,9 +448,11 @@ public class API implements ErrorController {
     }
 
     @PostMapping("/layout")
+    @CrossOrigin
     public String layout(@RequestBody Map<String, Object> jsonObject, HttpServletResponse response) throws IOException {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         this.resetStatus(jsonObject);
+        response.setStatus(HttpServletResponse.SC_OK);
+
         response.setStatus(HttpServletResponse.SC_OK);
 
         return "Layout successfully posted";
@@ -468,6 +470,7 @@ public class API implements ErrorController {
     }
 
     @PostMapping("/restart")
+    @CrossOrigin
     public String restart(HttpServletResponse response) {
         try {
             this.resetStatus();
