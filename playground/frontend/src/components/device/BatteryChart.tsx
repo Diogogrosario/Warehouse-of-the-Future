@@ -7,8 +7,6 @@ import { AxisLeft, AxisBottom } from "@visx/axis";
 import { GridRows, GridColumns } from "@visx/grid";
 import { ScaleSVG } from "@visx/responsive";
 
-import batteryData from "./battery.json";
-
 export const background = "#F3F3F3";
 
 interface batteryTick {
@@ -18,10 +16,6 @@ interface batteryTick {
 
 const timestamp = (d: batteryTick) => new Date(d["timestamp"] * 1000).valueOf();
 const batteryPower = (d: batteryTick) => parseFloat(d["battery_power"]);
-
-const timeScale = scaleTime<number>({
-	domain: [Math.min(...batteryData.map(timestamp)), Math.max(...batteryData.map(timestamp))],
-});
 
 const batteryPowerScale = scaleLinear<number>({
 	domain: [0, 100],
@@ -37,7 +31,16 @@ interface ThresholdProps {
 	margin?: { top: number; right: number; bottom: number; left: number };
 }
 
-export default function BatteryChart({ width, height, margin = defaultMargin }: ThresholdProps) {
+export default function BatteryChart({
+	width,
+	height,
+	batteryData,
+	margin = defaultMargin,
+}: ThresholdProps) {
+	const timeScale = scaleTime<number>({
+		domain: [Math.min(...batteryData.map(timestamp)), Math.max(...batteryData.map(timestamp))],
+	});
+
 	if (width < 10) return null;
 
 	const xMax = width - margin.left - margin.right;
@@ -45,6 +48,8 @@ export default function BatteryChart({ width, height, margin = defaultMargin }: 
 
 	timeScale.range([0, xMax]);
 	batteryPowerScale.range([yMax, 0]);
+
+	console.log(batteryData)
 
 	return (
 		<div>

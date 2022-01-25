@@ -1,17 +1,31 @@
+import { DeviceProps } from "../components/device/Device";
+
 export class SimulationAPI {
-	public static devices: object[] = [];
+	public static devices: DeviceProps[] = [];
 	public static currentTick = 0;
 	public static lastTickBatteryConsumption = 0;
 	public static currentTickBatteryConsumption = 0;
 	public static totalBatteryConsumption = 0;
 	public static failed = 0;
 
-	static getCurrentDevices() {
+	static updateCurrentDevices() {
 		fetch("http://localhost:8080/devices")
 			.then((response) => response.json())
 			.then((result) => {
-				// UNTESTED
-				if (this.devices[this.currentTick] == undefined) this.devices.push(result);
+				if (this.devices.length == 0) {
+					for (let i = 0; i < result.length; i++) {
+						const device = result[i];
+
+						device.battery_level = [device.battery_level];
+
+						this.devices.push(device);
+					}
+				} else {
+					for (let i = 0; i < this.devices.length; i++)
+						this.devices[i].battery_level.push(result[i].battery_level);
+				}
+
+				console.log(this.devices)
 			});
 	}
 
@@ -32,6 +46,7 @@ export class SimulationAPI {
 				this.currentTick++;
 				this.lastTickBatteryConsumption = this.currentTickBatteryConsumption;
 				this.getCurrentMetrics();
+				this.updateCurrentDevices();
 			});
 	}
 
