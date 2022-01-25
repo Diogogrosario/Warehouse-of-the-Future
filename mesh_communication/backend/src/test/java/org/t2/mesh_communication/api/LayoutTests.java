@@ -7,8 +7,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.t2.mesh_communication.API;
 import org.t2.mesh_communication.Main;
 import org.t2.mesh_communication.devices.*;
@@ -34,7 +38,7 @@ public class LayoutTests {
 
         List<MeshDevice> devices = main.getMeshGrid().getDevices();
         assertEquals(0, devices.size());
-        api.layout(map);
+        api.layout(map, Mockito.mock(HttpServletResponse.class));
         devices = main.getMeshGrid().getDevices();
         assertEquals(2, devices.size());
 
