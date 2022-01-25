@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { List, ListItem } from "@mui/material";
 
 import Device, { DeviceProps } from "./Device";
-import { List, ListItem } from "@mui/material";
 
 export default function DeviceList(): React.ReactElement {
 	const [devices, setDevices] = useState<DeviceProps[]>([]);

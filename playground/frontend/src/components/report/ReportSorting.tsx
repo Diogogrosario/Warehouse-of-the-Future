@@ -9,8 +9,9 @@ import {
 } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
 import { North, South } from "@mui/icons-material";
-import { ReportResource } from "../../resources/ReportResource";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+
+import { ReportResource } from "../../resources/ReportResource";
 
 export default function ReportSorting(props: {
 	reports: ReportResource[];
