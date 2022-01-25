@@ -5,6 +5,8 @@ import Stats from "../renderer/Stats";
 
 interface WarehouseRendererProps {
 	background?: string;
+	sendMessages?: object;
+	receiveMessages?: object;
 }
 
 class WarehouseRenderer extends Component<WarehouseRendererProps> {
@@ -21,6 +23,8 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 
 	static defaultProps: Partial<WarehouseRendererProps> = {
 		background: "#ffffff",
+		sendMessages: {},
+		receiveMessages: {},
 	};
 
 	constructor(props: WarehouseRendererProps) {

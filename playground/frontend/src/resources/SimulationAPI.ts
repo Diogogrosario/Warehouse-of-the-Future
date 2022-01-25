@@ -8,6 +8,9 @@ export class SimulationAPI {
 	public static totalBatteryConsumption = 0;
 	public static failed = 0;
 
+	public static sendMessages: object = {};
+	public static receiveMessages: object = {};
+
 	static updateCurrentDevices() {
 		fetch("http://localhost:8080/devices")
 			.then((response) => response.json())
@@ -49,6 +52,8 @@ export class SimulationAPI {
 				this.lastTickBatteryConsumption = this.currentTickBatteryConsumption;
 				this.getCurrentMetrics();
 				this.updateCurrentDevices();
+				this.updateReceiveMessages();
+				this.updateSendMessages();
 			});
 	}
 
@@ -69,16 +74,16 @@ export class SimulationAPI {
 		this.totalBatteryConsumption = result["batCommunication"];
 	}
 
-	static getSendMessages() {
+	static updateSendMessages() {
 		fetch("http://localhost:8080/messages/send")
 			.then((response) => response.json())
-			.then((result) => console.log(result));
+			.then((result) => (this.sendMessages = result));
 	}
 
-	static getReceiveMessages() {
+	static updateReceiveMessages() {
 		fetch("http://localhost:8080/messages/receive")
 			.then((response) => response.json())
-			.then((result) => console.log(result));
+			.then((result) => (this.receiveMessages = result));
 	}
 
 	static restart() {
@@ -94,6 +99,8 @@ export class SimulationAPI {
 		this.devices = [];
 		this.totalBatteryConsumption = 0;
 		this.failed = 0;
+		this.sendMessages = {};
+		this.receiveMessages = {};
 
 		this.orchestrate();
 	}
