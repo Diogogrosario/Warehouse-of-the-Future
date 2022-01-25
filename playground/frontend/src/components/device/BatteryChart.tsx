@@ -49,7 +49,7 @@ export default function BatteryChart({
 	timeScale.range([0, xMax]);
 	batteryPowerScale.range([yMax, 0]);
 
-	console.log(batteryData)
+	console.log(batteryData);
 
 	return (
 		<div>
