@@ -1,10 +1,8 @@
-import { height } from "@mui/system";
 import * as THREE from "three";
 import { Device } from "./Device";
 import { BucketConfig, RackFactory } from "./RackFactory";
 import SceneManager from "./SceneManager";
 import { WarehouseStructure } from "./Warehouse";
-
 
 // Internal
 interface BucketIdentifier {
@@ -44,7 +42,6 @@ export class BucketFactory {
 		}
 	}
 
-
 	public addBucket(bconfig: BucketConfig, depth: number, pos: number, obj: THREE.Object3D) {
 		// TODO: Calculate decent default height
 		const bheight = bconfig.height ?? 2;
@@ -53,8 +50,8 @@ export class BucketFactory {
 		const identifier = {
 			width: bconfig.width,
 			depth: depth - RackFactory.shelfEdgeDepth,
-			height: bheight
-		}
+			height: bheight,
+		};
 
 		let geometry = this.geometries.get(identifier);
 		if (!geometry) {
@@ -77,7 +74,7 @@ export class BucketFactory {
 		device.translateY(bheight - 0.05);
 		device.translateZ(0.025 / 2);
 
-		this.devices.set(bconfig.id, new Device(bconfig.id, device))
+		this.devices.set(bconfig.id, new Device(bconfig.id, device));
 	}
 
 	private generateBucket(identifier: BucketIdentifier): THREE.BufferGeometry {

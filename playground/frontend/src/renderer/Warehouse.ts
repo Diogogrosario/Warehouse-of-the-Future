@@ -24,17 +24,21 @@ export class Warehouse {
 	private readonly loader: THREE.TextureLoader;
 
 	private readonly sceneManager: SceneManager;
+	private readonly bucketFactory: BucketFactory;
 	private readonly rackFactory: RackFactory;
 
-	private static readonly lightDistancing = 6; 
+	private static readonly lightDistancing = 6;
+	private structure: WarehouseStructure;
 
 	constructor(sceneManager: SceneManager, structure: WarehouseStructure) {
+		this.structure = structure;
+
 		this.warehouse = new THREE.Group();
 		this.warehouse.name = "Warehouse";
 
 		this.sceneManager = sceneManager;
-		const bucketFactory = new BucketFactory(sceneManager);
-		this.rackFactory = new RackFactory(sceneManager, bucketFactory);
+		this.bucketFactory = new BucketFactory(sceneManager);
+		this.rackFactory = new RackFactory(sceneManager, this.bucketFactory);
 
 		// Load textures
 		const loadManager = new THREE.LoadingManager();
@@ -44,10 +48,13 @@ export class Warehouse {
 			this.sceneManager.invalidate();
 		};
 
-		BucketFactory.fixBucketWidths(structure);	
+		BucketFactory.fixBucketWidths(structure);
 
-		this.buildWarehouse(structure);
-		this.sceneManager.invalidate();
+		this.buildWarehouse(this.structure);
+	}
+
+	public addWarehouse(obj: THREE.Object3D) {
+		obj.add(this.warehouse);
 	}
 
 	private buildWarehouse(structure: WarehouseStructure) {
@@ -134,14 +141,14 @@ export class Warehouse {
 		ambient.intensity = 0.2;
 		this.warehouse.add(ambient);
 
-		const xLights = Math.floor(dim.width /  Warehouse.lightDistancing);
-		const zLights = Math.floor(dim.depth /  Warehouse.lightDistancing);
+		const xLights = Math.floor(dim.width / Warehouse.lightDistancing);
+		const zLights = Math.floor(dim.depth / Warehouse.lightDistancing);
 
 		const xSpacing = new SpaceEvenly(dim.width, Array(xLights).fill(0));
 		const zSpacing = new SpaceEvenly(dim.width, Array(xLights).fill(0));
 
-		for (let i=0; i < xLights; i++) {
-			for (let j=0; j < zLights; j++) {
+		for (let i = 0; i < xLights; i++) {
+			for (let j = 0; j < zLights; j++) {
 				const l = new THREE.PointLight();
 				l.intensity = 0.5;
 				l.position.set(

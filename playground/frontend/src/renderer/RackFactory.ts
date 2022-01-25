@@ -13,9 +13,9 @@ export interface BucketConfig {
 }
 
 export interface ShelfConfig {
-	y: number,
-	grounded?: boolean,
-	buckets: BucketConfig[]
+	y: number;
+	grounded?: boolean;
+	buckets: BucketConfig[];
 }
 
 enum Orientation {
@@ -35,7 +35,6 @@ export interface RackConfig {
 	shelves: ShelfConfig[];
 	hasFrame?: boolean;
 }
-
 
 // Internal mapping only
 interface FrameIdentifier {
@@ -83,6 +82,7 @@ export class RackFactory {
 	public addRack(config: RackConfig, dimensions: WarehouseDimensions, obj: THREE.Object3D) {
 		const rack = new THREE.Group();
 		rack.name = "Rack";
+		obj.add(rack);
 
 		const frameMesh = new THREE.Mesh();
 
@@ -90,7 +90,7 @@ export class RackFactory {
 			frameMesh.geometry = this.getFrameGeometry(config);
 			frameMesh.material = this.frameMaterial;
 		}
-		
+
 		frameMesh.translateX(-config.width / 2);
 		frameMesh.translateZ(-config.depth / 2);
 		frameMesh.name = "RackFrame";
@@ -99,8 +99,6 @@ export class RackFactory {
 		this.addShelves(rack, config);
 
 		this.positionRack(rack, config, dimensions);
-
-		obj.add(rack);
 	}
 
 	private positionRack(
@@ -142,8 +140,7 @@ export class RackFactory {
 
 	private addShelves(rack: THREE.Object3D, config: RackConfig) {
 		for (const sh of config.shelves) {
-			if (sh.y >= config.height)
-				console.warn("Shelf contains level higher than its height");
+			if (sh.y >= config.height) console.warn("Shelf contains level higher than its height");
 
 			const shelf = new THREE.Mesh();
 			shelf.name = `ShelfHeight${sh.y}`;
@@ -153,7 +150,7 @@ export class RackFactory {
 			shelf.translateZ(-config.depth / 2);
 			shelf.translateY(sh.y - config.height / 2);
 
-			if ((sh.grounded === undefined || sh.grounded === false)) {
+			if (sh.grounded === undefined || sh.grounded === false) {
 				shelf.geometry = this.getShelveGeometry(config);
 				shelf.material = this.shelfMaterial;
 
@@ -163,7 +160,11 @@ export class RackFactory {
 			}
 			rack.add(shelf);
 
-			const spacing = new SpaceEvenly(config.width - RackFactory.frameThickness * 2, sh.buckets.map((bucketConfig: BucketConfig) => bucketConfig.width));
+			// Add Buckets
+			const spacing = new SpaceEvenly(
+				config.width - RackFactory.frameThickness * 2,
+				sh.buckets.map((bucketConfig: BucketConfig) => bucketConfig.width)
+			);
 			for (let i = 0; i < sh.buckets.length; i++) {
 				const pos = RackFactory.frameThickness + spacing.position(i);
 
@@ -194,7 +195,11 @@ export class RackFactory {
 		// Vertical beams
 		for (let i = 0; i < 2; i++) {
 			for (let j = 0; j < 2; j++) {
-				const supportBeam = new THREE.BoxGeometry(RackFactory.frameThickness, config.height, RackFactory.frameThickness);
+				const supportBeam = new THREE.BoxGeometry(
+					RackFactory.frameThickness,
+					config.height,
+					RackFactory.frameThickness
+				);
 
 				positionHelper.position.setX(config.width * i);
 				positionHelper.position.setY(0);
@@ -286,7 +291,11 @@ export class RackFactory {
 
 		const realShelfDepth = config.depth / Math.cos(RackFactory.shelfAngle);
 
-		const shelfGeometry = new THREE.BoxGeometry(config.width - RackFactory.frameThickness, 0.025, realShelfDepth);
+		const shelfGeometry = new THREE.BoxGeometry(
+			config.width - RackFactory.frameThickness,
+			0.025,
+			realShelfDepth
+		);
 		const shelfEdge = new THREE.BoxGeometry(
 			config.width - RackFactory.frameThickness,
 			RackFactory.shelfEdgeHeight,
