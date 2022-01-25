@@ -85,7 +85,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 							minHeight: "inherit",
 						},
 					}}
-					id={reportContentId}
+					id={reportComponentId}
 				>
 					<Tooltip title={warningLevel}>
 						<Box
@@ -136,7 +136,7 @@ const Report: React.FC<ReportProps> = (props: ReportProps) => {
 					</Typography>
 				</AccordionSummary>
 				<Divider orientation="horizontal" flexItem />
-				<AccordionDetails>
+				<AccordionDetails id={reportContentId}>
 					<Stack
 						direction="column"
 						divider={<Divider orientation="horizontal" flexItem />}
