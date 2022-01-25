@@ -48,7 +48,6 @@ Then("the current tab is set to Simulation", async function () {
 	assert(header.length == 1);
 });
 
-
 AfterAll(async function () {
 	await driver.quit();
 });
