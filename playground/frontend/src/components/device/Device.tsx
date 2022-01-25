@@ -8,8 +8,9 @@ import {
 	Theme,
 	Typography,
 } from "@mui/material";
-import BatteryChart from "./BatteryChart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+import BatteryChart from "./BatteryChart";
 import Coloring from "../../utils/coloring";
 
 export interface DeviceProps {
