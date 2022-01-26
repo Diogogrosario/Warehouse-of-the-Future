@@ -20,7 +20,7 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 	private needsResize = false;
 
 	static defaultProps: Partial<WarehouseRendererProps> = {
-		background: "#ffffff"
+		background: "#ffffff",
 	};
 
 	constructor(props: WarehouseRendererProps) {

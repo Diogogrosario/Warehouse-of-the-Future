@@ -75,9 +75,8 @@ export class SimulationAPI {
 	public static orchestrate() {
 		fetch("http://localhost:8080/orchestrate", {
 			method: "POST",
-		})
-			.then((response) => response);
-			// .then((result) => console.log(result));
+		}).then((response) => response);
+		// .then((result) => console.log(result));
 	}
 
 	public static postLayout(layout: DeviceLayout) {
@@ -85,8 +84,8 @@ export class SimulationAPI {
 			method: "POST",
 			body: JSON.stringify(layout),
 			headers: {
-				'Content-Type': 'application/json'
-			}
+				"Content-Type": "application/json",
+			},
 		}).then((response) => response);
 		// .then((result) => console.log(result));
 	}
@@ -125,9 +124,8 @@ export class SimulationAPI {
 	static restart() {
 		fetch("http://localhost:8080/restart", {
 			method: "POST",
-		})
-			.then((response) => response);
-			// .then((result) => console.log(result));
+		}).then((response) => response);
+		// .then((result) => console.log(result));
 
 		this.currentTick = 0;
 		this.currentTickBatteryConsumption = 0;

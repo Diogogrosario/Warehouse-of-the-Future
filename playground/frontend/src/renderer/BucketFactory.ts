@@ -1,26 +1,30 @@
 import * as THREE from "three";
 import { ArrowType, Device } from "./Device";
-import { RecvMessages, RecvMessage, SentMessage, SentMessages } from "../resources/SimulationInterfaces";
+import {
+	RecvMessages,
+	RecvMessage,
+	SentMessage,
+	SentMessages,
+} from "../resources/SimulationInterfaces";
 import { BucketConfig, RackFactory } from "./RackFactory";
 import SceneManager from "./SceneManager";
 import { WarehouseDimensions, WarehouseStructure } from "./Warehouse";
-import { dumpObjectToConsole } from "./utils/DebugUtils";
 
 export interface Coords3 {
-	x: number,
-	y: number,
-	z: number
+	x: number;
+	y: number;
+	z: number;
 }
 
 export interface DeviceLayout {
-	[key: number]: [Coords3]
+	[key: number]: [Coords3];
 }
 
 export interface DummyDevice {
-	id: number,
-	x: number,
-	y: number,
-	z: number
+	id: number;
+	x: number;
+	y: number;
+	z: number;
 }
 
 // Internal
@@ -34,7 +38,7 @@ export class BucketFactory {
 	private readonly sentArrowsHolder: THREE.Object3D;
 	private readonly recvArrowsHolder: THREE.Object3D;
 
-	private readonly material = new THREE.MeshPhongMaterial({ color: 0x151226 });;
+	private readonly material = new THREE.MeshPhongMaterial({ color: 0x151226 });
 	private readonly deviceMaterial = new THREE.MeshPhongMaterial({ color: 0xcc3204 });
 	private readonly dummyDeviceMaterial = new THREE.MeshPhongMaterial({ color: 0x2e4057 });
 
@@ -62,11 +66,13 @@ export class BucketFactory {
 
 		for (const device of this.devices.values()) {
 			const pos = device.getPosition();
-			layout[device.getId()] = [{
-				x: Math.round(pos.getComponent(0) * 1000),
-				y: Math.round(pos.getComponent(1) * 1000),
-				z: Math.round(pos.getComponent(2) * 1000)
-			}];
+			layout[device.getId()] = [
+				{
+					x: Math.round(pos.getComponent(0) * 1000),
+					y: Math.round(pos.getComponent(1) * 1000),
+					z: Math.round(pos.getComponent(2) * 1000),
+				},
+			];
 		}
 
 		return layout;
@@ -75,14 +81,12 @@ export class BucketFactory {
 	public renderSentArrows(msgs: SentMessages) {
 		for (const [id, targets] of Object.entries(msgs) as [string, SentMessage[]][]) {
 			const origin = this.devices.get(Number(id));
-			if (origin === undefined)
-				continue;
+			if (origin === undefined) continue;
 
 			for (const t of targets) {
 				const dest = this.devices.get(Number(t.hop));
-				if (dest === undefined)
-					continue;
-				
+				if (dest === undefined) continue;
+
 				origin.arrowTo(dest, this.sentArrowsHolder, ArrowType.neutral);
 			}
 		}
@@ -94,7 +98,7 @@ export class BucketFactory {
 	public clearRenderedSentArrows() {
 		const arr = this.sentArrowsHolder.children;
 		const len = arr.length;
-		for (let i=0; i < len; i++) {
+		for (let i = 0; i < len; i++) {
 			const mesh = arr[0] as THREE.Mesh;
 			mesh.removeFromParent();
 			mesh.geometry.dispose();
@@ -106,14 +110,12 @@ export class BucketFactory {
 	public renderRecvArrows(msgs: RecvMessages) {
 		for (const [id, targets] of Object.entries(msgs) as [string, RecvMessage[]][]) {
 			const origin = this.devices.get(Number(id));
-			if (origin === undefined)
-				continue;
+			if (origin === undefined) continue;
 
 			for (const t of targets) {
 				const dest = this.devices.get(Number(t.hop));
-				if (dest === undefined)
-					continue;
-				
+				if (dest === undefined) continue;
+
 				let type: ArrowType;
 				if (t.failed) {
 					type = ArrowType.fail;
@@ -126,7 +128,7 @@ export class BucketFactory {
 				origin.arrowTo(dest, this.recvArrowsHolder, type);
 			}
 		}
-		
+
 		this.sceneManager.invalidate();
 	}
 
@@ -134,7 +136,7 @@ export class BucketFactory {
 	public clearRenderedRecvArrows() {
 		const arr = this.recvArrowsHolder.children;
 		const len = arr.length;
-		for (let i=0; i < len; i++) {
+		for (let i = 0; i < len; i++) {
 			const mesh = arr[0] as THREE.Mesh;
 			mesh.removeFromParent();
 			mesh.geometry.dispose();
@@ -142,7 +144,7 @@ export class BucketFactory {
 
 		this.sceneManager.invalidate();
 	}
-	
+
 	public static fixBucketWidths(config: WarehouseStructure) {
 		for (const rack of config.racks) {
 			for (const sh of rack.shelves) {
@@ -154,16 +156,16 @@ export class BucketFactory {
 	}
 
 	public addDummyDevice(config: DummyDevice, dim: WarehouseDimensions, obj: THREE.Object3D) {
-			// DEVICE
-			const device = new THREE.Mesh(this.deviceGeometry, this.dummyDeviceMaterial);
-			device.name = "Dummy  " + config.id;
-			obj.add(device);
-	
-			device.translateX(config.x - dim.width / 2);
-			device.translateY(config.y);
-			device.translateZ(config.z - dim.depth / 2);
-	
-			this.devices.set(config.id, new Device(config.id, device));	
+		// DEVICE
+		const device = new THREE.Mesh(this.deviceGeometry, this.dummyDeviceMaterial);
+		device.name = "Dummy  " + config.id;
+		obj.add(device);
+
+		device.translateX(config.x - dim.width / 2);
+		device.translateY(config.y);
+		device.translateZ(config.z - dim.depth / 2);
+
+		this.devices.set(config.id, new Device(config.id, device));
 	}
 
 	public addBucket(bconfig: BucketConfig, depth: number, pos: number, obj: THREE.Object3D) {
@@ -205,12 +207,14 @@ export class BucketFactory {
 		const radius = 0.1;
 		const widthSegments = 6;
 		const heightSegments = 3;
-		const sphereGeometry = new THREE.SphereGeometry(
-			radius, widthSegments, heightSegments);
-		const thresholdAngle = 1;  // ui: thresholdAngle
+		const sphereGeometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+		const thresholdAngle = 1; // ui: thresholdAngle
 		const edges = new THREE.EdgesGeometry(sphereGeometry, thresholdAngle);
-		const orchestrator = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xffffff } ) );
-		orchestrator.name = 'Orchestrator';
+		const orchestrator = new THREE.LineSegments(
+			edges,
+			new THREE.LineBasicMaterial({ color: 0xffffff })
+		);
+		orchestrator.name = "Orchestrator";
 		orchestrator.translateX(pos.x - dim.width / 2);
 		orchestrator.translateY(pos.y);
 		orchestrator.translateZ(pos.z - dim.depth / 2);

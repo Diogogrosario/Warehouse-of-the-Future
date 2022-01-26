@@ -46,7 +46,6 @@ const Metrics: React.FC<MetricsProps> = (props: MetricsProps) => {
 				margin: "32px 0",
 			}}
 		>
-
 			<Grid
 				item
 				style={{

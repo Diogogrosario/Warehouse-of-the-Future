@@ -4,7 +4,11 @@ import { RackFactory, RackConfig } from "./RackFactory";
 import { DummyDevice, BucketFactory, Coords3 } from "./BucketFactory";
 import SceneManager from "./SceneManager";
 import { SpaceEvenly } from "./utils/Spacing";
-import { RecvMessages, SentMessages, ISimulationMessageObserver } from "../resources/SimulationInterfaces";
+import {
+	RecvMessages,
+	SentMessages,
+	ISimulationMessageObserver,
+} from "../resources/SimulationInterfaces";
 import { SimulationAPI } from "../resources/SimulationAPI";
 
 export interface WarehouseDimensions {
@@ -98,9 +102,8 @@ export class Warehouse implements ISimulationMessageObserver {
 	}
 
 	private addDummyDevices(structure: WarehouseStructure) {
-		if (this.structure.dummyDevices === undefined)
-			return;
-		
+		if (this.structure.dummyDevices === undefined) return;
+
 		const dummyGroup = new THREE.Group();
 		dummyGroup.name = "DummyDevices";
 		this.warehouse.add(dummyGroup);

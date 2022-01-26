@@ -11,7 +11,6 @@ import TabPanel from "./components/TabPanel";
 import NoResultsOverlay from "./components/NoResultsOverlay";
 import theme from "./styles/theme";
 import Simulation from "./components/simulation/Simulation";
-import { SimulationAPI } from "./resources/SimulationAPI";
 
 export enum FullscreenState {
 	Left,
@@ -114,9 +113,7 @@ export default function App() {
 									: `${panelSize}%`,
 						}}
 					>
-						<WarehouseRenderer
-							background={theme.palette.dark.main}
-						/>
+						<WarehouseRenderer background={theme.palette.dark.main} />
 						<FullscreenButton
 							fullscreenState={fullscreen}
 							setFullscreen={setFullscreen}

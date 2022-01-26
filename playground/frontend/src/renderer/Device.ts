@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
 export enum ArrowType {
-	neutral="neutral",
-	hop="hop",
-	final="final",
-	fail="fail"
+	neutral = "neutral",
+	hop = "hop",
+	final = "final",
+	fail = "fail",
 }
 
 export class Device {
@@ -23,40 +23,40 @@ export class Device {
 	private static readonly cone = Device.genCone();
 
 	private static readonly coneMaterials = {
-		"neutral": new THREE.MeshLambertMaterial({
+		neutral: new THREE.MeshLambertMaterial({
 			color: Device.neutralColor,
 		}),
-		"hop": new THREE.MeshLambertMaterial({
+		hop: new THREE.MeshLambertMaterial({
 			color: Device.hopColor,
 		}),
-		"final": new THREE.MeshLambertMaterial({
+		final: new THREE.MeshLambertMaterial({
 			color: Device.finalColor,
 		}),
-		"fail": new THREE.MeshLambertMaterial({
+		fail: new THREE.MeshLambertMaterial({
 			color: Device.failColor,
 		}),
-	}
+	};
 
 	private static readonly arrowMaterials = {
-		"neutral": new THREE.LineDashedMaterial({
+		neutral: new THREE.LineDashedMaterial({
 			color: Device.neutralColor,
 			linewidth: 2,
 			dashSize: 0.03,
-			gapSize: 0.01
+			gapSize: 0.01,
 		}),
-		"hop": new THREE.LineBasicMaterial({
+		hop: new THREE.LineBasicMaterial({
 			color: Device.hopColor,
 			linewidth: 2,
 		}),
-		"final": new THREE.LineBasicMaterial({
+		final: new THREE.LineBasicMaterial({
 			color: Device.finalColor,
 			linewidth: 2,
 		}),
-		"fail": new THREE.LineBasicMaterial({
+		fail: new THREE.LineBasicMaterial({
 			color: Device.failColor,
 			linewidth: 2,
-		})
-	}
+		}),
+	};
 
 	constructor(id: number, device: THREE.Object3D) {
 		this.id = id;
@@ -109,23 +109,16 @@ export class Device {
 		}
 		const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
 
-
 		const arrowMat = Device.arrowMaterials[type];
 		// Create the final object to add to the scene
-		const arrow = new THREE.Line(
-			lineGeo,
-			arrowMat
-		);
+		const arrow = new THREE.Line(lineGeo, arrowMat);
 		arrow.computeLineDistances();
-		arrow.name = `arrow-${this.id}-${d.id}`; 
+		arrow.name = `arrow-${this.id}-${d.id}`;
 		scene.add(arrow);
 
 		const coneMat = Device.coneMaterials[type];
-		const coneMesh = new THREE.Mesh(
-			Device.cone,
-			coneMat
-		);
-		arrow.name = `arrowhead-${this.id}-${d.id}`; 
+		const coneMesh = new THREE.Mesh(Device.cone, coneMat);
+		arrow.name = `arrowhead-${this.id}-${d.id}`;
 		scene.add(coneMesh);
 
 		const curvePointForArrow = 1 - Device.coneHeight / curve.getLength();
