@@ -13,6 +13,7 @@ This project was built using Node 16 LTS and uses the following technologies:
 - [Docker](https://www.docker.com/) - For deployment.
 - [Prettier](https://prettier.io/) - For formatting.
 - [ESLint](https://eslint.org/) - For linting.
+- [visx](https://airbnb.io/visx/) - For device battery visualization.
 
 ## Available Scripts
 

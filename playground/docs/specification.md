@@ -20,6 +20,7 @@ The API documentation can found [here](openapi.yaml).
 
 - [React](https://reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
+- [visx](https://airbnb.io/visx/)
 
 ### Rendering (Warehouse)
 
@@ -38,6 +39,7 @@ The API documentation can found [here](openapi.yaml).
 ### Unit Testing
 
 - [Python](https://www.python.org/)
+- [Pytest](docs.pytest.org)
 
 ### Integration Testing
 
