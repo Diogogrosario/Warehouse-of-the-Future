@@ -1,4 +1,4 @@
-# Team 1 - Data collection & Processing
+# Team 1 - Data Collection & Processing
 
 We are a team in the Warehouse of Future project, that was done as part of the Large Scale Software Development Course at FEUP in colaboration with the DIGI-2 lab.
 
@@ -79,7 +79,8 @@ The documentation for this vertical is available at
 [docs](./docs). The main sections are:
 
 - [Architecture](./docs/wiki/architecture.md) - The class diagram of the project;
-- [Domain Analysis](./docs/wiki/domain_analysis.md) - details that might be important for code contributions;
+- [Domain Analysis](./docs/wiki/domain_analysis.md) - Details that might be important for code contributions;
 - [Product Vision](./docs/wiki/vision.md) - Detailed product vision;
 - [Risks](./docs/wiki/risks.md) - The risks of the project;
-- [Similar products](./docs/wiki/similar_projects.md) - products found in the wild.
+- [Similar products](./docs/wiki/similar_projects.md) - Products found in the wild;
+- [Sprint Logs](sprint_logs.md) - Detailed retrospective of each sprint.
