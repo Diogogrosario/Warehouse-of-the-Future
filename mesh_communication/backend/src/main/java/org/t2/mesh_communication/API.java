@@ -451,7 +451,6 @@ public class API implements ErrorController {
     public String layout(@RequestBody Map<String, Object> jsonObject, HttpServletResponse response)
             throws IOException {
         this.resetStatus(jsonObject);
-        response.setStatus(HttpServletResponse.SC_OK);
 
         response.setStatus(HttpServletResponse.SC_OK);
 
