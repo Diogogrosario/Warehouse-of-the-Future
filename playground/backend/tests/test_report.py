@@ -2,7 +2,6 @@ import requests
 import json
 from tools.utils import *
 
-SRC_FOLDER = "./tests/resources"
 BASE_URL = "http://localhost:3001"
 
 def test_retrieve_all_reports():
