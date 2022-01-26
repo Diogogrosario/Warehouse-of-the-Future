@@ -42,7 +42,7 @@ The main goal here is to collect the data from the warehouse and make it availab
 
 # Testing
 
-Quality Assurance is granted using GitHub actions that runs the Unit Tests a Property Based tests implemented for the API endpoints.
+Quality Assurance is granted using GitHub actions that runs the Unit and Property Based tests implemented for the API endpoints.
 
 Those tests can be run by executing the [runTests.sh](./backend/runTests.sh) script inside the [backend folder](./backend).
 
@@ -78,11 +78,8 @@ When code is pushed to the main branches, a Github action deploys the code and m
 The documentation for this vertical is available at
 [docs](./docs). The main sections are:
 
-- [Architecture](./docs/wiki/architecture.md) -- The class diagram of the
-  project;
-- [Domain Analysis](./docs/wiki/domain_analysis.md)
-  details that might be important for code contributions;
-- [Product Vision](./docs/wiki/vision.md) -- Detailed product vision;
-- [Risks](./docs/wiki/risks.md) -- The risks of the project;
-- [Similar products](./docs/wiki/similar_projects.md)
-  products found in the wild.
+- [Architecture](./docs/wiki/architecture.md) - The class diagram of the project;
+- [Domain Analysis](./docs/wiki/domain_analysis.md) - details that might be important for code contributions;
+- [Product Vision](./docs/wiki/vision.md) - Detailed product vision;
+- [Risks](./docs/wiki/risks.md) - The risks of the project;
+- [Similar products](./docs/wiki/similar_projects.md) - products found in the wild.
