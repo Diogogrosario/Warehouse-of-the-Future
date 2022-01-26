@@ -6,3 +6,4 @@
 - [Architecture](architecture.md)
 - [Risks](risks.md)
 - [Sprint Logs](sprint_logs.md)
+- [Mockups](mockups.md)

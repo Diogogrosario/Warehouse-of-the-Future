@@ -80,6 +80,7 @@ The documentation for this vertical is available at
 
 - [Architecture](./docs/wiki/architecture.md) - The class diagram of the project;
 - [Domain Analysis](./docs/wiki/domain_analysis.md) - Details that might be important for code contributions;
+- [Mockups](./docs/wiki/mockups.md) - The mockups of the project;
 - [Product Vision](./docs/wiki/vision.md) - Detailed product vision;
 - [Risks](./docs/wiki/risks.md) - The risks of the project;
 - [Similar products](./docs/wiki/similar_projects.md) - Products found in the wild;
