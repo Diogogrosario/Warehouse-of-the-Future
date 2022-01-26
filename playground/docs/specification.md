@@ -1,16 +1,49 @@
 # Playground - Team 3
 
-Playground is a web-app focused on providing maintenance staff a tool to visualize the real-time status of the warehouse.
+Playground is a web-app focused on providing maintenance staff a tool to visualize the real-time status of the warehouse. It also allows the user to simulate a specific warehouse layout.
 
-## Objectives
+## Features
+
 - 3D representation of the warehouse layout
-- Visual feeDatabaseack of the status of the hardware (e.g. LEDs, sensors)
-- Dashboard with relevant maintenance updates
-- Correspondence between reports and 3D representation
+- 3D device communication representation
+- Device simulation and statistics
+- List of reports/issues from the factory (e.g.: Device failures)
+- Add actions to reports
 
-## Possible tecnologies
+## Technologies used
+
+### Frontend
+
+- [React](https://reactjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+
+### Rendering (Warehouse)
+
 - [Three.js](https://threejs.org/)
-- [Grafana](https://grafana.com/)
-- [Docker](https://www.docker.com/)
+- [Typescript](https://www.typescriptlang.org/)
+
+### Database (Reports, actions)
+
 - [PostgreSQL](https://www.postgresql.org/)
-- [MongoDatabase](https://www.mongoDatabase.com/)
+
+### Backend
+
+- [Express](https://expressjs.com/)
+- [Sequelize](https://sequelize.org/v6/)
+
+### Unit Testing
+
+- [Python](https://www.python.org/)
+
+### Integration Testing
+
+- [Selenium](https://www.selenium.dev/)
+- [Cucumber](https://cucumber.io/)
+
+### Documentation
+
+- [OpenAPI](https://www.openapis.org/)
+
+### Deployment
+
+- [Docker](https://www.docker.com/)
