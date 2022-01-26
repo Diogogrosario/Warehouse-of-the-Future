@@ -27,3 +27,5 @@ Tools:
 * Bootstrap: Frontend library for rich web layouts. Flexible ensures adaptability to multiple screen sizes out of the box.
 
 * MySQL: Mainstream DB framework. Our main concern is not to deal with data, but to process data, so the decision here was just to configure the simplest element for this task as possible. This will be handled in detail by another group, our task is to ensure easy further integration and MySQL is the right tool for that.
+
+* Mongo: Group 1 solution to provide a data lake.

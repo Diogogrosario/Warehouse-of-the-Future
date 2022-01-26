@@ -1,19 +1,22 @@
 package org.t2.mesh_communication.devices;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.t2.mesh_communication.devices.comm_strat.CommunicationStrategy;
 import org.t2.mesh_communication.devices.command.Command;
+import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.ReplyMessage;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
 
 /** A device on a mesh Network. Can be an orchestrator or a normal, passive device. */
-public abstract class MeshDevice implements Updatable {
+public abstract class MeshDevice implements Updatable, Serializable {
     protected final int id;
     protected final Position pos;
     protected final float range;
+    protected final Battery battery;
 
     /** The set of commands that will be run in the current tick. */
     protected final List<Command> commands;
@@ -26,7 +29,8 @@ public abstract class MeshDevice implements Updatable {
     /** The sequence number that will be sent on the next message's header (from this device). */
     private int seqNum;
 
-    public MeshDevice(int id, Position pos, float range, CommunicationStrategy commStrat) {
+    public MeshDevice(
+            int id, Position pos, float range, CommunicationStrategy commStrat, Battery battery) {
         this.id = id;
         this.pos = pos;
         this.range = range;
@@ -35,6 +39,7 @@ public abstract class MeshDevice implements Updatable {
         this.seqNum = 0;
         this.commands = new ArrayList<>();
         this.commandsNext = new ArrayList<>();
+        this.battery = battery;
     }
 
     public int getId() {
@@ -146,4 +151,16 @@ public abstract class MeshDevice implements Updatable {
     }
 
     public abstract boolean isOperational();
+
+    public void rechargeBattery() {
+        this.battery.batteryRecharge();
+    }
+
+    public Battery getBattery() {
+        return battery;
+    }
+
+    public int getNFailedMessages() {
+        return this.commStrat.getNFailedMessages(this);
+    }
 }

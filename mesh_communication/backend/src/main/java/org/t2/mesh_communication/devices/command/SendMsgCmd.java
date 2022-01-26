@@ -1,11 +1,12 @@
 package org.t2.mesh_communication.devices.command;
 
+import java.io.Serializable;
 import org.t2.mesh_communication.devices.MeshDevice;
 import org.t2.mesh_communication.devices.messages.Message;
 import org.t2.mesh_communication.devices.messages.ReplyMessage;
 import org.t2.mesh_communication.devices.messages.RequestMessage;
 
-public class SendMsgCmd implements Command {
+public class SendMsgCmd implements Command, Serializable {
     private final MeshDevice meshDevice;
     private final Message message;
 

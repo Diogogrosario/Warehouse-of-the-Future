@@ -161,3 +161,112 @@ In this sprint, the front end will continued to be worked on to provide more fea
 - Advance time automatically;
 - Devices without battery are shown in the frontend;
 
+## Review
+
+- Front end:
+  - Front page;
+  - Passage of time was done to be automatic;
+  - Log file is now displayed on the frontend;
+  - Acceptance tests and the automation of these;
+  - Bugfixes;
+- API:
+  - More tests were done to cover more edge cases;
+  - Redo API specification;
+  - Error page;
+  - Default endpoint to show all rest API endpoints;
+  - Message endpoints were separated;
+
+### Changed details
+
+- Changed license to MIT;
+  - Be sure to check if any new library is not against the license;
+- Front end may be discarded;
+
+## Problems faced
+
+- Many members did not work the minimum time during this sprint;
+- After the merge, the sprint was not replanned;
+- Other projects from different subjects impacted the development;
+- (Potentially) Wasted a lot of time on the frontend;
+- There was a problem with the sprint planning (did not expect another week to be added to the sprint);
+
+## What to do next
+
+- Collect data from the warehouse data vertical;
+- Configuration must be changeable on the frontend and in runtime;
+- Integrate our project with the frontend vertical;
+- Change any hardcoded value;
+- Make undo tick command;
+- Failure detection and recovery;
+
+## Sprint 3 Retrospective
+
+### Positive Topics
+
+- Issue creation and discussion improved;
+- Well defined hierarchy on the project development;
+
+### Meh Topics
+
+- (Potentially) Wasted a lot of time on the frontend;
+  - Needed to present an API to the client, whoever, our vertical was not about the frontend so it may be discarded in the final product;
+
+- There was a problem with the sprint planning
+  - Did not expect another week to be added to the sprint so it was not accounted for;
+
+
+### Topics to work on
+
+- Many members did not work the minimum time during this sprint;
+- After the merge, the sprint was not replaned;
+  - Should have made a meet with the team the each time the sprint backlog is made;
+
+### The Bad Topics
+
+- Other projects from different subjects impacted the development;
+  - Too much workload from other subjects to fully dedicate the team's time to this project only;
+
+# Sprint 4
+
+## Planning
+
+### Why is this sprint valuable
+
+- After this sprint, the client will be able to fully customize the layout and other specification of the warehouse and see the results using different metrics. The integration with the front end will also be done during this sprint;
+
+### What can be done in this sprint
+
+- Metrics:
+  - Energy consumed in each tick;
+  - Energy consumed in a full communication;
+  - How many failures happen in the system;
+  - How many ticks the communication took;
+- Configuration must be changeable on the frontend and in runtime (restart);
+- Change any hardcoded value;
+  - Hardcoded values are now part of the configuration file, such as: 
+    - the device's range;
+    - orchestrator range;
+    - orchestrator ID;
+    - messages' time to live;
+    - liveness timeout;
+- Make undo tick command (?);
+  - Commands are not ready to undo themselves;
+    - Messages are processed in a specific order which is not saved;
+  - If a message failed and then undon, when being sent again, the message must fail again;
+    - Can be obtained by a complete history of states the grid has went through, even after undoing a command;
+- Failure detection and recovery;
+- Integrate our project with the frontend vertical;
+  - See if messages are being displayed correctly on their part;
+  - Make API support for metric retreival and see if it is being displayed correctly;
+  - Make API endpoint to change device's characteristics (difficult to complete on their part);
+- Prepare project presentation;
+
+### Sprint replaning
+
+- API:
+  - Submit new layouts;
+    - Generate a random manifest with each layout;
+  - Submit new configs (frontend might not have time to implement this on their part so we will not be able to implement);
+- Make undo command (refer to original sprint planning);
+- Random chance of message sending error;
+- Make gifs for the final presentation;

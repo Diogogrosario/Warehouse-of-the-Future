@@ -16,15 +16,15 @@ import org.t2.mesh_communication.devices.messages.RequestMessage;
 public class MeshGridTests {
     @Test
     public void meshGridTests() {
-        MeshGrid mg = new MeshGrid();
+        MeshGrid mg = new MeshGrid(0);
 
         Battery bat = new Battery(50, 7);
         Screen screen = new Screen(5, 10);
         Position pos = new Position(1, 1);
         Position fakePos = new Position(1, 2);
 
-        MeshDevice device1 = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
-        MeshDevice device2 = new Device(2, pos, new FloodStrategy(mg), 10, 10, bat, screen);
+        MeshDevice device1 = new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
+        MeshDevice device2 = new Device(2, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
 
         mg.addDevice(device1);
         assertEquals(1, mg.getDevices().size());
@@ -35,7 +35,7 @@ public class MeshGridTests {
         assertEquals(1, devicesInRange.size());
 
         device1.addCommand(
-                new ReceiveMsgCmd(device1, new RequestMessage(device1.getId(), 1, 0, "")));
+                new ReceiveMsgCmd(device1, new RequestMessage(device1.getId(), 1, 0, ""), 0));
         boolean updateOnce = mg.update();
         boolean updateTwice = mg.update();
         assertFalse(updateOnce);
@@ -44,9 +44,13 @@ public class MeshGridTests {
 
     @Test
     void testDeviceFailure() {
-        MeshGrid meshGrid = new MeshGrid();
+        MeshGrid meshGrid = new MeshGrid(0);
         Orchestrator orchestrator =
-                new Orchestrator(new Position(-1, 0), new FloodStrategy(meshGrid));
+                new Orchestrator(
+                        meshGrid.getOrchestratorId(),
+                        new Position(-1, 0),
+                        1,
+                        new FloodStrategy(meshGrid));
 
         meshGrid.addDevice(orchestrator);
 
@@ -62,6 +66,7 @@ public class MeshGridTests {
                             new FloodStrategy(meshGrid),
                             0,
                             0,
+                            1,
                             bat,
                             Mockito.mock(Screen.class));
             meshGrid.addDevice(d);
@@ -76,6 +81,7 @@ public class MeshGridTests {
                         new FloodStrategy(meshGrid),
                         0,
                         0,
+                        1,
                         bat_dead,
                         Mockito.mock(Screen.class));
         meshGrid.addDevice(toBeDead);

@@ -15,7 +15,15 @@ public interface CommunicationStrategy {
     List<Integer> getDeadNeighbors();
 
     /**
-     * Given a device that wants to send a message, yields all device that will recieve that message
+     * Given a device, yields the number of messages that it failed to receive in that tick
+     *
+     * @param me The messages' target device
+     * @return number of messages failed
+     */
+    int getNFailedMessages(MeshDevice me);
+
+    /**
+     * Given a device that wants to send a message, yields all device that will receive that message
      *
      * @param me The device relaying/sending the message.
      * @return the list of devices that me will send messages to

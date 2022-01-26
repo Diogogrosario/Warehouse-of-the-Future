@@ -31,4 +31,4 @@ Application runs at http://localhost:8000.
 - Rúben Almeida, up201704618@fe.up.pt (PO)
 
 ## Code Reference
-[Code Documentation](docs/REFERENCE.md)
+[Code Documentation](../../wiki/web-app.md)

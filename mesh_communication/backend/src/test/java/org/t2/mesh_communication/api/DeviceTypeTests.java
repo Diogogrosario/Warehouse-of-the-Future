@@ -19,7 +19,6 @@ import org.t2.mesh_communication.devices.components.Battery;
 import org.t2.mesh_communication.devices.components.Screen;
 
 public class DeviceTypeTests {
-
     private static API api;
     private static MeshGrid mg;
 
@@ -27,19 +26,19 @@ public class DeviceTypeTests {
     static void init() {
         api = new API();
         mg = Mockito.mock(MeshGrid.class);
-        MeshGrid mg = Mockito.mock(MeshGrid.class);
+        when(mg.getOrchestratorId()).thenReturn(0);
 
         Position pos = new Position(1, 1);
         Battery bat = new Battery(50, 7);
         Screen screen = new Screen(5, 10);
-        Device device1 = new Device(1, pos, new FloodStrategy(mg), 10, 10, bat, screen);
+        Device device1 = new Device(1, pos, new FloodStrategy(mg), 10, 10, 1, bat, screen);
 
         Position pos2 = new Position(1, 1);
         Battery bat2 = new Battery(50, 7);
         Screen screen2 = new Screen(5, 10);
-        Device device2 = new Device(2, pos2, new FloodStrategy(mg), 10, 10, bat2, screen2);
+        Device device2 = new Device(2, pos2, new FloodStrategy(mg), 10, 10, 1, bat2, screen2);
 
-        Orchestrator och = new Orchestrator(pos, new FloodStrategy(mg));
+        Orchestrator och = new Orchestrator(mg.getOrchestratorId(), pos, 1, new FloodStrategy(mg));
 
         when(mg.getDevices())
                 .thenAnswer(

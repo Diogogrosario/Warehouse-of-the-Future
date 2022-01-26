@@ -1,24 +1,47 @@
 package org.t2.mesh_communication.devices;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.t2.mesh_communication.devices.comm_strat.FloodStrategy;
 
 /**
  * Holder of the network devices. Represents the network and distributes the tick update commands to
  * all devices. Can be queried to find devices in a certain range.
  */
-public class MeshGrid {
-    public static final int ORCHESTRATOR_ID = 0;
-
+public class MeshGrid implements Serializable {
     private MeshDevice orchestrator;
     private List<MeshDevice> devices;
+    private int nTicks;
+    private int lastTickBat;
+    private int nFailedMsg;
 
-    public MeshGrid() {
+    private final int orchestratorId;
+
+    public MeshGrid(int orchestratorId) {
+        this.orchestratorId = orchestratorId;
         this.orchestrator = null;
         this.devices = new ArrayList<>();
+        this.nTicks = 0;
+        this.lastTickBat = 0;
+        this.nFailedMsg = 0;
+    }
+
+    public int getCurrentBat() {
+        int bat = 0;
+        for (MeshDevice md : devices) {
+            bat += md.getBattery().getRemainingBattery();
+        }
+        return bat;
+    }
+
+    public int getNTicks() {
+        return nTicks;
+    }
+
+    public int getLastTickBat() {
+        return lastTickBat;
     }
 
     public MeshDevice getOrchestrator() {
@@ -33,9 +56,13 @@ public class MeshGrid {
         this.devices = devices;
     }
 
+    public int getOrchestratorId() {
+        return this.orchestratorId;
+    }
+
     public void addDevice(MeshDevice d) {
         this.devices.add(d);
-        if (d.getId() == MeshGrid.ORCHESTRATOR_ID) {
+        if (d.getId() == this.orchestratorId) {
             assert this.orchestrator == null;
             this.orchestrator = d;
         }
@@ -55,6 +82,8 @@ public class MeshGrid {
 
     public boolean update() {
         boolean hadUpdates = false;
+        this.lastTickBat = this.getCurrentBat();
+        this.nTicks++;
 
         for (MeshDevice md : this.devices) {
             if (md.update()) hadUpdates = true;
@@ -62,6 +91,7 @@ public class MeshGrid {
 
         for (MeshDevice md : this.devices) {
             md.nextCommands();
+            this.nFailedMsg += md.getNFailedMessages();
         }
 
         return hadUpdates;
@@ -71,8 +101,20 @@ public class MeshGrid {
         for (Map.Entry<Integer, Position> e : devices.entrySet()) {
             int id = e.getKey();
             Position pos = e.getValue();
-            MeshDevice d = DeviceFactory.deviceFromConfig(id, pos, new FloodStrategy(this));
+            MeshDevice d = DeviceFactory.deviceFromConfig(id, pos, this);
             this.addDevice(d);
         }
+    }
+
+    public int getTotalInitialBat() {
+        int total = 0;
+        for (MeshDevice md : this.devices) {
+            total += md.getBattery().getTotalBattery();
+        }
+        return total;
+    }
+
+    public int getFailedMessages() {
+        return this.nFailedMsg;
     }
 }
