@@ -1,10 +1,12 @@
 package org.t2.mesh_communication.devices.components;
 
+import java.io.Serializable;
+
 /**
  * Observes all devices present on the network. Stores battery consumption for one tick. Its count
  * needs to be reset upon the start of a new tick.
  */
-public class BatteryObserver {
+public class BatteryObserver implements Serializable {
     private static BatteryObserver instance;
     private int totalTickConsumption;
 

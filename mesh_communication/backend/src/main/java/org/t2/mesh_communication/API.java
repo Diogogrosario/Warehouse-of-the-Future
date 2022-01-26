@@ -5,7 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,8 +66,17 @@ public class API implements ErrorController {
     private void resetStatus() throws IOException {
         this.main.clearMeshGrid();
         this.main.clearProducts();
-        this.main.prepareGrid();
         Main.prepareConfigs();
+        this.main.prepareGrid();
+
+        Logger.getInstance().resetLogger();
+    }
+
+    private void resetStatus(Map<String, Object> jsonObject) throws IOException {
+        this.main.clearMeshGrid();
+        this.main.clearProducts();
+        Main.prepareConfigs();
+        this.main.prepareGrid(jsonObject);
 
         Logger.getInstance().resetLogger();
     }
@@ -91,10 +101,10 @@ public class API implements ErrorController {
     }
 
     @GetMapping({"/devices/{status}", "/devices"})
+    @CrossOrigin
     public List<JsonNode> devicesStatus(
             @PathVariable(name = "status", required = false) String status,
             HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         List<MeshDevice> devices;
         if (status == null) status = "all";
@@ -135,8 +145,8 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/device/{id}")
+    @CrossOrigin
     public JsonNode devices(@PathVariable("id") int deviceID, HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         List<MeshDevice> devices = this.getMeshGrid().getDevices();
 
         MeshDevice device = null;
@@ -172,9 +182,9 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/devices/inrange/{id}")
+    @CrossOrigin
     public List<JsonNode> devicesInRange(
             @PathVariable("id") int deviceID, HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         MeshDevice device = null;
         for (MeshDevice dv : this.getMeshGrid().getDevices()) {
@@ -210,8 +220,8 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/devices/inrange/all")
+    @CrossOrigin
     public ObjectNode allInRange(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         HashMap<Integer, ArrayNode> inrangeAll = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
@@ -248,11 +258,11 @@ public class API implements ErrorController {
     }
 
     @PostMapping("/tick/{time_flow}")
+    @CrossOrigin
     public String tick(
             @PathVariable("time_flow") String timeFlow,
             @RequestParam(value = "n_ticks", required = false, defaultValue = "1") int nTicks,
             HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         if (nTicks <= 0) return "NTicks must be a number of value higher than 0.";
         switch (timeFlow) {
@@ -260,9 +270,9 @@ public class API implements ErrorController {
                 this.main.advanceTick(nTicks);
                 break;
             case "backwards":
-                // TODO: when UNDO ticks is implemented
-                response.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
-                return "Backwards time flow not implemented yet.";
+                int result = this.main.goBackTick(nTicks);
+                if (result < 0) return "Invalid time flow: Can't undo that many ticks.";
+                break;
             default:
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 return "Invalid time flow.";
@@ -273,16 +283,16 @@ public class API implements ErrorController {
     }
 
     @PostMapping("/orchestrate")
+    @CrossOrigin
     public String orchestrate(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         this.main.orchestrate();
         response.setStatus(HttpServletResponse.SC_OK);
         return "Orchestrator orchestrated";
     }
 
     @GetMapping("/messages/receive")
+    @CrossOrigin
     public ObjectNode messageReceive(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
@@ -318,8 +328,8 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/messages/send")
+    @CrossOrigin
     public ObjectNode messageSend(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         HashMap<Integer, ArrayNode> messages = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
@@ -379,8 +389,8 @@ public class API implements ErrorController {
     }
 
     @GetMapping("/log")
+    @CrossOrigin
     public ObjectNode log(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         HashMap<String, ArrayNode> logs = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
@@ -414,25 +424,37 @@ public class API implements ErrorController {
 
     @RequestMapping("/metrics")
     @ResponseBody
+    @CrossOrigin
     public ObjectNode getMetrics(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
 
-        int totalInnitialBat = this.getMeshGrid().getTotalInnitialBat();
+        int totalInnitialBat = this.getMeshGrid().getTotalInitialBat();
         int currentBattery = this.getMeshGrid().getCurrentBat();
         int tickBattery = this.getMeshGrid().getLastTickBat() - currentBattery;
         if (tickBattery < 0) {
             tickBattery = 0;
         }
+        int failedMsg = this.getMeshGrid().getFailedMessages();
 
         node.put("batTick", tickBattery);
         node.put("batCommunication", totalInnitialBat - currentBattery);
-        node.put("failed", 0);
+        node.put("failed", failedMsg);
         node.put("ticks", this.getMeshGrid().getNTicks());
 
         response.setStatus(HttpServletResponse.SC_OK);
         return node;
+    }
+
+    @PostMapping("/layout")
+    @CrossOrigin
+    public String layout(@RequestBody Map<String, Object> jsonObject, HttpServletResponse response)
+            throws IOException {
+        this.resetStatus(jsonObject);
+
+        response.setStatus(HttpServletResponse.SC_OK);
+
+        return "Layout successfully posted";
     }
 
     @RequestMapping("/error")
@@ -447,6 +469,7 @@ public class API implements ErrorController {
     }
 
     @PostMapping("/restart")
+    @CrossOrigin
     public String restart(HttpServletResponse response) {
         try {
             this.resetStatus();
