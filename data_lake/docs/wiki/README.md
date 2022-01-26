@@ -5,3 +5,4 @@
 - [Domain Analysis](domain_analysis.md)
 - [Architecture](architecture.md)
 - [Risks](risks.md)
+- [Sprint Logs](sprint_logs.md)
