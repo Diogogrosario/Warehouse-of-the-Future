@@ -30,7 +30,7 @@ Tools: Sequelize, Postgres, Node.js
 
 Problems configuring all these packages in a Docker container. Took more time than initially thought.
 Had to decide on a backend ORM.  
-Little experience with Sequelize (more time was needed to understand its functionalities nad nuances).
+Little experience with Sequelize (more time was needed to understand its functionalities and nuances).
 
 
 
@@ -53,7 +53,7 @@ Implemented API endpoints after their specification.
 Developed unit tests, in python, for each of the API routes.  
 Database Seed.  
 
-Several problems regarding openapi documentation, which can be confusing (at first sight).  
+Several problems regarding openAPI documentation can be confusing (at first sight).  
 Various problems with module imports due to their unconventional structure (ES6).  
 Difficulty in deciding the testing tools.  
 
@@ -81,15 +81,15 @@ In the next sprint, the file containing the structure of the warehouse and its p
 ## Frontend
 
 Added filtering, sorting of reports.  
-Fully implemented tab panels on the webapp.  
-Major redesign of the webapp.  
+Fully implemented tab panels on the web app.  
+Major redesign of the web app.  
 Removed mark as solved button and added new action form to add actions to a given report.  
 Acceptance tests with Gherkin Cucumber.  
 Integration with backend.  
 
-Problems with rest-hooks package. The examples provided in the documentation didn't work out of the box. A lot of time was dispended implementing the connections to the backend API.  
-When developing the backend and frontend are served from different ports as such the browser sees the requests have different origins and does not accept any calls to the backend (if not running from localhost, eg. from a tablet in the same network). This is not a priority, as in production proxing would not be needed.   
-Async/Network boundaries and Suspense. When the frontend request the databse for data it should render something while it is waiting (async boundaries and suspense). When these requests fail, the frontend simply goes down and shows a white page. This should be fixed with network error boundaries. This will be analyzed in another sprint.
+Problems with the rest-hooks package. The examples provided in the documentation didn't work out of the box. A lot of time was dispended implementing the connections to the backend API.  
+When developing the backend and frontend are served from different ports as such the browser sees the requests have different origins and does not accept any calls to the backend (if not running from localhost, eg. from a tablet in the same network). This is not a priority, as in production proxying would not be needed.   
+Async/Network boundaries and Suspense. When the frontend request the database for data it should render something while it is waiting (async boundaries and suspense). When these requests fail, the frontend simply goes down and shows a white page. This should be fixed with network error boundaries. This will be analyzed in another sprint.
 
 In the next sprint, we will focus on bug fixing and integration with other verticals.
 
@@ -98,9 +98,9 @@ In the next sprint, we will focus on bug fixing and integration with other verti
 Updated API documentation with the changes that occurred in this milestone.
 Created a database clear command.
 Fixed minor issues in backend controllers.
-Added wait for db initiation command to docker container.
+Added wait for DB initiation command to Docker container.
 
-In the future, we will need to remove the employee ID from the database as it goes against the companie's privacy policy. Will also focus on the integration with other verticals.
+In the future, we will need to remove the employee ID from the database as it goes against the company's privacy policy. Will also focus on the integration with other verticals.
 
 ## Dev Ops
 
@@ -108,9 +108,9 @@ Unit test automation for API tests.
 
 ## 3D Renderer
 
-Receiving configuration file to draw the whole warehouse.  
+Receiving configuration files to draw the whole warehouse.  
 
-In the next sprint, we will ad another json version to support arbitray buckets; add support for device representation; and integrate with other verticals.
+In the next sprint, we will add another JSON version to support arbitrary buckets; add support for device representation, and integrate with other verticals.
 
 ## Retrospective
 
@@ -125,3 +125,37 @@ Meh:
 Could have gone better:
 + Integration led to many unexpected bugs
 + GitHub actions going down
+
+# Sprint 4 Review
+
+## Frontend
+Added Search Bar functionality.  
+Added device representation.
+Displaying metrics for the devices in the network.  
+Added Simulation UI (reset, advance ticks buttons).  
+
+Some functionalities that were developed by team 2 weren't developed due to time restrictions and sudden changes of the API functionalities.  
+Detected a problem in the web app's responsiveness in smaller screens. This wasn't fixed because of the time that was dispended in the integration with the other teams.
+
+In the future, the team would focus on fixing the aforementioned problems.
+
+## Dev Ops
+Added docker service for mesh simulation.  
+
+Removed wait command from docker-compose because it wasn't working on some of the developers' machines.  
+Fixed cors problems that occurred during the integration with team 2.  
+
+## 3D Renderer
+Added device, message and orchestrator representations.  
+Added dummy devices for mesh communication to facilitate message representation.  
+Objects can now be placed on the ground.  
+Can now hide a rack frame.  
+Changed layout to receive arbitrary buckets for the 3D renderer.  
+
+Had to retroactively change how shelves' geometry was created and added to the rack mesh. This change was mandatory due to the change from bucket types to arbitrary sizes and to the addition of devices. This brought into attention how important setting the origin of every geometry and mesh is, to not mess up the relative placement of objects throughout the scene graph.  
+Arrow messages were initially straight (ArrowHelper), but thanks to feedback from the team, they should be curves to improve visibility. This unexpected change in requirements added a new layer of complexity that was unaccounted for and required more hours of development.  
+
+In the future, the team would focus on popups with information about the devices and a description of the events.  
+
+## Integration with other teams
+Some issues were encountered in the integration with the mesh communication team which had never tested the API with complex messages. This caused "CORS" related problems (pre-flight checks) especially when trying to upload devices through the layout's endpoint, with the content type `application/json`.
