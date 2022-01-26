@@ -2,6 +2,8 @@ package org.t2.mesh_communication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import java.io.IOException;
+import java.util.*;
 import org.springframework.stereotype.Component;
 import org.t2.mesh_communication.config.*;
 import org.t2.mesh_communication.devices.MeshGrid;
@@ -12,9 +14,6 @@ import org.t2.mesh_communication.devices.components.BatteryObserver;
 import org.t2.mesh_communication.log.Logger;
 import org.t2.mesh_communication.mementos.Caretaker;
 import org.t2.mesh_communication.mementos.Memento;
-
-import java.io.IOException;
-import java.util.*;
 
 @Component
 public class Main {

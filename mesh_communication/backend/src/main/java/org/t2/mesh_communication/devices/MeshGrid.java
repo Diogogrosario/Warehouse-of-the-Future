@@ -90,8 +90,8 @@ public class MeshGrid implements Serializable {
         }
 
         for (MeshDevice md : this.devices) {
-            this.nFailedMsg += md.getNFailedMessages();
             md.nextCommands();
+            this.nFailedMsg += md.getNFailedMessages();
         }
 
         return hadUpdates;

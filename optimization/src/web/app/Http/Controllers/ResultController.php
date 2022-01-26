@@ -60,13 +60,30 @@ class ResultController extends Controller
         $result->update();
 
         $layoutResult = app(ProductRackController::class)->getLayoutForResult($result);
+        $max_size = 0;
+        $max_sizes = collect();
+        
+        $shelves = Shelf::with('racks')->get()->sortBy('id')->values();
+        $results=$layoutResult['results'];
+        
+        foreach($shelves as $shelf){
+            foreach($shelf->racks->sortByDesc('y')->values() as $rack){
+                foreach($results[$rack->id] as $product_racks){
+                    if($max_size<count($product_racks)){
+                        $max_size=count($product_racks);
+                    }
+                }
+                $max_sizes[$shelf->id] = $max_size;
+            }
+            $max_size=0;
+        }
 
         return view('show_results', [
             'hasResults' => True,
             'geneticResults' => Result::all()->sortBy('id')->values(),
-            'shelves' => Shelf::with('racks')->get()->sortBy('id')->values(),
-            'results' => $layoutResult['results'],
-            'sizes' => $layoutResult['sizes'],
+            'shelves' => $shelves,
+            'results' => $results,
+            'sizes' => $max_sizes,
         ]);
     }
 

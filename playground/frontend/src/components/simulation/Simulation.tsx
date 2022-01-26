@@ -45,6 +45,7 @@ const Simulation: React.FC = () => {
 							padding: "10px",
 							opacity: 0.8,
 						}}
+						id="mesh-communication-header"
 					>
 						Mesh Communication
 					</Typography>

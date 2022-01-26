@@ -1,9 +1,8 @@
 package org.t2.mesh_communication.mementos;
 
+import java.io.*;
 import org.t2.mesh_communication.devices.MeshGrid;
 import org.t2.mesh_communication.devices.Orchestrator;
-
-import java.io.*;
 
 /** Represents the state of the program */
 public class Memento {

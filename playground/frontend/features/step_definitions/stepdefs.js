@@ -6,6 +6,8 @@ const driver = new Builder().forBrowser("firefox").build();
 
 Given("I am on the Playground website", async function () {
 	await driver.get("http://localhost:3000");
+	const element = await driver.findElement(By.id("app-tab-0"));
+	await element.click();
 });
 
 // Fullscreen
@@ -31,9 +33,19 @@ When("I click a report", async function () {
 });
 
 Then("the report expands and shows actions", async function () {
-	let reportContent = await driver.findElement(By.id("playground-report-content-1"));
+	let reportContent = await driver.findElement(By.id("playground-report-1"));
 	const isExpanded = await reportContent.getAttribute("aria-expanded");
 	assert(isExpanded);
+});
+
+When("I click the Simulation Tab", async function () {
+	const element = await driver.findElement(By.id("app-tab-1"));
+	element.click();
+});
+
+Then("the current tab is set to Simulation", async function () {
+	let header = await driver.findElements(By.id("mesh-communication-header"));
+	assert(header.length == 1);
 });
 
 AfterAll(async function () {

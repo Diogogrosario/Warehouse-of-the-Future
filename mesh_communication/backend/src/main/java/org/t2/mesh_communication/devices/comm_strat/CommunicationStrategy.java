@@ -1,10 +1,9 @@
 package org.t2.mesh_communication.devices.comm_strat;
 
-import org.t2.mesh_communication.devices.MeshDevice;
-import org.t2.mesh_communication.devices.messages.Message;
-
 import java.util.HashMap;
 import java.util.List;
+import org.t2.mesh_communication.devices.MeshDevice;
+import org.t2.mesh_communication.devices.messages.Message;
 
 public interface CommunicationStrategy {
     void reset();
