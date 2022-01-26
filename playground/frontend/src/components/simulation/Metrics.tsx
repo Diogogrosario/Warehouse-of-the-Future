@@ -18,7 +18,7 @@ export interface MetricsProps {
 const Metrics: React.FC<MetricsProps> = (props: MetricsProps) => {
 	const { ticks, prevBatTick, currBatTick, batCommunication, failed } = props;
 
-	const avgUsage = batCommunication / ticks;
+	const avgUsage = batCommunication / ticks || 0;
 	const lowUsageLimit = avgUsage * 0.9;
 	const highUsageLimit = avgUsage * 1.1;
 	const criticalUsageLimit = avgUsage * 1.2;
@@ -68,7 +68,7 @@ const Metrics: React.FC<MetricsProps> = (props: MetricsProps) => {
 				</Typography>
 				<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 					<Typography variant="h6" component="span" style={{ opacity: 0.8 }}>
-						Devices Failed
+						Messages Failed
 					</Typography>
 					<Typography
 						variant="body2"
@@ -122,7 +122,7 @@ const Metrics: React.FC<MetricsProps> = (props: MetricsProps) => {
 							}}
 						>
 							({currBatTick >= prevBatTick ? "+" : ""}
-							{((currBatTick / prevBatTick - 1) * 100).toFixed(2)}%)
+							{((currBatTick / prevBatTick - 1) * 100 || 0).toFixed(2)}%)
 						</Typography>
 						{lowBatUsage && <Battery20Icon color="success" fontSize="large" />}
 						{criticalBatUsage && <BatteryAlertIcon color="error" fontSize="large" />}

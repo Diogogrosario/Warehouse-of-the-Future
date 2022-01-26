@@ -19,13 +19,13 @@ export interface DeviceProps {
 		x: number;
 		y: number;
 	};
-	battery_max?: number;
-	battery_level?: number;
+	battery_max: number;
+	battery_level: number[];
 	orchestrator?: boolean;
 }
 
 export default function Device(props: DeviceProps): React.ReactElement {
-	const { id } = props;
+	const { id, battery_max, battery_level } = props;
 
 	return (
 		<Accordion
@@ -76,7 +76,16 @@ export default function Device(props: DeviceProps): React.ReactElement {
 						Battery level
 					</Typography>
 
-					<BatteryChart width={800} height={500} />
+					<BatteryChart
+						width={800}
+						height={500}
+						batteryData={battery_level.map((element, index) => {
+							return {
+								timestamp: index,
+								battery_power: ((element / battery_max) * 100).toString(),
+							};
+						})}
+					/>
 				</Stack>
 			</AccordionDetails>
 		</Accordion>

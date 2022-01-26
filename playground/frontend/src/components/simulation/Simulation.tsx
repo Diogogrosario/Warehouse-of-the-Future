@@ -9,6 +9,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import Coloring from "../../utils/coloring";
 import TabPanel from "../TabPanel";
 import DeviceList from "../device/DeviceList";
+import { SimulationAPI } from "../../resources/SimulationAPI";
 import Metrics from "./Metrics";
 
 const Simulation: React.FC = () => {
@@ -62,7 +63,10 @@ const Simulation: React.FC = () => {
 								borderTopRightRadius: 0,
 								borderBottomRightRadius: 0,
 							}}
-							onClick={() => setCurrentTick(0)}
+							onClick={() => {
+								SimulationAPI.restart();
+								setCurrentTick(SimulationAPI.currentTick);
+							}}
 						>
 							Reset
 						</Button>
@@ -104,7 +108,10 @@ const Simulation: React.FC = () => {
 								borderTopLeftRadius: 0,
 								borderBottomLeftRadius: 0,
 							}}
-							onClick={() => setCurrentTick((prevState) => prevState + 1)}
+							onClick={() => {
+								SimulationAPI.advanceTick();
+								setCurrentTick(SimulationAPI.currentTick);
+							}}
 						>
 							Advance
 						</Button>
@@ -159,11 +166,11 @@ const Simulation: React.FC = () => {
 					aria-labelledby="sim-tab-0"
 				>
 					<Metrics
-						ticks={3}
-						prevBatTick={270}
-						currBatTick={300}
-						batCommunication={1000}
-						failed={4}
+						ticks={SimulationAPI.currentTick}
+						prevBatTick={SimulationAPI.lastTickBatteryConsumption}
+						currBatTick={SimulationAPI.currentTickBatteryConsumption}
+						batCommunication={SimulationAPI.totalBatteryConsumption}
+						failed={SimulationAPI.failed}
 					/>
 				</TabPanel>
 

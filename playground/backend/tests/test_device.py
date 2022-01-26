@@ -32,9 +32,9 @@ def test_delete_device():
     """Test deleting a device"""   
     _resp = delete_req_assertion(f'{BASE_URL}/device/470H', expected={'message': 'Success.'})
     
-# def test_delete_all_devices():
-#     """Test delete all devices"""
-#     _resp = delete_req_assertion(f'{BASE_URL}/device', expected={'message': 'Success.'})
+def test_delete_all_devices():
+    """Test delete all devices"""
+    _resp = delete_req_assertion(f'{BASE_URL}/device', expected={'message': 'Success.'})
     
     
 if __name__ == "__main__":
@@ -43,4 +43,4 @@ if __name__ == "__main__":
     test_device_not_found()
     test_create_device()
     test_delete_device()
-    # test_delete_all_devices()
+    test_delete_all_devices()

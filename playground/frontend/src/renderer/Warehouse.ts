@@ -1,9 +1,15 @@
 import * as THREE from "three";
 
 import { RackFactory, RackConfig } from "./RackFactory";
-import { BucketFactory } from "./BucketFactory";
+import { DummyDevice, BucketFactory, Coords3 } from "./BucketFactory";
 import SceneManager from "./SceneManager";
 import { SpaceEvenly } from "./utils/Spacing";
+import {
+	RecvMessages,
+	SentMessages,
+	ISimulationMessageObserver,
+} from "../resources/SimulationInterfaces";
+import { SimulationAPI } from "../resources/SimulationAPI";
 
 export interface WarehouseDimensions {
 	width: number;
@@ -14,9 +20,11 @@ export interface WarehouseDimensions {
 export interface WarehouseStructure {
 	dimensions: WarehouseDimensions;
 	racks: RackConfig[];
+	orchestrator?: Coords3;
+	dummyDevices?: DummyDevice[];
 }
 
-export class Warehouse {
+export class Warehouse implements ISimulationMessageObserver {
 	private warehouse: THREE.Object3D;
 
 	private planeGeometry = new THREE.PlaneGeometry(1, 1, 1, 1);
@@ -51,6 +59,18 @@ export class Warehouse {
 		BucketFactory.fixBucketWidths(structure);
 
 		this.buildWarehouse(this.structure);
+		SimulationAPI.postLayout(this.bucketFactory.getDeviceLayout());
+		SimulationAPI.subscribeMessages(this);
+	}
+
+	newSentMessages(msgs: SentMessages): void {
+		this.bucketFactory.clearRenderedSentArrows();
+		this.bucketFactory.renderSentArrows(msgs);
+	}
+
+	newRecvMessages(msgs: RecvMessages): void {
+		this.bucketFactory.clearRenderedRecvArrows();
+		this.bucketFactory.renderRecvArrows(msgs);
 	}
 
 	public addWarehouse(obj: THREE.Object3D) {
@@ -61,11 +81,36 @@ export class Warehouse {
 		this.addWalls(structure.dimensions);
 		this.addGround(structure.dimensions);
 
+		this.addOrchestrator(structure);
+		this.addDummyDevices(structure);
+
 		for (const shelfConfig of structure.racks) {
 			this.rackFactory.addRack(shelfConfig, structure.dimensions, this.warehouse);
 		}
 
 		this.addLights(structure.dimensions);
+	}
+
+	private addOrchestrator(structure: WarehouseStructure) {
+		const pos = structure.orchestrator ?? {
+			x: structure.dimensions.width / 2,
+			y: structure.dimensions.height / 2,
+			z: structure.dimensions.depth / 2,
+		};
+
+		this.bucketFactory.addOrchestrator(pos, structure.dimensions, this.warehouse);
+	}
+
+	private addDummyDevices(structure: WarehouseStructure) {
+		if (this.structure.dummyDevices === undefined) return;
+
+		const dummyGroup = new THREE.Group();
+		dummyGroup.name = "DummyDevices";
+		this.warehouse.add(dummyGroup);
+
+		for (const d of this.structure.dummyDevices) {
+			this.bucketFactory.addDummyDevice(d, structure.dimensions, dummyGroup);
+		}
 	}
 
 	private addGround(dim: WarehouseDimensions) {
@@ -162,6 +207,10 @@ export class Warehouse {
 				// this.warehouse.add(helper);
 			}
 		}
+	}
+
+	public dispose() {
+		SimulationAPI.unsubscribeMessages(this);
 	}
 
 	public getObject(): THREE.Object3D {

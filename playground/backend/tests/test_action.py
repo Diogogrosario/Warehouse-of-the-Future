@@ -37,9 +37,9 @@ def test_delete_action():
     """Test deleting a action"""   
     _resp = delete_req_assertion(f'{BASE_URL}/action/2', expected={'message': 'Success.'})
     
-# def test_delete_all_actions():
-#     """Test delete all actions"""
-#     _resp = delete_req_assertion(f'{BASE_URL}/action', expected={'message': 'Success.'})
+def test_delete_all_actions():
+    """Test delete all actions"""
+    _resp = delete_req_assertion(f'{BASE_URL}/action', expected={'message': 'Success.'})
     
     
 if __name__ == "__main__":
@@ -48,4 +48,4 @@ if __name__ == "__main__":
     test_action_not_found()
     test_create_action()
     test_delete_action()
-    # test_delete_all_actions()
+    test_delete_all_actions()
