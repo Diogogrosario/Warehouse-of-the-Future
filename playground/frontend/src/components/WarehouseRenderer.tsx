@@ -22,7 +22,7 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 
 	static defaultProps: Partial<WarehouseRendererProps> = {
 		background: "#ffffff",
-		fpsCounter: false
+		fpsCounter: false,
 	};
 
 	constructor(props: WarehouseRendererProps) {
@@ -58,7 +58,7 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 	componentDidUpdate(prevProps: WarehouseRendererProps) {
 		if (this.props.background !== prevProps.background && this.props.background)
 			this.sceneManager.updateBackgroundColor(this.props.background);
-		
+
 		if (this.props.fpsCounter !== prevProps.fpsCounter) {
 			if (this.props.fpsCounter) {
 				if (this.stats === undefined) {
