@@ -10,6 +10,10 @@ Playground is a web-app focused on providing maintenance staff a tool to visuali
 - List of reports/issues from the factory (e.g.: Device failures)
 - Add actions to reports
 
+## API
+
+The API documentation can found [here](openapi.yaml).
+
 ## Technologies used
 
 ### Frontend
