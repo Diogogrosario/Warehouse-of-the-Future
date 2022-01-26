@@ -15,9 +15,9 @@ export class Device {
 	private static readonly controlPointDistance = 0.5;
 
 	private static readonly neutralColor = 0x696969;
-	private static readonly hopColor = 0x0000ff;
-	private static readonly finalColor = 0x00ff00;
-	private static readonly failColor = 0xff0000;
+	private static readonly hopColor = 0x08a4bd;
+	private static readonly finalColor = 0x1db933;
+	private static readonly failColor = 0x931f1d;
 
 	private static readonly coneHeight = 0.1;
 	private static readonly cone = Device.genCone();

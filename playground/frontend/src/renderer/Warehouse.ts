@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { RackFactory, RackConfig } from "./RackFactory";
-import { BucketFactory, Coords3 } from "./BucketFactory";
+import { DummyDevice, BucketFactory, Coords3 } from "./BucketFactory";
 import SceneManager from "./SceneManager";
 import { SpaceEvenly } from "./utils/Spacing";
 import { RecvMessages, SentMessages, ISimulationMessageObserver } from "../resources/SimulationInterfaces";
@@ -17,6 +17,7 @@ export interface WarehouseStructure {
 	dimensions: WarehouseDimensions;
 	racks: RackConfig[];
 	orchestrator?: Coords3;
+	dummyDevices?: DummyDevice[];
 }
 
 export class Warehouse implements ISimulationMessageObserver {
@@ -77,6 +78,7 @@ export class Warehouse implements ISimulationMessageObserver {
 		this.addGround(structure.dimensions);
 
 		this.addOrchestrator(structure);
+		this.addDummyDevices(structure);
 
 		for (const shelfConfig of structure.racks) {
 			this.rackFactory.addRack(shelfConfig, structure.dimensions, this.warehouse);
@@ -92,10 +94,20 @@ export class Warehouse implements ISimulationMessageObserver {
 			z: structure.dimensions.depth / 2,
 		};
 
-		pos.x -= structure.dimensions.width / 2;
-		pos.z -= structure.dimensions.depth / 2;
+		this.bucketFactory.addOrchestrator(pos, structure.dimensions, this.warehouse);
+	}
 
-		this.bucketFactory.addOrchestrator(pos, this.sceneManager.scene);
+	private addDummyDevices(structure: WarehouseStructure) {
+		if (this.structure.dummyDevices === undefined)
+			return;
+		
+		const dummyGroup = new THREE.Group();
+		dummyGroup.name = "DummyDevices";
+		this.warehouse.add(dummyGroup);
+
+		for (const d of this.structure.dummyDevices) {
+			this.bucketFactory.addDummyDevice(d, structure.dimensions, dummyGroup);
+		}
 	}
 
 	private addGround(dim: WarehouseDimensions) {

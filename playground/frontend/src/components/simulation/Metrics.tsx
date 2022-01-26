@@ -69,7 +69,7 @@ const Metrics: React.FC<MetricsProps> = (props: MetricsProps) => {
 				</Typography>
 				<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 					<Typography variant="h6" component="span" style={{ opacity: 0.8 }}>
-						Devices Failed
+						Messages Failed
 					</Typography>
 					<Typography
 						variant="body2"

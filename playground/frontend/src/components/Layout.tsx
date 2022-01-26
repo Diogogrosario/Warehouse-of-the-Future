@@ -48,6 +48,7 @@ const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
 							<Container
 								component="div"
 								maxWidth={false}
+								disableGutters
 								sx={{
 									display: "flex",
 									flexGrow: 1,

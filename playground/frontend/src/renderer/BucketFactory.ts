@@ -3,7 +3,7 @@ import { ArrowType, Device } from "./Device";
 import { RecvMessages, RecvMessage, SentMessage, SentMessages } from "../resources/SimulationInterfaces";
 import { BucketConfig, RackFactory } from "./RackFactory";
 import SceneManager from "./SceneManager";
-import { WarehouseStructure } from "./Warehouse";
+import { WarehouseDimensions, WarehouseStructure } from "./Warehouse";
 import { dumpObjectToConsole } from "./utils/DebugUtils";
 
 export interface Coords3 {
@@ -14,6 +14,13 @@ export interface Coords3 {
 
 export interface DeviceLayout {
 	[key: number]: [Coords3]
+}
+
+export interface DummyDevice {
+	id: number,
+	x: number,
+	y: number,
+	z: number
 }
 
 // Internal
@@ -27,8 +34,9 @@ export class BucketFactory {
 	private readonly sentArrowsHolder: THREE.Object3D;
 	private readonly recvArrowsHolder: THREE.Object3D;
 
-	private readonly material: THREE.Material;
-	private readonly deviceMaterial: THREE.Material;
+	private readonly material = new THREE.MeshPhongMaterial({ color: 0x151226 });;
+	private readonly deviceMaterial = new THREE.MeshPhongMaterial({ color: 0xcc3204 });
+	private readonly dummyDeviceMaterial = new THREE.MeshPhongMaterial({ color: 0x2e4057 });
 
 	private readonly geometries: Map<BucketIdentifier, THREE.BufferGeometry> = new Map();
 	private readonly deviceGeometry = new THREE.BoxGeometry(0.1, 0.1, 0.025);
@@ -47,12 +55,6 @@ export class BucketFactory {
 		this.recvArrowsHolder = new THREE.Group();
 		this.recvArrowsHolder.name = "recv-arrows-holder";
 		sceneManager.scene.add(this.recvArrowsHolder);
-
-		this.geometries = new Map();
-
-		// 0x606c2e
-		this.material = new THREE.MeshPhongMaterial({ color: 0x151226 });
-		this.deviceMaterial = new THREE.MeshPhongMaterial({ color: 0xcc3204 });
 	}
 
 	public getDeviceLayout(): DeviceLayout {
@@ -151,6 +153,19 @@ export class BucketFactory {
 		}
 	}
 
+	public addDummyDevice(config: DummyDevice, dim: WarehouseDimensions, obj: THREE.Object3D) {
+			// DEVICE
+			const device = new THREE.Mesh(this.deviceGeometry, this.dummyDeviceMaterial);
+			device.name = "Dummy  " + config.id;
+			obj.add(device);
+	
+			device.translateX(config.x - dim.width / 2);
+			device.translateY(config.y);
+			device.translateZ(config.z - dim.depth / 2);
+	
+			this.devices.set(config.id, new Device(config.id, device));	
+	}
+
 	public addBucket(bconfig: BucketConfig, depth: number, pos: number, obj: THREE.Object3D) {
 		// TODO: Calculate decent default height
 		const bheight = bconfig.height ?? 2;
@@ -186,7 +201,7 @@ export class BucketFactory {
 		this.devices.set(bconfig.id, new Device(bconfig.id, device));
 	}
 
-	public addOrchestrator(pos: Coords3, obj: THREE.Object3D) {
+	public addOrchestrator(pos: Coords3, dim: WarehouseDimensions, obj: THREE.Object3D) {
 		const radius = 0.1;
 		const widthSegments = 6;
 		const heightSegments = 3;
@@ -196,9 +211,9 @@ export class BucketFactory {
 		const edges = new THREE.EdgesGeometry(sphereGeometry, thresholdAngle);
 		const orchestrator = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xffffff } ) );
 		orchestrator.name = 'Orchestrator';
-		orchestrator.translateX(pos.x);
+		orchestrator.translateX(pos.x - dim.width / 2);
 		orchestrator.translateY(pos.y);
-		orchestrator.translateZ(pos.z);
+		orchestrator.translateZ(pos.z - dim.depth / 2);
 
 		obj.add(orchestrator);
 

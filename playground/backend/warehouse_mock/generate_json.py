@@ -15,9 +15,27 @@ class Coords3:
     def __repr__(self) -> str:
         return str(self.__dict__)
 
+class DummyDevice:
+
+    aux_id = 9000
+
+    def __init__(self, x: float, y: float, z: float) -> None:
+        self.x = x
+        self.y = y
+        self.z = z
+        self.id = DummyDevice.aux_id
+        DummyDevice.aux_id += 1
+    
+    def __str__(self) -> str:
+        return str(self.__dict__)
+    
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
+
 class Bucket:
 
-    bucket_id = 1000
+    bucket_id = 1
 
     def __init__(self, width: float, height: float) -> None:
         self.width = width
@@ -104,10 +122,11 @@ class WarehouseDimensions:
 
 
 class Warehouse:
-    def __init__(self, dimensions: WarehouseDimensions, racks: list[Rack], orchestrator: Coords3) -> None:
+    def __init__(self, dimensions: WarehouseDimensions, racks: list[Rack], orchestrator: Coords3, dummyDevices: list[DummyDevice] = []) -> None:
         self.dimensions = dimensions
         self.racks = racks
         self.orchestrator = orchestrator
+        self.dummyDevices = dummyDevices
 
     @staticmethod
     def mock() -> Warehouse:
@@ -135,7 +154,37 @@ class Warehouse:
         for z in range(5, 15, 2):
             racks.append(Rack.normal_rack("west", 11, z, random.randint(3, 4)))
 
-        return Warehouse(dim, racks, orchestrator)
+        # EXTRA DEVICES TO ALLOW ALL BUCKETS TO BE IN THE SAME NETWORK
+        aux_devices = []
+        # Left
+        for z in range(1, 5):
+            aux_devices.append(DummyDevice(0.5, 3.5, z + 0.5))
+        
+        # Middle
+        for z in range(1, 5):
+            aux_devices.append(DummyDevice(6, 3.5, z + 0.5))
+
+        # Right
+        for z in range(1, 5):
+            aux_devices.append(DummyDevice(11.5, 3.5, z + 0.5))
+
+        # Left corridor top
+        for x in range(1, 5):
+            aux_devices.append(DummyDevice(x + 0.5, 3.5, 4.5))
+        
+        # Right corridor top
+        for x in range(7, 11):
+            aux_devices.append(DummyDevice(x + 0.5, 3.5, 4.5))
+
+        # Left corridor bottom
+        for x in range(1, 5):
+            aux_devices.append(DummyDevice(x + 0.5, 3.5, 14.5))
+        
+        # Right corridor bottom
+        for x in range(7, 11):
+            aux_devices.append(DummyDevice(x + 0.5, 3.5, 14.5))
+
+        return Warehouse(dim, racks, orchestrator, aux_devices)
 
 
 class WarehouseEncoder(json.JSONEncoder):
@@ -147,4 +196,4 @@ warehouse = Warehouse.mock()
 
 # Save file
 with open(os.path.dirname(__file__) + "/mock_json.json", "w") as json_file:
-    json.dump(warehouse, json_file, indent=4, cls=WarehouseEncoder)
+    json.dump(warehouse, json_file, separators=(',', ':'), cls=WarehouseEncoder)
