@@ -195,5 +195,5 @@ random.seed = 42
 warehouse = Warehouse.mock()
 
 # Save file
-with open(os.path.dirname(__file__) + "/mock_json.json", "w") as json_file:
+with open(os.path.dirname(__file__) + "/mock_layout.json", "w") as json_file:
     json.dump(warehouse, json_file, separators=(',', ':'), cls=WarehouseEncoder)

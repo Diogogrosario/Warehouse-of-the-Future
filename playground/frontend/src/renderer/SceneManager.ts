@@ -3,7 +3,7 @@ import CameraControls from "camera-controls";
 
 import { Warehouse, WarehouseStructure } from "./Warehouse";
 
-import mockJSON from "./mock_json.json";
+import mockJSON from "./mock_layout.json";
 
 CameraControls.install({ THREE: THREE });
 
