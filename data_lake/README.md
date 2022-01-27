@@ -85,4 +85,4 @@ The documentation for this vertical is available at
 - [Product Vision](./docs/wiki/vision.md) - Detailed product vision;
 - [Risks](./docs/wiki/risks.md) - The risks of the project;
 - [Similar Products](./docs/wiki/similar_projects.md) - Products found in the wild;
-- [Sprint Logs](sprint_logs.md) - Detailed retrospective of each sprint.
+- [Sprint Logs](./docs/wiki/sprint_logs.md) - Detailed retrospective of each sprint.
