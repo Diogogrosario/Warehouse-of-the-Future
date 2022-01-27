@@ -16,6 +16,9 @@ The API documentation can found [here](openapi.yaml).
 
 ## Technologies used
 
+The application architecture is explained by the following diagram:  
+![architecture diagram](architecture.png)
+
 ### Frontend
 
 - [React](https://reactjs.org/)
