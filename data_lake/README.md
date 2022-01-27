@@ -42,7 +42,7 @@ The main goal here is to collect the data from the warehouse and make it availab
 
 # Testing
 
-Quality Assurance is granted using GitHub actions that runs the Unit and Property Based tests implemented for the API endpoints.
+Quality Assurance is granted using GitHub actions that runs the Unit tests developed using [Pytest](https://docs.pytest.org/en/6.2.x/) and Property Based tests developed using [Hypothesis](https://hypothesis.readthedocs.io/en/latest/). Both of this tests were implemented for the API endpoints.
 
 Those tests can be run by executing the [runTests.sh](./backend/runTests.sh) script inside the [backend folder](./backend).
 
