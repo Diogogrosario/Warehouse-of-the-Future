@@ -80,8 +80,9 @@ The documentation for this vertical is available at
 
 - [Architecture](./docs/wiki/architecture.md) - The class diagram of the project;
 - [Domain Analysis](./docs/wiki/domain_analysis.md) - Details that might be important for code contributions;
+- [Git Workflow](./docs/wiki/workflow.md) - The workflow and practices for commits and repository management;
 - [Mockups](./docs/wiki/mockups.md) - The mockups of the project;
 - [Product Vision](./docs/wiki/vision.md) - Detailed product vision;
 - [Risks](./docs/wiki/risks.md) - The risks of the project;
-- [Similar products](./docs/wiki/similar_projects.md) - Products found in the wild;
+- [Similar Products](./docs/wiki/similar_projects.md) - Products found in the wild;
 - [Sprint Logs](sprint_logs.md) - Detailed retrospective of each sprint.
