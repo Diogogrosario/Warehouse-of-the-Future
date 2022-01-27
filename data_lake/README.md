@@ -1,4 +1,4 @@
-# Team 1 - Data collection & Processing
+# Team 1 - Data Collection & Processing
 
 We are a team in the Warehouse of Future project, that was done as part of the Large Scale Software Development Course at FEUP in colaboration with the DIGI-2 lab.
 
@@ -42,7 +42,7 @@ The main goal here is to collect the data from the warehouse and make it availab
 
 # Testing
 
-Quality Assurance is granted using GitHub actions that runs the Unit and Property Based tests implemented for the API endpoints.
+Quality Assurance is granted using GitHub actions that runs the Unit tests developed using [Pytest](https://docs.pytest.org/en/6.2.x/) and Property Based tests developed using [Hypothesis](https://hypothesis.readthedocs.io/en/latest/). Both of this tests were implemented for the API endpoints.
 
 Those tests can be run by executing the [runTests.sh](./backend/runTests.sh) script inside the [backend folder](./backend).
 
@@ -79,7 +79,9 @@ The documentation for this vertical is available at
 [docs](./docs). The main sections are:
 
 - [Architecture](./docs/wiki/architecture.md) - The class diagram of the project;
-- [Domain Analysis](./docs/wiki/domain_analysis.md) - details that might be important for code contributions;
+- [Domain Analysis](./docs/wiki/domain_analysis.md) - Details that might be important for code contributions;
+- [Mockups](./docs/wiki/mockups.md) - The mockups of the project;
 - [Product Vision](./docs/wiki/vision.md) - Detailed product vision;
 - [Risks](./docs/wiki/risks.md) - The risks of the project;
-- [Similar products](./docs/wiki/similar_projects.md) - products found in the wild.
+- [Similar products](./docs/wiki/similar_projects.md) - Products found in the wild;
+- [Sprint Logs](sprint_logs.md) - Detailed retrospective of each sprint.
