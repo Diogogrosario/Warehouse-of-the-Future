@@ -13,7 +13,6 @@ services:
         tty: true
 
     grafana:
-        image: grafana/grafana
         build: ./grafana
         container_name: grafana
         ports:
@@ -24,6 +23,8 @@ services:
             - ./grafana/provisioning:/etc/grafana/provisioning
         networks:
             - grafnet
+        depends_on:
+            - backend
 
     backend:
         build: ./backend
@@ -45,6 +46,8 @@ services:
             - .:/app
         networks:
             - workerapi
+        depends_on:
+            - backend
 
 networks:
     workerapi:

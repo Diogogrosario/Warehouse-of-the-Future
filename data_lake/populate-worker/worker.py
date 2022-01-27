@@ -1,13 +1,9 @@
-import os
 import sched
 import time
 import requests
 from bson.objectid import ObjectId
 
-parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.sys.path.append(parentdir)
-
-from backend.api import db # noqa (ignore linter in this line)
+import db
 
 DAILY_MANIFESTS = 30
 terminate = False
@@ -121,6 +117,7 @@ def populate_items():
 
     db.client.WoF.Items.insert_many(items)
 
+
 if (reset):
     db.client.WoF.Buckets.drop()
     db.client.WoF.create_collection("Buckets")
@@ -139,7 +136,7 @@ if (reset):
 
 time.sleep(5)
 
-# Worker starts by populating staff and global, which are needed only once  
+# Worker starts by populating staff and global, which are needed only once
 populate_staff()
 populate_items()
 populate_global()
