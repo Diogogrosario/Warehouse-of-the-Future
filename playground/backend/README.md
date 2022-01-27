@@ -7,6 +7,7 @@ This project was built using Node 16 LTS and uses the following technologies:
 - [PostgreSQL](https://www.postgresql.org/) - Chosen technology for the database.
 - [Sequelize](https://sequelize.org/) - An ORM for the database.
 - [Pytest](docs.pytest.org) - Used for Unit-testing.
+- [Express](https://expressjs.com/) - Used to serve the API.
 
 ## Available Scripts
 
