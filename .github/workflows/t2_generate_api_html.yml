@@ -1,0 +1,29 @@
+name: T2 - Auto Generate API's HTML When Pushing To Github CI/CD
+
+on:
+  push:
+    branches: [ development, t2_development ]
+
+jobs:
+  gen-javadocs:
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./mesh_communication
+    steps:
+    - uses: actions/checkout@v2
+    - name: Generate html
+      run: python backend/swagger-yaml-to-html.py <docs/api/api.yaml >docs/api/api.html &&
+            cp docs/api/api.html backend/src/main/resources/api.html
+    - name: setup git config
+      run: |
+        git config user.name "GitHub Actions Bot [T2]"
+        git config user.email "<joaocosta.work@posteo.net>"
+    - name: commit (this step prints a message if nothing is commited)
+      run: |
+        test "$(git diff --name-only | wc -l)" -gt 0 && \
+          git add docs/api/api.html && \
+          git commit -m "Doc: regenerate API HTML" && \
+          git push origin t2_development || \
+          echo "The commit/push failed which is ok"

@@ -1,0 +1,75 @@
+name: T3 - Build and Test
+
+on:
+  push:
+    branches: [t3_development]
+  pull_request:
+    branches: [t3_development]
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playground/frontend
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+          cache: "yarn"
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install dependencies
+        run: yarn
+      - run: yarn build
+  backend:
+    runs-on: ubuntu-latest
+
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vWL5tiMn45P8q#kP2hDe44G&eo%dMK
+      POSTGRES_DB: playground_db
+      POSTGRES_HOST: localhost
+
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # env needs to be repeated
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: vWL5tiMn45P8q#kP2hDe44G&eo%dMK
+          POSTGRES_DB: playground_db
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
+    defaults:
+      run:
+        working-directory: playground/backend
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+          cache: "yarn"
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install dependencies
+        run: yarn
+      - name: Start server 
+        run: yarn serve &
+      - name: Seed database
+        run: yarn seed
+      - name: Run tests
+        run: |
+          pip install pytest
+          pytest ./tests

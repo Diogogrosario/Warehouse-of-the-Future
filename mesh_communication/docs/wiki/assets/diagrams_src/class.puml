@@ -1,0 +1,44 @@
+@startuml class_diagram
+
+!theme amiga
+
+hide empty members
+
+class ManifestEntry {
+    componentID : Integer 
+    position : Position 
+    quantity: Integer
+}
+
+class Manifest {}
+
+class Orchestrator {}
+
+class MeshGrid {}
+
+class Device {
+    sendConsumption : Integer
+    receiveConsumption : Integer
+}
+
+class Battery {
+    capacity : Integer
+    remaining : Integer
+}
+ 
+class Screen {
+    isOn : Boolean
+    onConsumption : Integer
+}
+
+
+ManifestEntry "1..*" --* Manifest
+Manifest "*" --  "1" Orchestrator
+Orchestrator "1" -- "1" MeshGrid : > sends commands
+MeshGrid o-- "1..*" Device
+Device "1" -- "*" Device : propagates commands
+Battery --o Device
+Screen --o Device
+
+
+@enduml

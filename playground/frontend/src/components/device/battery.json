@@ -1,0 +1,1466 @@
+[
+	{
+		"timestamp": 1638491906,
+		"battery_power": "72.2"
+	},
+	{
+		"timestamp": 1638491907,
+		"battery_power": "67.7"
+	},
+	{
+		"timestamp": 1638491908,
+		"battery_power": "69.4"
+	},
+	{
+		"timestamp": 1638491909,
+		"battery_power": "68.0"
+	},
+	{
+		"timestamp": 1638491910,
+		"battery_power": "72.4"
+	},
+	{
+		"timestamp": 1638491911,
+		"battery_power": "77.0"
+	},
+	{
+		"timestamp": 1638491912,
+		"battery_power": "82.3"
+	},
+	{
+		"timestamp": 1638491913,
+		"battery_power": "78.9"
+	},
+	{
+		"timestamp": 1638491914,
+		"battery_power": "68.8"
+	},
+	{
+		"timestamp": 1638491915,
+		"battery_power": "68.7"
+	},
+	{
+		"timestamp": 1638491916,
+		"battery_power": "70.3"
+	},
+	{
+		"timestamp": 1638491917,
+		"battery_power": "75.3"
+	},
+	{
+		"timestamp": 1638491918,
+		"battery_power": "76.6"
+	},
+	{
+		"timestamp": 1638491919,
+		"battery_power": "66.6"
+	},
+	{
+		"timestamp": 1638491920,
+		"battery_power": "68.0"
+	},
+	{
+		"timestamp": 1638491921,
+		"battery_power": "70.6"
+	},
+	{
+		"timestamp": 1638491922,
+		"battery_power": "71.1"
+	},
+	{
+		"timestamp": 1638491923,
+		"battery_power": "70.0"
+	},
+	{
+		"timestamp": 1638491924,
+		"battery_power": "61.6"
+	},
+	{
+		"timestamp": 1638491925,
+		"battery_power": "57.4"
+	},
+	{
+		"timestamp": 1638491926,
+		"battery_power": "64.3"
+	},
+	{
+		"timestamp": 1638491927,
+		"battery_power": "72.4"
+	},
+	{
+		"timestamp": 1638491928,
+		"battery_power": "72.4"
+	},
+	{
+		"timestamp": 1638491929,
+		"battery_power": "72.5"
+	},
+	{
+		"timestamp": 1638491930,
+		"battery_power": "72.7"
+	},
+	{
+		"timestamp": 1638491931,
+		"battery_power": "73.4"
+	},
+	{
+		"timestamp": 1638491932,
+		"battery_power": "70.7"
+	},
+	{
+		"timestamp": 1638491933,
+		"battery_power": "56.8"
+	},
+	{
+		"timestamp": 1638491934,
+		"battery_power": "51.0"
+	},
+	{
+		"timestamp": 1638491935,
+		"battery_power": "54.9"
+	},
+	{
+		"timestamp": 1638491936,
+		"battery_power": "58.8"
+	},
+	{
+		"timestamp": 1638491937,
+		"battery_power": "62.6"
+	},
+	{
+		"timestamp": 1638491938,
+		"battery_power": "71.0"
+	},
+	{
+		"timestamp": 1638491939,
+		"battery_power": "58.4"
+	},
+	{
+		"timestamp": 1638491940,
+		"battery_power": "45.1"
+	},
+	{
+		"timestamp": 1638491941,
+		"battery_power": "52.2"
+	},
+	{
+		"timestamp": 1638491942,
+		"battery_power": "73.0"
+	},
+	{
+		"timestamp": 1638491943,
+		"battery_power": "75.4"
+	},
+	{
+		"timestamp": 1638491944,
+		"battery_power": "72.1"
+	},
+	{
+		"timestamp": 1638491945,
+		"battery_power": "56.6"
+	},
+	{
+		"timestamp": 1638491946,
+		"battery_power": "55.4"
+	},
+	{
+		"timestamp": 1638491947,
+		"battery_power": "46.7"
+	},
+	{
+		"timestamp": 1638491948,
+		"battery_power": "62.0"
+	},
+	{
+		"timestamp": 1638491949,
+		"battery_power": "71.6"
+	},
+	{
+		"timestamp": 1638491950,
+		"battery_power": "75.5"
+	},
+	{
+		"timestamp": 1638491951,
+		"battery_power": "72.1"
+	},
+	{
+		"timestamp": 1638491952,
+		"battery_power": "65.7"
+	},
+	{
+		"timestamp": 1638491953,
+		"battery_power": "56.8"
+	},
+	{
+		"timestamp": 1638491954,
+		"battery_power": "49.9"
+	},
+	{
+		"timestamp": 1638491955,
+		"battery_power": "71.7"
+	},
+	{
+		"timestamp": 1638491956,
+		"battery_power": "77.7"
+	},
+	{
+		"timestamp": 1638491957,
+		"battery_power": "76.4"
+	},
+	{
+		"timestamp": 1638491958,
+		"battery_power": "68.8"
+	},
+	{
+		"timestamp": 1638491959,
+		"battery_power": "57.0"
+	},
+	{
+		"timestamp": 1638491960,
+		"battery_power": "55.5"
+	},
+	{
+		"timestamp": 1638491961,
+		"battery_power": "61.6"
+	},
+	{
+		"timestamp": 1638491962,
+		"battery_power": "64.1"
+	},
+	{
+		"timestamp": 1638491963,
+		"battery_power": "51.1"
+	},
+	{
+		"timestamp": 1638491964,
+		"battery_power": "43.0"
+	},
+	{
+		"timestamp": 1638491965,
+		"battery_power": "46.4"
+	},
+	{
+		"timestamp": 1638491966,
+		"battery_power": "48.0"
+	},
+	{
+		"timestamp": 1638491967,
+		"battery_power": "48.1"
+	},
+	{
+		"timestamp": 1638491968,
+		"battery_power": "60.6"
+	},
+	{
+		"timestamp": 1638491969,
+		"battery_power": "42.6"
+	},
+	{
+		"timestamp": 1638491970,
+		"battery_power": "37.1"
+	},
+	{
+		"timestamp": 1638491971,
+		"battery_power": "24.2"
+	},
+	{
+		"timestamp": 1638491972,
+		"battery_power": "20.4"
+	},
+	{
+		"timestamp": 1638491973,
+		"battery_power": "15.0"
+	},
+	{
+		"timestamp": 1638491974,
+		"battery_power": "18.0"
+	},
+	{
+		"timestamp": 1638491975,
+		"battery_power": "5.4"
+	},
+	{
+		"timestamp": 1638491976,
+		"battery_power": "10.7"
+	},
+	{
+		"timestamp": 1638491977,
+		"battery_power": "48.6"
+	},
+	{
+		"timestamp": 1638491978,
+		"battery_power": "52.2"
+	},
+	{
+		"timestamp": 1638491979,
+		"battery_power": "60.8"
+	},
+	{
+		"timestamp": 1638491980,
+		"battery_power": "70.0"
+	},
+	{
+		"timestamp": 1638491981,
+		"battery_power": "64.2"
+	},
+	{
+		"timestamp": 1638491982,
+		"battery_power": "50.9"
+	},
+	{
+		"timestamp": 1638491983,
+		"battery_power": "51.6"
+	},
+	{
+		"timestamp": 1638491984,
+		"battery_power": "55.2"
+	},
+	{
+		"timestamp": 1638491985,
+		"battery_power": "62.1"
+	},
+	{
+		"timestamp": 1638491986,
+		"battery_power": "56.3"
+	},
+	{
+		"timestamp": 1638491987,
+		"battery_power": "47.2"
+	},
+	{
+		"timestamp": 1638491988,
+		"battery_power": "52.3"
+	},
+	{
+		"timestamp": 1638491989,
+		"battery_power": "45.2"
+	},
+	{
+		"timestamp": 1638491990,
+		"battery_power": "43.6"
+	},
+	{
+		"timestamp": 1638491991,
+		"battery_power": "42.9"
+	},
+	{
+		"timestamp": 1638491992,
+		"battery_power": "48.2"
+	},
+	{
+		"timestamp": 1638491993,
+		"battery_power": "45.4"
+	},
+	{
+		"timestamp": 1638491994,
+		"battery_power": "44.2"
+	},
+	{
+		"timestamp": 1638491995,
+		"battery_power": "50.4"
+	},
+	{
+		"timestamp": 1638491996,
+		"battery_power": "52.4"
+	},
+	{
+		"timestamp": 1638491997,
+		"battery_power": "53.5"
+	},
+	{
+		"timestamp": 1638491998,
+		"battery_power": "55.9"
+	},
+	{
+		"timestamp": 1638491999,
+		"battery_power": "48.2"
+	},
+	{
+		"timestamp": 1638492000,
+		"battery_power": "41.0"
+	},
+	{
+		"timestamp": 1638492001,
+		"battery_power": "48.9"
+	},
+	{
+		"timestamp": 1638492002,
+		"battery_power": "54.8"
+	},
+	{
+		"timestamp": 1638492003,
+		"battery_power": "61.2"
+	},
+	{
+		"timestamp": 1638492004,
+		"battery_power": "59.7"
+	},
+	{
+		"timestamp": 1638492005,
+		"battery_power": "52.5"
+	},
+	{
+		"timestamp": 1638492006,
+		"battery_power": "54.0"
+	},
+	{
+		"timestamp": 1638492007,
+		"battery_power": "47.7"
+	},
+	{
+		"timestamp": 1638492008,
+		"battery_power": "49.2"
+	},
+	{
+		"timestamp": 1638492009,
+		"battery_power": "48.4"
+	},
+	{
+		"timestamp": 1638492010,
+		"battery_power": "40.2"
+	},
+	{
+		"timestamp": 1638492011,
+		"battery_power": "43.9"
+	},
+	{
+		"timestamp": 1638492012,
+		"battery_power": "45.2"
+	},
+	{
+		"timestamp": 1638492013,
+		"battery_power": "65.0"
+	},
+	{
+		"timestamp": 1638492014,
+		"battery_power": "68.2"
+	},
+	{
+		"timestamp": 1638492015,
+		"battery_power": "47.5"
+	},
+	{
+		"timestamp": 1638492016,
+		"battery_power": "57.1"
+	},
+	{
+		"timestamp": 1638492017,
+		"battery_power": "61.9"
+	},
+	{
+		"timestamp": 1638492018,
+		"battery_power": "54.6"
+	},
+	{
+		"timestamp": 1638492019,
+		"battery_power": "56.7"
+	},
+	{
+		"timestamp": 1638492020,
+		"battery_power": "54.4"
+	},
+	{
+		"timestamp": 1638492021,
+		"battery_power": "52.7"
+	},
+	{
+		"timestamp": 1638492022,
+		"battery_power": "61.8"
+	},
+	{
+		"timestamp": 1638492023,
+		"battery_power": "55.0"
+	},
+	{
+		"timestamp": 1638492024,
+		"battery_power": "50.7"
+	},
+	{
+		"timestamp": 1638492025,
+		"battery_power": "52.9"
+	},
+	{
+		"timestamp": 1638492026,
+		"battery_power": "44.4"
+	},
+	{
+		"timestamp": 1638492027,
+		"battery_power": "49.1"
+	},
+	{
+		"timestamp": 1638492028,
+		"battery_power": "62.8"
+	},
+	{
+		"timestamp": 1638492029,
+		"battery_power": "64.6"
+	},
+	{
+		"timestamp": 1638492030,
+		"battery_power": "61.1"
+	},
+	{
+		"timestamp": 1638492031,
+		"battery_power": "70.0"
+	},
+	{
+		"timestamp": 1638492032,
+		"battery_power": "61.3"
+	},
+	{
+		"timestamp": 1638492033,
+		"battery_power": "48.2"
+	},
+	{
+		"timestamp": 1638492034,
+		"battery_power": "44.2"
+	},
+	{
+		"timestamp": 1638492035,
+		"battery_power": "51.3"
+	},
+	{
+		"timestamp": 1638492036,
+		"battery_power": "49.2"
+	},
+	{
+		"timestamp": 1638492037,
+		"battery_power": "45.7"
+	},
+	{
+		"timestamp": 1638492038,
+		"battery_power": "54.1"
+	},
+	{
+		"timestamp": 1638492039,
+		"battery_power": "44.9"
+	},
+	{
+		"timestamp": 1638492040,
+		"battery_power": "36.5"
+	},
+	{
+		"timestamp": 1638492041,
+		"battery_power": "44.8"
+	},
+	{
+		"timestamp": 1638492042,
+		"battery_power": "52.3"
+	},
+	{
+		"timestamp": 1638492043,
+		"battery_power": "68.0"
+	},
+	{
+		"timestamp": 1638492044,
+		"battery_power": "54.6"
+	},
+	{
+		"timestamp": 1638492045,
+		"battery_power": "53.8"
+	},
+	{
+		"timestamp": 1638492046,
+		"battery_power": "56.2"
+	},
+	{
+		"timestamp": 1638492047,
+		"battery_power": "50.8"
+	},
+	{
+		"timestamp": 1638492048,
+		"battery_power": "53.0"
+	},
+	{
+		"timestamp": 1638492049,
+		"battery_power": "61.0"
+	},
+	{
+		"timestamp": 1638492050,
+		"battery_power": "68.8"
+	},
+	{
+		"timestamp": 1638492051,
+		"battery_power": "69.4"
+	},
+	{
+		"timestamp": 1638492052,
+		"battery_power": "59.3"
+	},
+	{
+		"timestamp": 1638492053,
+		"battery_power": "47.2"
+	},
+	{
+		"timestamp": 1638492054,
+		"battery_power": "47.7"
+	},
+	{
+		"timestamp": 1638492055,
+		"battery_power": "61.9"
+	},
+	{
+		"timestamp": 1638492056,
+		"battery_power": "67.2"
+	},
+	{
+		"timestamp": 1638492057,
+		"battery_power": "70.1"
+	},
+	{
+		"timestamp": 1638492058,
+		"battery_power": "62.1"
+	},
+	{
+		"timestamp": 1638492059,
+		"battery_power": "72.7"
+	},
+	{
+		"timestamp": 1638492060,
+		"battery_power": "59.0"
+	},
+	{
+		"timestamp": 1638492061,
+		"battery_power": "51.8"
+	},
+	{
+		"timestamp": 1638492062,
+		"battery_power": "55.0"
+	},
+	{
+		"timestamp": 1638492063,
+		"battery_power": "61.8"
+	},
+	{
+		"timestamp": 1638492064,
+		"battery_power": "67.1"
+	},
+	{
+		"timestamp": 1638492065,
+		"battery_power": "72.0"
+	},
+	{
+		"timestamp": 1638492066,
+		"battery_power": "46.4"
+	},
+	{
+		"timestamp": 1638492067,
+		"battery_power": "46.7"
+	},
+	{
+		"timestamp": 1638492068,
+		"battery_power": "56.9"
+	},
+	{
+		"timestamp": 1638492069,
+		"battery_power": "61.9"
+	},
+	{
+		"timestamp": 1638492070,
+		"battery_power": "68.8"
+	},
+	{
+		"timestamp": 1638492071,
+		"battery_power": "71.9"
+	},
+	{
+		"timestamp": 1638492072,
+		"battery_power": "72.0"
+	},
+	{
+		"timestamp": 1638492073,
+		"battery_power": "72.5"
+	},
+	{
+		"timestamp": 1638492074,
+		"battery_power": "71.7"
+	},
+	{
+		"timestamp": 1638492075,
+		"battery_power": "71.1"
+	},
+	{
+		"timestamp": 1638492076,
+		"battery_power": "73.0"
+	},
+	{
+		"timestamp": 1638492077,
+		"battery_power": "63.8"
+	},
+	{
+		"timestamp": 1638492078,
+		"battery_power": "60.0"
+	},
+	{
+		"timestamp": 1638492079,
+		"battery_power": "62.3"
+	},
+	{
+		"timestamp": 1638492080,
+		"battery_power": "61.1"
+	},
+	{
+		"timestamp": 1638492081,
+		"battery_power": "62.0"
+	},
+	{
+		"timestamp": 1638492082,
+		"battery_power": "64.6"
+	},
+	{
+		"timestamp": 1638492083,
+		"battery_power": "66.0"
+	},
+	{
+		"timestamp": 1638492084,
+		"battery_power": "65.8"
+	},
+	{
+		"timestamp": 1638492085,
+		"battery_power": "69.2"
+	},
+	{
+		"timestamp": 1638492086,
+		"battery_power": "69.5"
+	},
+	{
+		"timestamp": 1638492087,
+		"battery_power": "73.5"
+	},
+	{
+		"timestamp": 1638492088,
+		"battery_power": "73.9"
+	},
+	{
+		"timestamp": 1638492089,
+		"battery_power": "75.3"
+	},
+	{
+		"timestamp": 1638492090,
+		"battery_power": "75.4"
+	},
+	{
+		"timestamp": 1638492091,
+		"battery_power": "77.3"
+	},
+	{
+		"timestamp": 1638492092,
+		"battery_power": "67.0"
+	},
+	{
+		"timestamp": 1638492093,
+		"battery_power": "71.1"
+	},
+	{
+		"timestamp": 1638492094,
+		"battery_power": "70.4"
+	},
+	{
+		"timestamp": 1638492095,
+		"battery_power": "73.6"
+	},
+	{
+		"timestamp": 1638492096,
+		"battery_power": "71.1"
+	},
+	{
+		"timestamp": 1638492097,
+		"battery_power": "70.0"
+	},
+	{
+		"timestamp": 1638492098,
+		"battery_power": "69.0"
+	},
+	{
+		"timestamp": 1638492099,
+		"battery_power": "69.2"
+	},
+	{
+		"timestamp": 1638492100,
+		"battery_power": "74.5"
+	},
+	{
+		"timestamp": 1638492101,
+		"battery_power": "73.4"
+	},
+	{
+		"timestamp": 1638492102,
+		"battery_power": "76.0"
+	},
+	{
+		"timestamp": 1638492103,
+		"battery_power": "74.5"
+	},
+	{
+		"timestamp": 1638492104,
+		"battery_power": "63.6"
+	},
+	{
+		"timestamp": 1638492105,
+		"battery_power": "67.3"
+	},
+	{
+		"timestamp": 1638492106,
+		"battery_power": "65.1"
+	},
+	{
+		"timestamp": 1638492107,
+		"battery_power": "67.9"
+	},
+	{
+		"timestamp": 1638492108,
+		"battery_power": "68.9"
+	},
+	{
+		"timestamp": 1638492109,
+		"battery_power": "65.1"
+	},
+	{
+		"timestamp": 1638492110,
+		"battery_power": "65.4"
+	},
+	{
+		"timestamp": 1638492111,
+		"battery_power": "70.1"
+	},
+	{
+		"timestamp": 1638492112,
+		"battery_power": "67.0"
+	},
+	{
+		"timestamp": 1638492113,
+		"battery_power": "75.4"
+	},
+	{
+		"timestamp": 1638492114,
+		"battery_power": "77.5"
+	},
+	{
+		"timestamp": 1638492115,
+		"battery_power": "77.0"
+	},
+	{
+		"timestamp": 1638492116,
+		"battery_power": "77.7"
+	},
+	{
+		"timestamp": 1638492117,
+		"battery_power": "77.7"
+	},
+	{
+		"timestamp": 1638492118,
+		"battery_power": "77.7"
+	},
+	{
+		"timestamp": 1638492119,
+		"battery_power": "77.0"
+	},
+	{
+		"timestamp": 1638492120,
+		"battery_power": "77.9"
+	},
+	{
+		"timestamp": 1638492121,
+		"battery_power": "79.1"
+	},
+	{
+		"timestamp": 1638492122,
+		"battery_power": "80.1"
+	},
+	{
+		"timestamp": 1638492123,
+		"battery_power": "82.1"
+	},
+	{
+		"timestamp": 1638492124,
+		"battery_power": "79.0"
+	},
+	{
+		"timestamp": 1638492125,
+		"battery_power": "79.8"
+	},
+	{
+		"timestamp": 1638492126,
+		"battery_power": "70.0"
+	},
+	{
+		"timestamp": 1638492127,
+		"battery_power": "69.8"
+	},
+	{
+		"timestamp": 1638492128,
+		"battery_power": "71.3"
+	},
+	{
+		"timestamp": 1638492129,
+		"battery_power": "69.4"
+	},
+	{
+		"timestamp": 1638492130,
+		"battery_power": "72.0"
+	},
+	{
+		"timestamp": 1638492131,
+		"battery_power": "72.4"
+	},
+	{
+		"timestamp": 1638492132,
+		"battery_power": "72.5"
+	},
+	{
+		"timestamp": 1638492133,
+		"battery_power": "67.6"
+	},
+	{
+		"timestamp": 1638492134,
+		"battery_power": "69.0"
+	},
+	{
+		"timestamp": 1638492135,
+		"battery_power": "72.7"
+	},
+	{
+		"timestamp": 1638492136,
+		"battery_power": "73.7"
+	},
+	{
+		"timestamp": 1638492137,
+		"battery_power": "77.5"
+	},
+	{
+		"timestamp": 1638492138,
+		"battery_power": "75.8"
+	},
+	{
+		"timestamp": 1638492139,
+		"battery_power": "76.9"
+	},
+	{
+		"timestamp": 1638492140,
+		"battery_power": "78.8"
+	},
+	{
+		"timestamp": 1638492141,
+		"battery_power": "77.7"
+	},
+	{
+		"timestamp": 1638492142,
+		"battery_power": "80.6"
+	},
+	{
+		"timestamp": 1638492143,
+		"battery_power": "81.4"
+	},
+	{
+		"timestamp": 1638492144,
+		"battery_power": "82.3"
+	},
+	{
+		"timestamp": 1638492145,
+		"battery_power": "80.3"
+	},
+	{
+		"timestamp": 1638492146,
+		"battery_power": "80.3"
+	},
+	{
+		"timestamp": 1638492147,
+		"battery_power": "82.2"
+	},
+	{
+		"timestamp": 1638492148,
+		"battery_power": "81.9"
+	},
+	{
+		"timestamp": 1638492149,
+		"battery_power": "82.4"
+	},
+	{
+		"timestamp": 1638492150,
+		"battery_power": "77.9"
+	},
+	{
+		"timestamp": 1638492151,
+		"battery_power": "81.1"
+	},
+	{
+		"timestamp": 1638492152,
+		"battery_power": "82.2"
+	},
+	{
+		"timestamp": 1638492153,
+		"battery_power": "81.2"
+	},
+	{
+		"timestamp": 1638492154,
+		"battery_power": "83.0"
+	},
+	{
+		"timestamp": 1638492155,
+		"battery_power": "83.2"
+	},
+	{
+		"timestamp": 1638492156,
+		"battery_power": "82.1"
+	},
+	{
+		"timestamp": 1638492157,
+		"battery_power": "77.5"
+	},
+	{
+		"timestamp": 1638492158,
+		"battery_power": "77.9"
+	},
+	{
+		"timestamp": 1638492159,
+		"battery_power": "82.9"
+	},
+	{
+		"timestamp": 1638492160,
+		"battery_power": "86.8"
+	},
+	{
+		"timestamp": 1638492161,
+		"battery_power": "85.3"
+	},
+	{
+		"timestamp": 1638492162,
+		"battery_power": "76.9"
+	},
+	{
+		"timestamp": 1638492163,
+		"battery_power": "84.5"
+	},
+	{
+		"timestamp": 1638492164,
+		"battery_power": "84.4"
+	},
+	{
+		"timestamp": 1638492165,
+		"battery_power": "83.8"
+	},
+	{
+		"timestamp": 1638492166,
+		"battery_power": "82.5"
+	},
+	{
+		"timestamp": 1638492167,
+		"battery_power": "82.9"
+	},
+	{
+		"timestamp": 1638492168,
+		"battery_power": "82.5"
+	},
+	{
+		"timestamp": 1638492169,
+		"battery_power": "81.3"
+	},
+	{
+		"timestamp": 1638492170,
+		"battery_power": "80.8"
+	},
+	{
+		"timestamp": 1638492171,
+		"battery_power": "81.7"
+	},
+	{
+		"timestamp": 1638492172,
+		"battery_power": "83.9"
+	},
+	{
+		"timestamp": 1638492173,
+		"battery_power": "85.5"
+	},
+	{
+		"timestamp": 1638492174,
+		"battery_power": "87.2"
+	},
+	{
+		"timestamp": 1638492175,
+		"battery_power": "88.0"
+	},
+	{
+		"timestamp": 1638492176,
+		"battery_power": "89.6"
+	},
+	{
+		"timestamp": 1638492177,
+		"battery_power": "86.7"
+	},
+	{
+		"timestamp": 1638492178,
+		"battery_power": "85.3"
+	},
+	{
+		"timestamp": 1638492179,
+		"battery_power": "81.7"
+	},
+	{
+		"timestamp": 1638492180,
+		"battery_power": "78.5"
+	},
+	{
+		"timestamp": 1638492181,
+		"battery_power": "83.1"
+	},
+	{
+		"timestamp": 1638492182,
+		"battery_power": "83.1"
+	},
+	{
+		"timestamp": 1638492183,
+		"battery_power": "84.5"
+	},
+	{
+		"timestamp": 1638492184,
+		"battery_power": "84.6"
+	},
+	{
+		"timestamp": 1638492185,
+		"battery_power": "84.2"
+	},
+	{
+		"timestamp": 1638492186,
+		"battery_power": "86.7"
+	},
+	{
+		"timestamp": 1638492187,
+		"battery_power": "84.3"
+	},
+	{
+		"timestamp": 1638492188,
+		"battery_power": "83.7"
+	},
+	{
+		"timestamp": 1638492189,
+		"battery_power": "77.1"
+	},
+	{
+		"timestamp": 1638492190,
+		"battery_power": "77.4"
+	},
+	{
+		"timestamp": 1638492191,
+		"battery_power": "80.6"
+	},
+	{
+		"timestamp": 1638492192,
+		"battery_power": "81.4"
+	},
+	{
+		"timestamp": 1638492193,
+		"battery_power": "80.2"
+	},
+	{
+		"timestamp": 1638492194,
+		"battery_power": "81.8"
+	},
+	{
+		"timestamp": 1638492195,
+		"battery_power": "77.3"
+	},
+	{
+		"timestamp": 1638492196,
+		"battery_power": "80.8"
+	},
+	{
+		"timestamp": 1638492197,
+		"battery_power": "81.6"
+	},
+	{
+		"timestamp": 1638492198,
+		"battery_power": "80.9"
+	},
+	{
+		"timestamp": 1638492199,
+		"battery_power": "83.9"
+	},
+	{
+		"timestamp": 1638492200,
+		"battery_power": "85.6"
+	},
+	{
+		"timestamp": 1638492201,
+		"battery_power": "83.6"
+	},
+	{
+		"timestamp": 1638492202,
+		"battery_power": "84.0"
+	},
+	{
+		"timestamp": 1638492203,
+		"battery_power": "83.0"
+	},
+	{
+		"timestamp": 1638492204,
+		"battery_power": "84.8"
+	},
+	{
+		"timestamp": 1638492205,
+		"battery_power": "84.4"
+	},
+	{
+		"timestamp": 1638492206,
+		"battery_power": "84.3"
+	},
+	{
+		"timestamp": 1638492207,
+		"battery_power": "83.9"
+	},
+	{
+		"timestamp": 1638492208,
+		"battery_power": "85.0"
+	},
+	{
+		"timestamp": 1638492209,
+		"battery_power": "84.9"
+	},
+	{
+		"timestamp": 1638492210,
+		"battery_power": "86.3"
+	},
+	{
+		"timestamp": 1638492211,
+		"battery_power": "86.5"
+	},
+	{
+		"timestamp": 1638492212,
+		"battery_power": "85.8"
+	},
+	{
+		"timestamp": 1638492213,
+		"battery_power": "85.3"
+	},
+	{
+		"timestamp": 1638492214,
+		"battery_power": "86.0"
+	},
+	{
+		"timestamp": 1638492215,
+		"battery_power": "84.2"
+	},
+	{
+		"timestamp": 1638492216,
+		"battery_power": "81.9"
+	},
+	{
+		"timestamp": 1638492217,
+		"battery_power": "86.5"
+	},
+	{
+		"timestamp": 1638492218,
+		"battery_power": "86.1"
+	},
+	{
+		"timestamp": 1638492219,
+		"battery_power": "86.8"
+	},
+	{
+		"timestamp": 1638492220,
+		"battery_power": "88.0"
+	},
+	{
+		"timestamp": 1638492221,
+		"battery_power": "85.1"
+	},
+	{
+		"timestamp": 1638492222,
+		"battery_power": "87.4"
+	},
+	{
+		"timestamp": 1638492223,
+		"battery_power": "88.0"
+	},
+	{
+		"timestamp": 1638492224,
+		"battery_power": "88.0"
+	},
+	{
+		"timestamp": 1638492225,
+		"battery_power": "87.2"
+	},
+	{
+		"timestamp": 1638492226,
+		"battery_power": "86.1"
+	},
+	{
+		"timestamp": 1638492227,
+		"battery_power": "86.8"
+	},
+	{
+		"timestamp": 1638492228,
+		"battery_power": "84.9"
+	},
+	{
+		"timestamp": 1638492229,
+		"battery_power": "76.8"
+	},
+	{
+		"timestamp": 1638492230,
+		"battery_power": "80.6"
+	},
+	{
+		"timestamp": 1638492231,
+		"battery_power": "80.0"
+	},
+	{
+		"timestamp": 1638492232,
+		"battery_power": "78.2"
+	},
+	{
+		"timestamp": 1638492233,
+		"battery_power": "79.1"
+	},
+	{
+		"timestamp": 1638492234,
+		"battery_power": "81.9"
+	},
+	{
+		"timestamp": 1638492235,
+		"battery_power": "84.7"
+	},
+	{
+		"timestamp": 1638492236,
+		"battery_power": "83.5"
+	},
+	{
+		"timestamp": 1638492237,
+		"battery_power": "82.1"
+	},
+	{
+		"timestamp": 1638492238,
+		"battery_power": "84.0"
+	},
+	{
+		"timestamp": 1638492239,
+		"battery_power": "85.7"
+	},
+	{
+		"timestamp": 1638492240,
+		"battery_power": "87.2"
+	},
+	{
+		"timestamp": 1638492241,
+		"battery_power": "82.9"
+	},
+	{
+		"timestamp": 1638492242,
+		"battery_power": "84.8"
+	},
+	{
+		"timestamp": 1638492243,
+		"battery_power": "83.9"
+	},
+	{
+		"timestamp": 1638492244,
+		"battery_power": "85.5"
+	},
+	{
+		"timestamp": 1638492245,
+		"battery_power": "86.4"
+	},
+	{
+		"timestamp": 1638492246,
+		"battery_power": "85.8"
+	},
+	{
+		"timestamp": 1638492247,
+		"battery_power": "85.4"
+	},
+	{
+		"timestamp": 1638492248,
+		"battery_power": "85.3"
+	},
+	{
+		"timestamp": 1638492249,
+		"battery_power": "81.9"
+	},
+	{
+		"timestamp": 1638492250,
+		"battery_power": "74.8"
+	},
+	{
+		"timestamp": 1638492251,
+		"battery_power": "71.6"
+	},
+	{
+		"timestamp": 1638492252,
+		"battery_power": "75.9"
+	},
+	{
+		"timestamp": 1638492253,
+		"battery_power": "82.1"
+	},
+	{
+		"timestamp": 1638492254,
+		"battery_power": "80.5"
+	},
+	{
+		"timestamp": 1638492255,
+		"battery_power": "70.0"
+	},
+	{
+		"timestamp": 1638492256,
+		"battery_power": "71.2"
+	},
+	{
+		"timestamp": 1638492257,
+		"battery_power": "70.3"
+	},
+	{
+		"timestamp": 1638492258,
+		"battery_power": "72.1"
+	},
+	{
+		"timestamp": 1638492259,
+		"battery_power": "73.7"
+	},
+	{
+		"timestamp": 1638492260,
+		"battery_power": "72.7"
+	},
+	{
+		"timestamp": 1638492261,
+		"battery_power": "71.7"
+	},
+	{
+		"timestamp": 1638492262,
+		"battery_power": "72.9"
+	},
+	{
+		"timestamp": 1638492263,
+		"battery_power": "73.1"
+	},
+	{
+		"timestamp": 1638492264,
+		"battery_power": "75.6"
+	},
+	{
+		"timestamp": 1638492265,
+		"battery_power": "78.3"
+	},
+	{
+		"timestamp": 1638492266,
+		"battery_power": "78.3"
+	},
+	{
+		"timestamp": 1638492267,
+		"battery_power": "79.6"
+	},
+	{
+		"timestamp": 1638492268,
+		"battery_power": "76.4"
+	},
+	{
+		"timestamp": 1638492269,
+		"battery_power": "77.2"
+	},
+	{
+		"timestamp": 1638492270,
+		"battery_power": "75.2"
+	},
+	{
+		"timestamp": 1638492271,
+		"battery_power": "71.9"
+	}
+]

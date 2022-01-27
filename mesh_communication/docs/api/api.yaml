@@ -1,0 +1,405 @@
+---
+openapi: 3.0.0
+info:
+  title: MeshCommunication API
+  description: API for mesh communication backend
+  version: 1.0.4
+servers:
+- url: /
+paths:
+  /devices:
+    get:
+      summary: gets all devices
+      description: Returns all devices present in the mesh network.
+      operationId: getAllDevices
+      responses:
+        "200":
+          description: 'Success: Received all devices'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+        "400":
+          description: Bad Request
+        "204":
+          description: No devices found
+        "500":
+          description: Internal Server Error
+  /devices/{status}:
+    get:
+      summary: gets devices by status
+      description: Returns devices present in the mesh network with the given status.
+      operationId: getDevicesByStatus
+      parameters:
+      - name: status
+        in: path
+        description: What type of devices to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - all
+          - failed
+          - operational
+      responses:
+        "200":
+          description: 'Success: Received all devices'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+        "400":
+          description: Bad Request
+        "204":
+          description: No devices found
+        "500":
+          description: Internal Server Error
+  /device/{id}:
+    get:
+      summary: gets a specific device
+      description: Returns devices present in the mesh network with the given id.
+      operationId: getDevice
+      parameters:
+      - name: id
+        in: path
+        description: Id of the device to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: 'Success: Received all devices'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        "404":
+          description: Device does not exist.
+        "500":
+          description: Internal Server Error
+  /devices/inrange/all:
+    get:
+      summary: gets devices within range of another device
+      description: For each device in the mesh network, returns devices that are in range to it.
+      operationId: getDevicesInRange
+      responses:
+        "200":
+          description: 'Success: Received all devices within range'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Device'
+                description: Dictionary with device ids as keys, and arrays of devices as values. Each key maps to an array of all devices that are in range of the device with the same id as the key.
+              example:
+                "1":
+                - device_id: 1
+                  battery_level: 68
+                  battery_max: 100
+                  position:
+                    x: 2
+                    y: 1
+                    z: 4
+                - device_id: 4
+                  battery_level: 23
+                  battery_max: 100
+                  position:
+                    x: 5
+                    y: 2
+                    z: 6
+                "23":
+                - device_id: 13
+                  battery_level: 45
+                  battery_max: 120
+                  position:
+                    x: 5
+                    y: 6
+                    z: 7
+        "204":
+          description: No devices found
+        "500":
+          description: Internal Server Error
+  /devices/inrange/{id}:
+    get:
+      summary: gets devices within range of another device
+      description: Returns devices present in the mesh network that are within range of a device with the given id.
+      operationId: getDevicesInRangeWithId
+      parameters:
+      - name: id
+        in: path
+        description: Id of the device to make the search on
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: 'Success: Received all devices within range'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+        "204":
+          description: No devices in range found
+        "404":
+          description: Device does not exist.
+        "500":
+          description: Internal Server Error
+  /tick/{time_flow}:
+    post:
+      summary: Update grid ticks
+      description: Path that updates the grid by given number of ticks.
+      operationId: position
+      parameters:
+      - name: time_flow
+        in: path
+        description: In what direction time will advance
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - forwards
+          - backwards
+      - name: n_ticks
+        in: query
+        description: Number of ticks to skip
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 1
+      responses:
+        "200":
+          description: Mesh Grid updated
+        "404":
+          description: Device does not exist.
+  /orchestrate:
+    post:
+      summary: Make orchestrator send messages to the network
+      description: Path that signals orchestrator to send messages for each product in the layout file.
+      operationId: orchestrate
+      responses:
+        "200":
+          description: Orchestrator orchestrated
+  /messages/send:
+    get:
+      summary: Get all messages of type send in the current tick
+      description: Path that returns, for all message senders of the current tick, the messages of type `send` that were sent by them.
+      operationId: getAllMessagesSend
+      responses:
+        "200":
+          description: 'Success: Received all messages'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SendMessage'
+                description: Dictionary with ids of devices that sent message as keys, and arrays of messages as values. Each key maps to an array of messages that correspond to send commands that were sent by the device which id is the same as the array's key.
+              example:
+                "54":
+                - hop: 68
+                  final: 30
+                - hop: 21
+                  final: 45
+                "4":
+                - hop: 54
+                  final: 2
+                - hop: 2
+                  final: 1
+        "500":
+          description: Internal Server Error
+  /messages/receive:
+    get:
+      summary: Get all messages of type receive in the current tick
+      description: Path that returns, for all message senders of the current tick, the messages of type `receive` that were sent by them.
+      operationId: getAllMessagesReceive
+      responses:
+        "200":
+          description: 'Success: Received all messages'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ReceiveMessage'
+                description: Dictionary with ids of devices that sent message as keys, and arrays of messages as values. Each key maps to an array of messages that correspond to receive commands that were sent by the device which id is the same as the array's key.
+              example:
+                "1":
+                - hop: 68
+                  final: 30
+                  failed: true
+                - hop: 21
+                  final: 45
+                  failed: false
+                "30":
+                - hop: 54
+                  final: 2
+                  failed: false
+                - hop: 2
+                  final: 1
+                  failed: false
+        "500":
+          description: Internal Server Error
+  /log:
+    get:
+      summary: Get logs of the current tick
+      description: Path that returns, for all devices that had a log in the current tick, their respective log messages.
+      operationId: getLog
+      responses:
+        "200":
+          description: 'Success: Received all logs'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+                    description: Message log
+                description: Dictionary in which its keys are the devices, and its values are arrays of message logs that were sent by its respective key/sender
+              example:
+                Device 6:
+                - 'Received message: [source=0], [msg=padoru], [lastHop=0]'
+                - 'Relaying message: [destination=8], [msg=padoru]'
+  /metrics:
+    get:
+      summary: Gets metrics with which the communication is evaluated
+      description: Path that returns, for the whole communication, a collection of metrics for the current tick.
+      operationId: getMetrics
+      responses:
+        "200":
+          description: 'Success: Received all metrics'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metrics'
+              example:
+                batTick: 10
+                batCommunication: 20
+                failed: 0
+                ticks: 2
+  /restart:
+    post:
+      summary: Restart simulation
+      description: Path that restarts the simulation
+      operationId: restart
+      responses:
+        "200":
+          description: 'Success: Restarted simulation'
+        "500":
+          description: Internal Server Error
+  /layout:
+    post:
+      summary: Use a specified layout
+      description: Path that changes the current layout
+      operationId: specifyLayout
+      requestBody:
+        description: The layout to use
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+              description: Dictionary with ids of devices as keys and its respective position as value.
+            example:
+              "1":
+              - x: 1
+                y: 2
+                z: 3
+              "0":
+              - x: 7
+                y: 4
+                z: -3
+        required: true
+      responses:
+        "200":
+          description: 'Success: Changed the layout'
+components:
+  schemas:
+    SendMessage:
+      type: object
+      properties:
+        final:
+          type: integer
+          description: ID of the final destination of the message
+        hop:
+          type: integer
+          description: ID of the device to receive the message on this hop
+    ReceiveMessage:
+      type: object
+      properties:
+        final:
+          type: integer
+          description: ID of the final destination of the message
+        hop:
+          type: integer
+          description: ID of the device to receive the message on this hop
+        failed:
+          type: boolean
+          description: Wether or not the message was lost in the current tick
+    Metrics:
+      type: object
+      properties:
+        batTick:
+          type: integer
+          description: Battery consumed in the last tick
+        batCommunication:
+          type: integer
+          description: Battery consumed in the whole communication
+        failed:
+          type: integer
+          description: Number of failures that happened in the system
+        ticks:
+          type: integer
+          description: Number of tick since the beginning of the communication
+    Device:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+          battery_level:
+            type: integer
+          battery_max:
+            type: integer
+          position:
+            $ref: '#/components/schemas/Position'
+    Position:
+      type: object
+      properties:
+        x:
+          type: integer
+        y:
+          type: integer
+        z:
+          type: integer
+      example:
+        x: 2
+        y: 1
+        z: -5

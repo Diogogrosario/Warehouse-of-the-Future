@@ -1,0 +1,37 @@
+name: T2 - Mesh communication acceptance tests CI/CD
+
+on:
+  push:
+    branches: [ development, t2_development ]
+  pull_request:
+    branches: [ development, t2_development ]
+
+jobs:
+  acceptance_tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./mesh_communication/frontend
+    steps:
+    - uses: actions/checkout@v2
+    - uses: nanasess/setup-chromedriver@v1
+    - name: Install dependencies # https://docs.flutter.dev/get-started/install/linux#system-requirements
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends --no-install-suggests \
+          bash curl file git unzip xz-utils zip wget libglu1-mesa
+        sudo apt-get clean
+    - name: Install flutter
+      run: |
+        sudo curl "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_2.8.1-stable.tar.xz" | tar xJ -C /opt
+        /opt/flutter/bin/flutter doctor -v
+        sudo ln -s /opt/flutter/bin/flutter /bin/flutter
+    - name: Build test files
+      run: |
+        flutter pub get
+        flutter pub run build_runner clean
+        flutter pub run build_runner build --delete-conflicting-outputs
+    - name: Run tests
+      run: |
+        chromedriver --port=4444 &
+        flutter drive --driver=test_driver/integration_test_driver.dart --target=integration_test/gherkin_suite_test.dart -d web-server

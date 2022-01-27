@@ -1,0 +1,60 @@
+version: "3.8"
+services:
+    frontend:
+        build: ./frontend
+        environment:
+            CHOKIDAR_USEPOLLING: "true"
+        ports:
+            - 3000:3000
+        volumes:
+            - ./frontend/src:/app/frontend/src
+            - ./frontend/public:/app/frontend/public
+        stdin_open: true
+        tty: true
+
+    grafana:
+        build: ./grafana
+        container_name: grafana
+        ports:
+            - 9000:3000
+        volumes:
+            - grafana-data:/app/grafana
+            - ./grafana/dashboards:/etc/grafana/dashboards
+            - ./grafana/provisioning:/etc/grafana/provisioning
+        networks:
+            - grafnet
+        depends_on:
+            - backend
+
+    backend:
+        build: ./backend
+        ports:
+            - 8001:5000
+        env_file:
+            - ./backend/.env
+        volumes:
+            - ./backend:/app
+        networks:
+            - workerapi
+            - grafnet
+
+    populate-worker:
+        build: ./populate-worker
+        ports:
+            - 8080:8080
+        volumes:
+            - .:/app
+        networks:
+            - workerapi
+        depends_on:
+            - backend
+
+networks:
+    workerapi:
+        driver: bridge
+    grafnet:
+        external: false
+
+volumes:
+    grafana-data:
+        external: false

@@ -1,0 +1,3 @@
+build/
+src/renderer/mock_layout.json
+docs/layout_template.json

@@ -1,0 +1,16 @@
+orchestratorId: 0
+orchestratorRange: 3000
+
+totalBattery: 1000
+batIdleConsumption: 2
+
+screenIdleConsumption: 0
+screenOnConsumption: 20
+
+receivingConsumption: 20
+sendingConsumption: 30
+
+deviceRange: 1500
+timeToLive: 6
+
+messageFailure: 5

@@ -1,0 +1,23 @@
+# Git Workflow
+
+- Repository and branches
+    - There are five `development` branches, one for each team and one main, that should only be merged into during the last sprint.
+    - T1's branch is `t1_development`, and no commits can be directly made to it.
+    - Every branch from T1 should have the prefix `t1_` attached to it.
+- Merges and pull requests
+    - A branch can only be merged to `t1_development` through a pull request.
+    - No merge can be made without previous approval from at least 2 other peers.
+- Issues
+    - Issues should be used regarding each user story, as well as any feature to be added or any fixes and updates.
+    - Issues related to a user story or feature must have their estimated effort (using the Fibonacci scale) and must be delegated to one or more members of the team by the end of the sprint planning.
+    - Closing issues should be done with a pull request.
+- GitHub Projects
+    - There are four GitHub Projects, one for each team.
+    - T1's Project is `T1 - Data Collection & Processing` and all issues related to T1 should be associated with this Project.
+    - Issues for the current sprint should be placed in the `Sprint Backlog` column.
+    - Issues for a future sprint should be placed in the `Product Backlog` column.
+    - Issues which have their development in progress should be moved to the `In progress` column.
+    - Issues which have pending approval be moved to the `Review in progress` column.
+    - Issues closed should be moved to the `Done` column.
+    - Issues to no longer be taken into consideration should be moved to the `Won't Do` column.
+    - All issues except the ones in `Product Backlog` should have an associated Milestone (Sprint).
