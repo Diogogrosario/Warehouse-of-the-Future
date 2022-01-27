@@ -1,0 +1,53 @@
+{
+	"dimensions": {
+		"width": 1,
+		"height": 2,
+		"depth": 1
+	},
+	"orchestrator": { // Optional, defaults to center of the room
+		// Always has ID 0
+		"x": 1.0,
+		"y": 1.0,
+		"z": 1.0
+	},
+	"racks": [
+		{
+			"orientation": "north",
+			// Top-left corner of Rack
+			"x": 1,
+			"z": 0,
+			"width": 2,
+			"depth": 1,
+			"height": 4,
+			"shelves": [
+				{
+					"y": 1,
+					"buckets": [ // Ordered list of buckets, they are auto placed with spacing
+						{
+							"width": 0.5,
+							"height": 0.2, // optional, defaults to some value to be defined
+							"id": 3						
+						},
+						{
+							"width": 0.5,
+							"height": 0.2, // optional, defaults to some value to be defined
+							"id": 2						
+						}
+					]
+				},
+				...
+			]
+		},
+		...
+	],
+	"dummyDevices": [ // Optional
+		// Devices that only exist to make the whole network connect
+		{
+			"id": 2,
+			"x": 1.0,
+			"y": 1.0,
+			"z": 1.0
+		},
+		...
+	]
+}

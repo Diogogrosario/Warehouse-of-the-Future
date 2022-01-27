@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+
 import SceneManager from "../renderer/SceneManager";
 import Stats from "../renderer/Stats";
 
 interface WarehouseRendererProps {
 	background?: string;
+	fpsCounter?: boolean;
 }
 
 class WarehouseRenderer extends Component<WarehouseRendererProps> {
@@ -20,6 +22,7 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 
 	static defaultProps: Partial<WarehouseRendererProps> = {
 		background: "#ffffff",
+		fpsCounter: false,
 	};
 
 	constructor(props: WarehouseRendererProps) {
@@ -27,8 +30,10 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 	}
 
 	componentDidMount() {
-		this.stats = new Stats();
-		this.container?.appendChild(this.stats.dom);
+		if (this.props.fpsCounter) {
+			this.stats = new Stats();
+			this.container?.appendChild(this.stats.dom);
+		}
 
 		this.sceneSetup();
 		if (this.props.background) this.sceneManager.updateBackgroundColor(this.props.background);
@@ -53,6 +58,17 @@ class WarehouseRenderer extends Component<WarehouseRendererProps> {
 	componentDidUpdate(prevProps: WarehouseRendererProps) {
 		if (this.props.background !== prevProps.background && this.props.background)
 			this.sceneManager.updateBackgroundColor(this.props.background);
+
+		if (this.props.fpsCounter !== prevProps.fpsCounter) {
+			if (this.props.fpsCounter) {
+				if (this.stats === undefined) {
+					this.stats = new Stats();
+				}
+				this.container?.appendChild(this.stats.dom);
+			} else if (this.stats) {
+				this.container?.removeChild(this.stats.dom);
+			}
+		}
 	}
 
 	componentWillUnmount() {

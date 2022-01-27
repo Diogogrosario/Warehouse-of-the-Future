@@ -3,7 +3,7 @@ import CameraControls from "camera-controls";
 
 import { Warehouse, WarehouseStructure } from "./Warehouse";
 
-import mockJSON from "./mock_json.json";
+import mockJSON from "./mock_layout.json";
 
 CameraControls.install({ THREE: THREE });
 
@@ -20,6 +20,8 @@ export default class SceneManager {
 	private height: number;
 
 	private invalidFrame = true;
+
+	private warehouse: Warehouse;
 
 	constructor(container: HTMLElement | undefined, width: number, height: number) {
 		this.width = width;
@@ -53,10 +55,10 @@ export default class SceneManager {
 			event.preventDefault();
 		});
 
-		const whStructure = new Warehouse(this, mockJSON as WarehouseStructure);
-		this.scene.add(whStructure.getObject());
+		this.warehouse = new Warehouse(this, mockJSON as WarehouseStructure);
+		this.warehouse.addWarehouse(this.scene);
 
-		this.addAxes();
+		// this.addAxes();
 	}
 
 	public render() {
@@ -71,6 +73,7 @@ export default class SceneManager {
 
 	public dispose() {
 		this.cameraControls?.dispose();
+		this.warehouse.dispose();
 	}
 
 	public resize(width: number, height: number) {

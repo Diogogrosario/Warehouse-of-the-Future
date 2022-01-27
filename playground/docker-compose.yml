@@ -32,3 +32,8 @@ services:
             - .env
         depends_on:
             - db
+    simulation:
+        build: ../mesh_communication/backend
+        ports:
+        - "8080:8080"
+    

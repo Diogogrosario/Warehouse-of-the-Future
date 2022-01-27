@@ -13,6 +13,7 @@ This project was built using Node 16 LTS and uses the following technologies:
 - [Docker](https://www.docker.com/) - For deployment.
 - [Prettier](https://prettier.io/) - For formatting.
 - [ESLint](https://eslint.org/) - For linting.
+- [visx](https://airbnb.io/visx/) - For device battery visualization.
 
 ## Available Scripts
 
@@ -32,11 +33,11 @@ Builds the app for production to the `build` folder.
 
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.
+The build is minified, and the filenames include the hashes.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.
+Runs the integrations tests.
 
 ### `yarn serve`
 
