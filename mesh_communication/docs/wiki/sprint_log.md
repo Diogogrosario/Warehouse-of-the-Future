@@ -261,7 +261,7 @@ In this sprint, the front end will continued to be worked on to provide more fea
   - Make API endpoint to change device's characteristics (difficult to complete on their part);
 - Prepare project presentation;
 
-### Sprint replaning
+### Sprint replanning
 
 - API:
   - Submit new layouts;
@@ -270,3 +270,47 @@ In this sprint, the front end will continued to be worked on to provide more fea
 - Make undo command (refer to original sprint planning);
 - Random chance of message sending error;
 - Make gifs for the final presentation;
+
+### Sprint Review 
+
+- Add parameterizable configs;
+
+- Added metrics;
+
+- Undo ticks;
+
+- Device failure;
+
+- Restart endpoint;
+
+- Integrated with other teams;
+
+- Updated docker;
+
+- Updated API documentation;
+
+  
+
+## Whats next
+
+- Add more metrics; 
+
+- Failure detection;
+
+- Integrate further with frontend;
+- Config's default values should be implemented;
+
+## Retrospective
+
+### The good
+
+- Sprint replaning was well done;
+- Sprint estimations were well made;
+
+### The meh
+
+- Should have done more documentation about how to implement the backend on other vertical.
+
+### Topics to work on
+
+- Generating a random layout when running tests caused problems to other teams.
