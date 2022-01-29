@@ -116,8 +116,8 @@ This sprint we focused on integrating the features with the other verticals and 
 - A POST endpoint for layouts was temporarily added to the API, but it was dropped due to it not being used by the Layout Optimization vertical.
 
 ### Pipeline update
-- Grafana and Populate-worker deployment were included in the `GitHub Action` pipeline.
-- The pipeline was updated to also adapt to changes in repository path.
+- Grafana deployment was added in the `GitHub Action` pipeline.
+- The pipeline was updated to also include changes in repository path.
 
 ### Documentation update
 - Mockups, git workflow and sprint logs were added/moved to the `docs/wiki` folder of the team repository.
