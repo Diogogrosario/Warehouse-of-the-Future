@@ -106,3 +106,35 @@ The goals for this sprint were to improve the previous sprint's features and div
 
 ### What could have gone better?
 - Lesser involvement of some team members in the tasks and discussions.
+
+
+
+## Sprint 4
+This sprint we focused on integrating the features with the other verticals and polish some features of our vertical.
+
+### Layout POST endpoint
+- A POST endpoint for layouts was temporarily added to the API, but it was dropped due to it not being used by the Layout Optimization vertical.
+
+### Pipeline update
+- Grafana and Populate-worker deployment were included in the `GitHub Action` pipeline.
+- The pipeline was updated to also adapt to changes in repository path.
+
+### Documentation update
+- Mockups, git workflow and sprint logs were added/moved to the `docs/wiki` folder of the team repository.
+- README.md files were polished and terminated.
+
+### Stock integration
+- Stock endpoint was integrated with the Layout Optimization algorithm, in order to produce more realistic results.
+
+
+## Retrospective Sprint 4
+
+### What went well?
+- Project finalisation;
+- Grand Finale.
+
+### What went ok?
+- Presentation to the client.
+
+### What could have gone better?
+- Complete integration with other verticals.
