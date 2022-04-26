@@ -10,13 +10,24 @@ Playground is a web-app focused on providing maintenance staff a tool to visuali
 - List of reports/issues from the factory (e.g.: Device failures)
 - Add actions to reports
 
+## Similar Products
+
+In order to understand the feasibility of our product, we searched for similar products on the web.
+
+One crutial example would be [Critical Manufacturing MES](https://www.criticalmanufacturing.com/mes-for-industry-4-0/) product.
+
+It provides a digital twin of a factory, alongside dashboards with live charts and control panels.
+
+However, that product is very generalized and has a much broader scope than what we need.
+
 ## API
 
 The API documentation can found [here](openapi.yaml).
 
 ## Technologies used
 
-The application architecture is explained by the following diagram:  
+The application architecture is explained by the following diagram: 
+ 
 ![architecture diagram](architecture.png)
 
 ### Frontend

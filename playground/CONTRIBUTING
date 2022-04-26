@@ -1,0 +1,19 @@
+# Contributing
+
+## Style guide
+
+This project uses the [Prettier](https://prettier.io/) formatter.
+
+The code style is verified by Github actions. 
+
+A contributer can verify the style locally by running `yarn check-format`.
+
+In order to auto-format the code, a user can run locally `yarn format`.
+
+## Linting
+
+This project uses the [ESLint](https://eslint.org/) linter.
+
+The linting process is done by Github actions. 
+
+A contributer can lint the code locally by running `yarn lint`.

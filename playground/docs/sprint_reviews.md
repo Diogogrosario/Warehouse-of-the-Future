@@ -26,13 +26,11 @@ The group had more experience with MUI4, and, because of this and major library 
 
 Defined a conceptual model for the playground.
 
-Tools: Sequelize, Postgres, Node.js
+**Tools:** Sequelize, Postgres, Node.js
 
 Problems configuring all these packages in a Docker container. Took more time than initially thought.
 Had to decide on a backend ORM.  
 Little experience with Sequelize (more time was needed to understand its functionalities and nuances).
-
-
 
 # Sprint 2 Review
 
