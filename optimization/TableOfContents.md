@@ -8,7 +8,7 @@ Optimization Table of Contents
   * [Domain model](wiki/2-domain-analysis.md)
   * [User stories](https://github.com/softeng-feup/ds-meic2/labels/team%204)
 * [Architecture and Design](wiki/3-architecture.md)
-* [Implementation]
+* [Implementation]()
   * [Coding guidelines](wiki/6-git_workflow.md)
   * [Metrics Implemented](wiki/metrics-implemented.md)
   * [Deployment Scripts to Servers](wiki/web-app.md)
