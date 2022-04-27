@@ -13,4 +13,4 @@ Optimization Table of Contents
   * [Metrics Implemented](wiki/metrics-implemented.md)
   * [Deployment Scripts to Servers](wiki/web-app.md)
   * [Product Integration](wiki/integration-task.md)
-  * [Sprint Retrospectives](wiki/sprint_log.md): i.e. notes on what and how to improve
+  * [Sprint Retrospectives](wiki/sprint_log.md)
